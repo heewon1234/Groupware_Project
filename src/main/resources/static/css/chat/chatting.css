@@ -1,0 +1,135 @@
+@charset "UTF-8";
+.element {
+    position: static; /* 원래의 위치 지정 동작으로 되돌리기 */
+}
+
+/* 팝업 스타일 */
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    width: 400px;
+    height: 650px;
+}
+
+/* 팝업 내 닫기 버튼 스타일 */
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+/* 프로필 컨테이너 스타일 */
+.profile {
+    display: flex; 
+    align-items: center; 
+    margin-top: 15px;
+}
+
+/* 이미지 스타일 (선택 사항) */
+.img {
+    margin-right: 20px; /* 이미지와 텍스트 사이 여백 (선택 사항) */
+}
+
+/*top 아이콘 스타일 (선택 사항) */
+.top .fa-regular.fa-circle-user {
+    font-size: 50px; /* 아이콘 크기 (선택 사항) */
+}
+
+/* 사용자 정보 스타일 */
+.user {
+    display: flex; /* 사용자 정보 요소를 가로로 배열 */
+    flex-direction: column; /* 요소를 세로로 배열 (기본적으로) */
+}
+
+/* 사용자 정보 요소 사이 여백 (선택 사항) */
+.user > div {
+    margin-right: 10px;
+}
+.top{
+    height: 20%;
+}
+/* 부모 컨테이너 스타일 */
+.body {
+    display: flex; /* 요소들을 가로로 배열 */
+    height: 80%; /* 높이 설정 */
+    justify-content: space-between; /* 요소들 사이에 공간을 두어 좌우 정렬 */
+}
+
+/* 왼쪽 아이콘 컨테이너 스타일 */
+.left {
+    display: flex; /* 내부 요소들을 가로로 배열 */
+    flex-direction: column;
+    background-color: #d2e0fb;
+    padding-top: 10px;
+    width: 20%;
+    height: 100%;
+}
+.right{
+    width: 80%;
+    height: 100%;
+    padding: 20px;
+}
+
+/* 왼쪽 아이콘 스타일 (선택 사항) */
+.left i {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    margin-top: 15px;
+
+}
+
+/* 아이콘 스타일 (선택 사항) */
+.fa-regular, .fa-solid {
+    font-size: 29px; /* 아이콘 크기 (선택 사항) */
+}
+/*----------------전체 사람 리스트*/
+.Tlist, .Glist  {
+    display: flex; 
+    align-items: center; 
+}
+
+/* 이미지 컨테이너 스타일 (선택 사항) */
+.pimg {
+    margin-right: 10px; 
+}
+.pimg i{
+    font-size: 35px;
+}
+
+/* 텍스트 컨테이너 스타일 (선택 사항) */
+.person {
+    display: flex; /* 텍스트 요소를 가로로 배열 */
+    flex-direction: column; /* 요소를 세로로 배열 */
+}
+
+/* 텍스트 요소 사이 여백 (선택 사항) */
+.person > div {
+    margin-right: 10px;
+}
+.name{
+    font-size:medium;
+    font-weight: bold;
+}
+.state{color: #05509b;font-size:small;}
+.department{
+    font-size:smaller;
+}
+hr{
+    margin: 0px;
+}
+/*------------------------*/
+#departmentSelect {
+    border: none; /* 테두리 없음 */
+    outline: none; /* 포커스 표시 제거 */
+}
+
+
