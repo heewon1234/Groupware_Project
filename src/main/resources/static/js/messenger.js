@@ -1,15 +1,10 @@
-function openPopup() {
+function openPopup1() {
     document.getElementById("popup").style.display = "block";
 }
 
 function closePopup() {
     document.getElementById("popup").style.display = "none";
 }
-
-document.getElementById('departmentSelect').addEventListener('change', function () {
-    var selectedDepartment = this.value; // 선택된 부서의 값을 가져옵니다.
-    alert('선택한 부서: ' + selectedDepartment);
-});
 
 // 로고 요소와 팝업 요소를 선택합니다.
 const logo = document.getElementById('logo');
@@ -46,3 +41,27 @@ document.addEventListener('mousemove', (e) => {
 document.addEventListener('mouseup', () => {
     isDragging = false;
 });
+
+// 클릭된 메뉴가 열려있는지 여부를 나타내는 변수
+var isMenuOpen = false;
+
+// 클릭된 메뉴를 열거나 닫는 함수
+function toggleMenu() {
+    var menu = document.querySelector(".menu");
+    
+    if (!isMenuOpen) {
+        // 닫혀있으면 엽니다.
+        menu.style.display = "grid"; // 그대로 유지 (그리드 모양)
+    } else {
+        // 열려있으면 닫습니다.
+        menu.style.display = "none";
+    }
+    
+    // isMenuOpen 변수 업데이트
+    isMenuOpen = !isMenuOpen;
+}
+
+// 초기 상태에서 메뉴를 숨김
+toggleMenu();
+
+
