@@ -1,0 +1,26 @@
+*{box-sizing: border-box;}
+.homeContainer{
+	width: 100%;
+}
+#top_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#menu_contaier{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#menu {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #d2e0fb;
+  width: 80%;
+}
+
+#menu > div {
+  width: 50px; 
+}
+.title{font-size: small;}

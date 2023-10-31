@@ -1,0 +1,26 @@
+.box{width: 100%;height: 100%;}
+.chatForm {
+    height: 80%;
+    width: 100%;
+    background-color: #b2c7da;
+    /*background-color: #d2e0fb;*/
+}
+.chatBox{
+    height: 20%;
+    width: 100%;
+    align-items: center; 
+    border: 1px solid #b8c8d1;
+}
+.inputText {
+    flex: 1;
+    height: 70%; 
+}
+.chat-send {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#sendBtn {
+    margin-right: 3%;
+    margin-left: 5px;
+}

@@ -1,0 +1,21 @@
+*{box-sizing: border-box;}
+#top {
+	width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    border-bottom: 1px solid #eeeeee;
+}
+
+.icon {
+    margin-left: auto; 
+}
+.icon i {
+    margin-left: 10px;
+}
+
+.logo, .icon {
+    margin: 5px; 
+    font-size: 25px;
+}
+
