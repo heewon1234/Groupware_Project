@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="box" id="inputJSP">
-        <div class="chatForm"></div>
+        <div class="chatForm" style="position: relative;"></div>
         <div class="chatBox">
             <div class="inputText" contenteditable="true"></div>
             <div class="chat-send"><button id="backBtn">뒤로가기</button><button id="sendBtn">전송</button></div>

@@ -15,7 +15,7 @@
 #menu {
   display: flex;
   justify-content: space-between;
-  padding: 20px;
+  padding: 30px;
   background-color: #d2e0fb;
   width: 80%;
 }
@@ -23,4 +23,13 @@
 #menu > div {
   width: 50px; 
 }
-.title{font-size: small;}
+.title{font-size: small; width: 60px;margin-top: 5px;}
+.main_icon_box{
+ width: 60px; /* 지름을 나타내는 값 */
+    height: 60px; /* 지름을 나타내는 값 */
+    background-color: whitesmoke; /* 원의 배경색 */
+    border-radius: 50%; /* 원 모양을 만들기 위한 속성 */
+    text-align: center; /* 원 안의 텍스트 중앙 정렬 */
+    line-height: 60px; /* 원 안의 텍스트 수직 중앙 정렬 */
+    font-size: 24px; /* 텍스트 크기 */
+}

@@ -11,10 +11,10 @@
 </head>
 <body>
 <!-- 실제 팝업 내용 -->
-    <div class="popup" id="popup">
-        <div class="top m-2 mb-0">
-            <span class="close-button" onclick="closePopup()">&times;</span>
-            <div id="logo" class="dragHandle">
+    <div class="popup1" id="popup1">
+        <div class="top">
+            <span class="close-button" onclick="closeMess()">&times;</span>
+            <div id="logo">
                 <div>logo</div>
                 <div class="logout"><i class="fa-solid fa-right-from-bracket"></i></div>
             </div>

@@ -41,33 +41,38 @@ document.addEventListener('mousemove', (e) => {
         container.style.top = newY + 'px';
     }
 });
-
-// 마우스 업 이벤트를 처리합니다.
 document.addEventListener('mouseup', () => {
     isDragging = false;
 });
-function openchatPage() {
-    var chatPageURL = "/chats/inputText";
-
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", chatPageURL, true);
-
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            var parser = new DOMParser();
-            var doc = parser.parseFromString(xhr.responseText, "text/html");
-            var newBody = doc.body;
-
-            // 팝업 창의 popupBody에 새로운 body 내용을 업데이트합니다.
-            var popupBody = document.getElementById("popupBody");
-            popupBody.innerHTML = newBody.innerHTML;
-        }
-    };
-
-    xhr.send();
+function openchatMember() {
+    $(".chatMember_container").css("display", "block");
+    $(".allList").css("display", "none");
+    $(".chatRoom_container").css("display", "none");
+    $(".chatGroupRoom_container").css("display", "none");
+    $(".search_container").css("display", "none");
 }
 
+function openchatList() {
+    $(".chatRoom_container").css("display", "block");
+    $(".allList").css("display", "none");
+    $(".chatMember_container").css("display", "none");
+    $(".chatGroupRoom_container").css("display", "none");
+    $(".search_container").css("display", "none");
+}
+function openchatGroupList() {
+    $(".chatGroupRoom_container").css("display", "block");
+    $(".allList").css("display", "none");
+    $(".chatMember_container").css("display", "none");
+    $(".chatRoom_container").css("display", "none");
+    $(".search_container").css("display", "none");
+}
+//검색차
+function showSearchContainer() {
+    $(".search_container").css("display", "block");
+}
 
-
+function hideSearchContainer() {
+    $(".search_container").css("display", "none");
+}
 
 

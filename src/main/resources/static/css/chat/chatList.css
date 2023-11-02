@@ -1,0 +1,63 @@
+.chatroom_container{
+	width: 100%;
+}
+
+.chatBox {
+    display: flex; /* 요소를 가로로 배치합니다 */
+    align-items: center; /* 요소를 수직 중앙으로 정렬합니다 */
+    border: none;
+}
+
+#font {
+    margin-right: auto; /* font를 가장 왼쪽으로 배치합니다 */
+    font-size: large;
+    font-weight: bold;
+}
+
+.search_add {
+    margin-left: auto; /* search_add를 가장 오른쪽으로 배치합니다 */
+}
+.search_add img{width: 18px;height: auto;margin-top: 10%;}
+#searchBox img{width: 18px;height: auto;margin-right: 5px;
+    border: none;}
+#search_input{border-radius:5px ;}
+#search_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    display: none;
+    margin-top: 5px;
+}
+
+.chatroom_search {
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    border: 1px solid black;
+    padding: 10px;
+    
+}
+
+#searchBox {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+#search_input {
+    
+border: none;
+    outline: none;
+}
+#x {
+    display: flex;
+    align-items: center;
+}
+#searchBtn:hover {
+    background-color: lightgray;
+    cursor: pointer;
+}
+
+#plusButton:hover {
+    background-color: lightgray;
+    cursor: pointer;
+}
