@@ -30,7 +30,7 @@
     display: flex; 
     align-items: center; 
     margin-top: 20px;
-    margin-left: 10px;
+    margin-right: 58%;
 }
 
 /* 이미지 스타일 (선택 사항) */
@@ -57,7 +57,7 @@
     height: 18%;
 }
 /* 부모 컨테이너 스타일 */
-.body {
+.chat_body {
     display: flex; /* 요소들을 가로로 배열 */
     height: 82%; /* 높이 설정 */
     width: 100%;
@@ -135,6 +135,8 @@ hr{
     outline: none; /* 포커스 표시 제거 */
 }
 
-
-
+.table-row{
+	margin-bottom: 10px;
+}
+.oneChat{margin-left: 8px;}
 
