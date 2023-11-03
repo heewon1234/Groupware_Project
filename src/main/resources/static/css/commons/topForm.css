@@ -14,8 +14,22 @@
     margin-left: 10px;
 }
 
+.icon i:hover {
+	cursor:pointer;
+}
+
 .logo, .icon {
     margin: 5px; 
     font-size: 25px;
+}
+
+.logout {
+	position:fixed;
+	top:6%;
+	right:11%;
+	width:100px;
+	height:80px;
+	background-color: #ffffff;
+	border-radius: 10px;
 }
 
