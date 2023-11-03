@@ -68,7 +68,6 @@
 		$(document).ready(function() {
 			$("#top_container").load("/commons/topForm");
 		});
-		
 	</script>
 </body>
 </html>
