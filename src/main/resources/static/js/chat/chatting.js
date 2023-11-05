@@ -6,10 +6,6 @@ function closePopup() {
     document.getElementById("popup").style.display = "none";
 }
 
-document.getElementById('departmentSelect').addEventListener('change', function () {
-    var selectedDepartment = this.value; // 선택된 부서의 값을 가져옵니다.
-    alert('선택한 부서: ' + selectedDepartment);
-});
 
 // 로고 요소와 팝업 요소를 선택합니다.
 const logo = document.getElementById('logo');
@@ -47,6 +43,13 @@ document.addEventListener('mouseup', () => {
 function openchatMember() {
     $(".chatMember_container").css("display", "block");
     $(".allList").css("display", "none");
+    $(".chatRoom_container").css("display", "none");
+    $(".chatGroupRoom_container").css("display", "none");
+    $(".search_container").css("display", "none");
+}
+function openchatGmember() {
+    $(".chatMember_container").css("display", "none");
+    $(".allList").css("display", "block");
     $(".chatRoom_container").css("display", "none");
     $(".chatGroupRoom_container").css("display", "none");
     $(".search_container").css("display", "none");

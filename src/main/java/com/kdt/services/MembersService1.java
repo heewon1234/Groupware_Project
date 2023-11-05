@@ -13,7 +13,10 @@ public class MembersService1 {
 	@Autowired//자동으로 연결됨
 	private MembersDAO1 dao;
 	
-	public List<MembersDTO1> selectAll() throws Exception {
+	public List<MembersDTO1> selectAll() {
 		return dao.selectAll();
+	}
+	public List<MembersDTO1> getMembersByOrganization(String organization) {
+		return dao.getMembersByOrganization(organization);
 	}
 }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ChatMessage">
+
+	<insert id="insert">
+		insert into messages(roomID,sender,message,type)
+		values(#{roomID},#{sender},#{message},#{type})
+	</insert>
+	
+	<select id="selectByType"
+		resultType="com.kdt.dto.ChatMessageDTO">
+		SELECT * FROM messages where type = #{type} and MessageSeq=#{MessageSeq}
+	</select>
+</mapper>

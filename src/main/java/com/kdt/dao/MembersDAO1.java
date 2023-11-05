@@ -16,4 +16,7 @@ public class MembersDAO1 {
 	public List<MembersDTO1> selectAll(){ 
 		return db.selectList("Members1.selectAll"); 
 	}
+	public List<MembersDTO1> getMembersByOrganization(String organization){ 
+		return db.selectList("Members1.getMembersByOrganization", organization); 
+	}
 }

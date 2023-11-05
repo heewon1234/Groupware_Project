@@ -92,14 +92,9 @@
 .fa-regular, .fa-solid {
     font-size: 29px; /* 아이콘 크기 (선택 사항) */
 }
-/*----------------전체 사람 리스트*/
-.Tlist, .Glist  {
-    display: flex; 
-    align-items: center; 
-    margin: 5%;
-}
-.Thead{margin-top: 10px;font-size: medium;}
 
+/*----------------전체 사람 리스트*/
+.Thead, #departmentSelect{font-size: larger;font-weight: bold;}
 .pimg {
     margin-right: 10px; 
 }
