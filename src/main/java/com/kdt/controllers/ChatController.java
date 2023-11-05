@@ -2,7 +2,9 @@ package com.kdt.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kdt.services.ChatRoomService;
@@ -25,9 +27,13 @@ public class ChatController {
 		return "chat/chatting";
 	}
 	@RequestMapping("/inputText")
-	public String inputText() {
-		return "chat/inputText";
-	}
+    public String inputText(@RequestParam("friendName") String friendName,@RequestParam("organization") String organization, Model model) {
+        System.out.println(friendName);
+        model.addAttribute("friendName", friendName);
+        model.addAttribute("organization", organization);
+        return "chat/inputText";
+    }
+	
 	@RequestMapping("/chatList")
 	public String chatList() {
 		return "chat/chatList";

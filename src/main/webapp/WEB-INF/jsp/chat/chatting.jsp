@@ -35,8 +35,7 @@
 		<hr>
 		<div class="chat_body" id="popupBody">
 			<div class="left">
-				<i class="fa-regular fa-user" onclick="openchatMember()"></i> <i
-					class="fa-regular fa-comment" onclick="openchatList()"></i> <i
+				<i class="fa-regular fa-user" onclick="openchatMember()"></i>  <i
 					class="fa-regular fa-comments" onclick="openchatGroupList()"></i><i
 					class="fa-solid fa-bars" onclick="openchatGmember()"
 					style="position: absolute; bottom: 0; margin-bottom: 40px;"></i>
@@ -80,29 +79,6 @@
 					<div id="friend_list"
 						style="margin-top: 13px; height: 410px; overflow-y: auto;"></div>
 				</div>
-				<!-- 1대1 채팅 -->
-				<div class="chatRoom_container" style="display: none;">
-					<div class="chatBox">
-						<div id="font">채팅</div>
-						<div class="search_add">
-							<img id="searchBtn" alt="" src="/imges/chats/search.svg"
-								onclick="showSearchContainer()">
-						</div>
-
-					</div>
-					<div class="search_container" style="display: none;">
-						<div class="chatroom_search">
-							<div id="searchBox">
-								<img alt="" src="/imges/chats/search.svg""> <input
-									id="search_input" type="text" placeholder="채팅방 참여자 검색">
-								<img id="x" alt="" src="/imges/chats/x.svg"
-									onclick="hideSearchContainer()">
-							</div>
-						</div>
-					</div>
-					<!-- ajax -->
-					<div class="chatroom_list" style="margin-top: 8px"></div>
-				</div>
 				<!-- 그룹 채팅 -->
 				<div class="chatGroupRoom_container" style="display: none;">
 					<div class="chatBox">
@@ -128,7 +104,6 @@
 				</div>
 			</div>
 		</div>
-<div id="realPopup"></div>
 	</div>
 	<script src="/js/chat/chatting.js" type="text/javascript"></script>
 	<script src="/js/chat/inputText.js" type="text/javascript"></script>
@@ -177,7 +152,7 @@
 		                            .css("cursor", "pointer");
 		                        $nameCell.on("click", (function (name) {
 		                            return function () {
-		                                openOneChat(name);
+		                                openOneChat(name,friend.organization);
 		                                console.log(name); // 콘솔에 이름 출력
 		                            };
 		                        })(friend.name));
@@ -249,7 +224,7 @@
 									// 클로저로 friend.name을 감싸고 openOneChat을 호출
 									$nameCell.on("click", (function(name) {
 										return function() {
-											openOneChat(name);
+											openOneChat(name,friend.organization);
 											console.log(name); // 콘솔에 이름 출력
 										};
 									})(friend.name));
@@ -274,10 +249,9 @@
 			$(this).css("text-decoration", "none");
 		});
 
-		function openOneChat(friendName) {
+		function openOneChat(friendName, organization) {
 			// 이름을 쿼리 매개변수로 전달하여 페이지를 엽니다.
-			$.get("/chats/inputText?friendName="
-					+ encodeURIComponent(friendName), function(data) {
+			$.get("/chats/inputText?friendName=" + encodeURIComponent(friendName) + "&organization=" + encodeURIComponent(organization), function(data) {
 				// data를 팝업 div에 추가하고 팝업을 표시합니다.
 				var popup = document.createElement("div");
 				popup.className = "oneChat popup";

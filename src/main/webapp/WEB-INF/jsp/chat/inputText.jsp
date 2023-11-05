@@ -12,27 +12,22 @@
 	align-items: center; /* 세로 중앙 정렬 */
 }
 
-.myimg {
-	/* myimg의 스타일 */
-	
+.myimg i{
+	font-size: 40px;
 }
 
-.my {
+.other {
 	display: flex;
 	flex-direction: column; /* 내부 요소들을 세로로 나열 */
 	margin-left: 10px; /* 내부 요소 사이의 간격 조정 */
 }
 
-.myname {
-	/* myname의 스타일 */
-	
+#otherName {
+	font-size: medium;
+	font-weight: bold;
+	margin-left: -3px;
 }
-
-.department {
-	/* department의 스타일 */
-	
-}
-
+#organization{font-size: small;}
 .inputTop {
 	height: 10%
 }
@@ -40,17 +35,16 @@
 </head>
 <body>
 	<div class="box" id="inputJSP">
+		<input id="loginID" type="hidden" value="${loginId}">
 		<div class="inputTop" style="padding-top: 10px; padding-left: 10px">
 			<span class="close-button" onclick="closeOneChat()">&times;</span>
 			<div class="myProfile">
 				<div class="myimg">
 					<i class="fa-regular fa-circle-user"></i>
 				</div>
-				<div class="my">
-					<div class="myname">
-						<input id="loginID" type="hidden" value="${loginID}">
-					</div>
-					<div class="department">대표이사</div>
+				<div class="other">
+					<input id="otherName" value="${friendName}" style="border: none;">
+					<input id="organization" value="${organization} " style="border: none;">
 				</div>
 			</div>
 		</div>

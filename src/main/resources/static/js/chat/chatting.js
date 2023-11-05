@@ -55,13 +55,7 @@ function openchatGmember() {
     $(".search_container").css("display", "none");
 }
 
-function openchatList() {
-    $(".chatRoom_container").css("display", "block");
-    $(".allList").css("display", "none");
-    $(".chatMember_container").css("display", "none");
-    $(".chatGroupRoom_container").css("display", "none");
-    $(".search_container").css("display", "none");
-}
+
 function openchatGroupList() {
     $(".chatGroupRoom_container").css("display", "block");
     $(".allList").css("display", "none");
