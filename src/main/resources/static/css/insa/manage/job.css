@@ -1,0 +1,87 @@
+table {
+	margin-top: 20px;
+	width: 95%;
+}
+
+table, th, td {
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	border-collapse: collapse;
+}
+
+th {
+	background-color: #eff4fc !important;
+	width: 10%;
+	font-weight: 400;
+}
+
+td.jt_div {
+	width: 90%;
+	padding: 3px;
+}
+
+.parent_span {
+	margin-right: 20px;
+}
+
+h3 {
+	font-size: 22px;
+}
+
+h4, .h4_span {
+	font-weight: 700;
+}
+
+.h4_span {
+	margin-right: 20px;
+}
+
+hr {
+	width: 95%;
+	margin: 20px 0 20px 0;
+}
+
+button[type="submit"] {
+	background-color: #2985db;
+	border: 1px solid #056ac9;
+	color: #fff;
+	margin: 20px 0 50px;
+	padding: 5px 20px 6px;
+	font-size: 14px;
+	line-height: 1.5;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+}
+
+a {
+	text-decoration-line: none;
+}
+
+.btn {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	text-align: center;
+	color: #fff;
+	background: #bec3c9;
+	cursor: pointer;
+	line-height: 17px;
+}
+
+.hidden {
+	visibility: hidden;
+}
+
+.show {
+	visibility: visible;
+}
+
+#add_jr_btn {
+	color: #779ec0 !important;
+}
+
+#jr_contents {
+	padding-left: 20px;
+}
