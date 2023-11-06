@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="JobRole">
+	<select id="selectAll" resultType="com.kdt.dto.JobRoleDTO">
+		SELECT * FROM JOB_Role;
+	</select>
+	<insert id="insert">
+		INSERT INTO JOB_Role VALUES(#{job_name})
+	</insert>
+	<delete id="delete">
+		DELETE FROM JOB_Role WHERE job_name = #{job_name}
+	</delete>
+</mapper>
