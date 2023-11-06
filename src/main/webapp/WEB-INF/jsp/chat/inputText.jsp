@@ -36,6 +36,7 @@
 <body>
 	<div class="box" id="inputJSP">
 		<input id="loginID" type="hidden" value="${loginId}">
+		<input  id="oneSeq" value="${oneSeq}">
 		<div class="inputTop" style="padding-top: 10px; padding-left: 10px">
 			<span class="close-button" onclick="closeOneChat()">&times;</span>
 			<div class="myProfile">

@@ -23,19 +23,19 @@ public class ChatController {
 	@RequestMapping("/chatting")
 	//@RequestParam("position") String position, Model model
 	public String chatting(HttpServletRequest request) {
-		String id = (String)hsession.getAttribute("loginId");
-		hsession.setAttribute("id", id);
-		//model.addAttribute("position", position);
+		//String id = (String)hsession.getAttribute("loginId");
+		//String name = (String)hsession.getAttribute("name");
+		//String position = (String)hsession.getAttribute("position");
 		return "chat/chatting";
 	}
 	@RequestMapping("/inputText")
-	//,@RequestParam("oneSeq") int oneSeq
-    public String inputText(@RequestParam("friendName") String friendName,@RequestParam("organization") String organization, Model model) {
+	//
+    public String inputText(@RequestParam("friendName") String friendName,@RequestParam("organization") String organization,@RequestParam("oneSeq") int oneSeq, Model model) {
         System.out.println(friendName);
         model.addAttribute("friendName", friendName);
         model.addAttribute("organization", organization);
-        //model.addAttribute("oneSeq", oneSeq);
-        //System.out.println(oneSeq);
+        model.addAttribute("oneSeq", oneSeq);
+        System.out.println(oneSeq);
         return "chat/inputText";
     }
 	

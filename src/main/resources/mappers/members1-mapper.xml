@@ -12,5 +12,9 @@
 	<select id="getMembersByOrganization" resultType="com.kdt.dto.MembersDTO1">
 		SELECT * FROM members1 where organization = #{organization}
 	</select>
+	
+	<select id="loginUser" resultType="com.kdt.dto.MembersDTO1">
+		SELECT * FROM members1 where id = #{id}
+	</select>
 
 </mapper>

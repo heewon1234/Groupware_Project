@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -71,10 +72,38 @@ public class Members1Controller {
 	}
 	@PostMapping("/getMembersByOrganization")
 	@ResponseBody
-	public List<MembersDTO1> getMembersByOrganization(@RequestParam("organization") String organization) {
+	public Map<String, Object> getMembersByOrganization(@RequestParam("organization") String organization,@RequestParam("oneSeq") int oneSeq) throws Exception {
 		List<MembersDTO1> members = mservice.getMembersByOrganization(organization);
-		return members;
+
+		List<OneToOneChatDTO> OneToOneChatDTOList = roomService.selectAll();
+		System.out.println(OneToOneChatDTOList);
+		Map<String, Object> responseData = new HashMap<>();
+		responseData.put("members", members);
+		responseData.put("OneToOneChatDTOList", OneToOneChatDTOList);
+		return responseData;
 	}
+
+	@PostMapping("/loginUser")
+	@ResponseBody
+	public void loginUser(HttpSession session) {
+		String loginId = (String) session.getAttribute("loginId");
+
+		// mservice.loginUser(loginId)를 통해 로그인된 사용자의 DTO 가져오기
+		MembersDTO1 userDTO = mservice.loginUser(loginId);
+		System.out.println(userDTO);
+		if (userDTO != null) {
+			// DTO에서 이름과 부서 가져오기
+			String name = userDTO.getName();
+			String position = userDTO.getPosition();
+
+			// 세션에 이름과 부서 정보 저장
+			session.setAttribute("name", name);
+			session.setAttribute("position", position);
+
+		}
+	}
+
+
 
 
 }

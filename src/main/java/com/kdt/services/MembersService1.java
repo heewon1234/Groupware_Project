@@ -19,4 +19,7 @@ public class MembersService1 {
 	public List<MembersDTO1> getMembersByOrganization(String organization) {
 		return dao.getMembersByOrganization(organization);
 	}
+	public MembersDTO1 loginUser(String id) {
+		return dao.loginUser(id);
+	}
 }
