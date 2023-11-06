@@ -6,15 +6,17 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.handler.annotation.MessageExceptionHandler;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.kdt.dto.ChatMessageDTO;
 import com.kdt.services.ChatMessageService;
 
@@ -23,17 +25,26 @@ public class ChatStompController {
 	@Autowired
 	private ChatMessageService chatMessageService;
 
+	@Autowired
+	private Gson gson;
+
 	@MessageMapping("chat/message")
 	@SendTo("/topic/chat")
 	public ChatMessageDTO message(ChatMessageDTO message) {
 		return message;
 	}
 
-	@MessageMapping("/oneToOne/sendMessage")
-	@SendTo("/topic/oneToOne/{chatId}")
-	public int oneToOne_insert(ChatMessageDTO oneChat_dto) throws Exception {
-		return chatMessageService.insert(oneChat_dto);
+	@MessageMapping("/oneToOne/sendMessage/{oneSeq}")
+	@SendTo("/topic/oneToOne/{oneSeq}")
+	public int oneToOne_insert(@Payload String message, @DestinationVariable String oneSeq) throws Exception {
+	    System.out.println(message);
+		ChatMessageDTO dto = gson.fromJson(message, new TypeToken<ChatMessageDTO>() {}.getType());
+	    System.out.println("확인"+oneSeq);
+	    return chatMessageService.insert(dto);
 	}
+
+
+
 
 	@MessageMapping("/group/sendMessage")
 	@SendTo("/topic/group/{groupId}")

@@ -15,7 +15,7 @@ public class ChatMessageDAO {
 	private SqlSession db;
 	
 	public int insert(ChatMessageDTO dto){ 
-		return db.insert("ChatMessage.insert"); 
+		return db.insert("ChatMessage.insert",dto); 
 	}
 	public List<ChatMessageDTO> selectByType(Map<String, Object> parameterMap){ 
 		return db.selectList("ChatMessage.selectByType", parameterMap); 

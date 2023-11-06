@@ -12,7 +12,7 @@
 	align-items: center; /* 세로 중앙 정렬 */
 }
 
-.myimg i{
+.myimg i {
 	font-size: 40px;
 }
 
@@ -27,7 +27,11 @@
 	font-weight: bold;
 	margin-left: -3px;
 }
-#organization{font-size: small;}
+
+#organization {
+	font-size: small;
+}
+
 .inputTop {
 	height: 10%
 }
@@ -35,8 +39,9 @@
 </head>
 <body>
 	<div class="box" id="inputJSP">
-		<input id="loginID" type="hidden" value="${loginId}">
-		<input  id="oneSeq" value="${oneSeq}">
+		<input id="userName" type="hidden" value="${name}"> <input
+			id="loginID" type="hidden" value="${loginId}"> <input
+			id="oneSeq" value="${oneSeq}">
 		<div class="inputTop" style="padding-top: 10px; padding-left: 10px">
 			<span class="close-button" onclick="closeOneChat()">&times;</span>
 			<div class="myProfile">
@@ -44,12 +49,14 @@
 					<i class="fa-regular fa-circle-user"></i>
 				</div>
 				<div class="other">
-					<input id="otherName" value="${friendName}" style="border: none;" disabled="disabled">
-					<input id="organization" value="${organization} " style="border: none;" disabled="disabled">
+					<input id="otherName" value="${friendName}" style="border: none;"
+						disabled="disabled"> <input id="organization"
+						value="${organization} " style="border: none;" disabled="disabled">
 				</div>
 			</div>
 		</div>
 		<div class="chatForm" style="position: relative;"></div>
+		
 		<div id="messageForm">
 			<div class="chatBox">
 				<div class="inputText" id="inputText" contenteditable="true"
