@@ -5,8 +5,8 @@
 <mapper namespace="ChatMessage">
 
 	<insert id="insert">
-		insert into messages(roomID,sender,message,type)
-		values(#{roomID},#{sender},#{message},#{type})
+		insert into messages(roomID,userID,message,type)
+		values(#{roomID},#{userID},#{message},#{type})
 	</insert>
 	
 	<select id="selectByType"

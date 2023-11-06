@@ -43,8 +43,8 @@
 					<i class="fa-regular fa-circle-user"></i>
 				</div>
 				<div class="other">
-					<input id="otherName" value="${friendName}" style="border: none;">
-					<input id="organization" value="${organization} " style="border: none;">
+					<input id="otherName" value="${friendName}" style="border: none;" disabled="disabled">
+					<input id="organization" value="${organization} " style="border: none;" disabled="disabled">
 				</div>
 			</div>
 		</div>

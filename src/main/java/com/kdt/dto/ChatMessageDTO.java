@@ -5,22 +5,23 @@ import java.sql.Timestamp;
 public class ChatMessageDTO {
 	private int MessageSeq;
 	private int roomID; 
-	private String sender;
+	private String userID;
     private String message;
     private MessageType type;
     private Timestamp writer_date;
     
     public ChatMessageDTO() {}
-	public ChatMessageDTO(int messageSeq, int roomID, String sender, String message, MessageType type,
+	public ChatMessageDTO(int messageSeq, int roomID, String userID, String message, MessageType type,
 			Timestamp writer_date) {
 		super();
 		MessageSeq = messageSeq;
 		this.roomID = roomID;
-		this.sender = sender;
+		this.userID = userID;
 		this.message = message;
 		this.type = type;
 		this.writer_date = writer_date;
 	}
+
 
 
 	public int getMessageSeq() {
@@ -28,9 +29,11 @@ public class ChatMessageDTO {
 	}
 
 
+
 	public void setMessageSeq(int messageSeq) {
 		MessageSeq = messageSeq;
 	}
+
 
 
 	public int getRoomID() {
@@ -38,19 +41,23 @@ public class ChatMessageDTO {
 	}
 
 
+
 	public void setRoomID(int roomID) {
 		this.roomID = roomID;
 	}
 
 
-	public String getSender() {
-		return sender;
+
+	public String getUserID() {
+		return userID;
 	}
 
 
-	public void setSender(String sender) {
-		this.sender = sender;
+
+	public void setUserID(String userID) {
+		this.userID = userID;
 	}
+
 
 
 	public String getMessage() {
@@ -58,9 +65,11 @@ public class ChatMessageDTO {
 	}
 
 
+
 	public void setMessage(String message) {
 		this.message = message;
 	}
+
 
 
 	public MessageType getType() {
@@ -68,9 +77,11 @@ public class ChatMessageDTO {
 	}
 
 
+
 	public void setType(MessageType type) {
 		this.type = type;
 	}
+
 
 
 	public Timestamp getWriter_date() {
@@ -78,9 +89,11 @@ public class ChatMessageDTO {
 	}
 
 
+
 	public void setWriter_date(Timestamp writer_date) {
 		this.writer_date = writer_date;
 	}
+
 
 
 	public enum MessageType {

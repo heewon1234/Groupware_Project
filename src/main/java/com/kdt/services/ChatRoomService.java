@@ -6,21 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kdt.dao.ChatRoomDAO;
+import com.kdt.dto.OneToOneChatDTO;
 
 @Service
 public class ChatRoomService {
 	@Autowired//자동으로 연결됨
 	private ChatRoomDAO dao;
 
-	public int createOneChatRoom(String loggedInUserID, String otherUserID) {
-		// 새로운 1:1 채팅방을 생성하는 로직을 구현합니다.
-		// 이 부분은 데이터베이스 테이블에 새로운 레코드를 삽입하고 방 ID를 반환하는 방식으로 구현합니다.
-
-		// 예를 들어, chatRoomDAO를 사용하여 데이터베이스에 새로운 방을 삽입하고 방 ID를 가져오는 코드를 작성합니다.
-		int chatRoomID = dao.createOneChatRoom(loggedInUserID, otherUserID);
-
-		// 방 ID를 반환합니다.
-		return chatRoomID;
+	public void createOneChatRoom(String loggedInUserID, String otherUserID) {
+		dao.createOneChatRoom(loggedInUserID, otherUserID);
 	}
 
 	public int createGroupChat(String groupName, List<String> users) {
@@ -43,11 +37,16 @@ public class ChatRoomService {
 
 	// 방의 존재 여부 확인 메서드
 	public boolean oneroomExists(String loggedInUserID, String otherUserID) {
-        return dao.oneroomExists(loggedInUserID, otherUserID);
+		boolean roomExists = dao.oneroomExists(loggedInUserID, otherUserID);
+        return roomExists;
     }
 	//일대일 채팅 전체 수
 	public int oneCountAll() {
 	    return dao.oneCountAll();
+	}
+	//selectAll
+	public List<OneToOneChatDTO> selectAll() throws Exception {
+		return dao.selectAll();
 	}
 
 }

@@ -6,7 +6,7 @@
 
 
 	<select id="selectAll" resultType="com.kdt.dto.MembersDTO1">
-		select * from members1
+		select * from members1 where id != #{loggedInUserID}
 	</select>
 
 	<select id="getMembersByOrganization" resultType="com.kdt.dto.MembersDTO1">

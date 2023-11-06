@@ -21,16 +21,21 @@ public class ChatController {
 	private ChatRoomService service;
 	
 	@RequestMapping("/chatting")
+	//@RequestParam("position") String position, Model model
 	public String chatting(HttpServletRequest request) {
-		String id = (String)hsession.getAttribute("loginID");
+		String id = (String)hsession.getAttribute("loginId");
 		hsession.setAttribute("id", id);
+		//model.addAttribute("position", position);
 		return "chat/chatting";
 	}
 	@RequestMapping("/inputText")
+	//,@RequestParam("oneSeq") int oneSeq
     public String inputText(@RequestParam("friendName") String friendName,@RequestParam("organization") String organization, Model model) {
         System.out.println(friendName);
         model.addAttribute("friendName", friendName);
         model.addAttribute("organization", organization);
+        //model.addAttribute("oneSeq", oneSeq);
+        //System.out.println(oneSeq);
         return "chat/inputText";
     }
 	

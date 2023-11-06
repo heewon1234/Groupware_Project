@@ -1,22 +1,25 @@
 package com.kdt.dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kdt.dto.OneToOneChatDTO;
+
 @Repository
 public class ChatRoomDAO {
 	@Autowired
 	private SqlSession db;
 	
-	public int createOneChatRoom(String loggedInUserID, String otherUserID) {
+	public void createOneChatRoom(String loggedInUserID, String otherUserID) {
 	    Map<String, String> params = new HashMap<>();
 	    params.put("loggedInUserID", loggedInUserID);
 	    params.put("otherUserID", otherUserID);
-	    return db.insert("oneChat.createOneChatRoom", params);
+	    db.insert("oneChat.createOneChatRoom", params);
 	}
 	
 	public int createGroupChat(String groupName) {
@@ -33,11 +36,15 @@ public class ChatRoomDAO {
 		Map<String, Object> params = new HashMap<>();
 		params.put("loggedInUserID", loggedInUserID);
 		params.put("otherUserID", otherUserID);
-		return db.insert("oneChat.oneroomExists", params) < 0;
+		return db.selectOne("oneChat.oneroomExists", params);
 	}
 	
 	public int oneCountAll() {
 	    return db.selectOne("oneChat.oneCountAll");
+	}
+	public List<OneToOneChatDTO> selectAll() {
+		System.out.println(db.selectList("oneChat.selectAll"));
+		return db.selectList("oneChat.selectAll");
 	}
 
 
