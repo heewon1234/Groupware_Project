@@ -9,8 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kdt.dto.JobRoleDTO;
 import com.kdt.dto.JobTitleDTO;
+import com.kdt.dto.MembersDTO;
+import com.kdt.dto.OrganizationDTO;
 import com.kdt.services.JobRoleService;
 import com.kdt.services.JobTitleService;
+import com.kdt.services.MembersService;
+import com.kdt.services.OrganizationService;
 
 @Controller
 @RequestMapping("/insa/manage")
@@ -19,10 +23,10 @@ public class InsaManageController {
 	private JobRoleService jrService;
 	@Autowired
 	private JobTitleService jtService;
-//	@Autowired
-//	private OrganizationService orgService;
-//	@Autowired
-//	private MembersService mService;
+	@Autowired
+	private OrganizationService orgService;
+	@Autowired
+	private MembersService mService;
 
 	@RequestMapping(value = "/job")
 	public String home(Model model) throws Exception {
@@ -34,27 +38,29 @@ public class InsaManageController {
 		return "/insa/manage/job";
 	}
 	
-//	@RequestMapping(value="/org")
-//	public String toOrg(Model model) {
-//		List<OrganizationDTO> orgList = orgService.selectAll();
-//		
-//		model.addAttribute("orgList", orgList);
-//		
-//		return "/insa/manage/organization";
-//	}
-//	
-//	@RequestMapping(value="/members")
-//	public String toMember(Model model) {
-//		List<JobTitleDTO> jobTitleList = jtService.selectAll();
-//		List<OrganizationDTO> orgList = orgService.selectAll();
-//		List<MembersDTO> membersList = mService.selectAll();
-//		
-//		model.addAttribute("jobTitleList", jobTitleList);
-//		model.addAttribute("orgList", orgList);
-//		model.addAttribute("membersList", membersList);
-//		
-//		return "/insa/manage/members";
-//	}
+	@RequestMapping(value="/org")
+	public String toOrg(Model model) {
+		List<OrganizationDTO> orgList = orgService.selectAll();
+		
+		model.addAttribute("orgList", orgList);
+		
+		return "/insa/manage/organization";
+	}
+	
+	@RequestMapping(value="/members")
+	public String toMember(Model model) {
+		List<JobTitleDTO> jobTitleList = jtService.selectAll();
+		List<OrganizationDTO> orgList = orgService.selectAll();
+		List<MembersDTO> membersList = mService.selectAll();
+		List<String> workFormList = mService.selectWorkForm();
+		
+		model.addAttribute("jobTitleList", jobTitleList);
+		model.addAttribute("orgList", orgList);
+		model.addAttribute("membersList", membersList);
+		model.addAttribute("workFormList", workFormList);
+		
+		return "/insa/manage/members";
+	}
 	
 	@RequestMapping(value="/left_item")
 	public String toLeft_item(String selectItem, Model model) {

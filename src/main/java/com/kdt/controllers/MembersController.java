@@ -52,4 +52,35 @@ public class MembersController {
 		session.invalidate();
 		return "redirect:/";
 	}
+	
+	//
+	//
+	//
+	@RequestMapping(value = "/updateWorkForm")
+	public String updateWorkForm(String idList, String workForm) throws Exception {
+		mservice.updateWorkForm(idList, workForm);
+
+		return "redirect:/insa/manage/members";
+	}
+	
+	@RequestMapping(value = "/updatePosition")
+	public String updatePosition(String idList, String position) throws Exception {
+		mservice.updatePosition(idList, position);
+
+		return "redirect:/insa/manage/members";
+	}
+	
+	@RequestMapping(value = "/updateOrg")
+	public String updateOrg(String idList, String org) throws Exception {
+		mservice.updateOrg(idList, org);
+
+		return "redirect:/insa/manage/members";
+	}
+	
+	@RequestMapping(value = "/deleteMember")
+	public String deleteMember(String idList) throws Exception {
+		mservice.deleteMember(idList);
+
+		return "redirect:/insa/manage/members";
+	}
 }
