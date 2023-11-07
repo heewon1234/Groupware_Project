@@ -1,0 +1,76 @@
+@charset "UTF-8";
+
+ /* div{border:1px solid black;}   */
+
+.searchBox{
+    width:600px;
+    height:40px;
+    border:1px solid black;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom:30px;
+}
+.searchBox>div{
+    float: left;
+    height:100%;
+}
+.searchBox .searchIconBox{
+    width:7%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.searchIconBox>img{
+    width:38%;
+    height:40%;
+}
+.searchBox .searchTextBox{width:93%;}
+.searchTextBox>input{
+    width:95%;
+    height:100%;
+    border:none;
+}
+
+.board_list{
+    width:1500px;
+}
+
+.board_top{
+    margin-top:10px;
+    margin-bottom:10px;
+}
+.board_top>select{
+    border:none;
+    font-size:15px;
+}
+
+.board_body{
+    margin-top:10px;
+    border-top:1px solid black;
+    border-bottom:1px solid black;
+}
+
+.board_body .board_contents_list{
+    height:46px;
+    overflow:hidden;
+}
+.board_contents_list:not(.board_contents_list:first-child){
+    border-top:1px solid black;
+}
+.board_contents_list>div{
+    float:left;
+    height:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.board_contents_list>.favorite{width:3%;}
+.favorite>img{
+    width:45%;
+    height:45%;
+}
+.board_contents_list>.board_contents_title{width:60%;}
+.board_contents_list>.board_contents_writer{width:10%;}
+.board_contents_list>.view_count{width:5%;}
+.board_contents_list>.board_title{width:10%;}
+.board_contents_list>.board_contents_write_date{width:12%;}

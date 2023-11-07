@@ -1,0 +1,63 @@
+@charset "UTF-8";
+
+/* div{border:1px solid black;}  */
+
+.test_right>div{width:1500px;}
+
+.title{
+    font-weight: bold;
+    font-size:25px;
+    margin-bottom:40px;
+}
+
+.select_box{
+    
+    margin-bottom:20px;
+    height:30px;
+}
+.select_box>select{
+    font-size:15px;
+    border: none;
+    border-bottom:1px solid black;
+    width:10%;
+    height:100%;
+}
+
+.board_list_box{border:1px solid black;}
+.board_list_box>div{
+    overflow: hidden;
+    height:50px;
+}
+.board_list_box>div>div:not(.board_list>.buttons){
+    float:left;
+    height:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.board_index{
+    background-color: aliceblue;
+}
+.board_list{border-top:1px solid black;}
+.board_list_box>div>div:not(.buttons){border-right:1px solid black;}
+.board_index_check{width:3%}
+.board_index_board_type{width:12%}
+.board_index_name_type{width:12%}
+.board_index_board_title{width:28%}
+.board_index_board_admin{width:10%}
+.board_index_mk_date{width:15%}
+.buttons{width:20%;}
+.board_list>.buttons{
+    float:left;
+    height:100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;;
+}
+.buttons>button{
+    width:80px;
+    height:30px;
+    border:1px solid gainsboro;
+    border-radius: 5px;
+
+}
