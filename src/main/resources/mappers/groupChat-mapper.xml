@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="groupChat">
+
+	<insert id="createGroupChat">
+		insert into GroupChat (groupName)
+		values
+		(#{groupName})
+	</insert>
+
+	<insert id="addUserToGroupChat">
+		insert into GroupChat (groupSeq,userID)
+		values (#{groupSeq},#{userID})
+	</insert>
+
+
+
+	<select id="selectBy"
+		resultType="com.kdt.dto.ChatMessageDTO">
+		SELECT * FROM messages where type = #{type} and
+		MessageSeq=#{MessageSeq}
+	</select>
+</mapper>
