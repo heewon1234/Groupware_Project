@@ -9,6 +9,8 @@
     border-radius: 5px;
     overflow: hidden;
     margin-bottom:30px;
+    padding:0px;
+    margin-left:25px;
 }
 .searchBox>div{
     float: left;

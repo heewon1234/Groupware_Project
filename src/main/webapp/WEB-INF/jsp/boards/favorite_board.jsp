@@ -18,8 +18,7 @@
             
         </div>
         <div class="right_item">
-            <div class="test_right">
-
+            <div class="content_tab">
                 <div class="searchBox">
                     <div class="searchIconBox">
                         <img src="/images/board/search.png">

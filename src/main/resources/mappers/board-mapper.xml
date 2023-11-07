@@ -2,5 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Board">
-
+	<select id="select_board_type_group" resultType="com.kdt.dto.Mk_BoardDTO">
+		select * from mk_board where board_type='group'
+	</select>
+	<select id="select_board_type_all" resultType="com.kdt.dto.Mk_BoardDTO">
+		select * from mk_board where board_type='all'
+	</select>
 </mapper>

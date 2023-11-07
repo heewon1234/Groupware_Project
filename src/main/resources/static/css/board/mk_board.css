@@ -2,16 +2,22 @@
 
 /* div{border:1px solid black;}  */
 
-.test_right>div:not(.title){margin-bottom:40px;}
-.test_right>div:not(.title)>div{margin-bottom:10px;}
+.content_tab>div:not(.title){
+	margin-bottom:20px;
+	padding-bottom:0px;	
+}
+.content_tab>div:not(.title)>div{margin-bottom:10px;}
 .contents_title{
     width:1500px;
     height:50px;
     font-size:25px;
     font-weight: bold;
-    margin-bottom:40px;
+    padding-bottom:0px;	
 }
-.name{width:1500px;}
+.name{
+	width:1500px;
+
+}
 .name>.name_text{
     height:25px;
     font-weight: bold;
@@ -24,7 +30,9 @@
     height:100%;
 }
 
-.board_type{width:1500px;}
+.board_type{
+	width:1500px;
+}
 .board_type_text{font-weight: bold;}
 .board_type_select{
     overflow: hidden;
