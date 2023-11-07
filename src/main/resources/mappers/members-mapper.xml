@@ -7,4 +7,28 @@
 	<select id="isMember" resultType="boolean">
 		select (count(*) > 0) from members1 where id=#{id} and pw=#{pw}
 	</select>
+	
+	<select id="selectAll" resultType="com.kdt.dto.MembersDTO">
+		SELECT * FROM Members;
+	</select>
+	
+	<update id="updateWorkForm">
+		Update MEMBERS set work_form = #{work_form} where id = #{id};
+	</update>
+	
+	<update id="updatePosition">
+		Update MEMBERS set position = #{position} where id = #{id};
+	</update>
+	
+	<update id="updateOrg">
+		Update MEMBERS set organization = #{organization} where id = #{id};
+	</update>
+	
+	<delete id="deleteMember">
+		DELETE FROM MEMBERS WHERE ID = #{id};
+	</delete>
+	
+	<select id="selectWorkForm" resultType="String">
+		SELECT DISTINCT work_form FROM Members
+	</select>
 </mapper>

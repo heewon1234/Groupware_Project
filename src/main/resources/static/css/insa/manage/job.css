@@ -15,32 +15,6 @@ th {
 	font-weight: 400;
 }
 
-td.jt_div {
-	width: 90%;
-	padding: 3px;
-}
-
-.parent_span {
-	margin-right: 20px;
-}
-
-h3 {
-	font-size: 22px;
-}
-
-h4, .h4_span {
-	font-weight: 700;
-}
-
-.h4_span {
-	margin-right: 20px;
-}
-
-hr {
-	width: 95%;
-	margin: 20px 0 20px 0;
-}
-
 button[type="submit"] {
 	background-color: #2985db;
 	border: 1px solid #056ac9;
@@ -54,8 +28,21 @@ button[type="submit"] {
 	cursor: pointer;
 }
 
-a {
-	text-decoration-line: none;
+h4, .h4_span {
+	font-weight: 700;
+}
+
+td.jt_div {
+	width: 90%;
+	padding: 3px;
+}
+
+.parent_span {
+	margin-right: 20px;
+}
+
+.h4_span {
+	margin-right: 20px;
 }
 
 .btn {
