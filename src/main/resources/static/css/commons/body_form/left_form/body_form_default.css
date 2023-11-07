@@ -214,7 +214,7 @@
     overflow: auto;
 }
 
-.content_tab > *{
+.content_tab > * {
     padding: 20px 25px;
     margin-left: 4px;
 }
@@ -230,4 +230,41 @@
 
 .form-control:focus {
     box-shadow: none !important;
+}
+
+.button_cancel {
+    box-shadow: none;
+    background-color: #ebebeb;
+    border: solid 1px #d6d6d6;
+    border-radius: 4px;
+    color: #333;
+    padding: 0 20px 0px;
+    height: 34px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.button_cancel:hover {
+	background-color: #d6d6d6;
+}
+
+.button_apply {
+    box-shadow: none;
+    background-color: #2985db;
+    border: solid 1px #056ac9;
+    border-radius: 4px;
+    color: white;
+    padding: 0 20px 0px;
+    height: 34px;
+    font-size: 14px;
+}
+
+.button_apply:hover {
+	background-color: #056ac9;
+}
+
+.button_apply.permit {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: .4;
 }
