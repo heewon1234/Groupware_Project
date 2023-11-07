@@ -11,8 +11,4 @@ public class CommonsController {
 		return "commons/topForm";
 	}
 	
-	@RequestMapping("/bodyForm")
-	public String bodyForm() {
-		return "commons/bodyForm";
-	}
 }
