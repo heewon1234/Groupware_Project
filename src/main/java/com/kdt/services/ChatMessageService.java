@@ -21,4 +21,7 @@ public class ChatMessageService {
 	public List<ChatMessageDTO> selectByType(Map<String, Object> parameterMap) {
         return dao.selectByType(parameterMap);
     }
+	public List<ChatMessageDTO> getPreviousMessages(String oneSeq) {
+		return dao.getPreviousMessages(oneSeq);
+	}
 }

@@ -20,4 +20,8 @@ public class ChatMessageDAO {
 	public List<ChatMessageDTO> selectByType(Map<String, Object> parameterMap){ 
 		return db.selectList("ChatMessage.selectByType", parameterMap); 
 	}
+	public List<ChatMessageDTO> getPreviousMessages(String oneSeq){ 
+//		int oneSeqInt = Integer.parseInt(oneSeq);
+		return db.selectList("ChatMessage.getPreviousMessages", oneSeq); 
+	}
 }

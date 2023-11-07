@@ -11,9 +11,11 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -41,6 +43,13 @@ public class ChatStompController {
 		ChatMessageDTO dto = gson.fromJson(message, new TypeToken<ChatMessageDTO>() {}.getType());
 	    System.out.println("확인"+oneSeq);
 	    return chatMessageService.insert(dto);
+	}
+	@ResponseBody
+	@RequestMapping("/getPreviousMessages/{oneSeq}")
+	public List<ChatMessageDTO> getPreviousMessages(@PathVariable String oneSeq) {
+		System.out.println("이전" +oneSeq);
+	    List<ChatMessageDTO> previousMessages = chatMessageService.getPreviousMessages(oneSeq);
+	    return previousMessages;
 	}
 
 
@@ -73,6 +82,7 @@ public class ChatStompController {
 		// 나머지 로직
 		return dto;
 	}
+
 
 
 }

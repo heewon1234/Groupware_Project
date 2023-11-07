@@ -1,5 +1,7 @@
 package com.kdt.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kdt.dto.ChatMessageDTO;
+import com.kdt.services.ChatMessageService;
 import com.kdt.services.ChatRoomService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,6 +23,7 @@ public class ChatController {
 	private HttpSession hsession;
 	@Autowired
 	private ChatRoomService service;
+
 	
 	@RequestMapping("/chatting")
 	//@RequestParam("position") String position, Model model
@@ -62,4 +67,5 @@ public class ChatController {
         int newRecordCount = service.oneCountAll();
         return newRecordCount;
     }
+	
 }

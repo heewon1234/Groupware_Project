@@ -13,4 +13,8 @@
 		resultType="com.kdt.dto.ChatMessageDTO">
 		SELECT * FROM messages where type = #{type} and MessageSeq=#{MessageSeq}
 	</select>
+	<select id="getPreviousMessages"
+		resultType="com.kdt.dto.ChatMessageDTO">
+		SELECT * FROM messages where roomID =#{oneSeq }
+	</select>
 </mapper>

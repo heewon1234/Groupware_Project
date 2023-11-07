@@ -71,6 +71,7 @@ function showSearchContainer() {
 function hideSearchContainer() {
     $(".search_container").css("display", "none");
 }
+
 //inputText
 		/* let isDrag = false;
 		        let offsetX3, offsetY3;

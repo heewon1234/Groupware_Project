@@ -113,6 +113,10 @@
 	<script src="/js/chat/chatting.js" type="text/javascript"></script>
 	<script src="/js/chat/inputText.js" type="text/javascript"></script>
 	<script>
+	function keepScrollBottom() {
+        let contents = document.getElementsByClassName("chatForm")[0];
+        contents.scrollTop = contents.scrollHeight;
+     }
 		// 전체 친구 목록
 		$
 				.ajax({
@@ -176,6 +180,7 @@
 																			clickedUserName,
 																			friend.organization,
 																			oneSeq);
+																	getPreviousMessages(oneSeq);
 																	break;
 																}
 															}
@@ -192,7 +197,29 @@
 						}
 					},
 				});
-
+		function getPreviousMessages(oneSeq) {
+		    $.ajax({
+		        type: "GET",
+		        url: "/getPreviousMessages/" + oneSeq,
+		        dataType: "json",
+		        success: function(data) {
+		            console.log("시퀀스" + oneSeq);
+		            console.log(data);
+		            console.log(data[0]);
+		            // 서버에서 받은 데이터를 JSON으로 파싱
+		            var previousMessages = data;
+		            for (var i = 0; i < previousMessages.length; i++) {
+		                var previousMessage = previousMessages[i];
+		                var previousMessageContainer = $("<p><strong>" + previousMessage.userID + "</strong> - " + previousMessage.message + "</p>");
+		                $('.chatForm').append(previousMessageContainer);
+		                keepScrollBottom();
+		            }
+		        },
+		        error: function() {
+		            console.log("이전 메시지를 불러오지 못했습니다.");
+		        }
+		    });
+		}
 		//부서 목록 불러오기
 		$("#departmentSelect").on("change", function() {
 			var organization = $(this).val();
@@ -282,6 +309,7 @@
 																				clickedUserName,
 																				friend.organization,
 																				oneSeq); // openOneChat 함수 호출 위치 수정
+																				getPreviousMessages(oneSeq);
 																		break;
 																	}
 																}
@@ -366,16 +394,14 @@
 				document.body.removeChild(popup);
 			}
 		}
-		function keepScrollBottom() {
-			let contents = document.getElementsByClassName("chatForm")[0];
-			contents.scrollTop = contents.scrollHeight;
-		}
+		
 		
 		//실시간 채팅
 		var socket = new SockJS('/ws');
 		var stompClient = Stomp.over(socket);
 
 		stompClient.connect({}, function(frame) {
+			var oneSeq = $('#oneSeq').val();
 			stompClient.subscribe('/topic/oneToOne/{chatId}',
 					function(response) {
 						console.log('Received message: ' + response.body);
@@ -430,7 +456,6 @@
 						var messageType = 'one';
 
 						// 메세지를 서버로 전송
-						// 메세지를 서버로 전송
 						stompClient.send('/app/oneToOne/sendMessage/' + oneSeq,
 								{}, JSON.stringify({
 									type : "CHAT",
@@ -444,6 +469,7 @@
 						$('#inputText').empty();
 					}
 				});
+		
 
 		//그룹 채팅방 만들기
 		$(document).on(
