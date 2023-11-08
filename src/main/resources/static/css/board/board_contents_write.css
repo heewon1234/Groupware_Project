@@ -2,12 +2,12 @@
 
 /* div{border:1px solid black;} */
 
-.test_right>form>div:not(.board_contents_file_box):not(.board_contents_box){
+.content_tab>form>div:not(.board_contents_file_box):not(.board_contents_box){
     width:1500px;
     overflow: hidden;
     margin-bottom:10px;
 }
-.test_right>form>div>div:not(.board_contents_file_box>div):not(.board_contents_box>div):not(.board_servey>div){
+.content_tab>form>div>div:not(.board_contents_file_box>div):not(.board_contents_box>div):not(.board_servey>div){
     float:left;
     height:50px;
     display: flex;

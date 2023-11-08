@@ -2,7 +2,7 @@
 
 /* div{border:1px solid black;}  */
 
-.test_right>div{width:1500px;}
+.content_tab>div{width:1500px;}
 
 .title{
     font-weight: bold;
@@ -10,12 +10,12 @@
     margin-bottom:40px;
 }
 
-.select_box{
-    
+.select_box{ 
     margin-bottom:20px;
-    height:30px;
+    height:50px;
+    padding-top:0px;
 }
-.select_box>select{
+.select_box>.select{
     font-size:15px;
     border: none;
     border-bottom:1px solid black;
@@ -23,7 +23,11 @@
     height:100%;
 }
 
-.board_list_box{border:1px solid black;}
+.board_list_box{
+	margin-left:25px;
+	border:1px solid black;
+	padding:0px;
+	}
 .board_list_box>div{
     overflow: hidden;
     height:50px;

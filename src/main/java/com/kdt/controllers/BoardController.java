@@ -35,4 +35,18 @@ public class BoardController {
 	public String toMk_board(){
 		return "boards/mk_board";
 	}
+	
+	@RequestMapping("toEditBoard")
+	public String toEditBoard() {
+		return "boards/edit_board";
+	}
+	
+	@RequestMapping("toContentsBoard")
+	public String toContentsBoard() {
+		return "boards/contents_board";
+	}
+	@RequestMapping("toWriteContentsBoard")
+	public String toWriteContentsBoard() {
+		return "boards/write_contents_board";
+	}
 }

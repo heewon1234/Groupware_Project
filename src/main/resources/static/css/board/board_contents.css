@@ -2,7 +2,7 @@
 
 /* div{border: 1px solid black;}  */
 
-.test_right>div{width:1500px;}
+.content_tab>div{width:1500px;}
 
 .noticeBox{
     height:40px;
@@ -21,6 +21,8 @@
     overflow: hidden;
     height:100px;
     border-bottom:1px solid black;
+    padding:0px;
+    margin-left:25px;
 }
 .board_contents_info>div{
     float:left;
@@ -71,7 +73,9 @@
 .contents{
     min-height:300px;
     border-bottom:1px solid black;
-    padding:30px;
+    padding-top:20px;
+    padding-bottom:20px;
+    margin-left:25px;
 }
 
 .buttons{
@@ -81,6 +85,8 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom:20px;
+    padding:0px;
+    margin-left:25px;
 }
 .buttons>button{
     width:80px;
