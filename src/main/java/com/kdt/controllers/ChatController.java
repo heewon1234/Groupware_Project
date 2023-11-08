@@ -64,7 +64,8 @@ public class ChatController {
 	@RequestMapping("oneAllRecordCount")
     @ResponseBody
     public int getNewRecordCount() {
-        int newRecordCount = service.oneCountAll();
+		String id = (String)hsession.getAttribute("loginId");
+        int newRecordCount = service.oneCountAll(id);
         return newRecordCount;
     }
 	

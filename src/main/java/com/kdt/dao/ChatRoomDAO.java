@@ -54,8 +54,8 @@ public class ChatRoomDAO {
 		return db.selectOne("oneChat.oneroomExists", params);
 	}
 	
-	public int oneCountAll() {
-	    return db.selectOne("oneChat.oneCountAll");
+	public int oneCountAll(String  id) {
+	    return db.selectOne("oneChat.oneCountAll",id);
 	}
 	public List<OneToOneChatDTO> selectAll() {
 		System.out.println(db.selectList("oneChat.selectAll"));
