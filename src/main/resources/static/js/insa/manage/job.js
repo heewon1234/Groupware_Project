@@ -7,9 +7,11 @@ let jt_count = 0;
 $("#add_jr_btn").on("click", function() {
 	if (jr_count == 0) {
 		let div = $("<div>");
+		div.addClass("input-group");
 		div.css("display", "inline-block");
 
 		let input = $("<input type='text' >");
+		input.addClass("form-control");
 		input.attr("id", "job_name_input");
 		input.attr("name", "job_name");
 
