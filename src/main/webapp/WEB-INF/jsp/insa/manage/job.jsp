@@ -6,6 +6,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<!-- BootStrap -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/css/insa/manage/job.css">
 <link rel="stylesheet" type="text/css" href="/css/insa/manage/common.css">
 <link rel="stylesheet" type="text/css" href="/css/commons/body_form/left_form/body_form_default.css">
@@ -34,13 +36,13 @@
 												<c:if test="${job.job_rank eq i}">
 													<span class="parent_span"> 
 														<span><c:out value="${job.position}" /></span> 
-														<a class="remove_jt_btn btn hidden">X</a>
+														<a class="remove_jt_btn btns hidden">X</a>
 													</span>
 												</c:if>
 											</c:forEach>
 										</td>
 										<td align="right">
-											<span class="add_jt_btn btn">+</span>
+											<span class="add_jt_btn btns">+</span>
 										</td>
 									</tr>
 								</c:forEach>
@@ -61,7 +63,7 @@
 							<c:forEach var="job" items="${jobRoleList}">
 								<span class="parent_span"> 
 									<span>${job.job_name}</span> 
-									<a class="remove_jr_btn btn hidden">X</a>
+									<a class="remove_jr_btn btns hidden">X</a>
 								</span>
 							</c:forEach>
 						</div>

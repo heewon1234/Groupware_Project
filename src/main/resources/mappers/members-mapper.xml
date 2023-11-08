@@ -13,19 +13,19 @@
 	</select>
 	
 	<update id="updateWorkForm">
-		Update MEMBERS set work_form = #{work_form} where id = #{id};
+		Update Members set work_form = #{work_form} where id = #{id};
 	</update>
 	
 	<update id="updatePosition">
-		Update MEMBERS set position = #{position} where id = #{id};
+		Update Members set position = #{position} where id = #{id};
 	</update>
 	
 	<update id="updateOrg">
-		Update MEMBERS set organization = #{organization} where id = #{id};
+		Update Members set organization = #{organization} where id = #{id};
 	</update>
 	
 	<delete id="deleteMember">
-		DELETE FROM MEMBERS WHERE ID = #{id};
+		DELETE FROM Members WHERE ID = #{id};
 	</delete>
 	
 	<select id="selectWorkForm" resultType="String">

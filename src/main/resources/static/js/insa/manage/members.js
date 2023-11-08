@@ -25,7 +25,7 @@ $(".modalButton").on("click", function() {
 	// 체크된 아이디를 ','로 구분하여 하나의 input[type='text']에 반영
 	// service 에리어에서 split
 	const checkedValues = [];
-	$("input[type='checkbox']:checked").each(function() {
+	$("input[type='checkbox']:checked").not("#all_check").each(function() {
 		checkedValues.push($(this).val());
 	});
 
