@@ -112,7 +112,7 @@
 		<form action="/members/updatePosition">
 			<div class="modalContent">
 				<div align="center">직위 설정</div>
-				<input type="text" name="idList" class="updateID" hidden> 
+				<input type="text" name="idList" class="updateID"> 
 				<select name="position">
 					<c:forEach var="list" items="${jobTitleList }">
 						<option>${list.position }</option>
