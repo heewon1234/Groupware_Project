@@ -16,8 +16,8 @@ public class MembersService1 {
 	public List<MembersDTO1> selectAll(String loggedInUserID) {
 		return dao.selectAll(loggedInUserID);
 	}
-	public List<MembersDTO1> getMembersByOrganization(String organization) {
-		return dao.getMembersByOrganization(organization);
+	public List<MembersDTO1> getMembersByOrganization(String organization,String id) {
+		return dao.getMembersByOrganization(organization,id);
 	}
 	public MembersDTO1 loginUser(String id) {
 		return dao.loginUser(id);
