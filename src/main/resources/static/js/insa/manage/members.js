@@ -75,3 +75,106 @@ $("#all_check").on("click", function() {
 $(document).ready(function() {
 	$(".left_item").load("/insa/manage/left_item?selectItem=members");
 });
+
+
+// 회원가입 div 출력
+let signup = false;
+
+$("#add_btn").on("click", function() {
+	if (signup == false) {
+		$("#createUser").css("display", "flex");
+		signup = true;
+	} else {
+		$("#createUser").css("display", "none");
+		signup = false;
+	}
+});
+
+
+
+// 회원가입 regex
+let idRegex = /^[\w\d]{7,13}$/;
+let pwRegex = /^([\w\d\W]){8,}$/;
+let nameRegex = /^[가-힣]{2,5}$/;
+
+let idCheck = false;
+let pwCheck = false;
+let nameCheck = false;
+
+var duplCheck = false;
+
+var workFormSelect = document.getElementsByName("workForm")[0];
+var orgSelect = document.getElementsByName("org")[0];
+var positionSelect = document.getElementsByName("position")[0];
+var jobNameSelect = document.getElementsByName("jobName")[0];
+
+$("#id").on("keyup",function() {
+	$.ajax({
+		url: "/members/idCheck",
+		data: {
+			id: $("#id").val()
+		}
+	}).done(function(resp) {
+		if (resp == "true") {
+			duplCheck = false;
+			return;
+		} else {
+			duplCheck = true;
+		}
+	});
+});
+
+$("#signupForm").on("submit", function() {
+	if (!idRegex.test($("#id").val())) {
+		idCheck = false;
+	} else {
+		idCheck = true;
+	}
+	
+	if (!pwRegex.test($("#pw").val())) {
+		pwCheck = false;
+	} else {
+		pwCheck = true;
+	}
+	
+	if (!nameRegex.test($("#name").val())) {
+		nameCheck = false;
+	} else {
+		$("#nameCheck").html("");
+		nameCheck = true;
+	}
+	
+	if (idCheck == false) {
+		alert("아이디는 7~13자의 소문자와 숫자로 이루어져야 합니다.");
+		return false;
+	}
+	if (duplCheck == false) {
+		alert("이미 사용중인 아이디 입니다.");
+		return false;
+	}
+	if (pwCheck == false) {
+		alert("비밀번호는 대문자와 특수문자 포함 8글자 이상이여야 합니다.");
+		return false;
+	}
+	if (nameCheck == false) {
+		alert("이름은 2~5글자의 한글이여야 합니다.");
+		return false;
+	}
+	if (
+	    workFormSelect.selectedIndex === 0 ||
+	    orgSelect.selectedIndex === 0 ||
+	    positionSelect.selectedIndex === 0 ||
+	    jobNameSelect.selectedIndex === 0
+	  ) {
+	    alert("선택하지 않은 필수 항목이 있습니다.");
+	    return false;
+	  }
+	
+	let signup = confirm("회원가입 하시겠습니까?");
+	if (!signup) {
+		return false;
+	} else {
+		alert("회원가입이 완료되었습니다.");
+		return true;
+	}
+});

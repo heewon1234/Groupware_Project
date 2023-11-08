@@ -3,7 +3,9 @@ package com.kdt.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kdt.dto.MembersDTO;
 import com.kdt.dto.MembersDTO1;
 import com.kdt.services.MembersService;
 import com.kdt.services.MembersService1;
@@ -51,6 +53,20 @@ public class MembersController {
 	public String logout() throws Exception{
 		session.invalidate();
 		return "redirect:/";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="idCheck",produces="text/plain;charset=utf8")
+	public String idCheck(String id) throws Exception{
+		boolean result = this.mservice.idCheck(id);
+		return String.valueOf(result);
+	}
+	
+	@RequestMapping("signup")
+	public String signup(String name, String id, String pw, String workForm, String org, String position, String jobName) throws Exception{
+		MembersDTO dto = new MembersDTO(id,pw,name,workForm,org,jobName,position,null,null,null,null,null,null);
+		this.mservice.signup(dto);
+		return "redirect:/insa/manage/members";
 	}
 	
 	//

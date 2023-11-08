@@ -22,6 +22,14 @@ public class MembersService {
 		return this.mdao.isMember(param);
 	}
 	
+	public boolean idCheck(String id) {
+		return this.mdao.idCheck(id);
+	}
+	
+	public void signup(MembersDTO dto) {
+		this.mdao.signup(dto);
+	}
+	
 	//
 	//
 	//
