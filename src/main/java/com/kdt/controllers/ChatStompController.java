@@ -45,7 +45,7 @@ public class ChatStompController {
 	    return chatMessageService.insert(dto);
 	}
 	@ResponseBody
-	@RequestMapping("/getPreviousMessages/{oneSeq}")
+	@RequestMapping("/getPreviousMessages/{oneSeq}")//login된 userID를 where절로 줘야함 이름임
 	public List<ChatMessageDTO> getPreviousMessages(@PathVariable String oneSeq) {
 		System.out.println("이전" +oneSeq);
 	    List<ChatMessageDTO> previousMessages = chatMessageService.getPreviousMessages(oneSeq);

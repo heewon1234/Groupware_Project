@@ -15,12 +15,27 @@ public class ChatRoomDAO {
 	@Autowired
 	private SqlSession db;
 	
-	public void createOneChatRoom(String loggedInUserID, String otherUserID) {
-	    Map<String, String> params = new HashMap<>();
-	    params.put("loggedInUserID", loggedInUserID);
-	    params.put("otherUserID", otherUserID);
-	    db.insert("oneChat.createOneChatRoom", params);
+//	public void createOneChatRoom(String loggedInUserID, String otherUserID) {
+//	    Map<String, String> params = new HashMap<>();
+//	    params.put("loggedInUserID", loggedInUserID);
+//	    params.put("otherUserID", otherUserID);
+//	    db.insert("oneChat.createOneChatRoom", params);
+//	}
+	public void createOneChatRoom(String loggedInUserID, String otherUserID,String oneSeq) {
+		System.out.println(oneSeq);
+	    Map<String, Object> params1 = new HashMap<>();
+	    params1.put("oneSeq", oneSeq);
+	    params1.put("loggedInUserID", loggedInUserID);
+	    params1.put("otherUserID", otherUserID);
+	    db.insert("oneChat.createOneChatRoom", params1);
+
+	    Map<String, Object> params2 = new HashMap<>();
+	    params2.put("oneSeq", oneSeq);
+	    params2.put("loggedInUserID", otherUserID);
+	    params2.put("otherUserID", loggedInUserID);
+	    db.insert("oneChat.createOneChatRoom", params2);
 	}
+
 	
 	public int createGroupChat(String groupName) {
         return db.insert("groupChat.createGroupChat", groupName);

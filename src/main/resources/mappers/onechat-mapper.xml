@@ -7,8 +7,8 @@
 
 	<insert id="createOneChatRoom" parameterType="map" >
 		INSERT INTO
-		OneToOneChat (loggedInUserID, otherUserID)
-		VALUES (#{loggedInUserID},
+		OneToOneChat (oneSeq,loggedInUserID, otherUserID)
+		VALUES (#{oneSeq},#{loggedInUserID},
 		#{otherUserID})
 	</insert>
 
@@ -22,8 +22,7 @@
 		SELECT COUNT(*)
 		FROM OneToOneChat
 		WHERE (loggedInUserID = #{loggedInUserID} AND otherUserID = #{otherUserID})
-		OR (loggedInUserID = #{otherUserID} AND otherUserID =
-		#{loggedInUserID})
+		
 	</select>
 
 

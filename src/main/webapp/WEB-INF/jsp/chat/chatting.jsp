@@ -161,7 +161,7 @@
 															clickedUserId) {
 														return function() {
 															console
-																	.log(clickedUserName);
+																	.log(clickedUserName);//이게 문제임
 															var loginID = $(
 																	"#loginID")
 																	.val();
