@@ -37,16 +37,16 @@ td.jt_div {
 	margin-right: 20px;
 }
 
-.btn {
+.btns {
 	display: inline-block;
-	width: 20px;
-	height: 20px;
-	border-radius: 50%;
-	text-align: center;
-	color: #fff;
-	background: #bec3c9;
-	cursor: pointer;
-	line-height: 17px;
+    width: 23px;
+    height: 23px;
+    border-radius: 50%;
+    text-align: center;
+    color: #fff;
+    background: #bec3c9;
+    cursor: pointer;
+    line-height: 19px;
 }
 
 .hidden {
