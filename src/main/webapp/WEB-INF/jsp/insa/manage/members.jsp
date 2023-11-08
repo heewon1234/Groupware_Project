@@ -8,7 +8,7 @@
 <!-- DataTables -->
 <link href="https://cdn.datatables.net/v/dt/dt-1.13.6/datatables.min.css" rel="stylesheet">
 <script src="https://cdn.datatables.net/v/dt/dt-1.13.6/datatables.min.js"></script>
-<title>Insert title here</title>
+<title>임직원 관리 게시판</title>
 <!-- BootStrap -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/css/insa/manage/members.css">
