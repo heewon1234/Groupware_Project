@@ -1,0 +1,15 @@
+#top_container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#calendarBox{
+	display: flex;
+  	justify-content: center;
+  	align-items: center;
+}
+
+#calendar{
+	width:70%;
+}
