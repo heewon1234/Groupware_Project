@@ -49,6 +49,24 @@ tr {
 	padding: 0 0 0 25px;
 }
 
+#createUser {
+	width: 95%;
+	height: 150px;
+	padding: 0 0 0 25px;
+}
+
+#createUserTable {
+	width:100%;
+}
+
 .modalButton_div {
 	padding-top: 70px;
+}
+
+#signupForm {
+	padding:0px;
+}
+
+.signupSelect {
+	margin:0px;
 }

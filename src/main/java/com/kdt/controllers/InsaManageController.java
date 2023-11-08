@@ -50,11 +50,13 @@ public class InsaManageController {
 	@RequestMapping(value="/members")
 	public String toMember(Model model) {
 		List<JobTitleDTO> jobTitleList = jtService.selectAll();
+		List<JobRoleDTO> jobRoleList = jrService.selectAll();
 		List<OrganizationDTO> orgList = orgService.selectAll();
 		List<MembersDTO> membersList = mService.selectAll();
 		List<String> workFormList = mService.selectWorkForm();
 		
 		model.addAttribute("jobTitleList", jobTitleList);
+		model.addAttribute("jobRoleList", jobRoleList);
 		model.addAttribute("orgList", orgList);
 		model.addAttribute("membersList", membersList);
 		model.addAttribute("workFormList", workFormList);
