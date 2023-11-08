@@ -7,7 +7,7 @@
 <title>chatting</title>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.7.0.js"></script>  -->
 <link rel="stylesheet" type="text/css" href="/css/chat/chatting.css">
 <link rel="stylesheet" type="text/css" href="/css/chat/inputText.css">
 <link rel="stylesheet" type="text/css" href="/css/chat/chatList.css">
