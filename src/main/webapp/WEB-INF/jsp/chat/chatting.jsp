@@ -402,7 +402,7 @@
 
 		stompClient.connect({}, function(frame) {
 			var oneSeq = $('#oneSeq').val();
-			stompClient.subscribe('/topic/oneToOne/{oneChat}',
+			stompClient.subscribe('/topic/oneToOne/{oneSeq}',
 					function(response) {
 						console.log('Received message: ' + response.body);
 						var message = JSON.parse(response.body);
