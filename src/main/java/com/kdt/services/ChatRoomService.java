@@ -41,8 +41,8 @@ public class ChatRoomService {
         return roomExists;
     }
 	//일대일 채팅 전체 수
-	public int oneCountAll() {
-	    return dao.oneCountAll();
+	public int oneCountAll(String  id) {
+	    return dao.oneCountAll(id);
 	}
 	//selectAll
 	public List<OneToOneChatDTO> selectAll() throws Exception {
