@@ -46,7 +46,7 @@
 								</c:forEach>
 							</tbody>
 						</table>
-						<button type="submit">저장</button>
+						<button type="submit" class="button_apply">저장</button>
 					</form>
 	
 					<div>
@@ -65,7 +65,7 @@
 								</span>
 							</c:forEach>
 						</div>
-						<button type="submit">저장</button>
+						<button type="submit" class="button_apply">저장</button>
 					</form>
 				</div>
 			</div>
