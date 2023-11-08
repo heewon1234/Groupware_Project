@@ -25,7 +25,6 @@
 		
 	</select>
 
-
 	<!-- OneToOneChat 테이블의 전체 레코드 수를 가져오는 쿼리 -->
 	<select id="oneCountAll" resultType="int">
 		SELECT COUNT(*) FROM OneToOneChat;

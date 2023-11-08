@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -19,6 +18,7 @@ import com.kdt.dto.MembersDTO1;
 import com.kdt.dto.OneToOneChatDTO;
 import com.kdt.services.ChatRoomService;
 import com.kdt.services.MembersService1;
+import com.kdt.utils.UUIDToNumber;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -33,10 +33,10 @@ public class Members1Controller {
 	private SimpMessagingTemplate messagingTemplate;
 	@Autowired
 	private HttpSession session;
-	public String generateUniqueUUID() {
-	    UUID uuid = UUID.randomUUID();
-	    return uuid.toString();
-	}
+//	public String generateUniqueUUID() {
+//	    UUID uuid = UUID.randomUUID();
+//	    return uuid.toString();
+//	}
 
 	@RequestMapping("selectAll")
 	@ResponseBody
@@ -56,7 +56,7 @@ public class Members1Controller {
 		    // 이미 방이 있는지 확인
 		    if (!roomService.oneroomExists(loggedInUserID, otherUserID)) {
 		        System.out.println(roomService.oneroomExists(loggedInUserID, otherUserID));
-		        String oneSeq = generateUniqueUUID();
+		        int oneSeq = UUIDToNumber.convertUUIDToInt();
 		        System.out.println(oneSeq);
 		        roomService.createOneChatRoom(loggedInUserID, otherUserID,oneSeq);
 		        // 나머지 로직 추가 가능
@@ -74,7 +74,7 @@ public class Members1Controller {
 	}
 	@PostMapping("/getMembersByOrganization")
 	@ResponseBody
-	public Map<String, Object> getMembersByOrganization(@RequestParam("organization") String organization,@RequestParam("oneSeq") int oneSeq) throws Exception {
+	public Map<String, Object> getMembersByOrganization(@RequestParam("organization") String organization,@RequestParam("oneSeq") String oneSeq) throws Exception {
 		String id = (String) session.getAttribute("loginId");
 		List<MembersDTO1> members = mservice.getMembersByOrganization(organization,id);
 

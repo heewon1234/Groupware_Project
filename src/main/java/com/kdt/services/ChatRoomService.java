@@ -13,7 +13,7 @@ public class ChatRoomService {
 	@Autowired//자동으로 연결됨
 	private ChatRoomDAO dao;
 
-	public void createOneChatRoom(String loggedInUserID, String otherUserID,String oneSeq) {
+	public void createOneChatRoom(String loggedInUserID, String otherUserID,int oneSeq) {
 		dao.createOneChatRoom(loggedInUserID, otherUserID,oneSeq);
 	}
 

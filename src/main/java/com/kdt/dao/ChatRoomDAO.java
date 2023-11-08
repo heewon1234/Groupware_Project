@@ -21,7 +21,7 @@ public class ChatRoomDAO {
 //	    params.put("otherUserID", otherUserID);
 //	    db.insert("oneChat.createOneChatRoom", params);
 //	}
-	public void createOneChatRoom(String loggedInUserID, String otherUserID,String oneSeq) {
+	public void createOneChatRoom(String loggedInUserID, String otherUserID,int oneSeq) {
 		System.out.println(oneSeq);
 	    Map<String, Object> params1 = new HashMap<>();
 	    params1.put("oneSeq", oneSeq);
