@@ -19,6 +19,14 @@ public class MembersDAO {
 		return db.selectOne("Members.isMember",param);
 	}
 	
+	public boolean idCheck(String id) {
+		return db.selectOne("Members.idCheck",id);
+	}
+	
+	public void signup(MembersDTO dto) {
+		db.insert("Members.signup", dto);
+	}
+	
 	//
 	//
 	//

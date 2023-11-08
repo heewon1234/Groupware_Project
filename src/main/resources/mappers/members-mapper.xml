@@ -8,6 +8,14 @@
 		select (count(*) > 0) from members1 where id=#{id} and pw=#{pw}
 	</select>
 	
+	<select id="idCheck" resultType="boolean">
+		select (count(*) > 0) from Members where id=#{value}
+	</select>
+	
+	<insert id="signup">
+		insert into Members values(#{id},#{pw},#{name},#{work_form},#{organization},#{job_name},#{position},null,null,null,null,null,null)
+	</insert>
+	
 	<select id="selectAll" resultType="com.kdt.dto.MembersDTO">
 		SELECT * FROM Members;
 	</select>

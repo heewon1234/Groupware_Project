@@ -28,6 +28,67 @@
 				<div id="add_div">
 					<a id="add_btn" class="btns">사용자 추가</a>
 				</div>
+				<form id="signupForm" action="/members/signup" method="post">
+				<div id="createUser" style="display:none;">
+					<table id="createUserTable" class="compact">
+					<thead>
+						<tr>
+							<th>이름</th>
+							<th>ID</th>
+							<th>비밀번호</th>
+							<th>근로형태</th>
+							<th>소속조직</th>
+							<th>직위</th>
+							<th>직무</th>
+							<th>상태</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><input type="text" name="name" id="name" placeholder="이름 입력"></td>
+							<td><input type="text" name="id" id="id" placeholder="아이디 입력"></td>
+							<td><input type="password" name="pw" id="pw" placeholder="비밀번호 입력"></td>
+							<td>
+								<select class="signupSelect" name="workForm">
+									<option disabled selected>근로 형태</option>
+									<c:forEach var="workForm" items="${workFormList }">
+										<option>${workForm }</option>
+									</c:forEach>
+								</select>
+    						</td>
+							<td>
+								<select class="signupSelect" name="org">
+									<option disabled selected>소속 조직</option>
+									<c:forEach var="list" items="${orgList }">
+										<option>${list.organization }</option>
+									</c:forEach>
+								</select>
+							</td>
+							<td>
+								<select class="signupSelect" name="position">
+									<option disabled selected>직위</option>
+									<c:forEach var="list" items="${jobTitleList }">
+										<option>${list.position }</option>
+									</c:forEach>
+								</select>
+							</td>
+							<td>
+								<select class="signupSelect" name="jobName">
+									<option disabled selected>직무</option>
+									<c:forEach var="list" items="${jobRoleList }">
+										<option>${list.job_name }</option>
+									</c:forEach>
+								</select>
+							</td>
+							<td>
+								<button type="submit">저장</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				</div>
+				</form>
+				
 				<div id="update_div">
 					<span> 
 						<input type="checkbox" id="all_check"> 
@@ -38,6 +99,7 @@
 					<a class="modalButton modalButton_position btns invisbale">직위 수정</a> 
 					<a class="modalButton modalButton_delete btns invisbale">삭제</a>
 				</div>
+						
 				<table id="myTable" class="compact">
 					<thead>
 						<tr>
