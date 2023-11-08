@@ -2,20 +2,6 @@ input {
 	width: 100%;
 }
 
-button {
-	display: inline-block;
-	background-color: #2985db;
-	border: 1px solid #056ac9;
-	color: #fff;
-	margin: 20px 0 50px;
-	padding: 5px 20px 6px;
-	font-size: 14px;
-	line-height: 1.5;
-	text-align: center;
-	vertical-align: middle;
-	cursor: pointer;
-}
-
 .google-visualization-orgchart-node-medium {
 	width: 250px;
 }
@@ -29,15 +15,16 @@ button {
 }
 
 .btn {
+	font-size: 15px;
 	display: inline-block;
-	width: 15px;
-	height: 15px;
+	width: 16px;
+	height: 16px;
 	border-radius: 50%;
 	text-align: center;
 	color: #fff;
 	background: #bec3c9;
 	cursor: pointer;
-	line-height: 13px;
+	line-height: 10px;
 }
 
 #chart_div {
