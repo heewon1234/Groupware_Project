@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Organization">
+	<select id="selectAll" resultType="com.kdt.dto.OrganizationDTO">
+		SELECT o.Organization, o.LEVEL, o.MANAGER, COUNT(m.id) AS count
+		FROM Organization o
+		LEFT JOIN Members m ON o.Organization = m.organization
+		GROUP BY o.Organization, o.LEVEL, o.MANAGER
+		order by level;
+	</select>
+	<insert id="insert">
+		INSERT INTO Organization VALUES(#{organization}, #{level}, #{manager})
+	</insert>
+	<delete id="delete">
+		DELETE FROM organization WHERE organization = #{organization} OR manager = #{organization}
+	</delete>
+</mapper>

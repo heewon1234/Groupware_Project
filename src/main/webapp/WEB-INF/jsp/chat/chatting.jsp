@@ -15,8 +15,10 @@
 <script src="/webjars/stomp-websocket/2.3.3-1/stomp.min.js"></script>
 </head>
 <body>
+
 	<!-- 실제 팝업 내용 -->
 	<div class="popup" id="popup">
+		<input id="loginID" type="hidden" value="${loginId }">
 		<div class="top">
 			<span class="close-button" onclick="closePopup()">&times;</span>
 			<div id="logo" class="dragHandle">logo</div>
@@ -26,9 +28,12 @@
 				</div>
 				<div class="user">
 					<div class="name">
-						<input id="loginID" type="hidden" value="${loginID }">
+						<input id="name" value="${name }" style="border: none;" readonly>
 					</div>
-					<div class="department">대표이사</div>
+					<div class="position">
+						<input id="position" value="${position }" style="border: none;"
+							readonly>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -36,48 +41,31 @@
 		<div class="chat_body" id="popupBody">
 			<div class="left">
 				<i class="fa-regular fa-user" onclick="openchatMember()"></i> <i
-					class="fa-regular fa-comment" onclick="openchatList()"></i> <i
 					class="fa-regular fa-comments" onclick="openchatGroupList()"></i><i
-					class="fa-solid fa-bars"
+					class="fa-solid fa-bars" onclick="openchatGmember()"
 					style="position: absolute; bottom: 0; margin-bottom: 40px;"></i>
 			</div>
 			<div class="right" id="roomList">
 				<hr>
 				<div class="allList">
-					<div class="Thead">전체 182</div>
-					<div class="Tlist">
-						<div class="pimg">
-							<i class="fa-regular fa-circle-user"></i>
-						</div>
-						<div class="person">
-							<div class="name">강대리</div>
-							<div class="department">총무부</div>
-						</div>
-					</div>
-					<hr>
-					<select id="departmentSelect" class="Thead">
+					<select id="departmentSelect" style="margin-top: 10px">
 						<option selected>부서 선택</option>
-						<option value="부서1">부서1</option>
-						<option value="부서2">부서2</option>
-						<option value="부서3">부서3</option>
+						<option value="영업부">영업부</option>
+						<option value="관리부">관리부</option>
+						<option value="회계부">회계부</option>
 					</select>
-
+					<!-- 부서별 목록 -->
 					<div class="Glist">
-						<div class="pimg">
-							<i class="fa-regular fa-circle-user"></i>
-						</div>
-						<div class="person">
-							<div class="name">이과장</div>
-							<div class="department">총무부</div>
-						</div>
+						<div id="group_list"
+							style="margin-top: 13px; height: 410px; overflow-y: auto;"></div>
 					</div>
 				</div>
 				<!-- 친구 목록 -->
 				<div class="chatMember_container" style="display: none;">
 					<div class="chatBox">
-						<div id="font">친구</div>
+						<div class="Thead"></div>
 						<div class="search_add">
-							<img id="searchBtn" alt="" src="/imges/chats/search.svg"
+							<img id="searchBtn" alt="" src="/images/chats/search.svg"
 								onclick="showSearchContainer()">
 						</div>
 					</div>
@@ -85,57 +73,34 @@
 					<div class="search_container" style="display: none;">
 						<div class="chatroom_search">
 							<div id="searchBox">
-								<img alt="" src="/imges/chats/search.svg""> <input
+								<img alt="" src="/images/chats/search.svg""> <input
 									id="search_input" type="text" placeholder="채팅방 참여자 검색">
-								<img id="x" alt="" src="/imges/chats/x.svg"
+								<img id="x" alt="" src="/images/chats/x.svg"
 									onclick="hideSearchContainer()">
 							</div>
 						</div>
 					</div>
+
 					<div id="friend_list"
 						style="margin-top: 13px; height: 410px; overflow-y: auto;"></div>
-				</div>
-				<!-- 1대1 채팅 -->
-				<div class="chatRoom_container" style="display: none;">
-					<div class="chatBox">
-						<div id="font">채팅</div>
-						<div class="search_add">
-							<img id="searchBtn" alt="" src="/imges/chats/search.svg"
-								onclick="showSearchContainer()"> <img id="plusButton"
-								alt="" src="/imges/chats/plus.svg" onclick="showAlert()">
-						</div>
-
-					</div>
-					<div class="search_container" style="display: none;">
-						<div class="chatroom_search">
-							<div id="searchBox">
-								<img alt="" src="/imges/chats/search.svg""> <input
-									id="search_input" type="text" placeholder="채팅방 참여자 검색">
-								<img id="x" alt="" src="/imges/chats/x.svg"
-									onclick="hideSearchContainer()">
-							</div>
-						</div>
-					</div>
-					<!-- ajax -->
-					<div class="chatroom_list" style="margin-top: 8px"></div>
 				</div>
 				<!-- 그룹 채팅 -->
 				<div class="chatGroupRoom_container" style="display: none;">
 					<div class="chatBox">
 						<div id="font">그룹 채팅</div>
 						<div class="search_add">
-							<img id="searchBtn" alt="" src="/imges/chats/search.svg"
+							<img id="searchBtn" alt="" src="/images/chats/search.svg"
 								onclick="showSearchContainer()"> <img id="plusButton"
-								alt="" src="/imges/chats/plus.svg" onclick="showAlert()">
+								alt="" src="/images/chats/plus.svg" onclick="showAlert()">
 						</div>
 
 					</div>
 					<div class="search_container" style="display: none;">
 						<div class="chatroom_search">
 							<div id="searchBox">
-								<img alt="" src="/imges/chats/search.svg"> <input
+								<img alt="" src="/images/chats/search.svg"> <input
 									id="search_input" type="text" placeholder="채팅방 참여자 검색">
-								<img id="x" alt="" src="/imges/chats/x.svg"
+								<img id="x" alt="" src="/images/chats/x.svg"
 									onclick="hideSearchContainer()">
 							</div>
 						</div>
@@ -144,25 +109,32 @@
 				</div>
 			</div>
 		</div>
-
 	</div>
 	<script src="/js/chat/chatting.js" type="text/javascript"></script>
 	<script src="/js/chat/inputText.js" type="text/javascript"></script>
 	<script>
-		// 친구 목록
+	function keepScrollBottom() {
+        let contents = document.getElementsByClassName("chatForm")[0];
+        contents.scrollTop = contents.scrollHeight;
+     }
+		// 전체 친구 목록
 		$
 				.ajax({
 					type : "POST",
 					url : "/members1/selectAll",
 					dataType : "json",
 					success : function(data) {
+						var listData = data.list;
+						var OneToOneChatDTOList = data.OneToOneChatDTOList;
+						console.log(listData);
 						try {
+							//member의 리스트
 							var $friend_list = $("#friend_list");
-
-							if (data.length > 0) {
+							if (listData.length > 0) {
 								// 데이터가 존재하는 경우
-								for (var i = 0; i < data.length; i++) {
-									var friend = data[i];
+								for (var i = 0; i < listData.length; i++) {
+									var friend = listData[i];
+									console.log(friend);
 
 									// 각 <tr> 엘리먼트를 <div>로 래핑
 									var $row = $("<div>").addClass("table-row");
@@ -182,15 +154,40 @@
 													"oneChat").css("display",
 													"inline-block").css(
 													"cursor", "pointer");
-									// 클로저로 friend.name을 감싸고 openOneChat을 호출
-									$nameCell.on("click", (function(name) {
-										return function() {
-											openOneChat(name);
-											console.log(name); // 콘솔에 이름 출력
-										};
-									})(friend.name));
-									$row.append($nameCell);
+									$nameCell
+											.on(
+													"click",
+													(function(clickedUserName,
+															clickedUserId) {
+														return function() {
+															console
+																	.log(clickedUserName);
+															var loginID = $(
+																	"#loginID")
+																	.val();
+															var otherID = clickedUserId;
+															var organization = friend.organization;
 
+															var oneSeq = null;
+															for (var i = 0; i < OneToOneChatDTOList.length; i++) {
+																var chatRoom = OneToOneChatDTOList[i];
+																if (chatRoom.loggedInUserID === loginID
+																		&& chatRoom.otherUserID === otherID) {
+																	oneSeq = chatRoom.oneSeq;
+																	console
+																			.log(oneSeq);
+																	openOneChat(
+																			clickedUserName,
+																			friend.organization,
+																			oneSeq);
+																	getPreviousMessages(oneSeq);
+																	break;
+																}
+															}
+
+														};
+													})(friend.name, friend.id));
+									$row.append($nameCell);
 									$friend_list.append($row);
 								}
 							}
@@ -200,6 +197,157 @@
 						}
 					},
 				});
+		function getPreviousMessages(oneSeq) {
+		    $.ajax({
+		        type: "GET",
+		        url: "/getPreviousMessages/" + oneSeq,
+		        dataType: "json",
+		        success: function(data) {
+		            console.log("시퀀스" + oneSeq);
+		            console.log(data);
+		            console.log(data[0]);
+		            // 서버에서 받은 데이터를 JSON으로 파싱
+		            var previousMessages = data;
+		            for (var i = 0; i < previousMessages.length; i++) {
+		                var previousMessage = previousMessages[i];
+		                var previousMessageContainer = $("<p><strong>" + previousMessage.userID + "</strong> - " + previousMessage.message + "</p>");
+		                $('.chatForm').append(previousMessageContainer);
+		                keepScrollBottom();
+		            }
+		        },
+		        error: function() {
+		            console.log("이전 메시지를 불러오지 못했습니다.");
+		        }
+		    });
+		}
+		//부서 목록 불러오기
+		$("#departmentSelect").on("change", function() {
+			var organization = $(this).val();
+			console.log(organization);
+			if (organization !== "부서 선택") {
+				// 선택한 부서에 따라 회원 목록을 불러와서 표시하는 AJAX 요청을 보냅니다.
+				var oneSeq = 0;
+				loadMembersByDepartment(organization, oneSeq); // 초기에 oneSeq를 0로 전달
+			}
+		});
+
+		function loadMembersByDepartment(organization, oneSeq) {
+			$
+					.ajax({
+						type : "POST",
+						url : "/members1/getMembersByOrganization",
+						data : {
+							organization : organization,
+							oneSeq : oneSeq
+						},
+						dataType : "json",
+						success : function(data) {
+							var groupMembers = data.members;
+							var OneToOneChatDTOList = data.OneToOneChatDTOList;
+							console.log(groupMembers);
+							console.log(OneToOneChatDTOList);
+							try {
+								var $group_list = $("#group_list"); // group_list에 데이터를 추가하기 위해 선택합니다.
+								console.log("그룹 : " + $group_list)
+
+								if (groupMembers.length > 0) {
+									$group_list.empty(); // 목록 초기화
+
+									for (var i = 0; i < groupMembers.length; i++) {
+										var friend = groupMembers[i];
+										console.log(friend);
+
+										// <div> 엘리먼트 생성
+										var $row = $("<div>").addClass(
+												"table-row");
+
+										// 나머지 부분은 이전과 동일
+										var $iconCell = $("<div>")
+												.html(
+														'<i class="fa-regular fa-circle-user"></i>')
+												.css("display", "inline-block");
+										$iconCell.on("click", function() {
+											onOneChat();
+										});
+										$row.append($iconCell);
+
+										var $nameCell = $("<div>").text(
+												friend.name)
+												.addClass("oneChat").css(
+														"display",
+														"inline-block").css(
+														"cursor", "pointer");
+										/*$nameCell.on("click", (function(name, oneSeq) {
+										    return function() {
+										        openOneChat(name, friend.organization,
+										                oneSeq);
+										        console.log(name, friend.organization); // 콘솔에 이름 출력
+										    };
+										})(friend.name, oneSeq));*/
+										$nameCell
+												.on(
+														"click",
+														(function(
+																clickedUserName,
+																clickedUserId) {
+															return function() {
+																var loginID = $(
+																		"#loginID")
+																		.val();
+																var otherID = clickedUserId;
+																var organization = friend.organization;
+
+																var oneSeq = null;
+																for (var i = 0; i < OneToOneChatDTOList.length; i++) {
+																	var chatRoom = OneToOneChatDTOList[i];
+																	if (chatRoom.loggedInUserID === loginID
+																			&& chatRoom.otherUserID === otherID) {
+																		oneSeq = chatRoom.oneSeq;
+																		console
+																				.log(oneSeq);
+																		openOneChat(
+																				clickedUserName,
+																				friend.organization,
+																				oneSeq); // openOneChat 함수 호출 위치 수정
+																				getPreviousMessages(oneSeq);
+																		break;
+																	}
+																}
+															};
+														})(friend.name,
+																friend.id));
+
+										$row.append($nameCell);
+
+										// $group_list에 $row 추가
+										$group_list.append($row);
+									}
+								}
+							} catch (error) {
+								// JSON 파싱 오류 처리
+								console.error("JSON 파싱 오류:", error);
+							}
+						},
+						error : function() {
+							console.log("회원 목록을 불러오지 못했습니다.");
+						}
+					});
+		}
+
+		// 전체 레코드 수
+		$.ajax({
+			type : "POST",
+			url : "/chats/oneAllRecordCount",
+			dataType : "json",
+			success : function(data) {
+				// 서버에서 반환한 데이터를 가져와서 HTML 엘리먼트에 표시합니다.
+				$(".Thead").html("전체 " + data);
+			},
+			error : function() {
+				// 요청 실패 시 처리
+				console.log("새로운 레코드 수를 가져오지 못했습니다.");
+			}
+		});
 
 		// 이름 클릭 이벤트 처리
 		$(document).on("mouseenter", "#friend_list td.name", function() {
@@ -210,10 +358,12 @@
 			$(this).css("text-decoration", "none");
 		});
 
-		function openOneChat(friendName) {
+		function openOneChat(friendName, organization, oneSeq) {
 			// 이름을 쿼리 매개변수로 전달하여 페이지를 엽니다.
 			$.get("/chats/inputText?friendName="
-					+ encodeURIComponent(friendName), function(data) {
+					+ encodeURIComponent(friendName) + "&organization="
+					+ encodeURIComponent(organization) + "&oneSeq="
+					+ encodeURIComponent(oneSeq), function(data) {
 				// data를 팝업 div에 추가하고 팝업을 표시합니다.
 				var popup = document.createElement("div");
 				popup.className = "oneChat popup";
@@ -244,146 +394,100 @@
 				document.body.removeChild(popup);
 			}
 		}
-		function keepScrollBottom() {
-			let contents = document.getElementsByClassName("chatForm")[0];
-			contents.scrollTop = contents.scrollHeight;
-		}
+		
+		
+		//실시간 채팅
 		var socket = new SockJS('/ws');
 		var stompClient = Stomp.over(socket);
 
 		stompClient.connect({}, function(frame) {
-			stompClient.subscribe('/topic/chat', function(response) {
-				console.log('Received message: ' + response.body);
-				var message = JSON.parse(response.body);
-				var messageText = message.message;
+			var oneSeq = $('#oneSeq').val();
+			stompClient.subscribe('/topic/oneToOne/{chatId}',
+					function(response) {
+						console.log('Received message: ' + response.body);
+						var message = JSON.parse(response.body);
+						var messageText = message.message;
 
-				// 타입이 'CHAT'일 때만 메시지를 화면에 표시
-				if (message.type === 'CHAT') {
-					var messageContainer = $("<p><strong>" + message.sender
-							+ "</strong> - " + messageText + "</p>");
-					$('.chatForm').append(messageContainer);
-					keepScrollBottom();
-				}
-			});
+						// 타입이 'CHAT'일 때만 메시지를 화면에 표시
+						if (message.type === 'CHAT') {
+							var messageContainer = $("<p><strong>"
+									+ message.userID + "</strong> - "
+									+ messageText + "</p>");
+							$('.chatForm').append(messageContainer);
+							keepScrollBottom();
+						}
+					});
 		});
-		// 메세지 전송
-		$(document).on("click", "#sendBtn", function() {
-    var message = $('#inputText').text().trim();
-    if (message) {
-        var sender = $('#loginID').val();
-        var messageContainer = $("<p><strong>" + sender + "</strong> - " + message + "</p>");
-
-        // 타입이 'CHAT'일 때만 메시지를 오른쪽에 표시
-        if (message.type === 'CHAT') {
-            messageContainer.addClass('right'); // 오른쪽으로 표시
-        }
-
-        $('.chatForm').append(messageContainer);
-        keepScrollBottom();
-
-        // 입력 필드 비우기
-        $('#inputText').empty();
-    }
-});
-
-
-		/*// ws
-		var stompClient = null;
-
-		function connect() {
-			var socket = new SockJS('/ws');
-			stompClient = Stomp.over(socket);
-			stompClient.connect({}, function(frame) {
-				console.log('Connected: ' + frame);
-			});
-		}
-
-		connect();
-
+		//일대일 채팅 메세지 전송
 		$(document).on(
 				"click",
 				"#sendBtn",
 				function() {
-					var message = $("#inputText").text().trim();
+					var message = $('#inputText').text().trim();
+					var oneSeq = $('#oneSeq').val();
+					var currentTime = new Date(); 
+					var time = new Date().getTime(); 
+					var hours = currentTime.getHours();
+					var minutes = currentTime.getMinutes();
+					var write_date;
+
+					if (hours < 12) {
+					    write_date = hours + ":" + (minutes < 10 ? "0" : "") + minutes + " AM";
+					} else {
+					    if (hours > 12) {
+					        hours -= 12;
+					    }
+					    write_date = hours + ":" + (minutes < 10 ? "0" : "") + minutes + " PM";
+					}
+
+
 					if (message) {
-						stompClient.send("/app/chat/message", {}, JSON
-								.stringify({
-									'sender' : $("#loginID").val(),
-									'content' : message,
-									'type' : 'CHAT'
-								}));
+						var userID = $('#userName').val();
+						var messageContainer = $("<p><strong>" + userID
+								+ "</strong> - " + message + "</p>"+"<p>"+write_date+"</p>");
 
-						// 메시지를 chatForm에 추가
-						var messageContainer = $("<p>").html(
-								"<strong></strong> - " + message);
-						messageContainer.find("strong").text(
-								$("#loginID").val()); // 발신자 설정
-
-						$(".chatForm").append(messageContainer);
+						// 타입이 'CHAT'일 때만 메시지를 오른쪽에 표시
+						if (message.type === 'CHAT') {
+							messageContainer.addClass('right'); // 오른쪽으로 표시
+						}
+						$('.chatForm').append(messageContainer);
 						keepScrollBottom();
 
+						var messageType = 'one';
+
+						// 메세지를 서버로 전송
+						stompClient.send('/app/oneToOne/sendMessage/' + oneSeq,
+								{}, JSON.stringify({
+									type : "CHAT",
+									messageType : messageType,
+									userID : userID,
+									message : message,
+									roomID : oneSeq
+								}));
+
 						// 입력 필드 비우기
-						$("#inputText").empty();
+						$('#inputText').empty();
 					}
-				});*/
+				});
+		
 
-		/*const stompClient = Stomp.over(new SockJS('/ws')); // /ws는 엔드포인트 경로
+		//그룹 채팅방 만들기
+		$(document).on(
+				"click",
+				"#plusButton",
+				function() {
+					var roomName = prompt("방 이름을 입력하세요");
+					if (roomName) {
+						// 사용자로부터 방 이름을 입력받고, ChatRoom 객체를 만듭니다.
+						var chatRoom = {
+							name : roomName
+						};
 
-		stompClient.connect({}, function(frame) {
-		    console.log('Connected: ' + frame);
-		    stompClient.subscribe('/topic/chat', function(response) {
-		        const message = JSON.parse(response.body);
-		        // 메시지 처리 로직을 구현
-		        // 예를 들어, 수신한 메시지를 채팅 창에 표시하는 등의 로직을 추가하세요.
-		        let lineDiv = $("<div>");
-		        lineDiv.addClass("line");
-		        lineDiv.attr("display", "none");
-
-		        let chatDiv = $("<div>");
-		        chatDiv.addClass("line-chat");
-		        chatDiv.text(message.message); // 수신한 메시지 내용을 표시
-
-		        let divTime = $("<div>").text(getCurrentTime());
-		        divTime.addClass("time");
-		        lineDiv.append(divTime);
-		        lineDiv.append(chatDiv);
-
-		        $(".chatForm").append(lineDiv);
-		        keepScrollBottom();
-		    });
-		});
-
-		$("#sendBtn").on("click", function () {
-		    let msg = $(".inputText").text().trim(); // inputText의 내용 가져오기
-		    if (msg !== "") {
-		        let lineDiv = $("<div>");
-		        lineDiv.addClass("line");
-		        lineDiv.attr("display", "none");
-
-		        let chatDiv = $("<div>");
-		        chatDiv.addClass("line-chat");
-		        chatDiv.text(msg); // 메시지 내용 설정
-
-		        let divTime = $("<div>").text(getCurrentTime());
-		        divTime.addClass("time");
-		        lineDiv.append(divTime);
-		        lineDiv.append(chatDiv);
-
-		        $(".chatForm").append(lineDiv);
-
-		        $(".inputText").text(""); // inputText 초기화
-		        keepScrollBottom();
-
-		        // sendMessage 함수를 호출하여 메시지를 전송
-		        sendMessage(msg);
-		    }
-
-		    return false;
-		});
-
-		function sendMessage(message) {
-		    stompClient.send("/app/chat", {}, JSON.stringify({ message: message }));
-		}*/
+						// 서버로 ChatRoom 객체를 보냅니다.
+						stompClient.send("/app/createRoom", {}, JSON
+								.stringify(chatRoom));
+					}
+				});
 	</script>
 
 

@@ -1,16 +1,21 @@
 .chatroom_container{
 	width: 100%;
+	
 }
-
+#group_list, #friend_list,.chatroom_list{
+	padding-left: 8px;
+}
 .chatBox {
     display: flex; /* 요소를 가로로 배치합니다 */
     align-items: center; /* 요소를 수직 중앙으로 정렬합니다 */
     border: none;
+    margin-top: 10px;
+    
 }
 
 #font {
     margin-right: auto; /* font를 가장 왼쪽으로 배치합니다 */
-    font-size: large;
+    font-size: larger;
     font-weight: bold;
 }
 

@@ -1,0 +1,270 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.top_form {
+    width: 100%;
+    height: 60px;
+    position: fixed;
+    background-color: white;
+    z-index: 2;
+}
+
+.body_form {
+    position: absolute;
+    top: 60px;
+    width: 100%;
+    height: calc(100% - 60px);
+    z-index: 1;
+}
+
+.left_item {
+    float: left;
+    width: 276px;
+    height: 100%;
+    position: fixed;
+    background-color: #EFF4FC; 
+    z-index: 2;    
+}
+
+.div_hr {
+    background-color: #e0e5ee;
+    height: 1px;
+    margin: 0 -24px 20px;
+    border: none;
+}
+
+.main_button {
+    background: #2985db;
+    color: white;
+    width: calc(100% - 48px);
+    height: 44px;
+    margin: 20px 24px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.main_button:hover {
+    background-color: #056AC9;
+}
+
+.menu_tab {
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0 24px 30px;
+    height: 100%;
+}
+
+.menu_item {
+    height: 38px;
+    width: 228px;
+    color: #333333;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 0 10px;
+}
+
+.menu_item:hover {
+    background-color: #F7FAFF;
+}
+
+.menu_item img {
+    max-width: 16px;
+    margin-right: 8px;
+}
+
+.menu_item_text {
+    font-size: 15px;
+}
+
+.menu_item.select {
+    background-color: #DAE8F8;
+    color: #056AC9;
+    font-weight: bold;
+}
+
+.menu_list {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.menu_list_button {
+    height: 38px;
+    width: 228px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 0 10px;
+}
+
+.menu_list_button img {
+    max-width: 20px;
+    margin-right: 8px;
+    transition: all ease 0.2s;
+}
+
+.menu_list_button.plus:hover .menu_list_button_plus{
+    opacity: 1;
+    transition: all ease 0.2s;
+}
+
+.menu_list_button_text {
+    color: rgb(109, 136, 164);
+    font-weight: 600;
+}
+
+.menu_list_button.plus:hover {
+    background-color: #F7FAFF;
+} 
+
+.menu_list_button_plus {
+    margin-left: auto; 
+    padding: 6px;
+    width: 30px;
+    height: 30px;
+    opacity: 0;
+    border-radius: 50%;
+}
+
+.menu_list_button_plus img {
+    max-width: 18px;
+    max-height: 18px;
+    margin: 0;
+}
+
+.menu_list_button_plus:hover{
+    background-color: rgba(159, 166, 173, 0.2);
+
+}
+
+.menu_list_box {
+    width: 100%;
+}
+
+.menu_list_item {
+    padding: 0 10px 0 44px;
+    height: 38px;
+    color: #333333;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.menu_list_item:hover {
+    background-color: #F7FAFF;
+}
+
+.menu_list_item:hover .menu_list_item_plus {
+    opacity: 1;
+}
+
+.menu_list_item img {
+    max-width: 17px;
+    margin-right: 8px;
+}
+
+.menu_list_item_text {
+    font-size: 15px;
+    width: 125px;
+}
+
+.menu_list_item_plus {
+    width: 30px;
+    height: 30px;
+    padding: 6px;
+    opacity: 0;
+    transition: all ease 0.2s;
+}
+
+.menu_list_item_plus img {
+    width: 100%;
+    height: 100%;
+}
+
+.menu_list_item img:hover + .menu_list_item_plus,
+.menu_list_item_plus:hover {
+    transition-duration: .2s;
+    background-color: rgba(159, 166, 173, 0.2);
+    border-radius: 100%;
+}
+
+
+.menu_list_item.select {
+    background-color: #DAE8F8;
+    color: #056AC9;
+    font-weight: bold;
+}
+
+.right_item {
+    position: fixed;
+    float: left;
+    width: calc(100% - 276px);
+    height: calc(100% - 60px);
+    min-width: 950px;
+    margin-left: 276px;
+    z-index: 1;
+    overflow: auto;
+}
+
+.content_tab > * {
+    padding: 20px 25px;
+    margin-left: 4px;
+}
+
+.content_top {
+
+    height: 60px;
+}
+
+.form-control {
+    border-radius: 2px !important;
+}
+
+.form-control:focus {
+    box-shadow: none !important;
+}
+
+.button_cancel {
+    box-shadow: none;
+    background-color: #ebebeb;
+    border: solid 1px #d6d6d6;
+    border-radius: 4px;
+    color: #333;
+    padding: 0 20px 0px;
+    height: 34px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.button_cancel:hover {
+	background-color: #d6d6d6;
+}
+
+.button_apply {
+    box-shadow: none;
+    background-color: #2985db;
+    border: solid 1px #056ac9;
+    border-radius: 4px;
+    color: white;
+    padding: 0 20px 0px;
+    height: 34px;
+    font-size: 14px;
+}
+
+.button_apply:hover {
+	background-color: #056ac9;
+}
+
+.button_apply.permit {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: .4;
+}

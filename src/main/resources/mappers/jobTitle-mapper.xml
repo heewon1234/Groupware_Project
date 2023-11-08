@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="JobTitle">
+	<select id="selectAll" resultType="com.kdt.dto.JobTitleDTO">
+		SELECT job_rank, position
+        FROM JOB_TITLE
+        ORDER BY job_rank
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO JOB_TITLE VALUES(#{position}, #{job_rank})
+	</insert>
+	
+	<delete id="delete">
+		DELETE FROM JOB_TITLE WHERE position = #{position}
+	</delete>
+</mapper>
