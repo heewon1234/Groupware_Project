@@ -4,7 +4,7 @@ $(document).on("click","#toWriteContentsBoardBtn",function(){
 	location.href="/board/toWriteContentsBoard";
 })
 
-$(document).on("click","#toEditBoardBtn",function(){
+$(document).on("click","#toMkBoardBtn",function(){
 	location.href="/board/toMk_board";
 });
 

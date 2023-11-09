@@ -20,7 +20,7 @@
             <div class="member_list">
                 <div class="member_list_box">
                     <div class="member_list_box_header">직원 목록</div>
-                    <div class="member_list_box_body">
+                    <div class="member_list_box_body" id="member_list_box_body">
                         <div>
 							<c:forEach items="${organizationList}" var="i">
 								<div>
@@ -39,7 +39,7 @@
                         
                     </div>
                     <div class="auth_member_reset">
-                        <button>모두 취소</button>
+                        <button id="auth_member_reset_btn">모두 취소</button>
                     </div>
                 </div>
             </div>
@@ -90,15 +90,7 @@
                                 <div>이름</div>
                                 <div>기본 권한 : 읽기</div>
                             </div>
-                            <div class="authority_member_list">
-                                <div class="auth_member">
-                                    <div>대표이사</div>
-                                    <div>
-                                        <div><input type="checkbox">&nbsp;쓰기</div>
-                                        <div>x</div>
-                                    </div>
-                                </div>
-
+                            <div class="authority_member_list" id="authority_member_list">
                             </div>
                         </div>
                     </div>

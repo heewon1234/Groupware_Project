@@ -64,7 +64,7 @@
                 </div>
 
                 <!-- 일반 메뉴 -->
-                <div class="menu_item" id="toEditBoardBtn">
+                <div class="menu_item" id="toMkBoardBtn">
                     <img class="menu_item_img" src="/images/commons/body_form/left_item/default/plus.png" />
                     <span class="menu_item_text">게시판 만들기</span>
                 </div>

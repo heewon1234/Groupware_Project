@@ -1,16 +1,85 @@
 let authority = [];
 let headerList = [];
+let tempAuthority = [];
 
-$(".authority_member_add_btn").on("click",function(){
-	$(".modal").css("display","block");
+$("#member_add_complete").on("click",function(){
+	tempAuthority = authority;
+	$(".modal").css("display","none");
+	$("#authority_member_list").empty();
+	
+	for(let i=0;i<authority.length;i++){
+		let authDiv = $("<div>");
+		authDiv.addClass("auth_member"); 
+		authDiv.attr("data-index",i);
+		let NameDiv = $("<div>");
+		NameDiv.html(authority[i].name);
+		
+		let div = $("<div>");
+		
+		let inputDiv = $("<div>");
+		let input = $("<input>");
+		input.attr("type","checkbox");
+		inputDiv.append(input);
+		inputDiv.append("&nbsp;"+"쓰기");
+		
+		let delDiv = $("<div>");
+		delDiv.append("x");
+		delDiv.addClass("authDelBtn");
+
+		div.append(inputDiv);
+		div.append(delDiv);
+		
+		authDiv.append(NameDiv);
+		authDiv.append(div);
+		
+		$("#authority_member_list").append(authDiv);	
+	}
+	
+	
+	
+	
 })
 
 $("#member_add_cancel").on("click",function(){
+	authority = tempAuthority;
 	$(".modal").css("display","none");
+	
+	$("#authority_member_list").empty();
+	
+	for(let i=0;i<authority.length;i++){
+		let authDiv = $("<div>");
+		authDiv.addClass("auth_member"); 
+		authDiv.attr("data-index",i);
+		let NameDiv = $("<div>");
+		NameDiv.html(authority[i].name);
+		
+		let div = $("<div>");
+		
+		let inputDiv = $("<div>");
+		let input = $("<input>");
+		input.attr("type","checkbox");
+		inputDiv.append(input);
+		inputDiv.append("&nbps;쓰기");
+		
+		let delDiv = $("<div>");
+		delDiv.append("x");
+		delDiv.addClass("authDelBtn");
+		div.append(inputDiv);
+		div.append(delDiv);
+		
+		authDiv.append(NameDiv);
+		authDiv.append(div);
+		
+		$("#authority_member_list").append(authDiv);	
+	}
+	
 })
 
-$("#member_add_complete").on("click",function(){
-	$(".modal").css("display","none");
+$(".authority_member_add_btn").on("click",function(){
+	$(".modal").css("display","block");
+	authority = [];
+	$("#member_list_box_body").find("input[type='checkbox']").prop("checked",false);
+	$("#auth_member_list").empty();
 })
 
 // 모달창 - 멤버 추가 버튼 이벤트
@@ -117,6 +186,7 @@ $(document).on("click",".add_member_btn",function(){
 
 $(document).on("change",".organization_check",function(){
 	let organization = $(this).parent("div").text().trim();
+	authority = authority.filter(item => item.organization !== organization);
 	if($(this).prop('checked')){		
 		$.ajax({
 			url:"/board/selectMemberByOrganization",
@@ -143,7 +213,6 @@ $(document).on("change",".organization_check",function(){
 		inputCheck.find("input[type='checkbox']").prop("checked",true);
 		
 	} else{	
-		authority = authority.filter(item => item.organization !== organization);	
 		let inputCheck = $(this).parent("div").next(".member_dept_detail_box");
 		inputCheck.find("input[type='checkbox']").prop("checked",false);
 		
@@ -163,8 +232,19 @@ $(document).on("change",".organization_check",function(){
 })
 
 $(document).on("change",".jobName_check",function(){
+	let parents = $(this).parents(".member_dept_detail_box").prev("div");
+	
 	let job_name = $(this).parent("div").text().trim();
 	let organization = $(this).parents(".member_dept_detail_box").prev("div").text().trim();
+	
+	let inputBox = $(this).parents(".member_dept_detail_box");
+	let inputLength = inputBox.find("input[type='checkbox']");
+	let inputCheckLength = inputLength.filter(':checked');
+	
+	if(inputLength.length === inputCheckLength.length){
+		parents.find("input[type='checkbox']").prop("checked",true);
+	}
+	
 	if($(this).prop('checked')){
 		$.ajax({
 			url:"/board/selectMemberByOrganizationAndJobName",
@@ -189,8 +269,7 @@ $(document).on("change",".jobName_check",function(){
 		let inputCheck = $(this).parent("div").next(".member_datail_box");
 		console.log(inputCheck);
 		inputCheck.find("input[type='checkbox']").prop("checked",true);
-	} else{
-		let parents = $(this).parents(".member_dept_detail_box").prev("div");
+	} else{		
 		authority = authority.filter(item=>item.job_name!==job_name && item.authority !== authority);
 		let inputCheck = $(this).parent("div").next(".member_datail_box");
 		inputCheck.find("input[type='checkbox']").prop("checked",false);
@@ -213,6 +292,17 @@ $(document).on("change",".jobName_check",function(){
 });
 
 $(document).on("change",".name_check",function(){
+	let parents = $(this).parents(".member_datail_box").prev("div");
+	
+	let inputBox = $(this).parents(".member_datail_box");
+	let inputLength = inputBox.find("input[type='checkbox']");
+	let inputCheckLength = inputLength.filter(':checked');
+	
+	if(inputLength.length === inputCheckLength.length){
+		parents.find("input[type='checkbox']").prop("checked",true);
+	}
+	
+	
 	let name = $(this).parent("div").text().trim();
 	let job_name = $(this).parents(".member_datail_box").prev("div").text().trim();
 	console.log(job_name);
@@ -237,7 +327,7 @@ $(document).on("change",".name_check",function(){
 			}
 		})
 	} else{
-		let parents = $(this).parents(".member_datail_box").prev("div")
+		
 		console.log(parents.text().trim());
 		authority = authority.filter(item=>item.job_name!==job_name && item.authority !== authority && item.name !== name);
 		$("#auth_member_list").empty();
@@ -255,4 +345,19 @@ $(document).on("change",".name_check",function(){
 	
 	}
 	
+});
+
+$("#auth_member_reset_btn").on("click",function(){
+	$("#member_list_box_body").find("input[type='checkbox']").prop("checked",false);
+	authority = [];
+	$("#auth_member_list").empty();
 })
+
+
+// 멤버 제거
+$(document).on("click",".authDelBtn",function(resp){
+	let index = $(this).parents(".auth_member").attr("data-index");
+	console.log(index);
+	authority.splice(index,1);
+	$(this).parents(".auth_member").remove();
+});
