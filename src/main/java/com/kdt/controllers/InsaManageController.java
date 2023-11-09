@@ -11,14 +11,23 @@ import com.kdt.dto.JobRoleDTO;
 import com.kdt.dto.JobTitleDTO;
 import com.kdt.dto.MembersDTO;
 import com.kdt.dto.OrganizationDTO;
+import com.kdt.dto.WorksDTO;
 import com.kdt.services.JobRoleService;
 import com.kdt.services.JobTitleService;
 import com.kdt.services.MembersService;
 import com.kdt.services.OrganizationService;
+import com.kdt.services.WorksService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/insa/manage")
 public class InsaManageController {
+	
+	@Autowired
+	private HttpSession session;
+	@Autowired
+	private WorksService wservice;
 	@Autowired
 	private JobRoleService jrService;
 	@Autowired
@@ -68,5 +77,12 @@ public class InsaManageController {
 	public String toLeft_item(String selectItem, Model model) {
 		model.addAttribute("selectItem", selectItem);
 		return "/insa/manage/left_item";
+	}
+	@RequestMapping(value="/work_leave")
+	public String towork_leave(Model model)throws Exception {
+		String ID = (String) session.getAttribute("loginId");
+		List<WorksDTO> list = wservice.select(ID);
+		model.addAttribute("list",list);
+		return "/insa/manage/work_leave";
 	}
 }

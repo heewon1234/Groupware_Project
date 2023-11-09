@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="Works">
+  	 <select id="select" resultType="com.kdt.dto.WorksDTO"> <!-- select를 사용할때는 resultType 설정 -->
+  		select * from Works where id=#{id} 
+  	</select>
+  	
+  </mapper>

@@ -32,8 +32,28 @@
 			<hr class="div_hr">
 
 			
-
+			
+			<div class="menu_list">
+				<div class="menu_list_button">
+					<div class="menu_list_button_drop">
+						<img src="../imges/commons/body_form/left_item/default/drop.png" />
+					</div>
+					<span class="menu_list_button_text">내 근무</span>
+				</div>
+				<div class="menu_list_box">
+					<div id="work_leave" class="menu_list_item">
+						<img src="../imges/commons/body_form/left_item/default/company.png"> <span class="menu_list_item_text">휴가/근무 </span>
+					</div>
+					<div id="work_current" class="menu_list_item">
+						<img src="../imges/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">근무 현황</span>
+					</div>
+					<div id="dpwork_current" class="menu_list_item">
+						<img src="../imges/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">부서 근무 현황</span>
+					</div>
+				</div>
+			</div>
 			<!-- 일반 메뉴 -->
+			
 			<div class="menu_item">
 				<img src="../imges/commons/body_form/left_item/default/favorites.png" /> <span class="menu_item_text">근무계획 수립</span>
 			</div>

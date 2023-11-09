@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="Worktimes">
+  	 
+  	<insert id="insert">
+  		insert into WorkTimes values(null,#{id},#{work_type},default)
+  	</insert>
+  	<select id="selectby" resultType="com.kdt.dto.WorkTimesDTO"> <!-- select를 사용할때는 resultType 설정 -->
+  		select * from WorkTimes where id=#{id} and DATE(work_time) = CURDATE();
+  	</select>
+  	<select id="work_inout" resultType="com.kdt.dto.WorkTimesDTO">
+  	SELECT * FROM WorkTimes WHERE id=#{id} and DATE(work_time) = CURDATE() and (work_type = '근무 종료' or work_type = '근무중');
+  	</select>
+  	
+  </mapper>
