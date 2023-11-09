@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-<title>Personal Calendar</title>
+<title>Official Calendar</title>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <link rel="stylesheet" type="text/css" href="/css/calendar/calendar.css">
 <link rel="stylesheet"
@@ -84,7 +84,7 @@
 }
 
 
-#personal {
+#official {
     background-color: #DAE8F8;
     color: #056AC9;
     font-weight: bold;
@@ -135,7 +135,7 @@
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<form action="/calendar/pcreate" method="post">
+				<form action="/calendar/ocreate" method="post">
 					<div class="modal-body">
 						<div class="form-group">
 							<label for="taskId" class="col-form-label">일정 내용</label> <input
@@ -238,7 +238,7 @@
                     
                     $(function deleteData(){
                         $.ajax({
-                            url: "/calendar/pdelete",
+                            url: "/calendar/odelete",
                             method: "POST",
                             data: {
                             	seq:seq
@@ -261,7 +261,7 @@
 
                 $(function deleteData() {
                     $.ajax({
-                        url: "/calendar/pupdate",
+                        url: "/calendar/oupdate",
                         method: "POST",
                         data: {
                         	seq:seq,

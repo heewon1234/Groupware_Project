@@ -16,6 +16,11 @@
 		insert into Members values(#{id},#{pw},#{name},#{work_form},#{organization},#{job_name},#{position},null,null,null,null,null,null)
 	</insert>
 	
+	<!-- Members로 바꿔줘야됨~ -->
+	<select id="getOrganization" resultType="String">
+		select organization from members1 where id=#{value}
+	</select>
+	
 	<select id="selectAll" resultType="com.kdt.dto.MembersDTO">
 		SELECT * FROM Members;
 	</select>
