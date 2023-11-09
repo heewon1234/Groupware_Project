@@ -7,7 +7,7 @@
 		SELECT o.Organization, o.LEVEL, o.MANAGER, COUNT(m.id) AS count
 		FROM Organization o
 		LEFT JOIN Members m ON o.Organization = m.organization
-		GROUP BY o.Organization, o.LEVEL, o.MANAGER
+		GROUP BY o.Organization
 		order by level;
 	</select>
 	<insert id="insert">
