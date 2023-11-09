@@ -8,7 +8,9 @@
 <!-- DataTables -->
 <link href="https://cdn.datatables.net/v/dt/dt-1.13.6/datatables.min.css" rel="stylesheet">
 <script src="https://cdn.datatables.net/v/dt/dt-1.13.6/datatables.min.js"></script>
-<title>Insert title here</title>
+<title>임직원 관리 게시판</title>
+<!-- BootStrap -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/css/insa/manage/members.css">
 <link rel="stylesheet" type="text/css" href="/css/insa/manage/common.css">
 <link rel="stylesheet" type="text/css" href="/css/commons/body_form/left_form/body_form_default.css">
@@ -24,18 +26,80 @@
 					<hr>
 				</div>
 				<div id="add_div">
-					<a id="add_btn" class="btn">사용자 추가</a>
+					<a id="add_btn" class="btns">사용자 추가</a>
 				</div>
+				<form id="signupForm" action="/members/signup" method="post">
+				<div id="createUser" style="display:none;">
+					<table id="createUserTable" class="compact">
+					<thead>
+						<tr>
+							<th>이름</th>
+							<th>ID</th>
+							<th>비밀번호</th>
+							<th>근로형태</th>
+							<th>소속조직</th>
+							<th>직위</th>
+							<th>직무</th>
+							<th>상태</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><input type="text" name="name" id="name" placeholder="이름 입력"></td>
+							<td><input type="text" name="id" id="id" placeholder="아이디 입력"></td>
+							<td><input type="password" name="pw" id="pw" placeholder="비밀번호 입력"></td>
+							<td>
+								<select class="signupSelect" name="workForm">
+									<option disabled selected>근로 형태</option>
+									<c:forEach var="workForm" items="${workFormList }">
+										<option>${workForm }</option>
+									</c:forEach>
+								</select>
+    						</td>
+							<td>
+								<select class="signupSelect" name="org">
+									<option disabled selected>소속 조직</option>
+									<c:forEach var="list" items="${orgList }">
+										<option>${list.organization }</option>
+									</c:forEach>
+								</select>
+							</td>
+							<td>
+								<select class="signupSelect" name="position">
+									<option disabled selected>직위</option>
+									<c:forEach var="list" items="${jobTitleList }">
+										<option>${list.position }</option>
+									</c:forEach>
+								</select>
+							</td>
+							<td>
+								<select class="signupSelect" name="jobName">
+									<option disabled selected>직무</option>
+									<c:forEach var="list" items="${jobRoleList }">
+										<option>${list.job_name }</option>
+									</c:forEach>
+								</select>
+							</td>
+							<td>
+								<button type="submit">저장</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				</div>
+				</form>
+				
 				<div id="update_div">
 					<span> 
 						<input type="checkbox" id="all_check"> 
 						<span id="checked_count">0</span>
 					</span>
-					<a class="modalButton modalButton_workForm btn invisbale">근로형태 수정</a> 
-					<a class="modalButton modalButton_org btn invisbale">소속조직 수정</a> 
-					<a class="modalButton modalButton_position btn invisbale">직위 수정</a> 
-					<a class="modalButton modalButton_delete btn invisbale">삭제</a>
+					<a class="modalButton modalButton_workForm btns invisbale">근로형태 수정</a> 
+					<a class="modalButton modalButton_org btns invisbale">소속조직 수정</a> 
+					<a class="modalButton modalButton_position btns invisbale">직위 수정</a> 
+					<a class="modalButton modalButton_delete btns invisbale">삭제</a>
 				</div>
+						
 				<table id="myTable" class="compact">
 					<thead>
 						<tr>
@@ -71,7 +135,7 @@
 	<div id="modalContainer_workForm" class="modalContainer hidden">
 		<form action="/members/updateWorkForm">
 			<div class="modalContent">
-				<div>근로형태 설정</div>
+				<div align="center">근로형태 설정</div>
 				<input type="text" name="idList" class="updateID" hidden> 
 				<select name="workForm">
 					<c:forEach var="workForm" items="${workFormList }">
@@ -79,8 +143,8 @@
 					</c:forEach>
 				</select>
 				<div class="modalButton_div" align="center">
-					<button type="submit">제출</button>
-					<button type="button" class="modalButton_workForm">닫기</button>
+					<button type="submit" class="button_apply">제출</button>
+					<button type="button" class="modalButton_workForm button_cancel">닫기</button>
 				</div>
 			</div>
 		</form>
@@ -90,7 +154,7 @@
 	<div id="modalContainer_org" class="modalContainer hidden">
 		<form action="/members/updateOrg">
 			<div class="modalContent">
-				<div>소속조직 설정</div>
+				<div align="center">소속조직 설정</div>
 				<input type="text" name="idList" class="updateID" hidden> 
 				<select name="org">
 					<c:forEach var="list" items="${orgList }">
@@ -98,8 +162,8 @@
 					</c:forEach>
 				</select>
 				<div class="modalButton_div" align="center">
-					<button type="submit">제출</button>
-					<button type="button" class="modalButton_org">닫기</button>
+					<button type="submit" class="button_apply">제출</button>
+					<button type="button" class="modalButton_org button_cancel">닫기</button>
 				</div>
 			</div>
 		</form>
@@ -109,7 +173,7 @@
 	<div id="modalContainer_position" class="modalContainer hidden">
 		<form action="/members/updatePosition">
 			<div class="modalContent">
-				<div>직위 설정</div>
+				<div align="center">직위 설정</div>
 				<input type="text" name="idList" class="updateID" hidden> 
 				<select name="position">
 					<c:forEach var="list" items="${jobTitleList }">
@@ -117,8 +181,8 @@
 					</c:forEach>
 				</select>
 				<div class="modalButton_div" align="center">
-					<button type="submit">제출</button>
-					<button type="button" class="modalButton_position">닫기</button>
+					<button type="submit" class="button_apply">제출</button>
+					<button type="button" class="modalButton_position button_cancel">닫기</button>
 				</div>
 			</div>
 		</form>
@@ -131,8 +195,8 @@
 				<div align="center">정말로 삭제하시겠습니까?</div>
 				<input type="text" name="idList" class="updateID" hidden>
 				<div class="modalButton_div" align="center">
-					<button type="submit">확인</button>
-					<button type="button" class="modalButton_delete">취소</button>
+					<button type="submit" class="button_apply">확인</button>
+					<button type="button" class="modalButton_delete button_cancel">취소</button>
 				</div>
 			</div>
 		</form>

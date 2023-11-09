@@ -68,10 +68,8 @@ $(document).on("click", "#del_jt_btn", function() {
 });
 
 // 직무 리스트에서 직무 삭제
-$(".remove_jr_btn").on(
-	"click",
-	function() {
-		let result = confirm('삭제하시겠습니까?');
+$(".remove_jr_btn").on("click", function() {
+	let result = confirm('삭제하시겠습니까?');
 		if (result) {
 			location.href = "/job/deleteJobRole?job_name="
 				+ $(this).prev().html();
@@ -80,10 +78,8 @@ $(".remove_jr_btn").on(
 	});
 
 // 직위 리스트에서 직위 삭제
-$(".remove_jt_btn").on(
-	"click",
-	function() {
-		let result = confirm('삭제하시겠습니까?');
+$(".remove_jt_btn").on("click", function() {
+	let result = confirm('삭제하시겠습니까?');
 		if (result) {
 			location.href = "/job/deleteJobTitle?position="
 				+ $(this).prev().html();

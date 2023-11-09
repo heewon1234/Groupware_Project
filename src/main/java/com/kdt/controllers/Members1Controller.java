@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +18,7 @@ import com.kdt.dto.MembersDTO1;
 import com.kdt.dto.OneToOneChatDTO;
 import com.kdt.services.ChatRoomService;
 import com.kdt.services.MembersService1;
+import com.kdt.utils.UUIDToNumber;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -33,6 +33,10 @@ public class Members1Controller {
 	private SimpMessagingTemplate messagingTemplate;
 	@Autowired
 	private HttpSession session;
+//	public String generateUniqueUUID() {
+//	    UUID uuid = UUID.randomUUID();
+//	    return uuid.toString();
+//	}
 
 	@RequestMapping("selectAll")
 	@ResponseBody
@@ -49,18 +53,16 @@ public class Members1Controller {
 
 		// 1:1 채팅방을 생성하고 이미 방이 없는 경우에만 생성
 		for (String otherUserID : userIDs) {
-			if (!loggedInUserID.equals(otherUserID)) {
-				// 이미 방이 있는지 확인
-				if (!roomService.oneroomExists(loggedInUserID, otherUserID)) {
-					System.out.println(roomService.oneroomExists(loggedInUserID, otherUserID));
-					roomService.createOneChatRoom(loggedInUserID, otherUserID);
-					//	                // 방 ID를 기반으로 채팅방 입장 메시지 전송
-					//	                String destination = "/topic/oneToOne/" + oneSeq;
-					//	                String message = "User " + loggedInUserID + " has entered the chat with " + otherUserID + ".";
-					//	                messagingTemplate.convertAndSend(destination, message);
-				}
-			}
+		    // 이미 방이 있는지 확인
+		    if (!roomService.oneroomExists(loggedInUserID, otherUserID)) {
+		        System.out.println(roomService.oneroomExists(loggedInUserID, otherUserID));
+		        int oneSeq = UUIDToNumber.convertUUIDToInt();
+		        System.out.println(oneSeq);
+		        roomService.createOneChatRoom(loggedInUserID, otherUserID,oneSeq);
+		        // 나머지 로직 추가 가능
+		    }
 		}
+
 		List<OneToOneChatDTO> OneToOneChatDTOList = roomService.selectAll();
 		System.out.println(OneToOneChatDTOList);
 		Map<String, Object> responseData = new HashMap<>();
@@ -72,8 +74,9 @@ public class Members1Controller {
 	}
 	@PostMapping("/getMembersByOrganization")
 	@ResponseBody
-	public Map<String, Object> getMembersByOrganization(@RequestParam("organization") String organization,@RequestParam("oneSeq") int oneSeq) throws Exception {
-		List<MembersDTO1> members = mservice.getMembersByOrganization(organization);
+	public Map<String, Object> getMembersByOrganization(@RequestParam("organization") String organization,@RequestParam("oneSeq") String oneSeq) throws Exception {
+		String id = (String) session.getAttribute("loginId");
+		List<MembersDTO1> members = mservice.getMembersByOrganization(organization,id);
 
 		List<OneToOneChatDTO> OneToOneChatDTOList = roomService.selectAll();
 		System.out.println(OneToOneChatDTOList);

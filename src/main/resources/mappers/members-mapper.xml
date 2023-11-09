@@ -8,24 +8,32 @@
 		select (count(*) > 0) from members1 where id=#{id} and pw=#{pw}
 	</select>
 	
+	<select id="idCheck" resultType="boolean">
+		select (count(*) > 0) from Members where id=#{value}
+	</select>
+	
+	<insert id="signup">
+		insert into Members values(#{id},#{pw},#{name},#{work_form},#{organization},#{job_name},#{position},null,null,null,null,null,null)
+	</insert>
+	
 	<select id="selectAll" resultType="com.kdt.dto.MembersDTO">
 		SELECT * FROM Members;
 	</select>
 	
 	<update id="updateWorkForm">
-		Update MEMBERS set work_form = #{work_form} where id = #{id};
+		Update Members set work_form = #{work_form} where id = #{id};
 	</update>
 	
 	<update id="updatePosition">
-		Update MEMBERS set position = #{position} where id = #{id};
+		Update Members set position = #{position} where id = #{id};
 	</update>
 	
 	<update id="updateOrg">
-		Update MEMBERS set organization = #{organization} where id = #{id};
+		Update Members set organization = #{organization} where id = #{id};
 	</update>
 	
 	<delete id="deleteMember">
-		DELETE FROM MEMBERS WHERE ID = #{id};
+		DELETE FROM Members WHERE ID = #{id};
 	</delete>
 	
 	<select id="selectWorkForm" resultType="String">

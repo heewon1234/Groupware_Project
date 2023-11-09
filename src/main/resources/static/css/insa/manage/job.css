@@ -16,16 +16,8 @@ th {
 }
 
 button[type="submit"] {
-	background-color: #2985db;
-	border: 1px solid #056ac9;
-	color: #fff;
-	margin: 20px 0 50px;
-	padding: 5px 20px 6px;
-	font-size: 14px;
-	line-height: 1.5;
-	text-align: center;
-	vertical-align: middle;
-	cursor: pointer;
+	margin-top: 20px;
+	margin-bottom: 20px;
 }
 
 h4, .h4_span {
@@ -45,16 +37,16 @@ td.jt_div {
 	margin-right: 20px;
 }
 
-.btn {
+.btns {
 	display: inline-block;
-	width: 20px;
-	height: 20px;
-	border-radius: 50%;
-	text-align: center;
-	color: #fff;
-	background: #bec3c9;
-	cursor: pointer;
-	line-height: 17px;
+    width: 23px;
+    height: 23px;
+    border-radius: 50%;
+    text-align: center;
+    color: #fff;
+    background: #bec3c9;
+    cursor: pointer;
+    line-height: 19px;
 }
 
 .hidden {

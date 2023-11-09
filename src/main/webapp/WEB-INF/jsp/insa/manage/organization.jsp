@@ -7,6 +7,8 @@
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <title>Insert title here</title>
+<!-- BootStrap -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/css/insa/manage/organization.css">
 <link rel="stylesheet" type="text/css" href="/css/insa/manage/common.css">
 <link rel="stylesheet" type="text/css" href="/css/commons/body_form/left_form/body_form_default.css">
@@ -23,7 +25,7 @@
 				</div>
 				<div class="chart-box">
 					<div id="chart_div"></div>
-					<button class="modalButton">조직 추가</button>
+					<button class="modalButton button_apply">조직 추가</button>
 				</div>
 			</div>
 		</div>
@@ -32,13 +34,19 @@
 	<div class="modalContainer hidden">
 		<form action="/org/insert">
 			<div class="modalContent">
-				<input type="text" name="organization" placeholder="조직명">
-				<input type="text" name="manager" placeholder="상위조직명">
-				<input type="text" name="level" placeholder="조직 레벨">
+				<div class="input-group">
+                	<input type="text" class="form-control" id="organization" name="organization" placeholder="조직명">
+                </div>
+                <div class="input-group">
+                	<input type="text" class="form-control" id="manager" name="manager" placeholder="상위조직명">
+                </div>
+                <div class="input-group">
+                	<input type="text" class="form-control" id="level" name="level" placeholder="조직 레벨">
+                </div>
 				<br>
 				<div align="center">
-					<button type="submit">제출</button>
-					<button type="button" class="modalButton">닫기</button>
+					<button type="submit" class="button_apply permit" id="submit_btn">제출</button>
+					<button type="button" class="modalButton button_cancel">닫기</button>
 				</div>
 			</div>
 		</form>

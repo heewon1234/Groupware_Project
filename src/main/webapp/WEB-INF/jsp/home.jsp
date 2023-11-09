@@ -22,9 +22,11 @@
 					<div class="title">게시판</div>
 				</div>
 				<div>
+					<a href="/calendar/personal">
 					<div class="main_icon_box">
 						<i class="fa-regular fa-calendar-days"></i>
 					</div>
+					</a>
 					<div class="title">일정</div>
 				</div>
 				<div>

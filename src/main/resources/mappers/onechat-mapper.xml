@@ -7,8 +7,8 @@
 
 	<insert id="createOneChatRoom" parameterType="map" >
 		INSERT INTO
-		OneToOneChat (loggedInUserID, otherUserID)
-		VALUES (#{loggedInUserID},
+		OneToOneChat (oneSeq,loggedInUserID, otherUserID)
+		VALUES (#{oneSeq},#{loggedInUserID},
 		#{otherUserID})
 	</insert>
 
@@ -22,14 +22,11 @@
 		SELECT COUNT(*)
 		FROM OneToOneChat
 		WHERE (loggedInUserID = #{loggedInUserID} AND otherUserID = #{otherUserID})
-		OR (loggedInUserID = #{otherUserID} AND otherUserID =
-		#{loggedInUserID})
 	</select>
-
 
 	<!-- OneToOneChat 테이블의 전체 레코드 수를 가져오는 쿼리 -->
 	<select id="oneCountAll" resultType="int">
-		SELECT COUNT(*) FROM OneToOneChat;
+		SELECT COUNT(oneSeq) FROM OneToOneChat WHERE loggedInUserID =#{id}
 	</select>
 	<select id="selectAll" resultType="com.kdt.dto.OneToOneChatDTO">
 		SELECT * FROM OneToOneChat;
