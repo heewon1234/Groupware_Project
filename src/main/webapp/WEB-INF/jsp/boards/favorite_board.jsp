@@ -9,7 +9,9 @@
 	<link rel="stylesheet" href="/css/commons/topForm.css" />
     <link rel="stylesheet" href="/css/board/board_favorite.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="js/commons/body_form/body_form_default.js"></script>
+    <script src="/js/commons/body_form/body_form_default.js"></script>
+    
+	
 </head>
 <body>
 	<div class="top">TOP</div>
@@ -63,11 +65,7 @@
             </div>
         </div>
     </div>
-    
-    <script>
-    	$(document).ready(function() {
-			$("#left_item").load("/board/sideBar");
-		});
-    </script>
+	<script src="/js/board/sideBar.js" defer></script>
+    <script src="/js/board/favorite_board.js" defer></script>
 </body>
 </html>
