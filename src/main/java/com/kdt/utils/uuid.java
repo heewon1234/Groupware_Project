@@ -6,8 +6,10 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.UUID;
 
-
-public class UUIDToNumber {
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+@RestController
+public class uuid {
     public static long uuidToLong(UUID uuid) {
         byte[] bytes = ByteBuffer.wrap(new byte[16])
                             .putLong(uuid.getMostSignificantBits())
@@ -23,13 +25,13 @@ public class UUIDToNumber {
             return 0L; // Handle the exception as needed
         }
     }
-
-    public static int convertUUIDToInt() {
+	@RequestMapping("/generateUUID")
+    public int generateUUID() {
+        // UUID 생성
         UUID uuid = UUID.randomUUID();
-        long number = uuidToLong(uuid);
-        return (int) number; // Convert long to int
-    }
-    
-    
-}
+        long number = UUIDToNumber.uuidToLong(uuid);
 
+        // long 값을 int로 변환하여 반환
+        return (int) number;
+    }
+}

@@ -68,7 +68,6 @@ public class ChatStompController {
 	@SendTo("/topic/group/{groupId}")
 	public void group_insert(@Payload String roomInfo) throws Exception {
 		GroupChatDTO group_dto = gson.fromJson(roomInfo, new TypeToken<GroupChatDTO>() {}.getType());
-		System.out.println(group_dto);
 		ChatRoomService.createGroupChat(group_dto);
 	}
 //	   @MessageMapping("/group/sendMessage")

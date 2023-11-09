@@ -13,39 +13,43 @@
 <link rel="stylesheet" type="text/css" href="/css/chat/chatList.css">
 <script src="/webjars/sockjs-client/1.1.2/sockjs.min.js"></script>
 <script src="/webjars/stomp-websocket/2.3.3-1/stomp.min.js"></script>
+
 <style>
-#groupUserModal{
-display: none;
+#groupUserModal {
+	display: none;
 }
-        /* Define your modal styles here */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-        }
-        .modal-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #fff;
-            padding: 20px;
-        }
-        .close {
-            position: absolute;
-            right: 10px;
-            top: 10px;
-            cursor: pointer;
-        }
-            .selected {
-        background-color: lightblue;
-        cursor: pointer;
-    }
+/* Define your modal styles here */
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: #fff;
+	padding: 20px;
+}
+
+.close {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	cursor: pointer;
+}
+
+.selected {
+	background-color: lightblue;
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -139,26 +143,44 @@ display: none;
 							</div>
 						</div>
 					</div>
-					<div class="chatroom_list"></div>
+					<div class="chatroom_list" style="margin-top: 13px; height: 410px; overflow-y: auto;"></div>
 				</div>
 			</div>
 		</div>
-		    <!-- 그룹 선택 모달 창 -->
-    <div id="groupUserModal" class="modal">
-    <div class="modal-content" style="width: 300px; height: 500px;">
-        <span class="close" id="groupModalClose">&times;</span>
-        <h2>사용자 선택</h2>
-        <ul id="groupUserList">
-            <!-- User list will be dynamically added here -->
-        </ul>
-        <button id="selectUsersButton">선택 완료</button> <!-- 선택 완료 버튼 추가 -->
-    </div>
-</div>
+		<!-- 그룹 선택 모달 창 -->
+		<div id="groupUserModal" class="modal">
+			<div class="modal-content" style="width: 300px; height: 500px;">
+				<span class="close" id="groupModalClose">&times;</span>
+				<h2>사용자 선택</h2>
+				<ul id="groupUserList">
+					<!-- User list will be dynamically added here -->
+				</ul>
+				<button id="selectUsersButton">선택 완료</button>
+				<!-- 선택 완료 버튼 추가 -->
+			</div>
+		</div>
 
 	</div>
 	<script src="/js/chat/chatting.js" type="text/javascript"></script>
 	<script src="/js/chat/inputText.js" type="text/javascript"></script>
 	<script>
+	function generateUUID() {
+        // 서버에 UUID를 요청하는 AJAX
+        $.ajax({
+            url: "/generateUUID", // 해당 URL은 컨트롤러의 RequestMapping에 맞게 변경
+            type: "GET",
+            success: function (data) {
+                // 성공 시 결과를 표시
+                $("#uuidResult").text("Generated UUID: " + data);
+            },
+            error: function () {
+                // 실패 시 오류 메시지 표시
+                $("#uuidResult").text("Failed to generate UUID.");
+            }
+        });
+    }
+
+	updateGroupChatList();
 	//그룹 채팅방 만들기
 	   // 모달 열기
 	<!-- 모달 열기 -->
@@ -216,23 +238,129 @@ display: none;
 	        return;
 	    }
 
-	    for (var i = 0; i < selectedUsers.length; i++) {
-	        var roomInfo = {
-	        	groupName: pendingRoomName,
-	        	memberName: selectedUsers[i]
-	        };
-	        stompClient.send("/app/group/sendMessage", {}, JSON.stringify(roomInfo));
-	    }
-	    clearSelectedCheckboxes();
-	    closeGroupModal();
+	    // 서버에 UUID를 요청하는 AJAX
+	    $.ajax({
+	        url: "/generateUUID",
+	        type: "GET",
+	        success: function (data) {
+	            // 성공 시 결과를 표시
+	            var generatedUUID = data;
+
+	            for (var i = 0; i < selectedUsers.length; i++) {
+	                var roomInfo = {
+	                    groupSeq: generatedUUID,
+	                    groupName: pendingRoomName,
+	                    memberName: selectedUsers[i]
+	                };
+	                stompClient.send("/app/group/sendMessage", {}, JSON.stringify(roomInfo));
+	            }
+
+	            clearSelectedCheckboxes();
+	            closeGroupModal();
+	        },
+	        error: function () {
+	            // 실패 시 오류 메시지 표시
+	            alert("Failed to generate UUID.");
+	        }
+	    });
 	}
+
 	function clearSelectedCheckboxes() {
 	    selectedUsers = []; // Clear the selected users array
 	    $("#groupUserList input[type=checkbox]").prop("checked", false); // Uncheck all checkboxes
 	    $("#groupUserList li").removeClass("selected"); // Remove the "selected" class
 	}
-	<!-- "선택 완료" 버튼 클릭 시 선택한 사용자 처리 */
-	$("#selectUsersButton").on("click", handleSelectedUsers);
+	// "선택 완료" 버튼 클릭 시 선택한 사용자 처리
+// "선택 완료" 버튼 클릭 시 선택한 사용자 처리
+$("#selectUsersButton").on("click", function() {
+    handleSelectedUsers();
+
+    // 여기에서 원하는 ajax 요청을 추가하세요.
+    updateGroupChatList();
+});
+
+// 그룹방을 보여주는 ajax
+function updateGroupChatList() {
+    $.ajax({
+        type: "POST",
+        url: "/groupChatRooms/groupSelectAll",
+        dataType: "json",
+        success: function(data) {
+            // 성공 시 실행되는 콜백 함수
+            console.log("group방 업데이트" + data);
+            var $chatroom_list = $(".chatroom_list");
+
+            // 데이터를 비우고 새로 받아온 데이터로 업데이트
+            $chatroom_list.empty();
+
+            // groupName을 사용하여 각 그룹을 friend_list에 추가
+            data.forEach(function(group) {
+                var $row = $("<div>").addClass("table-row");
+
+                // 그룹 아이콘 (여기서는 임의로 설정한 아이콘 사용)
+                var $iconCell = $("<div>")
+                        .html('<i class="fa-regular fa-comment"></i>')
+                        .css("display", "inline-block");
+
+                // 그룹 이름을 표시하는 셀
+                var $nameCell = $("<div>")
+                        .text(group.groupName)
+                        .addClass("groupChat")
+                        .css("display", "inline-block")
+                        .css("cursor", "pointer");
+
+                // 클릭 이벤트 처리
+                $nameCell.on("click", function() {
+                    // 클릭 시 실행할 로직 추가
+                    console.log("Clicked group:", group.groupName);
+                    groupChat(group.groupName, group.groupSeq);
+                    console.log(group.groupSeq);
+                });
+
+                // 행에 아이콘과 그룹 이름 셀을 추가
+                $row.append($iconCell);
+                $row.append($nameCell);
+
+                // friend_list에 행 추가
+                $chatroom_list.append($row);
+            });
+
+            // 여기서 받아온 데이터(data)를 사용하여 화면에 표시하는 로직을 추가할 수 있음
+        },
+        error: function(xhr, status, error) {
+            // 실패 시 실행되는 콜백 함수
+            console.error("AJAX request failed:", status, error);
+        }
+    });
+}
+
+function groupChat(groupName, groupSeq) {
+    // 페이지를 열 때 그룹 이름과 그룹 시퀀스를 쿼리 매개변수로 전달합니다.
+    $.get("/chats/groupInputText", {
+        groupName: groupName,
+        groupSeq: groupSeq
+    }, function(data) {
+        // 받은 데이터로 팝업 창을 생성하고 body에 추가합니다.
+        var popup = document.createElement("div");
+        popup.className = "groupChat popup";
+        popup.style.width = "400px";
+        popup.style.height = "650px";
+        popup.style.display = "block";
+        popup.style.position = "fixed";
+        popup.style.top = "50%";
+        popup.style.left = "50%";
+        popup.style.transform = "translate(-50%, -50%)";
+        popup.style.backgroundColor = "#fff";
+        popup.style.padding = "20px";
+        popup.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.2)";
+        popup.style.zIndex = "1000";
+        popup.innerHTML = data;
+
+        // body 요소에 팝업 div 추가
+        document.body.appendChild(popup);
+    });
+}
+	
 	//----------------------------
 	function keepScrollBottom() {
         let contents = document.getElementsByClassName("chatForm")[0];
