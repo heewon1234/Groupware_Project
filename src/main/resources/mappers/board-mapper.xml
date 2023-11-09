@@ -3,9 +3,30 @@
 
 <mapper namespace="Board">
 	<select id="select_board_type_group" resultType="com.kdt.dto.Mk_BoardDTO">
-		select * from mk_board where board_type='group'
+		select * from Mk_Board where board_type='group'
 	</select>
 	<select id="select_board_type_all" resultType="com.kdt.dto.Mk_BoardDTO">
-		select * from mk_board where board_type='all'
+		select * from Mk_Board where board_type='all'
 	</select>
+	
+	<!-- member-mapper로 옮겨라 -->
+	<select id="selectAllOrganization" resultType="String">
+		select organization from members group by organization
+	</select>
+	<select id="selectByOrganization" resultType="String">
+		select JOB_NAME from (select * from members where organization=#{organization}) as job group by job_name
+	</select>
+	<select id="selectByJobName" resultType="String">
+		select name from members where job_name=#{job_name};
+	</select>
+	<select id="selectMemberByOrganization" resultType="com.kdt.dto.MembersDTO">
+		select * from members where organization=#{organization}
+	</select>
+	<select id="selectMemberByOrganizationAndJobName" resultType="com.kdt.dto.MembersDTO">
+		select * from members where organization=#{organization} and job_name=#{job_name}
+	</select>
+	<select id="selectMemberByName" resultType="com.kdt.dto.MembersDTO">
+		select * from members where organization=#{organization} and job_name=#{job_name} and name=#{name}
+	</select>
+	<!-- 옮겨라 -->
 </mapper>
