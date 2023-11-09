@@ -1,0 +1,187 @@
+    h3 {
+    	padding-left: 10px;
+    }
+
+    .spanbox {
+    	padding-bottom: 20px;
+    }
+
+
+    .upbox {
+    	height: 35%;
+    }
+
+    .middlebox {
+    	height: 5%;
+    }
+
+    .downbox {
+    	height: 55%;
+    }
+
+    .upbox>div {
+    	float: left;
+    	width: 30%;
+    	margin: 1%;
+    	height: 150px;
+    }
+
+    .downbox>div {
+    	float: left;
+    	width: 30%;
+    	margin: 1%;
+    	height: 150px;
+    }
+
+    .workbox {
+    	border: 1px solid black;
+    	border-radius: 4px;
+    	width: 100%;
+    	height: 100%;
+    }
+
+    .workbox>div {
+    	padding-left: 5px;
+    	font-size: 15px;
+    	float: left;
+    	width: 25%;
+    	align-content: center;
+    	padding-top: 50px;
+    	text-align: center;
+    }
+
+    .workbox>div>span {
+    	font-weight: bolder;
+    }
+
+
+    .leavebox {
+    	border: 1px solid black;
+    	border-radius: 4px;
+    	width: 100%;
+    	height: 100%;
+    }
+
+    .leavebox>div {
+    	padding-left: 5px;
+    	font-size: 15px;
+    	float: left;
+    	width: 50%;
+    	align-content: center;
+    	padding-top: 50px;
+    	text-align: center;
+    }
+
+    .leavebox>div>span {
+    	font-weight: bolder;
+    }
+
+    .leavebox>div>button {
+    	border: 1px solid grey;
+    	background-color: white;
+    }
+
+    .worktimebox>div {
+    	float: left;
+    	width: 50%;
+    }
+
+    .worktimebox {
+    	border: 1px solid black;
+    	border-radius: 4px;
+    	width: 100%;
+    	height: 100%;
+
+    }
+
+    .worktimebox>div {
+    	text-align: center;
+    	font-size: 15px;
+    	float: left;
+    	width: 50%;
+    	align-content: center;
+    	padding-top: 50px;
+    }
+
+    .worktimebox>div>span {
+    	font-weight: bolder;
+    }
+
+    #workin {
+    	border: none;
+    	background-color: white;
+    }
+
+    .workcheckbox>div {
+    	padding-top: 50px;
+    }
+
+    .workcheckbox {
+
+    	border-radius: 4px;
+    	height: 400px;
+    	border: 1px solid black;
+    }
+
+    #workout {
+    	border: none;
+    	background-color: white;
+    }
+
+    .timebox {
+    	font-size: 30px;
+    	text-align: center;
+    }
+
+    .workinoutbox {
+    	font-size: 20px;
+    	text-align: center;
+    }
+
+    .workbtn {
+    	background-color: white;
+    	border: 1px solid grey;
+    	width: 25%;
+    	margin: 10px;
+    }
+
+    .workbtnbox {
+    	padding-left: 30px;
+    }
+
+    .highlight {
+    	background-color: aliceblue;
+    }
+
+    .box>div {
+    	float: left;
+    }
+
+    .workcurrent {
+		position: relative;
+    	border-radius: 4px;
+    	height: 400px;
+    	border: 1px solid black;
+    }
+
+    .workplanbox {
+
+    	border-radius: 4px;
+    	height: 400px;
+    	border: 1px solid black;
+    }
+    .workcurrent>button{
+    position: absolute;
+  	right: 0;
+  	bottom: 0;
+    margin: 30px;
+}
+.worktime_update{
+    background-color: white;
+    border: 1px solid grey;
+    height: 30px;
+}
+.comment{
+    overflow-y: scroll;
+    height: 300px;
+}
