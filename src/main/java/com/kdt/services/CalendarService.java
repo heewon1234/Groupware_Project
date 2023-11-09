@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kdt.dao.CalendarDAO;
+import com.kdt.dto.Official_CalendarDTO;
 import com.kdt.dto.Personal_CalendarDTO;
 
 @Service
@@ -13,19 +14,35 @@ public class CalendarService {
 	@Autowired
 	public CalendarDAO cdao;
 	
-	public List<Personal_CalendarDTO> selectAll(String id) {
-		return this.cdao.selectAll(id);
+	public List<Personal_CalendarDTO> selectAllP(String id) {
+		return this.cdao.selectAllP(id);
 	}
 	
-	public void insert(Personal_CalendarDTO dto) {
-		this.cdao.insert(dto);
+	public List<Official_CalendarDTO> selectAllO(String org) {
+		return this.cdao.selectAllO(org);
 	}
 	
-	public int delete(int seq) {
-		return this.cdao.delete(seq);
+	public void pinsert(Personal_CalendarDTO dto) {
+		this.cdao.pinsert(dto);
 	}
 	
-	public int update(Personal_CalendarDTO dto) {
-		return this.cdao.update(dto);
+	public void oinsert(Official_CalendarDTO dto) {
+		this.cdao.oinsert(dto);
+	}
+	
+	public int pdelete(int seq) {
+		return this.cdao.pdelete(seq);
+	}
+	
+	public int odelete(int seq) {
+		return this.cdao.odelete(seq);
+	}
+	
+	public int pupdate(Personal_CalendarDTO dto) {
+		return this.cdao.pupdate(dto);
+	}
+	
+	public int oupdate(Official_CalendarDTO dto) {
+		return this.cdao.oupdate(dto);
 	}
 }
