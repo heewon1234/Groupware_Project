@@ -29,4 +29,25 @@
 		select * from members where organization=#{organization} and job_name=#{job_name} and name=#{name}
 	</select>
 	<!-- 옮겨라 -->
+	
+	<!-- 게시판 생성 관련 -->
+	<insert id="Mk_boardInsert" useGeneratedKeys="true" keyProperty="seq">
+		insert into mk_board values (null, #{id}, #{board_title}, #{board_type}, #{name_type}, #{use_header}, default)
+	</insert>
+	<insert id="createTable">
+		${sql}
+	</insert>
+	<insert id="authorityInsert">
+		insert into authority values (null,#{id},#{sys_board_title},#{ori_board_title},#{authority})
+	</insert>
+	<insert id="headerInsert">
+		insert into header values (null,#{board_title},#{header})
+	</insert>
+	<!-- 게시판 생성 관련 -->
+	
+	<!-- 게시글 등록 관련 -->
+	<select id="selectAuthBoard" resultType="String">
+		select sys_board_title from authority where id=#{id} and authority="쓰기" 
+	</select>
+	<!-- 게시글 등록 관련 -->
 </mapper>

@@ -40,6 +40,12 @@ public class BoardController {
 		return "boards/mk_board";
 	}
 	
+	@RequestMapping("Mk_boardInsert")
+	public String Mk_boardInsert(Mk_BoardDTO dto, String headerList, String authorityList) {
+		bservice.Mk_boardInsert(dto, headerList, authorityList);
+		return "redirect:/board/toFavoriteBoard";
+	}
+	
 	// MemberController로 옮겨라
 	@ResponseBody
 	@RequestMapping("selectByOrganization")

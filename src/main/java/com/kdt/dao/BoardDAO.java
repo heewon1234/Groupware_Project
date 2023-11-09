@@ -7,6 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kdt.dto.AuthorityDTO;
+import com.kdt.dto.HeaderDTO;
 import com.kdt.dto.MembersDTO;
 import com.kdt.dto.Mk_BoardDTO;
 
@@ -53,4 +55,22 @@ public class BoardDAO {
 		return list;
 	}
 	//
+	
+	//게시판 생성 관련
+	public int Mk_boardInsert(Mk_BoardDTO dto) {
+		dto.setId("test1");
+		return db.insert("Board.Mk_boardInsert",dto);
+	}
+	public int createTable(String sql) {
+		return db.insert("Board.createTable",sql);
+	}
+	public int authorityInsert(AuthorityDTO dto) {
+		return db.insert("Board.authorityInsert",dto);
+	}
+	
+	public int headerInsert(HeaderDTO dto) {
+		return db.insert("Board.headerInsert",dto);
+	}
+	//
+
 }

@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="/css/commons/body_form/left_form/body_form_default.css" />
 	<link rel="stylesheet" href="/css/commons/topForm.css" />
     <link rel="stylesheet" href="/css/board/board_contents_write.css" />
-    <script src="js/commons/body_form/body_form_default.js"></script>
+    <script src="/js/commons/body_form/body_form_default.js" defer></script>
 </head>
 <body>
 	 <div class="top">TOP</div>
@@ -73,48 +73,8 @@
             </div>
         </div>
     </div>
+	<script src="/js/board/sideBar.js" defer></script>
+    <script src="/js/board/write_contents_board.js" defer></script>
 
-	<script>
-    	$(document).ready(function() {
-			$("#left_item").load("/board/sideBar");
-			
-			$("#summernote").summernote({
-	            width: 1500,
-	            height: null,
-	            minHeight: 380,
-	            maxHeight: null,
-	            focus: true,
-	            lang: "ko-KR",
-	            placeholder: '내용을 입력하세요 ( 1000 글자 이하 )',
-	            callbacks: {
-	                onImageUpload: function (files) {
-	                    let formData = new FormData();
-	                    for (let i = 0; i < files.length; i++) {
-	                        formData.append("fileList", files[i]);
-	                    }
-
-	                    $.ajax({
-	                        url: "/file/upload",
-	                        method: "post",
-	                        data: formData,
-	                        processData: false, // 인코딩 처리 금지 ( processData, contentType : false = multipart/form-data)
-	                        contentType: false, // 파일 타입 그대로 유지
-
-	                    }).done(function (resp) {
-	                        console.log(resp);
-	                        for (let i = 0; i < files.length; i++) {
-	                            let img = $("<img>");
-	                            img.attr("type", "file");
-	                            img.attr("src", resp[i]);
-	                            $("#summernote").summernote('insertNode', img[0]);
-	                        }
-
-	                    })
-
-	                }
-	            }
-	        });
-		});
-    </script>
 </body>
 </html>

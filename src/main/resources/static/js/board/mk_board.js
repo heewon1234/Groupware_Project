@@ -361,3 +361,95 @@ $(document).on("click",".authDelBtn",function(resp){
 	authority.splice(index,1);
 	$(this).parents(".auth_member").remove();
 });
+
+//말머리 추가
+$(".header_input_check").change(function(){
+	console.log($(this).val());
+	if($(this).val()=='true'){
+		$("#headerBox").css("display","block");
+	} else{
+		$("#headerBox").css("display","none");
+	}
+});
+
+$("#header_add_input").on("keydown",function(e){
+	if(e.key=='Enter'){return false;}
+})
+
+$("#header_add_btn").on("click",function(){
+	let text = $("#header_add_input").val().trim();
+	if(text==""){
+		alert("값을 입력해주세요");
+		$("#header_add_input").focus();
+		return false;
+	}
+	
+	for(let i=0;i<headerList.length;i++){
+		if(headerList[i]===text){
+			alert("말머리가 중복되었습니다");
+			$("#header_add_input").val("");
+			$("#header_add_input").focus();
+			return false;
+		}
+	}
+	
+	$("#header_add_input").val("");
+	headerList.push(text);
+	
+	let boxDiv = $("<div>");
+	boxDiv.addClass("header_list_box");
+	boxDiv.attr("data-index",headerList.length-1);
+	
+	let listDiv = $("<div>");
+	listDiv.addClass("header_list");
+	
+	let textDiv = $("<div>");
+	let span = $("<span>");
+	span.append("-&nbsp;");
+	textDiv.append(span);
+	textDiv.append(text);
+	
+	let imgDiv = $("<div>");
+	let img = $("<img>");
+	img.attr("src","/images/board/del.png");
+	img.addClass("header_del_btn");
+	imgDiv.append(img);
+	
+	listDiv.append(textDiv);
+	listDiv.append(imgDiv);
+	
+	boxDiv.append(listDiv);
+
+	$("#header_list_border").append(boxDiv);
+
+});
+
+$(document).on("click",".header_del_btn",function(){
+	let index = $(this).parents(".header_list_box").attr("data-index");
+	$(this).parents(".header_list_box").remove();
+	headerList.splice(index,1);
+	console.log(headerList);
+})
+
+//submit
+$("#frmBtn").on("click",function(){
+	
+	if($("#board_title_input").val()==""){
+		alert("게시판 이름을 입력하세요");
+		$("#board_title_input").focus();
+		return false;
+	}
+	
+	
+	let authorityList = authority.map(item=>{
+		delete item.name;
+		delete item.organization;
+		delete item.job_name;
+		delete item.position;
+		
+		return item;
+	})
+	$("#authorityList").val(JSON.stringify(authorityList));
+	$("#headerList").val(JSON.stringify(headerList));
+	$("#frm").submit();
+})
