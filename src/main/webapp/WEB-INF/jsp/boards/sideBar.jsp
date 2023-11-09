@@ -10,7 +10,7 @@
 <body>
             <!-- 최상단에 버튼만 있는 부분 -->
             <div class="button_tab">    
-                <button class="main_button">
+                <button class="main_button" id="toWriteContentsBoardBtn">
                     <span>작성하기</span>
                 </button>
             </div>
@@ -19,7 +19,7 @@
             <div class="menu_tab">
 
                 <!-- 일반 메뉴 -->
-                <div class="menu_item">
+                <div class="menu_item" id="toFavoriteBoardBtn">
                     <img src="/images/commons/body_form/left_item/default/favorites.png" />
                     <span class="menu_item_text">중요 게시물</span>
                 </div>
@@ -64,11 +64,11 @@
                 </div>
 
                 <!-- 일반 메뉴 -->
-                <div class="menu_item">
+                <div class="menu_item" id="toEditBoardBtn">
                     <img class="menu_item_img" src="/images/commons/body_form/left_item/default/plus.png" />
                     <span class="menu_item_text">게시판 만들기</span>
                 </div>
-                <div class="menu_item">
+                <div class="menu_item" id="toEditBoardBtn">
                     <img class="menu_item_img" src="/images/board/setting.png" />
                     <span class="menu_item_text">게시판 관리</span>
                 </div>
