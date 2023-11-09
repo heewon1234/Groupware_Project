@@ -43,14 +43,14 @@ document.addEventListener('mouseup', () => {
 function openchatMember() {
     $(".chatMember_container").css("display", "block");
     $(".allList").css("display", "none");
-    $(".chatRoom_container").css("display", "none");
+    //$(".chatRoom_container").css("display", "none");
     $(".chatGroupRoom_container").css("display", "none");
     $(".search_container").css("display", "none");
 }
 function openchatGmember() {
     $(".chatMember_container").css("display", "none");
     $(".allList").css("display", "block");
-    $(".chatRoom_container").css("display", "none");
+    //$(".chatRoom_container").css("display", "none");
     $(".chatGroupRoom_container").css("display", "none");
     $(".search_container").css("display", "none");
 }
@@ -60,7 +60,7 @@ function openchatGroupList() {
     $(".chatGroupRoom_container").css("display", "block");
     $(".allList").css("display", "none");
     $(".chatMember_container").css("display", "none");
-    $(".chatRoom_container").css("display", "none");
+    //$(".chatRoom_container").css("display", "none");
     $(".search_container").css("display", "none");
 }
 //검색차
