@@ -30,10 +30,6 @@ public class MembersService {
 		this.mdao.signup(dto);
 	}
 	
-	public String getOrganization(String id) {
-		return this.mdao.getOrganization(id);
-	}
-	
 	//
 	//
 	//

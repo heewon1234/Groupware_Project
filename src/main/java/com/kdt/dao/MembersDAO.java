@@ -27,10 +27,6 @@ public class MembersDAO {
 		db.insert("Members.signup", dto);
 	}
 	
-	public String getOrganization(String id) {
-		return db.selectOne("Members.getOrganization",id);
-	}
-	
 	//
 	//
 	//

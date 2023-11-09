@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-<title>Personal Calendar</title>
+<title>Calendar</title>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <link rel="stylesheet" type="text/css" href="/css/calendar/calendar.css">
 <link rel="stylesheet"
@@ -82,13 +82,6 @@
 	padding-left: 20px;
 	overflow: auto;
 }
-
-
-#personal {
-    background-color: #DAE8F8;
-    color: #056AC9;
-    font-weight: bold;
-}
 </style>
 
 
@@ -105,13 +98,13 @@
                 <!-- 일반 메뉴 -->
                 <div class="menu_item">
                     <img src="/images/commons/body_form/left_item/default/favorites.png" />
-                    <span class="menu_item_text" id="official">회사 캘린더</span>
+                    <span class="menu_item_text">중요 주소록</span>
                 </div>
 
                 <!-- 일반 메뉴 -->
                 <div class="menu_item">
                     <img class="menu_item_img" src="/images/commons/body_form/left_item/default/information.png" />
-                    <span class="menu_item_text" id="personal">개인 캘린더</span>
+                    <span class="menu_item_text">일반 메뉴</span>
                 </div>
             </div>
         </div>
@@ -135,7 +128,7 @@
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<form action="/calendar/pcreate" method="post">
+				<form action="/calendar/create" method="post">
 					<div class="modal-body">
 						<div class="form-group">
 							<label for="taskId" class="col-form-label">일정 내용</label> <input
@@ -238,7 +231,7 @@
                     
                     $(function deleteData(){
                         $.ajax({
-                            url: "/calendar/pdelete",
+                            url: "/calendar/delete",
                             method: "POST",
                             data: {
                             	seq:seq
@@ -261,7 +254,7 @@
 
                 $(function deleteData() {
                     $.ajax({
-                        url: "/calendar/pupdate",
+                        url: "/calendar/update",
                         method: "POST",
                         data: {
                         	seq:seq,
@@ -304,15 +297,7 @@
 	});
 	
 	$(document).ready(function() {
-		$("#top_container").load("/commons/topForm");
-		
-		$('#official').click(function() {
-			location.href = "/calendar/official";
-		});
-		
-		$('#personal').click(function() {
-			location.href = "/calendar/personal";
-		});
+		$("#top_container").load("/commons/topForm")
 	});
 	
 	
