@@ -20,12 +20,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.kdt.dto.ChatMessageDTO;
+import com.kdt.dto.GroupChatDTO;
 import com.kdt.services.ChatMessageService;
+import com.kdt.services.ChatRoomService;
 
 @Controller
 public class ChatStompController {
 	@Autowired
 	private ChatMessageService chatMessageService;
+	@Autowired
+	private ChatRoomService ChatRoomService;
 
 	@Autowired
 	private Gson gson;
@@ -37,7 +41,7 @@ public class ChatStompController {
 	}
 
 	@MessageMapping("/oneToOne/sendMessage/{oneSeq}")
-	@SendTo("/topic/oneToOne/{oneSeq}")
+	@SendTo("/topic/oneToOne/{oneSeq}")//roomID이거 다시 봐야할 듯
 	public int oneToOne_insert(@Payload String message, @DestinationVariable String oneSeq) throws Exception {
 	    System.out.println(message);
 		ChatMessageDTO dto = gson.fromJson(message, new TypeToken<ChatMessageDTO>() {}.getType());
@@ -55,11 +59,31 @@ public class ChatStompController {
 
 
 
+//	@MessageMapping("/group/sendMessage")
+//	@SendTo("/topic/group/{groupId}")
+//	public int group_insert(ChatMessageDTO group_dto) throws Exception {
+//		return chatMessageService.insert(group_dto);
+//	}
 	@MessageMapping("/group/sendMessage")
 	@SendTo("/topic/group/{groupId}")
-	public int group_insert(ChatMessageDTO group_dto) throws Exception {
-		return chatMessageService.insert(group_dto);
+	public void group_insert(@Payload String roomInfo) throws Exception {
+		GroupChatDTO group_dto = gson.fromJson(roomInfo, new TypeToken<GroupChatDTO>() {}.getType());
+		System.out.println(group_dto);
+		ChatRoomService.createGroupChat(group_dto);
 	}
+//	   @MessageMapping("/group/sendMessage")
+//	   @SendTo("/topic/group/{groupId}")
+//	   public void group_insert(@Payload String roomInfo) throws Exception {
+//	       // JSON 파싱
+//	       JsonObject jsonObject = JsonParser.parseString(roomInfo).getAsJsonObject();
+//	       String groupName = jsonObject.get("groupName").getAsString();
+//	       String memberName = jsonObject.get("memberName").getAsString();
+//	       ChatRoomService.createGroupChat(groupName)
+//	       System.out.println("groupName: " + groupName);
+//	       System.out.println("memberName: " + memberName);
+//
+//	       // 이제 groupName 및 memberName을 각각 사용하여 원하는 작업을 수행할 수 있습니다.
+//	   }
 
 	@RequestMapping(value = "/chat/selectByType", method = RequestMethod.GET)
 	public List<ChatMessageDTO> selectChat(@RequestParam("type") String type, @RequestParam("MessageSeq") int MessageSeq) {
