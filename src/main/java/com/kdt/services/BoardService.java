@@ -39,7 +39,7 @@ public class BoardService {
 	@Transactional
 	public void Mk_boardInsert(Mk_BoardDTO dto, String headerList, String authorityList) {
 		bdao.Mk_boardInsert(dto);
-		String sys_board_title = "board_"+dto.getSeq();
+		String sys_board_title = "Board_"+dto.getSeq();
 		
 		String sql = "create table "+sys_board_title+"(\r\n"
 				+ "	seq int auto_increment primary key,\r\n"
@@ -67,6 +67,9 @@ public class BoardService {
 	//
 	
 	// MemberService로 가시오
+	public List<MembersDTO> selectAllMembers(){
+		return bdao.selectAllMembers();
+	}
 	public List<String> selectAllOrganization(){
 		return bdao.selectAllOrganization();
 	}
@@ -91,6 +94,12 @@ public class BoardService {
 	
 	public MembersDTO selectMemberByName(MembersDTO dto){
 		return bdao.selectMemberByName(dto);
+	}
+	//
+	
+	// 게시글 등록 관련
+	public List<String> selectAuthBoard(String id){
+		return bdao.selectAuthBoard(id);
 	}
 	//
 	

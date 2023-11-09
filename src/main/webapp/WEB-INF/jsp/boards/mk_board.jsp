@@ -69,8 +69,8 @@
                 <div class="board_type">
                     <div class="board_type_text">게시판 종류</div>
                     <div class="board_type_select">
-                        <div><input type="radio" name="board_type" value="all" checked> 전사 게시판 - 조직에 속한 모든 사람과 공유 ( 조직없음 제외 )</div>
-                        <div><input type="radio" name="board_type" value="group"> 그룹 게시판 - 소유자 및 관리자가 지정한 사람과 공유</div>
+                        <div><input type="radio" name="board_type" value="all"> 전사 게시판 - 조직에 속한 모든 사람과 공유 ( 조직없음 제외 )</div>
+                        <div><input type="radio" name="board_type" value="group" checked> 그룹 게시판 - 소유자 및 관리자가 지정한 사람과 공유</div>
                     </div>
                 </div>
                 <div class="name_type">

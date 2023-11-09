@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,14 +26,15 @@
                     <div class="board_title_box">
                         <div class="board_title_text">게시판</div>
                         <div>
-                            <select>
+                            <select name="board_title" id="board_title">
                                 <option selected>게시판선택</option>
-                                <option>자유게시판</option>
-                                <option>사내게시판</option>
+                                <c:forEach items="${boardList }" var="i">
+                                	<option>${i }</option>
+                                </c:forEach>
                             </select>
                         </div>
                         <div>
-                            <select>
+                            <select >
                                 <option selected>말머리 선택</option>
                                 <option>[중요]</option>
                             </select>

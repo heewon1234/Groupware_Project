@@ -2,9 +2,7 @@ let authority = [];
 let headerList = [];
 let tempAuthority = [];
 
-$("#member_add_complete").on("click",function(){
-	tempAuthority = authority;
-	$(".modal").css("display","none");
+let add_authority_member_list = () => {
 	$("#authority_member_list").empty();
 	
 	for(let i=0;i<authority.length;i++){
@@ -19,6 +17,7 @@ $("#member_add_complete").on("click",function(){
 		let inputDiv = $("<div>");
 		let input = $("<input>");
 		input.attr("type","checkbox");
+		input.addClass("auth_write");
 		inputDiv.append(input);
 		inputDiv.append("&nbsp;"+"쓰기");
 		
@@ -34,45 +33,20 @@ $("#member_add_complete").on("click",function(){
 		
 		$("#authority_member_list").append(authDiv);	
 	}
+}
+
+$("#member_add_complete").on("click",function(){
+	tempAuthority = authority;
+	$(".modal").css("display","none");
 	
-	
-	
-	
+	add_authority_member_list();
 })
 
 $("#member_add_cancel").on("click",function(){
 	authority = tempAuthority;
 	$(".modal").css("display","none");
 	
-	$("#authority_member_list").empty();
-	
-	for(let i=0;i<authority.length;i++){
-		let authDiv = $("<div>");
-		authDiv.addClass("auth_member"); 
-		authDiv.attr("data-index",i);
-		let NameDiv = $("<div>");
-		NameDiv.html(authority[i].name);
-		
-		let div = $("<div>");
-		
-		let inputDiv = $("<div>");
-		let input = $("<input>");
-		input.attr("type","checkbox");
-		inputDiv.append(input);
-		inputDiv.append("&nbps;쓰기");
-		
-		let delDiv = $("<div>");
-		delDiv.append("x");
-		delDiv.addClass("authDelBtn");
-		div.append(inputDiv);
-		div.append(delDiv);
-		
-		authDiv.append(NameDiv);
-		authDiv.append(div);
-		
-		$("#authority_member_list").append(authDiv);	
-	}
-	
+	add_authority_member_list();
 })
 
 $(".authority_member_add_btn").on("click",function(){
@@ -184,6 +158,20 @@ $(document).on("click",".add_member_btn",function(){
 
 // input check 이벤트
 
+let add_auth_member_list = () => {
+	$("#auth_member_list").empty();
+	for(let i=0;i<authority.length;i++){
+		let div = $("<div>");
+		let spanName = $("<span>");
+		spanName.append(authority[i].name);
+		let spanDel = $("<span>");
+		spanDel.append("&times;");
+		div.append(spanName);
+		div.append(spanDel);
+		$("#auth_member_list").append(div);
+	}
+}
+
 $(document).on("change",".organization_check",function(){
 	let organization = $(this).parent("div").text().trim();
 	authority = authority.filter(item => item.organization !== organization);
@@ -196,17 +184,7 @@ $(document).on("change",".organization_check",function(){
 				authority.push({"id":resp[i].id,"name":resp[i].name,"authority":"읽기","organization":resp[i].organization,"job_name":resp[i].job_name,"position":resp[i].position});
 			}
 			
-			$("#auth_member_list").empty();
-			for(let i=0;i<authority.length;i++){
-				let div = $("<div>");
-				let spanName = $("<span>");
-				spanName.append(authority[i].name);
-				let spanDel = $("<span>");
-				spanDel.append("&times;");
-				div.append(spanName);
-				div.append(spanDel);
-				$("#auth_member_list").append(div);
-			}
+			add_auth_member_list();
 		})
 		
 		let inputCheck = $(this).parent("div").next(".member_dept_detail_box");
@@ -216,17 +194,7 @@ $(document).on("change",".organization_check",function(){
 		let inputCheck = $(this).parent("div").next(".member_dept_detail_box");
 		inputCheck.find("input[type='checkbox']").prop("checked",false);
 		
-		$("#auth_member_list").empty();
-		for(let i=0;i<authority.length;i++){
-			let div = $("<div>");
-			let spanName = $("<span>");
-			spanName.append(authority[i].name);
-			let spanDel = $("<span>");
-			spanDel.append("&times;");
-			div.append(spanName);
-			div.append(spanDel);
-			$("#auth_member_list").append(div);
-		}
+		add_auth_member_list();
 	}
 	
 })
@@ -254,17 +222,7 @@ $(document).on("change",".jobName_check",function(){
 				authority.push({"id":resp[i].id,"name":resp[i].name,"authority":"읽기","organization":resp[i].organization,"job_name":resp[i].job_name,"position":resp[i].position});
 			}
 			
-			$("#auth_member_list").empty();
-			for(let i=0;i<authority.length;i++){
-				let div = $("<div>");
-				let spanName = $("<span>");
-				spanName.append(authority[i].name);
-				let spanDel = $("<span>");
-				spanDel.append("&times;");
-				div.append(spanName);
-				div.append(spanDel);
-				$("#auth_member_list").append(div);
-			}
+			add_auth_member_list();
 		})
 		let inputCheck = $(this).parent("div").next(".member_datail_box");
 		console.log(inputCheck);
@@ -274,22 +232,13 @@ $(document).on("change",".jobName_check",function(){
 		let inputCheck = $(this).parent("div").next(".member_datail_box");
 		inputCheck.find("input[type='checkbox']").prop("checked",false);
 		
-		$("#auth_member_list").empty();
-		for(let i=0;i<authority.length;i++){
-			let div = $("<div>");
-			let spanName = $("<span>");
-			spanName.append(authority[i].name);
-			let spanDel = $("<span>");
-			spanDel.append("&times;");
-			div.append(spanName);
-			div.append(spanDel);
-			$("#auth_member_list").append(div);
-		}
+		add_auth_member_list();
 		parents.find("input[type='checkbox']").prop("checked",false);
 	}
 	
 	
 });
+
 
 $(document).on("change",".name_check",function(){
 	let parents = $(this).parents(".member_datail_box").prev("div");
@@ -314,33 +263,13 @@ $(document).on("change",".name_check",function(){
 		}).done(function(resp){
 			authority.push({"id":resp.id,"name":resp.name,"authority":"읽기","organization":resp.organization,"job_name":resp.job_name,"position":resp.position});
 			
-			$("#auth_member_list").empty();
-			for(let i=0;i<authority.length;i++){
-				let div = $("<div>");
-				let spanName = $("<span>");
-				spanName.append(authority[i].name);
-				let spanDel = $("<span>");
-				spanDel.append("&times;");
-				div.append(spanName);
-				div.append(spanDel);
-				$("#auth_member_list").append(div);
-			}
+			add_auth_member_list();
 		})
 	} else{
 		
 		console.log(parents.text().trim());
 		authority = authority.filter(item=>item.job_name!==job_name && item.authority !== authority && item.name !== name);
-		$("#auth_member_list").empty();
-		for(let i=0;i<authority.length;i++){
-			let div = $("<div>");
-			let spanName = $("<span>");
-			spanName.append(authority[i].name);
-			let spanDel = $("<span>");
-			spanDel.append("&times;");
-			div.append(spanName);
-			div.append(spanDel);
-			$("#auth_member_list").append(div);
-		}
+		add_auth_member_list();
 		parents.find("input[type='checkbox']").prop("checked",false);
 	
 	}
@@ -452,4 +381,31 @@ $("#frmBtn").on("click",function(){
 	$("#authorityList").val(JSON.stringify(authorityList));
 	$("#headerList").val(JSON.stringify(headerList));
 	$("#frm").submit();
-})
+});
+
+
+
+$("input[name='board_type']").change(function(){
+	if($(this).val()=="all"){
+		$.ajax({
+			url:"/board/selectAllMembers"
+		}).done(function(resp){
+			authority = [];
+			for(let i=0;i<resp.length;i++){
+				authority.push({"id":resp[i].id,"name":resp[i].name,"authority":"읽기","organization":resp[i].organization,"job_name":resp[i].job_name,"position":resp[i].position});
+			}
+			add_authority_member_list();
+		})
+	} else {
+		authority = tempAuthority;
+		add_authority_member_list();
+	}
+});
+
+$(document).on("change",".auth_write",function(){
+	alert("test");
+	let index = $(this).parents(".auth_member").attr("data-index");
+	authority[index].authority = "쓰기";
+	console.log(authority);
+});
+

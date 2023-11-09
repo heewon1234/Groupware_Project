@@ -10,44 +10,47 @@
 	</select>
 	
 	<!-- member-mapper로 옮겨라 -->
+	<select id="selectAllMembers" resultType="com.kdt.dto.MembersDTO">
+		select * from Members;
+	</select>
 	<select id="selectAllOrganization" resultType="String">
-		select organization from members group by organization
+		select organization from Members group by organization
 	</select>
 	<select id="selectByOrganization" resultType="String">
-		select JOB_NAME from (select * from members where organization=#{organization}) as job group by job_name
+		select JOB_NAME from (select * from Members where organization=#{organization}) as job group by job_name
 	</select>
 	<select id="selectByJobName" resultType="String">
-		select name from members where job_name=#{job_name};
+		select name from Members where job_name=#{job_name};
 	</select>
 	<select id="selectMemberByOrganization" resultType="com.kdt.dto.MembersDTO">
-		select * from members where organization=#{organization}
+		select * from Members where organization=#{organization}
 	</select>
 	<select id="selectMemberByOrganizationAndJobName" resultType="com.kdt.dto.MembersDTO">
-		select * from members where organization=#{organization} and job_name=#{job_name}
+		select * from Members where organization=#{organization} and job_name=#{job_name}
 	</select>
 	<select id="selectMemberByName" resultType="com.kdt.dto.MembersDTO">
-		select * from members where organization=#{organization} and job_name=#{job_name} and name=#{name}
+		select * from Members where organization=#{organization} and job_name=#{job_name} and name=#{name}
 	</select>
 	<!-- 옮겨라 -->
 	
 	<!-- 게시판 생성 관련 -->
 	<insert id="Mk_boardInsert" useGeneratedKeys="true" keyProperty="seq">
-		insert into mk_board values (null, #{id}, #{board_title}, #{board_type}, #{name_type}, #{use_header}, default)
+		insert into Mk_Board values (null, #{id}, #{board_title}, #{board_type}, #{name_type}, #{use_header}, default)
 	</insert>
 	<insert id="createTable">
 		${sql}
 	</insert>
 	<insert id="authorityInsert">
-		insert into authority values (null,#{id},#{sys_board_title},#{ori_board_title},#{authority})
+		insert into Authority values (null,#{id},#{sys_board_title},#{ori_board_title},#{authority})
 	</insert>
 	<insert id="headerInsert">
-		insert into header values (null,#{board_title},#{header})
+		insert into Header values (null,#{board_title},#{header})
 	</insert>
 	<!-- 게시판 생성 관련 -->
 	
 	<!-- 게시글 등록 관련 -->
 	<select id="selectAuthBoard" resultType="String">
-		select sys_board_title from authority where id=#{id} and authority="쓰기" 
+		select sys_board_title from Authority where id=#{id} and authority="쓰기" 
 	</select>
 	<!-- 게시글 등록 관련 -->
 </mapper>

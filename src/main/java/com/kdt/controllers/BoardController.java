@@ -12,12 +12,17 @@ import com.kdt.dto.MembersDTO;
 import com.kdt.dto.Mk_BoardDTO;
 import com.kdt.services.BoardService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/board/")
 public class BoardController {
 	
 	@Autowired
 	BoardService bservice;
+	
+	@Autowired
+	HttpSession session;
 	
 	@RequestMapping("sideBar")
 	public String sideBar(Model model) {
@@ -33,6 +38,7 @@ public class BoardController {
 		return "boards/favorite_board";
 	}
 	
+	// 게시판 생성 관련
 	@RequestMapping("toMk_board")
 	public String toMk_board(Model model){
 		List<String> organizationList = bservice.selectAllOrganization(); // member service로 바꿀 예정		
@@ -45,8 +51,15 @@ public class BoardController {
 		bservice.Mk_boardInsert(dto, headerList, authorityList);
 		return "redirect:/board/toFavoriteBoard";
 	}
+	//
 	
 	// MemberController로 옮겨라
+	@ResponseBody
+	@RequestMapping("selectAllMembers")
+	public List<MembersDTO> selectAllMembers(){
+		return bservice.selectAllMembers();
+	}
+	
 	@ResponseBody
 	@RequestMapping("selectByOrganization")
 	public List<String> selectByOrganization(String organization){
@@ -77,9 +90,19 @@ public class BoardController {
 	public MembersDTO selectMemberByName(MembersDTO dto){
 		return bservice.selectMemberByName(dto);
 	}
-	
-	
 	////////////////
+	
+	// 게시글 등록 관련
+	@RequestMapping("toWriteContentsBoard")
+	public String toWriteContentsBoard(Model model) {
+		//String id = (String)session.getAttribute("loginID");
+		String id = "test1";
+		List<String> boardList = bservice.selectAuthBoard(id);
+		model.addAttribute("boardList",boardList);
+		System.out.println(boardList.size());
+		return "boards/write_contents_board";
+	}
+	//
 	
 	@RequestMapping("toEditBoard")
 	public String toEditBoard() {
@@ -90,8 +113,5 @@ public class BoardController {
 	public String toContentsBoard() {
 		return "boards/contents_board";
 	}
-	@RequestMapping("toWriteContentsBoard")
-	public String toWriteContentsBoard() {
-		return "boards/write_contents_board";
-	}
+	
 }

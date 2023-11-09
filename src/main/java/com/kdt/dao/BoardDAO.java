@@ -27,6 +27,10 @@ public class BoardDAO {
 	}
 	
 	// memberdao로 옮겨라
+	public List<MembersDTO> selectAllMembers(){
+		return db.selectList("Board.selectAllMembers");
+	}
+	
 	public List<String> selectAllOrganization(){
 		return db.selectList("Board.selectAllOrganization");
 	}
@@ -72,5 +76,11 @@ public class BoardDAO {
 		return db.insert("Board.headerInsert",dto);
 	}
 	//
-
+	
+	// 게시글 등록 관련
+	public List<String> selectAuthBoard(String id){
+		return db.selectList("Board.selectAuthBoard",id);
+	}
+	//
+	
 }
