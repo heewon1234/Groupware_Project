@@ -190,6 +190,7 @@ $(document).on("change",".jobName_check",function(){
 		console.log(inputCheck);
 		inputCheck.find("input[type='checkbox']").prop("checked",true);
 	} else{
+		let parents = $(this).parents(".member_dept_detail_box").prev("div");
 		authority = authority.filter(item=>item.job_name!==job_name && item.authority !== authority);
 		let inputCheck = $(this).parent("div").next(".member_datail_box");
 		inputCheck.find("input[type='checkbox']").prop("checked",false);
@@ -205,6 +206,7 @@ $(document).on("change",".jobName_check",function(){
 			div.append(spanDel);
 			$("#auth_member_list").append(div);
 		}
+		parents.find("input[type='checkbox']").prop("checked",false);
 	}
 	
 	
