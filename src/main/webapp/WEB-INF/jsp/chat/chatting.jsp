@@ -13,6 +13,40 @@
 <link rel="stylesheet" type="text/css" href="/css/chat/chatList.css">
 <script src="/webjars/sockjs-client/1.1.2/sockjs.min.js"></script>
 <script src="/webjars/stomp-websocket/2.3.3-1/stomp.min.js"></script>
+<style>
+#groupUserModal{
+display: none;
+}
+        /* Define your modal styles here */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+        }
+        .close {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            cursor: pointer;
+        }
+            .selected {
+        background-color: lightblue;
+        cursor: pointer;
+    }
+</style>
 </head>
 <body>
 
@@ -91,7 +125,7 @@
 						<div class="search_add">
 							<img id="searchBtn" alt="" src="/images/chats/search.svg"
 								onclick="showSearchContainer()"> <img id="plusButton"
-								alt="" src="/images/chats/plus.svg" onclick="showAlert()">
+								alt="" src="/images/chats/plus.svg">
 						</div>
 
 					</div>
@@ -109,10 +143,97 @@
 				</div>
 			</div>
 		</div>
+		    <!-- 그룹 선택 모달 창 -->
+    <div id="groupUserModal" class="modal">
+    <div class="modal-content" style="width: 300px; height: 500px;">
+        <span class="close" id="groupModalClose">&times;</span>
+        <h2>사용자 선택</h2>
+        <ul id="groupUserList">
+            <!-- User list will be dynamically added here -->
+        </ul>
+        <button id="selectUsersButton">선택 완료</button> <!-- 선택 완료 버튼 추가 -->
+    </div>
+</div>
+
 	</div>
 	<script src="/js/chat/chatting.js" type="text/javascript"></script>
 	<script src="/js/chat/inputText.js" type="text/javascript"></script>
 	<script>
+	//그룹 채팅방 만들기
+	   // 모달 열기
+	<!-- 모달 열기 -->
+	function openGroupModal() {
+	    $("#groupUserModal").css("display", "block");
+	}
+
+	<!-- 모달 닫기 */
+	function closeGroupModal() {
+	    $("#groupUserModal").css("display", "none");
+	}
+
+	var pendingRoomName = null; // 방 이름을 일시적으로 저장할 변수
+	var selectedUsers = []; // 선택한 사용자를 저장할 배열
+
+	<!-- plusButton 클릭 이벤트 처리 -->
+	$("#plusButton").on("click", function() {
+	    pendingRoomName = prompt("방 이름을 입력하세요");
+	    if (pendingRoomName) {
+	        openGroupModal();
+	    }
+	});
+
+	<!-- groupModalClose 클릭 이벤트 처리 -->
+	$("#groupModalClose").on("click", closeGroupModal);
+
+	<!-- 예제로 사용자와 체크박스를 모달에 추가 */
+	$("#groupUserList").append('<li><input type="checkbox" id="user1"> GroupUser1</li>');
+	$("#groupUserList").append('<li><input type="checkbox" id="user2"> GroupUser2</li>');
+	$("#groupUserList").append('<li><input type="checkbox" id="user3"> GroupUser3</li');
+
+	<!-- 사용자 선택 및 로직 처리 */
+	$("#groupUserList").on("change", "input[type=checkbox]", function() {
+	    var userId = $(this).attr("id");
+	    if ($(this).is(":checked")) {
+	        selectedUsers.push(userId);
+	        $(this).parent().addClass("selected");
+	    } else {
+	        var index = selectedUsers.indexOf(userId);
+	        if (index !== -1) {
+	            selectedUsers.splice(index, 1);
+	        }
+	        $(this).parent().removeClass("selected");
+	    }
+	});
+
+	<!-- 선택한 사용자를 처리할 함수 */
+	function handleSelectedUsers() {
+	    if (selectedUsers.length === 0) {
+	        alert("사용자를 선택하세요.");
+	        return;
+	    }
+	    if (!pendingRoomName) {
+	        alert("방 이름을 입력하세요.");
+	        return;
+	    }
+
+	    for (var i = 0; i < selectedUsers.length; i++) {
+	        var roomInfo = {
+	        	groupName: pendingRoomName,
+	        	memberName: selectedUsers[i]
+	        };
+	        stompClient.send("/app/group/sendMessage", {}, JSON.stringify(roomInfo));
+	    }
+	    clearSelectedCheckboxes();
+	    closeGroupModal();
+	}
+	function clearSelectedCheckboxes() {
+	    selectedUsers = []; // Clear the selected users array
+	    $("#groupUserList input[type=checkbox]").prop("checked", false); // Uncheck all checkboxes
+	    $("#groupUserList li").removeClass("selected"); // Remove the "selected" class
+	}
+	<!-- "선택 완료" 버튼 클릭 시 선택한 사용자 처리 */
+	$("#selectUsersButton").on("click", handleSelectedUsers);
+	//----------------------------
 	function keepScrollBottom() {
         let contents = document.getElementsByClassName("chatForm")[0];
         contents.scrollTop = contents.scrollHeight;
@@ -462,7 +583,7 @@
 									messageType : messageType,
 									userID : userID,
 									message : message,
-									roomID : oneSeq
+									oneSeq : oneSeq//이거 roomID를 바꿨음 테스트 확인바람
 								}));
 
 						// 입력 필드 비우기
@@ -471,23 +592,7 @@
 				});
 		
 
-		//그룹 채팅방 만들기
-		$(document).on(
-				"click",
-				"#plusButton",
-				function() {
-					var roomName = prompt("방 이름을 입력하세요");
-					if (roomName) {
-						// 사용자로부터 방 이름을 입력받고, ChatRoom 객체를 만듭니다.
-						var chatRoom = {
-							name : roomName
-						};
 
-						// 서버로 ChatRoom 객체를 보냅니다.
-						stompClient.send("/app/createRoom", {}, JSON
-								.stringify(chatRoom));
-					}
-				});
 	</script>
 
 

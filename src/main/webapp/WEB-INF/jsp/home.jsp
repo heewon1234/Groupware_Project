@@ -22,7 +22,7 @@
 					<div class="title">게시판</div>
 				</div>
 				<div>
-					<a href="/calendar/personal">
+					<a href="/calendar/official">
 					<div class="main_icon_box">
 						<i class="fa-regular fa-calendar-days"></i>
 					</div>
