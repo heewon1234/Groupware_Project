@@ -5,9 +5,9 @@
 <mapper namespace="groupChat">
 
 	<insert id="createGroupChat">
-		insert into GroupChat (groupName,memberName)
+		insert into GroupChat (groupSeq,groupName,memberName)
 		values
-		(#{groupName},#{memberName})
+		(#{groupSeq},#{groupName},#{memberName})
 	</insert>
 
 	<select id="selectBy"
@@ -15,8 +15,10 @@
 		SELECT * FROM messages where type = #{type} and
 		MessageSeq=#{MessageSeq}
 	</select>
+	
+	<!-- 방이름 불러오는 코드 -->
 	<select id="groupSelectAll"
 		resultType="com.kdt.dto.GroupChatDTO">
-		SELECT * FROM 
+		select distinct groupName,groupSeq from GroupChat;
 	</select>
 </mapper>
