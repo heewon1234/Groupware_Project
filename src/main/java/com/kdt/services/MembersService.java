@@ -34,9 +34,6 @@ public class MembersService {
 		return this.mdao.getOrganization(id);
 	}
 	
-	//
-	//
-	//
 	public List<MembersDTO> selectAll() {
 		return mdao.selectAll();
 	}
@@ -92,5 +89,9 @@ public class MembersService {
 	
 	public List<String> selectWorkForm() {
 		return mdao.selectWorkForm();
+	}
+	
+	public List<MembersDTO> selectApprovalMembers(String position) {
+		return mdao.selectApprovalMembers(position);
 	}
 }

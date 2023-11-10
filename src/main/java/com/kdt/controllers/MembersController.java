@@ -40,6 +40,10 @@ public class MembersController {
 		        // 세션에 이름과 부서 정보 저장
 		        session.setAttribute("name", name);
 		        session.setAttribute("position", position);
+		        
+		        // 이름과 부서 따로 저장하지 말고
+		        // 이걸로 쓰면 편할거 같아요
+		        session.setAttribute("userDTO", userDTO);
 
 		    }
 			return "home";
