@@ -66,7 +66,7 @@ $(".add_dept_btn").on("click",function(){
 		let orgDiv = $(this).parent("div");
 		$(this).attr("src","/images/board/del.png");
 		$.ajax({
-			url:"/board/selectByOrganization",
+			url:"/mk_board/selectByOrganization",
 			data:{"organization":organization}
 		}).done(function(resp){
 			let completeDiv = $("<div>");
@@ -120,7 +120,7 @@ $(document).on("click",".add_member_btn",function(){
 		let completeDiv = $("<div>");
 		completeDiv.addClass("member_datail_box");
 		$.ajax({
-			url:"/board/selectByJobName",
+			url:"/mk_board/selectByJobName",
 			data:{"job_name":job_name}
 		}).done(function(resp){
 			for(let i=0;i<resp.length;i++){
@@ -177,7 +177,7 @@ $(document).on("change",".organization_check",function(){
 	authority = authority.filter(item => item.organization !== organization);
 	if($(this).prop('checked')){		
 		$.ajax({
-			url:"/board/selectMemberByOrganization",
+			url:"/mk_board/selectMemberByOrganization",
 			data:{"organization":organization}
 		}).done(function(resp){
 			for(let i=0;i<resp.length;i++){
@@ -215,7 +215,7 @@ $(document).on("change",".jobName_check",function(){
 	
 	if($(this).prop('checked')){
 		$.ajax({
-			url:"/board/selectMemberByOrganizationAndJobName",
+			url:"/mk_board/selectMemberByOrganizationAndJobName",
 			data:{"job_name":job_name,"organization":organization}
 		}).done(function(resp){
 			for(let i=0;i<resp.length;i++){
@@ -258,7 +258,7 @@ $(document).on("change",".name_check",function(){
 	let organization = $(this).parents(".member_dept_detail_box").prev("div").text().trim();
 	if($(this).prop("checked")){
 		$.ajax({
-			url:"/board/selectMemberByName",
+			url:"/mk_board/selectMemberByName",
 			data:{"organization":organization,"job_name":job_name,"name":name}
 		}).done(function(resp){
 			authority.push({"id":resp.id,"name":resp.name,"authority":"읽기","organization":resp.organization,"job_name":resp.job_name,"position":resp.position});
@@ -388,7 +388,7 @@ $("#frmBtn").on("click",function(){
 $("input[name='board_type']").change(function(){
 	if($(this).val()=="all"){
 		$.ajax({
-			url:"/board/selectAllMembers"
+			url:"/mk_board/selectAllMembers"
 		}).done(function(resp){
 			authority = [];
 			for(let i=0;i<resp.length;i++){
@@ -403,7 +403,6 @@ $("input[name='board_type']").change(function(){
 });
 
 $(document).on("change",".auth_write",function(){
-	alert("test");
 	let index = $(this).parents(".auth_member").attr("data-index");
 	authority[index].authority = "쓰기";
 	console.log(authority);

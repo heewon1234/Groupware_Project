@@ -38,3 +38,125 @@ $(document).ready(function() {
 		}
 	});
 });
+
+$("#board_title").change(function(){
+	$("#header").empty();
+	
+	if($(this).val()=="게시판선택"){
+		$("#header").prop("disabled",true);
+		return false;
+	}
+	
+	$("#header").prop("disabled",false);
+	
+	let selectOption = $("<option>");
+	selectOption.prop("selected",true);
+	selectOption.append("말머리 없음");
+	$("#header").append(selectOption);
+	
+	$.ajax({
+		url:"/board/selectHeader",
+		data:{"board_title":$(this).val()}
+	}).done(function(resp){
+		
+		for(let i=0;i<resp.length;i++){
+			let option = $("<option>");
+			option.append(resp[i]);
+			$("#header").append(option);
+		}
+	})
+});
+
+$("#fileAddBtn").on("click",function(){
+	if($("input[type=file]").length>5){ // length는 0부터 시작함
+		alert("파일 추가는 5개가 최대입니다");
+  	  return;
+	}
+
+    let div = $("<div>");
+	let inputFile=$("<input>")
+    inputFile.attr("type","file");
+	inputFile.attr("name","fileList");
+    let anker = $("<a>");
+   	anker.html("X");
+    anker.attr("href","#");
+         	
+    anker.on("click",function(){
+    	div.remove();
+    })
+    div.prepend(inputFile);
+    div.append(anker);
+    $("#file_box_input_file").append(div);
+});
+
+$("input[name='useServey']").change(function(){
+	if($(this).val()==='true'){
+		$("#surveyBox").css("display","block");
+	}else{
+		$("#surveyBox").css("display","none");
+	}
+	
+})
+
+$(document).on("click",".add_item_btn",function(){
+	if($("input[name='items']").length>4){ 
+		alert("항목 추가는 5개가 최대입니다");
+  	  	return false;
+	}
+	
+	let surveyContents = $("<div>");
+	surveyContents.addClass("surveyContents");
+	
+	let surveyText = $("<div>");
+	surveyText.addClass("surveyText");
+	surveyText.html("항목");
+	
+	let surveyInputBox = $("<div>");
+	let itemInput = $("<input>");
+	itemInput.attr("placeholder","항목을 입력해주세요");
+	itemInput.attr("name","items");
+	itemInput.attr("type","text");
+	surveyInputBox.append(itemInput);
+	
+	let imgDiv = $("<div>");
+	let img = $("<img>");
+	img.attr("src","/images/commons/body_form/left_item/default/plus.png");
+	img.addClass("add_item_btn");
+	imgDiv.append(img);
+	
+	surveyContents.append(surveyText);
+	surveyContents.append(surveyInputBox);
+	surveyContents.append(imgDiv);
+	
+	$("#surveyBox").append(surveyContents);
+});
+
+$("input[name='notice']").change(function(){
+	if($(this).prop("checked")){
+		$(this).val("true");
+	} else{
+		$(this).val("false");
+	}
+});
+
+$("#frmBtn").on("click",function(){
+	if($("#board_title").val()=="게시판선택"){
+		alert("게시판을 선택해주세요");
+		return false;
+	}
+
+	if($("input[name='title']").val()==""){
+		alert("제목을 입력해주세요");
+		$("input[name='title']").focus();
+		return false;
+	}
+	
+	if($("#summernote").val()==""){
+		alert("내용을 입력해주세요");
+		return false;
+	}
+	
+	if($("header").val()=="말머리 없음"){
+		$("header").val("");
+	}
+})

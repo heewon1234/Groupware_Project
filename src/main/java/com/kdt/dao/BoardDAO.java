@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kdt.dto.AuthorityDTO;
+import com.kdt.dto.BoardDTO;
 import com.kdt.dto.HeaderDTO;
 import com.kdt.dto.MembersDTO;
 import com.kdt.dto.Mk_BoardDTO;
@@ -18,13 +19,7 @@ public class BoardDAO {
 	@Autowired
 	private SqlSession db;
 
-	public List<Mk_BoardDTO> select_board_type_group(){
-		return db.selectList("Board.select_board_type_group");
-	}
 	
-	public List<Mk_BoardDTO> select_board_type_all(){
-		return db.selectList("Board.select_board_type_all");
-	}
 	
 	// memberdao로 옮겨라
 	public List<MembersDTO> selectAllMembers(){
@@ -59,27 +54,16 @@ public class BoardDAO {
 		return list;
 	}
 	//
-	
-	//게시판 생성 관련
-	public int Mk_boardInsert(Mk_BoardDTO dto) {
-		dto.setId("test1");
-		return db.insert("Board.Mk_boardInsert",dto);
-	}
-	public int createTable(String sql) {
-		return db.insert("Board.createTable",sql);
-	}
-	public int authorityInsert(AuthorityDTO dto) {
-		return db.insert("Board.authorityInsert",dto);
-	}
-	
-	public int headerInsert(HeaderDTO dto) {
-		return db.insert("Board.headerInsert",dto);
-	}
-	//
+
 	
 	// 게시글 등록 관련
-	public List<String> selectAuthBoard(String id){
-		return db.selectList("Board.selectAuthBoard",id);
+	public int insertBoardContents(BoardDTO dto) {
+		db.insert("insertBoardContents",dto);
+		return dto.getSeq();
+	}
+	
+	public int insertServeyItem(String item) {
+		return db.insert("Board.insertServeyItem",item);
 	}
 	//
 	

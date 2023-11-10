@@ -5,7 +5,7 @@ $(document).on("click","#toWriteContentsBoardBtn",function(){
 })
 
 $(document).on("click","#toMkBoardBtn",function(){
-	location.href="/board/toMk_board";
+	location.href="/mk_board/toMk_board";
 });
 
 $(document).on("click","#toFavoriteBoardBtn",function(){
