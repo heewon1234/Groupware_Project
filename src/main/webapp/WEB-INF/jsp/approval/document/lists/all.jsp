@@ -23,13 +23,22 @@
 					<thead>
 						<tr>
 							<th>문서번호</th>
-							<th>제목</th>
 							<th>기안자</th>
+							<th>제목</th>
 							<th>기안일</th>
 							<th>구분</th>
 						</tr>
 					</thead>
 					<tbody>
+						<c:forEach var="list" items="${appList }">
+							<tr>
+								<td>${list.seq}</td>
+								<td>${list.id}</td>
+								<td>${list.title}</td>
+								<td>${list.draft_date}</td>
+								<td>${list.confirm}</td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>

@@ -16,4 +16,9 @@
 	<delete id="delete">
 		DELETE FROM organization WHERE organization = #{organization} OR manager = #{organization}
 	</delete>
+	<select id="getManagerOrg" resultType="String">
+		SELECT manager
+        FROM Organization
+        WHERE Organization = #{org}
+	</select>
 </mapper>
