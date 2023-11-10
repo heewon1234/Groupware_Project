@@ -45,6 +45,16 @@
     width:78%;
     padding-left:10px;
 }
+.board_contents_info>div:nth-child(4){
+    height:100%;
+}
+.contents_write_date>div:first-child{height:60%;}
+.contents_write_date>div:last-child{height:40%;}
+.contents_write_date button{
+    width:80px;
+    height:30px;
+    border-radius: 5px;
+}
 .contents_info>div{
     display: flex;
     align-items: center;
@@ -116,6 +126,7 @@
 .reply_input>textarea{
     width:95%;
     resize:none;
+    height:50%;
 }
 .reply_button{width:7%;}
 .reply_button>button{

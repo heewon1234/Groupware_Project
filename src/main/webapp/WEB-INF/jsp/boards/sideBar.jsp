@@ -34,7 +34,7 @@
                     </div>
                     <div class="menu_list_box">
                     	<c:forEach items="${all_list}" var="i">
-                        	<div class="menu_list_item">
+                        	<div class="menu_list_item" data-boardTitle="${i.board_title }">
                             	<img src="/images/commons/body_form/left_item/default/company.png">
                             	<span class="menu_list_item_text">${i.board_title }</span>
                         	</div>
@@ -52,7 +52,7 @@
                     </div>
                     <div class="menu_list_box">
                     	<c:forEach var="i" items="${group_list }">
-                        	<div class="menu_list_item">
+                        	<div class="menu_list_item" data-boardTitle="${i.board_title }">
                             	<img src="/images/commons/body_form/left_item/default/company.png">
                             	<span class="menu_list_item_text">${i.board_title }</span>
                             	<div class="menu_list_item_plus">

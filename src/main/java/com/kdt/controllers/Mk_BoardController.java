@@ -35,6 +35,10 @@ public class Mk_BoardController {
 		return "boards/mk_board";
 	}
 	
+	@RequestMapping("toEditBoard")
+	public String toEditBoard() {
+		return "boards/edit_board";
+	}
 
 	@RequestMapping("Mk_boardInsert")
 	public String Mk_boardInsert(Mk_BoardDTO dto, String headerList, String authorityList) {

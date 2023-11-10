@@ -1,18 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-	<link rel="stylesheet" href="/css/commons/body_form/left_form/body_form_default.css" />
-	<link rel="stylesheet" href="/css/commons/topForm.css" />
-    <link rel="stylesheet" href="/css/board/board_contents_write.css" />
-    <script src="/js/commons/body_form/body_form_default.js" defer></script>
 </head>
 <body>
 	<div class="top">TOP</div>
@@ -27,7 +19,6 @@
                         <div class="board_title_text">게시판</div>
                         <div>
                             <select name="board_title" id="board_title">
-                                <option selected>게시판선택</option>
                                 <c:forEach items="${boardList }" var="i">
                                 	<option>${i }</option>
                                 </c:forEach>
@@ -85,7 +76,6 @@
         </div>
     </div>
 	<script src="/js/board/sideBar.js" defer></script>
-    <script src="/js/board/write_contents_board.js" defer></script>
-
+    <script src="/js/board/edit_contents_board.js" defer></script>
 </body>
 </html>

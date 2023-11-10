@@ -156,7 +156,7 @@ $("#frmBtn").on("click",function(){
 		return false;
 	}
 	
-	if($("header").val()=="말머리 없음"){
-		$("header").val("");
+	if($("#header").val()=="말머리 없음"){
+		$("#header").val("");
 	}
 })

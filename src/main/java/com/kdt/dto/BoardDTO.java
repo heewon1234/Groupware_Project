@@ -13,12 +13,13 @@ public class BoardDTO {
 	private String contents;
 	private String servey_question;
 	private int view_count;
+	private boolean favorite;
 	public BoardDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public BoardDTO(int seq, String board_title, String title, String writer, Timestamp write_date, String header,
-			boolean notice, String contents, String servey_question, int view_count) {
+			boolean notice, String contents, String servey_question, int view_count, boolean favorite) {
 		super();
 		this.seq = seq;
 		this.board_title = board_title;
@@ -30,6 +31,7 @@ public class BoardDTO {
 		this.contents = contents;
 		this.servey_question = servey_question;
 		this.view_count = view_count;
+		this.favorite = favorite;
 	}
 	public int getSeq() {
 		return seq;
@@ -90,6 +92,12 @@ public class BoardDTO {
 	}
 	public void setView_count(int view_count) {
 		this.view_count = view_count;
+	}
+	public boolean isFavorite() {
+		return favorite;
+	}
+	public void setFavorite(boolean favorite) {
+		this.favorite = favorite;
 	}
 	
 	

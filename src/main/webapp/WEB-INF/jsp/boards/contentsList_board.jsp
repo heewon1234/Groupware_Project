@@ -41,7 +41,11 @@
                             	<div class="favorite">
                                 	<img src="/images/board/notFavorite.png">
                             	</div>
-                            	<div class="board_contents_title"><span>${i.header }&nbsp;&nbsp;</span>${i.title }</div>
+                            	<div class="board_contents_title">
+                            		<a href="/board/toContentsBoard?seq=${i.seq }">
+                            			<span>${i.header }&nbsp;&nbsp;</span>${i.title }
+                            		</a>
+                            	</div>
                            		<div class="board_contents_writer">${i.writer }</div>
                             	<div class="view_count">${i.view_count }</div>
                           	  	<div class="board_title">${board_title}</div>

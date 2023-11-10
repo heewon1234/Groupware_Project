@@ -21,5 +21,9 @@
 	</insert>
 	<!-- 게시판 생성 -->
 	
+	<!-- 게시글 불러오기 -->
+	<select id="allBoardSeq" resultType="int">
+		select seq from Mk_Board
+	</select>
 	
 </mapper>

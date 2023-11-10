@@ -67,9 +67,23 @@ public class BoardDAO {
 	}
 	//
 	
-	// 게시글 리스트 불러오기
+	// 게시글 불러오기
 	public List<BoardDTO> boardContentsList(String board_title){
 		return db.selectList("Board.boardContentsList",board_title);
+	}
+	
+	public BoardDTO boardContents(Map<String,String> map) {
+		return db.selectOne("Board.boardContents",map);
+	}
+	
+	public List<BoardDTO> FavoriteAllContentsList(Map<String,String> map){
+		return db.selectList("Board.FavoriteBoardContentsList",map);
+	}
+	//
+	
+	//게시글 삭제
+	public int delContents(Map<String,String> map) {
+		return db.delete("Board.delContents",map);
 	}
 	//
 	

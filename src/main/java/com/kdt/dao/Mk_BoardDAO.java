@@ -33,4 +33,9 @@ public class Mk_BoardDAO {
 	public int createTable(String sql) {
 		return db.insert("Mk_Board.createTable",sql);
 	}
+	
+	//게시글 불러오기 관련 기능
+	public List<Integer> allBoardSeq(){
+		return db.selectList("Mk_Board.allBoardSeq");
+	}
 }

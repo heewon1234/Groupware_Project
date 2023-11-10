@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,32 +20,39 @@
         </div>
         <div class="right_item">
             <div class="content_tab">
-                <div class="noticeBox">
-                    <button>공지</button>
-                </div>
+            	<c:if test="${boardContents.notice=='true'}">
+                	<div class="noticeBox">
+                		<button>공지</button>             
+               	 	</div>
+                </c:if>
                <div class="board_contents_info">
                     <div class="favorite"><img src="/images/commons/body_form/left_item/default/favorites.png" /></div>
                     <div class="profile">
                         <img src="/images/commons/body_form/left_item/default/information.png" />
                     </div>
                     <div class="contents_info">
-                        <div class="board_contents_title">글1</div>
+                        <div class="board_contents_title">${boardContents.title}</div>
                         <div class="contents_info_datail">
-                            <div>대표이사</div> |
-                            <div>테스트1</div> |
-                            <div>조회수 10</div>
+                        	<div id="boardSeq">글번호 ${boardContents.seq}</div> |
+                            <div>${boardContents.writer}</div> |
+                            <div>${board_title}</div> |
+                            <div>조회수 ${boardContents.view_count }</div>
                         </div>
                     </div>
-                    <div class="contents_write_date">2023-11-06 00:06</div>
+                    <div class="contents_write_date">
+                    	<div>${boardContents.write_date }</div>
+                    	<div><button id="contentsDelBtn">삭제</button></div>
+                    </div>
                 </div>
                 <div class="contents">
-                    글3
+                   ${boardContents.contents }
                 </div>
                 <div class="buttons">
-                    <button>수정</button>
-                    <button>삭제</button>
+                 	<button id="backBtn">뒤로가기</button>
+                    <button id="contentsUpdateBtn">수정</button> 
                 </div>
                 <div class="reply_box">
+                	<form>
                     <div class="input_reply_box">
                         <div class="reply_profile">
                             <img src="/images/commons/body_form/left_item/default/information.png" />
@@ -56,6 +64,7 @@
                             <button>등록</button>
                         </div>
                     </div>
+                    </form>
                     <div class="reply_list_box">
                         <div class="reply_list">
                             <div class="reply_list_info">
@@ -101,11 +110,7 @@
             </div>
         </div>
     </div>
-    
-     <script>
-    	$(document).ready(function() {
-			$("#left_item").load("/board/sideBar");
-		});
-    </script>
+    <script src="/js/board/sideBar.js" defer></script>
+    <script src="/js/board/contents_board.js" defer></script>
 </body>
 </html>
