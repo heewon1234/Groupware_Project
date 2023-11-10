@@ -7,5 +7,8 @@
   	 <select id="select" resultType="com.kdt.dto.WorksDTO"> <!-- select를 사용할때는 resultType 설정 -->
   		select * from Works where id=#{id} 
   	</select>
+  	<select id="selectList" resultType="com.kdt.dto.WorkstatisticsDTO">
+  		select * from Works
+  	</select>
   	
   </mapper>

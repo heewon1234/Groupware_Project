@@ -41,7 +41,7 @@
 					<span class="menu_list_button_text">내 근무</span>
 				</div>
 				<div class="menu_list_box">
-					<div id="work_leave" class="mywork menu_list_item ">
+					<div id="work_leave" class="menu_list_item mywork">
 						<img src="../imges/commons/body_form/left_item/default/company.png"> <span class="menu_list_item_text">휴가/근무 </span>
 					</div>
 					<div id="work_current" class="menu_list_item mywork">
