@@ -7,6 +7,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kdt.dto.AuthorityDTO;
+import com.kdt.dto.BoardDTO;
+import com.kdt.dto.HeaderDTO;
 import com.kdt.dto.MembersDTO;
 import com.kdt.dto.Mk_BoardDTO;
 
@@ -16,15 +19,13 @@ public class BoardDAO {
 	@Autowired
 	private SqlSession db;
 
-	public List<Mk_BoardDTO> select_board_type_group(){
-		return db.selectList("Board.select_board_type_group");
-	}
 	
-	public List<Mk_BoardDTO> select_board_type_all(){
-		return db.selectList("Board.select_board_type_all");
-	}
 	
 	// memberdao로 옮겨라
+	public List<MembersDTO> selectAllMembers(){
+		return db.selectList("Board.selectAllMembers");
+	}
+	
 	public List<String> selectAllOrganization(){
 		return db.selectList("Board.selectAllOrganization");
 	}
@@ -53,4 +54,17 @@ public class BoardDAO {
 		return list;
 	}
 	//
+
+	
+	// 게시글 등록 관련
+	public int insertBoardContents(BoardDTO dto) {
+		db.insert("insertBoardContents",dto);
+		return dto.getSeq();
+	}
+	
+	public int insertServeyItem(String item) {
+		return db.insert("Board.insertServeyItem",item);
+	}
+	//
+	
 }

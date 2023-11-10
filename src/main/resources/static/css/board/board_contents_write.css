@@ -7,7 +7,7 @@
     overflow: hidden;
     margin-bottom:10px;
 }
-.content_tab>form>div>div:not(.board_contents_file_box>div):not(.board_contents_box>div):not(.board_servey>div){
+.content_tab>form>div>div:not(.board_contents_file_box>div):not(.board_contents_box>div):not(.board_survey>div){
     float:left;
     height:50px;
     display: flex;
@@ -40,7 +40,10 @@
 }
 .file_box_text{
     margin-bottom:10px;
+    display: flex;
+    align-items: center;
 }
+.file_box_text>span{font-size:large;}
 .file_box_input_file{
     border-top:1px solid gainsboro;
     padding-top:10px;
@@ -53,25 +56,58 @@
     width:1500px;
     margin-bottom:30px;
 }
-.board_servey{
+.board_survey{
     padding:10px;
     padding-left:20px;
     padding-right:20px;
     border:1px solid gainsboro;
 }
-.board_servey>div:nth-child(1){
+.board_survey>div:nth-child(1){
     height:50px;
     display: flex;
     align-items: center;
     border-bottom:1px solid gainsboro;
 }
-.board_servey>div:nth-child(2){
+.board_survey>div:nth-child(2){
     height:50px;
     display: flex;
     align-items: center;
 }
-.board_servey>div:nth-child(2)>div:nth-child(1){
+.board_survey>div:nth-child(2)>div:nth-child(1){
     margin-right:20px;
+}
+
+#surveyBox{
+    border:1px solid black;
+    border-radius: 5px;;
+    padding:10px;
+    display: none;
+}
+.surveyContents{
+    overflow: hidden;
+    height:30px;
+    display: flex;
+    align-items: center;
+    margin-bottom:15px;
+}
+.surveyContents:last-child{margin-bottom:0px;}
+.surveyContents>div{
+    float:left;
+    height:100%;
+    display: flex;
+    align-items: center;
+}
+.surveyContents>div:first-child{
+    margin-right:20px;
+}
+.surveyContents input{
+    height:100%;
+    width:500px;
+}
+
+.surveyContents img{
+    height:95%;
+    margin-left:30px;
 }
 
 .buttons{

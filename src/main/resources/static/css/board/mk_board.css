@@ -264,3 +264,45 @@
     display: none;
 }
 
+.headerBox{
+    border:1px solid black;
+    width:300px;   
+    display: none;
+}
+.header_add{overflow: hidden;}
+.header_add>div{
+    float:left;
+    display: flex;
+    align-items: center;
+    height:30px;
+}
+.header_add>div:first-child{width:90%;}
+.header_add>div:last-child{
+    width:10%;
+}
+.header_add>div>input{
+    width:100%;
+    height:30px;
+    border:none;
+}
+.header_add img{ width:60%;}
+.header_add{border-bottom:1px solid black;}
+.header_list_box{
+    width:300px;
+    padding:5px;
+    overflow: hidden;
+}
+.header_list_box>.header_list>div{
+    float:left;
+    height:30px;
+    display: flex;
+    align-items: center;
+}
+.header_list>div:first-child{width:90%}
+.header_list>div:last-child{width:10%}
+.header_list_box>div:not(.header_list_box>div:first-child){
+    margin-top:5px;
+}
+.header_list img {
+    width:60%;
+}
