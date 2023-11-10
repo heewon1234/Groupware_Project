@@ -30,7 +30,7 @@ public class ApprovalController {
 
 	@RequestMapping("/write")
 	public String write(Model model) throws Exception {
-		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");
+		MembersDTO1 userDTO = (MembersDTO1) session.getAttribute("userDTO");
 		List<String> managerList = orgService.getManagerList(userDTO.getOrganization());
 		model.addAttribute("userDTO", userDTO);
 		
@@ -41,13 +41,18 @@ public class ApprovalController {
 	
 	@RequestMapping("/lists/all")
 	public String listsAll(Model model) throws Exception {
+		MembersDTO1 userDTO = (MembersDTO1) session.getAttribute("userDTO");
+		List<ApprovalDTO> appList = appService.selectBtId(userDTO.getId());
+		
+		model.addAttribute("appList", appList);
+		
 		return "/approval/document/lists/all";
 	}
 	
 	@RequestMapping("/insertApproval")
 	public String insertApproval(String title, String contents, MultipartFile[] files) throws Exception {
 		MembersDTO1 userDTO = (MembersDTO1) session.getAttribute("userDTO");
-		ApprovalDTO appdto = new ApprovalDTO(0, userDTO.getId(), title, contents, false);
+		ApprovalDTO appdto = new ApprovalDTO(0, userDTO.getId(), title, contents, null, false);
 		String uploadPath = "c:/uploads";
 		
 		System.out.println(files);

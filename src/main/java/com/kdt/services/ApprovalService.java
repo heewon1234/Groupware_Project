@@ -1,6 +1,7 @@
 package com.kdt.services;
 
 import java.io.File;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,10 @@ public class ApprovalService {
 	@Autowired
 	private ApprovalFilesDAO afdao;
 	
+	public List<ApprovalDTO> selectBtId(String id) {
+		return adao.selectbyId(id);
+	}
+	
 	@Transactional
 	public void insert(ApprovalDTO dto, MultipartFile[] files, String path) throws Exception {
 		int parent_seq = adao.insert(dto);
@@ -30,8 +35,6 @@ public class ApprovalService {
 		if(!uploadPath.exists()) {
 			uploadPath.mkdir();
 		}
-		
-		System.out.println(parent_seq);
 
 		// 클라이언트에서 submit한 데이터에 files가 존재할 경우
 		if(files != null) {
