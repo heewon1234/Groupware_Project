@@ -8,7 +8,7 @@ import java.util.UUID;
 
 
 public class UUIDToNumber {
-    public static long uuidToLong(UUID uuid) {
+    public static int uuidToPositiveInt(UUID uuid) {
         byte[] bytes = ByteBuffer.wrap(new byte[16])
                             .putLong(uuid.getMostSignificantBits())
                             .putLong(uuid.getLeastSignificantBits())
@@ -17,19 +17,16 @@ public class UUIDToNumber {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hash = digest.digest(bytes);
             BigInteger bigInt = new BigInteger(1, hash);
-            return bigInt.longValue();
+            return bigInt.intValue() & Integer.MAX_VALUE; // Convert to int and make it positive
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
-            return 0L; // Handle the exception as needed
+            return 0; // Handle the exception as needed
         }
     }
 
-    public static int convertUUIDToInt() {
+    public static int convertUUIDToPositiveInt() {
         UUID uuid = UUID.randomUUID();
-        long number = uuidToLong(uuid);
-        return (int) number; // Convert long to int
+        return uuidToPositiveInt(uuid);
     }
-    
-    
 }
 

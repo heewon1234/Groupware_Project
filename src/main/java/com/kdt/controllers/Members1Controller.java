@@ -56,7 +56,7 @@ public class Members1Controller {
 		    // 이미 방이 있는지 확인
 		    if (!roomService.oneroomExists(loggedInUserID, otherUserID)) {
 		        System.out.println(roomService.oneroomExists(loggedInUserID, otherUserID));
-		        int oneSeq = UUIDToNumber.convertUUIDToInt();
+		        int oneSeq = UUIDToNumber.convertUUIDToPositiveInt();
 		        System.out.println(oneSeq);
 		        roomService.createOneChatRoom(loggedInUserID, otherUserID,oneSeq);
 		        // 나머지 로직 추가 가능

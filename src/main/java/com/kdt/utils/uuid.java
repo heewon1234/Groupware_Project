@@ -8,9 +8,11 @@ import java.util.UUID;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 @RestController
 public class uuid {
-    public static long uuidToLong(UUID uuid) {
+    
+    public static int uuidToPositiveInt(UUID uuid) {
         byte[] bytes = ByteBuffer.wrap(new byte[16])
                             .putLong(uuid.getMostSignificantBits())
                             .putLong(uuid.getLeastSignificantBits())
@@ -19,19 +21,18 @@ public class uuid {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hash = digest.digest(bytes);
             BigInteger bigInt = new BigInteger(1, hash);
-            return bigInt.longValue();
+            return bigInt.intValue() & Integer.MAX_VALUE; // Convert to positive int
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
-            return 0L; // Handle the exception as needed
+            return 0; // Handle the exception as needed
         }
     }
-	@RequestMapping("/generateUUID")
+
+    @RequestMapping("/generateUUID")
     public int generateUUID() {
         // UUID 생성
         UUID uuid = UUID.randomUUID();
-        long number = UUIDToNumber.uuidToLong(uuid);
-
-        // long 값을 int로 변환하여 반환
-        return (int) number;
+        // 양수로 변환하여 반환
+        return uuidToPositiveInt(uuid);
     }
 }
