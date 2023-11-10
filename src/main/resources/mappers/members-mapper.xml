@@ -44,4 +44,12 @@
 	<select id="selectWorkForm" resultType="String">
 		SELECT DISTINCT work_form FROM Members
 	</select>
+	
+	<select id="selectApprovalMembers" resultType="com.kdt.dto.MembersDTO">
+		SELECT m.*
+		FROM Members m
+		JOIN JOB_TITLE jt ON m.position = jt.POSITION
+		WHERE jt.JOB_RANK > (SELECT JOB_RANK FROM JOB_TITLE WHERE POSITION = #{position})
+		ORDER BY jt.JOB_RANK DESC;
+	</select>
 </mapper>
