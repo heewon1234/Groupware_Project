@@ -29,7 +29,7 @@ public class ChatController {
 		//String position = (String)hsession.getAttribute("position");
 		return "chat/chatting";
 	}
-	@RequestMapping("/inputText")
+	/*@RequestMapping("/inputText") 이 코드 안씀
     public String inputText(@RequestParam("friendName") String friendName,@RequestParam("organization") String organization,@RequestParam("oneSeq") int oneSeq, Model model) {
         System.out.println(friendName);
         model.addAttribute("friendName", friendName);
@@ -37,7 +37,7 @@ public class ChatController {
         model.addAttribute("oneSeq", oneSeq);
         System.out.println(oneSeq);
         return "chat/inputText";
-    }
+    }*/
 	@RequestMapping("/groupInputText")
 	public String inputText(@RequestParam("groupName") String groupName,@RequestParam("groupSeq") int groupSeq, Model model) {
 		model.addAttribute("groupName", groupName);
