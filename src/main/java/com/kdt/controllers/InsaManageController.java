@@ -11,7 +11,6 @@ import com.kdt.dto.JobRoleDTO;
 import com.kdt.dto.JobTitleDTO;
 import com.kdt.dto.MembersDTO;
 import com.kdt.dto.OrganizationDTO;
-import com.kdt.dto.WorksDTO;
 import com.kdt.services.JobRoleService;
 import com.kdt.services.JobTitleService;
 import com.kdt.services.MembersService;
@@ -78,11 +77,5 @@ public class InsaManageController {
 		model.addAttribute("selectItem", selectItem);
 		return "/insa/manage/left_item";
 	}
-	@RequestMapping(value="/work_leave")
-	public String towork_leave(Model model)throws Exception {
-		String ID = (String) session.getAttribute("loginId");
-		List<WorksDTO> list = wservice.select(ID);
-		model.addAttribute("list",list);
-		return "/insa/manage/work_leave";
-	}
+	
 }
