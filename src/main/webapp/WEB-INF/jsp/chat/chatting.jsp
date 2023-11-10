@@ -143,7 +143,8 @@
 							</div>
 						</div>
 					</div>
-					<div class="chatroom_list" style="margin-top: 13px; height: 410px; overflow-y: auto;"></div>
+					<div class="chatroom_list"
+						style="margin-top: 13px; height: 410px; overflow-y: auto;"></div>
 				</div>
 			</div>
 		</div>
@@ -157,6 +158,37 @@
 				</ul>
 				<button id="selectUsersButton">선택 완료</button>
 				<!-- 선택 완료 버튼 추가 -->
+			</div>
+		</div>
+		<!-- input.jsp -->
+		<div class="box" id="inputJSP" style="display: none;">
+			<input id="userName" type="hidden" value="${name}"> <input
+				id="loginID" type="hidden" value="${loginId}"> <input
+				id="oneSeq" value="${oneSeq}">
+			<div class="inputTop" style="padding-top: 10px; padding-left: 10px">
+				<span class="close-button" onclick="closeOneChat()">&times;</span>
+				<div class="myProfile">
+					<div class="myimg">
+						<i class="fa-regular fa-circle-user"></i>
+					</div>
+					<div class="other">
+						<input id="otherName" value="${friendName}" style="border: none;"
+							disabled="disabled"> <input id="organization"
+							value="${organization} " style="border: none;"
+							disabled="disabled">
+					</div>
+				</div>
+			</div>
+			<div class="chatForm" style="position: relative;"></div>
+
+			<div id="messageForm">
+				<div class="chatBox">
+					<div class="inputText" id="inputText" contenteditable="true"
+						style="padding: 10px"></div>
+					<div>
+						<button id="sendBtn">전송</button>
+					</div>
+				</div>
 			</div>
 		</div>
 
@@ -334,31 +366,11 @@ function updateGroupChatList() {
     });
 }
 
+//그룹채팅방 여는 코드
 function groupChat(groupName, groupSeq) {
-    // 페이지를 열 때 그룹 이름과 그룹 시퀀스를 쿼리 매개변수로 전달합니다.
-    $.get("/chats/groupInputText", {
-        groupName: groupName,
-        groupSeq: groupSeq
-    }, function(data) {
-        // 받은 데이터로 팝업 창을 생성하고 body에 추가합니다.
-        var popup = document.createElement("div");
-        popup.className = "groupChat popup";
-        popup.style.width = "400px";
-        popup.style.height = "650px";
-        popup.style.display = "block";
-        popup.style.position = "fixed";
-        popup.style.top = "50%";
-        popup.style.left = "50%";
-        popup.style.transform = "translate(-50%, -50%)";
-        popup.style.backgroundColor = "#fff";
-        popup.style.padding = "20px";
-        popup.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.2)";
-        popup.style.zIndex = "1000";
-        popup.innerHTML = data;
-
-        // body 요소에 팝업 div 추가
-        document.body.appendChild(popup);
-    });
+	$("#otherName").val(groupName);
+    $("#oneSeq").val(groupSeq);
+	$("#inputJSP").css("display", "block");
 }
 	
 	//----------------------------
@@ -606,121 +618,114 @@ function groupChat(groupName, groupSeq) {
 			// 마우스를 내렸을 때 스타일 변경
 			$(this).css("text-decoration", "none");
 		});
+		var stompClient;
 
 		function openOneChat(friendName, organization, oneSeq) {
-			// 이름을 쿼리 매개변수로 전달하여 페이지를 엽니다.
-			$.get("/chats/inputText?friendName="
-					+ encodeURIComponent(friendName) + "&organization="
-					+ encodeURIComponent(organization) + "&oneSeq="
-					+ encodeURIComponent(oneSeq), function(data) {
-				// data를 팝업 div에 추가하고 팝업을 표시합니다.
-				var popup = document.createElement("div");
-				popup.className = "oneChat popup";
-				popup.style.width = "400px";
-				popup.style.height = "650px";
-				popup.style.display = "block";
-				popup.style.position = "fixed";
-				popup.style.top = "50%";
-				popup.style.left = "50%";
-				popup.style.transform = "translate(-50%, -50%)";
-				popup.style.backgroundColor = "#fff";
-				popup.style.padding = "20px";
-				popup.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.2)";
-				popup.style.zIndex = "1000";
-				popup.innerHTML = data;
+		    console.log(friendName, organization, oneSeq);
+		    $("#otherName").val(friendName);
+		    $("#organization").val(organization);
+		    $("#oneSeq").val(oneSeq);
+		    $("#inputJSP").css("display", "block");
 
-				// body 요소에 팝업 div 추가
-				document.body.appendChild(popup);
-			});
+		    // WebSocket 연결이 없는 경우에만 연결
+		    if (!stompClient) {
+		        var socket = new SockJS('/ws');
+		        stompClient = Stomp.over(socket);
+
+		        // 연결 설정
+		        stompClient.connect({}, function (frame) {
+		            console.log("수신확인" + oneSeq);
+
+		            // 메시지 수신 구독
+		            stompClient.subscribe('/topic/oneToOne/' + oneSeq, function (response) {
+		                console.log('Received message: ' + response.body);
+		                var message = JSON.parse(response.body);
+		                var messageText = message.message;
+
+		                // 타입이 'CHAT'일 때만 메시지를 화면에 표시
+		                if (message.type === 'CHAT') {
+		                    var messageContainer = $("<p><strong>"
+		                        + message.userID + "</strong> - "
+		                        + messageText + "</p>");
+		                    $('.chatForm').append(messageContainer);
+		                    keepScrollBottom();
+		                }
+		            });
+
+		            // 일대일 채팅 메시지 전송
+		            $(document).on("click", "#sendBtn", function () {
+		                sendMessage(oneSeq);
+		            });
+		        });
+		    }
 		}
 
-		function closeOneChat() {
-			// 팝업 닫기
-			var popup = document.querySelector(".oneChat.popup");
-			if (popup) {
-				popup.style.display = "none";
-				// body에서 팝업 div 제거
-				document.body.removeChild(popup);
-			}
+		// 메시지 전송 함수
+		function sendMessage(oneSeq) {
+		    var message = $('#inputText').val().trim();
+		    console.log("채팅 전송" + oneSeq);
+
+		    var message = $('#inputText').text().trim();
+            var oneSeq = $('#oneSeq').val();
+            console.log("채팅 전송"+oneSeq);
+            var currentTime = new Date(); 
+            var time = new Date().getTime(); 
+            var hours = currentTime.getHours();
+            var minutes = currentTime.getMinutes();
+            var write_date;
+
+            if (hours < 12) {
+                write_date = hours + ":" + (minutes < 10 ? "0" : "") + minutes + " AM";
+            } else {
+                if (hours > 12) {
+                    hours -= 12;
+                }
+                write_date = hours + ":" + (minutes < 10 ? "0" : "") + minutes + " PM";
+            }
+
+
+            if (message) {
+               var userID = $('#userName').val();
+               keepScrollBottom();
+
+               var messageType = 'one';
+
+               // 메세지를 서버로 전송
+               stompClient.send('/app/oneToOne/sendMessage/' + oneSeq,
+                     {}, JSON.stringify({
+                        type : "CHAT",
+                        messageType : messageType,
+                        userID : userID,
+                        message : message,
+                        roomID : oneSeq
+                     }));
+
+               // 입력 필드 비우기
+               $('#inputText').empty();
+		    }
 		}
-		
-		
-		//실시간 채팅
-		var socket = new SockJS('/ws');
-		var stompClient = Stomp.over(socket);
 
-		stompClient.connect({}, function(frame) {
-			var oneSeq = $('#oneSeq').val();
-			stompClient.subscribe('/topic/oneToOne/{oneSeq}',
-					function(response) {
-						console.log('Received message: ' + response.body);
-						var message = JSON.parse(response.body);
-						var messageText = message.message;
+		// 실시간 채팅 메시지 수신
+		if (stompClient) {
+		    var oneSeq = $('#oneSeq').val();
+		    console.log("수신확인" + oneSeq);
+		    stompClient.subscribe('/topic/oneToOne/' + oneSeq, function (response) {
+		        console.log('Received message: ' + response.body);
+		        var message = JSON.parse(response.body);
+		        var messageText = message.message;
 
-						// 타입이 'CHAT'일 때만 메시지를 화면에 표시
-						if (message.type === 'CHAT') {
-							var messageContainer = $("<p><strong>"
-									+ message.userID + "</strong> - "
-									+ messageText + "</p>");
-							$('.chatForm').append(messageContainer);
-							keepScrollBottom();
-						}
-					});
-		});
-		//일대일 채팅 메세지 전송
-		$(document).on(
-				"click",
-				"#sendBtn",
-				function() {
-					var message = $('#inputText').text().trim();
-					var oneSeq = $('#oneSeq').val();
-					var currentTime = new Date(); 
-					var time = new Date().getTime(); 
-					var hours = currentTime.getHours();
-					var minutes = currentTime.getMinutes();
-					var write_date;
-
-					if (hours < 12) {
-					    write_date = hours + ":" + (minutes < 10 ? "0" : "") + minutes + " AM";
-					} else {
-					    if (hours > 12) {
-					        hours -= 12;
-					    }
-					    write_date = hours + ":" + (minutes < 10 ? "0" : "") + minutes + " PM";
-					}
-
-
-					if (message) {
-						var userID = $('#userName').val();
-						var messageContainer = $("<p><strong>" + userID
-								+ "</strong> - " + message + "</p>"+"<p>"+write_date+"</p>");
-
-						// 타입이 'CHAT'일 때만 메시지를 오른쪽에 표시
-						if (message.type === 'CHAT') {
-							messageContainer.addClass('right'); // 오른쪽으로 표시
-						}
-						$('.chatForm').append(messageContainer);
-						keepScrollBottom();
-
-						var messageType = 'one';
-
-						// 메세지를 서버로 전송
-						stompClient.send('/app/oneToOne/sendMessage/' + oneSeq,
-								{}, JSON.stringify({
-									type : "CHAT",
-									messageType : messageType,
-									userID : userID,
-									message : message,
-									oneSeq : oneSeq//이거 roomID를 바꿨음 테스트 확인바람
-								}));
-
-						// 입력 필드 비우기
-						$('#inputText').empty();
-					}
-				});
-		
-
-
+		        // 타입이 'CHAT'일 때만 메시지를 화면에 표시
+		        if (message.type === 'CHAT') {
+		            var messageContainer = $("<p><strong>"
+		                + message.userID + "</strong> - "
+		                + messageText + "</p>");
+		            $('.chatForm').append(messageContainer);
+		            keepScrollBottom();
+		        }
+		    }, function (error) {
+		        console.error('Subscription error: ', error);
+		    });
+		}
 	</script>
 
 

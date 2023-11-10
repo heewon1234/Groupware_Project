@@ -1,11 +1,14 @@
 function openPopup() {
-    document.getElementById("popup").style.display = "block";
+    $("#popup").css("display", "block");
 }
 
 function closePopup() {
-    document.getElementById("popup").style.display = "none";
+    $("#popup").css("display", "none");
 }
 
+function oneChatPopup() {
+    document.getElementById("inputJSP").style.display = "block";
+}
 
 // 로고 요소와 팝업 요소를 선택합니다.
 const logo = document.getElementById('logo');
