@@ -30,7 +30,7 @@ public class ApprovalController {
 	@RequestMapping("/write")
 	public String write(Model model) throws Exception {
 		MembersDTO1 userDTO = (MembersDTO1) session.getAttribute("userDTO");
-		List<MembersDTO> approvalMembers = mService.selectApprovalMembers(userDTO.getPosition());
+		List<MembersDTO> approvalMembers = mService.selectApprovalMembers(userDTO);
 		model.addAttribute("userDTO", userDTO);
 		model.addAttribute("approvalMembers", approvalMembers);
 		
@@ -49,6 +49,8 @@ public class ApprovalController {
 		MembersDTO1 userDTO = (MembersDTO1) session.getAttribute("userDTO");
 		ApprovalDTO appdto = new ApprovalDTO(0, userDTO.getId(), title, contents, false);
 		String uploadPath = "c:/uploads";
+		
+		System.out.println(files);
 		
 		appService.insert(appdto, files, uploadPath);
 		

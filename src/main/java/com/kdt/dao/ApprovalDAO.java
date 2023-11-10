@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kdt.dto.ApprovalDTO;
+import com.kdt.dto.ApprovalFilesDTO;
 
 @Repository
 public class ApprovalDAO {

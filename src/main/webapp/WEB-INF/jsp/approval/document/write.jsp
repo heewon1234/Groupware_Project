@@ -12,7 +12,7 @@
 <link rel="stylesheet" type="text/css" href="/css/commons/body_form/left_form/body_form_default.css">
 </head>
 <body>
-	<form action="/approval/document/insertApproval">
+	<form action="/approval/document/insertApproval" method="post" enctype="multipart/form-data">
 		<div class="top">TOP</div>
 		<div class="body_form">
 			<div class="left_item"></div>
@@ -108,7 +108,7 @@
 
 					<h4>파일 첨부</h4>
 					<div class="input-group">
-						<input type='file' multiple>
+						<input type="file" name="files" multiple>
 					</div>
 
 				</div>

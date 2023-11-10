@@ -12,6 +12,6 @@ public class ApprovalFilesDAO {
 	private SqlSession db;
 	
 	public int insert(ApprovalFilesDTO dto) {
-		return db.insert("ApprovalFiles.insert");
+		return db.insert("ApprovalFiles.insert", dto);
 	}
 }

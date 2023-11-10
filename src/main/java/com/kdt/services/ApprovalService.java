@@ -30,6 +30,8 @@ public class ApprovalService {
 		if(!uploadPath.exists()) {
 			uploadPath.mkdir();
 		}
+		
+		System.out.println(parent_seq);
 
 		// 클라이언트에서 submit한 데이터에 files가 존재할 경우
 		if(files != null) {
