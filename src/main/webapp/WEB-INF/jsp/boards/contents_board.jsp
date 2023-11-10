@@ -52,59 +52,24 @@
                     <button id="contentsUpdateBtn">수정</button> 
                 </div>
                 <div class="reply_box">
-                	<form>
-                    <div class="input_reply_box">
-                        <div class="reply_profile">
-                            <img src="/images/commons/body_form/left_item/default/information.png" />
-                        </div>
-                        <div class="reply_input">
-                            <textarea placeholder="댓글을 입력하세요"></textarea>
-                        </div>
-                        <div class="reply_button">
-                            <button>등록</button>
-                        </div>
-                    </div>
+                	<form action="/reply/insertReply">
+                		<input type="hidden" name="parent_seq" value="${boardContents.seq }">
+                    	<div class="input_reply_box">
+                      		<div class="reply_profile">
+                       	    	<img src="/images/commons/body_form/left_item/default/information.png" />
+                        	</div>
+                        	<div class="reply_input">
+                            	<textarea placeholder="댓글을 입력하세요" name="contents"></textarea>
+                        	</div>
+                        	<div class="reply_button">
+                            	<button>등록</button>
+                        	</div>
+                    	</div>
                     </form>
                     <div class="reply_list_box">
-                        <div class="reply_list">
-                            <div class="reply_list_info">
-                                <div>대표이사</div>
-                                <div>2023-11-06 19:34</div>
-                            </div>
-                            <div class="reply_list_contents">
-                                하하하
-                            </div>
-                            <div class="reply_list_edit_buttons">
-                                <button>수정</button>
-                                <button>삭제</button>
-                            </div>
-                        </div>
-                        <div class="reply_list">
-                            <div class="reply_list_info">
-                                <div>대표이사</div>
-                                <div>2023-11-06 19:34</div>
-                            </div>
-                            <div class="reply_list_contents">
-                                하하하
-                            </div>
-                            <div class="reply_list_edit_buttons">
-                                <button>수정</button>
-                                <button>삭제</button>
-                            </div>
-                        </div>
-                        <div class="reply_list">
-                            <div class="reply_list_info">
-                                <div>대표이사</div>
-                                <div>2023-11-06 19:34</div>
-                            </div>
-                            <div class="reply_list_contents">
-                                하하하
-                            </div>
-                            <div class="reply_list_edit_buttons">
-                                <button>수정</button>
-                                <button>삭제</button>
-                            </div>
-                        </div>
+						<c:forEach>
+							
+						</c:forEach>
                     </div>
                 </div>
             </div>

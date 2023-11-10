@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kdt.dto.BoardDTO;
 import com.kdt.dto.Mk_BoardDTO;
+import com.kdt.dto.ReplyDTO;
 import com.kdt.services.AuthorityService;
 import com.kdt.services.BoardService;
 import com.kdt.services.Mk_BoardService;
+import com.kdt.services.ReplyService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -27,6 +29,9 @@ public class BoardController {
 	
 	@Autowired
 	AuthorityService aservice;
+	
+	@Autowired
+	ReplyService rservice;
 	
 	@Autowired
 	HttpSession session;
@@ -72,6 +77,8 @@ public class BoardController {
 	@RequestMapping("toContentsBoard") // 게시글 내용 보는 곳으로 이동
 	public String toContentsBoard(String seq, Model model) {
 		String board_title = (String)session.getAttribute("board_title");
+		List<ReplyDTO> replyList = rservice.replyList(board_title, seq);
+		model.addAttribute("replyList",replyList);
 		model.addAttribute("boardContents",bservice.boardContents(board_title, seq));
 		return "boards/contents_board";
 	}
