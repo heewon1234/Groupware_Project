@@ -43,9 +43,12 @@ public class BoardController {
 	//
 	
 	// 게시글 리스트 보는 곳
-	@RequestMapping("toFavoriteBoard")
-	public String toFavoriteBoard() {
-		return "boards/favorite_board";
+	@RequestMapping("toBoard")
+	public String toFavoriteBoard(String board_title, Model model) {
+		session.setAttribute("board_title", board_title);
+		List<BoardDTO> boardContentsList = bservice.boardContentsList(board_title);
+		model.addAttribute("boardContentsList",boardContentsList);
+		return "boards/contentsList_board";
 	}
 	//
 	
@@ -61,7 +64,10 @@ public class BoardController {
 
 	@RequestMapping("insertBoardContents")
 	public String insertBoardContents(BoardDTO dto,String[] items) {
-		return "redirect:/board/toWriteContentsBoard";	
+		//String writer = (String)session.getAttribute("loginID");
+		dto.setWriter("test1");
+		bservice.insertBoardContents(dto, items);
+		return "redirect:/board/toFavoriteBoard";	
 	}
 	//
 	

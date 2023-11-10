@@ -67,4 +67,10 @@ public class BoardDAO {
 	}
 	//
 	
+	// 게시글 리스트 불러오기
+	public List<BoardDTO> boardContentsList(String board_title){
+		return db.selectList("Board.boardContentsList",board_title);
+	}
+	//
+	
 }

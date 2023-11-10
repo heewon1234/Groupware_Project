@@ -11,8 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.google.gson.Gson;
 import com.kdt.dao.BoardDAO;
 import com.kdt.dao.Mk_BoardDAO;
+import com.kdt.dao.SurveyDAO;
 import com.kdt.dto.BoardDTO;
 import com.kdt.dto.MembersDTO;
+import com.kdt.dto.SurveyDTO;
 
 @Service
 public class BoardService {
@@ -22,6 +24,9 @@ public class BoardService {
 	
 	@Autowired
 	Mk_BoardDAO mdao;
+	
+	@Autowired
+	SurveyDAO sdao;
 	
 	@Autowired
 	private Gson gson;
@@ -58,18 +63,24 @@ public class BoardService {
 	//
 	
 	// 게시글 등록 관련
-	
 	@Transactional
 	public void insertBoardContents(BoardDTO dto,String[] items) {
 		int boardSeq = mdao.selectBoardSeq(dto.getBoard_title());
 		dto.setBoard_title("Board_"+boardSeq);
 		int parent_seq = bdao.insertBoardContents(dto);
-		
 		for(String item:items) {
-			
+			if(item!="") {
+				sdao.insertSurveyItem(new SurveyDTO(0,dto.getBoard_title(),parent_seq,item));
+			}
 		}
 		
 	}
 	//
+	
+	// 게시글 리스트 불러오기
+	public List<BoardDTO> boardContentsList(String board_title){
+		int boardSeq = mdao.selectBoardSeq(board_title);
+		return bdao.boardContentsList("Board_"+boardSeq);
+	}
 	
 }

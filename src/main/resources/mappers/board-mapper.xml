@@ -32,4 +32,10 @@
 		insert into ${board_title} values (null,#{title},#{writer},default,#{header},#{notice},#{contents},#{servey_question},default);
 	</insert>
 	<!-- 게시글 등록 관련 -->
+	
+	<!-- 게시글 목록 불러오기 -->
+	<select id="boardContentsList" resultType="com.kdt.dto.BoardDTO">
+		select * from ${board_title}
+	</select>
+	<!-- 게시글 목록 불러오기 -->
 </mapper>

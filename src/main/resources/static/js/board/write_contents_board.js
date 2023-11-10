@@ -55,7 +55,7 @@ $("#board_title").change(function(){
 	$("#header").append(selectOption);
 	
 	$.ajax({
-		url:"/board/selectHeader",
+		url:"/header/selectHeader",
 		data:{"board_title":$(this).val()}
 	}).done(function(resp){
 		
