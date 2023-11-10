@@ -11,7 +11,7 @@
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css"
-	href="/css/insa/manage/work_leave.css">
+	href="/css/insa/mywork/work_leave.css">
 <link rel="stylesheet" type="text/css"
 	href="/css/insa/manage/common.css">
 <link rel="stylesheet" type="text/css"
@@ -140,6 +140,6 @@
 			</div>
 		</div>
 	</div>
-	<script src="/js/insa/manage/work_leave.js"></script>
+	<script src="/js/insa/mywork/work_leave.js"></script>
 </body>
 </html>

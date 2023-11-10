@@ -15,4 +15,5 @@
   	SELECT * FROM WorkTimes WHERE id=#{id} and DATE(work_time) = CURDATE() and (work_type = '근무 종료' or work_type = '근무중');
   	</select>
   	
+  	
   </mapper>
