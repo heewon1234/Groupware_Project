@@ -6,8 +6,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kdt.dto.LeavesDTO;
 import com.kdt.dto.WorkTimesDTO;
 import com.kdt.dto.WorksDTO;
+import com.kdt.dto.WorkstatisticsDTO;
 @Repository
 public class WorksDAO {
 
@@ -29,5 +31,11 @@ public class WorksDAO {
 	
 	public List<WorkTimesDTO> work_inout(String id)throws Exception{
 		return db.selectList("Worktimes.work_inout",id);
+	}
+	public List<WorkstatisticsDTO> statisticslist()throws Exception{
+		return db.selectList("Works.selectList");
+	}
+	public List<LeavesDTO> leaveslist()throws Exception{
+		return db.selectList("Leaves.list");
 	}
 }
