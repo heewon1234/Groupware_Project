@@ -20,7 +20,7 @@
             <div class="member_list">
                 <div class="member_list_box">
                     <div class="member_list_box_header">직원 목록</div>
-                    <div class="member_list_box_body">
+                    <div class="member_list_box_body" id="member_list_box_body">
                         <div>
 							<c:forEach items="${organizationList}" var="i">
 								<div>
@@ -39,7 +39,7 @@
                         
                     </div>
                     <div class="auth_member_reset">
-                        <button>모두 취소</button>
+                        <button id="auth_member_reset_btn">모두 취소</button>
                     </div>
                 </div>
             </div>
@@ -54,28 +54,30 @@
         <div class="left_item" id="left_item">
 
         </div>
-        <form id="frm">
+        <form id="frm" action="/mk_board/Mk_boardInsert">
+        <input type="hidden" name="authorityList" id="authorityList">
+        <input type="hidden" name="headerList" id="headerList">
         <div class="right_item">
             <div class="content_tab">
                 <div class="contents_title">게시판 만들기</div>
                 <div class="name">
                     <div class="name_text">이름</div>
                     <div class="name_input" >
-                        <input type="text" placeholder="&nbsp게시판 이름을 입력하세요." name="board_title">
+                        <input type="text" placeholder="&nbsp게시판 이름을 입력하세요." name="board_title" id="board_title_input">
                     </div>
                 </div>
                 <div class="board_type">
                     <div class="board_type_text">게시판 종류</div>
                     <div class="board_type_select">
-                        <div><input type="radio" name="board_type"> 전사 게시판 - 조직에 속한 모든 사람과 공유 ( 조직없음 제외 )</div>
-                        <div><input type="radio" name="board_type"> 그룹 게시판 - 소유자 및 관리자가 지정한 사람과 공유</div>
+                        <div><input type="radio" name="board_type" value="all"> 전사 게시판 - 조직에 속한 모든 사람과 공유 ( 조직없음 제외 )</div>
+                        <div><input type="radio" name="board_type" value="group" checked> 그룹 게시판 - 소유자 및 관리자가 지정한 사람과 공유</div>
                     </div>
                 </div>
                 <div class="name_type">
                     <div class="name_type_text">게시판 유형</div>
                     <div class="name_type_select">
-                        <div><input type="radio" name="name_type"> 일반형</div>
-                        <div><input type="radio" name="name_type"> 익명형</div>
+                        <div><input type="radio" name="name_type" value="identity" checked> 일반형</div>
+                        <div><input type="radio" name="name_type" value="anonymous"> 익명형</div>
                     </div>
                 </div>
                 <div class="authority">
@@ -90,29 +92,28 @@
                                 <div>이름</div>
                                 <div>기본 권한 : 읽기</div>
                             </div>
-                            <div class="authority_member_list">
-                                <div class="auth_member">
-                                    <div>대표이사</div>
-                                    <div>
-                                        <div><input type="checkbox">&nbsp;쓰기</div>
-                                        <div>x</div>
-                                    </div>
-                                </div>
-
+                            <div class="authority_member_list" id="authority_member_list">
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="header">
+                 <div class="header">
                     <div class="header_text">말머리 설정</div>
                     <div class="header_type">
-                        <div><input type="radio" name="header"> 사용</div>
-                        <div><input type="radio" name="header"> 사용 안 함</div>
+                        <div><input type="radio" name="header" value="true" class="header_input_check"> 사용</div>
+                        <div><input type="radio" name="header" value="false" class="header_input_check" checked> 사용 안 함</div>
+                    </div>
+                    <div class="headerBox" id="headerBox">
+                        <div class="header_add">
+                            <div><input placeholder="&nbsp;말머리를 입력하세요" id="header_add_input"></div>
+                            <div><img src="/images/commons/body_form/left_item/default/plus.png" id="header_add_btn"></div>
+                        </div>
+						<div id="header_list_border"></div>
                     </div>
                 </div>
                 <div class="buttons">
-                    <button>취소</button>
-                    <button>생성</button>
+                    <button type="button">취소</button>
+                    <button id="frmBtn">생성</button>
                 </div>
             </div>
         </div>

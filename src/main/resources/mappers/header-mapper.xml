@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Header">
+
+	<!-- 게시판 생성 -->
+	<insert id="headerInsert">
+		insert into Header values (null,#{board_title},#{header})
+	</insert>
+	
+	<!-- 게시글 등록 -->
+	<select id="selectHeader" resultType="String">
+		select header from Header where board_title=#{board_title}
+	</select>
+</mapper>

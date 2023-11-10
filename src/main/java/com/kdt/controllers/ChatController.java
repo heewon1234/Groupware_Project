@@ -1,7 +1,5 @@
 package com.kdt.controllers;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,8 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kdt.dto.ChatMessageDTO;
-import com.kdt.services.ChatMessageService;
 import com.kdt.services.ChatRoomService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -34,7 +30,6 @@ public class ChatController {
 		return "chat/chatting";
 	}
 	@RequestMapping("/inputText")
-	//
     public String inputText(@RequestParam("friendName") String friendName,@RequestParam("organization") String organization,@RequestParam("oneSeq") int oneSeq, Model model) {
         System.out.println(friendName);
         model.addAttribute("friendName", friendName);
@@ -43,6 +38,14 @@ public class ChatController {
         System.out.println(oneSeq);
         return "chat/inputText";
     }
+	@RequestMapping("/groupInputText")
+	public String inputText(@RequestParam("groupName") String groupName,@RequestParam("groupSeq") int groupSeq, Model model) {
+		model.addAttribute("groupName", groupName);
+		System.out.println(groupName);
+		model.addAttribute("groupSeq", groupSeq);
+		System.out.println(groupSeq);
+		return "chat/groupInputText";
+	}
 	
 	@RequestMapping("/chatList")
 	public String chatList() {

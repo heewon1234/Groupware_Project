@@ -2,31 +2,34 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Board">
-	<select id="select_board_type_group" resultType="com.kdt.dto.Mk_BoardDTO">
-		select * from Mk_Board where board_type='group'
-	</select>
-	<select id="select_board_type_all" resultType="com.kdt.dto.Mk_BoardDTO">
-		select * from Mk_Board where board_type='all'
-	</select>
 	
 	<!-- member-mapper로 옮겨라 -->
+	<select id="selectAllMembers" resultType="com.kdt.dto.MembersDTO">
+		select * from Members;
+	</select>
 	<select id="selectAllOrganization" resultType="String">
-		select organization from members group by organization
+		select organization from Members group by organization
 	</select>
 	<select id="selectByOrganization" resultType="String">
-		select JOB_NAME from (select * from members where organization=#{organization}) as job group by job_name
+		select JOB_NAME from (select * from Members where organization=#{organization}) as job group by job_name
 	</select>
 	<select id="selectByJobName" resultType="String">
-		select name from members where job_name=#{job_name};
+		select name from Members where job_name=#{job_name};
 	</select>
 	<select id="selectMemberByOrganization" resultType="com.kdt.dto.MembersDTO">
-		select * from members where organization=#{organization}
+		select * from Members where organization=#{organization}
 	</select>
 	<select id="selectMemberByOrganizationAndJobName" resultType="com.kdt.dto.MembersDTO">
-		select * from members where organization=#{organization} and job_name=#{job_name}
+		select * from Members where organization=#{organization} and job_name=#{job_name}
 	</select>
 	<select id="selectMemberByName" resultType="com.kdt.dto.MembersDTO">
-		select * from members where organization=#{organization} and job_name=#{job_name} and name=#{name}
+		select * from Members where organization=#{organization} and job_name=#{job_name} and name=#{name}
 	</select>
 	<!-- 옮겨라 -->
+	
+	<!-- 게시글 등록 관련 -->
+	<insert id="insertBoardContents" useGeneratedKeys="true" keyProperty="seq">
+		insert into ${board_title} values (null,#{title},#{writer},default,#{header},#{notice},#{contents},#{servey_question},default);
+	</insert>
+	<!-- 게시글 등록 관련 -->
 </mapper>

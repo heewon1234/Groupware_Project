@@ -6,10 +6,13 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.google.gson.Gson;
 import com.kdt.dao.BoardDAO;
+import com.kdt.dao.Mk_BoardDAO;
+import com.kdt.dto.BoardDTO;
 import com.kdt.dto.MembersDTO;
-import com.kdt.dto.Mk_BoardDTO;
 
 @Service
 public class BoardService {
@@ -17,15 +20,16 @@ public class BoardService {
 	@Autowired
 	BoardDAO bdao;
 	
-	public List<Mk_BoardDTO> select_board_type_group(){
-		return bdao.select_board_type_group();
-	}
+	@Autowired
+	Mk_BoardDAO mdao;
 	
-	public List<Mk_BoardDTO> select_board_type_all(){
-		return bdao.select_board_type_all();
-	}
-	
+	@Autowired
+	private Gson gson;
+
 	// MemberService로 가시오
+	public List<MembersDTO> selectAllMembers(){
+		return bdao.selectAllMembers();
+	}
 	public List<String> selectAllOrganization(){
 		return bdao.selectAllOrganization();
 	}
@@ -50,6 +54,21 @@ public class BoardService {
 	
 	public MembersDTO selectMemberByName(MembersDTO dto){
 		return bdao.selectMemberByName(dto);
+	}
+	//
+	
+	// 게시글 등록 관련
+	
+	@Transactional
+	public void insertBoardContents(BoardDTO dto,String[] items) {
+		int boardSeq = mdao.selectBoardSeq(dto.getBoard_title());
+		dto.setBoard_title("Board_"+boardSeq);
+		int parent_seq = bdao.insertBoardContents(dto);
+		
+		for(String item:items) {
+			
+		}
+		
 	}
 	//
 	

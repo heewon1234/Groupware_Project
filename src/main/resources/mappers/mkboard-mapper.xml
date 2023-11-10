@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Mk_Board">
+	<select id="select_board_type_group" resultType="com.kdt.dto.Mk_BoardDTO">
+		select * from Mk_Board where board_type='group'
+	</select>
+	<select id="select_board_type_all" resultType="com.kdt.dto.Mk_BoardDTO">
+		select * from Mk_Board where board_type='all'
+	</select>
+	<select id="selectBoardSeq" resultType="int">
+		select seq from Mk_Board where board_title=#{board_title}
+	</select>
+	
+	<!-- 게시판 생성 -->
+	<insert id="Mk_boardInsert" useGeneratedKeys="true" keyProperty="seq">
+		insert into Mk_Board values (null, #{id}, #{board_title}, #{board_type}, #{name_type}, #{use_header}, default)
+	</insert>
+	<insert id="createTable">
+		${sql}
+	</insert>
+	<!-- 게시판 생성 -->
+	
+	
+</mapper>
