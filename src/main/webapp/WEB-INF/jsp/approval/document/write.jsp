@@ -36,7 +36,7 @@
 								</select>
 							</td>
 							<th>작성자</th>
-							<td>하이웍스산업 대표이사 대표이사</td>
+							<td> ${userDTO.organization } ${userDTO.position } ${userDTO.name }</td>
 						</tr>
 					</tbody>
 				</table>
@@ -50,10 +50,10 @@
 							<td>
 								<table class="innerTable" border='1'>
 									<tr>
-										<th>대표이사</th>
-										<th>대표이사</th>
-										<th>대표이사</th>
-										<th>대표이사</th>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th></th>
 									</tr>
 									<tr>
 										<td></td>
@@ -119,11 +119,11 @@
 		<form action="">
 			<div class="modalContent">
 				<div align="center">신청 설정</div>
-				<div>
-					<div>대표이사 <input type='checkbox'></div>
-					<div>대표이사 <input type='checkbox'></div>
-					<div>대표이사 <input type='checkbox'></div>
-				</div>
+				<ul>
+					<c:forEach var="list" items="${approvalMembers }">
+						<li>${list.name } <input type='checkbox'></li>
+					</c:forEach>
+				</ul>
 				<div class="modalButton_div" align="center">
 					<button type="submit" class="button_apply">확인</button>
 					<button type="button" class="modalButton_apply button_cancel">취소</button>
@@ -136,11 +136,11 @@
 		<form action="">
 			<div class="modalContent">
 				<div align="center">처리 설정</div>
-				<div>
-					<div>대표이사 <input type='checkbox'></div>
-					<div>대표이사 <input type='checkbox'></div>
-					<div>대표이사 <input type='checkbox'></div>
-				</div>
+				<ul>
+					<c:forEach var="list" items="${approvalMembers }">
+						<li>${list.name } <input type='checkbox'></li>
+					</c:forEach>
+				</ul>
 				<div class="modalButton_div" align="center">
 					<button type="submit" class="button_apply">확인</button>
 					<button type="button" class="modalButton_process button_cancel">취소</button>

@@ -31,9 +31,6 @@ public class MembersDAO {
 		return db.selectOne("Members.getOrganization",id);
 	}
 	
-	//
-	//
-	//
 	public List<MembersDTO> selectAll() {
 
 		return db.selectList("Members.selectAll");
@@ -57,5 +54,9 @@ public class MembersDAO {
 	
 	public List<String> selectWorkForm() {
 		return db.selectList("Members.selectWorkForm");
+	}
+	
+	public List<MembersDTO> selectApprovalMembers(String position) {
+		return db.selectList("Members.selectApprovalMembers", position);
 	}
 }
