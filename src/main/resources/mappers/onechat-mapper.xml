@@ -31,4 +31,7 @@
 	<select id="selectAll" resultType="com.kdt.dto.OneToOneChatDTO">
 		SELECT * FROM OneToOneChat;
 	</select>
+	<select id="searchUser" resultType="com.kdt.dto.OneToOneChatDTO">
+		SELECT * FROM OneToOneChat;
+	</select>
 </mapper>

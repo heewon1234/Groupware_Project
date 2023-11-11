@@ -1,11 +1,4 @@
-function closeOneChat() {
-    $("#inputJSP").css("display", "none");
-    // 구독 해제
-    if (stompClient) {
-        stompClient.unsubscribe();
-    }
-    $('.chatForm').empty();
-}
+
 //----------------------------
 const inputTop = $(".inputTop");
 const inputJSP = $("#inputJSP");

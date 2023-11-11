@@ -15,6 +15,10 @@
 	</select>
 	<select id="getPreviousMessages"
 		resultType="com.kdt.dto.ChatMessageDTO">
-		SELECT * FROM messages where roomID =#{oneSeq }
+		SELECT * FROM messages where roomID =#{oneSeq } and messageType='one'
+	</select>
+	<select id="getPreviousGroupMessages"
+		resultType="com.kdt.dto.ChatMessageDTO">
+		SELECT * FROM messages where roomID =#{groupSeq} and messageType='group'
 	</select>
 </mapper>

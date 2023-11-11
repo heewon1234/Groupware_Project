@@ -1,24 +1,15 @@
 package com.kdt.controllers;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.converter.MappingJackson2MessageConverter;
-import org.springframework.messaging.converter.MessageConverter;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
@@ -53,13 +44,21 @@ public class ChatStompController {
 	    List<ChatMessageDTO> previousMessages = chatMessageService.getPreviousMessages(oneSeq);
 	    return previousMessages;
 	}
+	@ResponseBody
+	@RequestMapping("/getPreviousGroupMessages/{groupSeq}")//login된 userID를 where절로 줘야함 이름임
+	public List<ChatMessageDTO> getPreviousGroupMessages(@PathVariable String groupSeq) {
+		System.out.println("그룹이전메세지" +groupSeq);
+		List<ChatMessageDTO> previousGroupMessages = chatMessageService.getPreviousGroupMessages(groupSeq);
+		return previousGroupMessages;
+	}
 
 
-	@MessageMapping("/group/sendMessage")
+	@MessageMapping("/group/sendMessage/{groupSeq}")
 	@SendTo("/topic/group/{groupSeq}")
-	public void group_insert(@Payload String roomInfo) throws Exception {
-		GroupChatDTO group_dto = gson.fromJson(roomInfo, new TypeToken<GroupChatDTO>() {}.getType());
-		ChatRoomService.createGroupChat(group_dto);
+	public ChatMessageDTO group_insert(@Payload ChatMessageDTO message, @DestinationVariable int groupSeq) throws Exception {
+		System.out.println("그룹 메세지"+message);
+		chatMessageService.insert(message);
+		return message;
 	}
 
 	/*@RequestMapping(value = "/chat/selectByType", method = RequestMethod.GET)

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.kdt.dao.ChatRoomDAO;
 import com.kdt.dto.GroupChatDTO;
+import com.kdt.dto.MembersDTO;
 import com.kdt.dto.OneToOneChatDTO;
 
 @Service
@@ -38,6 +39,14 @@ public class ChatRoomService {
 	//groupselectAll
 	public List<GroupChatDTO> groupSelectAll() throws Exception {
 		return dao.groupSelectAll();
+	}
+	//searchUser
+	public List<MembersDTO> searchUser(String searchValue) throws Exception {
+		return dao.searchUser(searchValue);
+	}
+	//그룹채팅방 검색
+	public List<GroupChatDTO> searchGroup(String searchGroup) throws Exception {
+		return dao.searchGroup(searchGroup);
 	}
 
 }

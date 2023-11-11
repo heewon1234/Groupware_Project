@@ -64,4 +64,8 @@
 	<select id="loginUser" resultType="com.kdt.dto.MembersDTO">
 		SELECT * FROM Members where id = #{id}
 	</select>
+	
+	<select id="searchUser" resultType="com.kdt.dto.MembersDTO">
+		SELECT * FROM Members where name like #{searchValue}
+	</select>
 </mapper>

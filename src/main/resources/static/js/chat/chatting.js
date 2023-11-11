@@ -75,6 +75,73 @@ function hideSearchContainer() {
     $(".search_container").css("display", "none");
 }
 
+function searchUser() {
+    // 입력된 검색어 가져오기
+    var searchValue = document.getElementById("search_input").value;
+
+    // AJAX를 사용하여 검색어를 컨트롤러로 전송
+    $.ajax({
+        url: "/chats/searchUser", // 실제 컨트롤러의 URL로 변경
+        type: "POST", // 예시로 POST로 지정, 필요에 따라 변경
+        contentType: "application/x-www-form-urlencoded",
+        data: { searchValue: searchValue }, // 검색어를 객체 형태로 전송
+        success: function (response) {
+			var listData = response.searchList;
+			var OneToOneChatDTOList = response.OneToOneChatDTOList;
+			console.log(response);
+			$("#friend_list").empty();
+			
+			listData.forEach(function(friend) {
+    console.log(friend.name);
+    var $row = $("<div>").addClass("table-row");
+    var $iconCell = $("<div>")
+        .html('<i class="fa-regular fa-circle-user"></i>')
+        .css("display", "inline-block");
+
+    var $nameCell = $("<div>")
+        .text(friend.name)
+        .addClass("oneChat")
+        .css("display", "inline-block")
+        .css("cursor", "pointer");
+
+    $nameCell.on(
+        "click",
+        (function (clickedUserName, clickedUserId) {
+            return function () {
+                console.log(clickedUserName);
+                var loginID = $("#loginID").val();
+                var otherID = clickedUserId;
+                var organization = friend.organization;
+                var oneSeq = null;
+                for (var i = 0; i < OneToOneChatDTOList.length; i++) {
+                    var chatRoom = OneToOneChatDTOList[i];
+                    if (chatRoom.loggedInUserID === loginID && chatRoom.otherUserID === otherID) {
+                        oneSeq = chatRoom.oneSeq;
+                        console.log(oneSeq);
+                        openOneChat(clickedUserName, organization, oneSeq);
+                        getPreviousMessages(oneSeq);
+                        break;
+                    }
+                }
+            };
+        })(friend.name, friend.id)
+    );
+
+    $row.append($iconCell);
+    $row.append($nameCell);
+
+    $("#friend_list").append($row);
+});
+
+},
+
+        error: function (error) {
+            console.error("Search failed:", error);
+        }
+    });
+}
+
+
 //inputText
 		/* let isDrag = false;
 		        let offsetX3, offsetY3;
