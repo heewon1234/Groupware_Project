@@ -38,22 +38,6 @@ public class ChatStompController {
 	@Autowired
 	private Gson gson;
 	
-	@MessageMapping("chat/message")
-	@SendTo("/topic/chat")
-	public ChatMessageDTO message(ChatMessageDTO message) {
-		return message;
-	}
-
-//	@MessageMapping("/oneToOne/sendMessage/{oneSeq}")
-//	@SendTo("/topic/oneToOne/{oneSeq}")
-//	public ChatMessageDTO oneToOne_insert(@Payload ChatMessageDTO message, @DestinationVariable int oneSeq) throws Exception {
-//	    System.out.println("메세지"+message);
-//	    //ChatMessageDTO dto = gson.fromJson(message, new TypeToken<ChatMessageDTO>() {}.getType());
-//	    System.out.println("확인" + oneSeq);
-//	    //System.out.println(dto.getRoomID());
-//	    chatMessageService.insert(message);
-//	    return message;
-//	}
 	@MessageMapping("/oneToOne/sendMessage/{oneSeq}")
 	@SendTo("/topic/oneToOne/{oneSeq}")
 	public ChatMessageDTO oneToOne_insert(@Payload ChatMessageDTO message, @DestinationVariable int oneSeq) throws Exception {
@@ -71,34 +55,14 @@ public class ChatStompController {
 	}
 
 
-
-
-//	@MessageMapping("/group/sendMessage")
-//	@SendTo("/topic/group/{groupId}")
-//	public int group_insert(ChatMessageDTO group_dto) throws Exception {
-//		return chatMessageService.insert(group_dto);
-//	}
 	@MessageMapping("/group/sendMessage")
-	@SendTo("/topic/group/{groupId}")
+	@SendTo("/topic/group/{groupSeq}")
 	public void group_insert(@Payload String roomInfo) throws Exception {
 		GroupChatDTO group_dto = gson.fromJson(roomInfo, new TypeToken<GroupChatDTO>() {}.getType());
 		ChatRoomService.createGroupChat(group_dto);
 	}
-//	   @MessageMapping("/group/sendMessage")
-//	   @SendTo("/topic/group/{groupId}")
-//	   public void group_insert(@Payload String roomInfo) throws Exception {
-//	       // JSON 파싱
-//	       JsonObject jsonObject = JsonParser.parseString(roomInfo).getAsJsonObject();
-//	       String groupName = jsonObject.get("groupName").getAsString();
-//	       String memberName = jsonObject.get("memberName").getAsString();
-//	       ChatRoomService.createGroupChat(groupName)
-//	       System.out.println("groupName: " + groupName);
-//	       System.out.println("memberName: " + memberName);
-//
-//	       // 이제 groupName 및 memberName을 각각 사용하여 원하는 작업을 수행할 수 있습니다.
-//	   }
 
-	@RequestMapping(value = "/chat/selectByType", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/chat/selectByType", method = RequestMethod.GET)
 	public List<ChatMessageDTO> selectChat(@RequestParam("type") String type, @RequestParam("MessageSeq") int MessageSeq) {
 		List<ChatMessageDTO> dto = new ArrayList<>();
 
@@ -118,7 +82,7 @@ public class ChatStompController {
 
 		// 나머지 로직
 		return dto;
-	}
+	}*/
 
 
 

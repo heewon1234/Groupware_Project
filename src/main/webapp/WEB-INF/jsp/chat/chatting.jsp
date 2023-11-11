@@ -164,7 +164,7 @@
 		<div class="box" id="inputJSP" style="display: none;">
 			<input id="userName" type="hidden" value="${name}"> <input
 				id="loginID" type="hidden" value="${loginId}"> <input
-				id="oneSeq" value="${oneSeq}">
+				id="oneSeq" type="hidden" value="${oneSeq}">
 			<div class="inputTop" style="padding-top: 10px; padding-left: 10px">
 				<span class="close-button" onclick="closeOneChat()">&times;</span>
 				<div class="myProfile">
@@ -196,6 +196,20 @@
 	<script src="/js/chat/chatting.js" type="text/javascript"></script>
 	<script src="/js/chat/inputText.js" type="text/javascript"></script>
 	<script>
+	//전체 인원수를 불러오는 코드
+	$.ajax({
+		type : "POST",
+		url : "/chats/oneAllRecordCount",
+		dataType : "json",
+		success : function(data) {
+			// 서버에서 반환한 데이터를 가져와서 HTML 엘리먼트에 표시합니다.
+			$(".Thead").html("전체 " + data);
+		},
+		error : function() {
+			// 요청 실패 시 처리
+			console.log("새로운 레코드 수를 가져오지 못했습니다.");
+		}
+	});
 	function generateUUID() {
         // 서버에 UUID를 요청하는 AJAX
         $.ajax({
@@ -275,7 +289,6 @@
 	        url: "/generateUUID",
 	        type: "GET",
 	        success: function (data) {
-	            // 성공 시 결과를 표시
 	            var generatedUUID = data;
 
 	            for (var i = 0; i < selectedUsers.length; i++) {
@@ -284,7 +297,17 @@
 	                    groupName: pendingRoomName,
 	                    memberName: selectedUsers[i]
 	                };
-	                stompClient.send("/app/group/sendMessage", {}, JSON.stringify(roomInfo));
+	                $.ajax({
+	                    url: "/groupChatRooms/createGroupChat", // 이 URL은 컨트롤러의 RequestMapping에 맞게 변경
+	                    type: "POST",
+	                    contentType: "application/json",
+	                    data: JSON.stringify(roomInfo),
+	                    success: function (response) {
+	                        console.log("Message sent successfully:", response);
+	                        updateGroupChatList();
+	                    },
+
+	                });
 	            }
 
 	            clearSelectedCheckboxes();
@@ -295,6 +318,7 @@
 	            alert("Failed to generate UUID.");
 	        }
 	    });
+	    
 	}
 
 	function clearSelectedCheckboxes() {
@@ -307,7 +331,6 @@
 $("#selectUsersButton").on("click", function() {
     handleSelectedUsers();
 
-    // 여기에서 원하는 ajax 요청을 추가하세요.
     updateGroupChatList();
 });
 
@@ -378,29 +401,24 @@ function groupChat(groupName, groupSeq) {
         let contents = document.getElementsByClassName("chatForm")[0];
         contents.scrollTop = contents.scrollHeight;
      }
-		// 전체 친구 목록
 		$
 				.ajax({
 					type : "POST",
-					url : "/members1/selectAll",
+					url : "/members/selectAllNotLogged",
 					dataType : "json",
 					success : function(data) {
 						var listData = data.list;
 						var OneToOneChatDTOList = data.OneToOneChatDTOList;
 						console.log(listData);
 						try {
-							//member의 리스트
 							var $friend_list = $("#friend_list");
 							if (listData.length > 0) {
-								// 데이터가 존재하는 경우
 								for (var i = 0; i < listData.length; i++) {
 									var friend = listData[i];
 									console.log(friend);
 
-									// 각 <tr> 엘리먼트를 <div>로 래핑
 									var $row = $("<div>").addClass("table-row");
 
-									// 나머지 부분은 이전과 동일
 									var $iconCell = $("<div>")
 											.html(
 													'<i class="fa-regular fa-circle-user"></i>')
@@ -453,7 +471,6 @@ function groupChat(groupName, groupSeq) {
 								}
 							}
 						} catch (error) {
-							// JSON 파싱 오류 처리
 							console.error("JSON 파싱 오류:", error);
 						}
 					},
@@ -493,10 +510,9 @@ function groupChat(groupName, groupSeq) {
 		});
 
 		function loadMembersByDepartment(organization, oneSeq) {
-			$
-					.ajax({
+			$.ajax({
 						type : "POST",
-						url : "/members1/getMembersByOrganization",
+						url : "/members/getMembersByOrganization",
 						data : {
 							organization : organization,
 							oneSeq : oneSeq
@@ -508,7 +524,7 @@ function groupChat(groupName, groupSeq) {
 							console.log(groupMembers);
 							console.log(OneToOneChatDTOList);
 							try {
-								var $group_list = $("#group_list"); // group_list에 데이터를 추가하기 위해 선택합니다.
+								var $group_list = $("#group_list");
 								console.log("그룹 : " + $group_list)
 
 								if (groupMembers.length > 0) {
@@ -518,11 +534,9 @@ function groupChat(groupName, groupSeq) {
 										var friend = groupMembers[i];
 										console.log(friend);
 
-										// <div> 엘리먼트 생성
 										var $row = $("<div>").addClass(
 												"table-row");
 
-										// 나머지 부분은 이전과 동일
 										var $iconCell = $("<div>")
 												.html(
 														'<i class="fa-regular fa-circle-user"></i>')
@@ -538,13 +552,6 @@ function groupChat(groupName, groupSeq) {
 														"display",
 														"inline-block").css(
 														"cursor", "pointer");
-										/*$nameCell.on("click", (function(name, oneSeq) {
-										    return function() {
-										        openOneChat(name, friend.organization,
-										                oneSeq);
-										        console.log(name, friend.organization); // 콘솔에 이름 출력
-										    };
-										})(friend.name, oneSeq));*/
 										$nameCell
 												.on(
 														"click",
@@ -596,19 +603,7 @@ function groupChat(groupName, groupSeq) {
 		}
 
 		// 전체 레코드 수
-		$.ajax({
-			type : "POST",
-			url : "/chats/oneAllRecordCount",
-			dataType : "json",
-			success : function(data) {
-				// 서버에서 반환한 데이터를 가져와서 HTML 엘리먼트에 표시합니다.
-				$(".Thead").html("전체 " + data);
-			},
-			error : function() {
-				// 요청 실패 시 처리
-				console.log("새로운 레코드 수를 가져오지 못했습니다.");
-			}
-		});
+		
 
 		// 이름 클릭 이벤트 처리
 		$(document).on("mouseenter", "#friend_list td.name", function() {
@@ -650,6 +645,8 @@ function groupChat(groupName, groupSeq) {
 		                    $('.chatForm').append(messageContainer);
 		                    keepScrollBottom();
 		                }
+		            }, function (error) {
+		                console.error('Subscription error: ', error);
 		            });
 
 		            // 일대일 채팅 메시지 전송
@@ -705,12 +702,79 @@ function groupChat(groupName, groupSeq) {
 		    }
 		}
 
-		// 실시간 채팅 메시지 수신
+		// 일대일 실시간 채팅 메시지 수신
 		if (stompClient) {
 		    var oneSeq = $('#oneSeq').val();
 		    console.log("수신확인" + oneSeq);
 		    stompClient.subscribe('/topic/oneToOne/' + oneSeq, function (response) {
 		        console.log('Received message: ' + response.body);
+		        var message = JSON.parse(response.body);
+		        var messageText = message.message;
+
+		        // 타입이 'CHAT'일 때만 메시지를 화면에 표시
+		        if (message.type === 'CHAT') {
+		            var messageContainer = $("<p><strong>"
+		                + message.userID + "</strong> - "
+		                + messageText + "</p>");
+		            $('.chatForm').append(messageContainer);
+		            keepScrollBottom();
+		        }
+		    }, function (error) {
+		        console.error('Subscription error: ', error);
+		    });
+		}
+		
+		//그룹 메시지 전송 함수
+		function sendGroupMessage(groupSeq) {
+		    var message = $('#inputText').val().trim();
+		    console.log("채팅 전송" + oneSeq);
+
+		    var message = $('#inputText').text().trim();
+            var groupSeq = $('#oneSeq').val();
+            console.log("채팅 전송"+groupSeq);
+            var currentTime = new Date();
+            var time = new Date().getTime();
+            var hours = currentTime.getHours();
+            var minutes = currentTime.getMinutes();
+            var write_date;
+
+            if (hours < 12) {
+                write_date = hours + ":" + (minutes < 10 ? "0" : "") + minutes + " AM";
+            } else {
+                if (hours > 12) {
+                    hours -= 12;
+                }
+                write_date = hours + ":" + (minutes < 10 ? "0" : "") + minutes + " PM";
+            }
+
+
+            if (message) {
+               var userID = $('#userName').val();
+               keepScrollBottom();
+
+               var messageType = 'group';
+
+               // 메세지를 서버로 전송
+               stompClient.send('/app/group/sendMessage/' + groupSeq,
+                     {}, JSON.stringify({
+                        type : "CHAT",
+                        messageType : messageType,
+                        userID : userID,
+                        message : message,
+                        roomID : oneSeq
+                     }));
+
+               // 입력 필드 비우기
+               $('#inputText').empty();
+		    }
+		}
+		
+		// 그룹 실시간 채팅 메시지 수신
+		if (stompClient) {
+		    var groupSeq = $('#oneSeq').val();
+		    console.log("수신확인" + groupSeq);
+		    stompClient.subscribe('/topic/group/' + groupSeq, function (response) {
+		        console.log('Received group message: ' + response.body);
 		        var message = JSON.parse(response.body);
 		        var messageText = message.message;
 
