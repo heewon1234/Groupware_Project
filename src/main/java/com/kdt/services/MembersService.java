@@ -1,5 +1,6 @@
 package com.kdt.services;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -103,5 +104,22 @@ public class MembersService {
 	}
 	public MembersDTO loginUser(String id) {
 		return mdao.loginUser(id);
+	}
+	
+	public List<MembersDTO> getManagerList(List<String> managerOrgList, List<String> managerJobTitleList) {
+		List<MembersDTO> managerList = new ArrayList<>();
+		
+		for(String org : managerOrgList) {
+			for(String position : managerJobTitleList) {
+				System.out.println(org +":"+ position);
+				
+				MembersDTO manager = mdao.getManager(org, position);
+				
+				if(manager != null)
+					managerList.add(manager);
+			}
+		}
+		
+		return managerList;
 	}
 }

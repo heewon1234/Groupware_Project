@@ -67,4 +67,8 @@
 	<select id="searchUser" resultType="com.kdt.dto.MembersDTO">
 		SELECT * FROM Members where name like #{searchValue}
 	</select>
+	
+	<select id="getManager" resultType="com.kdt.dto.MembersDTO">
+		SELECT * FROM Members WHERE organization = #{org} AND position = #{position}
+	</select>
 </mapper>

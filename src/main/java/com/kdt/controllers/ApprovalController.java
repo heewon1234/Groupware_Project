@@ -29,17 +29,24 @@ public class ApprovalController {
 	private OrganizationService orgService;
 	@Autowired
 	private JobTitleService jobService;
+	@Autowired
+	private MembersService mService;
 	
 
 	@RequestMapping("/write")
 	public String write(Model model) throws Exception {
 		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");
-		List<String> managerList = orgService.getManagerList(userDTO.getOrganization());
-		List<String> managerJobTitleList = jobService.getManagerJobTitle(userDTO.getPosition());
+		List<String> managerOrgList = orgService.getManagerOrgList(userDTO.getOrganization());
+		List<String> managerPositionList = jobService.getManagerPosition(userDTO.getPosition());
+		List<MembersDTO> managerList = mService.getManagerList(managerOrgList, managerPositionList);
  		model.addAttribute("userDTO", userDTO);
 		
-		System.out.println(managerList);
-		System.out.println(managerJobTitleList);
+		System.out.println(managerOrgList);
+		System.out.println(managerPositionList);
+		
+		for(MembersDTO manager : managerList) {
+			System.out.println(manager.getName());
+		}
 		
 		return "/approval/document/write";
 	}

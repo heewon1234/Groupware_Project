@@ -25,7 +25,7 @@ public class JobTitleService {
 		return dao.delete(position);
 	}
 	
-	public List<String> getManagerJobTitle(String position) {
-		return dao.getManagerJobTitle(position);
+	public List<String> getManagerPosition(String position) {
+		return dao.getManagerPosition(position);
 	}
 }

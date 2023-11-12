@@ -26,7 +26,7 @@ public class JobTitleDAO {
 		return db.delete("JobTitle.delete", position);
 	}
 	
-	public List<String> getManagerJobTitle(String position) {
-		return db.selectList("JobTitle.getManagerJobTitle", position);
+	public List<String> getManagerPosition(String position) {
+		return db.selectList("JobTitle.getManagerPosition", position);
 	}
 }
