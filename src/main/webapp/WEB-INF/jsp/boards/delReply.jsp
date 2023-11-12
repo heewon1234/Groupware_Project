@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>컨텐츠 삭제</title>
+<title>Insert title here</title>
 	<link rel="stylesheet" href="/css/board/delContents.css" />
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -19,6 +19,6 @@
 			<button id="cancelBtn">취소</button>
 		</div>
 	</div>
-	<script src="/js/board/delContents.js" defer></script>
+	<script src="/js/board/delReply.js" defer></script>
 </body>
 </html>

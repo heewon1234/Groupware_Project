@@ -27,4 +27,14 @@ public class ReplyController {
 		rservice.insertReply(dto);
 		return "redirect:/board/toContentsBoard?seq="+dto.getParent_seq();
 	}
+	
+	@RequestMapping("toDelReply")
+	public String toDelReply() {
+		return "boards/delReply";
+	}
+	@RequestMapping("delReply")
+	public String delReply(int seq, String parent_seq) {
+		rservice.delReply(seq);
+		return "redirect:/board/toContentsBoard?seq="+parent_seq;
+	}
 }

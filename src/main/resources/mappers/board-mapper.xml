@@ -37,7 +37,7 @@
 		select * from ${board_title}
 	</select>
 	<select id="boardContents" resultType="com.kdt.dto.BoardDTO">
-		select * from ${board_title} where seq=${seq}
+		select * from ${board_title} where seq=#{seq}
 	</select>
 	
 	<select id="FavoriteBoardContentsList" resultType="com.kdt.dto.BoardDTO">

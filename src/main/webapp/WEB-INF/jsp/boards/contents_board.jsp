@@ -52,7 +52,7 @@
                     <button id="contentsUpdateBtn">수정</button> 
                 </div>
                 <div class="reply_box">
-                	<form action="/reply/insertReply">
+                	<form action="/reply/insertReply" method="post">
                 		<input type="hidden" name="parent_seq" value="${boardContents.seq }">
                     	<div class="input_reply_box">
                       		<div class="reply_profile">
@@ -67,8 +67,20 @@
                     	</div>
                     </form>
                     <div class="reply_list_box">
-						<c:forEach>
-							
+						<c:forEach items="${replyList }" var="i">
+							<div class="reply_list" data-index="${replyList.seq }">
+    							<div class="reply_list_info">
+        							<div>${i.writer }</div>
+        							<div>${i.write_date }</div>
+    							</div>
+    							<div class="reply_list_contents">
+        							${i.contents }
+    							</div>
+    							<div class="reply_list_edit_buttons">
+    								<button class="replyDelBtn">삭제</button>
+        							<button class="replyUpdateBtn">수정</button>
+    							</div>
+							</div>	
 						</c:forEach>
                     </div>
                 </div>

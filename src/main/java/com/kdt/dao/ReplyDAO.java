@@ -22,5 +22,9 @@ public class ReplyDAO {
 		return db.selectList("Reply.replyList",dto);
 	}
 	
+	public int delReply(int seq) {
+		return db.delete("Reply.delReply",seq);
+	}
+	
 	
 }

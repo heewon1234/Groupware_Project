@@ -76,10 +76,13 @@ public class BoardController {
 	
 	@RequestMapping("toContentsBoard") // 게시글 내용 보는 곳으로 이동
 	public String toContentsBoard(String seq, Model model) {
+		System.out.println("seq:"+seq);
 		String board_title = (String)session.getAttribute("board_title");
 		List<ReplyDTO> replyList = rservice.replyList(board_title, seq);
+		System.out.println("2");
 		model.addAttribute("replyList",replyList);
-		model.addAttribute("boardContents",bservice.boardContents(board_title, seq));
+		BoardDTO boardContents = bservice.boardContents(board_title, seq);
+		model.addAttribute("boardContents",boardContents);
 		return "boards/contents_board";
 	}
 	

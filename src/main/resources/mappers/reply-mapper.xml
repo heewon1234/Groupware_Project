@@ -3,10 +3,14 @@
 
 <mapper namespace="Reply">
 	<insert id="insertReply">
-		insert into Reply values (null, #{writer},#{contents},#{board_title},#{parent_seq});
+		insert into Reply values (null, #{writer},#{contents},#{board_title},#{parent_seq},default);
 	</insert>
 	
 	<select id="replyList" resultType="com.kdt.dto.ReplyDTO">
-		select * from Reply where board_title=#{board_title} and parent_seq=#{parent_seq}
+		select * from Reply where board_title=#{board_title} and parent_seq=#{parent_seq} order by seq desc
 	</select>
+	
+	<delete id="delReply">
+		delete * from Reply where seq=#{seq}
+	</delete>
 </mapper>

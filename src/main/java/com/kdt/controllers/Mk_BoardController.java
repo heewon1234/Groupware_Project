@@ -43,7 +43,7 @@ public class Mk_BoardController {
 	@RequestMapping("Mk_boardInsert")
 	public String Mk_boardInsert(Mk_BoardDTO dto, String headerList, String authorityList) {
 		mservice.Mk_boardInsert(dto, headerList, authorityList);
-		return "redirect:/board/toFavoriteBoard";
+		return "redirect:/board/toBoard";
 	}
 	
 	// MemberController로 옮겨라

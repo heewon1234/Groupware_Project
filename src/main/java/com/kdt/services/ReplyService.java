@@ -19,7 +19,11 @@ public class ReplyService {
 	}
 	
 	public List<ReplyDTO> replyList(String board_title, String parent_seq){
-		return rdao.replyList(new ReplyDTO(0,null,null,board_title,Integer.parseInt(parent_seq)));
+		return rdao.replyList(new ReplyDTO(0,null,null,board_title,Integer.parseInt(parent_seq),null));
+	}
+	
+	public int delReply(int seq) {
+		return rdao.delReply(seq);
 	}
 	
 }
