@@ -45,7 +45,7 @@ public class MembersController {
 		boolean result = this.mservice.isMember(id,shapw);
 		if(result) {
 			session.setAttribute("loginId",id);
-			MembersDTO1 userDTO = mservice1.loginUser(id);
+			MembersDTO userDTO = mservice.loginUser(id);
 		    System.out.println(userDTO);
 		    if (userDTO != null) {
 		        // DTO에서 이름과 부서 가져오기
