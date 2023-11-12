@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kdt.dto.GroupChatDTO;
+import com.kdt.dto.MembersDTO;
 import com.kdt.dto.OneToOneChatDTO;
 
 @Repository
@@ -59,6 +60,12 @@ public class ChatRoomDAO {
 	public List<GroupChatDTO> groupSelectAll() {
 		System.out.println(db.selectList("oneChat.selectAll"));
 		return db.selectList("groupChat.groupSelectAll");
+	}
+	public List<MembersDTO> searchUser(String searchValue) {
+		return db.selectList("Members.searchUser",'%'+searchValue+'%');
+	}
+	public List<GroupChatDTO> searchGroup(String searchGroup) {
+		return db.selectList("groupChat.searchGroup",'%'+searchGroup+'%');
 	}
 
 

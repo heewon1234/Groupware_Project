@@ -1,5 +1,6 @@
 package com.kdt.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kdt.dto.MembersDTO;
-import com.kdt.dto.MembersDTO1;
 
 @Repository
 public class MembersDAO {
@@ -57,7 +57,20 @@ public class MembersDAO {
 		return db.selectList("Members.selectWorkForm");
 	}
 	
-	public List<MembersDTO> selectApprovalMembers(MembersDTO1 dto) {
+	public List<MembersDTO> selectApprovalMembers(MembersDTO dto) {
 		return db.selectList("Members.selectApprovalMembers", dto);
+	}
+	
+	public List<MembersDTO> selectAllNotLogged(String loggedInUserID){ 
+		return db.selectList("Members.selectAllNotLogged",loggedInUserID); 
+	}
+	public List<MembersDTO> getMembersByOrganization(String organization,String id){ 
+		Map<String, Object> parameters = new HashMap<>();
+	    parameters.put("organization", organization);
+	    parameters.put("id", id);
+		return db.selectList("Members.getMembersByOrganization", parameters); 
+	}
+	public MembersDTO loginUser(String id){ 
+		return db.selectOne("Members.loginUser", id); 
 	}
 }
