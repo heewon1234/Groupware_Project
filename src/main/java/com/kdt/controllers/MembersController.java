@@ -139,14 +139,12 @@ public class MembersController {
 		    if (!roomService.oneroomExists(loggedInUserID, otherUserID)) {
 		        System.out.println(roomService.oneroomExists(loggedInUserID, otherUserID));
 		        int oneSeq = UUIDToNumber.convertUUIDToPositiveInt();
-		        System.out.println(oneSeq);
 		        roomService.createOneChatRoom(loggedInUserID, otherUserID,oneSeq);
 		        // 나머지 로직 추가 가능
 		    }
 		}
 
-		List<OneToOneChatDTO> OneToOneChatDTOList = roomService.selectAll();
-		System.out.println(OneToOneChatDTOList);
+		List<OneToOneChatDTO> OneToOneChatDTOList = roomService.selectAll(loggedInUserID);
 		Map<String, Object> responseData = new HashMap<>();
 		responseData.put("list", list);
 		responseData.put("OneToOneChatDTOList", OneToOneChatDTOList);
@@ -160,11 +158,27 @@ public class MembersController {
 		String id = (String) session.getAttribute("loginId");
 		List<MembersDTO> members = mservice.getMembersByOrganization(organization,id);
 
-		List<OneToOneChatDTO> OneToOneChatDTOList = roomService.selectAll();
-		System.out.println(OneToOneChatDTOList);
+		List<OneToOneChatDTO> OneToOneChatDTOList = roomService.selectAll(id);
 		Map<String, Object> responseData = new HashMap<>();
 		responseData.put("members", members);
 		responseData.put("OneToOneChatDTOList", OneToOneChatDTOList);
 		return responseData;
+	}
+	@RequestMapping("getUserList")
+	@ResponseBody
+	public List<String> getUserList() throws Exception {
+		List<MembersDTO> membersList = mservice.getUserList();
+		List<String> memberNames = new ArrayList<>();
+        for (MembersDTO member : membersList) {
+            String memberName = member.getName();
+            memberNames.add(memberName);
+        }
+		return memberNames;
+	}
+	@RequestMapping("getDepartmentList")
+	@ResponseBody
+	public List<String> getDepartmentList() throws Exception {
+		System.out.println(mservice.getDepartmentList());
+		return mservice.getDepartmentList();
 	}
 }

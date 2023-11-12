@@ -87,10 +87,10 @@
 				<hr>
 				<div class="allList">
 					<select id="departmentSelect" style="margin-top: 10px">
-						<option selected>부서 선택</option>
+						<!-- <option selected>부서 선택</option>
 						<option value="영업부">영업부</option>
 						<option value="관리부">관리부</option>
-						<option value="회계부">회계부</option>
+						<option value="회계부">회계부</option> -->
 					</select>
 					<!-- 부서별 목록 -->
 					<div class="Glist">
@@ -111,9 +111,10 @@
 					<div class="search_container" style="display: none;">
 						<div class="chatroom_search">
 							<div id="searchBox">
-								<img alt="" src="/images/chats/search.svg" onclick="searchUser()"> <input
-									id="search_input" type="text" placeholder="채팅방 참여자 검색">
-								<img id="x" alt="" src="/images/chats/x.svg"
+								<img alt="" src="/images/chats/search.svg"
+									onclick="searchUser()"> <input id="search_input"
+									type="text" placeholder="채팅방 참여자 검색"> <img id="x"
+									alt="" src="/images/chats/x.svg"
 									onclick="hideSearchContainer()">
 							</div>
 						</div>
@@ -136,9 +137,10 @@
 					<div class="search_container" style="display: none;">
 						<div class="chatroom_search">
 							<div id="searchBox">
-								<img alt="" src="/images/chats/search.svg" onclick="searchGroup()"> <input
-									id="searchGroup_input" type="text" placeholder="채팅방 참여자 검색">
-								<img id="x" alt="" src="/images/chats/x.svg"
+								<img alt="" src="/images/chats/search.svg"
+									onclick="searchGroup()"> <input id="searchGroup_input"
+									type="text" placeholder="채팅방 참여자 검색"> <img id="x"
+									alt="" src="/images/chats/x.svg"
 									onclick="hideSearchContainer()">
 							</div>
 						</div>
@@ -193,39 +195,52 @@
 		</div>
 		<!-- 그룹 채팅방 -->
 		<div class="box" id="groupJSP" style="display: none">
-		<input id="groupUserName" type="hidden" value="${name}"> <input
-			id="loginID" type="hidden" value="${loginId}"> <input
-			id="groupSeq" value="${groupSeq}">
-		<div class="inputTop" style="padding-top: 10px; padding-left: 10px">
-			<span class="close-button" onclick="closeGroupChat()">&times;</span>
-			<div class="myProfile">
-				<div class="myimg">
-					<i class="fa-regular fa-comment"></i>
-				</div>
-				<div class="other">
-					<input id="groupName" value="${groupName}" style="border: none;"
-						disabled="disabled"> <!-- <input id="organization"
+			<input id="groupUserName" type="hidden" value="${name}"> <input
+				id="loginID" type="hidden" value="${loginId}"> <input
+				id="groupSeq" value="${groupSeq}">
+			<div class="inputTop" style="padding-top: 10px; padding-left: 10px">
+				<span class="close-button" onclick="closeGroupChat()">&times;</span>
+				<div class="myProfile">
+					<div class="myimg">
+						<i class="fa-regular fa-comment"></i>
+					</div>
+					<div class="other">
+						<input id="groupName" value="${groupName}" style="border: none;"
+							disabled="disabled">
+						<!-- <input id="organization"
 						value="${organization} " style="border: none;" disabled="disabled"> -->
+					</div>
+				</div>
+			</div>
+			<div class="chatGroupForm" style="position: relative;"></div>
+
+			<div id="messageForm">
+				<div class="chatBox">
+					<div class="inputText" id="groupinputText" contenteditable="true"
+						style="padding: 10px"></div>
+					<div>
+						<button id="sendGroupBtn">전송</button>
+					</div>
 				</div>
 			</div>
 		</div>
-		<div class="chatGroupForm" style="position: relative;"></div>
-		
-		<div id="messageForm">
-			<div class="chatBox">
-				<div class="inputText" id="groupinputText" contenteditable="true"
-					style="padding: 10px"></div>
-				<div>
-					<button id="sendGroupBtn">전송</button>
-				</div>
-			</div>
-		</div>
-	</div>
 
 	</div>
 	<script src="/js/chat/chatting.js" type="text/javascript"></script>
 	<script src="/js/chat/inputText.js" type="text/javascript"></script>
 	<script>
+	// 부서 목록을 가져오는 Ajax 요청
+	$.ajax({
+        url:'/members/getDepartmentList'
+     }).done(function(data){
+    	 $("#departmentSelect").empty();
+	        $("#departmentSelect").append('<option selected>부서 선택</option>');
+	        for (let i = 0; i < data.length; i++) {
+	            const departmentName = data[i];
+	            $("#departmentSelect").append('<option value="' + departmentName + '">' + departmentName + '</option>');
+	        }
+     });
+
 	//전체 인원수를 불러오는 코드
 	$.ajax({
 		type : "POST",
@@ -277,16 +292,26 @@
 	    pendingRoomName = prompt("방 이름을 입력하세요");
 	    if (pendingRoomName) {
 	        openGroupModal();
+	        $.ajax({
+	            url:'/members/getUserList'
+	         }).done(function(resp){
+	        	 $("#groupUserList").empty();
+	            for(let i=0;i<resp.length;i++){
+	               const userName = resp[i];
+	               $("#groupUserList").append('<li><input type="checkbox" id="' + userName + '">' + userName + '</li>');
+	            }
+	         });
 	    }
 	});
 
 	<!-- groupModalClose 클릭 이벤트 처리 -->
 	$("#groupModalClose").on("click", closeGroupModal);
 
-	<!-- 예제로 사용자와 체크박스를 모달에 추가 */
-	$("#groupUserList").append('<li><input type="checkbox" id="user1"> GroupUser1</li>');
-	$("#groupUserList").append('<li><input type="checkbox" id="user2"> GroupUser2</li>');
-	$("#groupUserList").append('<li><input type="checkbox" id="user3"> GroupUser3</li');
+	// 사용자 목록
+	
+
+
+
 
 	<!-- 사용자 선택 및 로직 처리 */
 	$("#groupUserList").on("change", "input[type=checkbox]", function() {
@@ -368,7 +393,7 @@ $("#selectUsersButton").on("click", function() {
 function updateGroupChatList() {
     $.ajax({
         type: "POST",
-        url: "/groupChatRooms/groupSelectAll",
+        url: "/groupChatRooms/InvitedGroups",
         dataType: "json",
         success: function(data) {
             // 성공 시 실행되는 콜백 함수

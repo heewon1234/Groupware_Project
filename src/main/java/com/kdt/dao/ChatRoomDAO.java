@@ -53,9 +53,9 @@ public class ChatRoomDAO {
 	public int oneCountAll(String  id) {
 	    return db.selectOne("oneChat.oneCountAll",id);
 	}
-	public List<OneToOneChatDTO> selectAll() {
+	public List<OneToOneChatDTO> selectAll(String id) {
 		System.out.println(db.selectList("oneChat.selectAll"));
-		return db.selectList("oneChat.selectAll");
+		return db.selectList("oneChat.selectAll",id);
 	}
 	public List<GroupChatDTO> groupSelectAll() {
 		System.out.println(db.selectList("oneChat.selectAll"));
