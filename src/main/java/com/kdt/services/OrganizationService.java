@@ -29,6 +29,8 @@ public class OrganizationService {
 	public List<String> getManagerList(String org) {
 		List<String> managerList = new ArrayList<>();
 		
+		managerList.add(org);
+		
 		String manager = dao.getManagerOrg(org);
 		
 		while(manager != null) {
