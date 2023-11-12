@@ -50,7 +50,7 @@ public class ApprovalController {
 	}
 	
 	@RequestMapping("/lists/wait")
-	public String listsWaut(Model model) throws Exception {
+	public String listsWait(Model model) throws Exception {
 		MembersDTO1 userDTO = (MembersDTO1) session.getAttribute("userDTO");
 		List<ApprovalDTO> appList = appService.selectWaitById(userDTO.getId());
 		
