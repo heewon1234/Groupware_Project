@@ -21,4 +21,8 @@
 		resultType="com.kdt.dto.GroupChatDTO">
 		select distinct groupName,groupSeq from GroupChat;
 	</select>
+	
+	<select id="searchGroup" resultType="com.kdt.dto.GroupChatDTO">
+		select distinct groupName,groupSeq from GroupChat where groupName like #{searchGroup}
+	</select>
 </mapper>

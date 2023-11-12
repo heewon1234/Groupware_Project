@@ -13,6 +13,7 @@ import com.kdt.dto.MembersDTO;
 import com.kdt.dto.MembersDTO1;
 import com.kdt.services.ApprovalService;
 import com.kdt.services.MembersService;
+import com.kdt.services.OrganizationService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -22,32 +23,46 @@ public class ApprovalController {
 	@Autowired
 	private HttpSession session;
 	@Autowired
-	private MembersService mService;
-	@Autowired
 	private ApprovalService appService;
+	@Autowired
+	private OrganizationService orgService;
 	
 
 	@RequestMapping("/write")
 	public String write(Model model) throws Exception {
 		MembersDTO1 userDTO = (MembersDTO1) session.getAttribute("userDTO");
-		List<MembersDTO> approvalMembers = mService.selectApprovalMembers(userDTO);
+		List<String> managerList = orgService.getManagerList(userDTO.getOrganization());
 		model.addAttribute("userDTO", userDTO);
-		model.addAttribute("approvalMembers", approvalMembers);
 		
-		System.out.println(approvalMembers);
+		System.out.println(managerList);
 		
 		return "/approval/document/write";
 	}
 	
 	@RequestMapping("/lists/all")
 	public String listsAll(Model model) throws Exception {
+		MembersDTO1 userDTO = (MembersDTO1) session.getAttribute("userDTO");
+		List<ApprovalDTO> appList = appService.selectById(userDTO.getId());
+		
+		model.addAttribute("appList", appList);
+		
 		return "/approval/document/lists/all";
+	}
+	
+	@RequestMapping("/lists/wait")
+	public String listsWait(Model model) throws Exception {
+		MembersDTO1 userDTO = (MembersDTO1) session.getAttribute("userDTO");
+		List<ApprovalDTO> appList = appService.selectWaitById(userDTO.getId());
+		
+		model.addAttribute("appList", appList);
+		
+		return "/approval/document/lists/wait";
 	}
 	
 	@RequestMapping("/insertApproval")
 	public String insertApproval(String title, String contents, MultipartFile[] files) throws Exception {
 		MembersDTO1 userDTO = (MembersDTO1) session.getAttribute("userDTO");
-		ApprovalDTO appdto = new ApprovalDTO(0, userDTO.getId(), title, contents, false);
+		ApprovalDTO appdto = new ApprovalDTO(0, userDTO.getId(), title, contents, null, "Wait");
 		String uploadPath = "c:/uploads";
 		
 		System.out.println(files);

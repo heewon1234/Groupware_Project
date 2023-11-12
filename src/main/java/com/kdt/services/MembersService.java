@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.kdt.dao.MembersDAO;
 import com.kdt.dto.MembersDTO;
-import com.kdt.dto.MembersDTO1;
 
 @Service
 public class MembersService {
@@ -92,7 +91,17 @@ public class MembersService {
 		return mdao.selectWorkForm();
 	}
 	
-	public List<MembersDTO> selectApprovalMembers(MembersDTO1 dto) {
-		return mdao.selectApprovalMembers(dto);
+	public List<MembersDTO> selectApprovalMembers(String position) {
+		return mdao.selectApprovalMembers(position);
+	}
+	
+	public List<MembersDTO> selectAllNotLogged(String loggedInUserID) {
+		return mdao.selectAllNotLogged(loggedInUserID);
+	}
+	public List<MembersDTO> getMembersByOrganization(String organization,String id) {
+		return mdao.getMembersByOrganization(organization,id);
+	}
+	public MembersDTO loginUser(String id) {
+		return mdao.loginUser(id);
 	}
 }

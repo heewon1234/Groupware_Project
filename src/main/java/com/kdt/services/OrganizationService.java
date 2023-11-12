@@ -1,5 +1,6 @@
 package com.kdt.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +24,18 @@ public class OrganizationService {
 	
 	public int delete(String organization) {
 		return dao.delete(organization);
+	}
+	
+	public List<String> getManagerList(String org) {
+		List<String> managerList = new ArrayList<>();
+		
+		String manager = dao.getManagerOrg(org);
+		
+		while(manager != null) {
+			managerList.add(manager);
+			manager = dao.getManagerOrg(manager);
+		}
+		
+		return managerList;
 	}
 }

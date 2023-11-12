@@ -1,23 +1,27 @@
 package com.kdt.dto;
 
+import java.sql.Timestamp;
+
 public class ApprovalDTO {
 	private int seq;
 	private String id;
 	private String title;
 	private String contents;
-	private boolean confirm;
+	private Timestamp draft_date;
+	private String status;
 	
 	
 	public ApprovalDTO() {
 		super();
 	}
-	public ApprovalDTO(int seq, String id, String title, String contents, boolean confirm) {
+	public ApprovalDTO(int seq, String id, String title, String contents, Timestamp draft_date, String status) {
 		super();
 		this.seq = seq;
 		this.id = id;
 		this.title = title;
 		this.contents = contents;
-		this.confirm = confirm;
+		this.draft_date = draft_date;
+		this.status = status;
 	}
 	public int getSeq() {
 		return seq;
@@ -43,12 +47,17 @@ public class ApprovalDTO {
 	public void setContents(String contents) {
 		this.contents = contents;
 	}
-	public boolean isConfirm() {
-		return confirm;
+	public Timestamp getDraft_date() {
+		return draft_date;
 	}
-	public void setConfirm(boolean confirm) {
-		this.confirm = confirm;
+	public void setDraft_date(Timestamp draft_date) {
+		this.draft_date = draft_date;
 	}
-	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	
 }
