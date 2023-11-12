@@ -42,6 +42,7 @@ public class Mk_BoardController {
 
 	@RequestMapping("Mk_boardInsert")
 	public String Mk_boardInsert(Mk_BoardDTO dto, String headerList, String authorityList) {
+		dto.setId((String)session.getAttribute("loginId"));
 		mservice.Mk_boardInsert(dto, headerList, authorityList);
 		return "redirect:/board/toBoard";
 	}

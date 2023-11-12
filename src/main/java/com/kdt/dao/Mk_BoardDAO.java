@@ -31,7 +31,6 @@ public class Mk_BoardDAO {
 	
 	//게시판 생성 관련
 	public int Mk_boardInsert(Mk_BoardDTO dto) {
-		dto.setId("test1");
 		return db.insert("Mk_Board.Mk_boardInsert",dto);
 	}
 	public int createTable(String sql) {

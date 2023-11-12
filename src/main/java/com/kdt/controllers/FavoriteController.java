@@ -23,16 +23,16 @@ public class FavoriteController {
 	@ResponseBody
 	@RequestMapping("insertFav")
 	public int insertFav(FavoriteBoardDTO dto) {
-		//String id = (String)session.getAttribute("loginID");
-		dto.setId("test1");
+		String id = (String)session.getAttribute("loginId");
+		dto.setId(id);
 		return fservice.insertFav(dto);
 	}
 	
 	@ResponseBody
 	@RequestMapping("delFavContents")
 	public int delFavContents(FavoriteBoardDTO dto) {
-		//String id = (String)session.getAttribute("loginID");
-		dto.setId("test1");
+		String id = (String)session.getAttribute("loginID");
+		dto.setId(id);
 		return fservice.delFavContents(dto);
 	}
 	
