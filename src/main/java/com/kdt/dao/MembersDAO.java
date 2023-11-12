@@ -1,5 +1,6 @@
 package com.kdt.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -58,5 +59,18 @@ public class MembersDAO {
 	
 	public List<MembersDTO> selectApprovalMembers(String position) {
 		return db.selectList("Members.selectApprovalMembers", position);
+	}
+	
+	public List<MembersDTO> selectAllNotLogged(String loggedInUserID){ 
+		return db.selectList("Members.selectAllNotLogged",loggedInUserID); 
+	}
+	public List<MembersDTO> getMembersByOrganization(String organization,String id){ 
+		Map<String, Object> parameters = new HashMap<>();
+	    parameters.put("organization", organization);
+	    parameters.put("id", id);
+		return db.selectList("Members.getMembersByOrganization", parameters); 
+	}
+	public MembersDTO loginUser(String id){ 
+		return db.selectOne("Members.loginUser", id); 
 	}
 }

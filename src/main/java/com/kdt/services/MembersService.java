@@ -94,4 +94,14 @@ public class MembersService {
 	public List<MembersDTO> selectApprovalMembers(String position) {
 		return mdao.selectApprovalMembers(position);
 	}
+	
+	public List<MembersDTO> selectAllNotLogged(String loggedInUserID) {
+		return mdao.selectAllNotLogged(loggedInUserID);
+	}
+	public List<MembersDTO> getMembersByOrganization(String organization,String id) {
+		return mdao.getMembersByOrganization(organization,id);
+	}
+	public MembersDTO loginUser(String id) {
+		return mdao.loginUser(id);
+	}
 }

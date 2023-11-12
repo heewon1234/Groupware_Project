@@ -44,4 +44,31 @@
 	<select id="selectWorkForm" resultType="String">
 		SELECT DISTINCT work_form FROM Members
 	</select>
+<<<<<<< HEAD
+=======
+	
+	<select id="selectApprovalMembers" resultType="com.kdt.dto.MembersDTO">
+		SELECT m.*
+		FROM Members m
+		JOIN JOB_TITLE jt ON m.position = jt.POSITION
+		WHERE jt.JOB_RANK > (SELECT JOB_RANK FROM JOB_TITLE WHERE POSITION = #{position})
+		ORDER BY jt.JOB_RANK DESC;
+	</select>
+	
+	<select id="selectAllNotLogged" resultType="com.kdt.dto.MembersDTO">
+		select * from Members where id != #{loggedInUserID}
+	</select>
+	
+	<select id="getMembersByOrganization" resultType="com.kdt.dto.MembersDTO">
+		SELECT * FROM Members where organization = #{organization} AND id != #{id}
+	</select>
+	
+	<select id="loginUser" resultType="com.kdt.dto.MembersDTO">
+		SELECT * FROM Members where id = #{id}
+	</select>
+	
+	<select id="searchUser" resultType="com.kdt.dto.MembersDTO">
+		SELECT * FROM Members where name like #{searchValue}
+	</select>
+>>>>>>> ee47b50c8ba4f46cb44e46b041173c6a184215ee
 </mapper>
