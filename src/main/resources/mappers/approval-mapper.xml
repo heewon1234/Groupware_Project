@@ -6,7 +6,10 @@
 	<select id="selectById" resultType="com.kdt.dto.ApprovalDTO">
 		SELECT * FROM Approval WHERE id = #{id} 
 	</select>
+	<select id="selectWaitById" resultType="com.kdt.dto.ApprovalDTO">
+		SELECT * FROM Approval WHERE id = #{id} AND status = 'Wait'
+	</select>
 	<insert id="insert" useGeneratedKeys="true" keyProperty="seq">
-		insert into Approval values (null,#{id},#{title},#{contents}, now(), false)
+		insert into Approval values (null,#{id},#{title},#{contents}, now(), 'Wait')
 	</insert>
 </mapper>

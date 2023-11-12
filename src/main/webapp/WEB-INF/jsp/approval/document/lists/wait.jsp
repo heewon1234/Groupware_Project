@@ -42,6 +42,6 @@
 			</div>
 		</div>
 	</div>
-	<script src="/js/approval/document/lists/all.js"></script>
+	<script src="/js/approval/document/lists/wait.js"></script>
 </body>
 </html>

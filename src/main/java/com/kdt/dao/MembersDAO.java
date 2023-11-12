@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kdt.dto.MembersDTO;
-import com.kdt.dto.MembersDTO1;
 
 @Repository
 public class MembersDAO {
@@ -57,7 +56,7 @@ public class MembersDAO {
 		return db.selectList("Members.selectWorkForm");
 	}
 	
-	public List<MembersDTO> selectApprovalMembers(MembersDTO1 dto) {
-		return db.selectList("Members.selectApprovalMembers", dto);
+	public List<MembersDTO> selectApprovalMembers(String position) {
+		return db.selectList("Members.selectApprovalMembers", position);
 	}
 }
