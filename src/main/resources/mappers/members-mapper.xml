@@ -43,7 +43,7 @@
 	<select id="selectWorkForm" resultType="String">
 		SELECT * FROM Work_Form
 	</select>
-	
+
 	<select id="selectApprovalMembers" resultType="com.kdt.dto.MembersDTO">
 		SELECT m.*
 		FROM Members m

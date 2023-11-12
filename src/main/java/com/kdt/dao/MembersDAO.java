@@ -57,8 +57,8 @@ public class MembersDAO {
 		return db.selectList("Members.selectWorkForm");
 	}
 	
-	public List<MembersDTO> selectApprovalMembers(MembersDTO dto) {
-		return db.selectList("Members.selectApprovalMembers", dto);
+	public List<MembersDTO> selectApprovalMembers(String position) {
+		return db.selectList("Members.selectApprovalMembers", position);
 	}
 	
 	public List<MembersDTO> selectAllNotLogged(String loggedInUserID){ 

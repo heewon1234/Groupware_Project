@@ -91,8 +91,8 @@ public class MembersService {
 		return mdao.selectWorkForm();
 	}
 	
-	public List<MembersDTO> selectApprovalMembers(MembersDTO dto) {
-		return mdao.selectApprovalMembers(dto);
+	public List<MembersDTO> selectApprovalMembers(String position) {
+		return mdao.selectApprovalMembers(position);
 	}
 	
 	public List<MembersDTO> selectAllNotLogged(String loggedInUserID) {

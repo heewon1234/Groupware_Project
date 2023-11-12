@@ -42,17 +42,27 @@ public class ApprovalController {
 	@RequestMapping("/lists/all")
 	public String listsAll(Model model) throws Exception {
 		MembersDTO1 userDTO = (MembersDTO1) session.getAttribute("userDTO");
-		List<ApprovalDTO> appList = appService.selectBtId(userDTO.getId());
+		List<ApprovalDTO> appList = appService.selectById(userDTO.getId());
 		
 		model.addAttribute("appList", appList);
 		
 		return "/approval/document/lists/all";
 	}
 	
+	@RequestMapping("/lists/wait")
+	public String listsWait(Model model) throws Exception {
+		MembersDTO1 userDTO = (MembersDTO1) session.getAttribute("userDTO");
+		List<ApprovalDTO> appList = appService.selectWaitById(userDTO.getId());
+		
+		model.addAttribute("appList", appList);
+		
+		return "/approval/document/lists/wait";
+	}
+	
 	@RequestMapping("/insertApproval")
 	public String insertApproval(String title, String contents, MultipartFile[] files) throws Exception {
 		MembersDTO1 userDTO = (MembersDTO1) session.getAttribute("userDTO");
-		ApprovalDTO appdto = new ApprovalDTO(0, userDTO.getId(), title, contents, null, false);
+		ApprovalDTO appdto = new ApprovalDTO(0, userDTO.getId(), title, contents, null, "Wait");
 		String uploadPath = "c:/uploads";
 		
 		System.out.println(files);

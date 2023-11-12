@@ -8,19 +8,20 @@ public class ApprovalDTO {
 	private String title;
 	private String contents;
 	private Timestamp draft_date;
-	private boolean confirm;
+	private String status;
+	
 	
 	public ApprovalDTO() {
 		super();
 	}
-	public ApprovalDTO(int seq, String id, String title, String contents, Timestamp draft_date, boolean confirm) {
+	public ApprovalDTO(int seq, String id, String title, String contents, Timestamp draft_date, String status) {
 		super();
 		this.seq = seq;
 		this.id = id;
 		this.title = title;
 		this.contents = contents;
 		this.draft_date = draft_date;
-		this.confirm = confirm;
+		this.status = status;
 	}
 	public int getSeq() {
 		return seq;
@@ -52,11 +53,11 @@ public class ApprovalDTO {
 	public void setDraft_date(Timestamp draft_date) {
 		this.draft_date = draft_date;
 	}
-	public boolean isConfirm() {
-		return confirm;
+	public String getStatus() {
+		return status;
 	}
-	public void setConfirm(boolean confirm) {
-		this.confirm = confirm;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 }
