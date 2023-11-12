@@ -72,12 +72,16 @@ function showSearchContainer() {
 }
 
 function hideSearchContainer() {
+    var searchValue = $("#search_input");
+    var groupValue = $("#searchGroup_input");
+    searchValue.val('');
+    groupValue.val('');
     $(".search_container").css("display", "none");
 }
 
 function searchUser() {
     // 입력된 검색어 가져오기
-    var searchValue = document.getElementById("search_input").value;
+    var searchValue = $("#search_input").val();
 
     // AJAX를 사용하여 검색어를 컨트롤러로 전송
     $.ajax({
@@ -131,12 +135,71 @@ function searchUser() {
     $row.append($nameCell);
 
     $("#friend_list").append($row);
+    
 });
 
 },
 
         error: function (error) {
             console.error("Search failed:", error);
+        }
+    });
+}
+
+function searchGroup() {
+    var groupValue = $("#searchGroup_input").val();
+    $.ajax({
+        type: "POST",
+        url: "/groupChatRooms/searchGroup",
+        contentType: "application/x-www-form-urlencoded",
+        data: { groupValue: groupValue },
+        success: function(data) {
+            // 성공 시 실행되는 콜백 함수
+            console.log("group방 업데이트" + data);
+            var $chatroom_list = $(".chatroom_list");
+
+            // 데이터를 비우고 새로 받아온 데이터로 업데이트
+            $chatroom_list.empty();
+
+            // groupName을 사용하여 각 그룹을 friend_list에 추가
+            data.forEach(function(group) {
+                var $row = $("<div>").addClass("table-row");
+
+                // 그룹 아이콘 (여기서는 임의로 설정한 아이콘 사용)
+                var $iconCell = $("<div>")
+                        .html('<i class="fa-regular fa-comment"></i>')
+                        .css("display", "inline-block");
+
+                // 그룹 이름을 표시하는 셀
+                var $nameCell = $("<div>")
+                        .text(group.groupName)
+                        .addClass("groupChat")
+                        .css("display", "inline-block")
+                        .css("cursor", "pointer");
+
+                // 클릭 이벤트 처리
+                $nameCell.on("click", function() {
+                    // 클릭 시 실행할 로직 추가
+                    console.log("Clicked group:", group.groupName);
+                    groupChat(group.groupName, group.groupSeq);
+                    console.log(group.groupSeq);
+                    
+                });
+
+                // 행에 아이콘과 그룹 이름 셀을 추가
+                $row.append($iconCell);
+                $row.append($nameCell);
+
+                // friend_list에 행 추가
+                $chatroom_list.append($row);
+                
+            });
+
+            // 여기서 받아온 데이터(data)를 사용하여 화면에 표시하는 로직을 추가할 수 있음
+        },
+        error: function(xhr, status, error) {
+            // 실패 시 실행되는 콜백 함수
+            console.error("AJAX request failed:", status, error);
         }
     });
 }

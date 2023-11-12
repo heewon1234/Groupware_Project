@@ -139,7 +139,7 @@
 							<div id="searchBox">
 								<img alt="" src="/images/chats/search.svg"
 									onclick="searchGroup()"> <input id="searchGroup_input"
-									type="text" placeholder="채팅방 참여자 검색"> <img id="x"
+									type="text" placeholder="채팅방 검색" style="border: none;"> <img id="x"
 									alt="" src="/images/chats/x.svg"
 									onclick="hideSearchContainer()">
 							</div>
