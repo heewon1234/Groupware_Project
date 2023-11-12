@@ -19,6 +19,7 @@ import com.kdt.dto.OneToOneChatDTO;
 import com.kdt.services.ChatRoomService;
 import com.kdt.services.MembersService;
 import com.kdt.services.MembersService1;
+import com.kdt.utils.EncryptionUtils;
 import com.kdt.utils.UUIDToNumber;
 
 import jakarta.servlet.http.HttpSession;
@@ -40,8 +41,8 @@ public class MembersController {
 	
 	@RequestMapping("login")
 	public String login(String id, String pw) throws Exception{
-		//String shapw = EncryptionUtils.getSHA512(pw);
-		boolean result = this.mservice.isMember(id,pw);
+		String shapw = EncryptionUtils.getSHA512(pw);
+		boolean result = this.mservice.isMember(id,shapw);
 		if(result) {
 			session.setAttribute("loginId",id);
 			MembersDTO1 userDTO = mservice1.loginUser(id);
@@ -60,7 +61,7 @@ public class MembersController {
 		        session.setAttribute("userDTO", userDTO);
 
 		    }
-			return "home";
+			return "redirect:/";
 		}
 		
 		
@@ -82,7 +83,8 @@ public class MembersController {
 	
 	@RequestMapping("signup")
 	public String signup(String name, String id, String pw, String workForm, String org, String position, String jobName) throws Exception{
-		MembersDTO dto = new MembersDTO(id,pw,name,workForm,org,jobName,position,null,null,null,null,null,null);
+		String shapw = EncryptionUtils.getSHA512(pw);
+		MembersDTO dto = new MembersDTO(id,shapw,name,workForm,org,jobName,position,null,null,null,null,null,null);
 		this.mservice.signup(dto);
 		return "redirect:/insa/manage/members";
 	}
