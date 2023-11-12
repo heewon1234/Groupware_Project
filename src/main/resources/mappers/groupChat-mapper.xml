@@ -19,7 +19,7 @@
 	<!-- 방이름 불러오는 코드 -->
 	<select id="groupSelectAll"
 		resultType="com.kdt.dto.GroupChatDTO">
-		select distinct groupName,groupSeq from GroupChat;
+		select * from GroupChat;
 	</select>
 	
 	<select id="searchGroup" resultType="com.kdt.dto.GroupChatDTO">

@@ -104,4 +104,10 @@ public class MembersService {
 	public MembersDTO loginUser(String id) {
 		return mdao.loginUser(id);
 	}
+	public List<MembersDTO> getUserList() {
+		return mdao.getUserList();
+	}
+	public List<String> getDepartmentList() {
+		return mdao.getDepartmentList();
+	}
 }

@@ -33,8 +33,8 @@ public class ChatRoomService {
 	    return dao.oneCountAll(id);
 	}
 	//selectAll
-	public List<OneToOneChatDTO> selectAll() throws Exception {
-		return dao.selectAll();
+	public List<OneToOneChatDTO> selectAll(String id) throws Exception {
+		return dao.selectAll(id);
 	}
 	//groupselectAll
 	public List<GroupChatDTO> groupSelectAll() throws Exception {
