@@ -5,7 +5,7 @@
   
 <mapper namespace="Members">
 	<select id="isMember" resultType="boolean">
-		select (count(*) > 0) from members1 where id=#{id} and pw=#{pw}
+		select (count(*) > 0) from Members where id=#{id} and pw=#{pw}
 	</select>
 	
 	<select id="idCheck" resultType="boolean">
@@ -16,9 +16,8 @@
 		insert into Members values(#{id},#{pw},#{name},#{work_form},#{organization},#{job_name},#{position},null,null,null,null,null,null)
 	</insert>
 	
-	<!-- Members로 바꿔줘야됨~ -->
 	<select id="getOrganization" resultType="String">
-		select organization from members1 where id=#{value}
+		select organization from Members where id=#{value}
 	</select>
 	
 	<select id="selectAll" resultType="com.kdt.dto.MembersDTO">
@@ -42,7 +41,7 @@
 	</delete>
 	
 	<select id="selectWorkForm" resultType="String">
-		SELECT DISTINCT work_form FROM Members
+		SELECT * FROM Work_Form
 	</select>
 	
 	<select id="selectApprovalMembers" resultType="com.kdt.dto.MembersDTO">
