@@ -30,7 +30,7 @@ public class ApprovalController {
 
 	@RequestMapping("/write")
 	public String write(Model model) throws Exception {
-		MembersDTO1 userDTO = (MembersDTO1) session.getAttribute("userDTO");
+		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");
 		List<String> managerList = orgService.getManagerList(userDTO.getOrganization());
 		model.addAttribute("userDTO", userDTO);
 		

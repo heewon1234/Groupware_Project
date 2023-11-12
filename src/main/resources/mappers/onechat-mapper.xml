@@ -29,7 +29,7 @@
 		SELECT COUNT(oneSeq) FROM OneToOneChat WHERE loggedInUserID =#{id}
 	</select>
 	<select id="selectAll" resultType="com.kdt.dto.OneToOneChatDTO">
-		SELECT * FROM OneToOneChat;
+		SELECT * FROM OneToOneChat WHERE loggedInUserID =#{id};
 	</select>
 	<select id="searchUser" resultType="com.kdt.dto.OneToOneChatDTO">
 		SELECT * FROM OneToOneChat;

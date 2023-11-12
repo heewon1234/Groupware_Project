@@ -19,6 +19,7 @@ import com.kdt.dto.OneToOneChatDTO;
 import com.kdt.services.ChatRoomService;
 import com.kdt.services.MembersService;
 import com.kdt.services.MembersService1;
+import com.kdt.utils.EncryptionUtils;
 import com.kdt.utils.UUIDToNumber;
 
 import jakarta.servlet.http.HttpSession;
@@ -40,11 +41,11 @@ public class MembersController {
 	
 	@RequestMapping("login")
 	public String login(String id, String pw) throws Exception{
-		//String shapw = EncryptionUtils.getSHA512(pw);
-		boolean result = this.mservice.isMember(id,pw);
+		String shapw = EncryptionUtils.getSHA512(pw);
+		boolean result = this.mservice.isMember(id,shapw);
 		if(result) {
 			session.setAttribute("loginId",id);
-			MembersDTO1 userDTO = mservice1.loginUser(id);
+			MembersDTO userDTO = mservice.loginUser(id);
 		    System.out.println(userDTO);
 		    if (userDTO != null) {
 		        // DTO에서 이름과 부서 가져오기
@@ -60,7 +61,7 @@ public class MembersController {
 		        session.setAttribute("userDTO", userDTO);
 
 		    }
-			return "home";
+			return "redirect:/";
 		}
 		
 		
@@ -82,7 +83,8 @@ public class MembersController {
 	
 	@RequestMapping("signup")
 	public String signup(String name, String id, String pw, String workForm, String org, String position, String jobName) throws Exception{
-		MembersDTO dto = new MembersDTO(id,pw,name,workForm,org,jobName,position,null,null,null,null,null,null);
+		String shapw = EncryptionUtils.getSHA512(pw);
+		MembersDTO dto = new MembersDTO(id,shapw,name,workForm,org,jobName,position,null,null,null,null,null,null);
 		this.mservice.signup(dto);
 		return "redirect:/insa/manage/members";
 	}
@@ -137,14 +139,12 @@ public class MembersController {
 		    if (!roomService.oneroomExists(loggedInUserID, otherUserID)) {
 		        System.out.println(roomService.oneroomExists(loggedInUserID, otherUserID));
 		        int oneSeq = UUIDToNumber.convertUUIDToPositiveInt();
-		        System.out.println(oneSeq);
 		        roomService.createOneChatRoom(loggedInUserID, otherUserID,oneSeq);
 		        // 나머지 로직 추가 가능
 		    }
 		}
 
-		List<OneToOneChatDTO> OneToOneChatDTOList = roomService.selectAll();
-		System.out.println(OneToOneChatDTOList);
+		List<OneToOneChatDTO> OneToOneChatDTOList = roomService.selectAll(loggedInUserID);
 		Map<String, Object> responseData = new HashMap<>();
 		responseData.put("list", list);
 		responseData.put("OneToOneChatDTOList", OneToOneChatDTOList);
@@ -158,11 +158,27 @@ public class MembersController {
 		String id = (String) session.getAttribute("loginId");
 		List<MembersDTO> members = mservice.getMembersByOrganization(organization,id);
 
-		List<OneToOneChatDTO> OneToOneChatDTOList = roomService.selectAll();
-		System.out.println(OneToOneChatDTOList);
+		List<OneToOneChatDTO> OneToOneChatDTOList = roomService.selectAll(id);
 		Map<String, Object> responseData = new HashMap<>();
 		responseData.put("members", members);
 		responseData.put("OneToOneChatDTOList", OneToOneChatDTOList);
 		return responseData;
+	}
+	@RequestMapping("getUserList")
+	@ResponseBody
+	public List<String> getUserList() throws Exception {
+		List<MembersDTO> membersList = mservice.getUserList();
+		List<String> memberNames = new ArrayList<>();
+        for (MembersDTO member : membersList) {
+            String memberName = member.getName();
+            memberNames.add(memberName);
+        }
+		return memberNames;
+	}
+	@RequestMapping("getDepartmentList")
+	@ResponseBody
+	public List<String> getDepartmentList() throws Exception {
+		System.out.println(mservice.getDepartmentList());
+		return mservice.getDepartmentList();
 	}
 }
