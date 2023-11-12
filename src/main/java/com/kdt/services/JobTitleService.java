@@ -24,4 +24,8 @@ public class JobTitleService {
 	public int delete(String position) {
 		return dao.delete(position);
 	}
+	
+	public List<String> getManagerJobTitle(String position) {
+		return dao.getManagerJobTitle(position);
+	}
 }
