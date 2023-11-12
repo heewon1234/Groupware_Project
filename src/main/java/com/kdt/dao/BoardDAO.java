@@ -68,12 +68,12 @@ public class BoardDAO {
 	//
 	
 	// 게시글 불러오기
-	public List<BoardDTO> boardContentsList(String board_title){
-		return db.selectList("Board.boardContentsList",board_title);
+	public List<BoardDTO> boardContentsList(Map<String,String> map){
+		return db.selectList("Board.boardContentsList",map);
 	}
 	
-	public BoardDTO boardContents(Map<String,String> map) {
-		return db.selectOne("Board.boardContents",map);
+	public BoardDTO boardContents(BoardDTO dto) {
+		return db.selectOne("Board.boardContents",dto);
 	}
 	
 	public List<BoardDTO> FavoriteAllContentsList(Map<String,String> map){

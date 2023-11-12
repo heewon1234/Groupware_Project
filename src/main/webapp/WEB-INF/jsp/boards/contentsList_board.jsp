@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="/css/commons/topForm.css" />
     <link rel="stylesheet" href="/css/board/board_favorite.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/js/commons/body_form/body_form_default.js"></script>
+    <script src="/js/commons/body_form/body_form_default.js" defer></script>
 </head>
 <body>
 	<div class="top">TOP</div>
@@ -38,17 +38,28 @@
                     <div class="board_body">
                     	<c:forEach var="i" items="${boardContentsList}">
                     		<div class="board_contents_list">
-                            	<div class="favorite">
-                                	<img src="/images/board/notFavorite.png">
+                            	<div class="favorite" data-index='${i.seq }'>
+                            		<c:choose>
+                            			<c:when test="${i.favorite }">
+                            				<img src="/images/commons/body_form/left_item/default/favorites.png" >
+                            			</c:when>
+                            			<c:otherwise>
+                            				<img src="/images/board/notFavorite.png" >
+                            			</c:otherwise>
+                            		</c:choose>
+                                	
                             	</div>
                             	<div class="board_contents_title">
                             		<a href="/board/toContentsBoard?seq=${i.seq }">
-                            			<span>${i.header }&nbsp;&nbsp;</span>${i.title }
+                            			<c:if test="${i.header==''}">
+                            				<span>${i.header }&nbsp;&nbsp;</span>
+                            			</c:if>
+                            				${i.title }
                             		</a>
                             	</div>
                            		<div class="board_contents_writer">${i.writer }</div>
                             	<div class="view_count">${i.view_count }</div>
-                          	  	<div class="board_title">${board_title}</div>
+                          	  	<div class="board_title">${i.board_title}</div>
                             	<div class="board_contents_write_date">${i.write_date }</div>
                         	</div>
                     	</c:forEach>
@@ -61,6 +72,6 @@
         </div>
     </div>
 	<script src="/js/board/sideBar.js" defer></script>
-    <script src="/js/board/favorite_board.js" defer></script>
+    <script src="/js/board/contentsList_board.js" defer></script>
 </body>
 </html>

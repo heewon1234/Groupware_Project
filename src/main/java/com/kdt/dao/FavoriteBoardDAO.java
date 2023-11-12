@@ -12,6 +12,11 @@ public class FavoriteBoardDAO {
 	@Autowired
 	private SqlSession db;
 	
+	public int insertFav(FavoriteBoardDTO dto) {
+		db.insert("Favorite_Board.insertFav",dto);
+		return dto.getSeq();
+	}
+	
 	public int delFavContents(FavoriteBoardDTO dto) {
 		return db.delete("Favorite_Board.delFavContents",dto);
 	}

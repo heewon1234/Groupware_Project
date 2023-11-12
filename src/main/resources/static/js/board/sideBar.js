@@ -14,7 +14,7 @@ $(document).on("click","#toMkBoardBtn",function(){
 });
 
 $(document).on("click","#toFavoriteBoardBtn",function(){
-	location.href="/board/toBoard";
+	location.href="/board/toBoard?board_title=중요게시물";
 });
 
 $(document).on("click","#toEditBoardBtn",function(){

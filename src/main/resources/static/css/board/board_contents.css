@@ -174,3 +174,5 @@
     margin-bottom:10px;
 }
 
+.updateCancelBtn,.updateSuccessBtn{display:none;}
+

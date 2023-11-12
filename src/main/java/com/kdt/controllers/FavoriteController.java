@@ -1,0 +1,39 @@
+package com.kdt.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.kdt.dto.FavoriteBoardDTO;
+import com.kdt.services.FavoriteService;
+
+import jakarta.servlet.http.HttpSession;
+
+@Controller
+@RequestMapping("/favorite/")
+public class FavoriteController {
+	
+	@Autowired
+	HttpSession session;
+	
+	@Autowired
+	FavoriteService fservice;
+	
+	@ResponseBody
+	@RequestMapping("insertFav")
+	public int insertFav(FavoriteBoardDTO dto) {
+		//String id = (String)session.getAttribute("loginID");
+		dto.setId("test1");
+		return fservice.insertFav(dto);
+	}
+	
+	@ResponseBody
+	@RequestMapping("delFavContents")
+	public int delFavContents(FavoriteBoardDTO dto) {
+		//String id = (String)session.getAttribute("loginID");
+		dto.setId("test1");
+		return fservice.delFavContents(dto);
+	}
+	
+}

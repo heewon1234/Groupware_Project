@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="/css/commons/topForm.css" />
     <link rel="stylesheet" href="/css/board/board_contents.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="js/commons/body_form/body_form_default.js"></script>
+    <script src="/js/commons/body_form/body_form_default.js" defer></script>
 </head>
 <body>
 	<div class="top">TOP</div>
@@ -53,7 +53,7 @@
                 </div>
                 <div class="reply_box">
                 	<form action="/reply/insertReply" method="post">
-                		<input type="hidden" name="parent_seq" value="${boardContents.seq }">
+                		<input type="hidden" name="parent_seq" value='${boardContents.seq }'>
                     	<div class="input_reply_box">
                       		<div class="reply_profile">
                        	    	<img src="/images/commons/body_form/left_item/default/information.png" />
@@ -67,21 +67,37 @@
                     	</div>
                     </form>
                     <div class="reply_list_box">
-						<c:forEach items="${replyList }" var="i">
-							<div class="reply_list" data-index="${replyList.seq }">
-    							<div class="reply_list_info">
-        							<div>${i.writer }</div>
-        							<div>${i.write_date }</div>
-    							</div>
-    							<div class="reply_list_contents">
-        							${i.contents }
-    							</div>
-    							<div class="reply_list_edit_buttons">
-    								<button class="replyDelBtn">삭제</button>
-        							<button class="replyUpdateBtn">수정</button>
-    							</div>
-							</div>	
-						</c:forEach>
+                    	<c:choose>
+                    		<c:when test="${replyList.size()>0 }"> 
+                    			<form action="/reply/updateReply" method="post">  
+                    				<input type="hidden" name="parent_seq" value='${boardContents.seq }'>               			
+                    				<c:forEach items="${replyList }" var="i">
+										<div class="reply_list" data-index='${i.seq }'>
+    										<div class="reply_list_info">
+    											<input type="hidden" name="seq" value='${i.seq }'>
+        										<div>${i.writer }</div>
+        										<div>${i.write_date }</div>
+    										</div>
+    										<div class="reply_list_contents">
+        										${i.contents }
+    										</div>
+    										<div class="reply_list_edit_buttons">
+    											<button class="replyDelBtn" type="button">삭제</button>
+        										<button class="replyUpdateBtn" type="button">수정</button>
+        										<button class="updateCancelBtn" type="button">취소</button>
+        										<button class="updateSuccessBtn">수정완료</button>
+    										</div>
+										</div>	
+									</c:forEach>
+								</form> 
+                    		</c:when>
+                    		<c:otherwise>
+                    			<div class="reply_list" text-align="center">
+                    				댓글 없음
+                    			</div>
+                    		</c:otherwise>
+                    	</c:choose>
+						
                     </div>
                 </div>
             </div>

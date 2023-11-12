@@ -54,20 +54,19 @@ public class BoardController {
 		
 		if(board_title==null) {
 			if(session.getAttribute("board_title")==null) {
-				board_title="중요 게시물";
+				board_title="중요게시물";
 			} else {
 				board_title=(String)session.getAttribute("board_title");
 			}
 			
 		}
-		//String id = (String)session.getAttribute("loginID");
-		String id="test1";
+		String id = (String)session.getAttribute("loginId");
 		session.setAttribute("board_title", board_title);
 		List<BoardDTO> boardContentsList;
-		if(board_title.equals("중요 게시물")) {
+		if(board_title.equals("중요게시물")) {
 			boardContentsList = bservice.FavoriteAllContentsList(board_title,id);
 		} else {
-			boardContentsList = bservice.boardContentsList(board_title);
+			boardContentsList = bservice.boardContentsList(board_title,id);
 		}
 		
 		model.addAttribute("boardContentsList",boardContentsList);
@@ -76,10 +75,8 @@ public class BoardController {
 	
 	@RequestMapping("toContentsBoard") // 게시글 내용 보는 곳으로 이동
 	public String toContentsBoard(String seq, Model model) {
-		System.out.println("seq:"+seq);
 		String board_title = (String)session.getAttribute("board_title");
 		List<ReplyDTO> replyList = rservice.replyList(board_title, seq);
-		System.out.println("2");
 		model.addAttribute("replyList",replyList);
 		BoardDTO boardContents = bservice.boardContents(board_title, seq);
 		model.addAttribute("boardContents",boardContents);
@@ -89,8 +86,7 @@ public class BoardController {
 	// C 관련 기능
 	@RequestMapping("toWriteContentsBoard") // 게시글 작성하는 곳 이동
 	public String toWriteContentsBoard(Model model) {
-		//String id = (String)session.getAttribute("loginID");
-		String id = "test1";
+		String id = (String)session.getAttribute("loginId");
 		List<String> boardList = aservice.selectAuthBoard(id);
 		model.addAttribute("boardList",boardList);
 		return "boards/write_contents_board";
@@ -98,8 +94,8 @@ public class BoardController {
 
 	@RequestMapping("insertBoardContents") // 게시글 등록
 	public String insertBoardContents(BoardDTO dto,String[] items) {
-		//String writer = (String)session.getAttribute("loginID");
-		dto.setWriter("test1");
+		String writer = (String)session.getAttribute("loginId");
+		dto.setWriter(writer);
 		bservice.insertBoardContents(dto, items);
 		
 		String board_title=(String)session.getAttribute("board_title");
@@ -121,8 +117,7 @@ public class BoardController {
 	@RequestMapping("delContents")
 	public String delContents(String seq) {
 		String board_title = (String)session.getAttribute("board_title");
-		//String id = (String)session.getAttribute("loginID");
-		String id = "test1";
+		String id = (String)session.getAttribute("loginId");
 		bservice.delContents(seq, board_title,id);
 		return "redirect:/board/toBoard";
 	}

@@ -11,6 +11,10 @@
 	</select>
 	
 	<delete id="delReply">
-		delete * from Reply where seq=#{seq}
+		delete from Reply where seq=#{seq} and board_title=#{board_title}
 	</delete>
+	
+	<update id="updateReply">
+		update Reply set contents=#{contents} where seq=${seq} and board_title=#{board_title}
+	</update>
 </mapper>

@@ -15,6 +15,7 @@ public class ReplyDAO {
 	private SqlSession db;
 	
 	public int insertReply(ReplyDTO dto) {
+		System.out.println("멀쩡");
 		return db.insert("Reply.insertReply",dto);
 	}
 	
@@ -22,8 +23,12 @@ public class ReplyDAO {
 		return db.selectList("Reply.replyList",dto);
 	}
 	
-	public int delReply(int seq) {
-		return db.delete("Reply.delReply",seq);
+	public int delReply(ReplyDTO dto) {
+		return db.delete("Reply.delReply",dto);
+	}
+	
+	public int updateReply(ReplyDTO dto) {
+		return db.update("Reply.updateReply",dto);
 	}
 	
 	

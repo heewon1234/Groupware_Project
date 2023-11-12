@@ -25,6 +25,10 @@ public class Mk_BoardDAO {
 		return db.selectOne("Mk_Board.selectBoardSeq",board_title);
 	}
 	
+	public String selectBoardName(int seq) {
+		return db.selectOne("Mk_Board.selectBoardName",seq);
+	}
+	
 	//게시판 생성 관련
 	public int Mk_boardInsert(Mk_BoardDTO dto) {
 		dto.setId("test1");

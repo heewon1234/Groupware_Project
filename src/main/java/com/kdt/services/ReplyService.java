@@ -22,8 +22,12 @@ public class ReplyService {
 		return rdao.replyList(new ReplyDTO(0,null,null,board_title,Integer.parseInt(parent_seq),null));
 	}
 	
-	public int delReply(int seq) {
-		return rdao.delReply(seq);
+	public int delReply(ReplyDTO dto) {
+		return rdao.delReply(dto);
+	}
+	
+	public int updateReply(ReplyDTO dto) {
+		return rdao.updateReply(dto);
 	}
 	
 }

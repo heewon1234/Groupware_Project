@@ -83,9 +83,12 @@ public class BoardService {
 	}
 	
 	// 게시글 불러오기 관련
-	public List<BoardDTO> boardContentsList(String board_title){ // 게시글 리스트
+	public List<BoardDTO> boardContentsList(String board_title, String id){ // 게시글 리스트
+		Map<String,String> map = new HashMap<>();
 		int boardSeq = mdao.selectBoardSeq(board_title);
-		return bdao.boardContentsList("Board_"+boardSeq);
+		map.put("board_title", "Board_"+boardSeq);
+		map.put("id", id);
+		return bdao.boardContentsList(map);
 	}
 	
 	public List<BoardDTO> FavoriteAllContentsList(String board_title,String id){
@@ -95,6 +98,7 @@ public class BoardService {
 		Map<String,String> map = new HashMap<>();
 		map.put("id", id);
 		for(int seq:seqList) {
+			map.put("oriBoardTitle", mdao.selectBoardName(seq));
 			map.put("board_title", "Board_"+seq);
 			favContentsList.addAll(bdao.FavoriteAllContentsList(map));
 		}
@@ -103,10 +107,11 @@ public class BoardService {
 	
 	public BoardDTO boardContents(String board_title, String seq) {
 		int boardSeq = mdao.selectBoardSeq(board_title);
-		Map<String,String> map = new HashMap<>();
-		map.put("board_title", "Board_"+boardSeq);
-		map.put("seq", seq);
-		return bdao.boardContents(map);
+		String sysBoardTitle = "Board_"+boardSeq;
+		BoardDTO dto = new BoardDTO();
+		dto.setBoard_title(sysBoardTitle);
+		dto.setSeq(Integer.parseInt(seq));
+		return bdao.boardContents(dto);
 	}
 	//
 	

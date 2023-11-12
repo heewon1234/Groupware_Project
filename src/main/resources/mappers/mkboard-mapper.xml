@@ -11,6 +11,9 @@
 	<select id="selectBoardSeq" resultType="int">
 		select seq from Mk_Board where board_title=#{board_title}
 	</select>
+	<select id="selectBoardName" resultType="String">
+		select board_title from Mk_Board where seq=#{seq}
+	</select>
 	
 	<!-- 게시판 생성 -->
 	<insert id="Mk_boardInsert" useGeneratedKeys="true" keyProperty="seq">

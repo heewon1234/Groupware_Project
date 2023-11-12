@@ -21,8 +21,9 @@ public class ReplyController {
 	
 	@RequestMapping("insertReply")
 	public String insertReply(ReplyDTO dto) {
-		//dto.setWriter((String)session.getAttribute("loginID"));
-		dto.setWriter("test1");
+		dto.setWriter((String)session.getAttribute("loginId"));
+		String contents = dto.getContents().replaceAll("\n", "<br>");
+		dto.setContents(contents);
 		dto.setBoard_title((String)session.getAttribute("board_title"));
 		rservice.insertReply(dto);
 		return "redirect:/board/toContentsBoard?seq="+dto.getParent_seq();
@@ -33,8 +34,15 @@ public class ReplyController {
 		return "boards/delReply";
 	}
 	@RequestMapping("delReply")
-	public String delReply(int seq, String parent_seq) {
-		rservice.delReply(seq);
-		return "redirect:/board/toContentsBoard?seq="+parent_seq;
+	public String delReply(ReplyDTO dto) {
+		rservice.delReply(dto);
+		return "redirect:/board/toContentsBoard?seq="+dto.getParent_seq();
+	}
+	
+	@RequestMapping("updateReply")
+	public String updateReply(ReplyDTO dto) {
+		dto.setBoard_title((String)session.getAttribute("board_title"));
+		rservice.updateReply(dto);
+		return "redirect:/board/toContentsBoard?seq="+dto.getParent_seq();
 	}
 }
