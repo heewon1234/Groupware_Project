@@ -22,8 +22,12 @@ public class ApprovalService {
 	@Autowired
 	private ApprovalFilesDAO afdao;
 	
-	public List<ApprovalDTO> selectBtId(String id) {
+	public List<ApprovalDTO> selectById(String id) {
 		return adao.selectbyId(id);
+	}
+	
+	public List<ApprovalDTO> selectWaitById(String id) {
+		return adao.selectWaitbyId(id);
 	}
 	
 	@Transactional
