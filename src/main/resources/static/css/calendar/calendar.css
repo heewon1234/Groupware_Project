@@ -1,15 +1,75 @@
-#top_container{
-  display: flex;
-  justify-content: center;
-  align-items: center;
+* {
+    box-sizing: border-box;
+}
+
+.top_form {
+    width: 100%;
+    height: 60px;
+    position: fixed;
+    background-color: white;
+}
+
+.body_form {
+    position: absolute;
+    top: 60px;
+    width: 100%;
+    height: calc(100% - 60px);
+}
+
+.left_item {
+    float: left;
+    width: 276px;
+    height: 100%;
+    position: fixed;
+    background-color: #EFF4FC;     
+}
+
+.right_item {
+    float: left;
+    width: calc(100% - 276px);
+    height: calc(100% - 60px);
+    min-width: 950px;
+    margin-left: 276px;
+    overflow: auto;
 }
 
 #calendarBox{
-	display: flex;
-  	justify-content: center;
-  	align-items: center;
+	width:70%;
+	margin:30px;
 }
 
-#calendar{
-	width:70%;
+/* left 메뉴 style*/
+.menu_tab {
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0 24px 30px;
+    height: 100%;
+}
+.menu_item {
+    height: 38px;
+    width: 228px;
+    color: #333333;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 0 10px;
+}
+
+.menu_item:hover {
+    background-color: #F7FAFF;
+}
+
+.menu_item img {
+    max-width: 16px;
+    margin-right: 8px;
+}
+
+.menu_item_text {
+    font-size: 15px;
+}
+
+.menu_item.select {
+    background-color: #DAE8F8;
+    color: #056AC9;
+    font-weight: bold;
 }
