@@ -203,31 +203,3 @@ function searchGroup() {
         }
     });
 }
-
-
-//inputText
-		/* let isDrag = false;
-		        let offsetX3, offsetY3;
-		        const input_container = document.getElementById("inputJSP");
-		        const inputTop = document.querySelector(".inputTop");
-
-		        inputTop.addEventListener("mousedown", (e) => {
-		            isDrag = true;
-		            offsetX3 = e.clientX3 - input_container.getBoundingClientRect().left;
-		            offsetY3 = e.clientY3 - input_container.getBoundingClientRect().top;
-		        });
-
-		        document.addEventListener("mousemove", (e) => {
-		            if (isDrag) {
-		                const newX = e.clientX3 - offsetX3;
-		                const newY = e.clientY3 - offsetY3;
-
-		                input_container.style.left = newX + "px";
-		                input_container.style.top = newY + "px";
-		            }
-		        });
-
-		        document.addEventListener("mouseup", () => {
-		            isDrag = false;
-		        });*/
-
