@@ -25,7 +25,7 @@
 			<div class="title">
 				<h3>올해 근무 정보</h3>
 			</div>
-			<%-- <c:forEach var="i" items="${list}">	 --%>
+			<c:forEach var="i" items="${list}">
 			<div class="upbox">
 				<div class="work">
 					<div class="spanbox">
@@ -35,16 +35,16 @@
 					<div class="workbox">
 
 						<div class="worklate">
-							<span>지각</span><br> <br>${i.work_late }
+							<span>지각</span><br> <br>${i.work_late }회
 						</div>
 						<div class="workearly">
-							<span>조기 퇴근</span> <br> <br>${i.work_early }
+							<span>조기 퇴근</span> <br> <br>${i.work_early }회
 						</div>
 						<div class="notcheck">
-							<span>퇴근 미체크</span><br> <br>${i.work_notcheck }
+							<span>퇴근 미체크</span><br> <br>${i.work_notcheck }회
 						</div>
 						<div class="worknone">
-							<span>결근</span> <br> <br>${i.work_truancy}
+							<span>결근</span> <br> <br>${i.work_truancy}회
 						</div>
 
 					</div>
@@ -55,7 +55,7 @@
 					</div>
 					<div class="leavebox">
 						<div class="remainder">
-							<span>잔여 휴가</span><br> <br> ${i.leave_remainder}
+							<span>잔여 휴가</span><br> <br> ${i.leave_remainder}일
 						</div>
 						<div class="leaveapply">
 							<a href="#">휴가 현황</a>
@@ -70,16 +70,16 @@
 					</div>
 					<div class="worktimebox">
 						<div class="workday">
-							<span>근무 일수</span> <br> <br> ${i.all_workday}
+							<span>근무 일수</span> <br> <br> ${i.all_workday}일
 						</div>
 						<div class="allworktile">
-							<span>총 근무 시간</span> <br> <br>
+							<span>총 근무 시간</span> <br> <br> ${i.all_worktime }시간
 						</div>
 					</div>
 				</div>
 
 			</div>
-			<%-- </c:forEach> --%>
+			</c:forEach>
 			<div class="middlebox"></div>
 
 			<div class="title">
@@ -130,9 +130,9 @@
 						<span>근무현황</span>
 					</div>
 					<div class="workcurrent">
-						<div class="comment">
+						<table border="1" id="workform">
 						
-						</div>
+						</table>
 						<button class="worktime_update">근무시간 수정</button>
 					</div>
 

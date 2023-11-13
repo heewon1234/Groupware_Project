@@ -6,4 +6,13 @@
 <select id="list" resultType="com.kdt.dto.LeavesDTO">
   		SELECT * FROM Leaves where joinday is not null;
   </select>
+  <insert id="insert">
+  	insert into Leaves values(#{id},#{name},#{organization},default,default,default,default,default,default,default,default)
+  </insert>
+  <delete id="delete">
+  	delete from Leaves where id=#{id}
+  </delete>
+  <update id="update">
+		Update Leaves set organization = #{organization} where id = #{id};
+	</update>
 </mapper>

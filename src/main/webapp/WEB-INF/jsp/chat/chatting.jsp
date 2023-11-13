@@ -375,7 +375,6 @@
 	                    contentType: "application/json",
 	                    data: JSON.stringify(roomInfo),
 	                    success: function (response) {
-	                        console.log("Message sent successfully:", response);
 	                        updateGroupChatList();
 	                    },
 
@@ -414,7 +413,6 @@ function updateGroupChatList() {
         dataType: "json",
         success: function(data) {
             // 성공 시 실행되는 콜백 함수
-            console.log("group방 업데이트" + data);
             var $chatroom_list = $(".chatroom_list");
 
             // 데이터를 비우고 새로 받아온 데이터로 업데이트
@@ -438,11 +436,7 @@ function updateGroupChatList() {
 
                 // 클릭 이벤트 처리
                 $nameCell.on("click", function() {
-                    // 클릭 시 실행할 로직 추가
-                    console.log("Clicked group:", group.groupName);
                     groupChat(group.groupName, group.groupSeq);
-                    console.log(group.groupSeq);
-                    
                 });
 
                 // 행에 아이콘과 그룹 이름 셀을 추가
@@ -476,18 +470,6 @@ function groupChat(groupName, groupSeq) {
     $("#groupSeq").val(groupSeq);
 	$("#groupJSP").css("display", "block");
 	
-	/*var socket = new SockJS('/ws');
-    stompClient = Stomp.over(socket);
-
-    // 연결 설정
-    stompClient.connect({}, function (frame) {
-        console.log("그룹방 수신확인" + groupSeq);
-     // 기존 구독 해지
-        if (stompClient.subscriptions) {
-            stompClient.subscriptions = {};
-        }*/
-        // 메시지 수신 구독
-        
         stompClient.subscribe('/topic/group/' + groupSeq, function (response) {
             console.log('Received message: ' + response.body);
             var message = JSON.parse(response.body);
@@ -515,7 +497,6 @@ function groupChat(groupName, groupSeq) {
 function sendGroupMessage(groupSeq) {
     var message = $('#groupinputText').text().trim();
     var groupSeq = $('#groupSeq').val();
-    console.log("채팅 전송"+groupSeq);
 
     if (message) {
        var userID = $('#groupUserName').val();
@@ -543,8 +524,6 @@ function getPreviousGroupMessages(groupSeq) {
         url: "/getPreviousGroupMessages/" + groupSeq,
         dataType: "json",
         success: function(data) {
-            console.log("시퀀스" + groupSeq);
-            // 서버에서 받은 데이터를 JSON으로 파싱
             var previousMessages = data;
             for (var i = 0; i < previousMessages.length; i++) {
                 var previousMessage = previousMessages[i];
@@ -574,14 +553,11 @@ function getPreviousGroupMessages(groupSeq) {
 					success : function(data) {
 						var listData = data.list;
 						var OneToOneChatDTOList = data.OneToOneChatDTOList;
-						console.log(listData);
 						try {
 							var $friend_list = $("#friend_list");
 							if (listData.length > 0) {
 								for (var i = 0; i < listData.length; i++) {
 									var friend = listData[i];
-									console.log(friend);
-
 									var $row = $("<div>").addClass("table-row");
 
 									var $iconCell = $("<div>")
@@ -646,10 +622,6 @@ function getPreviousGroupMessages(groupSeq) {
 		        url: "/getPreviousMessages/" + oneSeq,
 		        dataType: "json",
 		        success: function(data) {
-		            console.log("시퀀스" + oneSeq);
-		            console.log(data);
-		            console.log(data[0]);
-		            // 서버에서 받은 데이터를 JSON으로 파싱
 		            var previousMessages = data;
 		            for (var i = 0; i < previousMessages.length; i++) {
 		                var previousMessage = previousMessages[i];
@@ -666,7 +638,6 @@ function getPreviousGroupMessages(groupSeq) {
 		//부서 목록 불러오기
 		$("#departmentSelect").on("change", function() {
 			var organization = $(this).val();
-			console.log(organization);
 			if (organization !== "부서 선택") {
 				// 선택한 부서에 따라 회원 목록을 불러와서 표시하는 AJAX 요청을 보냅니다.
 				var oneSeq = 0;
@@ -686,19 +657,13 @@ function getPreviousGroupMessages(groupSeq) {
 						success : function(data) {
 							var groupMembers = data.members;
 							var OneToOneChatDTOList = data.OneToOneChatDTOList;
-							console.log(groupMembers);
-							console.log(OneToOneChatDTOList);
 							try {
 								var $group_list = $("#group_list");
-								console.log("그룹 : " + $group_list)
-
 								if (groupMembers.length > 0) {
 									$group_list.empty(); // 목록 초기화
 
 									for (var i = 0; i < groupMembers.length; i++) {
 										var friend = groupMembers[i];
-										console.log(friend);
-
 										var $row = $("<div>").addClass(
 												"table-row");
 
@@ -788,24 +753,11 @@ function getPreviousGroupMessages(groupSeq) {
 		        });
 		    }
 			
-		    console.log(friendName, organization, oneSeq);
 		    $("#otherName").val(friendName);
 		    $("#organization").val(organization);
 		    $("#oneSeq").val(oneSeq);
 		    $("#inputJSP").css("display", "block");
 
-		        /*var socket = new SockJS('/ws');
-		        stompClient = Stomp.over(socket);
-
-		        // 연결 설정
-		        stompClient.connect({}, function (frame) {
-		            console.log("수신확인" + oneSeq);
-		         // 기존 구독 해지
-		            if (stompClient.subscriptions) {
-		                stompClient.subscriptions = {};
-		            }*/
-		            // 메시지 수신 구독
-		            
 		            stompClient.subscribe('/topic/oneToOne/' + oneSeq, function (response) {
 		                console.log('Received message: ' + response.body);
 		                var message = JSON.parse(response.body);
@@ -833,11 +785,8 @@ function getPreviousGroupMessages(groupSeq) {
 		// 메시지 전송 함수
 		function sendMessage(oneSeq) {
 		    var message = $('#inputText').val().trim();
-		    console.log("채팅 전송" + oneSeq);
-
 		    var message = $('#inputText').text().trim();
             var oneSeq = $('#oneSeq').val();
-            console.log("채팅 전송"+oneSeq);
             var currentTime = new Date(); 
             var time = new Date().getTime(); 
             var hours = currentTime.getHours();
