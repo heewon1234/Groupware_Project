@@ -16,4 +16,9 @@
 	<delete id="delete">
 		DELETE FROM JOB_TITLE WHERE position = #{position}
 	</delete>
+	
+	<select id="getManagerPosition" resultType="String">
+		select position from JOB_TITLE
+		<![CDATA[where job_rank < (select job_rank from JOB_TITLE where position = #{position})]]>
+	</select>
 </mapper>

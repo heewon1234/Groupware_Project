@@ -26,7 +26,7 @@ public class OrganizationService {
 		return dao.delete(organization);
 	}
 	
-	public List<String> getManagerList(String org) {
+	public List<String> getManagerOrgList(String org) {
 		List<String> managerList = new ArrayList<>();
 		
 		managerList.add(org);

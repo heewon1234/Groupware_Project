@@ -1,5 +1,4 @@
 *{box-sizing: border-box;}
-/*div{border:1px solid black;}*/
 
 body{
 	background-color: #D2E0FB;
@@ -15,9 +14,10 @@ body{
   	flex-direction: column;
   	justify-content: center;
   	align-items: center;
+  	box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.5);
 }
 
-.logo{
+.loginLogo{
 	display:flex;
 	justify-content: center;
 	align-items: center;
