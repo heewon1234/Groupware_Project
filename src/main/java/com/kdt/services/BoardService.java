@@ -86,6 +86,7 @@ public class BoardService {
 	public List<BoardDTO> boardContentsList(String board_title, String id){ // 게시글 리스트
 		Map<String,String> map = new HashMap<>();
 		int boardSeq = mdao.selectBoardSeq(board_title);
+		map.put("oriBoardTitle", board_title);
 		map.put("board_title", "Board_"+boardSeq);
 		map.put("id", id);
 		return bdao.boardContentsList(map);
