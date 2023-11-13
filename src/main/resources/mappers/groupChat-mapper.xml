@@ -22,7 +22,7 @@
 		select * from GroupChat;
 	</select>
 	
-	<select id="searchGroup" resultType="com.kdt.dto.GroupChatDTO">
-		select distinct groupName,groupSeq from GroupChat where groupName like #{searchGroup}
+	<select id="searchGroup" resultType="com.kdt.dto.GroupChatDTO" parameterType="map">
+		select distinct groupName,groupSeq from GroupChat where groupName like #{searchGroup} and memberName=#{name}
 	</select>
 </mapper>

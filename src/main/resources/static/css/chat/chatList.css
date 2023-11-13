@@ -26,12 +26,8 @@
 #searchBox img{width: 18px;height: auto;margin-right: 5px;
     border: none;}
 #search_input{border-radius:5px ;}
-#search_container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    display: none;
-    margin-top: 5px;
+.search_container {
+    margin-top: 6px;
 }
 
 .chatroom_search {
