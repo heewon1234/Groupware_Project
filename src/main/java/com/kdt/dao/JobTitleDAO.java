@@ -29,4 +29,8 @@ public class JobTitleDAO {
 	public List<String> getManagerPosition(String position) {
 		return db.selectList("JobTitle.getManagerPosition", position);
 	}
+	
+	public int getRank(String position) {
+		return db.selectOne("JobTitle.getRank",position);
+	}
 }
