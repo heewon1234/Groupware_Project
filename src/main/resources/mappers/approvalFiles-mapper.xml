@@ -6,4 +6,8 @@
 	<insert id="insert">
 		INSERT INTO Approval_Files VALUES(NULL, #{parent_seq}, #{ori_name}, #{sys_name})
 	</insert>
+	
+	<select id="selectByParentSeq" resultType="com.kdt.dto.ApprovalFilesDTO">
+		SELECT * FROM Approval_Files WHERE parent_seq = #{parent_seq}
+	</select>
 </mapper>

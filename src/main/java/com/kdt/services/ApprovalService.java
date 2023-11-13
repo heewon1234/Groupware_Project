@@ -1,6 +1,7 @@
 package com.kdt.services;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -10,8 +11,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kdt.dao.ApprovalDAO;
 import com.kdt.dao.ApprovalFilesDAO;
+import com.kdt.dao.ApprovalResponsiblesDAO;
 import com.kdt.dto.ApprovalDTO;
 import com.kdt.dto.ApprovalFilesDTO;
+import com.kdt.dto.ApprovalResponsiblesDTO;
 
 import jakarta.transaction.Transactional;
 
@@ -21,6 +24,8 @@ public class ApprovalService {
 	private ApprovalDAO adao;
 	@Autowired
 	private ApprovalFilesDAO afdao;
+	@Autowired
+	private ApprovalResponsiblesDAO ardao;
 	
 	public List<ApprovalDTO> selectById(String id) {
 		return adao.selectbyId(id);
@@ -53,7 +58,21 @@ public class ApprovalService {
 		}
 		
 		for(String id : managerID) {
-			
+			ardao.insert(new ApprovalResponsiblesDTO(0, parent_seq, id, "미결"));
 		}
+	}
+	
+	public List<ApprovalDTO> selectEveryByDocId(List<Integer> docIdList) {
+		List<ApprovalDTO> appList = new ArrayList<>();
+		
+		for(Integer docId : docIdList) {
+			appList.add(adao.selectByDocId(docId));
+		}
+		
+		return appList;
+	}
+	
+	public ApprovalDTO selectByDocId(int docId) {
+		return adao.selectByDocId(docId);
 	}
 }

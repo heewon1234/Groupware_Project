@@ -26,12 +26,14 @@
 						<tbody>
 							<tr>
 								<th>문서 종류</th>
-								<td><select name="doc_type">
+								<td>
+									<select name="doc_type">
 										<option>지출결의서</option>
 										<option>업무연락</option>
-								</select></td>
+									</select>
+								</td>
 								<th>작성자</th>
-								<td>${userDTO.organization }${userDTO.position }${userDTO.name }</td>
+								<td>${userDTO.organization } ${userDTO.position } ${userDTO.name }</td>
 							</tr>
 						</tbody>
 					</table>

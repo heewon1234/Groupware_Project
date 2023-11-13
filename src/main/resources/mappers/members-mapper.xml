@@ -79,4 +79,8 @@
 	<select id="getManager" resultType="com.kdt.dto.MembersDTO">
 		SELECT * FROM Members WHERE organization = #{org} AND position = #{position}
 	</select>
+	
+	<select id="selectById" resultType="com.kdt.dto.MembersDTO">
+		SELECT * FROM Members WHERE id = #{id}
+	</select>
 </mapper>
