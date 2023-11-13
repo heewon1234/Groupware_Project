@@ -29,12 +29,12 @@
 	
 	<!-- 게시글 등록 -->
 	<insert id="insertBoardContents" useGeneratedKeys="true" keyProperty="seq">
-		insert into ${board_title} values (null,#{title},#{writer},default,#{header},#{notice},#{contents},#{servey_question},default);
+		insert into ${board_title} values (null,#{title},#{writer},default,#{header},#{notice},#{contents},#{survey_question},default);
 	</insert>
 	
 	<!-- 게시글 불러오기 -->
 	<select id="boardContentsList" resultType="com.kdt.dto.BoardDTO">
-		select b.*, #{oriBoardTitle} as board_title,case when b.seq = parent_seq then 'true' else 'false' end as favorite from ${board_title} b left join Favorite_Board f on id=#{id} and parent_seq = b.seq and board_title=#{board_title}
+		select b.*, #{oriBoardTitle} as board_title,case when b.seq = parent_seq then 'true' else 'false' end as favorite from ${board_title} b left join Favorite_Board f on id=#{id} and parent_seq = b.seq and board_title=#{board_title} order by seq desc
 	</select>
 	<select id="boardContents" resultType="com.kdt.dto.BoardDTO">
 		select * from ${board_title} where seq=#{seq}
