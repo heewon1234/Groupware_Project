@@ -21,4 +21,8 @@
 		select position from JOB_TITLE
 		<![CDATA[where job_rank < (select job_rank from JOB_TITLE where position = #{position})]]>
 	</select>
+	
+	<select id="getRank" resultType="int">
+		select JOB_RANK from JOB_TITLE where POSITION=#{position}
+	</select>
 </mapper>
