@@ -91,17 +91,13 @@
 			$("#top_container").load("/commons/topForm");
 			
 			var loginId = "<c:out value="${loginId}"/>";
-			console.log("이거 되긴 되는거야?");
-			console.log(loginId);
 			if (loginId != "") {
-				console.log("로그인 됐을 때 : "+loginId);
                 var link = document.createElement("link");
                 link.rel = "stylesheet";
                 link.type = "text/css";
                 link.href = "/css/home/home.css";
                 document.head.appendChild(link);
             } else {
-                console.log("안됐을때 : "+loginId);
                 var link1 = document.createElement("link");
                 link1.rel = "stylesheet";
                 link1.type = "text/css";
