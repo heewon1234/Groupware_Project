@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Reply">
+	<insert id="insertReply">
+		insert into Reply values (null, #{writer},#{contents},#{board_title},#{parent_seq},default);
+	</insert>
+	
+	<select id="replyList" resultType="com.kdt.dto.ReplyDTO">
+		select * from Reply where board_title=#{board_title} and parent_seq=#{parent_seq} order by seq desc
+	</select>
+	
+	<delete id="delReply">
+		delete from Reply where seq=#{seq} and board_title=#{board_title}
+	</delete>
+	
+	<update id="updateReply">
+		update Reply set contents=#{contents} where seq=${seq} and board_title=#{board_title}
+	</update>
+</mapper>

@@ -11,14 +11,15 @@ public class BoardDTO {
 	private String header;
 	private boolean notice;
 	private String contents;
-	private String servey_question;
+	private String survey_question;
 	private int view_count;
+	private boolean favorite;
 	public BoardDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public BoardDTO(int seq, String board_title, String title, String writer, Timestamp write_date, String header,
-			boolean notice, String contents, String servey_question, int view_count) {
+			boolean notice, String contents, String survey_question, int view_count, boolean favorite) {
 		super();
 		this.seq = seq;
 		this.board_title = board_title;
@@ -28,8 +29,9 @@ public class BoardDTO {
 		this.header = header;
 		this.notice = notice;
 		this.contents = contents;
-		this.servey_question = servey_question;
+		this.survey_question = survey_question;
 		this.view_count = view_count;
+		this.favorite = favorite;
 	}
 	public int getSeq() {
 		return seq;
@@ -79,11 +81,11 @@ public class BoardDTO {
 	public void setContents(String contents) {
 		this.contents = contents;
 	}
-	public String getServey_question() {
-		return servey_question;
+	public String getSurvey_question() {
+		return survey_question;
 	}
-	public void setServey_question(String servey_question) {
-		this.servey_question = servey_question;
+	public void setSurvey_question(String survey_question) {
+		this.survey_question = survey_question;
 	}
 	public int getView_count() {
 		return view_count;
@@ -91,6 +93,13 @@ public class BoardDTO {
 	public void setView_count(int view_count) {
 		this.view_count = view_count;
 	}
+	public boolean isFavorite() {
+		return favorite;
+	}
+	public void setFavorite(boolean favorite) {
+		this.favorite = favorite;
+	}
+	
 	
 	
 }

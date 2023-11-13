@@ -54,7 +54,7 @@ public class Mk_BoardService {
 				+ "	header varchar(150), \r\n"
 				+ "	notice boolean not null,\r\n"
 				+ "	contents varchar(6000) not null,\r\n"
-				+ "	servey_question varchar(300),\r\n"
+				+ "	survey_question varchar(300),\r\n"
 				+ "	view_count int not null default 0\r\n"
 				+ ");";
 		mdao.createTable(sql);

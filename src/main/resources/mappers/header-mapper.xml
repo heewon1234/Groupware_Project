@@ -10,6 +10,6 @@
 	
 	<!-- 게시글 등록 -->
 	<select id="selectHeader" resultType="String">
-		select header from Header where board_title=#{board_title}
+		select Header from Header where board_title=#{board_title}
 	</select>
 </mapper>

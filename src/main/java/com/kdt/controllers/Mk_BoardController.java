@@ -35,11 +35,16 @@ public class Mk_BoardController {
 		return "boards/mk_board";
 	}
 	
+	@RequestMapping("toEditBoard")
+	public String toEditBoard() {
+		return "boards/edit_board";
+	}
 
 	@RequestMapping("Mk_boardInsert")
 	public String Mk_boardInsert(Mk_BoardDTO dto, String headerList, String authorityList) {
+		dto.setId((String)session.getAttribute("loginId"));
 		mservice.Mk_boardInsert(dto, headerList, authorityList);
-		return "redirect:/board/toFavoriteBoard";
+		return "redirect:/board/toBoard";
 	}
 	
 	// MemberController로 옮겨라
