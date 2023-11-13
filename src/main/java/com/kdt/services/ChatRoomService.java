@@ -45,8 +45,8 @@ public class ChatRoomService {
 		return dao.searchUser(searchValue);
 	}
 	//그룹채팅방 검색
-	public List<GroupChatDTO> searchGroup(String searchGroup) throws Exception {
-		return dao.searchGroup(searchGroup);
+	public List<GroupChatDTO> searchGroup(String searchGroup,String name) throws Exception {
+		return dao.searchGroup(searchGroup,name);
 	}
 
 }

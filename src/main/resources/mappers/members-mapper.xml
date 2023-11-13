@@ -75,4 +75,8 @@
 	<select id="getDepartmentList" resultType="String">
 		select distinct organization from Members
 	</select>
+	
+	<select id="getManager" resultType="com.kdt.dto.MembersDTO">
+		SELECT * FROM Members WHERE organization = #{org} AND position = #{position}
+	</select>
 </mapper>
