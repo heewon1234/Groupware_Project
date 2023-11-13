@@ -10,5 +10,13 @@
   	<select id="selectList" resultType="com.kdt.dto.WorkstatisticsDTO">
   		select * from Works
   	</select>
-  	
+  	<insert id="insert">
+  		insert into Works values(#{id},#{name},#{organization},default,default,default,default,default,default,default,default)
+  	</insert>
+  	<delete id="delete">
+  		delete from Works where id=#{id}
+  </delete>
+  <update id="update">
+		Update Works set organization = #{organization} where id = #{id};
+	</update>
   </mapper>
