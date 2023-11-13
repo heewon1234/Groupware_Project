@@ -34,19 +34,11 @@ public class ChatGroupRoomController {
 	@Autowired
 	private HttpSession session;
 
-	/*@RequestMapping("groupSelectAll")
-	@ResponseBody
-	public List<GroupChatDTO> groupSelectAll() throws Exception {
-		return service.groupSelectAll();
-	}*/
-	
 	@RequestMapping("InvitedGroups")
 	@ResponseBody
 	public List<GroupChatDTO> groupSelectInvited() throws Exception {
 		String name = (String) session.getAttribute("name");
 		System.out.println(name);
-	    // TODO: userId를 기반으로 초대된 방 정보만 필터링하여 가져오는 로직 작성
-	    // 예시: groupSelectAll()에서 가져온 방 목록을 userId를 이용하여 필터링
 	    List<GroupChatDTO> allGroups = service.groupSelectAll();
 	    List<GroupChatDTO> invitedGroups = new ArrayList<>();
 
@@ -55,7 +47,6 @@ public class ChatGroupRoomController {
 	            invitedGroups.add(group);
 	        }
 	    }
-	    System.out.println("그룹채팅방"+invitedGroups);
 	    return invitedGroups;
 	}
 
@@ -63,8 +54,6 @@ public class ChatGroupRoomController {
 	@RequestMapping(value = "createGroupChat", consumes = "application/json", method = RequestMethod.POST)
 	@ResponseBody
 	public String createGroupChat(@RequestBody GroupChatDTO group_dto) throws Exception {
-		System.out.println("그룹" + group_dto.getGroupName());
-		System.out.println("멤버" + group_dto.getMemberName());
 		service.createGroupChat(group_dto);
 		return "Success"; 
 	}

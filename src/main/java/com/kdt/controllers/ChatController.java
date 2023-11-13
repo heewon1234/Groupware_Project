@@ -29,31 +29,9 @@ public class ChatController {
 
 	
 	@RequestMapping("/chatting")
-	//@RequestParam("position") String position, Model model
 	public String chatting(HttpServletRequest request) {
-		//String id = (String)hsession.getAttribute("loginId");
-		//String name = (String)hsession.getAttribute("name");
-		//String position = (String)hsession.getAttribute("position");
 		return "chat/chatting";
 	}
-//	@RequestMapping("/chatting")
-//	//@RequestParam("position") String position, Model model
-//	public String chatting(HttpServletRequest request,@RequestParam("search_input") String searchInput) {
-//		System.out.println(searchInput);
-//		//String id = (String)hsession.getAttribute("loginId");
-//		//String name = (String)hsession.getAttribute("name");
-//		//String position = (String)hsession.getAttribute("position");
-//		return "chat/chatting";
-//	}
-	/*@RequestMapping("/inputText") 이 코드 안씀
-    public String inputText(@RequestParam("friendName") String friendName,@RequestParam("organization") String organization,@RequestParam("oneSeq") int oneSeq, Model model) {
-        System.out.println(friendName);
-        model.addAttribute("friendName", friendName);
-        model.addAttribute("organization", organization);
-        model.addAttribute("oneSeq", oneSeq);
-        System.out.println(oneSeq);
-        return "chat/inputText";
-    }*/
 	@RequestMapping("/groupInputText")
 	public String inputText(@RequestParam("groupName") String groupName,@RequestParam("groupSeq") int groupSeq, Model model) {
 		model.addAttribute("groupName", groupName);

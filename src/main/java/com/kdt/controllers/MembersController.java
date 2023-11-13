@@ -14,11 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kdt.dto.MembersDTO;
-import com.kdt.dto.MembersDTO1;
 import com.kdt.dto.OneToOneChatDTO;
 import com.kdt.services.ChatRoomService;
 import com.kdt.services.MembersService;
-import com.kdt.services.MembersService1;
 import com.kdt.utils.EncryptionUtils;
 import com.kdt.utils.UUIDToNumber;
 
@@ -29,9 +27,6 @@ import jakarta.servlet.http.HttpSession;
 public class MembersController {
 	@Autowired
 	private MembersService mservice;
-	
-	@Autowired
-	private MembersService1 mservice1;
 	
 	@Autowired
 	private HttpSession session;

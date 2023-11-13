@@ -18,11 +18,9 @@ public class ChatRoomService {
 	public void createOneChatRoom(String loggedInUserID, String otherUserID,int oneSeq) {
 		dao.createOneChatRoom(loggedInUserID, otherUserID,oneSeq);
 	}
-
 	public void createGroupChat(GroupChatDTO group_dto) {
 		dao.createGroupChat(group_dto);
 	}
-
 	// 방의 존재 여부 확인 메서드
 	public boolean oneroomExists(String loggedInUserID, String otherUserID) {
 		boolean roomExists = dao.oneroomExists(loggedInUserID, otherUserID);
@@ -48,5 +46,4 @@ public class ChatRoomService {
 	public List<GroupChatDTO> searchGroup(String searchGroup,String name) throws Exception {
 		return dao.searchGroup(searchGroup,name);
 	}
-
 }
