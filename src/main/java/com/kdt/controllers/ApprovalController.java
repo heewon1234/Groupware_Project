@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kdt.dto.ApprovalDTO;
@@ -40,20 +41,14 @@ public class ApprovalController {
 		List<String> managerPositionList = jobService.getManagerPosition(userDTO.getPosition());
 		List<MembersDTO> managerList = mService.getManagerList(managerOrgList, managerPositionList);
  		model.addAttribute("userDTO", userDTO);
-		
-		System.out.println(managerOrgList);
-		System.out.println(managerPositionList);
-		
-		for(MembersDTO manager : managerList) {
-			System.out.println(manager.getName());
-		}
+		model.addAttribute("managerList", managerList);
 		
 		return "/approval/document/write";
 	}
 	
 	@RequestMapping("/lists/all")
 	public String listsAll(Model model) throws Exception {
-		MembersDTO1 userDTO = (MembersDTO1) session.getAttribute("userDTO");
+		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");
 		List<ApprovalDTO> appList = appService.selectById(userDTO.getId());
 		
 		model.addAttribute("appList", appList);
@@ -63,7 +58,7 @@ public class ApprovalController {
 	
 	@RequestMapping("/lists/wait")
 	public String listsWait(Model model) throws Exception {
-		MembersDTO1 userDTO = (MembersDTO1) session.getAttribute("userDTO");
+		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");
 		List<ApprovalDTO> appList = appService.selectWaitById(userDTO.getId());
 		
 		model.addAttribute("appList", appList);
@@ -72,14 +67,13 @@ public class ApprovalController {
 	}
 	
 	@RequestMapping("/insertApproval")
-	public String insertApproval(String title, String contents, MultipartFile[] files) throws Exception {
-		MembersDTO1 userDTO = (MembersDTO1) session.getAttribute("userDTO");
-		ApprovalDTO appdto = new ApprovalDTO(0, userDTO.getId(), title, contents, null, "Wait");
+	public String insertApproval(String title, String contents, String doc_type, 
+			MultipartFile[] files, @RequestParam(name = "managerID", required = false) String[] managerID) throws Exception {
+		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");
+		ApprovalDTO appdto = new ApprovalDTO(0, userDTO.getId(), title, contents, null, "Wait", doc_type);
 		String uploadPath = "c:/uploads";
 		
-		System.out.println(files);
-		
-		appService.insert(appdto, files, uploadPath);
+		appService.insert(appdto, files, uploadPath, managerID);
 		
 		return "redirect:/approval/document/lists/all";
 	}

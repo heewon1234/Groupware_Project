@@ -10,6 +10,6 @@
 		SELECT * FROM Approval WHERE id = #{id} AND status = 'Wait'
 	</select>
 	<insert id="insert" useGeneratedKeys="true" keyProperty="seq">
-		insert into Approval values (null,#{id},#{title},#{contents}, now(), 'Wait')
+		insert into Approval values (null,#{id},#{title},#{contents}, now(), 'Wait', #{doc_type})
 	</insert>
 </mapper>
