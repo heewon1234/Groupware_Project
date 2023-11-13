@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ApprovalResponsibles">
+	<insert id="insert">
+		INSERT INTO Approval_Responsibles VALUES(NULL, #{doc_id}, #{approver_id}, #{status})
+	</insert>
+	
+	<select id="getDocIdByUserId" resultType="Integer">
+		select doc_id from Approval_Responsibles
+		where approver_id = #{id};
+	</select>
+	<select id="getManagerIdList" resultType="String">
+		select approver_id from Approval_Responsibles
+		where doc_id = #{docId};
+	</select>
+</mapper>

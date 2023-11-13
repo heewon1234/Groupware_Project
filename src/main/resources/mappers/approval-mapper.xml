@@ -12,4 +12,7 @@
 	<insert id="insert" useGeneratedKeys="true" keyProperty="seq">
 		insert into Approval values (null,#{id},#{title},#{contents}, now(), 'Wait', #{doc_type})
 	</insert>
+	<select id="selectByDocId" resultType="com.kdt.dto.ApprovalDTO">
+		SELECT * FROM Approval WHERE seq = #{docId}
+	</select>
 </mapper>
