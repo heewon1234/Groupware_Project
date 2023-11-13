@@ -61,13 +61,13 @@
                     <div class="board_survey">
                         <div>설문 여부</div>
                         <div>
-                            <div><input type="radio" name="useServey" value="true"> 사용</div>
-                            <div><input type="radio" name="useServey" value="false" checked> 사용 안 함</div>
+                            <div><input type="radio" name="useSurvey" value="true"> 사용</div>
+                            <div><input type="radio" name="useSurvey" value="false" checked> 사용 안 함</div>
                         </div>
                         <div id="surveyBox">
                             <div class="questionBox surveyContents">
                                 <div class="surveyText">질문</div>
-                                <div class="surveyInputBox"><input type="text" placeholder="질문을 입력해주세요" name="servey_question"></div>
+                                <div class="surveyInputBox"><input type="text" placeholder="질문을 입력해주세요" name="survey_question"></div>
                             </div>
                             <div class="itemBox surveyContents">
                                 <div class="surveyText">항목</div>

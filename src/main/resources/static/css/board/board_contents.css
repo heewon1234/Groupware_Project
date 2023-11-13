@@ -88,6 +88,36 @@
     margin-left:25px;
 }
 
+.survey_box{
+    border:1px solid black;
+    border-radius: 5px;
+    margin-top:20px;
+    padding:15px;
+    width:600px;
+    overflow-x:auto;   
+}
+.survey_question{
+    font-weight: bold;
+    font-size:15px;
+}
+.survey_box>hr{
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
+.survey_items{margin-top:10px;}
+.survey_item{margin-bottom:10px;}
+.survey_btns{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.survey_btns>button{
+    width:80px;
+    height:30px;
+    border-radius: 5px;
+}
+
 .buttons{
     border-bottom:1px solid black;
     height:60px;

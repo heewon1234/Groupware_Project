@@ -46,6 +46,26 @@
                 </div>
                 <div class="contents">
                    ${boardContents.contents }
+                   <div class="survey_box">
+                        <div class="survey_question">${boardContents.survey_question }</div>
+                        <hr>
+                        <div class="survey_items">
+                            <div class="survey_item">
+                                <input type="radio" name="item"> 항목1
+                            </div>
+                            <div class="survey_item">
+                                <input type="radio" name="item"> 항목2
+                            </div>
+                            <div class="survey_item">
+                                <input type="radio" name="item"> 항목2
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="survey_btns">
+                            <button>결과보기</button>
+                            <button>투표</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="buttons">
                  	<button id="backBtn">뒤로가기</button>

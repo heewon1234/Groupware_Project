@@ -89,7 +89,7 @@ $("#fileAddBtn").on("click",function(){
     $("#file_box_input_file").append(div);
 });
 
-$("input[name='useServey']").change(function(){
+$("input[name='useSurvey']").change(function(){
 	if($(this).val()==='true'){
 		$("#surveyBox").css("display","block");
 	}else{

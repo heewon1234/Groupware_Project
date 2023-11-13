@@ -82,6 +82,9 @@ public class BoardController {
 		model.addAttribute("replyList",replyList);
 		BoardDTO boardContents = bservice.boardContents(board_title, seq);
 		model.addAttribute("boardContents",boardContents);
+		
+		
+		
 		return "boards/contents_board";
 	}
 	
