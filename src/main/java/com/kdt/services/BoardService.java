@@ -107,6 +107,7 @@ public class BoardService {
 	}
 	
 	public BoardDTO boardContents(String board_title, String seq) {
+		
 		int boardSeq = mdao.selectBoardSeq(board_title);
 		String sysBoardTitle = "Board_"+boardSeq;
 		BoardDTO dto = new BoardDTO();
