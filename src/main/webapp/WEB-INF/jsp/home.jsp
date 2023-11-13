@@ -70,9 +70,11 @@
 							<div class="title">사내메일</div>
 						</div>
 						<div>
+							<a href="/works/work_leave">
 							<div class="main_icon_box">
 								<i class="fa-solid fa-sitemap"></i>
 							</div>
+							</a>
 							<div class="title">인사</div>
 						</div>
 						<div>

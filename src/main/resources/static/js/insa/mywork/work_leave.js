@@ -130,7 +130,7 @@ function displayTime(elementId, timeString) {
 	currentTimeElement.innerText = newTime;
 }
 
-function work_inout() { // 화면에 근무중 업무중 등 출력하는 기능
+function work_inout() { 
 	$.ajax({
 		url: "/works/list",
 	})
