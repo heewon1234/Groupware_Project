@@ -39,10 +39,7 @@
 						<img src="../imges/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">대기</span>
 					</div>
 					<div id="" class="menu_list_item">
-						<img src="../imges/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">확인</span>
-					</div>
-					<div id="" class="menu_list_item">
-						<img src="../imges/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">예정</span>
+						<img src="../imges/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">완료</span>
 					</div>
 					<div id="" class="menu_list_item">
 						<img src="../imges/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">진행</span>
@@ -63,16 +60,10 @@
 						<img src="../imges/commons/body_form/left_item/default/company.png"> <span class="menu_list_item_text">전체</span>
 					</div>
 					<div id="" class="menu_list_item">
-						<img src="../imges/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">기안</span>
+						<img src="../imges/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">미결</span>
 					</div>
 					<div id="" class="menu_list_item">
 						<img src="../imges/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">결재</span>
-					</div>
-					<div id="" class="menu_list_item">
-						<img src="../imges/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">수신</span>
-					</div>
-					<div id="" class="menu_list_item">
-						<img src="../imges/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">회람/참조</span>
 					</div>
 					<div id="" class="menu_list_item">
 						<img src="../imges/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">반려</span>

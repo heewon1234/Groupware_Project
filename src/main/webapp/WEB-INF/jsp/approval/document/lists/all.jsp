@@ -26,6 +26,7 @@
 							<th>기안자</th>
 							<th>제목</th>
 							<th>기안일</th>
+							<th>문서 종류</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -35,6 +36,7 @@
 								<td>${list.id}</td>
 								<td>${list.title}</td>
 								<td>${list.draft_date}</td>
+								<td>${list.doc_type }</td>
 							</tr>
 						</c:forEach>
 					</tbody>
