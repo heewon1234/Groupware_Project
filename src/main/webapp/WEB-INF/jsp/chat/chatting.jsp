@@ -892,7 +892,5 @@ function getPreviousGroupMessages(groupSeq) {
 		}
 
 	</script>
-
-
 </body>
 </html>
