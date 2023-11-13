@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 	<link rel="stylesheet" href="/css/commons/body_form/left_form/body_form_default.css" />
@@ -74,6 +74,11 @@
                                 <div class="surveyInputBox"><input type="text" placeholder="항목을 입력해주세요" name="items"></div>
                                 <div><img src="/images/commons/body_form/left_item/default/plus.png" class="add_item_btn"/></div>
                             </div>
+                            <div class="itemBox surveyContents">
+                                <div class="surveyText">항목</div>
+                                <div class="surveyInputBox"><input type="text" placeholder="항목을 입력해주세요" name="items"></div>
+                                <div><img src="/images/commons/body_form/left_item/default/plus.png" class="add_item_btn"/></div>
+                            </div>
                         </div>
                     </div>
                     <div class="buttons">
@@ -86,6 +91,5 @@
     </div>
 	<script src="/js/board/sideBar.js" defer></script>
     <script src="/js/board/write_contents_board.js" defer></script>
-
 </body>
 </html>

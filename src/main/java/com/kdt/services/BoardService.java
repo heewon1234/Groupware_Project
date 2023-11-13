@@ -72,11 +72,12 @@ public class BoardService {
 	@Transactional
 	public void insertBoardContents(BoardDTO dto,String[] items) {
 		int boardSeq = mdao.selectBoardSeq(dto.getBoard_title());
+		String board_title = dto.getBoard_title();
 		dto.setBoard_title("Board_"+boardSeq);
 		int parent_seq = bdao.insertBoardContents(dto);
 		for(String item:items) {
 			if(item!="") {
-				sdao.insertSurveyItem(new SurveyDTO(0,dto.getBoard_title(),parent_seq,item));
+				sdao.insertSurveyItem(new SurveyDTO(0,board_title,parent_seq,item,0,0));
 			}
 		}
 		
@@ -106,8 +107,7 @@ public class BoardService {
 		return favContentsList;
 	}
 	
-	public BoardDTO boardContents(String board_title, String seq) {
-		
+	public BoardDTO boardContents(String board_title, String seq) {		
 		int boardSeq = mdao.selectBoardSeq(board_title);
 		String sysBoardTitle = "Board_"+boardSeq;
 		BoardDTO dto = new BoardDTO();

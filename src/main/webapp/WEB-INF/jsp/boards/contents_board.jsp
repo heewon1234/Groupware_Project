@@ -44,28 +44,31 @@
                     	<div><button id="contentsDelBtn">삭제</button></div>
                     </div>
                 </div>
-                <div class="contents">
+                <div class="contents" data-vote="${isVote }">
                    ${boardContents.contents }
-                   <div class="survey_box">
-                        <div class="survey_question">${boardContents.survey_question }</div>
-                        <hr>
-                        <div class="survey_items">
-                            <div class="survey_item">
-                                <input type="radio" name="item"> 항목1
-                            </div>
-                            <div class="survey_item">
-                                <input type="radio" name="item"> 항목2
-                            </div>
-                            <div class="survey_item">
-                                <input type="radio" name="item"> 항목2
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="survey_btns">
-                            <button>결과보기</button>
-                            <button>투표</button>
-                        </div>
-                    </div>
+                  		<div class="survey_box" id="surveyVoteBox">
+                       		<div class="survey_question">${boardContents.survey_question }</div>
+                        	<hr>
+                        	<div class="survey_items">
+                        		<c:forEach items="${surveyList }" var="i">
+                        			<div class="survey_item">
+                                		<input type="radio" name="item" class="survey_item_input" data-index="${i.seq }"> ${i.items }
+                           			</div>
+                        		</c:forEach>                      
+                        	</div>
+                        	<hr>
+                        	<div class="survey_btns">
+                            	<button id="showResultBtn">결과보기</button>
+                           		<button id="voteSurveyBtn">투표</button>
+                        	</div>
+                    	</div>
+                    	<div class="survey_box" id="surveyResultBox">
+                        	<div class="survey_question">질문</div>
+                        	<hr>
+                       		 <div class="survey_items" id="surveyResult">
+                       
+                        	</div>
+                    	</div>
                 </div>
                 <div class="buttons">
                  	<button id="backBtn">뒤로가기</button>

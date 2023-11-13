@@ -93,9 +93,10 @@
     border-radius: 5px;
     margin-top:20px;
     padding:15px;
-    width:600px;
+    width:800px;
     overflow-x:auto;   
 }
+.survey_box:last-child{display:none;}
 .survey_question{
     font-weight: bold;
     font-size:15px;
@@ -106,7 +107,27 @@
 }
 
 .survey_items{margin-top:10px;}
-.survey_item{margin-bottom:10px;}
+.survey_item{
+	margin-bottom:10px;
+	overflow: hidden;
+}
+.survey_item>div{
+    float:left;
+    height:20px;
+}
+.survey_item>div:first-child{
+	width:15%;
+}
+.graph{
+    border: 1px solid black;
+    width:60%;
+    margin-left:20px;
+}
+.ratioBox{
+	width:20%;
+	padding-left:5px;
+}
+
 .survey_btns{
     display: flex;
     align-items: center;

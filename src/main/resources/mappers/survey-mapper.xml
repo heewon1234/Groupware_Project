@@ -3,6 +3,26 @@
 
 <mapper namespace="Survey">
 	<insert id="insertSurveyItem">
-		insert into Survey values (null,#{board_title},#{parent_seq},#{items}); 
+		insert into Survey values (null,#{board_title},#{parent_seq},#{items},default); 
 	</insert>
+	
+	<select id="selectServeyItem" resultType="com.kdt.dto.SurveyDTO">
+		select * from Survey where board_title=#{board_title} and parent_seq=#{parent_seq}
+	</select>
+	
+	<insert id="insertSurveyUser">
+		insert into Survey_User values (null,#{id},#{parent_seq})
+	</insert>
+	
+	<update id="voteCountUpdate">
+		update Survey set vote = vote+1 where seq=#{seq}
+	</update>
+	
+	<select id="isVote" resultType="boolean">
+		select count(*) from Survey_User where id=#{id} and parent_seq=#{parent_seq}
+	</select>
+	
+	<select id="voteList" resultType="com.kdt.dto.SurveyDTO">
+		select *, (select sum(vote) from Survey where parent_seq=#{parent_seq}) as totalVote from Survey where parent_seq=#{parent_seq} 
+	</select>
 </mapper>

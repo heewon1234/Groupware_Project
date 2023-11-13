@@ -15,7 +15,6 @@ $(document).ready(function() {
 	            for (let i = 0; i < files.length; i++) {
 	            	formData.append("fileList", files[i]);
 	            }
-
 	            $.ajax({
 	            	url: "/file/upload",
 	                method: "post",
@@ -23,8 +22,7 @@ $(document).ready(function() {
 	                processData: false, // 인코딩 처리 금지 ( processData, contentType : false = multipart/form-data)
 	                contentType: false, // 파일 타입 그대로 유지
 
-	            }).done(function (resp) {
-	             	
+	            }).done(function (resp) {	             	
 	            	for (let i = 0; i < files.length; i++) {
 	                	let img = $("<img>");
 	                    img.attr("type", "file");

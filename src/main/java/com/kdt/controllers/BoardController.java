@@ -10,10 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.kdt.dto.BoardDTO;
 import com.kdt.dto.Mk_BoardDTO;
 import com.kdt.dto.ReplyDTO;
+import com.kdt.dto.SurveyDTO;
+import com.kdt.dto.SurveyUserDTO;
 import com.kdt.services.AuthorityService;
 import com.kdt.services.BoardService;
 import com.kdt.services.Mk_BoardService;
 import com.kdt.services.ReplyService;
+import com.kdt.services.SurveyService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -32,6 +35,9 @@ public class BoardController {
 	
 	@Autowired
 	ReplyService rservice;
+	
+	@Autowired
+	SurveyService sservice;
 	
 	@Autowired
 	HttpSession session;
@@ -78,14 +84,24 @@ public class BoardController {
 		if(board_title==null && (String)session.getAttribute("board_title")!="중요게시물") {
 			board_title= (String)session.getAttribute("board_title");
 		}
-		System.out.println("board_title:"+ board_title);
+		
 		List<ReplyDTO> replyList = rservice.replyList(board_title, seq);
 		model.addAttribute("replyList",replyList);
+		
 		BoardDTO boardContents = bservice.boardContents(board_title, seq);
 		model.addAttribute("boardContents",boardContents);
 		
+		model.addAttribute("surveyList", null);
+		model.addAttribute("isVote",false);
 		
+		String id = (String)session.getAttribute("loginId");
 		
+		if(!boardContents.getSurvey_question().isEmpty()) {
+			model.addAttribute("isVote",sservice.isVote(new SurveyUserDTO (0,id,Integer.parseInt(seq))));
+			List<SurveyDTO> list = sservice.selectServeyItem(new SurveyDTO(0,board_title, Integer.parseInt(seq),null,0,0));
+			model.addAttribute("surveyList", list);
+		}
+
 		return "boards/contents_board";
 	}
 	
