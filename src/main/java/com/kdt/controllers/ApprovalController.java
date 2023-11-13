@@ -12,6 +12,7 @@ import com.kdt.dto.ApprovalDTO;
 import com.kdt.dto.MembersDTO;
 import com.kdt.dto.MembersDTO1;
 import com.kdt.services.ApprovalService;
+import com.kdt.services.JobTitleService;
 import com.kdt.services.MembersService;
 import com.kdt.services.OrganizationService;
 
@@ -26,15 +27,26 @@ public class ApprovalController {
 	private ApprovalService appService;
 	@Autowired
 	private OrganizationService orgService;
+	@Autowired
+	private JobTitleService jobService;
+	@Autowired
+	private MembersService mService;
 	
 
 	@RequestMapping("/write")
 	public String write(Model model) throws Exception {
 		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");
-		List<String> managerList = orgService.getManagerList(userDTO.getOrganization());
-		model.addAttribute("userDTO", userDTO);
+		List<String> managerOrgList = orgService.getManagerOrgList(userDTO.getOrganization());
+		List<String> managerPositionList = jobService.getManagerPosition(userDTO.getPosition());
+		List<MembersDTO> managerList = mService.getManagerList(managerOrgList, managerPositionList);
+ 		model.addAttribute("userDTO", userDTO);
 		
-		System.out.println(managerList);
+		System.out.println(managerOrgList);
+		System.out.println(managerPositionList);
+		
+		for(MembersDTO manager : managerList) {
+			System.out.println(manager.getName());
+		}
 		
 		return "/approval/document/write";
 	}
