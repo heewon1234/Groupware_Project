@@ -74,8 +74,10 @@ public class BoardController {
 	}
 	
 	@RequestMapping("toContentsBoard") // 게시글 내용 보는 곳으로 이동
-	public String toContentsBoard(String seq, Model model) {
-		String board_title = (String)session.getAttribute("board_title");
+	public String toContentsBoard(String seq, String board_title, Model model) {
+		if(board_title==null && (String)session.getAttribute("board_title")=="중요게시물") {
+			board_title= (String)session.getAttribute("board_title");
+		}
 		List<ReplyDTO> replyList = rservice.replyList(board_title, seq);
 		model.addAttribute("replyList",replyList);
 		BoardDTO boardContents = bservice.boardContents(board_title, seq);

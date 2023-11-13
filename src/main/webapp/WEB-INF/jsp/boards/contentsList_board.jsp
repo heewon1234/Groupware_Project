@@ -36,33 +36,51 @@
                         </select>
                     </div>
                     <div class="board_body">
-                    	<c:forEach var="i" items="${boardContentsList}">
-                    		<div class="board_contents_list">
-                            	<div class="favorite" data-index='${i.seq }'>
-                            		<c:choose>
-                            			<c:when test="${i.favorite }">
-                            				<img src="/images/commons/body_form/left_item/default/favorites.png" >
-                            			</c:when>
-                            			<c:otherwise>
-                            				<img src="/images/board/notFavorite.png" >
-                            			</c:otherwise>
-                            		</c:choose>
-                                	
-                            	</div>
-                            	<div class="board_contents_title">
-                            		<a href="/board/toContentsBoard?seq=${i.seq }">
-                            			<c:if test="${i.header==''}">
-                            				<span>${i.header }&nbsp;&nbsp;</span>
-                            			</c:if>
-                            				${i.title }
-                            		</a>
-                            	</div>
-                           		<div class="board_contents_writer">${i.writer }</div>
-                            	<div class="view_count">${i.view_count }</div>
-                          	  	<div class="board_title">${i.board_title}</div>
-                            	<div class="board_contents_write_date">${i.write_date }</div>
-                        	</div>
-                    	</c:forEach>
+                    	<c:choose>
+                    		<c:when test="${boardContentsList.size()==0 }">
+                    			<div class="board_contents_list" style="display:flex;align-items:center;justify-content:center;">게시글 없음</div>
+                    		</c:when>
+                    		<c:otherwise>
+                    			<c:forEach var="i" items="${boardContentsList}">
+                    				<div class="board_contents_list">
+                            			<div class="favorite" data-index='${i.seq }'>
+                            				<c:choose>
+                            					<c:when test="${i.favorite }">
+                            						<img src="/images/commons/body_form/left_item/default/favorites.png" >
+                            					</c:when>
+                            					<c:otherwise>
+                            						<img src="/images/board/notFavorite.png" >
+                            					</c:otherwise>
+                            				</c:choose> 	
+                            			</div>
+                            			<div class="board_contents_title">
+                            				<c:choose>
+                            					<c:when test="${board_title == '중요게시물'}">
+                            						<a href="/board/toContentsBoard?seq=${i.seq }&board_title=${i.board_title}">
+                            							<c:if test="${i.header==''}">
+                            								<span>${i.header }&nbsp;&nbsp;</span>
+                            							</c:if>
+                            							${i.title }
+                            						</a>
+                            					</c:when>
+                            					<c:otherwise>
+                            						<a href="/board/toContentsBoard?seq=${i.seq }">
+                            							<c:if test="${i.header==''}">
+                            								<span>${i.header }&nbsp;&nbsp;</span>
+                            							</c:if>
+                            							${i.title }
+                            						</a>
+                            					</c:otherwise>
+                            				</c:choose>
+                            			</div>
+                           				<div class="board_contents_writer">${i.writer }</div>
+                            			<div class="view_count">${i.view_count }</div>
+                          	  			<div class="board_title">${i.board_title}</div>
+                            			<div class="board_contents_write_date">${i.write_date }</div>
+                        			</div>
+                    			</c:forEach>
+                    		</c:otherwise>
+                    	</c:choose>
                     </div>
                 </div>
                 <div class="board_bottom">
