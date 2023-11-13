@@ -139,7 +139,7 @@
 							<div id="searchBox">
 								<img alt="" src="/images/chats/search.svg"
 									onclick="searchGroup()"> <input id="searchGroup_input"
-									type="text" placeholder="채팅방 참여자 검색"> <img id="x"
+									type="text" placeholder="채팅방 검색" style="border: none;"> <img id="x"
 									alt="" src="/images/chats/x.svg"
 									onclick="hideSearchContainer()">
 							</div>
@@ -229,6 +229,23 @@
 	<script src="/js/chat/chatting.js" type="text/javascript"></script>
 	<script src="/js/chat/inputText.js" type="text/javascript"></script>
 	<script>
+	var stompClient;
+
+    $(document).ready(function () {
+        connectWebSocket();
+
+        // 웹소켓 연결 함수
+        function connectWebSocket() {
+            var socket = new SockJS('/ws');
+            stompClient = Stomp.over(socket);
+
+            stompClient.connect({}, function (frame) {
+                console.log('WebSocket 연결 성공!');
+            }, function (error) {
+                console.error('WebSocket 연결 실패: ' + error);
+            });
+        }
+    });
 	// 부서 목록을 가져오는 Ajax 요청
 	$.ajax({
         url:'/members/getDepartmentList'
@@ -447,12 +464,19 @@ function updateGroupChatList() {
 
 //그룹채팅방 여는 코드
 function groupChat(groupName, groupSeq) {
+	// 이전에 등록된 구독 모두 해지
+	if (stompClient && stompClient.subscriptions) {
+        Object.keys(stompClient.subscriptions).forEach(function (subscriptionId) {
+            stompClient.unsubscribe(subscriptionId);
+        });
+    }
+	
 	getPreviousGroupMessages(groupSeq);
 	$("#groupName").val(groupName);
     $("#groupSeq").val(groupSeq);
 	$("#groupJSP").css("display", "block");
 	
-	var socket = new SockJS('/ws');
+	/*var socket = new SockJS('/ws');
     stompClient = Stomp.over(socket);
 
     // 연결 설정
@@ -461,7 +485,7 @@ function groupChat(groupName, groupSeq) {
      // 기존 구독 해지
         if (stompClient.subscriptions) {
             stompClient.subscriptions = {};
-        }
+        }*/
         // 메시지 수신 구독
         
         stompClient.subscribe('/topic/group/' + groupSeq, function (response) {
@@ -485,7 +509,7 @@ function groupChat(groupName, groupSeq) {
         $(document).on("click", "#sendGroupBtn", function () {
         	sendGroupMessage(groupSeq);
         });
-    });
+    //});
 }
 //그룹 메시지 전송 함수
 function sendGroupMessage(groupSeq) {
@@ -754,16 +778,23 @@ function getPreviousGroupMessages(groupSeq) {
 			// 마우스를 내렸을 때 스타일 변경
 			$(this).css("text-decoration", "none");
 		});
-		var stompClient;
+		//var stompClient;
 
 		function openOneChat(friendName, organization, oneSeq) {
+			// 이전에 등록된 구독 모두 해지
+			if (stompClient && stompClient.subscriptions) {
+		        Object.keys(stompClient.subscriptions).forEach(function (subscriptionId) {
+		            stompClient.unsubscribe(subscriptionId);
+		        });
+		    }
+			
 		    console.log(friendName, organization, oneSeq);
 		    $("#otherName").val(friendName);
 		    $("#organization").val(organization);
 		    $("#oneSeq").val(oneSeq);
 		    $("#inputJSP").css("display", "block");
 
-		        var socket = new SockJS('/ws');
+		        /*var socket = new SockJS('/ws');
 		        stompClient = Stomp.over(socket);
 
 		        // 연결 설정
@@ -772,7 +803,7 @@ function getPreviousGroupMessages(groupSeq) {
 		         // 기존 구독 해지
 		            if (stompClient.subscriptions) {
 		                stompClient.subscriptions = {};
-		            }
+		            }*/
 		            // 메시지 수신 구독
 		            
 		            stompClient.subscribe('/topic/oneToOne/' + oneSeq, function (response) {
@@ -796,7 +827,7 @@ function getPreviousGroupMessages(groupSeq) {
 		            $(document).on("click", "#sendBtn", function () {
 		                sendMessage(oneSeq);
 		            });
-		        });
+		        //});
 		}
 
 		// 메시지 전송 함수
@@ -844,18 +875,18 @@ function getPreviousGroupMessages(groupSeq) {
 		    }
 		}
 		function closeOneChat() {
+			var oneSeq = $("#oneSeq").val();
 		    $('.chatForm').empty();
 		    if (stompClient) {
-		        stompClient.disconnect();
-		        stompClient = null;  // stompClient 초기화
+		        stompClient.unsubscribe('/topic/oneToOne/' + oneSeq);
 		    }
 		    $("#inputJSP").css("display", "none");
 		}
 		function closeGroupChat() {
+			var groupSeq = $("#groupSeq").val();
 		    $('.chatGroupForm').empty();
 		    if (stompClient) {
-		        stompClient.disconnect();
-		        stompClient = null;  // stompClient 초기화
+		        stompClient.unsubscribe('/topic/group/' + groupSeq);
 		    }
 		    $("#groupJSP").css("display", "none");
 		}

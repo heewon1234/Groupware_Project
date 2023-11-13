@@ -64,8 +64,11 @@ public class ChatRoomDAO {
 	public List<MembersDTO> searchUser(String searchValue) {
 		return db.selectList("Members.searchUser",'%'+searchValue+'%');
 	}
-	public List<GroupChatDTO> searchGroup(String searchGroup) {
-		return db.selectList("groupChat.searchGroup",'%'+searchGroup+'%');
+	public List<GroupChatDTO> searchGroup(String searchGroup, String name) {
+	    Map<String, Object> params = new HashMap<>();
+	    params.put("searchGroup", '%' + searchGroup + '%');
+	    params.put("name", name);
+	    return db.selectList("groupChat.searchGroup", params);
 	}
 
 
