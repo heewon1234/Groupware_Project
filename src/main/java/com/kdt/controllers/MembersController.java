@@ -1,14 +1,24 @@
 package com.kdt.controllers;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kdt.dto.MembersDTO;
-import com.kdt.dto.MembersDTO1;
+import com.kdt.dto.OneToOneChatDTO;
+import com.kdt.services.ChatRoomService;
 import com.kdt.services.MembersService;
-import com.kdt.services.MembersService1;
+import com.kdt.utils.EncryptionUtils;
+import com.kdt.utils.UUIDToNumber;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -19,18 +29,18 @@ public class MembersController {
 	private MembersService mservice;
 	
 	@Autowired
-	private MembersService1 mservice1;
+	private HttpSession session;
 	
 	@Autowired
-	private HttpSession session;
+	private ChatRoomService roomService;
 	
 	@RequestMapping("login")
 	public String login(String id, String pw) throws Exception{
-		//String shapw = EncryptionUtils.getSHA512(pw);
-		boolean result = this.mservice.isMember(id,pw);
+		String shapw = EncryptionUtils.getSHA512(pw);
+		boolean result = this.mservice.isMember(id,shapw);
 		if(result) {
 			session.setAttribute("loginId",id);
-			MembersDTO1 userDTO = mservice1.loginUser(id);
+			MembersDTO userDTO = mservice.loginUser(id);
 		    System.out.println(userDTO);
 		    if (userDTO != null) {
 		        // DTO에서 이름과 부서 가져오기
@@ -46,7 +56,7 @@ public class MembersController {
 		        session.setAttribute("userDTO", userDTO);
 
 		    }
-			return "home";
+			return "redirect:/";
 		}
 		
 		
@@ -68,7 +78,8 @@ public class MembersController {
 	
 	@RequestMapping("signup")
 	public String signup(String name, String id, String pw, String workForm, String org, String position, String jobName) throws Exception{
-		MembersDTO dto = new MembersDTO(id,pw,name,workForm,org,jobName,position,null,null,null,null,null,null);
+		String shapw = EncryptionUtils.getSHA512(pw);
+		MembersDTO dto = new MembersDTO(id,shapw,name,workForm,org,jobName,position,null,null,null,null,null,null);
 		this.mservice.signup(dto);
 		return "redirect:/insa/manage/members";
 	}
@@ -102,5 +113,67 @@ public class MembersController {
 		mservice.deleteMember(idList);
 
 		return "redirect:/insa/manage/members";
+	}
+	//채팅 관련 기능입니다.
+	@RequestMapping("selectAllNotLogged")
+	@ResponseBody
+	public Map<String, Object> selectAll(HttpSession session, Model model) throws Exception {
+		String loggedInUserID = (String) session.getAttribute("loginId");
+		List<MembersDTO> list = mservice.selectAllNotLogged(loggedInUserID);
+
+		// 사용자 목록에서 ID를 추출
+		List<String> userIDs = new ArrayList<>();
+		for (MembersDTO member : list) {
+			userIDs.add(member.getId());
+		}
+		System.out.println(userIDs);
+
+		// 1:1 채팅방을 생성하고 이미 방이 없는 경우에만 생성
+		for (String otherUserID : userIDs) {
+		    // 이미 방이 있는지 확인
+		    if (!roomService.oneroomExists(loggedInUserID, otherUserID)) {
+		        System.out.println(roomService.oneroomExists(loggedInUserID, otherUserID));
+		        int oneSeq = UUIDToNumber.convertUUIDToPositiveInt();
+		        roomService.createOneChatRoom(loggedInUserID, otherUserID,oneSeq);
+		        // 나머지 로직 추가 가능
+		    }
+		}
+
+		List<OneToOneChatDTO> OneToOneChatDTOList = roomService.selectAll(loggedInUserID);
+		Map<String, Object> responseData = new HashMap<>();
+		responseData.put("list", list);
+		responseData.put("OneToOneChatDTOList", OneToOneChatDTOList);
+
+
+		return responseData;
+	}
+	@PostMapping("/getMembersByOrganization")
+	@ResponseBody
+	public Map<String, Object> getMembersByOrganization(@RequestParam("organization") String organization,@RequestParam("oneSeq") String oneSeq) throws Exception {
+		String id = (String) session.getAttribute("loginId");
+		List<MembersDTO> members = mservice.getMembersByOrganization(organization,id);
+
+		List<OneToOneChatDTO> OneToOneChatDTOList = roomService.selectAll(id);
+		Map<String, Object> responseData = new HashMap<>();
+		responseData.put("members", members);
+		responseData.put("OneToOneChatDTOList", OneToOneChatDTOList);
+		return responseData;
+	}
+	@RequestMapping("getUserList")
+	@ResponseBody
+	public List<String> getUserList() throws Exception {
+		List<MembersDTO> membersList = mservice.getUserList();
+		List<String> memberNames = new ArrayList<>();
+        for (MembersDTO member : membersList) {
+            String memberName = member.getName();
+            memberNames.add(memberName);
+        }
+		return memberNames;
+	}
+	@RequestMapping("getDepartmentList")
+	@ResponseBody
+	public List<String> getDepartmentList() throws Exception {
+		System.out.println(mservice.getDepartmentList());
+		return mservice.getDepartmentList();
 	}
 }

@@ -24,4 +24,12 @@ public class JobTitleService {
 	public int delete(String position) {
 		return dao.delete(position);
 	}
+	
+	public List<String> getManagerPosition(String position) {
+		return dao.getManagerPosition(position);
+	}
+	
+	public int getRank(String position) {
+		return dao.getRank(position);
+	}
 }

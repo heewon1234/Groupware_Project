@@ -25,4 +25,12 @@ public class JobTitleDAO {
 	public int delete(String position) {
 		return db.delete("JobTitle.delete", position);
 	}
+	
+	public List<String> getManagerPosition(String position) {
+		return db.selectList("JobTitle.getManagerPosition", position);
+	}
+	
+	public int getRank(String position) {
+		return db.selectOne("JobTitle.getRank",position);
+	}
 }

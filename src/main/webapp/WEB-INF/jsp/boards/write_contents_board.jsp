@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 	<link rel="stylesheet" href="/css/commons/body_form/left_form/body_form_default.css" />
@@ -15,14 +15,14 @@
     <script src="/js/commons/body_form/body_form_default.js" defer></script>
 </head>
 <body>
-	 <div class="top">TOP</div>
+	<div class="top">TOP</div>
     <div class="body_form">
         <div class="left_item" id="left_item">
 
         </div>
         <div class="right_item">
             <div class="content_tab">
-                <form action="/board/insertBoardContents" id="frm">
+                <form action="/board/insertBoardContents" id="frm" method="post">
                     <div class="board_title_box">
                         <div class="board_title_text">게시판</div>
                         <div>
@@ -61,13 +61,18 @@
                     <div class="board_survey">
                         <div>설문 여부</div>
                         <div>
-                            <div><input type="radio" name="useServey" value="true"> 사용</div>
-                            <div><input type="radio" name="useServey" value="false" checked> 사용 안 함</div>
+                            <div><input type="radio" name="useSurvey" value="true"> 사용</div>
+                            <div><input type="radio" name="useSurvey" value="false" checked> 사용 안 함</div>
                         </div>
                         <div id="surveyBox">
                             <div class="questionBox surveyContents">
                                 <div class="surveyText">질문</div>
-                                <div class="surveyInputBox"><input type="text" placeholder="질문을 입력해주세요" name="servey_question"></div>
+                                <div class="surveyInputBox"><input type="text" placeholder="질문을 입력해주세요" name="survey_question"></div>
+                            </div>
+                            <div class="itemBox surveyContents">
+                                <div class="surveyText">항목</div>
+                                <div class="surveyInputBox"><input type="text" placeholder="항목을 입력해주세요" name="items"></div>
+                                <div><img src="/images/commons/body_form/left_item/default/plus.png" class="add_item_btn"/></div>
                             </div>
                             <div class="itemBox surveyContents">
                                 <div class="surveyText">항목</div>
@@ -86,6 +91,5 @@
     </div>
 	<script src="/js/board/sideBar.js" defer></script>
     <script src="/js/board/write_contents_board.js" defer></script>
-
 </body>
 </html>

@@ -5,7 +5,7 @@
   
 <mapper namespace="Members">
 	<select id="isMember" resultType="boolean">
-		select (count(*) > 0) from members1 where id=#{id} and pw=#{pw}
+		select (count(*) > 0) from Members where id=#{id} and pw=#{pw}
 	</select>
 	
 	<select id="idCheck" resultType="boolean">
@@ -16,9 +16,8 @@
 		insert into Members values(#{id},#{pw},#{name},#{work_form},#{organization},#{job_name},#{position},null,null,null,null,null,null)
 	</insert>
 	
-	<!-- Members로 바꿔줘야됨~ -->
 	<select id="getOrganization" resultType="String">
-		select organization from members1 where id=#{value}
+		select organization from Members where id=#{value}
 	</select>
 	
 	<select id="selectAll" resultType="com.kdt.dto.MembersDTO">
@@ -42,14 +41,46 @@
 	</delete>
 	
 	<select id="selectWorkForm" resultType="String">
-		SELECT DISTINCT work_form FROM Members
+		SELECT * FROM Work_Form
 	</select>
-	
+
 	<select id="selectApprovalMembers" resultType="com.kdt.dto.MembersDTO">
 		SELECT m.*
 		FROM Members m
 		JOIN JOB_TITLE jt ON m.position = jt.POSITION
 		WHERE jt.JOB_RANK > (SELECT JOB_RANK FROM JOB_TITLE WHERE POSITION = #{position})
 		ORDER BY jt.JOB_RANK DESC;
+	</select>
+	
+	<select id="selectAllNotLogged" resultType="com.kdt.dto.MembersDTO">
+		select * from Members where id != #{loggedInUserID}
+	</select>
+	
+	<select id="getMembersByOrganization" resultType="com.kdt.dto.MembersDTO">
+		SELECT * FROM Members where organization = #{organization} AND id != #{id}
+	</select>
+	
+	<select id="loginUser" resultType="com.kdt.dto.MembersDTO">
+		SELECT * FROM Members where id = #{id}
+	</select>
+	
+	<select id="searchUser" resultType="com.kdt.dto.MembersDTO">
+		SELECT * FROM Members where name like #{searchValue}
+	</select>
+	
+	<select id="getUserList" resultType="com.kdt.dto.MembersDTO">
+		SELECT * FROM Members
+	</select>
+	
+	<select id="getDepartmentList" resultType="String">
+		select distinct organization from Members
+	</select>
+	
+	<select id="getManager" resultType="com.kdt.dto.MembersDTO">
+		SELECT * FROM Members WHERE organization = #{org} AND position = #{position}
+	</select>
+	
+	<select id="selectById" resultType="com.kdt.dto.MembersDTO">
+		SELECT * FROM Members WHERE id = #{id}
 	</select>
 </mapper>

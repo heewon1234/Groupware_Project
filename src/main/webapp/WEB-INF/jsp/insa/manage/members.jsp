@@ -25,9 +25,11 @@
 					<h3>임직원 관리</h3>
 					<hr>
 				</div>
-				<div id="add_div">
-					<a id="add_btn" class="btns">사용자 추가</a>
-				</div>
+				<c:if test="${rank <= 5}">
+    				<div id="add_div">
+						<a id="add_btn" class="btns">사용자 추가</a>
+					</div>
+				</c:if>
 				<form id="signupForm" action="/members/signup" method="post">
 				<div id="createUser" style="display:none;">
 					<table id="createUserTable" class="compact">

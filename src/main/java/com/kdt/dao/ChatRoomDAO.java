@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kdt.dto.GroupChatDTO;
+import com.kdt.dto.MembersDTO;
 import com.kdt.dto.OneToOneChatDTO;
 
 @Repository
@@ -16,14 +17,7 @@ public class ChatRoomDAO {
 	@Autowired
 	private SqlSession db;
 	
-//	public void createOneChatRoom(String loggedInUserID, String otherUserID) {
-//	    Map<String, String> params = new HashMap<>();
-//	    params.put("loggedInUserID", loggedInUserID);
-//	    params.put("otherUserID", otherUserID);
-//	    db.insert("oneChat.createOneChatRoom", params);
-//	}
 	public void createOneChatRoom(String loggedInUserID, String otherUserID,int oneSeq) {
-		System.out.println(oneSeq);
 	    Map<String, Object> params1 = new HashMap<>();
 	    params1.put("oneSeq", oneSeq);
 	    params1.put("loggedInUserID", loggedInUserID);
@@ -52,15 +46,19 @@ public class ChatRoomDAO {
 	public int oneCountAll(String  id) {
 	    return db.selectOne("oneChat.oneCountAll",id);
 	}
-	public List<OneToOneChatDTO> selectAll() {
-		System.out.println(db.selectList("oneChat.selectAll"));
-		return db.selectList("oneChat.selectAll");
+	public List<OneToOneChatDTO> selectAll(String id) {
+		return db.selectList("oneChat.selectAll",id);
 	}
 	public List<GroupChatDTO> groupSelectAll() {
-		System.out.println(db.selectList("oneChat.selectAll"));
 		return db.selectList("groupChat.groupSelectAll");
 	}
-
-
-
+	public List<MembersDTO> searchUser(String searchValue) {
+		return db.selectList("Members.searchUser",'%'+searchValue+'%');
+	}
+	public List<GroupChatDTO> searchGroup(String searchGroup, String name) {
+	    Map<String, Object> params = new HashMap<>();
+	    params.put("searchGroup", '%' + searchGroup + '%');
+	    params.put("name", name);
+	    return db.selectList("groupChat.searchGroup", params);
+	}
 }

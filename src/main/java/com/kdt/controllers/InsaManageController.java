@@ -57,12 +57,18 @@ public class InsaManageController {
 	
 	@RequestMapping(value="/members")
 	public String toMember(Model model) {
+		String id = (String) session.getAttribute("loginId");
+		MembersDTO userDTO = mService.loginUser(id);
+		String position = userDTO.getPosition();
+		int rank = jtService.getRank(position);
+		
 		List<JobTitleDTO> jobTitleList = jtService.selectAll();
 		List<JobRoleDTO> jobRoleList = jrService.selectAll();
 		List<OrganizationDTO> orgList = orgService.selectAll();
 		List<MembersDTO> membersList = mService.selectAll();
 		List<String> workFormList = mService.selectWorkForm();
 		
+		model.addAttribute("rank",rank);
 		model.addAttribute("jobTitleList", jobTitleList);
 		model.addAttribute("jobRoleList", jobRoleList);
 		model.addAttribute("orgList", orgList);

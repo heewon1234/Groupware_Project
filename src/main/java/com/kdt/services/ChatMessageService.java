@@ -24,4 +24,7 @@ public class ChatMessageService {
 	public List<ChatMessageDTO> getPreviousMessages(String oneSeq) {
 		return dao.getPreviousMessages(oneSeq);
 	}
+	public List<ChatMessageDTO> getPreviousGroupMessages(String groupSeq) {
+		return dao.getPreviousGroupMessages(groupSeq);
+	}
 }

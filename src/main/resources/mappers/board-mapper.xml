@@ -14,22 +14,38 @@
 		select JOB_NAME from (select * from Members where organization=#{organization}) as job group by job_name
 	</select>
 	<select id="selectByJobName" resultType="String">
-		select name from Members where job_name=#{job_name};
+		select name from Members where JOB_NAME=#{job_name};
 	</select>
 	<select id="selectMemberByOrganization" resultType="com.kdt.dto.MembersDTO">
 		select * from Members where organization=#{organization}
 	</select>
 	<select id="selectMemberByOrganizationAndJobName" resultType="com.kdt.dto.MembersDTO">
-		select * from Members where organization=#{organization} and job_name=#{job_name}
+		select * from Members where organization=#{organization} and JOB_NAME=#{job_name}
 	</select>
 	<select id="selectMemberByName" resultType="com.kdt.dto.MembersDTO">
-		select * from Members where organization=#{organization} and job_name=#{job_name} and name=#{name}
+		select * from Members where organization=#{organization} and JOB_NAME=#{job_name} and name=#{name}
 	</select>
 	<!-- 옮겨라 -->
 	
-	<!-- 게시글 등록 관련 -->
+	<!-- 게시글 등록 -->
 	<insert id="insertBoardContents" useGeneratedKeys="true" keyProperty="seq">
-		insert into ${board_title} values (null,#{title},#{writer},default,#{header},#{notice},#{contents},#{servey_question},default);
+		insert into ${board_title} values (null,#{title},#{writer},default,#{header},#{notice},#{contents},#{survey_question},default);
 	</insert>
-	<!-- 게시글 등록 관련 -->
+	
+	<!-- 게시글 불러오기 -->
+	<select id="boardContentsList" resultType="com.kdt.dto.BoardDTO">
+		select b.*, #{oriBoardTitle} as board_title,case when b.seq = parent_seq then 'true' else 'false' end as favorite from ${board_title} b left join Favorite_Board f on id=#{id} and parent_seq = b.seq and board_title=#{board_title} order by seq desc
+	</select>
+	<select id="boardContents" resultType="com.kdt.dto.BoardDTO">
+		select * from ${board_title} where seq=#{seq}
+	</select>
+	
+	<select id="FavoriteBoardContentsList" resultType="com.kdt.dto.BoardDTO">
+		select b.*,#{oriBoardTitle} as board_title, "true" as favorite from Favorite_Board f left join ${board_title} b on parent_seq=b.seq where id=#{id} and board_title=#{board_title} order by write_date desc;
+	</select>
+	<!-- 게시글 삭제 -->
+	<delete id="delContents">
+		delete from ${board_title} where seq=${seq}
+	</delete>
+
 </mapper>

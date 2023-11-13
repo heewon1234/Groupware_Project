@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kdt.dto.LeavesDTO;
+import com.kdt.dto.MembersDTO;
 import com.kdt.dto.WorkTimesDTO;
 import com.kdt.dto.WorksDTO;
 import com.kdt.dto.WorkstatisticsDTO;
@@ -29,6 +30,24 @@ public class WorksDAO {
 		return db.insert("Worktimes.insert", dto);
 	}
 	
+	public int leave_insert(LeavesDTO dto)throws Exception{
+		return db.insert("Leaves.insert",dto);
+	}
+	public int work_insert(WorksDTO dto)throws Exception{
+		return db.insert("Works.insert",dto);
+	}
+	public int leave_update(LeavesDTO dto) {
+		return db.update("Leaves.update", dto);
+	}
+	public int work_update(WorksDTO dto) {
+		return db.update("Works.update", dto);
+	}
+	public int leave_delete(String idList)throws Exception{
+		return db.delete("Leaves.delete",idList);
+	}
+	public int work_delete(String idList)throws Exception{
+		return db.delete("Works.delete",idList);
+	}
 	public List<WorkTimesDTO> work_inout(String id)throws Exception{
 		return db.selectList("Worktimes.work_inout",id);
 	}

@@ -25,4 +25,8 @@ public class OrganizationDAO {
 	public int delete(String organization) {
 		return db.delete("Organization.delete", organization);
 	}
+	
+	public String getManagerOrg(String org) {
+		return db.selectOne("Organization.getManagerOrg", org);
+	}
 }

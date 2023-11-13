@@ -54,7 +54,7 @@
         <div class="left_item" id="left_item">
 
         </div>
-        <form id="frm" action="/mk_board/Mk_boardInsert">
+        <form id="frm" action="/mk_board/Mk_boardInsert" method="post">
         <input type="hidden" name="authorityList" id="authorityList">
         <input type="hidden" name="headerList" id="headerList">
         <div class="right_item">

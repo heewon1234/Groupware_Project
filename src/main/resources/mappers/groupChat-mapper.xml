@@ -3,22 +3,22 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="groupChat">
-
 	<insert id="createGroupChat">
 		insert into GroupChat (groupSeq,groupName,memberName)
 		values
 		(#{groupSeq},#{groupName},#{memberName})
 	</insert>
-
 	<select id="selectBy"
 		resultType="com.kdt.dto.ChatMessageDTO">
 		SELECT * FROM messages where type = #{type} and
 		MessageSeq=#{MessageSeq}
 	</select>
-	
 	<!-- 방이름 불러오는 코드 -->
 	<select id="groupSelectAll"
 		resultType="com.kdt.dto.GroupChatDTO">
-		select distinct groupName,groupSeq from GroupChat;
+		select * from GroupChat;
+	</select>
+	<select id="searchGroup" resultType="com.kdt.dto.GroupChatDTO" parameterType="map">
+		select distinct groupName,groupSeq from GroupChat where groupName like #{searchGroup} and memberName=#{name}
 	</select>
 </mapper>
