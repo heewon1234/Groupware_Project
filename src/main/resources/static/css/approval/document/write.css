@@ -1,7 +1,7 @@
 h4 {
 	font-size: 14px;
 	font-weight: 700;
-	padding: 0 0 15px 0;
+	padding: 15px 0 15px 0;
 }
 
 th {
@@ -22,11 +22,10 @@ textarea {
 }
 
 .outTable th {
-	width: 15%;
+	width: 5%;
 }
 
 .outTable td {
-	width: 35%;
 	padding: 0;
 }
 

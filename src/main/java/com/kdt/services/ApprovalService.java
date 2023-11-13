@@ -31,7 +31,7 @@ public class ApprovalService {
 	}
 	
 	@Transactional
-	public void insert(ApprovalDTO dto, MultipartFile[] files, String path) throws Exception {
+	public void insert(ApprovalDTO dto, MultipartFile[] files, String path, String[] managerID) throws Exception {
 		int parent_seq = adao.insert(dto);
 
 		File uploadPath = new File(path);
@@ -50,6 +50,10 @@ public class ApprovalService {
 
 				afdao.insert(new ApprovalFilesDTO(0,parent_seq, oriName, sysName));
 			}
+		}
+		
+		for(String id : managerID) {
+			
 		}
 	}
 }
