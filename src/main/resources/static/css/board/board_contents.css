@@ -45,6 +45,16 @@
     width:78%;
     padding-left:10px;
 }
+.board_contents_info>div:nth-child(4){
+    height:100%;
+}
+.contents_write_date>div:first-child{height:60%;}
+.contents_write_date>div:last-child{height:40%;}
+.contents_write_date button{
+    width:80px;
+    height:30px;
+    border-radius: 5px;
+}
 .contents_info>div{
     display: flex;
     align-items: center;
@@ -76,6 +86,57 @@
     padding-top:20px;
     padding-bottom:20px;
     margin-left:25px;
+}
+
+.survey_box{
+    border:1px solid black;
+    border-radius: 5px;
+    margin-top:20px;
+    padding:15px;
+    width:800px;
+    overflow-x:auto;   
+}
+.survey_box:last-child{display:none;}
+.survey_question{
+    font-weight: bold;
+    font-size:15px;
+}
+.survey_box>hr{
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
+.survey_items{margin-top:10px;}
+.survey_item{
+	margin-bottom:10px;
+	overflow: hidden;
+}
+.survey_item>div{
+    float:left;
+    height:20px;
+}
+.survey_item>div:first-child{
+	width:15%;
+}
+.graph{
+    border: 1px solid black;
+    width:60%;
+    margin-left:20px;
+}
+.ratioBox{
+	width:20%;
+	padding-left:5px;
+}
+
+.survey_btns{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.survey_btns>button{
+    width:80px;
+    height:30px;
+    border-radius: 5px;
 }
 
 .buttons{
@@ -116,6 +177,7 @@
 .reply_input>textarea{
     width:95%;
     resize:none;
+    height:50%;
 }
 .reply_button{width:7%;}
 .reply_button>button{
@@ -162,4 +224,6 @@
     align-items: center;
     margin-bottom:10px;
 }
+
+.updateCancelBtn,.updateSuccessBtn{display:none;}
 

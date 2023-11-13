@@ -10,6 +10,6 @@
 	
 	<!-- 게시글 작성 -->
 	<select id="selectAuthBoard" resultType="String">
-		select sys_board_title from Authority where id=#{id} and authority="쓰기" 
+		select sys_board_title from Authority where id=#{id} and authority="쓰기"
 	</select>
 </mapper>

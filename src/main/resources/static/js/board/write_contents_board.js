@@ -15,7 +15,6 @@ $(document).ready(function() {
 	            for (let i = 0; i < files.length; i++) {
 	            	formData.append("fileList", files[i]);
 	            }
-
 	            $.ajax({
 	            	url: "/file/upload",
 	                method: "post",
@@ -23,8 +22,7 @@ $(document).ready(function() {
 	                processData: false, // 인코딩 처리 금지 ( processData, contentType : false = multipart/form-data)
 	                contentType: false, // 파일 타입 그대로 유지
 
-	            }).done(function (resp) {
-	             	
+	            }).done(function (resp) {	             	
 	            	for (let i = 0; i < files.length; i++) {
 	                	let img = $("<img>");
 	                    img.attr("type", "file");
@@ -55,7 +53,7 @@ $("#board_title").change(function(){
 	$("#header").append(selectOption);
 	
 	$.ajax({
-		url:"/board/selectHeader",
+		url:"/header/selectHeader",
 		data:{"board_title":$(this).val()}
 	}).done(function(resp){
 		
@@ -89,7 +87,7 @@ $("#fileAddBtn").on("click",function(){
     $("#file_box_input_file").append(div);
 });
 
-$("input[name='useServey']").change(function(){
+$("input[name='useSurvey']").change(function(){
 	if($(this).val()==='true'){
 		$("#surveyBox").css("display","block");
 	}else{
@@ -156,7 +154,7 @@ $("#frmBtn").on("click",function(){
 		return false;
 	}
 	
-	if($("header").val()=="말머리 없음"){
-		$("header").val("");
+	if($("#header").val()=="말머리 없음"){
+		$("#header").val("");
 	}
 })
