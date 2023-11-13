@@ -47,7 +47,6 @@ public class ChatGroupRoomController {
 	            invitedGroups.add(group);
 	        }
 	    }
-	    System.out.println("그룹채팅방"+invitedGroups);
 	    return invitedGroups;
 	}
 
@@ -55,8 +54,6 @@ public class ChatGroupRoomController {
 	@RequestMapping(value = "createGroupChat", consumes = "application/json", method = RequestMethod.POST)
 	@ResponseBody
 	public String createGroupChat(@RequestBody GroupChatDTO group_dto) throws Exception {
-		System.out.println("그룹" + group_dto.getGroupName());
-		System.out.println("멤버" + group_dto.getMemberName());
 		service.createGroupChat(group_dto);
 		return "Success"; 
 	}
