@@ -73,7 +73,12 @@ public class MembersDAO {
 	public MembersDTO loginUser(String id){ 
 		return db.selectOne("Members.loginUser", id); 
 	}
-	
+	public List<MembersDTO> getUserList(){ 
+		return db.selectList("Members.getUserList"); 
+	}
+	public List<String> getDepartmentList(){ 
+		return db.selectList("Members.getDepartmentList"); 
+	}
 	public MembersDTO getManager(String org, String position) {
 		Map<String, Object> parameters = new HashMap<>();
 	    parameters.put("org", org);
