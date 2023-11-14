@@ -7,7 +7,7 @@ public class LeavesDTO {
 	private String id;
 	private String name;
 	private String organization;
-	private Timestamp joinday;
+	private String joinday;
 	private int leave_regular;
 	private int leave_bonus;
 	private int leave_other_bonus;
@@ -19,7 +19,7 @@ public class LeavesDTO {
 	public LeavesDTO() {
 		super();
 	}
-	public LeavesDTO(String id, String name, String organization, Timestamp joinday, int leave_regular, int leave_bonus,
+	public LeavesDTO(String id, String name, String organization, String joinday, int leave_regular, int leave_bonus,
 			int leave_other_bonus, int year_leave, int bonus_leave, int month_leave, int family_event_leave) {
 		super();
 		this.id = id;
@@ -52,10 +52,10 @@ public class LeavesDTO {
 	public void setOrganization(String organization) {
 		this.organization = organization;
 	}
-	public Timestamp getJoinday() {
+	public String getJoinday() {
 		return joinday;
 	}
-	public void setJoinday(Timestamp joinday) {
+	public void setJoinday(String joinday) {
 		this.joinday = joinday;
 	}
 	public int getLeave_regular() {
@@ -106,9 +106,5 @@ public class LeavesDTO {
 	public int getremainder_leave() {
 		return this.getall_leave()-(this.getYear_leave()+this.getBonus_leave()+this.getMonth_leave()+this.getFamily_event_leave());
 	}
-	public String getTime() {
-		long currentTime = System.currentTimeMillis();
-		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
-		return sdf.format(this.getJoinday());
-	}
+	
 }

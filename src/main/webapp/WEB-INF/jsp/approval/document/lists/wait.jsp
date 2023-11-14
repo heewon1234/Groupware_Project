@@ -27,6 +27,7 @@
 							<th>제목</th>
 							<th>기안일</th>
 							<th>문서 종류</th>
+							<th>상태</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -37,6 +38,7 @@
 								<td>${list.title}</td>
 								<td>${list.draft_date}</td>
 								<td>${list.doc_type }</td>
+								<td>${list.approval_status }</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -44,6 +46,11 @@
 			</div>
 		</div>
 	</div>
-	<script src="/js/approval/document/lists/wait.js"></script>
+	<script src="/js/approval/document/table.js"></script>
+	<script>
+		$(document).ready(function() {
+			$(".left_item").load("/approval/document/left_item?selectItem=wait");
+		});
+	</script>
 </body>
 </html>

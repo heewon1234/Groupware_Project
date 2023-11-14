@@ -27,6 +27,7 @@
 							<th>제목</th>
 							<th>기안일</th>
 							<th>문서 종류</th>
+							<th>상태</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -34,13 +35,10 @@
 							<tr>
 								<td>${list.seq}</td>
 								<td>${list.id}</td>
-								<td>
-									<a href="/approval/document/view?docId=${list.seq}">
-										${list.title}
-									</a>
-								</td>
+								<td>${list.title}</td>
 								<td>${list.draft_date}</td>
 								<td>${list.doc_type }</td>
+								<td>${list.approval_status }</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -51,7 +49,7 @@
 	<script src="/js/approval/document/table.js"></script>
 	<script>
 		$(document).ready(function() {
-			$(".left_item").load("/approval/document/left_item?selectItem=pending");
+			$(".left_item").load("/approval/document/left_item?selectItem=complete");
 		});
 	</script>
 </body>

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,9 +21,6 @@
 	<div class="body_form">
 		<div class="left_item"></div>
 		<div class="right_item">
-			<div class="title">
-				<h3>2023-01-01~2023-12-31</h3>
-			</div>
 			<table border="1" style="width: 100%;">
 				<thead>
 					<tr>
@@ -43,14 +40,48 @@
 						<th>월차</th>
 						<th>경조사</th>
 					</tr>
-
 				</thead>
 				<tbody id="workbox">
 				</tbody>
 			</table>
-			<div class="div"></div>
+			<div class="div">
+				<span><button id="openModalBtn">휴가 미생성자</button></span>
+			</div>
+			
+			<div id="myModal" class="modal right_item">
+				<h3>휴가 미생성자</h3>
+				<hr>
+				<!-- action 및 method 추가 -->
+				<form action="/works/joindayupdate">
+					입사일을 입력하고 생성을 클릭하면, 해당 사용자의 올해 휴가가 생성됩니다.
+					<table border="1" style="width: 100%;">
+						<thead>
+							<tr>
+								<th>이름(ID)</th>
+								<th>입사일</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="i" items="${list}">
+								<tr>
+									<td>${i.name}(${i.id })</td>
+									<td><input type="text" name="idList" class="idListbox"
+										hidden> <input type="text" name="joindayList"
+										class="joindayListbox" hidden> <input type="hidden"
+										class="id" value="${i.id}"> <input type="text"
+										class="joinday" placeholder="YYYY-MM-DD 입력"></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+					<button id="leaveCreationForm" type="submit" class="button_apply">생성</button>
+					<button id="closeModalBtn">취소</button>
+				</form>
+			</div>
+			<div id="overlay" class="overlay"></div>
+
+			<script src="/js/insa/work_manage/workmanage.js"></script>
 		</div>
 	</div>
-	<script src="/js/insa/work_manage/workmanage.js"></script>
 </body>
 </html>

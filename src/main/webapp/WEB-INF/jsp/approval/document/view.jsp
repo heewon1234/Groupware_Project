@@ -18,8 +18,10 @@
 		<div class="left_item"></div>
 		<div class="right_item">
 			<div class="content_tab">
-				<form action="/approval/document/insertApproval" method="post" enctype="multipart/form-data">
+				<form action="/approval/document/updateStatus" method="post">
 					<div id="submit_div">
+						<input type='text' hidden name="doc_id" value="${docId }">
+						<input type='text' hidden name="userId" value="${userDTO.id }">
 						<button type="submit" class="button_apply">기안하기</button>
 					</div>
 
@@ -63,12 +65,12 @@
 
 					<h4>제목</h4>
 					<div class="input-group">
-						<input type="text" class="form-control" id="" name="title" value="${app.title }" readonly>
+						<input type="text" class="form-control" value="${app.title }" readonly>
 					</div>
 
 					<h4>본문</h4>
 					<div class="input-group">
-						<textarea name="contents" readonly>
+						<textarea readonly>
 							${app.contents }
 						</textarea>
 					</div>

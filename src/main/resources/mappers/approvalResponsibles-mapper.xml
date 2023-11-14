@@ -4,15 +4,36 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ApprovalResponsibles">
 	<insert id="insert">
-		INSERT INTO Approval_Responsibles VALUES(NULL, #{doc_id}, #{approver_id}, #{status})
+		INSERT INTO Approval_Responsibles VALUES(NULL, #{doc_id}, #{approver_id}, "미결")
 	</insert>
 	
 	<select id="getDocIdByUserId" resultType="Integer">
 		select doc_id from Approval_Responsibles
 		where approver_id = #{id};
 	</select>
+	
+	<select id="getPendingDocIdByUserId" resultType="Integer">
+		select doc_id from Approval_Responsibles
+		where approver_id = #{id} and approval_status = "미결"
+	</select>
+	
+	<select id="getApproveDocIdByUserId" resultType="Integer">
+		select doc_id from Approval_Responsibles
+		where approver_id = #{id} and approval_status = "결재"
+	</select>
+	
+	<select id="getReturnDocIdByUserId" resultType="Integer">
+		select doc_id from Approval_Responsibles
+		where approver_id = #{id} and approval_status = "반려"
+	</select>
+	
 	<select id="getManagerIdList" resultType="String">
 		select approver_id from Approval_Responsibles
 		where doc_id = #{docId};
 	</select>
+	
+	<update id="updateStatus">
+		UPDATE Approval_Responsibles SET approval_status = #{approval_status}
+		where doc_id = #{doc_id} and approver_id = #{approver_id}
+	</update>
 </mapper>

@@ -35,6 +35,14 @@ public class ApprovalService {
 		return adao.selectWaitbyId(id);
 	}
 	
+	public List<ApprovalDTO> selectCompleteById(String id) {
+		return adao.selectCompleteById(id);
+	}
+	
+	public List<ApprovalDTO> selectProgressById(String id) {
+		return adao.selectProgressById(id);
+	}
+	
 	@Transactional
 	public void insert(ApprovalDTO dto, MultipartFile[] files, String path, String[] managerID) throws Exception {
 		int parent_seq = adao.insert(dto);
@@ -62,7 +70,7 @@ public class ApprovalService {
 		}
 	}
 	
-	public List<ApprovalDTO> selectEveryByDocId(List<Integer> docIdList) {
+	public List<ApprovalDTO> selectListByDocId(List<Integer> docIdList) {
 		List<ApprovalDTO> appList = new ArrayList<>();
 		
 		for(Integer docId : docIdList) {
