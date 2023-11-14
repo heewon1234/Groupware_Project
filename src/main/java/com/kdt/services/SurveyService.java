@@ -20,18 +20,24 @@ public class SurveyService {
 		return sdao.selectServeyItem(dto);
 	}
 	
-	public List<SurveyDTO> voteList(int parent_seq){
-		return sdao.voteList(parent_seq);
+	public List<SurveyDTO> voteList(int parent_seq,String board_title){
+		SurveyDTO dto = new SurveyDTO();
+		dto.setParent_seq(parent_seq);
+		dto.setBoard_title(board_title);
+		return sdao.voteList(dto);
 	}
 	
 	@Transactional
 	public List<SurveyDTO> voteCountUpdate(SurveyDTO dto,String id) {
 		sdao.insertSurveyUser(dto, id);
 		sdao.voteCountUpdate(dto.getSeq());
-		return sdao.voteList(dto.getParent_seq());
+		return sdao.voteList(dto);
 	}
 	
 	public boolean isVote(SurveyUserDTO dto) {
 		return sdao.isVote(dto);
+	}
+	public boolean isExistVote(SurveyDTO dto) {
+		return sdao.isExistVote(dto);
 	}
 }

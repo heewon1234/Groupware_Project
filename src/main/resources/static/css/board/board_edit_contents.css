@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+@charset "UTF-8";
+
 /* div{border:1px solid black;} */
 .note-modal-backdrop{display:none !important;}
 .content_tab>form>div:not(.board_contents_file_box):not(.board_contents_box){
@@ -7,7 +9,7 @@
     overflow: hidden;
     margin-bottom:10px;
 }
-.content_tab>form>div>div:not(.board_contents_file_box>div):not(.board_contents_box>div):not(.board_survey>div):not(.contents-file>div){
+.content_tab>form>div>div:not(.board_contents_file_box>div):not(.board_contents_box>div):not(.board_survey>div):not(.contents-file>div):not(.board_survey>div){
     float:left;
     height:50px;
     display: flex;
@@ -86,8 +88,8 @@
     border:1px solid black;
     border-radius: 5px;;
     padding:10px;
-    display: none;
 }
+.notUseSurveyBox{display:none;}
 .surveyContents{
     overflow: hidden;
     height:30px;

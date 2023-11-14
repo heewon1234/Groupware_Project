@@ -32,7 +32,14 @@ $(document).ready(function() {
 
 	        	})
 
-			}
+			},
+			onMediaDelete:function($target, editor, $editable){
+	        	$.ajax({
+	           		url:"/file/deleteServerFile",
+	           		data:{"sys_name":$target[0].getAttribute("src").split("/uploads/")[1]}
+	           	}) 			
+	    	}
+			
 		}
 	});
 });

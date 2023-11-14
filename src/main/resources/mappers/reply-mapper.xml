@@ -13,6 +13,9 @@
 	<delete id="delReply">
 		delete from Reply where seq=#{seq} and board_title=#{board_title}
 	</delete>
+	<delete id="delReplyByParentSeq">
+		delete from Reply where parent_seq=#{parent_seq} and board_title=#{board_title}
+	</delete>
 	
 	<update id="updateReply">
 		update Reply set contents=#{contents} where seq=${seq} and board_title=#{board_title}
