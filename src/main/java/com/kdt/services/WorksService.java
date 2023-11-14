@@ -85,7 +85,8 @@ public class WorksService {
 	}
 	public List<LeavesDTO> leavenull()throws Exception{
 		return wdao.leavenull();
-	}public void leave_joindayupdate(String idList, String joindayList) throws Exception {
+	}
+	public void leave_joindayupdate(String idList, String joindayList) throws Exception {
 	    
 
 	    String idArray[] = idList.split(",");
@@ -102,6 +103,26 @@ public class WorksService {
 	        }
 
 	        wdao.leave_joindayupdate(dto);
+	    }
+	    return;
+	}
+public void updateLeaveRemainder(String idList, String joindayList) throws Exception {
+	    
+
+	    String idArray[] = idList.split(",");
+	    String joindayArray[] = joindayList.split(",");
+
+	    for (int i = 0; i < idArray.length; i++) {
+	        LeavesDTO dto = new LeavesDTO();
+	        dto.setId(idArray[i]);
+	        
+	        if (i < joindayArray.length && joindayArray[i] != null && !joindayArray[i].isEmpty()) {
+	            dto.setJoinday(joindayArray[i]);
+	        } else {
+	            dto.setJoinday(null);
+	        }
+
+	        wdao.updateLeaveRemainder(dto);
 	    }
 	    return;
 	}

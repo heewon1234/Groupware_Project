@@ -63,4 +63,8 @@ public class WorksDAO {
 	public int leave_joindayupdate(LeavesDTO dto)throws Exception{
 		return db.update("Leaves.joindayupdate",dto);
 	}
+	public int updateLeaveRemainder(LeavesDTO dto)throws Exception{
+		return db.update("Leaves.updateLeaveRemainder",dto);
+	}
+	
 }
