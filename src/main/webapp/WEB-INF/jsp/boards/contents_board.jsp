@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/css/board/board_contents.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/js/commons/body_form/body_form_default.js" defer></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
 </head>
 <body>
 	<div class="top">TOP</div>
@@ -44,9 +45,29 @@
                     	<div><button id="contentsDelBtn">삭제</button></div>
                     </div>
                 </div>
+                <div class="contents-file">
+					<div>첨부 파일 목록</div>
+						<div>
+							<c:choose>
+								<c:when test="${fileList.size()>0 }">
+									<c:forEach var="i" items="${fileList }">
+										<div id="fileListDiv">
+											<i class="fa-regular fa-file fa-sm"></i>
+											<a href="/file/download?oriName=${i.ori_name }&sysName=${i.sys_name}">${i.ori_name }</a>
+										</div>
+									</c:forEach>	
+								</c:when>
+								<c:otherwise>
+									<i class="fa-regular fa-file fa-sm"></i>
+								 	첨부파일이 없습니다.
+								</c:otherwise>
+						</c:choose>		
+					</div>
+				</div>
                 <div class="contents" data-vote="${isVote }">
                    ${boardContents.contents }
-                  		<div class="survey_box" id="surveyVoteBox">
+                   	<c:if test="${surveyList ne null }">
+                   		<div class="survey_box" id="surveyVoteBox">
                        		<div class="survey_question">${boardContents.survey_question }</div>
                         	<hr>
                         	<div class="survey_items">
@@ -69,6 +90,7 @@
                        
                         	</div>
                     	</div>
+                   	</c:if>        
                 </div>
                 <div class="buttons">
                  	<button id="backBtn">뒤로가기</button>

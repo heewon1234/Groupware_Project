@@ -1,18 +1,29 @@
 package com.kdt.controllers;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kdt.services.FileService;
+
+import jakarta.servlet.http.HttpServletResponse;
+
 @Controller
 @RequestMapping("/file/")
 public class FileController {
+	
+	@Autowired
+	FileService fservice;
 	
 	@ResponseBody
 	@RequestMapping("upload")
@@ -36,6 +47,28 @@ public class FileController {
 		}
 		return list;
 
+	}
+	
+	@RequestMapping("download")
+	public void download(String oriName, String sysName, HttpServletResponse response) throws Exception{
+		String realPath =  "E:/uploads";
+		File targetFile = new File(realPath + "/" + sysName);
+
+		oriName = new String(oriName.getBytes("utf8"),"ISO-8859-1");
+		response.setHeader("content-disposition", "attachment;filename="+oriName);
+
+		try(DataInputStream dis = new DataInputStream(new FileInputStream(targetFile));
+			DataOutputStream dos = new DataOutputStream(response.getOutputStream());){
+			byte[] fileContents = dis.readAllBytes();
+			dos.write(fileContents);
+			dos.flush();
+		}	
+	}
+	
+	@ResponseBody
+	@RequestMapping("deleteServerFile")
+	public void deleteServerFile(String sys_name) throws Exception{
+		fservice.deleteServerFile(sys_name);
 	}
 	
 }

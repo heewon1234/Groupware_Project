@@ -6,14 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kdt.dto.BoardDTO;
+import com.kdt.dto.FileDTO;
 import com.kdt.dto.Mk_BoardDTO;
 import com.kdt.dto.ReplyDTO;
 import com.kdt.dto.SurveyDTO;
 import com.kdt.dto.SurveyUserDTO;
 import com.kdt.services.AuthorityService;
 import com.kdt.services.BoardService;
+import com.kdt.services.FileService;
 import com.kdt.services.Mk_BoardService;
 import com.kdt.services.ReplyService;
 import com.kdt.services.SurveyService;
@@ -38,6 +41,9 @@ public class BoardController {
 	
 	@Autowired
 	SurveyService sservice;
+	
+	@Autowired
+	FileService fservice;
 	
 	@Autowired
 	HttpSession session;
@@ -85,22 +91,29 @@ public class BoardController {
 			board_title= (String)session.getAttribute("board_title");
 		}
 		
-		List<ReplyDTO> replyList = rservice.replyList(board_title, seq);
+		List<ReplyDTO> replyList = rservice.replyList(board_title, seq); // 댓글 리스트
 		model.addAttribute("replyList",replyList);
 		
-		BoardDTO boardContents = bservice.boardContents(board_title, seq);
+		BoardDTO boardContents = bservice.boardContents(board_title, seq); // 게시글 내용
 		model.addAttribute("boardContents",boardContents);
 		
-		model.addAttribute("surveyList", null);
+		model.addAttribute("surveyList", null); // 설문조사 관련
 		model.addAttribute("isVote",false);
 		
 		String id = (String)session.getAttribute("loginId");
 		
 		if(!boardContents.getSurvey_question().isEmpty()) {
-			model.addAttribute("isVote",sservice.isVote(new SurveyUserDTO (0,id,Integer.parseInt(seq))));
+			model.addAttribute("isVote",sservice.isVote(new SurveyUserDTO(0,id,Integer.parseInt(seq),board_title)));
 			List<SurveyDTO> list = sservice.selectServeyItem(new SurveyDTO(0,board_title, Integer.parseInt(seq),null,0,0));
 			model.addAttribute("surveyList", list);
 		}
+		
+		// 파일 목록
+		FileDTO fdto = new FileDTO();
+		fdto.setBoard_title(board_title);
+		fdto.setParent_seq(Integer.parseInt(seq));
+		List<FileDTO> fileList = fservice.selectFileList(fdto);
+		model.addAttribute("fileList",fileList);
 
 		return "boards/contents_board";
 	}
@@ -115,10 +128,10 @@ public class BoardController {
 	}
 
 	@RequestMapping("insertBoardContents") // 게시글 등록
-	public String insertBoardContents(BoardDTO dto,String[] items) {
+	public String insertBoardContents(BoardDTO dto,String[] items, MultipartFile[] fileList) throws Exception{
 		String writer = (String)session.getAttribute("loginId");
 		dto.setWriter(writer);
-		bservice.insertBoardContents(dto, items);
+		bservice.insertBoardContents(dto, items, fileList);
 		
 		String board_title=(String)session.getAttribute("board_title");
 		return "redirect:/board/toBoard";	
@@ -126,7 +139,13 @@ public class BoardController {
 	
 	// U 관련 기능
 	@RequestMapping("toEditContentsBoard") // 게시판 수정하는 곳 이동
-	public String toEditBoard() {
+	public String toEditBoard(String board_title, String seq, Model model) {
+		BoardDTO boardContents = bservice.boardContents(board_title, seq);
+		model.addAttribute("boardContents",boardContents);
+		
+		List<FileDTO> fileList = fservice.selectFileList(new FileDTO(0,null,null,Integer.parseInt(seq),board_title,null));
+		model.addAttribute("fileList",fileList);
+		
 		return "boards/edit_contents_board";
 	}
 	
@@ -137,7 +156,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping("delContents")
-	public String delContents(String seq) {
+	public String delContents(String seq) throws Exception{
 		String board_title = (String)session.getAttribute("board_title");
 		String id = (String)session.getAttribute("loginId");
 		bservice.delContents(seq, board_title,id);

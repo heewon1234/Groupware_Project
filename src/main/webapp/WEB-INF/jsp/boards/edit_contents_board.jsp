@@ -1,10 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Insert title here</title>  
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+	<link rel="stylesheet" href="/css/commons/body_form/left_form/body_form_default.css" />
+	<link rel="stylesheet" href="/css/commons/topForm.css" />
+    <link rel="stylesheet" href="/css/board/board_contents_write.css" />
+    <script src="/js/commons/body_form/body_form_default.js" defer></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
 </head>
 <body>
 	<div class="top">TOP</div>
@@ -46,6 +55,26 @@
 
                         </div>
                     </div>
+                    <div class="contents-file">
+						<div>첨부 파일 목록</div>
+						<div>
+							<c:choose>
+								<c:when test="${fileList.size()>0 }">
+									<c:forEach var="i" items="${fileList }">
+										<div id="fileListDiv" data-type="${i.type }">
+											<i class="fa-regular fa-file fa-sm"></i>
+											<a href="/file/download?oriName=${i.ori_name }&sysName=${i.sys_name}">${i.ori_name }</a>
+										</div>
+									</c:forEach>	
+								</c:when>
+								<c:otherwise>
+									<i class="fa-regular fa-file fa-sm"></i>
+								 	첨부파일이 없습니다.
+								</c:otherwise>
+							</c:choose>
+							
+						</div>
+					</div>
                     <div class="board_contents_box">
                         <textarea id="summernote" name="contents"></textarea>
                     </div>

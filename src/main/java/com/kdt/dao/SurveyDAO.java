@@ -1,6 +1,7 @@
 package com.kdt.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class SurveyDAO {
 	}
 	
 	public int insertSurveyUser(SurveyDTO dto, String id) {
-		return db.insert("Survey.insertSurveyUser",new SurveyUserDTO(0,id,dto.getParent_seq()));
+		return db.insert("Survey.insertSurveyUser",new SurveyUserDTO(0,id,dto.getParent_seq(),dto.getBoard_title()));
 	}
 	
 	public int voteCountUpdate(int seq) {
@@ -37,6 +38,14 @@ public class SurveyDAO {
 	
 	public List<SurveyDTO> voteList(int parent_seq){
 		return db.selectList("Survey.voteList",parent_seq);
+	}
+	
+	public int delSurveyByParentSeq(SurveyDTO dto) {
+		return db.delete("Survey.delSurveyByParentSeq",dto);
+	}
+	
+	public int delSurveyUserByParentSeq(SurveyUserDTO dto) {
+		return db.delete("Survey.delSurveyUserByParentSeq",dto);
 	}
 	
 }
