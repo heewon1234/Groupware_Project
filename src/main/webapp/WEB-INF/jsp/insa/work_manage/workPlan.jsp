@@ -218,7 +218,7 @@
 
 $(document).ready(function() {
 	$("#top_container").load("/commons/topForm");
-	$(".left_item").load("/works/manage_left_item?selectItem=workmanage");
+	$(".left_item").load("/works/manage_left_item?selectItem=workPlan");
 	
 // 주말을 제외한 정을 추가하는 함수
 function createScheduleCell(date) {
