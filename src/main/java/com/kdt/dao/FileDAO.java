@@ -25,4 +25,10 @@ public class FileDAO {
 	public int delFileByParensSeq(FileDTO dto) {
 		return db.delete("File.delFileByParensSeq",dto);
 	}
+	public int delFileBySysName(String sys_name) {
+		return db.delete("File.delFileBySysName",sys_name);
+	}
+	public int delFileTag(FileDTO dto) {
+		return db.delete("File.delFileTag",dto);
+	}
 }

@@ -13,4 +13,10 @@
 	<delete id="delFileByParensSeq">
 		delete from File where parent_seq=#{parent_seq} and board_title=#{board_title}
 	</delete>
+	<delete id="delFileBySysName">
+		delete from File where sys_name=#{sys_name}
+	</delete>
+	<delete id="delFileTag">
+		delete from File where parent_seq=#{parent_seq} and board_title=#{board_title} and type="tag"
+	</delete>
 </mapper>

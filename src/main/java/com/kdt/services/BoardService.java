@@ -49,7 +49,7 @@ public class BoardService {
 
 	@Autowired
 	FileDAO filedao;
-	
+
 	@Autowired
 	ReplyDAO rdao;
 
@@ -96,7 +96,7 @@ public class BoardService {
 		String board_title = dto.getBoard_title();
 		dto.setBoard_title("Board_"+boardSeq);
 		int parent_seq = bdao.insertBoardContents(dto);
-		
+
 		// Survey 테이블 insert
 		if(!dto.getSurvey_question().isEmpty()) {
 			for(String item:items) {
@@ -106,10 +106,9 @@ public class BoardService {
 			}
 
 		}
-		
+
 		// File 테이블 insert
 		// input type = file
-		List<String> list = new ArrayList<>();
 		String realPath = "E:/uploads";
 		File uploadPath = new File(realPath); 
 		if(!uploadPath.exists()) { 
@@ -122,7 +121,6 @@ public class BoardService {
 				String sys_name = UUID.randomUUID() + "_" + ori_name;
 				file.transferTo(new File(uploadPath+"/"+sys_name));
 				filedao.insertFile(new FileDTO(0,sys_name,ori_name,parent_seq,board_title,"input"));
-				list.add("/uploads/"+sys_name);
 			}
 		}
 		// img tag
@@ -136,33 +134,7 @@ public class BoardService {
 		}
 	}
 
-	public List<String> extractImageSrc(String input) { // sys_name 추출
-		List<String> imgSrcList = new ArrayList<>();
-		String regex = "<img\\s+type=\"file\"\\s+src\\s*=\\s*\"/uploads/([^\"]+)\"";
-		Pattern pattern = Pattern.compile(regex);
-		Matcher matcher = pattern.matcher(input);
 
-		while (matcher.find()) {
-			String src = matcher.group(1);
-			imgSrcList.add(src);
-		}
-
-		return imgSrcList;
-	}
-
-	public List<String> oriNameRegex(String input) { // ori_name 추출
-		List<String> imgSrcList = new ArrayList<>();
-		String regex =  "<img[^>]*type=\"file\"[^>]*src\\s*=\\s*\"/uploads/[^_]+_([^\"\\>]+)\"";
-		Pattern pattern = Pattern.compile(regex);
-		Matcher matcher = pattern.matcher(input);
-
-		while (matcher.find()) {
-			String src = matcher.group(1); // 두 번째 그룹을 가져와서 저장 (뒤의 글자들)
-			imgSrcList.add(src);
-		}
-
-		return imgSrcList;
-	}
 
 	// 게시글 불러오기 관련
 	public List<BoardDTO> boardContentsList(String board_title, String id){ // 게시글 리스트
@@ -206,9 +178,9 @@ public class BoardService {
 		Map<String,String> map = new HashMap<>();
 		map.put("board_title", "Board_"+boardSeq);
 		map.put("seq", seq);
-		
+
 		int parent_seq = Integer.parseInt(seq);
-		
+
 		// 서버 파일 삭제
 		List<FileDTO> fileList = filedao.selectFileList(new FileDTO(0,null,null,parent_seq,board_title,null));
 		String realPath = "E:/uploads";
@@ -217,8 +189,8 @@ public class BoardService {
 			Path path = Paths.get(uploadPath + "/" + file.getSys_name());
 			Files.deleteIfExists(path);
 		}
-		
-		
+
+
 		// 테이블에서 데이터 삭제
 		bdao.delContents(map); // board 테이블 데이터 삭제
 		fdao.delFavContents(new FavoriteBoardDTO(0,"Board_"+boardSeq,id,parent_seq)); // 즐겨찾기 테이블 데이터 삭제
@@ -230,6 +202,89 @@ public class BoardService {
 	//
 
 	// 게시글 수정
+	@Transactional
+	public void updateContentsBoard(BoardDTO dto,String prevContents, String delInputFileList, String useSurvey, MultipartFile[] fileList,String[] items) throws Exception{
+		// board 테이블 업데이트
+		String board_title = dto.getBoard_title();
+		int seq = mdao.selectBoardSeq(board_title);
+		dto.setBoard_title("Board_"+seq);
+		bdao.updateContentsBoard(dto);
+
+		if(useSurvey.equals("false")) {
+			dto.setSurvey_question(null);
+			bdao.updateSurveyQuestion(dto);
+		}
+		
+		if(dto.getSurvey_question()!=null) {
+			bdao.updateSurveyQuestion(dto);
+		}
+
+		// 파일 테이블 업데이트
+		String realPath = "E:/uploads";
+		File uploadPath = new File(realPath);
+
+		// input type=file
+		String[] delFileList = gson.fromJson(delInputFileList,String[].class);
+		for(String delFile:delFileList) {
+			filedao.delFileBySysName(delFile);
+			// 서버 파일 삭제
+			Path path = Paths.get(uploadPath + "/" + delFile);
+			Files.deleteIfExists(path);
+		}
+
+		if(fileList != null) { 
+			for(MultipartFile file : fileList) {
+				String ori_name = file.getOriginalFilename();
+				String sys_name = UUID.randomUUID() + "_" + ori_name;
+				file.transferTo(new File(uploadPath+"/"+sys_name));
+				filedao.insertFile(new FileDTO(0,sys_name,ori_name,dto.getSeq(),board_title,"input"));
+			}
+		}
+
+		// img tag
+		// 태그 데이터 삭제
+		FileDTO fdto = new FileDTO();
+		fdto.setParent_seq(dto.getSeq());
+		fdto.setBoard_title(board_title);
+		filedao.delFileTag(fdto);
+
+		// 파일 테이블에 태그 데이터 추가
+		List<String> sysNameList = extractImageSrc(dto.getContents());
+		List<String> oriNameList = oriNameRegex(dto.getContents());
+		for(int i=0;i<sysNameList.size();i++) {
+			filedao.insertFile(new FileDTO(0,sysNameList.get(i),oriNameList.get(i),dto.getSeq(),board_title,"tag"));
+		}
+
+		// 서버 파일 날리기
+		List<String> prevFile = extractImageSrc(prevContents);
+		List<String> notExistFile = notExistFile(prevFile,sysNameList);
+
+		for(String file : notExistFile) {
+			Path path = Paths.get(uploadPath + "/" + file);
+			Files.deleteIfExists(path);
+		}
+
+
+		// 설문조사
+		if(useSurvey.equals("false")) {
+			sdao.delSurveyByParentSeq(new SurveyDTO(0,board_title,dto.getSeq(),null,0,0));
+			sdao.delSurveyUserByParentSeq(new SurveyUserDTO(0,null,dto.getSeq(),board_title));
+		}
+
+		if(items!=null && useSurvey.equals("true")) { // 설문조사 항목 수정
+			sdao.delSurveyByParentSeq(new SurveyDTO(0,board_title,dto.getSeq(),null,0,0));
+
+			for(String item:items) {
+				if(!item.isEmpty()) {
+					sdao.insertSurveyItem(new SurveyDTO(0,board_title,dto.getSeq(),item,0,0));
+				}
+			}
+
+
+		}
+
+	}
+	//
 
 	// 사라진 태그 검색
 	public List<String> notExistFile(List<String> prevList, List<String> updateList) { 
@@ -248,6 +303,34 @@ public class BoardService {
 		}
 
 		return existFile;
+	}
+
+	public List<String> extractImageSrc(String input) { // sys_name 추출
+		List<String> imgSrcList = new ArrayList<>();
+		String regex = "<img\\s+type=\"file\"\\s+src\\s*=\\s*\"/uploads/([^\"]+)\"";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(input);
+
+		while (matcher.find()) {
+			String src = matcher.group(1);
+			imgSrcList.add(src);
+		}
+
+		return imgSrcList;
+	}
+
+	public List<String> oriNameRegex(String input) { // ori_name 추출
+		List<String> imgSrcList = new ArrayList<>();
+		String regex =  "<img[^>]*type=\"file\"[^>]*src\\s*=\\s*\"/uploads/[^_]+_([^\"\\>]+)\"";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(input);
+
+		while (matcher.find()) {
+			String src = matcher.group(1); // 두 번째 그룹을 가져와서 저장 (뒤의 글자들)
+			imgSrcList.add(src);
+		}
+
+		return imgSrcList;
 	}
 
 }

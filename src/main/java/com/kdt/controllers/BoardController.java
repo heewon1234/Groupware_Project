@@ -17,6 +17,7 @@ import com.kdt.dto.SurveyUserDTO;
 import com.kdt.services.AuthorityService;
 import com.kdt.services.BoardService;
 import com.kdt.services.FileService;
+import com.kdt.services.HeaderService;
 import com.kdt.services.Mk_BoardService;
 import com.kdt.services.ReplyService;
 import com.kdt.services.SurveyService;
@@ -26,6 +27,9 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/board/")
 public class BoardController {
+	
+	@Autowired
+	HeaderService hservice;
 	
 	@Autowired
 	BoardService bservice;
@@ -90,7 +94,7 @@ public class BoardController {
 		if(board_title==null && (String)session.getAttribute("board_title")!="중요게시물") {
 			board_title= (String)session.getAttribute("board_title");
 		}
-		
+		session.setAttribute("board_title", board_title);
 		List<ReplyDTO> replyList = rservice.replyList(board_title, seq); // 댓글 리스트
 		model.addAttribute("replyList",replyList);
 		
@@ -102,7 +106,7 @@ public class BoardController {
 		
 		String id = (String)session.getAttribute("loginId");
 		
-		if(!boardContents.getSurvey_question().isEmpty()) {
+		if(boardContents.getSurvey_question()!=null) {
 			model.addAttribute("isVote",sservice.isVote(new SurveyUserDTO(0,id,Integer.parseInt(seq),board_title)));
 			List<SurveyDTO> list = sservice.selectServeyItem(new SurveyDTO(0,board_title, Integer.parseInt(seq),null,0,0));
 			model.addAttribute("surveyList", list);
@@ -139,24 +143,37 @@ public class BoardController {
 	
 	// U 관련 기능
 	@RequestMapping("toEditContentsBoard") // 게시판 수정하는 곳 이동
-	public String toEditBoard(String board_title, String seq, Model model) {
+	public String toEditBoard(String seq, Model model) {
+		String board_title = (String)session.getAttribute("board_title");
+		String id = (String)session.getAttribute("loginId");
+		
 		BoardDTO boardContents = bservice.boardContents(board_title, seq);
-		model.addAttribute("boardContents",boardContents);
-		
 		List<FileDTO> fileList = fservice.selectFileList(new FileDTO(0,null,null,Integer.parseInt(seq),board_title,null));
-		model.addAttribute("fileList",fileList);
+		List<String> headerList = hservice.selectHeader(board_title);
+		List<String> boardList = aservice.selectAuthBoard(id);
+		List<SurveyDTO> surveyItemList = sservice.selectServeyItem(new SurveyDTO(0,board_title,Integer.parseInt(seq),null,0,0));
+		boolean isExistVote = sservice.isExistVote(new SurveyDTO(0,board_title,Integer.parseInt(seq),null,0,0));
 		
+		model.addAttribute("isExistVote",isExistVote);
+		model.addAttribute("surveyItemList",surveyItemList);
+		model.addAttribute("boardContents",boardContents);
+		model.addAttribute("headerList",headerList);
+		model.addAttribute("fileList",fileList);
+		model.addAttribute("boardList",boardList);
+		model.addAttribute("seq",seq);
+
 		return "boards/edit_contents_board";
 	}
 	
 	@RequestMapping("updateContentsBoard")
-	public String updateContentsBoard() {
-		return "";
+	public String updateContentsBoard(BoardDTO dto,String prevContents, String inputFileDelBtn, String useSurvey, String[] items, MultipartFile[] fileList) throws Exception{
+		bservice.updateContentsBoard(dto, prevContents, inputFileDelBtn, useSurvey, fileList, items);
+		return "redirect:/board/toContentsBoard?seq="+dto.getSeq();
 	}
 	
 	// D 관련 기능
 	@RequestMapping("toDelContents")
-	public String toDelContents(BoardDTO dto,String[] items, MultipartFile[] fileList) throws Exception{
+	public String toDelContents() {
 		return "boards/delContents";
 	}
 	

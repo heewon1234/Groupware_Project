@@ -66,7 +66,7 @@
 				</div>
                 <div class="contents" data-vote="${isVote }">
                    ${boardContents.contents }
-                   	<c:if test="${surveyList ne null }">
+                   	<c:if test="${not empty boardContents.survey_question or surveyList.size()>0}">
                    		<div class="survey_box" id="surveyVoteBox">
                        		<div class="survey_question">${boardContents.survey_question }</div>
                         	<hr>
@@ -86,7 +86,7 @@
                     	<div class="survey_box" id="surveyResultBox">
                         	<div class="survey_question">질문</div>
                         	<hr>
-                       		 <div class="survey_items" id="surveyResult">
+                       		<div class="survey_items" id="surveyResult">
                        
                         	</div>
                     	</div>

@@ -32,14 +32,7 @@ $(document).ready(function() {
 
 	        	})
 
-			},
-			onMediaDelete:function($target, editor, $editable){
-	        	$.ajax({
-	           		url:"/file/deleteServerFile",
-	           		data:{"sys_name":$target[0].getAttribute("src").split("/uploads/")[1]}
-	           	}) 			
-	    	}
-			
+			}
 		}
 	});
 });
@@ -145,6 +138,8 @@ $("input[name='notice']").change(function(){
 	}
 });
 
+let delInputFileList = [];
+
 $("#frmBtn").on("click",function(){
 	if($("#board_title").val()=="게시판선택"){
 		alert("게시판을 선택해주세요");
@@ -165,4 +160,14 @@ $("#frmBtn").on("click",function(){
 	if($("#header").val()=="말머리 없음"){
 		$("#header").val("");
 	}
-})
+	
+	$("#inputFileDelBtn").val(JSON.stringify(delInputFileList));
+});
+
+
+$(".inputFileDelBtn").on("click",function(){
+	let sys_name = $(this).attr("data-name");
+	delInputFileList.push(sys_name);
+	console.log(delInputFileList);
+	$(this).parents(".fileListDiv").remove();
+});

@@ -51,7 +51,7 @@ $("#backBtn").on("click",function(){
 });
 
 $("#contentsUpdateBtn").on("click",function(){
-	location.href="/board/toEditContentsBoard?board_title="+board_title+"&seq="+parent_seq;
+	location.href="/board/toEditContentsBoard?seq="+parent_seq;
 });
 
 $(document).on("click",".replyDelBtn",function(){
@@ -97,9 +97,8 @@ $("#voteSurveyBtn").on("click",function(){
 		url:"/survey/voteCountUpdate",
 		data:{
 			"seq":seq,
-			"parent_seq":parent_seq,
-			"board_title":board_title
-			}
+			"parent_seq":parent_seq
+		}
 	}).done(function(resp){
 		alert("투표가 완료되었습니다");
 		voteItem.attr("data-index","true");

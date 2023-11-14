@@ -36,8 +36,15 @@ public class SurveyDAO {
 		return db.selectOne("Survey.isVote",dto);
 	}
 	
-	public List<SurveyDTO> voteList(int parent_seq){
-		return db.selectList("Survey.voteList",parent_seq);
+	public boolean isExistVote(SurveyDTO dto) {
+		String totalVote = db.selectOne("Survey.isExistVote",dto);
+		int result = 0;
+		if(totalVote==null) {System.out.println("0임");}
+		else {result = Integer.parseInt(totalVote);}
+		return result>0;
+	}
+	public List<SurveyDTO> voteList(SurveyDTO dto){
+		return db.selectList("Survey.voteList",dto);
 	}
 	
 	public int delSurveyByParentSeq(SurveyDTO dto) {
