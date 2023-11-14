@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,9 +59,160 @@
 }
 
 .gridItem:nth-child(odd) {
-	/* 1, 3번째 div에 추가 스타일 적용 */
-	grid-column: span 1; /* 한 열만 차지하도록 설정 */
+	grid-column: span 1;
 }
+
+.grid-container {
+	display: grid;
+	grid-template-columns: 1fr 3fr;
+}
+
+.grid-item {
+	border: 1px solid #ccc;
+	padding: 20px;
+}
+
+.grid-item:nth-child(1) {
+	grid-column: 1;
+}
+
+.grid-item:nth-child(2) {
+	grid-column: 2;
+}
+
+.modal_form {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	z-index: 3;
+	top: 0;
+	left: 0;
+	display: none;
+}
+
+.modal_background {
+	background: rgba(0, 0, 0, 0.5);
+	position: fixed;
+	z-index: 4;
+	width: 100%;
+	height: 100%;
+}
+
+.modal_contact_add {
+	z-index: 4;
+	background-color: white;
+	border-radius: 4px;
+	padding: 25px;
+	width: 600px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.modal_tag_add {
+	z-index: 6;
+	background-color: white;
+	border-radius: 4px;
+	padding: 25px;
+	width: 400px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	display: none;
+}
+
+.modal_title {
+	width: 100%;
+	padding-bottom: 14px;
+	border-bottom: 1px solid #ebebeb;
+	font-size: 16px;
+	font-weight: bold;
+	color: #333333;
+}
+
+.modal_body {
+	width: 100%;
+	padding: 20px 0 30px;
+}
+
+.modal_body_content {
+	display: table;
+	margin-bottom: 13px;
+}
+
+.modal_body_content_add {
+	padding-bottom: 13px;
+	border-bottom: 1px solid #ebebeb;
+}
+
+.modal_footer {
+	display: flex;
+	justify-content: center;
+}
+
+.modal_footer.right {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.button_cancel.float_left {
+	margin-right: auto;
+}
+
+.button_apply.float_right {
+	margin-left: 14px;
+}
+
+[type="checkbox"] {
+	appearance: none;
+	position: relative;
+	border: max(2px, 0.1em) solid #D9D9D9;
+	background-color: #D9D9D9;
+	border-radius: 1.25em;
+	width: 2.25em;
+	height: 1.25em;
+	cursor: pointer;
+}
+
+[type="checkbox"]::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	width: 1em;
+	height: 1em;
+	border-radius: 50%;
+	transform: scale(0.8);
+	background-color: white;
+	transition: left 250ms linear;
+}
+
+[type="checkbox"]:checked {
+	background-color: #2985DB;
+	border-color: #2985DB;
+}
+
+[type="checkbox"]:checked::before {
+	background-color: white;
+	left: 1em;
+}
+
+[type="checkbox"]:disabled {
+	border-color: lightgray;
+	opacity: 0.7;
+	cursor: not-allowed;
+}
+
+[type="checkbox"]:disabled:before {
+	background-color: lightgray;
+}
+
+[type="checkbox"]:disabled+span {
+	opacity: 0.7;
+	cursor: not-allowed;
+}
+
 </style>
 </head>
 <body>
@@ -161,15 +313,176 @@
 						</table>
 					</div>
 					<div>
-						<button>기안하기</button>
+						<button id="openModalBtn" disabled>기안하기</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
+	<div class="modal_form">
+		<div class="modal_background"></div>
+		<form class="modal_contact_add_form" method="post" id="contact_form"
+			action="/approval/document/insertApproval">
+			<!-- 변경된 내용을 hidden으로 숨겨서 같이 보냄 -->
+			<input type="hidden" name="title" value="근무계획변경"> <input
+				type="hidden" name="contents">
+			<div class="modal_contact_add">
+				<div class="modal_title">결재</div>
+				<div class="modal_body">
+					<div class="modal_body_content">
+						<div style="margin-bottom: 20px; margin-top: 20px;">결재 라인</div>
+						<div class="grid-container">
+							<div class="grid-item" id="request">
+								신청
+								<img id="plusIcon" style="margin-top: 20px;"
+									src="/images/chats/plus-circle.svg">
+							</div>
+							<div class="grid-item manager"></div>
+						</div>
+					</div>
+				</div>
+				<div class="modal_footer right">
+					<button type="button" class="button_cancel float_left"
+						id="modal_cancel_button">닫기</button>
+					<button class="button_apply float_right"
+						id="modal_apply_button" disabled>확인</button>
+				</div>
+			</div>
+		</form>
+		<div class="modal_tag_add">
+			<div class="modal_title">
+				<span>신청 설정</span>
+			</div>
+			<div class="modal_body">
+				<ul>
+					<c:forEach var="list" items="${managerList }">
+						<li><span>${list.organization }</span> <span>${list.name }</span>
+							<span hidden>${list.id }</span> <input type='checkbox'
+							name='managerID' value='${list.id}'></li>
+					</c:forEach>
+				</ul>
+			</div>
+			<div class="modal_footer">
+				<button class="button_cancel" id="button_cancel_tag">취소</button>
+				<button type="button" class="button_apply" id="button_apply_tag"
+					style="margin-left: 14px">확인</button>
+			</div>
+		</div>
+	</div>
+
+
 	<script>
 
+
+	let tag_list_open = false;
+
+	// img 버튼 눌렀을때 모달 창 띄우는거
+	$(document).ready(function() {
+	    $('#openModalBtn').click(function() {
+	    	$('.modal_form').css('display', 'block');
+	    	$('#modal_apply_button').prop('disabled', true);
+	    });
+	});
+
+	// 모달창에서 취소 누르면 모달창 꺼지는거
+	$(document).ready(function() {
+	    $('#modal_cancel_button').click(function() {
+	    	$('.grid-item.manager').empty();
+	    	$('#openModalBtn').prop('disabled', true);
+	        $('.modal_form').css('display', 'none');
+	        $('#update_workPlan_body select').val('9시 출근');
+	    });
+	});
 	
+
+	// 태그 선택 박스 이외에 다른 곳이 클릭 됐을 때 
+	$(document).on("click", function(event) {
+	    if (tag_list_open) {
+	        if (!$(event.target).closest('.modal_tag').length) {
+	            $('.modal_tag_select_list').css('display', 'none');
+	            tag_list_open = false;
+	        }
+	    }
+	});
+
+	// 새 태그 만들기 클릭 했을때 --이게나는 플러스 버튼
+	$(document).on("click", "#plusIcon", function() {
+	    $('.modal_contact_add').css('z-index', '3');
+	    $('.modal_contact_add').css('border', 'solid 1px #707070');
+	    $('.modal_contact_add').css('box-shadow', '2px 5px 4px 0 rgba(0,0,0,.16)');
+	    $('.modal_tag_add').css('display', 'block');
+	});
+
+	// 새 태그 만들기 취소 했을 때
+	$(document).on("click", "#button_cancel_tag", function() {
+		$('input[name="managerID"]').prop('checked', false);
+		$('#openModalBtn').prop('disabled', true);
+	    $('.modal_contact_add').css('z-index', '4');
+	    $('.modal_contact_add').css('border', '');
+	    $('.modal_contact_add').css('box-shadow', '');
+	    $('.modal_tag_add').css('display', 'none');
+	});
+
+
+	// 사람 설정
+	$(document).on("click", "#button_apply_tag", function() {
+		console.log("manager");
+		var checkboxes = document.querySelectorAll('input[name="managerID"]:checked');
+	    
+	    var gridItem = document.querySelector('.manager');
+
+	    var selectedNames = [];
+
+	    // 선택된 체크박스에서 이름 가져와서 배열에 추가
+	    checkboxes.forEach(function(checkbox) {
+	        var listItem = checkbox.parentElement;
+	        var name = listItem.querySelector('span:nth-child(2)').textContent;
+	        selectedNames.push(name);
+	    });
+	    const applyButton = $('#modal_apply_button');
+
+	    if (selectedNames.length > 0) {
+	        applyButton.prop('disabled', false); // 확인 버튼 활성화
+	    } else {
+	        applyButton.prop('disabled', true); // 확인 버튼 비활성화
+	    }
+
+	    gridItem.innerHTML = selectedNames.join(', ');
+	    $('.modal_contact_add').css('z-index', '4');
+	    $('.modal_contact_add').css('border', '');
+	    $('.modal_contact_add').css('box-shadow', '');
+	    $('.modal_tag_add').css('display', 'none');
+
+	});
+	// submit 확인임
+	$(document).ready(function() {
+	    $('#modal_apply_button').on('click', function() {
+	    });
+	});
+	
+	//----------------------------------------------------------------
+// 리스트를 저장할 배열
+let selectedValues = [];
+
+// select 요소에서 변경이 일어났을 때 이벤트 감지
+document.getElementById('update_workPlan_body').addEventListener('change', function(event) {
+    const target = event.target;
+
+    if (target.tagName === 'SELECT') {
+        const selectedValue = target.value;
+        const date = target.closest('tr').querySelector('td:first-child').textContent;
+        const columnIndex = Array.from(target.closest('tr').children).indexOf(target.closest('td'));
+        const headerText = $('#update_workPlan_head').children().eq(columnIndex).text();
+        
+        if (selectedValue !== '9시 출근') {
+            console.log('날짜:', date, '이름:', headerText, '선택된 값:', selectedValue);
+        }
+    }
+});
+
+
+
 	function updateWorkPlanTable(userNames) {
 	    var tableHeader = $("#update_workPlan_head").empty();
 	    var tableCol = $('<th>');
@@ -190,19 +503,36 @@
 	        userNames.forEach(userName => {
 	            const cellDate1 = $('<td>');
 	            const select = $('<select>');
-	            select.append('<option value="10시출근">10시출근</option>');
-	            select.append('<option value="9시출근" selected>9시 출근</option>');
+	            select.append('<option value="10시 출근">10시 출근</option>');
+	            select.append('<option value="9시 출근" selected>9시 출근</option>');
 	            select.append('<option value="휴무일">휴무일</option>');
 	            select.append('<option value="휴일">휴일</option>');
 	            select.append('<option value="변경 안 함">변경 안 함</option>');
-	            cellDate1.append(select); // Append the select element to the cell
+	            cellDate1.append(select);
 	            tableRow.append(cellDate1);
 	        });
 
 	        tableBody.append(tableRow);
 	    });
 	}
+	$(document).ready(function() {
+		$('#update_workPlan_body').on('change', 'select', function() {
+			$('#openModalBtn').prop('disabled', true);
+		    let noChange = true;
+		    $('#update_workPlan_body select').each(function() {
+		        if ($(this).val() !== '9시 출근') {
+		            noChange = false;
+		            return false; // Break the loop since a change is found
+		        }
+		    });
 
+		    if (noChange) {
+		        $('#openModalBtn').prop('disabled', true);
+		    } else {
+		        $('#openModalBtn').prop('disabled', false);
+		    }
+		});
+		});
 
 	const today = new Date();
 	const currentYear = today.getFullYear();
