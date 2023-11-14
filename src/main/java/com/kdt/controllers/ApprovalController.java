@@ -119,19 +119,68 @@ public class ApprovalController {
 		return "/approval/document/lists/wait";
 	}
 	
+	@RequestMapping("/lists/complete")
+	public String listsComplete(Model model) throws Exception {
+		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");
+		List<ApprovalDTO> appList = appService.selectCompleteById(userDTO.getId());
+		
+		model.addAttribute("appList", appList);
+		
+		return "/approval/document/lists/complete";
+	}
+	
+	@RequestMapping("/lists/progress")
+	public String listsProgress(Model model) throws Exception {
+		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");
+		List<ApprovalDTO> appList = appService.selectProgressById(userDTO.getId());
+		
+		model.addAttribute("appList", appList);
+		
+		return "/approval/document/lists/progress";
+	}
+	
 	@RequestMapping("/box/every")
 	public String boxEvery(Model model) throws Exception {
 		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");
 		List<Integer> docIdList = appRService.getDocIdByUserId(userDTO.getId());
-		List<ApprovalDTO> appList = appService.selectEveryByDocId(docIdList);
+		List<ApprovalDTO> appList = appService.selectListByDocId(docIdList);
 		
 		model.addAttribute("appList", appList);
 		
-		for(Integer docId : docIdList) {
-			System.out.println("docId:"+docId);
-		}
-		
 		return "/approval/document/box/every";
+	}
+	
+	@RequestMapping("/box/pending")
+	public String boxPending(Model model) throws Exception {
+		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");
+		List<Integer> docIdList = appRService.getPendingDocIdByUserId(userDTO.getId());
+		List<ApprovalDTO> appList = appService.selectListByDocId(docIdList);
+		
+		model.addAttribute("appList", appList);
+		
+		return "/approval/document/box/pending";
+	}
+	
+	@RequestMapping("/box/approve")
+	public String boxApprove(Model model) throws Exception {
+		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");
+		List<Integer> docIdList = appRService.getApproveDocIdByUserId(userDTO.getId());
+		List<ApprovalDTO> appList = appService.selectListByDocId(docIdList);
+		
+		model.addAttribute("appList", appList);
+		
+		return "/approval/document/box/approve";
+	}
+	
+	@RequestMapping("/box/return")
+	public String boxReturn(Model model) throws Exception {
+		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");
+		List<Integer> docIdList = appRService.getReturnDocIdByUserId(userDTO.getId());
+		List<ApprovalDTO> appList = appService.selectListByDocId(docIdList);
+		
+		model.addAttribute("appList", appList);
+		
+		return "/approval/document/box/return";
 	}
 	
 	@RequestMapping("/insertApproval")

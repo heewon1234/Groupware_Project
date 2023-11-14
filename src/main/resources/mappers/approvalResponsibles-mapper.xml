@@ -12,6 +12,21 @@
 		where approver_id = #{id};
 	</select>
 	
+	<select id="getPendingDocIdByUserId" resultType="Integer">
+		select doc_id from Approval_Responsibles
+		where approver_id = #{id} and approval_status = "미결"
+	</select>
+	
+	<select id="getApproveDocIdByUserId" resultType="Integer">
+		select doc_id from Approval_Responsibles
+		where approver_id = #{id} and approval_status = "결재"
+	</select>
+	
+	<select id="getReturnDocIdByUserId" resultType="Integer">
+		select doc_id from Approval_Responsibles
+		where approver_id = #{id} and approval_status = "반려"
+	</select>
+	
 	<select id="getManagerIdList" resultType="String">
 		select approver_id from Approval_Responsibles
 		where doc_id = #{docId};

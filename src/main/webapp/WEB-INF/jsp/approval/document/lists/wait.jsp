@@ -44,6 +44,11 @@
 			</div>
 		</div>
 	</div>
-	<script src="/js/approval/document/lists/wait.js"></script>
+	<script src="/js/approval/document/table.js"></script>
+	<script>
+		$(document).ready(function() {
+			$(".left_item").load("/approval/document/left_item?selectItem=wait");
+		});
+	</script>
 </body>
 </html>
