@@ -33,4 +33,18 @@
             id = #{id};
         ]]>
     </update>
+    <update id="updateLeaveRemainder">
+    <![CDATA[
+    UPDATE Works
+    SET
+        leave_remainder = 
+            CASE 
+                WHEN DATEDIFF(NOW(), STR_TO_DATE(#{joinday}, '%Y-%m-%d')) < 365 THEN 11  -- 1년 미만
+                WHEN DATEDIFF(NOW(), STR_TO_DATE(#{joinday}, '%Y-%m-%d')) < 730 THEN 15  -- 2년 미만
+                ELSE LEAST(25, FLOOR((DATEDIFF(NOW(), STR_TO_DATE(#{joinday}, '%Y-%m-%d')) - 729) / 730) + 15)
+            END
+    WHERE
+        id = #{id};
+    ]]>
+</update>
 </mapper>
