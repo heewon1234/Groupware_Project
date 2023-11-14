@@ -85,4 +85,10 @@ public class MembersDAO {
 	    parameters.put("position", position);
 		return db.selectOne("Members.getManager", parameters);
 	}
+	public MembersDTO selectById(String id) {
+		return db.selectOne("Members.selectById", id);
+	}
+	public int countUser() {
+		return db.selectOne("Members.countUser");
+	}
 }

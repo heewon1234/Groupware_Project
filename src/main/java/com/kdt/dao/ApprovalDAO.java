@@ -26,4 +26,8 @@ public class ApprovalDAO {
 		
 		return dto.getSeq();
 	}
+	
+	public ApprovalDTO selectByDocId(int docId) {
+		return db.selectOne("Approval.selectByDocId", docId);
+	}
 }

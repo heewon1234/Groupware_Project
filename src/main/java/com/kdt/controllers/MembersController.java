@@ -176,4 +176,14 @@ public class MembersController {
 		System.out.println(mservice.getDepartmentList());
 		return mservice.getDepartmentList();
 	}
+	@RequestMapping("countUser")
+	@ResponseBody
+	public int countUser() throws Exception {
+		return mservice.countUser();
+	}
+	@RequestMapping("selectAll")
+	@ResponseBody
+	public List<MembersDTO> selectAll() throws Exception {
+		return mservice.selectAll();
+	}
 }

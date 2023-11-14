@@ -55,8 +55,8 @@
 					</div>
 					<span class="menu_list_button_text">문서함</span>
 				</div>
-				<div class="menu_list_box">
-					<div id="" class="menu_list_item">
+				<div id="box" class="menu_list_box">
+					<div id="every" class="menu_list_item">
 						<img src="../imges/commons/body_form/left_item/default/company.png"> <span class="menu_list_item_text">전체</span>
 					</div>
 					<div id="" class="menu_list_item">
