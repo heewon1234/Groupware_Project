@@ -2,6 +2,11 @@
 .homeContainer{
 	width: 100%;
 }
+
+a {
+  text-decoration-line: none;
+}
+
 #top_container {
   display: flex;
   justify-content: center;

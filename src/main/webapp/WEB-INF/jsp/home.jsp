@@ -77,10 +77,12 @@
 							<div class="title">주소록</div>
 						</div>
 						<div>
+							<a href="/approval/document/lists/all">
 							<div class="main_icon_box">
 								<i class="fa-regular fa-clipboard"></i>
 							</div>
 							<div class="title">결재</div>
+							</a>
 						</div>
 					</div>
 				</div>
