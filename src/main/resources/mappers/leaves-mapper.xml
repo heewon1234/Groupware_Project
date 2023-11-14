@@ -15,4 +15,22 @@
   <update id="update">
 		Update Leaves set organization = #{organization} where id = #{id};
 	</update>
+	 <select id="leavenull" resultType="com.kdt.dto.LeavesDTO">
+  		SELECT * FROM Leaves where joinday is null;
+  </select>
+    <update id="joindayupdate">
+        <![CDATA[
+        UPDATE Leaves
+        SET
+            joinday = #{joinday},
+            leave_regular = 
+                CASE 
+                    WHEN DATEDIFF(NOW(), STR_TO_DATE(#{joinday}, '%Y-%m-%d')) < 365 THEN 11  -- 1년 미만
+                    WHEN DATEDIFF(NOW(), STR_TO_DATE(#{joinday}, '%Y-%m-%d')) < 730 THEN 15  -- 2년 미만
+                    ELSE LEAST(25, FLOOR((DATEDIFF(NOW(), STR_TO_DATE(#{joinday}, '%Y-%m-%d')) - 729) / 730) + 15)
+                END
+        WHERE
+            id = #{id};
+        ]]>
+    </update>
 </mapper>

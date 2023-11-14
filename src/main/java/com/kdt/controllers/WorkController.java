@@ -35,6 +35,8 @@ public class WorkController {
 	}
 	@RequestMapping("workmanage")
 	public String toworkmanage(Model model)throws Exception {
+		List<LeavesDTO> list = wservice.leavenull();
+		model.addAttribute("list",list);
 		return "/insa/work_manage/workmanage";
 	}
 	@RequestMapping("workstatistics")
@@ -92,6 +94,13 @@ public class WorkController {
 		List<LeavesDTO> list = wservice.leaveslist();
 		model.addAttribute("list",list);
 		return list;
+	}
+	@RequestMapping("joindayupdate")
+	public String joindayupdate(String idList,String joindayList) throws Exception {
+		System.out.println(idList);
+		System.out.println(joindayList);
+	    wservice.leave_joindayupdate(idList, joindayList);
+	    return "redirect:/works/workmanage";
 	}
 	
 	

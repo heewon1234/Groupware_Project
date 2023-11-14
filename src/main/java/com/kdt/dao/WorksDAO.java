@@ -57,4 +57,10 @@ public class WorksDAO {
 	public List<LeavesDTO> leaveslist()throws Exception{
 		return db.selectList("Leaves.list");
 	}
+	public List<LeavesDTO> leavenull()throws Exception{
+		return db.selectList("Leaves.leavenull");
+	}
+	public int leave_joindayupdate(LeavesDTO dto)throws Exception{
+		return db.update("Leaves.joindayupdate",dto);
+	}
 }
