@@ -62,7 +62,7 @@
 					<span class="menu_list_button_text">근무 관리</span>
 				</div>
 				<div class="menu_list_box">
-					<div id="plan_apply" class="menu_list_item work_manage">
+					<div id="workPlan" class="menu_list_item work_plan">
 						<img src="../imges/commons/body_form/left_item/default/company.png"> <span class="menu_list_item_text">근무계획 수립 </span>
 					</div>
 					<div id="workstatistics" class="menu_list_item work_manage">
