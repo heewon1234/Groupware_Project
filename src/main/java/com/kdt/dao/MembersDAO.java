@@ -88,4 +88,7 @@ public class MembersDAO {
 	public MembersDTO selectById(String id) {
 		return db.selectOne("Members.selectById", id);
 	}
+	public int countUser() {
+		return db.selectOne("Members.countUser");
+	}
 }

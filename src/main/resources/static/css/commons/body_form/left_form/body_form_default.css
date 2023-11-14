@@ -127,17 +127,19 @@
 
 .menu_list_button_plus {
     margin-left: auto; 
-    padding: 6px;
     width: 30px;
     height: 30px;
     opacity: 0;
     border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .menu_list_button_plus img {
     max-width: 18px;
     max-height: 18px;
-    margin: 0;
+    margin: 0 auto;
 }
 
 .menu_list_button_plus:hover{
@@ -179,14 +181,20 @@
 .menu_list_item_plus {
     width: 30px;
     height: 30px;
-    padding: 6px;
     opacity: 0;
     transition: all ease 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .menu_list_item_plus img {
-    width: 100%;
-    height: 100%;
+    width: 18px;
+    width: 18px;
+}
+
+.menu_list_item_plus.point img {
+    margin: 0 !important;
 }
 
 .menu_list_item img:hover + .menu_list_item_plus,
@@ -214,13 +222,13 @@
     overflow: auto;
 }
 
-.content_tab > * {
+.content_tab > *{
     padding: 20px 25px;
     margin-left: 4px;
 }
 
 .content_top {
-
+    
     height: 60px;
 }
 
@@ -245,7 +253,7 @@
 }
 
 .button_cancel:hover {
-	background-color: #d6d6d6;
+    background-color: #d6d6d6;
 }
 
 .button_apply {
@@ -260,7 +268,7 @@
 }
 
 .button_apply:hover {
-	background-color: #056ac9;
+    background-color: #056ac9;
 }
 
 .button_apply.permit {
