@@ -47,7 +47,7 @@
 	<script src="/js/approval/document/table.js"></script>
 	<script>
 		$(document).ready(function() {
-			$(".left_item").load("/approval/document/left_item?selectItem=all");
+			$(".left_item").load("/approval/document/left_item?selectItem=progress");
 		});
 	</script>
 </body>

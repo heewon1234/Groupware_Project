@@ -16,6 +16,15 @@ public class ApprovalResponsiblesService {
 	public List<Integer> getDocIdByUserId(String id) {
 		return dao.getDocIdByUserId(id);
 	}
+	public List<Integer> getPendingDocIdByUserId(String id) {
+		return dao.getPendingDocIdByUserId(id);
+	}
+	public List<Integer> getApproveDocIdByUserId(String id) {
+		return dao.getApproveDocIdByUserId(id);
+	}
+	public List<Integer> getReturnDocIdByUserId(String id) {
+		return dao.getReturnDocIdByUserId(id);
+	}
 	
 	public List<String> getManagerIdList(int docId) {
 		return dao.getManagerIdList(docId);
