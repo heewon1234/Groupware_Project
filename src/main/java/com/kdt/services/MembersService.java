@@ -121,10 +121,10 @@ public class MembersService {
 
 		for (String org : managerOrgList) {
 			for (String position : managerJobTitleList) {
-				MembersDTO manager = mdao.getManager(org, position);
+				List<MembersDTO> manager = mdao.getManager(org, position);
 
 				if (manager != null)
-					managerList.add(manager);
+					managerList.addAll(manager);
 			}
 		}
 
