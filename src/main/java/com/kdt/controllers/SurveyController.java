@@ -26,13 +26,16 @@ public class SurveyController {
 	@RequestMapping("voteCountUpdate")
 	public List<SurveyDTO> voteCountUpdate(SurveyDTO dto) {	
 		String id = (String)session.getAttribute("loginId");
+		String board_title = (String)session.getAttribute("board_title");
+		dto.setBoard_title(board_title);
 		return sservice.voteCountUpdate(dto,id);
 	}
 	
 	@ResponseBody
 	@RequestMapping("voteList")
 	public List<SurveyDTO> voteList(int parent_seq){
-		return sservice.voteList(parent_seq);
+		String board_title = (String)session.getAttribute("board_title");
+		return sservice.voteList(parent_seq, board_title);
 	}
 	
 }
