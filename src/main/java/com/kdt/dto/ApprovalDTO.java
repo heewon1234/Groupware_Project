@@ -8,14 +8,14 @@ public class ApprovalDTO {
 	private String title;
 	private String contents;
 	private Timestamp draft_date;
-	private String status;
+	private String approval_status;
 	private String doc_type;
 	
 	
 	public ApprovalDTO() {
 		super();
 	}
-	public ApprovalDTO(int seq, String id, String title, String contents, Timestamp draft_date, String status,
+	public ApprovalDTO(int seq, String id, String title, String contents, Timestamp draft_date, String approval_status,
 			String doc_type) {
 		super();
 		this.seq = seq;
@@ -23,7 +23,7 @@ public class ApprovalDTO {
 		this.title = title;
 		this.contents = contents;
 		this.draft_date = draft_date;
-		this.status = status;
+		this.approval_status = approval_status;
 		this.doc_type = doc_type;
 	}
 	public int getSeq() {
@@ -56,11 +56,11 @@ public class ApprovalDTO {
 	public void setDraft_date(Timestamp draft_date) {
 		this.draft_date = draft_date;
 	}
-	public String getStatus() {
-		return status;
+	public String getApproval_status() {
+		return approval_status;
 	}
-	public void setStatus(String status) {
-		this.status = status;
+	public void setApproval_status(String approval_status) {
+		this.approval_status = approval_status;
 	}
 	public String getDoc_type() {
 		return doc_type;

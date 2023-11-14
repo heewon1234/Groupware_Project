@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Contact">
+
+	<select id="personal_contact_tag_selectAll" resultType="com.kdt.dto.ContactDTO">
+		select * from Personal_Contact_Tag where writer = #{writer}
+	</select>
+	
+	<select id="personal_contact_tag_selectAll_duplicate" resultType="com.kdt.dto.ContactDTO">
+		select * from Personal_Contact_Tag where writer = #{writer} and tag = #{tag}
+	</select>
+	
+	<insert id="personal_contact_tag_insert">
+		insert into Personal_Contact_Tag(writer, tag)
+		
+		values(#{writer}, #{tag})
+	</insert>
+	
+	<insert id="personal_contact_insert">
+		insert into Personal_Contact(tag, name, email, phone, company_name, company_rank, 
+		company_department, address, link, birthday, memo, writer)
+
+		values(#{tag}, #{name}, #{email}, #{phone}, #{companyName}, #{companyRank},
+		#{companyDepartment}, #{address}, #{link}, #{birthday}, #{memo}, #{writer})
+	</insert>
+	
+	<select id="share_contact_tag_selectAll" resultType="com.kdt.dto.ContactDTO">
+		select * from Share_Contact_Tag
+	</select>
+
+	<insert id="share_contact_insert">
+		insert into Share_Contact(tag, name, email, phone, company_name, company_rank,
+		company_department, address, link, birthday, memo, writer, edit)
+
+		values(#{tag}, #{name}, #{email}, #{phone}, #{companyName}, #{companyRank},
+		#{companyDepartment}, #{address}, #{link}, #{birthday}, #{memo}, #{writer}, #{edit})
+	</insert>
+	
+</mapper>

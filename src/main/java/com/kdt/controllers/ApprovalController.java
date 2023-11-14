@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kdt.dto.ApprovalDTO;
 import com.kdt.dto.ApprovalFilesDTO;
+import com.kdt.dto.ApprovalResponsiblesDTO;
 import com.kdt.dto.MembersDTO;
 import com.kdt.services.ApprovalFilesService;
 import com.kdt.services.ApprovalResponsiblesService;
@@ -65,6 +66,7 @@ public class ApprovalController {
 		List<String> managerIdList = appRService.getManagerIdList(docId);
 		List<MembersDTO> managerList = mService.getManagerList(managerIdList);
 		
+		model.addAttribute("docId", docId);
 		model.addAttribute("userDTO", userDTO);
 		model.addAttribute("app", app);
 		model.addAttribute("filesList", filesList);
@@ -90,6 +92,13 @@ public class ApprovalController {
 		}
 	}
 	
+	@RequestMapping("/updateStatus")
+	public String updateStatus(String status, int doc_id, String userId) throws Exception {
+		appRService.updateStatus(new ApprovalResponsiblesDTO(0, doc_id, userId, status));
+		
+		return "redirect:/approval/document/box/every";
+	}
+ 	
 	@RequestMapping("/lists/all")
 	public String listsAll(Model model) throws Exception {
 		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");
@@ -110,19 +119,68 @@ public class ApprovalController {
 		return "/approval/document/lists/wait";
 	}
 	
+	@RequestMapping("/lists/complete")
+	public String listsComplete(Model model) throws Exception {
+		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");
+		List<ApprovalDTO> appList = appService.selectCompleteById(userDTO.getId());
+		
+		model.addAttribute("appList", appList);
+		
+		return "/approval/document/lists/complete";
+	}
+	
+	@RequestMapping("/lists/progress")
+	public String listsProgress(Model model) throws Exception {
+		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");
+		List<ApprovalDTO> appList = appService.selectProgressById(userDTO.getId());
+		
+		model.addAttribute("appList", appList);
+		
+		return "/approval/document/lists/progress";
+	}
+	
 	@RequestMapping("/box/every")
 	public String boxEvery(Model model) throws Exception {
 		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");
 		List<Integer> docIdList = appRService.getDocIdByUserId(userDTO.getId());
-		List<ApprovalDTO> appList = appService.selectEveryByDocId(docIdList);
+		List<ApprovalDTO> appList = appService.selectListByDocId(docIdList);
 		
 		model.addAttribute("appList", appList);
 		
-		for(Integer docId : docIdList) {
-			System.out.println("docId:"+docId);
-		}
-		
 		return "/approval/document/box/every";
+	}
+	
+	@RequestMapping("/box/pending")
+	public String boxPending(Model model) throws Exception {
+		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");
+		List<Integer> docIdList = appRService.getPendingDocIdByUserId(userDTO.getId());
+		List<ApprovalDTO> appList = appService.selectListByDocId(docIdList);
+		
+		model.addAttribute("appList", appList);
+		
+		return "/approval/document/box/pending";
+	}
+	
+	@RequestMapping("/box/approve")
+	public String boxApprove(Model model) throws Exception {
+		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");
+		List<Integer> docIdList = appRService.getApproveDocIdByUserId(userDTO.getId());
+		List<ApprovalDTO> appList = appService.selectListByDocId(docIdList);
+		
+		model.addAttribute("appList", appList);
+		
+		return "/approval/document/box/approve";
+	}
+	
+	@RequestMapping("/box/return")
+	public String boxReturn(Model model) throws Exception {
+		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");
+		List<Integer> docIdList = appRService.getReturnDocIdByUserId(userDTO.getId());
+		List<ApprovalDTO> appList = appService.selectListByDocId(docIdList);
+		
+		model.addAttribute("appList", appList);
+		
+		return "/approval/document/box/return";
 	}
 	
 	@RequestMapping("/insertApproval")

@@ -8,3 +8,8 @@ $(document).ready(function() {
 		location.href = "/works/" + $(this).attr('id');
 	});
 });
+$(document).ready(function() {
+	$('.menu_item, .work_plan').click(function() {
+		location.href = "/works_plan/" + $(this).attr('id');
+	});
+});

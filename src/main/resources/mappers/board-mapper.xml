@@ -47,5 +47,12 @@
 	<delete id="delContents">
 		delete from ${board_title} where seq=${seq}
 	</delete>
+	<!-- 게시글 수정 -->
+	<update id="updateContentsBoard">
+		update ${board_title} set title=#{title}, header=#{header}, notice=#{notice}, contents=#{contents} where seq=#{seq}
+	</update>
+	<update id="updateSurveyQuestion">
+		update ${board_title} set survey_question=#{survey_question} where seq=#{seq}
+	</update>
 
 </mapper>

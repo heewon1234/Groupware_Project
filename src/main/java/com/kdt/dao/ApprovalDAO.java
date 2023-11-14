@@ -21,6 +21,14 @@ public class ApprovalDAO {
 		return db.selectList("Approval.selectWaitById", id);
 	}
 	
+	public List<ApprovalDTO> selectCompleteById(String id) {
+		return db.selectList("Approval.selectCompleteById", id);
+	}
+	
+	public List<ApprovalDTO> selectProgressById(String id) {
+		return db.selectList("Approval.selectProgressById", id);
+	}
+	
 	public int insert(ApprovalDTO dto) {
 		db.insert("Approval.insert", dto);
 		

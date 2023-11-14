@@ -7,7 +7,7 @@
     overflow: hidden;
     margin-bottom:10px;
 }
-.content_tab>form>div>div:not(.board_contents_file_box>div):not(.board_contents_box>div):not(.board_survey>div){
+.content_tab>form>div>div:not(.board_contents_file_box>div):not(.board_contents_box>div):not(.board_survey>div):not(.contents-file>div){
     float:left;
     height:50px;
     display: flex;
@@ -30,7 +30,12 @@
     width:80%;
 }
 .board_contents_title_box>div:nth-child(3){width:60%;}
-
+.contents-file{
+	border:1px solid gainsboro;
+	margin-bottom:20px!important;
+	padding:10px;
+	
+}
 .board_contents_file_box{
     width:1500px;
     padding:10px;

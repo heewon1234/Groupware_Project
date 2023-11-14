@@ -1,0 +1,132 @@
+@charset "UTF-8";
+
+@charset "UTF-8";
+
+/* div{border:1px solid black;} */
+.note-modal-backdrop{display:none !important;}
+.content_tab>form>div:not(.board_contents_file_box):not(.board_contents_box){
+    width:1500px;
+    overflow: hidden;
+    margin-bottom:10px;
+}
+.content_tab>form>div>div:not(.board_contents_file_box>div):not(.board_contents_box>div):not(.board_survey>div):not(.contents-file>div):not(.board_survey>div){
+    float:left;
+    height:50px;
+    display: flex;
+    align-items: center;
+}
+
+.board_title_box>div:nth-child(1){width:10%;}
+.board_title_box>div:nth-child(2){width:20%;}
+.board_title_box select{
+    height:80%;
+    width:80%;
+}
+.board_title_box>div:nth-child(3){width:20%;}
+.board_title_box>div:nth-child(4){width:50%;}
+
+.board_contents_title_box>div:nth-child(1){width:10%;}
+.board_contents_title_box>div:nth-child(2){width:30%;}
+.board_contents_title_box>div:nth-child(2)>input{
+    height:80%;
+    width:80%;
+}
+.board_contents_title_box>div:nth-child(3){width:60%;}
+.contents-file{
+	border:1px solid gainsboro;
+	margin-bottom:20px!important;
+	padding:10px;
+	
+}
+.board_contents_file_box{
+    width:1500px;
+    padding:10px;
+    border: 1px dotted gainsboro;
+    margin-top:10px;
+    margin-bottom:30px;
+}
+.file_box_text{
+    margin-bottom:10px;
+    display: flex;
+    align-items: center;
+}
+.file_box_text>span{font-size:large;}
+.file_box_input_file{
+    border-top:1px solid gainsboro;
+    padding-top:10px;
+}
+.file_box_input_file>div:not(.file_box_input_file>div:nth-child(1)){
+    margin-top:10px;
+}
+
+.board_contents_box{
+    width:1500px;
+    margin-bottom:30px;
+}
+.board_survey{
+    padding:10px;
+    padding-left:20px;
+    padding-right:20px;
+    border:1px solid gainsboro;
+}
+.board_survey>div:nth-child(1){
+    height:50px;
+    display: flex;
+    align-items: center;
+    border-bottom:1px solid gainsboro;
+}
+.board_survey>div:nth-child(2){
+    height:50px;
+    display: flex;
+    align-items: center;
+}
+.board_survey>div:nth-child(2)>div:nth-child(1){
+    margin-right:20px;
+}
+
+#surveyBox{
+    border:1px solid black;
+    border-radius: 5px;;
+    padding:10px;
+}
+.notUseSurveyBox{display:none;}
+.surveyContents{
+    overflow: hidden;
+    height:30px;
+    display: flex;
+    align-items: center;
+    margin-bottom:15px;
+}
+.surveyContents:last-child{margin-bottom:0px;}
+.surveyContents>div{
+    float:left;
+    height:100%;
+    display: flex;
+    align-items: center;
+}
+.surveyContents>div:first-child{
+    margin-right:20px;
+}
+.surveyContents input{
+    height:100%;
+    width:500px;
+}
+
+.surveyContents img{
+    height:95%;
+    margin-left:30px;
+}
+
+.buttons{
+    margin-top:20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.buttons>button{
+    width:70px;
+    height:30px;
+    border:1px solid gainsboro;
+    border-radius: 5px;
+}
+

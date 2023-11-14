@@ -22,7 +22,7 @@
         </div>
         <div class="right_item">
             <div class="content_tab">
-                <form action="/board/insertBoardContents" id="frm" method="post">
+                <form action="/board/insertBoardContents" id="frm" method="post" enctype="multipart/form-data">
                     <div class="board_title_box">
                         <div class="board_title_text">게시판</div>
                         <div>

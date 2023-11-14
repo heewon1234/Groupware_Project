@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="File">
+	<insert id="insertFile">
+		insert into File values (null,#{sys_name},#{ori_name},#{parent_seq},#{board_title},#{type})
+	</insert>
+	
+	<select id="selectFileList" resultType="com.kdt.dto.FileDTO">
+		select * from File where parent_seq=#{parent_seq} and board_title=#{board_title}
+	</select>
+	
+	<delete id="delFileByParensSeq">
+		delete from File where parent_seq=#{parent_seq} and board_title=#{board_title}
+	</delete>
+	<delete id="delFileBySysName">
+		delete from File where sys_name=#{sys_name}
+	</delete>
+	<delete id="delFileTag">
+		delete from File where parent_seq=#{parent_seq} and board_title=#{board_title} and type="tag"
+	</delete>
+</mapper>

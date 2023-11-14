@@ -87,4 +87,13 @@ public class BoardDAO {
 	}
 	//
 	
+	// 게시글 수정
+	public int updateContentsBoard(BoardDTO dto) {
+		return db.update("Board.updateContentsBoard",dto);
+	}
+	public int updateSurveyQuestion(BoardDTO dto) {
+		return db.update("Board.updateSurveyQuestion",dto);
+	}
+	//
+	
 }

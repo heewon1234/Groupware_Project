@@ -27,6 +27,10 @@ public class ReplyDAO {
 		return db.delete("Reply.delReply",dto);
 	}
 	
+	public int delReplyByParentSeq(ReplyDTO dto) {
+		return db.delete("Reply.delReplyByParentSeq",dto);
+	}
+	
 	public int updateReply(ReplyDTO dto) {
 		return db.update("Reply.updateReply",dto);
 	}

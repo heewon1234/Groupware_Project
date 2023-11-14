@@ -11,7 +11,7 @@
 	</select>
 	
 	<insert id="insertSurveyUser">
-		insert into Survey_User values (null,#{id},#{parent_seq})
+		insert into Survey_User values (null,#{id},#{board_title},#{parent_seq})
 	</insert>
 	
 	<update id="voteCountUpdate">
@@ -21,8 +21,18 @@
 	<select id="isVote" resultType="boolean">
 		select count(*) from Survey_User where id=#{id} and parent_seq=#{parent_seq}
 	</select>
+	<select id="isExistVote" resultType="String">
+		select sum(vote) from Survey where parent_seq=#{parent_seq} and board_title=#{board_title}
+	</select>
 	
 	<select id="voteList" resultType="com.kdt.dto.SurveyDTO">
-		select *, (select sum(vote) from Survey where parent_seq=#{parent_seq}) as totalVote from Survey where parent_seq=#{parent_seq} 
+		select *, (select sum(vote) from Survey where parent_seq=#{parent_seq} and board_title=#{board_title}) as totalVote from Survey where parent_seq=#{parent_seq} and board_title=#{board_title} 
 	</select>
+	
+	<delete id="delSurveyByParentSeq">
+		delete from Survey where board_title=#{board_title} and parent_seq=#{parent_seq}
+	</delete>
+	<delete id="delSurveyUserByParentSeq">
+		delete from Survey_User where board_title=#{board_title} and parent_seq=#{parent_seq}
+	</delete>
 </mapper>

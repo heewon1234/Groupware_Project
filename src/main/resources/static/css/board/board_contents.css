@@ -79,6 +79,13 @@
     width:10%;
     text-align: end;
 }
+.contents-file{
+	border-bottom:1px solid black;
+	margin-bottom:10px;
+	margin-left:25px;
+}
+
+
 
 .contents{
     min-height:300px;
@@ -86,6 +93,7 @@
     padding-top:20px;
     padding-bottom:20px;
     margin-left:25px;
+    overflow-x:auto;
 }
 
 .survey_box{

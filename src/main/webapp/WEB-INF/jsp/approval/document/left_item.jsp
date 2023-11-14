@@ -38,10 +38,10 @@
 					<div id="wait" class="menu_list_item">
 						<img src="../imges/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">대기</span>
 					</div>
-					<div id="" class="menu_list_item">
+					<div id="complete" class="menu_list_item">
 						<img src="../imges/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">완료</span>
 					</div>
-					<div id="" class="menu_list_item">
+					<div id="progress" class="menu_list_item">
 						<img src="../imges/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">진행</span>
 					</div>
 				</div>
@@ -59,13 +59,13 @@
 					<div id="every" class="menu_list_item">
 						<img src="../imges/commons/body_form/left_item/default/company.png"> <span class="menu_list_item_text">전체</span>
 					</div>
-					<div id="" class="menu_list_item">
+					<div id="pending" class="menu_list_item">
 						<img src="../imges/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">미결</span>
 					</div>
-					<div id="" class="menu_list_item">
+					<div id="approve" class="menu_list_item">
 						<img src="../imges/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">결재</span>
 					</div>
-					<div id="" class="menu_list_item">
+					<div id="return" class="menu_list_item">
 						<img src="../imges/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">반려</span>
 					</div>
 				</div>
