@@ -7,7 +7,7 @@
 		SELECT * FROM Approval WHERE id = #{id} 
 	</select>
 	<select id="selectWaitById" resultType="com.kdt.dto.ApprovalDTO">
-		SELECT * FROM Approval WHERE id = #{id} AND status = 'Wait'
+		SELECT * FROM Approval WHERE id = #{id} AND approval_status = 'Wait'
 	</select>
 	<insert id="insert" useGeneratedKeys="true" keyProperty="seq">
 		insert into Approval values (null,#{id},#{title},#{contents}, now(), 'Wait', #{doc_type})
