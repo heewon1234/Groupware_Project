@@ -22,4 +22,7 @@ public class ApprovalResponsiblesDAO {
 	public List<String> getManagerIdList(int docId) {
 		return db.selectList("ApprovalResponsibles.getManagerIdList", docId);
 	}
+	public int updateStatus(ApprovalResponsiblesDTO dto) {
+		return db.update("ApprovalResponsibles.updateStatus", dto);
+	}
 }

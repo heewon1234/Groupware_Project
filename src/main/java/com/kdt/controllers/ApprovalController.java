@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kdt.dto.ApprovalDTO;
 import com.kdt.dto.ApprovalFilesDTO;
+import com.kdt.dto.ApprovalResponsiblesDTO;
 import com.kdt.dto.MembersDTO;
 import com.kdt.services.ApprovalFilesService;
 import com.kdt.services.ApprovalResponsiblesService;
@@ -65,6 +66,7 @@ public class ApprovalController {
 		List<String> managerIdList = appRService.getManagerIdList(docId);
 		List<MembersDTO> managerList = mService.getManagerList(managerIdList);
 		
+		model.addAttribute("docId", docId);
 		model.addAttribute("userDTO", userDTO);
 		model.addAttribute("app", app);
 		model.addAttribute("filesList", filesList);
@@ -90,6 +92,13 @@ public class ApprovalController {
 		}
 	}
 	
+	@RequestMapping("/updateStatus")
+	public String updateStatus(String status, int doc_id, String userId) throws Exception {
+		appRService.updateStatus(new ApprovalResponsiblesDTO(0, doc_id, userId, status));
+		
+		return "redirect:/approval/document/box/every";
+	}
+ 	
 	@RequestMapping("/lists/all")
 	public String listsAll(Model model) throws Exception {
 		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");

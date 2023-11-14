@@ -11,8 +11,14 @@
 		select doc_id from Approval_Responsibles
 		where approver_id = #{id};
 	</select>
+	
 	<select id="getManagerIdList" resultType="String">
 		select approver_id from Approval_Responsibles
 		where doc_id = #{docId};
 	</select>
+	
+	<update id="updateStatus">
+		UPDATE Approval_Responsibles SET status = #{status}
+		where doc_id = #{doc_id} and approver_id = #{approver_id}
+	</update>
 </mapper>
