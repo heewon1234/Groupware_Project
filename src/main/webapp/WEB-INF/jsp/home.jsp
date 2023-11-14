@@ -63,7 +63,6 @@
 								</div>
 								<div class="title">사내메일</div>
 							</div>
-<<<<<<< HEAD
 							<div class="title">주소록</div>
 						</div>
 						<div>
@@ -73,7 +72,6 @@
 							</div>
 							<div class="title">결재</div>
 							</a>
-=======
 							<div>
 								<a href="/works/work_leave">
 									<div class="main_icon_box">
@@ -94,7 +92,6 @@
 								</div>
 								<div class="title">결재</div>
 							</div>
->>>>>>> 3c272f19e34d931b60a4650b880bc21e290f55de
 						</div>
 					</div>
 				</div>
