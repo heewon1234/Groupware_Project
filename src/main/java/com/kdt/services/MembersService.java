@@ -145,4 +145,7 @@ public class MembersService {
 
 		return managerList;
 	}
+	public int countUser() {
+		return mdao.countUser();
+	}
 }
