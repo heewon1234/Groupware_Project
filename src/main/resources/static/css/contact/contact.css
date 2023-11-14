@@ -236,6 +236,11 @@
     pointer-events: none;
 }
 
+.modal_tag_select_item.nothing{
+	cursor: not-allowed !important;
+    pointer-events: none !important;
+}
+
 .modal_tag_list {
     width: 338px;
     overflow: hidden;

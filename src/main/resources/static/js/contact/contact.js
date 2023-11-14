@@ -9,7 +9,6 @@ let persion_action_ajax = "?";
 let share_action = "/contact/shareContactInsert";
 let share_action_ajax = "?";
 
-
 // 작성하기 버튼 눌렀을때 모달 창 띄우는거
 $(document).ready(function() {
     $('#modal_open_button').click(function() {
@@ -24,43 +23,54 @@ $(document).ready(function() {
     });
 });
 
-// 태그 선택창 열고 닫는거
+// 태그 선택창 열고 닫기
 $(document).ready(function() {
-	
-	
     $('.modal_tag').click(function() {
-        if(tag_list_open) {
+		console.log(contactType);
+        if (tag_list_open) {
             $('.modal_tag_select_list').css('display', 'none');
             tag_list_open = false;
-        }
-        else {
+        } else {
             $('.modal_tag_select_list').empty();
             $('.modal_tag_select_list').css('display', 'block');
-            
+
+            if (contactType == "personal") {
             $.ajax({
-	        url: "/contact/personalContactTagSelectAll",
-	        type: "GET",
-	        dataType: "json"
-	    }).done(function (resp) {
-			console.log(resp.length);
-			console.log("서버에서 받은 배열:", resp);
-            for(let i=0; i < resp.length; i++) {
-                const isTagSelected = selectedTags.includes(resp[i].tag);
-                const tagClass = isTagSelected ? "modal_tag_select_item select" : "modal_tag_select_item";
-                $(".modal_tag_select_list").append("<div class='" + tagClass + "'>" + resp[i].tag + "</div>");
+                url: "/contact/personalContactTagSelectAll",
+                type: "GET",
+                dataType: "json"
+            }).done(function(resp) {
+                for (let i = 0; i < resp.length; i++) {
+                    const isTagSelected = selectedTags.includes(resp[i].tag);
+                    const tagClass = isTagSelected ? "modal_tag_select_item select" : "modal_tag_select_item";
+                    $(".modal_tag_select_list").append("<div class='" + tagClass + "'>" + resp[i].tag + "</div>");
+                }
+            });
+            } else if(contactType == "share") {
+            $.ajax({
+                url: "/contact/shareContactTagSelectAll",
+                type: "GET",
+                dataType: "json"
+            }).done(function(resp) {
+				if(!resp.length == "0") {
+					for (let i = 0; i < resp.length; i++) {
+                    const isTagSelected = selectedTags.includes(resp[i].tag);
+                    const tagClass = isTagSelected ? "modal_tag_select_item select" : "modal_tag_select_item";
+                    $(".modal_tag_select_list").append("<div class='" + tagClass + "'>" + resp[i].tag + "</div>");
+                }
+				}
+				else {
+					$(".modal_tag_select_list").append('<div class="modal_tag_select_item nothing">데이터가 없습니다.</div>');
+				}
+            });
             }
-	        });
-           
             tag_list_open = true;
-    
         }
     });
-    
-    
 });
 
 // 태그 select 붙이기
-$(document).on("click", ".modal_tag_select_item", function () {
+$(document).on("click", ".modal_tag_select_item", function() {
     var tagValue = $(this).text();
 
     $(this).toggleClass("select");
@@ -81,13 +91,13 @@ $(document).on("click", ".modal_tag_select_item", function () {
 
     // selectedTags의 각 요소에 대해 태그를 추가
     selectedTags.forEach(function(tag) {
-        $(".modal_tag_list").append("<div class='modal_tag_list_item'><div class='modal_tag_list_item_text'>"
-        + tag + "</div><div class='modal_tag_list_item_delete'><img src='/images/contact/X.png'></div></div>");
+        $(".modal_tag_list").append("<div class='modal_tag_list_item'><div class='modal_tag_list_item_text'>" +
+            tag + "</div><div class='modal_tag_list_item_delete'><img src='/images/contact/X.png'></div></div>");
     });
 });
 
 // 선택한 태그 삭제
-$(document).on("click", ".modal_tag_list_item_delete", function () {
+$(document).on("click", ".modal_tag_list_item_delete", function() {
     // 클릭한 div의 가장 가까운 부모인 .select_tag 요소를 찾음
     var parentTag = $(this).closest(".modal_tag_list_item");
 
@@ -106,7 +116,7 @@ $(document).on("click", ".modal_tag_list_item_delete", function () {
 
 // 태그 선택 박스 이외에 다른 곳이 클릭 됐을 때 
 $(document).on("click", function(event) {
-    if(tag_list_open){
+    if (tag_list_open) {
         if (!$(event.target).closest('.modal_tag').length) {
             $('.modal_tag_select_list').css('display', 'none');
             tag_list_open = false;
@@ -115,7 +125,7 @@ $(document).on("click", function(event) {
 });
 
 // 새 태그 만들기 클릭 했을때
-$(document).on("click", ".modal_body_content_input_bonus_text", function () {
+$(document).on("click", ".modal_body_content_input_bonus_text", function() {
     $('.modal_contact_add').css('z-index', '3');
     $('.modal_contact_add').css('border', 'solid 1px #707070');
     $('.modal_contact_add').css('box-shadow', '2px 5px 4px 0 rgba(0,0,0,.16)');
@@ -123,8 +133,8 @@ $(document).on("click", ".modal_body_content_input_bonus_text", function () {
 });
 
 // 새 태그 만들기 취소 했을 때
-$(document).on("click", "#button_cancel_tag", function () {
-	$("#modal_new_tag_input").val("");
+$(document).on("click", "#button_cancel_tag", function() {
+    $("#modal_new_tag_input").val("");
     $('.modal_contact_add').css('z-index', '4');
     $('.modal_contact_add').css('border', '');
     $('.modal_contact_add').css('box-shadow', '');
@@ -134,73 +144,72 @@ $(document).on("click", "#button_cancel_tag", function () {
 // 새 태그 중복 확인
 $(document).ready(function() {
     $('#modal_new_tag_input').on('keyup', function() {
-		
-		let tag_input = $("#modal_new_tag_input").val();
-			
-		if(!tag_input) {
-			$('#button_apply_tag').addClass('permit');
-			return;
-		}
-		
-		if(contactType == "personal"){
-			$.ajax({
-	        url: "/contact/personalContactTagSelectAllDeplicate",
-	        type: "GET",
-	        data: {tag:tag_input }
-	        }).done(function (resp) {
-			if(resp.length == 1) {
-				$('.modal_tag_duplication_error').css('display', 'flex');
-				$('#button_apply_tag').addClass('permit');
-			}
-			
-			else {
-				$('.modal_tag_duplication_error').css('display', 'none');
-				$('#button_apply_tag').removeClass('permit');
-			}
-	        });
-		
-		}
-		else if (contactType == "share"){
-			
-			// 추가 예정
-		}
+
+        let tag_input = $("#modal_new_tag_input").val();
+
+        if (!tag_input) {
+            $('#button_apply_tag').addClass('permit');
+            return;
+        }
+
+        if (contactType == "personal") {
+            $.ajax({
+                url: "/contact/personalContactTagSelectAllDeplicate",
+                type: "GET",
+                data: {
+                    tag: tag_input
+                }
+            }).done(function(resp) {
+                if (resp.length == 1) {
+                    $('.modal_tag_duplication_error').css('display', 'flex');
+                    $('#button_apply_tag').addClass('permit');
+                } else {
+                    $('.modal_tag_duplication_error').css('display', 'none');
+                    $('#button_apply_tag').removeClass('permit');
+                }
+            });
+
+        } else if (contactType == "share") {
+
+            // 추가 예정
+        }
     });
 });
 
 // 새 태그 생성
-$(document).on("click", "#button_apply_tag", function () {
-	let tag_input = $("#modal_new_tag_input").val();
-	
-	if(contactType == "personal") {
-			$.ajax({
-	        url: "/contact/personalContactTagInsert",
-	        type: "GET",
-	        data: {tag:tag_input}
-	        }).done(function () {
-				$("#modal_new_tag_input").val("");
-				$('.modal_contact_add').css('z-index', '4');
-    			$('.modal_contact_add').css('border', '');
-    			$('.modal_contact_add').css('box-shadow', '');
-    			$('.modal_tag_add').css('display', 'none');
-    			$('#button_apply_tag').addClass('permit');
-    			});
-	        }
-	
-	else if(contactType == "share") {
-		console.log("공유로 새 태그 넣을거임")
-	}
+$(document).on("click", "#button_apply_tag", function() {
+    let tag_input = $("#modal_new_tag_input").val();
+
+    if (contactType == "personal") {
+        $.ajax({
+            url: "/contact/personalContactTagInsert",
+            type: "GET",
+            data: {
+                tag: tag_input
+            }
+        }).done(function() {
+            $("#modal_new_tag_input").val("");
+            $('.modal_contact_add').css('z-index', '4');
+            $('.modal_contact_add').css('border', '');
+            $('.modal_contact_add').css('box-shadow', '');
+            $('.modal_tag_add').css('display', 'none');
+            $('#button_apply_tag').addClass('permit');
+        });
+    } else if (contactType == "share") {
+        console.log("공유로 새 태그 넣을거임")
+    }
 });
 // 입력 항목 추가 눌렀을 때
-$(document).on("click", ".modal_body_content_plus", function () {
-    $('.modal_body_content_plus').css('display','none');
-    $('.modal_body_content_minus').css('display','block');
+$(document).on("click", ".modal_body_content_plus", function() {
+    $('.modal_body_content_plus').css('display', 'none');
+    $('.modal_body_content_minus').css('display', 'block');
     $('.modal_body_content_form_plus').css('display', 'block');
 });
 
 // 추가 입력 항목 닫기 눌렀을 때
-$(document).on("click", ".modal_body_content_minus", function () {
-    $('.modal_body_content_minus').css('display','none');
-    $('.modal_body_content_plus').css('display','block');
+$(document).on("click", ".modal_body_content_minus", function() {
+    $('.modal_body_content_minus').css('display', 'none');
+    $('.modal_body_content_plus').css('display', 'block');
     $('.modal_body_content_form_plus').css('display', 'none');
 });
 
@@ -217,9 +226,7 @@ $(document).ready(function() {
             contactType = "personal";
             selectedTags = [];
             $(".modal_tag_list").html("");
-        }
-
-        else if (classList.includes('share')) {
+        } else if (classList.includes('share')) {
             $('.modal_body_content_form_edit').css('display', 'flex');
             contactType = "share";
             selectedTags = [];
@@ -229,13 +236,12 @@ $(document).ready(function() {
 });
 
 // 편집 허용, 허용 안 하는거 토글 관리
-$(document).on("click", ".edit_toggle", function () {
-    if(editToggle) {
+$(document).on("click", ".edit_toggle", function() {
+    if (editToggle) {
         $('#edit_toggle_text').html('허용 안함');
         editToggle = false;
         $('#hidden_edit_toggle_value').val(editToggle);
-    }
-    else {
+    } else {
         $('#edit_toggle_text').html('허용 함');
         editToggle = true;
         $('#hidden_edit_toggle_value').val(editToggle);
@@ -256,12 +262,10 @@ $(document).ready(function() {
 $(document).ready(function() {
     $('#modal_body_content_input_right_name').on('keyup', function() {
         var inputValue = $(this).val();
-        
+
         if (inputValue !== "") {
             $('.button_apply.float_right').removeClass('permit');
-        }
-
-        else {
+        } else {
             $('.button_apply.float_right').addClass('permit');
         }
     });
@@ -270,19 +274,17 @@ $(document).ready(function() {
 // 저장 버튼 눌렀을때 하나만 저장
 $(document).ready(function() {
     $('#modal_apply_button').on('click', function() {
-		$('#contact_form').removeAttr('action');
+        $('#contact_form').removeAttr('action');
         $('#hidden_tag_list').val(selectedTags);
 
-        if(contactType=="personal") {
-			$('#contact_form').attr('action', persion_action);
-			$("#contact_form").submit();
-        }
-
-        else if (contactType=="share") {
+        if (contactType == "personal") {
+            $('#contact_form').attr('action', persion_action);
+            $("#contact_form").submit();
+        } else if (contactType == "share") {
             console.log("공유 주소록 등록");
             console.log("편집 허용 여부" + editToggle);
             $('#contact_form').attr('action', share_action);
-			$("#contact_form").submit();
+            $("#contact_form").submit();
         }
     });
 });

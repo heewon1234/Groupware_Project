@@ -18,8 +18,6 @@
 		values(#{writer}, #{tag})
 	</insert>
 	
-
-
 	<insert id="personal_contact_insert">
 		insert into Personal_Contact(tag, name, email, phone, company_name, company_rank, 
 		company_department, address, link, birthday, memo, writer)
@@ -27,6 +25,10 @@
 		values(#{tag}, #{name}, #{email}, #{phone}, #{companyName}, #{companyRank},
 		#{companyDepartment}, #{address}, #{link}, #{birthday}, #{memo}, #{writer})
 	</insert>
+	
+	<select id="share_contact_tag_selectAll" resultType="com.kdt.dto.ContactDTO">
+		select * from Share_Contact_Tag
+	</select>
 
 	<insert id="share_contact_insert">
 		insert into Share_Contact(tag, name, email, phone, company_name, company_rank,

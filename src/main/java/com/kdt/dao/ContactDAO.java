@@ -30,6 +30,10 @@ public class ContactDAO {
 		return db.insert("Contact.personal_contact_insert", dto);
 	}
 	
+	public List<ContactDTO> shareContactTagSelectAll(ContactDTO dto) {
+		return db.selectList("Contact.share_contact_tag_selectAll", dto);
+	}
+	
 	public int shareContactInsert(ContactDTO dto) {
 		return db.insert("Contact.share_contact_insert", dto);
 	}

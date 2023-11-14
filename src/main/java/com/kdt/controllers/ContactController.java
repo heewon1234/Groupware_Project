@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -23,7 +24,17 @@ public class ContactController {
 	private HttpSession session;
 
 	@RequestMapping("personal")
-	public String toFavoriteBoard() {
+	public String personal(Model model) {
+		ContactDTO dto = new ContactDTO();
+		String id = (String) session.getAttribute("loginID");
+		dto.setWriter("test1");
+		
+		List<ContactDTO> personalList = Service.personalContactTagSelectAll(dto);
+		List<ContactDTO> shareList = Service.shareContactTagSelectAll(dto);
+		
+		model.addAttribute("personalList", personalList);
+	    model.addAttribute("shareList", shareList);
+		
 		return "contact/personal";
 	}
 	
@@ -60,8 +71,11 @@ public class ContactController {
 		return "contact/personal";
 	}
 	
-	
-	
+	@ResponseBody
+	@RequestMapping("shareContactTagSelectAll")
+	public List<ContactDTO> shareContactTagSelectAll(ContactDTO dto) {
+		return this.Service.shareContactTagSelectAll(dto);
+	}
 	
 	@RequestMapping("shareContactInsert")
 	public String shareContactInsert(ContactDTO dto) throws Exception{

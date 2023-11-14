@@ -30,6 +30,10 @@ public class ContactService {
 		return this.dao.personalContactInsert(dto);
 	}
 	
+	public List<ContactDTO> shareContactTagSelectAll(ContactDTO dto) {
+		return this.dao.shareContactTagSelectAll(dto);
+	}
+	
 	public int shareContactInsert(ContactDTO dto) {
 		return this.dao.shareContactInsert(dto);
 	}
