@@ -149,9 +149,14 @@ public class BoardController {
 		return "boards/edit_contents_board";
 	}
 	
+	@RequestMapping("updateContentsBoard")
+	public String updateContentsBoard() {
+		return "";
+	}
+	
 	// D 관련 기능
 	@RequestMapping("toDelContents")
-	public String toDelContents() {
+	public String toDelContents(BoardDTO dto,String[] items, MultipartFile[] fileList) throws Exception{
 		return "boards/delContents";
 	}
 	
