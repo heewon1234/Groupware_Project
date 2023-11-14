@@ -4,7 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ApprovalResponsibles">
 	<insert id="insert">
-		INSERT INTO Approval_Responsibles VALUES(NULL, #{doc_id}, #{approver_id}, #{status})
+		INSERT INTO Approval_Responsibles VALUES(NULL, #{doc_id}, #{approver_id}, "미결")
 	</insert>
 	
 	<select id="getDocIdByUserId" resultType="Integer">
@@ -18,7 +18,7 @@
 	</select>
 	
 	<update id="updateStatus">
-		UPDATE Approval_Responsibles SET status = #{status}
+		UPDATE Approval_Responsibles SET approval_status = #{approval_status}
 		where doc_id = #{doc_id} and approver_id = #{approver_id}
 	</update>
 </mapper>

@@ -4,18 +4,18 @@ public class ApprovalResponsiblesDTO {
 	private int id;
 	private int doc_id;
 	private String approver_id;
-	private String status;
+	private String approval_status;
 	
 	
 	public ApprovalResponsiblesDTO() {
 		super();
 	}
-	public ApprovalResponsiblesDTO(int id, int doc_id, String approver_id, String status) {
+	public ApprovalResponsiblesDTO(int id, int doc_id, String approver_id, String approval_status) {
 		super();
 		this.id = id;
 		this.doc_id = doc_id;
 		this.approver_id = approver_id;
-		this.status = status;
+		this.approval_status = approval_status;
 	}
 	public int getId() {
 		return id;
@@ -35,11 +35,10 @@ public class ApprovalResponsiblesDTO {
 	public void setApprover_id(String approver_id) {
 		this.approver_id = approver_id;
 	}
-	public String getStatus() {
-		return status;
+	public String getApproval_status() {
+		return approval_status;
 	}
-	public void setStatus(String status) {
-		this.status = status;
+	public void setApproval_status(String approval_status) {
+		this.approval_status = approval_status;
 	}
-	
 }
