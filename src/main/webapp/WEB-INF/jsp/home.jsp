@@ -63,6 +63,15 @@
 								</div>
 								<div class="title">사내메일</div>
 							</div>
+							<div class="title">주소록</div>
+						</div>
+						<div>
+							<a href="/approval/document/lists/all">
+							<div class="main_icon_box">
+								<i class="fa-regular fa-clipboard"></i>
+							</div>
+							<div class="title">결재</div>
+							</a>
 							<div>
 								<a href="/works/work_leave">
 									<div class="main_icon_box">
