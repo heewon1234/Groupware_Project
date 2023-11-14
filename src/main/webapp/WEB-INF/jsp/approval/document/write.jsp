@@ -102,25 +102,12 @@
 					</c:forEach>
 				</ul>
 				<div class="modalButton_div" align="center">
-					<button type="button" id="apply_btn" class="modalButton_apply button_apply">확인</button>
-					<button type="button" class="modalButton_apply button_cancel">취소</button>
+					<button type="button" id="apply_btn" class="button_apply">확인</button>
+					<button type="button" id="cancle_btn" class="modalButton_apply button_cancel">취소</button>
 				</div>
 			</div>
 		</div>
 	</form>
 	<script src="/js/approval/document/write.js"></script>
-	<script>
-		$(document).ready(function() {
-			$("#top_container").load("/commons/topForm");
-		});
-		$("#apply_btn").on("click", function() {
-			$(".app").empty();
-	
-			$("#modalContainer_apply input[type='checkbox']:checked").each(function(index) {
-				$("#app_th" + (index + 1)).html($(this).prev().prev().html());
-				$("#app_td" + (index + 1)).html($(this).prev().prev().prev().html());
-			});
-		});
-	</script>
 </body>
 </html>
