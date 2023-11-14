@@ -13,10 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kdt.dto.LeavesDTO;
 import com.kdt.dto.MembersDTO;
 import com.kdt.dto.OneToOneChatDTO;
+import com.kdt.dto.WorksDTO;
 import com.kdt.services.ChatRoomService;
 import com.kdt.services.MembersService;
+import com.kdt.services.WorksService;
 import com.kdt.utils.EncryptionUtils;
 import com.kdt.utils.UUIDToNumber;
 
@@ -34,6 +37,8 @@ public class MembersController {
 	@Autowired
 	private ChatRoomService roomService;
 	
+	@Autowired
+	private WorksService wservice;
 	@RequestMapping("login")
 	public String login(String id, String pw) throws Exception{
 		String shapw = EncryptionUtils.getSHA512(pw);
@@ -80,6 +85,10 @@ public class MembersController {
 	public String signup(String name, String id, String pw, String workForm, String org, String position, String jobName) throws Exception{
 		String shapw = EncryptionUtils.getSHA512(pw);
 		MembersDTO dto = new MembersDTO(id,shapw,name,workForm,org,jobName,position,null,null,null,null,null,null);
+		LeavesDTO ldto = new LeavesDTO(id,name,org,null,0,0,0,0,0,0,0);
+		WorksDTO wdto = new WorksDTO(id,name,org,0,0,0,0,0,0,0,0);
+		this.wservice.leave_insert(ldto);
+		this.wservice.work_insert(wdto);
 		this.mservice.signup(dto);
 		return "redirect:/insa/manage/members";
 	}
@@ -104,14 +113,16 @@ public class MembersController {
 	@RequestMapping(value = "/updateOrg")
 	public String updateOrg(String idList, String org) throws Exception {
 		mservice.updateOrg(idList, org);
-
+		wservice.leave_update(idList, org);
+		wservice.work_update(idList, org);
 		return "redirect:/insa/manage/members";
 	}
 	
 	@RequestMapping(value = "/deleteMember")
 	public String deleteMember(String idList) throws Exception {
 		mservice.deleteMember(idList);
-
+		wservice.leave_delete(idList);
+		wservice.work_delete(idList);
 		return "redirect:/insa/manage/members";
 	}
 	//채팅 관련 기능입니다.
