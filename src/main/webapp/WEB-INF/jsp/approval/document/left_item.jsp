@@ -36,13 +36,13 @@
 						<img src="../imges/commons/body_form/left_item/default/company.png"> <span class="menu_list_item_text">전체</span> ${allCount }
 					</div>
 					<div id="wait" class="menu_list_item">
-						<img src="../imges/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">대기</span>
+						<img src="../imges/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">대기</span> ${waitCount }
 					</div>
 					<div id="complete" class="menu_list_item">
-						<img src="../imges/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">완료</span>
+						<img src="../imges/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">완료</span> ${completeCount }
 					</div>
 					<div id="progress" class="menu_list_item">
-						<img src="../imges/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">진행</span>
+						<img src="../imges/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">진행</span> ${processCount }
 					</div>
 				</div>
 			</div>

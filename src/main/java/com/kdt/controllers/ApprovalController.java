@@ -199,9 +199,15 @@ public class ApprovalController {
 	public String toLeft_item(String selectItem, Model model) {
 		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");
 		int allCount = appService.getAllCount(userDTO.getId());
+		int waitCount = appService.getWaitCount(userDTO.getId());
+		int completeCount = appService.getCompleteCount(userDTO.getId());
+		int processCount = appService.getProcessCount(userDTO.getId());
 		
 		model.addAttribute("selectItem", selectItem);
 		model.addAttribute("allCount", allCount);
+		model.addAttribute("waitCount", waitCount);
+		model.addAttribute("completeCount", completeCount);
+		model.addAttribute("processCount", processCount);
 		
 		return "/approval/document/left_item";
 	}

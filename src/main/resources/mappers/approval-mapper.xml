@@ -25,4 +25,16 @@
 		SELECT COUNT(*) FROM Approval
 		WHERE id = #{id}
 	</select>
+	<select id="getWaitCount" resultType="Integer">
+		SELECT COUNT(*) FROM Approval
+		WHERE id = #{id} and approval_status = '대기'
+	</select>
+	<select id="getCompleteCount" resultType="Integer">
+		SELECT COUNT(*) FROM Approval
+		WHERE id = #{id} and approval_status = '완료'
+	</select>
+	<select id="getProcessCount" resultType="Integer">
+		SELECT COUNT(*) FROM Approval
+		WHERE id = #{id} and approval_status = '진행중'
+	</select>
 </mapper>
