@@ -2,10 +2,10 @@
 
  /* div{border:1px solid black;}   */
 
-.searchBox{
+/*.searchBox{
     width:600px;
     height:40px;
-    border:1px solid black;
+    border:1px solid #d6d6d6;
     border-radius: 5px;
     overflow: hidden;
     margin-bottom:30px;
@@ -31,8 +31,48 @@
     width:95%;
     height:100%;
     border:none;
+}*/
+
+.searchBox {
+    width:522px;
+    height:38px;
+    border: 1px solid #d6d6d6;
+    border-radius: 2px;
+    padding:0px;
+    display: flex;
 }
 
+.searchBox.focus {
+    border: 1px solid rgb(41, 133, 219);
+}
+
+.searchIconBox {
+    width: 35px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.searchIconBox img {
+    width: 16px;
+    width: 16px;
+}
+
+.searchTextBox{
+    width: calc(100% - 35px);
+    display: flex;
+    align-items: center;
+}
+
+.searchTextBox input {
+    border: none;
+    outline: none;
+    width: 485px;
+}
+.searchTextBox input::placeholder {
+   font-size: 13px;
+}
 .board_list{
     width:1500px;
 }
@@ -48,16 +88,16 @@
 
 .board_body{
     margin-top:10px;
-    border-top:1px solid black;
-    border-bottom:1px solid black;
+    border-top:1px solid #d6d6d6;
+    border-bottom:1px solid #d6d6d6;
 }
-
+#noticeList>div{background-color: rgb(240, 240, 240,0.3);}
 .board_body .board_contents_list{
     height:46px;
     overflow:hidden;
 }
 .board_contents_list:not(.board_contents_list:first-child){
-    border-top:1px solid black;
+    border-top:1px solid #d6d6d6;
 }
 .board_contents_list>div{
     float:left;
@@ -76,3 +116,14 @@
 .board_contents_list>.view_count{width:5%;}
 .board_contents_list>.board_title{width:10%;}
 .board_contents_list>.board_contents_write_date{width:12%;}
+
+#boardListFooter{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width:1500px;
+}
+#boardListFooter>a{
+	margin-left:10px;
+	margin-right:10px;
+}

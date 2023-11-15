@@ -58,7 +58,7 @@
 							<span>잔여 휴가</span><br> <br> ${i.leave_remainder}일
 						</div>
 						<div class="leaveapply">
-							<a href="#">휴가 현황</a>
+							<a href="#">휴가 현황</a><br> <br>
 							<button>휴가 신청</button>
 						</div>
 
@@ -130,9 +130,11 @@
 						<span>근무현황</span>
 					</div>
 					<div class="workcurrent">
-						<table border="1" id="workform">
+						<div class="comment">
+						<table id="workform" width="100%" >
 						
 						</table>
+						</div>
 						<button class="worktime_update">근무시간 수정</button>
 					</div>
 

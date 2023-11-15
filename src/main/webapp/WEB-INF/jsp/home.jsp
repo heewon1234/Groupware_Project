@@ -58,12 +58,6 @@
 								<div class="title">일정</div>
 							</div>
 							<div>
-								<div class="main_icon_box">
-									<i class="fa-regular fa-envelope"></i>
-								</div>
-								<div class="title">사내메일</div>
-							</div>
-							<div>
 								<a href="/works/work_leave">
 									<div class="main_icon_box">
 										<i class="fa-solid fa-sitemap"></i>
@@ -119,17 +113,19 @@
 							</div>
 						</div>
 						<div class="blank"></div>
-						<div id="mailContainer">메일이 일정 내에 안될거같지만 일단은 메일 들어가는 자리입니다</div>
+						<div id="mailContainer">메일 대신 주소록이나 게시판 들어갈 자리 입니도</div>
 					</div>
 					<div id="calendarContainer">
 						<div class="date-wrap">
 							<div class="date-month">
-								<span id="month-this">2022.05</span>
+								<span id="month-this"></span>
 								<div class="button_wrap">
-									<button type="button" id="month-prev" class="month-move"
-										data-ym="2022-04-01"><</button>
-									<button type="button" id="month-next" class="month-move"
-										data-ym="2022-06-01">></button>
+									<button type="button" id="month-prev" class="month-move">
+										<img class="prevMonth" src="/images/insa/work_plan/chevron-left.svg">
+									</button>
+									<button type="button" id="month-next" class="month-move">
+										<img class="nextMonth" src="/images/insa/work_plan/chevron-right.svg">
+									</button>
 								</div>
 							</div>
 							<table class="date-month">
@@ -145,27 +141,20 @@
 									</tr>
 								</thead>
 								<tbody id="tbl-month">
-									<tr>
-										<td class="sun"><a>1</a></td>
-										<td class=""><a href="/news/schedule?date=2022-05-02">2</a></td>
-										<td class=""><a>3</a></td>
-										<td class=""><a>4</a></td>
-										<td class="today"><a>5</a></td>
-										<td class=""><a>6</a></td>
-										<td class="sat"><a>7</a></td>
-									</tr>
-									<!-- 행 반복 -->
-									<tr>
-										<td class="sun"><a>29</a></td>
-										<td class=""><a>30</a></td>
-										<td class=""><a>31</a></td>
-										<td class=""><a></a></td>
-										<td class=""><a></a></td>
-										<td class=""><a></a></td>
-										<td class="sat"></a></td>
-									</tr>
+							
 								</tbody>
 							</table>
+						</div>
+						<div class="verticalLine"></div>
+						<div id="scheduleList">
+							<c:forEach var="lists" items="${list }">
+								<div class="schedules">
+									<div class="circle"></div>
+									<div class="schedule">${lists.schedule }</div>
+									<div class="startday">${lists.startday }</div>
+								</div>
+								<br>
+							</c:forEach>
 						</div>
 					</div>
 				</div>

@@ -97,11 +97,59 @@ a {
 	margin-top:100px;
 }
 
+.verticalLine {
+	border-right: 1px solid rgb(192, 192, 192);
+    height: 80%;
+    float:left;
+    margin-top: 50px;
+}
+
+#scheduleList {
+	float:left;
+	width:45%;
+	height:100%;
+	margin-top: 70px;
+	margin-left:20px;
+}
+
+.schedules {
+	display: flex;
+	align-items: center;
+}
+
+.circle {
+	width:10px;
+	height:10px;
+	border-radius: 50%;
+	background-color:#d2e0fb;
+	float:left;
+	margin-right: 10px
+}
+
+.schedule {
+	float:left;
+	margin-right: 10px
+}
+
+.startday {
+	clear: both;
+	color:rgb(192, 192, 192);
+	font-size: 9pt;
+}
 
 /*출근체크*/
 
+.workcheckbox{
+	height:100%;
+}
+
 .workcheckbox>div {
     padding-top: 50px;
+}
+
+#workin {
+	border: none;
+    background-color: white;
 }
 
 #workout {
@@ -112,11 +160,13 @@ a {
     .timebox {
     	font-size: 30px;
     	text-align: center;
+    	height:25%;
     }
 
     .workinoutbox {
     	font-size: 20px;
     	text-align: center;
+    	height:25%;
     }
 
     .workbtn {
@@ -124,10 +174,12 @@ a {
     	border: 1px solid grey;
     	width: 25%;
     	margin: 10px;
+    	height:30px;
     }
 
     .workbtnbox {
     	padding-left: 30px;
+    	height:50%;
     }
 
     .highlight {
@@ -139,6 +191,7 @@ a {
 .date-wrap {
 	width:50%;
 	height:100%;
+	float:left;
 }
 
 table.date-month {
@@ -146,7 +199,15 @@ table.date-month {
 	height:80%;
 }
 
-/*td {
+td {
     text-align: center;
     vertical-align: middle;
-}*/
+    width:75px;
+    height:75px;
+}
+
+.today {
+	color:white;
+	background-color:rgb(206, 216, 255);
+	border-radius: 50%;
+}

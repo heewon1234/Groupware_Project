@@ -4,6 +4,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,13 +64,22 @@ public class ApprovalController {
 		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");
 		ApprovalDTO app = appService.selectByDocId(docId);
 		List<ApprovalFilesDTO> filesList = appFService.selectByParentSeq(docId);
-		List<String> managerIdList = appRService.getManagerIdList(docId);
+		
+		List<ApprovalResponsiblesDTO> managerRBList = appRService.getManagerRBList(docId);
+		List<String> managerIdList = new ArrayList<>();
+		for(ApprovalResponsiblesDTO dto : managerRBList) {
+			managerIdList.add(dto.getApprover_id());
+			System.out.println(dto.getApprover_id());
+			System.out.println(dto.getApproval_status());
+		}
+		
 		List<MembersDTO> managerList = mService.getManagerList(managerIdList);
 		
 		model.addAttribute("docId", docId);
 		model.addAttribute("userDTO", userDTO);
 		model.addAttribute("app", app);
 		model.addAttribute("filesList", filesList);
+		model.addAttribute("managerRBList", managerRBList);
 		model.addAttribute("managerList", managerList);
 		
 		return "/approval/document/view";
@@ -200,9 +210,24 @@ public class ApprovalController {
 	public String toLeft_item(String selectItem, Model model) {
 		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");
 		int allCount = appService.getAllCount(userDTO.getId());
+		int waitCount = appService.getWaitCount(userDTO.getId());
+		int completeCount = appService.getCompleteCount(userDTO.getId());
+		int processCount = appService.getProcessCount(userDTO.getId());
+		
+		int everyCount = appRService.getEveryCount(userDTO.getId());
+		int pendingCount = appRService.getPendingCount(userDTO.getId());
+		int approveCount = appRService.getApproveCount(userDTO.getId());
+		int returnCount = appRService.getReturnCount(userDTO.getId());
 		
 		model.addAttribute("selectItem", selectItem);
 		model.addAttribute("allCount", allCount);
+		model.addAttribute("waitCount", waitCount);
+		model.addAttribute("completeCount", completeCount);
+		model.addAttribute("processCount", processCount);
+		model.addAttribute("everyCount", everyCount);
+		model.addAttribute("pendingCount", pendingCount);
+		model.addAttribute("approveCount", approveCount);
+		model.addAttribute("returnCount", returnCount);
 		
 		return "/approval/document/left_item";
 	}

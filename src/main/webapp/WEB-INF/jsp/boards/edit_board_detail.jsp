@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>글 작성</title>
+<title>Insert title here</title>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<link rel="stylesheet" href="/css/commons/body_form/left_form/body_form_default.css" />
 	<link rel="stylesheet" href="/css/commons/topForm.css" />
@@ -13,13 +13,13 @@
 </head>
 <body>
 	<div class="background"></div>
-    <div class="modal">
-        <div>사용자 추가하기</div>
-        <div class="member">
-            <div class="member_list">
-                <div class="member_list_box">
-                    <div class="member_list_box_header">직원 목록</div>
-                    <div class="member_list_box_body" id="member_list_box_body">
+    	<div class="modal">
+        	<div>사용자 추가하기</div>
+        	<div class="member">
+            	<div class="member_list">
+                	<div class="member_list_box">
+                    	<div class="member_list_box_header">직원 목록</div>
+                    	<div class="member_list_box_body" id="member_list_box_body">
                         <div>
 							<c:forEach items="${organizationList}" var="i">
 								<div>
@@ -120,8 +120,5 @@
     </div>
     <script src="/js/board/mk_board.js" defer></script>
    	<script src="/js/board/sideBar.js" defer></script>
-   
-    	
-
 </body>
 </html>

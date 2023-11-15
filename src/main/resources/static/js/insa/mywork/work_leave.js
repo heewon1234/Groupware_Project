@@ -88,6 +88,7 @@ function changeStatus(newStatus, button) { // 업무 외출 회의 외근 버튼
 		},
 	}).done(
 		function(resp) {
+			console.log(resp);
 			let tr = $("<tr>");
 			tr.html("<td width='100'>"
 				+ (resp[resp.length - 1].time) + "</td>"
@@ -98,6 +99,7 @@ function changeStatus(newStatus, button) { // 업무 외출 회의 외근 버튼
 		});
 
 }
+
 function updateClock() { // 시계 출력
 	var now = new Date();
 	var options = {
@@ -130,7 +132,7 @@ function displayTime(elementId, timeString) {
 	currentTimeElement.innerText = newTime;
 }
 
-function work_inout() { 
+function work_inout() {
 	$.ajax({
 		url: "/works/list",
 	})
@@ -144,12 +146,15 @@ function work_inout() {
 						.querySelectorAll('.workbtn');
 					for (var i = 0; i < buttons.length; i++) {
 						buttons[i].disabled = false;
+						if (resp[resp.length - 1].work_type.trim().includes(buttons[i].textContent.trim())) {
+							buttons[i].disabled = true;
+						}
 					}
 					document.getElementById("workin").disabled = true;
 					document.getElementById("workout").disabled = false;
 					var statusText = document
 						.getElementById('statusText');
-					statusText.textContent = resp[0].work_type;
+					statusText.textContent = resp[resp.length - 1].work_type;
 					displayTime("currentinTime", resp[0].work_time);
 				}
 

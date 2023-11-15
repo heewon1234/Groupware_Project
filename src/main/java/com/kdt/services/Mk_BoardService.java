@@ -1,6 +1,8 @@
 package com.kdt.services;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,7 +42,7 @@ public class Mk_BoardService {
 	}
 	//
 
-
+	// 게시판 생성
 	@Transactional
 	public void Mk_boardInsert(Mk_BoardDTO dto, String headerList, String authorityList) {
 		mdao.Mk_boardInsert(dto);
@@ -69,4 +71,48 @@ public class Mk_BoardService {
 			hdao.headerInsert(new HeaderDTO(0,dto.getBoard_title(),header));
 		}
 	}
+	//
+
+	// 게시판 불러오기
+	public List<Mk_BoardDTO> selectAllBoard(){
+		return mdao.selectAllBoard();
+	}
+	public Mk_BoardDTO boardDetail(String board_title) {
+		return mdao.boardDetail(board_title);
+	}
+	
+	//
+
+	// 게시판 삭제
+	@Transactional
+	public void delBoard(String board_title) {
+		int boardSeq = mdao.selectBoardSeq(board_title);
+
+		// drop table
+		String sql = "drop table Board_"+boardSeq;
+		mdao.delBoard(sql);
+
+		// 게시판 관련 내용 삭제
+		Map<String,String> map = new HashMap<>();
+		map.put("board_title", board_title);
+
+		String[] boardTitleTable = {"Mk_Board", "File", "Header", "Reply", "Survey", "Survey_User"};
+		String[] oriBoardTitleTable = {"Authority","Favorite_Board"};
+		
+		for(String table : boardTitleTable) {
+			map.put("table", table);
+			mdao.deleteByBoardTitle(map);
+		}
+		
+		for(String table : oriBoardTitleTable) {
+			map.put("table", table);
+			mdao.deleteByOriBoardTitle(map);
+		}
+
+	}
+	//
+	
+	// 게시판 수정
+	
+	//
 }

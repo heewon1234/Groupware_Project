@@ -20,14 +20,16 @@
         </div>
         <div class="right_item">
             <div class="content_tab">
-                <div class="searchBox">
-                    <div class="searchIconBox">
-                        <img src="/images/board/search.png">
+                      <div class="main_search" id="searchBox">
+                        <div class="searchBox">
+                            <div class="searchIconBox">
+                                <img src="/images/commons/body_form/left_item/default/search.png" >
+                            </div>
+                            <div class="searchTextBox">
+                                <input type="text" placeholder="게시글 검색" id="searchTextBoxInput">
+                            </div>
+                        </div>
                     </div>
-                    <div class="searchTextBox">
-                        <input type="text" placeholder="게시글 검색">
-                    </div>
-                </div>
                 <div class="board_list">
                     <div class="board_top">
                         <select name="board_title">
@@ -41,6 +43,27 @@
                     			<div class="board_contents_list" style="display:flex;align-items:center;justify-content:center;">게시글 없음</div>
                     		</c:when>
                     		<c:otherwise>
+                    			<c:if test="${noticeList.size()>0}">
+                    				<c:forEach items="${noticeList }" var="i">
+                    					<div class="board_contents_list" id="noticeList">
+                            				<div class="favorite" data-index='${i.seq }'>
+                            					<img src="/images/board/notice.png" >
+                            				</div>
+                            				<div class="board_contents_title">
+                            					<a href="/board/toContentsBoard?seq=${i.seq }">
+                            						<c:if test="${i.header==''}">
+                            							<span>${i.header }&nbsp;&nbsp;</span>
+                            						</c:if>
+                            						${i.title }
+                            					</a>
+                            				</div>
+                           					<div class="board_contents_writer">${i.writer }</div>
+                            				<div class="view_count">${i.view_count }</div>
+                          	  				<div class="board_title">${i.board_title}</div>
+                            				<div class="board_contents_write_date">${i.write_date }</div>
+                        				</div>
+                    				</c:forEach>
+                    			</c:if>
                     			<c:forEach var="i" items="${boardContentsList}">
                     				<div class="board_contents_list">
                             			<div class="favorite" data-index='${i.seq }'>
@@ -83,7 +106,7 @@
                     	</c:choose>
                     </div>
                 </div>
-                <div class="board_bottom">
+                <div id="boardListFooter">
 
                 </div>
             </div>
@@ -91,5 +114,47 @@
     </div>
 	<script src="/js/board/sideBar.js" defer></script>
     <script src="/js/board/contentsList_board.js" defer></script>
+    <script>
+		if(${recordTotalCount}>0){
+			let boardListFooter = document.getElementById("boardListFooter");
+			let recordTotalCount = ${recordTotalCount};
+			let recordCountPerPage = ${recordCountPerPage};
+			let naviCountPerPage = ${naviCountPerPage};
+			let currentPage = ${currentPage};
+		
+			let pageTotalCount = 0;
+
+			if((recordTotalCount%recordCountPerPage)>0){
+				pageTotalCount = Math.floor( recordTotalCount/recordCountPerPage ) + 1;
+			} else {
+				pageTotalCount =  recordTotalCount/ recordCountPerPage;
+			}
+
+			if(currentPage<1){currenReplyPage=1;}
+			else if(currentPage>pageTotalCount){currentPage=pageTotalCount;}
+		
+			let startNavi = Math.floor(( currentPage - 1 ) / naviCountPerPage) * naviCountPerPage + 1;
+			let endNavi = startNavi + naviCountPerPage - 1;
+			if(endNavi > pageTotalCount) {endNavi = pageTotalCount;}
+
+			let needPrev = true;
+			let needNext = true;
+		
+			if( startNavi == 1 ) { needPrev=false; }
+			if( endNavi == pageTotalCount ) { needNext = false; }
+		
+			if(needPrev) {
+				$("#boardListFooter").append("<a href='/board/toBoard?cPage="+(startNavi-1)+">"+ "<<"+ "</a>");
+			}
+			for(let i = startNavi; i<=endNavi; i++) {
+				$("#boardListFooter").append("<a href='/board/toBoard?cPage="+ i +"' class='naviNum'>" + i + "</a>");
+			}
+			if(needNext) {$("#boardListFooter").append("<a href='/board/toBoard?cPage="+(endNavi+1)+"&board_title=${board_title}'>"+ ">>"+ "</a>");}
+		
+			let childNum = currentPage;
+			if(childNum>10){childNum = childNum-9;}
+			$(".naviNum:nth-child("+childNum+")").css("color","red").css("text-decoration","underline");
+		}
+	</script>
 </body>
 </html>

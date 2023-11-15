@@ -45,7 +45,7 @@ public class WorkTimesDTO {
 	public void setWork_time(Timestamp work_time) {
 		this.work_time = work_time;
 	}
-		public String getTime() {
+	public String getTime() {
 		long currentTime = System.currentTimeMillis();
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
 		return sdf.format(getWork_time());

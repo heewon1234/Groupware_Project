@@ -48,6 +48,8 @@ public class WorkController {
 	public List<WorkTimesDTO> insert(WorkTimesDTO dto,Model model)throws Exception {
 		String ID = (String) session.getAttribute("loginId");
 		dto.setId(ID);
+
+		System.out.println(dto.getId()+dto.getWork_type()+dto.getWork_time());
 		wservice.insert(dto);
 		List<WorkTimesDTO> tlist = wservice.selectby(ID);
 		model.addAttribute("tlist",tlist);
