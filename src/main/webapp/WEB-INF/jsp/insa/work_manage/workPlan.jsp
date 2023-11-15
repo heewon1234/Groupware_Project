@@ -17,6 +17,7 @@
 * {
 	
 }
+
 .weekend-cell {
 	color: #a6a6a6;
 }
@@ -222,32 +223,44 @@
 	filter: invert(45%) sepia(63%) saturate(1946%) hue-rotate(162deg)
 		brightness(95%) contrast(101%);
 	position: relative;
-	bottom:1px;
+	bottom: 1px;
 	width: 20px;
 }
-tr,td{border: 1px solid #d4d4d4;}
-#update_workPlan select{
-border: none;}
-#update_workPlan_head th {border: 1px solid #d4d4d4;}
-#update_workPlan th,#update_workPlan td{
-padding: 10px;
+
+tr, td {
+	border: 1px solid #d4d4d4;
 }
-#update_workPlan_head,#update_workPlan_body .members,#currentTable{
+
+#update_workPlan select {
+	border: none;
+}
+
+#update_workPlan_head th {
+	border: 1px solid #d4d4d4;
+}
+
+#update_workPlan th, #update_workPlan td {
+	padding: 10px;
+}
+
+#update_workPlan_head, #update_workPlan_body .members, #currentTable {
 	background-color: #EFF4FC;
 }
-.nextMonth{
-position: relative;
-bottom: 2px;
-left: 5px;
 
+.nextMonth {
+	position: relative;
+	bottom: 2px;
+	left: 5px;
 }
-.prevMonth{
-position: relative;
-bottom: 2px;
-right: 5px;
+
+.prevMonth {
+	position: relative;
+	bottom: 2px;
+	right: 5px;
 }
-button, select{
-cursor: pointer;
+
+button, select {
+	cursor: pointer;
 }
 </style>
 </head>
@@ -272,7 +285,8 @@ cursor: pointer;
 						</div>
 					</div>
 					<div>
-						<button class="button_apply" type="button" onclick="workPlanUpdate()" style="margin-bottom: 10px;">근무계획변경</button>
+						<button class="button_apply" type="button"
+							onclick="workPlanUpdate()" style="margin-bottom: 10px;">근무계획변경</button>
 					</div>
 					<table border="1" id="current_table">
 						<thead id="currentTable">
@@ -316,19 +330,25 @@ cursor: pointer;
 					<div>
 						<div style="font-weight: bold;">적용대상</div>
 						<div>
-							<select class="form-select form-select-sm" aria-label="Small select example" id="department_Select" style="margin-top: 10px;margin-bottom: 10px;padding: 2px;">
+							<select class="form-select form-select-sm"
+								aria-label="Small select example" id="department_Select"
+								style="margin-top: 10px; margin-bottom: 10px; padding: 2px;">
 							</select>
-							<div id="group_UserList" style="padding: 0px; margin-bottom: 10px;">
+							<div id="group_UserList"
+								style="padding: 0px; margin-bottom: 10px;">
 								<!-- User list will be dynamically added here -->
 							</div>
 						</div>
 					</div>
 					<div>
-						<button class="button_apply" id="selectFinished" onclick="selectFinished()" disabled>선택완료</button>
-						<button class="button_apply" id="reset" onclick="reset()" style="display: none">재설정</button>
+						<button class="button_apply" id="selectFinished"
+							onclick="selectFinished()" disabled>선택완료</button>
+						<button class="button_apply" id="reset" onclick="reset()"
+							style="display: none">재설정</button>
 					</div>
 					<!-- 추가 설정 -->
-					<div id="set-up" style="display: none;margin-top: 10px;margin-bottom: 10px;">
+					<div id="set-up"
+						style="display: none; margin-top: 10px; margin-bottom: 10px;">
 						<div id="gridContainer">
 							<div class="gridItem">적용 기간</div>
 							<div class="gridItem"></div>
@@ -337,7 +357,8 @@ cursor: pointer;
 						</div>
 
 						<div>
-							<div style="margin-top: 10px;margin-bottom: 10px;font-weight: bold;">근무계획</div>
+							<div
+								style="margin-top: 10px; margin-bottom: 10px; font-weight: bold;">근무계획</div>
 							<table id="update_workPlan">
 								<thead>
 									<tr id="update_workPlan_head" style="text-align: center;">
@@ -350,7 +371,8 @@ cursor: pointer;
 							</table>
 						</div>
 						<div>
-							<button class="button_apply" id="openModalBtn" style="margin-top: 20px;" disabled>기안하기</button>
+							<button class="button_apply" id="openModalBtn"
+								style="margin-top: 20px;" disabled>기안하기</button>
 						</div>
 					</div>
 				</div>
@@ -360,59 +382,58 @@ cursor: pointer;
 
 	<div class="modal_form">
 		<div class="modal_background"></div>
-		<form class="modal_contact_add_form" method="post" id="contact_form"
-			action="/approval/document/insertApproval">
-			<!-- 변경된 내용을 hidden으로 숨겨서 같이 보냄 -->
-			<input type="hidden" id=doc_type name="doc_type" value="근무계획변경">
-			<input type="hidden" id="work_plan_title" name="title" value="근무계획변경">
-			<input type="hidden" id="work_plan_contents" name="contents">
-			<div class="modal_contact_add">
-				<div class="modal_title">결재</div>
-				<div class="modal_body">
-					<div class="modal_body_content">
-						<div class="grid-container">
-							<div class="grid-item" id="request">
-								신청 <img id="plusIcon" src="/images/chats/plus-circle.svg">
-							</div>
-							<div class="grid-item manager"></div>
+		<input id="loginID" type="hidden" value="${loginId }">
+		<input type="hidden" id=doc_type name="doc_type" value="근무계획변경">
+		<input type="hidden" id="work_plan_title" name="title" value="근무계획변경">
+		<input type="hidden" id="work_plan_contents" name="contents">
+
+		<input type="hidden" id="user_names" name="user_names"> <input
+			type="hidden" id="work_types" name="work_types"> <input
+			type="hidden" id="work_days" name="work_days">
+
+		<div class="modal_contact_add">
+			<div class="modal_title">결재</div>
+			<div class="modal_body">
+				<div class="modal_body_content">
+					<div class="grid-container">
+						<div class="grid-item" id="request">
+							신청 <img id="plusIcon" src="/images/chats/plus-circle.svg">
 						</div>
+						<div class="grid-item manager"></div>
 					</div>
 				</div>
-				<div class="modal_footer" style="width: 100%;">
-					<button type="button" class="button_cancel float_left"
-						id="modal_cancel_button">닫기</button>
-					<button class="button_apply float_right" id="modal_apply_button"
-						disabled>확인</button>
-				</div>
 			</div>
+			<div class="modal_footer" style="width: 100%;">
+				<button type="button" class="button_cancel float_left"
+					id="modal_cancel_button">닫기</button>
+				<button class="button_apply float_right" id="modal_apply_button"
+					disabled>확인</button>
+			</div>
+		</div>
 
-			<div class="modal_tag_add">
-				<div class="modal_title">
-					<span>신청 설정</span>
-				</div>
-				<div class="modal_body">
-					<ul>
-						<c:forEach var="list" items="${managerList }">
-							<li><span>${list.organization }</span> <span>${list.name }</span>
-								<span hidden>${list.id }</span> <input type='checkbox'
-								name='managerID' value='${list.id}'></li>
-						</c:forEach>
-					</ul>
-				</div>
-				<div class="modal_footer">
-					<button type="button" class="button_cancel" id="button_cancel_tag">취소</button>
-					<button type="button" class="button_apply" id="button_apply_tag"
-						style="margin-left: 14px">확인</button>
-				</div>
+		<div class="modal_tag_add">
+			<div class="modal_title">
+				<span>신청 설정</span>
 			</div>
-		</form>
+			<div class="modal_body">
+				<ul>
+					<c:forEach var="list" items="${managerList }">
+						<li><span>${list.organization }</span> <span>${list.name }</span>
+							<span hidden>${list.id }</span> <input type='checkbox'
+							name='managerID' value='${list.id}'></li>
+					</c:forEach>
+				</ul>
+			</div>
+			<div class="modal_footer">
+				<button type="button" class="button_cancel" id="button_cancel_tag">취소</button>
+				<button type="button" class="button_apply" id="button_apply_tag"
+					style="margin-left: 14px">확인</button>
+			</div>
+		</div>
 	</div>
 
 
 	<script>
-
-
-
 	let tag_list_open = false;
 
 	// img 버튼 눌렀을때 모달 창 띄우는거
@@ -508,7 +529,9 @@ cursor: pointer;
 	//----------------------------------------------------------------
 // 리스트를 저장할 배열
 let selectedValues = [];
-
+let user_names = [];
+let work_types = [];
+let work_days = [];
 // select 요소에서 변경이 일어났을 때 이벤트 감지
 document.getElementById('update_workPlan_body').addEventListener('change', function(event) {
     const target = event.target;
@@ -519,15 +542,55 @@ document.getElementById('update_workPlan_body').addEventListener('change', funct
         const columnIndex = Array.from(target.closest('tr').children).indexOf(target.closest('td'));
         const headerText = $('#update_workPlan_head').children().eq(columnIndex).text();
         
+		
         if (selectedValue !== '9시 출근') {
         	var logContent = '날짜: ' + date + ', 이름: ' + headerText + ', 근무변경요청: ' + selectedValue;
-            console.log('날짜:', date, '이름:', headerText, '변경요청:', selectedValue);
+            user_names.push(headerText);
+            work_types.push(selectedValue);
+            work_days.push(date);
+            
+            $('#user_names').val(JSON.stringify(user_names));
+            $('#work_types').val(JSON.stringify(work_types));
+            $('#work_days').val(JSON.stringify(work_days));
+            
             $("#work_plan_contents").val(function(index, currentValue) {
                 return currentValue + logContent + '\n';
             });
         }
-    }
 });
+$(document).ready(function() {
+    $('#modal_apply_button').on('click', function() {
+    	var approval = {
+    		id:$("#loginID").val(),
+    	    title: $("#work_plan_title").val(),
+    	    contents: $("#work_plan_contents").val(),
+    	    doc_type: $("#doc_type").val()
+    	};
+
+    	var workplan = {
+    		id:$("#loginID").val(),
+    	    user_names: $('#user_names').val(),
+    	    work_types: $('#work_types').val(),
+    	    work_days: $('#work_days').val()
+    	    
+    	};
+    	var data = {
+                approval: approval,
+                workPlan: workplan
+            };
+		console.log("approval : "+approval+"workplan : "+workplan);
+    	$.ajax({
+    	    url: '/approval/document/works/workPlan_write',
+    	    method: 'POST',
+    	    contentType: 'application/json',
+    	    data: JSON.stringify(data),
+    	    success: function(response) {
+    	        window.location.href = response;
+    	    }
+    	});
+    });
+});
+
 
 
 
@@ -555,7 +618,6 @@ document.getElementById('update_workPlan_body').addEventListener('change', funct
 	            select.append('<option value="9시 출근" selected>9시 출근</option>');
 	            select.append('<option value="휴무일">휴무일</option>');
 	            select.append('<option value="휴일">휴일</option>');
-	            select.append('<option value="변경 안 함">변경 안 함</option>');
 	            cellDate1.append(select);
 	            tableRow.append(cellDate1);
 	        });
