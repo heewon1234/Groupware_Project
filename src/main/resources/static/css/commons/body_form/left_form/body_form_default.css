@@ -223,7 +223,16 @@
     min-width: 950px;
     margin-left: 276px;
     z-index: 1;
-    overflow: auto;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+.right_item.overflowY {
+    overflow-y: hidden;
+}
+
+.right_item.overflowX {
+    overflow-x: hidden;
 }
 
 .content_tab > *{
@@ -232,8 +241,14 @@
 }
 
 .content_top {
-    
     height: 60px;
+}
+
+.main_tab {
+    min-width: 980px;
+    min-height: 100%;
+    padding: 20px;
+    background-color: white;
 }
 
 .form-control {
