@@ -99,4 +99,7 @@ public class ApprovalService {
 	public int getProcessCount(String id) {
 		return adao.getProcessCount(id);
 	}
+	public int insertWorkPlan(ApprovalDTO dto) {
+		return adao.insert(dto);
+	}
 }

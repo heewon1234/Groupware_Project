@@ -8,10 +8,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kdt.dto.ApprovalDTO;
 import com.kdt.dto.MembersDTO;
 import com.kdt.services.JobTitleService;
 import com.kdt.services.MembersService;
 import com.kdt.services.OrganizationService;
+import com.kdt.services.WorkPlanService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -26,6 +28,8 @@ public class WorkPlanController {
 	private OrganizationService orgService;
 	@Autowired
 	private JobTitleService jobService;
+	@Autowired
+	private WorkPlanService planService;
 
 	@RequestMapping("/workPlan")
 	public String towork_leave(Model model)throws Exception {
