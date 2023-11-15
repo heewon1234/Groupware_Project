@@ -347,10 +347,8 @@ $(document).ready(function() {
         if (parent_name == "개인 주소록") {
             if (item_name == "전체") {
                 window.location.href = "/contact/personal";
-                console.log("개인 주소록 전체 메뉴");
             } else {
                 window.location.href = "/contact/personal?tag=" + item_name;
-                console.log("개인 주소록 일반 메뉴");
             }
         } else if (parent_name == "공유 주소록") {
             if (item_name == "전체") {
@@ -363,3 +361,19 @@ $(document).ready(function() {
         }
     });
 });
+
+// 검색창 포커싱 됐을때
+$(document).ready(function() {
+    var myInput = $('#searchTextBoxInput');
+    var searchBox = $('.searchBox');
+
+    myInput.on('focus', function() {
+        searchBox.addClass('focus');
+    });
+
+    myInput.on('blur', function() {
+        searchBox.removeClass('focus');
+    });
+});
+
+
