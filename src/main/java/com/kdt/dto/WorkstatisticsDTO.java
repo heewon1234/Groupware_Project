@@ -63,6 +63,32 @@ public class WorkstatisticsDTO {
 	public WorkstatisticsDTO() {
 		super();
 	}
+	public String getAveragehours() {
+		 if (all_workday == 0) {
+			 String formattedAverageTime ="00";
+		        return formattedAverageTime;
+		    }
+		 else {
+			int averageWorktime = all_worktime / all_workday;
+			  int averageMinutes = averageWorktime / 60;
+		 String formattedAverageTime = String.format("%02d", averageMinutes);
+		return  formattedAverageTime;
+		 }
+		
+	}
+	
+	public String getAverageminute() {
+		 if (all_workday == 0) {
+		        return "00";
+		    }
+		 else {
+			int averageWorktime = all_worktime / all_workday;
+			  int averageMinutes = averageWorktime % 60;
+		 String formattedAverageTime = String.format("%02d", averageMinutes);
+		return  formattedAverageTime;
+		 }
+		
+	}
 	
 	
 	
