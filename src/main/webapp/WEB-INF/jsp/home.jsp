@@ -146,31 +146,36 @@
 								</thead>
 								<tbody id="tbl-month">
 									<tr>
-										<td class="sun"><a>1</a></td>
-										<td class=""><a href="/news/schedule?date=2022-05-02">2</a></td>
-										<td class=""><a>3</a></td>
-										<td class=""><a>4</a></td>
-										<td class="today"><a>5</a></td>
-										<td class=""><a>6</a></td>
-										<td class="sat"><a>7</a></td>
+										<td class="sun">1</td>
+										<td class="">2</td>
+										<td class="">3</td>
+										<td class="">4</td>
+										<td class="today">5</td>
+										<td class="">6</td>
+										<td class="sat">7</td>
 									</tr>
 									<!-- 행 반복 -->
 									<tr>
-										<td class="sun"><a>29</a></td>
-										<td class=""><a>30</a></td>
-										<td class=""><a>31</a></td>
-										<td class=""><a></a></td>
-										<td class=""><a></a></td>
-										<td class=""><a></a></td>
-										<td class="sat"></a></td>
+										<td class="sun">29</td>
+										<td class="">30</td>
+										<td class="">31</td>
+										<td class=""></td>
+										<td class=""></td>
+										<td class=""></td>
+										<td class="sat"></td>
 									</tr>
 								</tbody>
 							</table>
 						</div>
 						<div class="verticalLine"></div>
 						<div id="scheduleList">
-							<c:forEach var="list" items="${list }">
-								<div>${list.schedule }</div>
+							<c:forEach var="lists" items="${list }">
+								<div class="schedules">
+									<div class="circle"></div>
+									<div class="schedule">${lists.schedule }</div>
+									<div class="startday">${lists.startday }</div>
+								</div>
+								<br>
 							</c:forEach>
 						</div>
 					</div>

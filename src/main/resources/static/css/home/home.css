@@ -112,6 +112,31 @@ a {
 	margin-left:20px;
 }
 
+.schedules {
+	display: flex;
+	align-items: center;
+}
+
+.circle {
+	width:10px;
+	height:10px;
+	border-radius: 50%;
+	background-color:#d2e0fb;
+	float:left;
+	margin-right: 10px
+}
+
+.schedule {
+	float:left;
+	margin-right: 10px
+}
+
+.startday {
+	clear: both;
+	color:rgb(192, 192, 192);
+	font-size: 9pt;
+}
+
 /*출근체크*/
 
 .workcheckbox>div {
