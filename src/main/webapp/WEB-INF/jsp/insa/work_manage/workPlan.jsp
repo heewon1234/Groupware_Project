@@ -9,6 +9,10 @@
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="/css/commons/body_form/left_form/body_form_default.css">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <style>
 * {
 	
@@ -103,7 +107,7 @@
 	background-color: white;
 	border-radius: 4px;
 	padding: 25px;
-	width: 600px;
+	width: 500px;
 	position: fixed;
 	top: 50%;
 	left: 50%;
@@ -135,6 +139,8 @@
 .modal_body {
 	width: 100%;
 	padding: 20px 0 30px;
+	display: flex;
+	justify-content: center;
 }
 
 .modal_body_content {
@@ -157,10 +163,9 @@
 	justify-content: flex-end;
 }
 
-.button_cancel.float_left {
+/*.button_cancel.float_left {
 	margin-right: auto;
-}
-
+}*/
 .button_apply.float_right {
 	margin-left: 14px;
 }
@@ -212,6 +217,38 @@
 	opacity: 0.7;
 	cursor: not-allowed;
 }
+
+#plusIcon {
+	filter: invert(45%) sepia(63%) saturate(1946%) hue-rotate(162deg)
+		brightness(95%) contrast(101%);
+	position: relative;
+	bottom:1px;
+	width: 20px;
+}
+tr,td{border: 1px solid #d4d4d4;}
+#update_workPlan select{
+border: none;}
+#update_workPlan_head th {border: 1px solid #d4d4d4;}
+#update_workPlan th,#update_workPlan td{
+padding: 10px;
+}
+#update_workPlan_head,#update_workPlan_body .members,#currentTable{
+	background-color: #EFF4FC;
+}
+.nextMonth{
+position: relative;
+bottom: 2px;
+left: 5px;
+
+}
+.prevMonth{
+position: relative;
+bottom: 2px;
+right: 5px;
+}
+button, select{
+cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -219,49 +256,9 @@
 	<div class="body_form">
 		<div class="left_item"></div>
 		<div class="right_item">
-			<div id="work_contents" style="margin-left: 25px;">
-				<!-- 현재 월을 나타내는 부분 -->
-				<div
-					style="margin-bottom: 10px; display: flex; align-items: center;">
-					<div style="margin-top: 3px;">
-						<img class="prevMonth"
-							src="/images/insa/work_plan/chevron-left.svg">
-					</div>
-					<div class="currentMonth"></div>
-					<div style="margin-top: 3px;">
-						<img class="nextMonth"
-							src="/images/insa/work_plan/chevron-right.svg">
-					</div>
-				</div>
-				<div>
-					<button type="button" onclick="workPlanUpdate()">근무계획변경</button>
-				</div>
-				<table border="1">
-					<thead>
-						<tr id="tr1">
-							<!-- 데이터 추가하는 부분 -->
-							<th rowspan="2" style="padding: 5px;">이름</th>
-							<th rowspan="2" style="padding: 5px;">소속</th>
-							<!-- 두 번째 줄의 데이터 추가 -->
-							<!-- 날짜 데이터 -->
-							<!-- <th id="monthDataRow"></th> -->
-						</tr>
-						<tr id="tr2">
-							<!-- 요일 데이터 -->
-							<!-- <th id="monthDaysRow"></th> -->
-						</tr>
-					</thead>
-
-					<tbody id="userWorkData">
-					</tbody>
-				</table>
-				<div id="allUserCount" style="margin-top: 10px;"></div>
-			</div>
-			<!-- 수정 div -->
-			<div id="work_contents_update" style="display: none">
-				<div style="font-weight: bold;">근무계획 변경</div>
-				<div>
-					<div style="font-weight: bold;">적용기간</div>
+			<div class="main_tab">
+				<div id="work_contents">
+					<!-- 현재 월을 나타내는 부분 -->
 					<div
 						style="margin-bottom: 10px; display: flex; align-items: center;">
 						<div style="margin-top: 3px;">
@@ -274,45 +271,87 @@
 								src="/images/insa/work_plan/chevron-right.svg">
 						</div>
 					</div>
-				</div>
-				<div>
-					<div style="font-weight: bold;">적용대상</div>
 					<div>
-						<select id="department_Select" style="margin-top: 10px">
-						</select>
-						<div id="group_UserList" style="padding: 0px;">
-							<!-- User list will be dynamically added here -->
+						<button class="button_apply" type="button" onclick="workPlanUpdate()" style="margin-bottom: 10px;">근무계획변경</button>
+					</div>
+					<table border="1" id="current_table">
+						<thead id="currentTable">
+							<tr id="tr1">
+								<!-- 데이터 추가하는 부분 -->
+								<th class="left_none" rowspan="2" style="padding: 5px;">이름</th>
+								<th rowspan="2" style="padding: 5px;">소속</th>
+								<!-- 두 번째 줄의 데이터 추가 -->
+								<!-- 날짜 데이터 -->
+								<!-- <th id="monthDataRow"></th> -->
+							</tr>
+							<tr id="tr2">
+								<!-- 요일 데이터 -->
+								<!-- <th id="monthDaysRow"></th> -->
+							</tr>
+						</thead>
+
+						<tbody id="userWorkData">
+						</tbody>
+					</table>
+					<div id="allUserCount" style="margin-top: 10px;"></div>
+				</div>
+				<!-- 수정 div -->
+				<div id="work_contents_update" style="display: none">
+					<div style="font-weight: bold; margin-bottom: 10px;">근무계획 변경</div>
+					<div>
+						<div style="font-weight: bold; margin-bottom: 10px;">적용기간</div>
+						<div
+							style="margin-bottom: 10px; display: flex; align-items: center;">
+							<div style="margin-top: 3px;">
+								<img class="prevMonth"
+									src="/images/insa/work_plan/chevron-left.svg">
+							</div>
+							<div class="currentMonth"></div>
+							<div style="margin-top: 3px;">
+								<img class="nextMonth"
+									src="/images/insa/work_plan/chevron-right.svg">
+							</div>
 						</div>
 					</div>
-				</div>
-				<div>
-					<button id="selectFinished" onclick="selectFinished()">선택완료</button>
-					<button id="reset" onclick="reset()" style="display: none">재설정</button>
-				</div>
-				<!-- 추가 설정 -->
-				<div id="set-up" style="display: none">
-					<div id="gridContainer">
-						<div class="gridItem">적용 기간</div>
-						<div class="gridItem"></div>
-						<div class="gridItem">적용 대상</div>
-						<div class="gridItem"></div>
-					</div>
-
 					<div>
-						<div>근무계획</div>
-						<table id="update_workPlan">
-							<thead>
-								<tr id="update_workPlan_head">
-								</tr>
-							</thead>
-							<tbody id="update_workPlan_body">
-
-							</tbody>
-
-						</table>
+						<div style="font-weight: bold;">적용대상</div>
+						<div>
+							<select class="form-select form-select-sm" aria-label="Small select example" id="department_Select" style="margin-top: 10px;margin-bottom: 10px;padding: 2px;">
+							</select>
+							<div id="group_UserList" style="padding: 0px; margin-bottom: 10px;">
+								<!-- User list will be dynamically added here -->
+							</div>
+						</div>
 					</div>
 					<div>
-						<button id="openModalBtn" disabled>기안하기</button>
+						<button class="button_apply" id="selectFinished" onclick="selectFinished()" disabled>선택완료</button>
+						<button class="button_apply" id="reset" onclick="reset()" style="display: none">재설정</button>
+					</div>
+					<!-- 추가 설정 -->
+					<div id="set-up" style="display: none;margin-top: 10px;margin-bottom: 10px;">
+						<div id="gridContainer">
+							<div class="gridItem">적용 기간</div>
+							<div class="gridItem"></div>
+							<div class="gridItem">적용 대상</div>
+							<div class="gridItem"></div>
+						</div>
+
+						<div>
+							<div style="margin-top: 10px;margin-bottom: 10px;font-weight: bold;">근무계획</div>
+							<table id="update_workPlan">
+								<thead>
+									<tr id="update_workPlan_head" style="text-align: center;">
+									</tr>
+								</thead>
+								<tbody id="update_workPlan_body">
+
+								</tbody>
+
+							</table>
+						</div>
+						<div>
+							<button class="button_apply" id="openModalBtn" style="margin-top: 20px;" disabled>기안하기</button>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -331,7 +370,6 @@
 				<div class="modal_title">결재</div>
 				<div class="modal_body">
 					<div class="modal_body_content">
-						<div style="margin-bottom: 20px; margin-top: 20px;">결재 라인</div>
 						<div class="grid-container">
 							<div class="grid-item" id="request">
 								신청 <img id="plusIcon" src="/images/chats/plus-circle.svg">
@@ -340,7 +378,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="modal_footer right">
+				<div class="modal_footer" style="width: 100%;">
 					<button type="button" class="button_cancel float_left"
 						id="modal_cancel_button">닫기</button>
 					<button class="button_apply float_right" id="modal_apply_button"
@@ -372,6 +410,7 @@
 
 
 	<script>
+
 
 
 	let tag_list_open = false;
@@ -481,7 +520,7 @@ document.getElementById('update_workPlan_body').addEventListener('change', funct
         const headerText = $('#update_workPlan_head').children().eq(columnIndex).text();
         
         if (selectedValue !== '9시 출근') {
-        	var logContent = '날짜: ' + date + ', 이름: ' + headerText + ', 변경요청 날짜: ' + selectedValue;
+        	var logContent = '날짜: ' + date + ', 이름: ' + headerText + ', 근무변경요청: ' + selectedValue;
             console.log('날짜:', date, '이름:', headerText, '변경요청:', selectedValue);
             $("#work_plan_contents").val(function(index, currentValue) {
                 return currentValue + logContent + '\n';
@@ -506,12 +545,12 @@ document.getElementById('update_workPlan_body').addEventListener('change', funct
 
 	    dates.forEach(date => {
 	        var tableRow = $('<tr>');
-	        const cellDate = $('<td>').text(formatDate2(date));
+	        const cellDate = $('<td>').text(formatDate2(date)).addClass('members');
 	        tableRow.append(cellDate);
 
 	        userNames.forEach(userName => {
 	            const cellDate1 = $('<td>');
-	            const select = $('<select>');
+	            const select = $('<select>').css('padding', '2px');
 	            select.append('<option value="10시 출근">10시 출근</option>');
 	            select.append('<option value="9시 출근" selected>9시 출근</option>');
 	            select.append('<option value="휴무일">휴무일</option>');
@@ -822,22 +861,38 @@ $(document).on('mouseleave', '.jeng', function() {
     $("#jeng-info").css("display", "none");
 });
 // 부서 목록을 가져오는 Ajax 요청
-$.ajax({
-    url:'/members/getDepartmentList'
- }).done(function(data){
-	 $("#department_Select").empty();
+$(document).ready(function() {
+    // getDepartmentList를 통해 데이터 가져오기
+    $.ajax({
+        url:'/members/getDepartmentList'
+    }).done(function(data) {
+        // 성공적으로 데이터를 가져온 경우
+        $("#department_Select").empty();
         $("#department_Select").append('<option selected>부서 선택</option>');
         for (let i = 0; i < data.length; i++) {
             const departmentName = data[i];
             $("#department_Select").append('<option value="' + departmentName + '">' + departmentName + '</option>');
         }
- });
-$("#department_Select").on("change", function() {
-	var organization = $(this).val();
-	if (organization !== "부서 선택") {
-		loadMembersByDepartment(organization); // 초기에 oneSeq를 0로 전달
-	}
+    });
+
+    // select 요소의 변경 감지하여 버튼 활성화/비활성화 처리
+    $("#department_Select").on("change", function() {
+        var organization = $(this).val();
+        if (organization !== "부서 선택") {
+            loadMembersByDepartment(organization); // 선택한 부서의 멤버 로드
+            $('#selectFinished').prop('disabled', false); // 버튼 활성화
+        } else {
+            $('#selectFinished').prop('disabled', true); // 버튼 비활성화
+        }
+        
+        
+    });
+
+    // 페이지 로드 시 초기 상태 설정 (버튼은 비활성화)
+    $('#selectFinished').prop('disabled', true);
 });
+
+
 
 function loadMembersByDepartment(organization) {
 var userNames = [];
