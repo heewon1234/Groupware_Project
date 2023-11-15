@@ -14,6 +14,14 @@ public class ContactService {
 	@Autowired
     private ContactDAO dao;
 	
+	public List<ContactDTO> personalContactSelectAll(ContactDTO dto) {
+		return this.dao.personalContactSelectAll(dto);
+	}
+	
+	public List<ContactDTO> personalContactSelectBy(ContactDTO dto) {
+		return this.dao.personalContactSelectBy(dto);
+	}
+	
 	public List<ContactDTO> personalContactTagSelectAll(ContactDTO dto) {
 		return this.dao.personalContactTagSelectAll(dto);
 	}
@@ -32,6 +40,14 @@ public class ContactService {
 	
 	public List<ContactDTO> shareContactTagSelectAll(ContactDTO dto) {
 		return this.dao.shareContactTagSelectAll(dto);
+	}
+	
+	public List<ContactDTO> shareContactTagSelectAllDeplicate(ContactDTO dto) {
+		return this.dao.shareContactTagSelectAllDeplicate(dto);
+	}
+	
+	public int shareContactTagInsert(ContactDTO dto) {
+		return this.dao.shareContactTagInsert(dto);
 	}
 	
 	public int shareContactInsert(ContactDTO dto) {
