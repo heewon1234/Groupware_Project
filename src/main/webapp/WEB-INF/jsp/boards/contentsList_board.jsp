@@ -43,6 +43,27 @@
                     			<div class="board_contents_list" style="display:flex;align-items:center;justify-content:center;">게시글 없음</div>
                     		</c:when>
                     		<c:otherwise>
+                    			<c:if test="${noticeList.size()>0}">
+                    				<c:forEach items="${noticeList }" var="i">
+                    					<div class="board_contents_list" id="noticeList">
+                            				<div class="favorite" data-index='${i.seq }'>
+                            					<img src="/images/board/notice.png" >
+                            				</div>
+                            				<div class="board_contents_title">
+                            					<a href="/board/toContentsBoard?seq=${i.seq }">
+                            						<c:if test="${i.header==''}">
+                            							<span>${i.header }&nbsp;&nbsp;</span>
+                            						</c:if>
+                            						${i.title }
+                            					</a>
+                            				</div>
+                           					<div class="board_contents_writer">${i.writer }</div>
+                            				<div class="view_count">${i.view_count }</div>
+                          	  				<div class="board_title">${i.board_title}</div>
+                            				<div class="board_contents_write_date">${i.write_date }</div>
+                        				</div>
+                    				</c:forEach>
+                    			</c:if>
                     			<c:forEach var="i" items="${boardContentsList}">
                     				<div class="board_contents_list">
                             			<div class="favorite" data-index='${i.seq }'>
