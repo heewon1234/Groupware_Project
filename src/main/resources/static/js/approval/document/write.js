@@ -26,7 +26,12 @@ $("#apply_btn").on("click", function() {
 	$(".app").empty();
 
 	$("#modalContainer_apply input[type='checkbox']:checked").each(function(index) {
+		let input = $("<input type='text' hidden>");
+		input.attr("name", "managerID");
+		input.val($(this).prev().html());
+		
 		$("#app_th" + (index + 1)).html($(this).prev().prev().html());
+		$("#app_th" + (index + 1)).append(input);
 		$("#app_td" + (index + 1)).html($(this).prev().prev().prev().html());
 	});
 });
