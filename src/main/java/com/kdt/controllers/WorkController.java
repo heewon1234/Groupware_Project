@@ -48,12 +48,29 @@ public class WorkController {
 	public List<WorkTimesDTO> insert(WorkTimesDTO dto,Model model)throws Exception {
 		String ID = (String) session.getAttribute("loginId");
 		dto.setId(ID);
-
-		System.out.println(dto.getId()+dto.getWork_type()+dto.getWork_time());
-		wservice.insert(dto);
+		int today = wservice.existstoday(ID);
+		System.out.println(today);
+		if(today==0 && dto.getWork_type().equals("근무중")) { // 09시 이후 출근 클릭
+			wservice.insert(dto);
+			wservice.addworklate(ID);
 		List<WorkTimesDTO> tlist = wservice.selectby(ID);
 		model.addAttribute("tlist",tlist);
 		return tlist;
+		}
+		else if(today==0 && dto.getWork_type().equals("근무 종료")) { // 18시 이전 퇴근 클릭
+			wservice.insert(dto);
+			wservice.addworkearly(ID);
+		List<WorkTimesDTO> tlist = wservice.selectby(ID);
+		model.addAttribute("tlist",tlist);
+		return tlist;
+		}
+		else {
+			wservice.insert(dto);
+			List<WorkTimesDTO> tlist = wservice.selectby(ID);
+			model.addAttribute("tlist",tlist);
+			return tlist;
+		}
+		
 	}
 	@ResponseBody
 	@RequestMapping("list") // 근무현황판 출력

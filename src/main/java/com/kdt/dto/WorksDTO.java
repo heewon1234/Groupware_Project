@@ -98,6 +98,23 @@ public class WorksDTO {
 	public void setAll_worktime(int all_worktime) {
 		this.all_worktime = all_worktime;
 	}
+	public String getAveragehours() {
+		 
+			  int averageMinutes = all_worktime / 60;
+		 String formattedAverageTime = String.format("%02d", averageMinutes);
+		return  formattedAverageTime;
+		 }
+		
+	
+	
+	public String getAverageminute() {
+		 
+			  int averageMinutes = all_worktime % 60;
+		 String formattedAverageTime = String.format("%02d", averageMinutes);
+		return  formattedAverageTime;
+		 }
+		
+	
 	
 	
 }

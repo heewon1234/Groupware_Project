@@ -45,9 +45,10 @@
 				</tbody>
 			</table>
 			<div class="div">
-				<span><button id="openModalBtn">휴가 미생성자</button></span>
+				 <span style="float: right;"><button id="openModalBtn">휴가 미생성자</button></span>
 			</div>
-
+<c:choose>
+<c:when test="${not empty list}">
 			<div id="myModal" class="modal right_item">
 				<h3>휴가 미생성자</h3>
 				<hr>
@@ -57,30 +58,76 @@
 					<table border="1" style="width: 100%;">
 						<thead>
 							<tr>
-								<th>이름(ID)</th>
-								<th>입사일</th>
+								<th style="text-align: center;">이름(ID)</th>
+								<th style="text-align: center;">입사일</th>
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="i" items="${list}">
-								<tr>
-									<td>${i.name}(${i.id })</td>
-									<td><input type="text" name="idList" class="idListbox"
-										hidden> <input type="text" name="joindayList"
-										class="joindayListbox" hidden> <input type="hidden"
-										class="id" value="${i.id}">
-										<div class="input-group mb-0">
-											<input type="text" name="name" class="form-control joinday" placeholder="YYYY-MM-DD" id="modal_body_content_input_right_name" style="font-size: 14px; height: 34px; width: 338px; padding: 0 10px;" maxlength="50">
-										</div></td>
-								</tr>
-							</c:forEach>
+								
+									<c:forEach var="i" items="${list}">
+										<tr>
+											<td style="text-align: center;">${i.name}(${i.id})</td>
+											<td style="text-align: center;"><input type="text" name="idList" class="idListbox"
+												hidden> <input type="text" name="joindayList"
+												class="joindayListbox" hidden> <input type="hidden"
+												class="id" value="${i.id}">
+												<div class="input-group mb-0">
+													<input type="text" name="name" class="form-control joinday"
+														placeholder="YYYY-MM-DD"
+														id="modal_body_content_input_right_name"
+														style="font-size: 14px; height: 34px; width: 338px; padding: 0 10px;"
+														maxlength="50">
+												</div></td>
+										</tr>
+									</c:forEach>
+								
+								
+							
 						</tbody>
 					</table>
+					<div style="text-align: center;">
 					<button id="leaveCreationForm" type="submit" class="button_apply">생성</button>
 					<button id="closeModalBtn">취소</button>
+					</div>
 				</form>
 			</div>
 			<div id="overlay" class="overlay"></div>
+			</c:when>
+			<c:otherwise><div id="myModal" class="modal right_item">
+				<h3>휴가 미생성자</h3>
+				<hr>
+				<!-- action 및 method 추가 -->
+				<form action="/works/joindayupdate">
+					입사일을 입력하고 생성을 클릭하면, 해당 사용자의 올해 휴가가 생성됩니다.
+					<table border="1" style="width: 100%;">
+						<thead>
+							<tr>
+								<th style="text-align: center;">이름(ID)</th>
+								<th style="text-align: center;">입사일</th>
+							</tr>
+						</thead>
+						<tbody>
+								
+									<tr>
+								<td colspan="2">
+								<div style="text-align: center;">휴가 미생성자가 없습니다</div>
+								</td>
+								</tr>
+								
+								
+							
+						</tbody>
+					</table>
+					<div style="text-align: center;">
+					<button id="leaveCreationForm" type="submit" class="button_apply permit">생성</button>
+					<button id="closeModalBtn">취소</button>
+					</div>
+				</form>
+			</div>
+			<div id="overlay" class="overlay"></div>
+								
+								</c:otherwise>
+</c:choose>
 
 			<script src="/js/insa/work_manage/workmanage.js"></script>
 		</div>
