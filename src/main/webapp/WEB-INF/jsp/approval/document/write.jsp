@@ -19,7 +19,7 @@
 			<div class="right_item">
 				<div class="content_tab">
 					<div id="submit_div">
-						<button type="submit" class="button_apply">기안하기</button>
+						<button type="submit" id="submit_btn" class="button_apply permit">기안하기</button>
 					</div>
 					<h4>기본 설정</h4>
 					<table class="outTable" border='1'>
@@ -72,12 +72,12 @@
 
 					<h4>제목</h4>
 					<div class="input-group">
-						<input type="text" class="form-control" id="" name="title">
+						<input type="text" class="form-control" id="title" name="title">
 					</div>
 
 					<h4>본문</h4>
 					<div class="input-group">
-						<textarea name="contents"></textarea>
+						<textarea name="contents" id="contents"></textarea>
 					</div>
 
 					<h4>파일 첨부</h4>
