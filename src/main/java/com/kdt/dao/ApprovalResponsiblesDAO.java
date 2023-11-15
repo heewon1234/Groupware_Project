@@ -28,8 +28,8 @@ public class ApprovalResponsiblesDAO {
 	public List<Integer> getReturnDocIdByUserId(String id) {
 		return db.selectList("ApprovalResponsibles.getReturnDocIdByUserId", id);
 	}
-	public List<String> getManagerIdList(int docId) {
-		return db.selectList("ApprovalResponsibles.getManagerIdList", docId);
+	public List<ApprovalResponsiblesDTO> getManagerRBList(int docId) {
+		return db.selectList("ApprovalResponsibles.getManagerRBList", docId);
 	}
 	public int updateStatus(ApprovalResponsiblesDTO dto) {
 		return db.update("ApprovalResponsibles.updateStatus", dto);

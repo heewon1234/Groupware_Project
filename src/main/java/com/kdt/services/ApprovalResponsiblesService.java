@@ -26,8 +26,8 @@ public class ApprovalResponsiblesService {
 		return dao.getReturnDocIdByUserId(id);
 	}
 	
-	public List<String> getManagerIdList(int docId) {
-		return dao.getManagerIdList(docId);
+	public List<ApprovalResponsiblesDTO> getManagerRBList(int docId) {
+		return dao.getManagerRBList(docId);
 	}
 	public int updateStatus(ApprovalResponsiblesDTO dto) {
 		return dao.updateStatus(dto);
