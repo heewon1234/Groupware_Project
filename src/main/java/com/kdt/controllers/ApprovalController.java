@@ -183,20 +183,6 @@ public class ApprovalController {
 		return "/approval/document/box/return";
 	}
 	
-	@RequestMapping("/works/workLeave_write")
-	public String workLeave() throws Exception {
-		
-		
-		return "/approval/document/works/wokrLeave_write";
-	}
-	
-	@RequestMapping("/works/workPlan_write")
-	public String workPlan() throws Exception {
-		
-		
-		return "/approval/document/works/wokrPlan_write";
-	}
-	
 	@RequestMapping("/insertApproval")
 	public String insertApproval(String title, String contents, String doc_type, 
 			MultipartFile[] files, @RequestParam(name = "managerID", required = false) String[] managerID) throws Exception {
@@ -214,5 +200,9 @@ public class ApprovalController {
 		model.addAttribute("selectItem", selectItem);
 		
 		return "/approval/document/left_item";
+	}
+	@RequestMapping("/work_plan_write")
+	public String work_plan_write() {
+		return "/approval/document/works/workPlan_write";
 	}
 }
