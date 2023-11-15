@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 
@@ -181,7 +182,7 @@
     </div>
 
     <!-- 여기서부터 -->
-    
+
     <div class="body_form">
         <!-- 왼쪽 부분(메뉴) -->
         <div class="left_item">
@@ -202,11 +203,14 @@
 
                 <!-- 드롭 다운 메뉴 (추가 효과 없음) -->
                 <div class="menu_list">
-                    <div class="menu_list_button">
+                    <div class="menu_list_button plus">
                         <div class="menu_list_button_drop">
                             <img src="/images/commons/body_form/left_item/default/drop.png" />
                         </div>
                         <span class="menu_list_button_text">개인 주소록</span>
+                        <div class="menu_list_button_plus">
+                            <img src="/images/commons/body_form/left_item/default/plus.png" />
+                        </div>
                     </div>
                     <div class="menu_list_box">
                         <div class="menu_list_item">
@@ -230,11 +234,14 @@
 
                 <!-- 드롭 다운 메뉴 (리스트 내용에 마우스 올리면 설정 메뉴 나옴) -->
                 <div class="menu_list">
-                    <div class="menu_list_button">
+                    <div class="menu_list_button plus">
                         <div class="menu_list_button_drop">
                             <img src="/images/commons/body_form/left_item/default/drop.png" />
                         </div>
                         <span class="menu_list_button_text">공유 주소록</span>
+                        <div class="menu_list_button_plus">
+                            <img src="/images/commons/body_form/left_item/default/plus.png" />
+                        </div>
                     </div>
                     <div class="menu_list_box">
                         <div class="menu_list_item">
@@ -268,17 +275,70 @@
 
         <!-- 오른쪽 부분(해당 메뉴의 주요 콘텐츠) -->
         <div class="right_item">
-            <div class="content_tab">
+            <div class="main_tab">
+                <div class="main_top">
+                    <div class="main_search" id="searchBox">
+                        <div class="searchBox">
+                            <div class="searchIconBox">
+                                <img src="/images/commons/body_form/right_item/default/search.png">
+                            </div>
+                            <div class="searchTextBox">
+                                <input type="text" placeholder="게시글 검색" id="searchTextBoxInput">
+                            </div>
+                        </div>
+                        <div class="countBox">
+                            ${contactName}<span style="color: blue; font-weight: bold; margin:0 0px 0 5px">${personalContactList.size()}</span>개
+                        </div>
+                    </div>
 
-                <!-- 오른쪽 최상단 콘텐츠 (주로 있길래 만듬) -->
-                <div class="content_top">오른쪽 메뉴</div>
-                그냥 테스트<br> <br> <span>스팬 태그 테스트</span>
-                <div>디브 태그 테스트</div>
-                <c:forEach items="${personalContactList}" var="contact">
-                                        ${contact.tag} ${contact.name}                                         
-                        </c:forEach>
+                    <div class="main_category">
+                        <div class="main_category_favorite"></div>
+                        <div class="main_category_name">이름</div>
+                        <div class="main_category_email">이메일</div>
+                        <div class="main_category_phone">전화번호</div>
+                        <div class="main_category_companyName">회사</div>
+                        <div class="main_category_tag">태그</div>
+                    </div>
+                </div>
+                <div class="main_body">
+                    <c:choose>
+                        <c:when test="${personalContactList.size() > 0}">
+                            <c:forEach var="contact" items="${personalContactList}">
+                                <div class="main_category cursor">
+                                    <div class="main_category_favorite">
+                                        <img src="/images/commons/body_form/right_item/default/favorites.png">
+                                    </div>
+                                    <div class="main_category_seq">${contact.seq}</div>
+                                    <div class="main_category_name">${contact.name}</div>
+                                    <div class="main_category_email">${contact.email}</div>
+                                    <div class="main_category_phone">${contact.phone}</div>
+                                    <div class="main_category_companyName">${contact.companyName}</div>
+                                    <div class="main_category_tag">
+                                        <div class="main_tag_list">
+                                            <c:if test="${not empty contact.tag}">
+                                                <c:set var="tagString" value="${contact.tag}" />
+                                                <c:set var="tagArray" value="${fn:split(tagString, ',')}" />
+                                                <c:forEach var="tag" items="${tagArray}">
+                                                    <div class="main_tag_list_item">${tag}</div>
+                                                </c:forEach>
+                                            </c:if>
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="main_category">
+                                    
+                                    <div class="main_category_null">등록된 주소가 없습니다.</div>
+                                    
+                                </div>
+                        </c:otherwise>
+                    </c:choose>
+                </div>
             </div>
         </div>
     </div>
 </body>
+
 </html>

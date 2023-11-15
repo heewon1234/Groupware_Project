@@ -22,6 +22,10 @@ public class ContactService {
 		return this.dao.personalContactSelectBy(dto);
 	}
 	
+	public List<ContactDTO> personalContactSelectNull(ContactDTO dto) {
+		return this.dao.personalContactSelectNull(dto);
+	}	
+	
 	public List<ContactDTO> personalContactTagSelectAll(ContactDTO dto) {
 		return this.dao.personalContactTagSelectAll(dto);
 	}

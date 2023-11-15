@@ -22,6 +22,12 @@ public class ContactDAO {
 		return db.selectList("Contact.personal_contact_selectBy", dto);
 	}
 	
+	public List<ContactDTO> personalContactSelectNull(ContactDTO dto) {
+		return db.selectList("Contact.personal_contact_selectNull", dto);
+	}
+	
+	
+	
 	public List<ContactDTO> personalContactTagSelectAll(ContactDTO dto) {
 		return db.selectList("Contact.personal_contact_tag_selectAll", dto);
 	}
