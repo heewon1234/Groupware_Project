@@ -48,6 +48,9 @@ public class Mk_BoardDAO {
 	public List<Mk_BoardDTO> selectAllBoard(){
 		return db.selectList("Mk_Board.selectAllBoard");
 	}
+	public Mk_BoardDTO boardDetail(String board_title) {
+		return db.selectOne("Mk_Board.BoardDetail",board_title);
+	}
 	
 	// 게시판 삭제
 	public int delBoard(String sql) { // drop table

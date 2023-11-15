@@ -77,6 +77,10 @@ public class Mk_BoardService {
 	public List<Mk_BoardDTO> selectAllBoard(){
 		return mdao.selectAllBoard();
 	}
+	public Mk_BoardDTO boardDetail(String board_title) {
+		return mdao.boardDetail(board_title);
+	}
+	
 	//
 
 	// 게시판 삭제

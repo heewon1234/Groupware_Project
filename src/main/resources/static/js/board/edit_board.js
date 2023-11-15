@@ -1,5 +1,6 @@
 $(".updateBtn").on("click",function(){
-	location.href="/mk_board/toEditBoardDetail";
+	let board_title = $(this).parent("div").siblings(".board_index_board_title").html().trim();
+	location.href="/mk_board/toEditBoardDetail?board_title="+board_title;
 });
 
 $(".delBtn").on("click",function(){

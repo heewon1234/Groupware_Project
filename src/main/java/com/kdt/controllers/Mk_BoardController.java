@@ -8,8 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kdt.dto.AuthorityDTO;
 import com.kdt.dto.MembersDTO;
 import com.kdt.dto.Mk_BoardDTO;
+import com.kdt.services.AuthorityService;
 import com.kdt.services.BoardService;
 import com.kdt.services.Mk_BoardService;
 
@@ -24,6 +26,9 @@ public class Mk_BoardController {
 	
 	@Autowired
 	Mk_BoardService mservice;
+	
+	@Autowired
+	AuthorityService aservice;
 	
 	@Autowired
 	HttpSession session;
@@ -104,7 +109,13 @@ public class Mk_BoardController {
 	}
 	
 	// 게시판 수정
-	public String toEditBoardDetail() {
+	@RequestMapping("toEditBoardDetail")
+	public String toEditBoardDetail(String board_title, Model model) {
+		Mk_BoardDTO boardDetail = mservice.boardDetail(board_title);
+		List<AuthorityDTO> authMember = aservice.selectAuthMember(board_title);
+		
+		model.addAttribute("boardDetail",boardDetail);
+		model.addAttribute("authMember",authMember);
 		return "boards/edit_board_detail";
 	}
 }

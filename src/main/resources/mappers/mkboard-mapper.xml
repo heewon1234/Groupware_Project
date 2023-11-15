@@ -28,6 +28,9 @@
 	<select id="allBoardSeq" resultType="int">
 		select seq from Mk_Board
 	</select>
+	<select id="BoardDetail" resultType="com.kdt.dto.Mk_BoardDTO">
+		select * from Mk_Board where board_title=#{board_title}
+	</select>
 	
 	<!-- 모든 게시판 목록 불러오기 -->
 	<select id="selectAllBoard" resultType="com.kdt.dto.Mk_BoardDTO">
@@ -44,4 +47,6 @@
 	<delete id="DeleteByOriBoardTitle">
 		delete from ${table} where ori_board_title=#{board_title}
 	</delete>
+	
+	<!-- 게시판 수정 -->
 </mapper>
