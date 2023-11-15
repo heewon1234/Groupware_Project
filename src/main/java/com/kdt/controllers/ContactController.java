@@ -24,16 +24,28 @@ public class ContactController {
 	private HttpSession session;
 
 	@RequestMapping("personal")
-	public String personal(Model model) {
-		ContactDTO dto = new ContactDTO();
+	public String personal(ContactDTO dto, Model model) {
 		String id = (String) session.getAttribute("loginID");
 		dto.setWriter("test1");
 		
-		List<ContactDTO> personalList = Service.personalContactTagSelectAll(dto);
-		List<ContactDTO> shareList = Service.shareContactTagSelectAll(dto);
+		List<ContactDTO> personalTagList = Service.personalContactTagSelectAll(dto);
+		List<ContactDTO> shareTagList = Service.shareContactTagSelectAll(dto);
 		
-		model.addAttribute("personalList", personalList);
-	    model.addAttribute("shareList", shareList);
+		model.addAttribute("personalTagList", personalTagList);
+	    model.addAttribute("shareTagList", shareTagList);
+	    
+	    System.out.println(dto.getTag());
+	   
+	    if(dto.getTag() == null) {
+	    	List<ContactDTO> personalContactList = Service.personalContactSelectAll(dto);
+	    	model.addAttribute("personalContactList", personalContactList);
+	    }
+	    
+	    else {
+	    	List<ContactDTO> personalContactList = Service.personalContactSelectBy(dto);
+	    	model.addAttribute("personalContactList", personalContactList);
+	    }
+	    
 		
 		return "contact/personal";
 	}
@@ -62,13 +74,20 @@ public class ContactController {
 		return Service.personalContactTagInsert(dto);
 	}
 	
-	
 	@RequestMapping("personalContactInsert")
 	public String personalContactInsert(ContactDTO dto) throws Exception{
 		String id = (String) session.getAttribute("loginId");
 		dto.setWriter("test1");
 		Service.personalContactInsert(dto);
-		return "contact/personal";
+		return "redirect:/contact/personal";
+	}
+	
+	@ResponseBody
+	@RequestMapping("personalContactInsertList")
+	public void personalContactInsertList(ContactDTO dto) throws Exception{
+		String id = (String) session.getAttribute("loginId");
+		dto.setWriter("test1");
+		Service.personalContactInsert(dto);
 	}
 	
 	@ResponseBody
@@ -77,12 +96,36 @@ public class ContactController {
 		return this.Service.shareContactTagSelectAll(dto);
 	}
 	
+	@ResponseBody
+	@RequestMapping("shareContactTagSelectAllDeplicate")
+	public List<ContactDTO> shareContactTagSelectAllDeplicate(ContactDTO dto) {
+		String id = (String) session.getAttribute("loginID");
+		dto.setWriter("test1");
+		return Service.shareContactTagSelectAllDeplicate(dto);
+	}
+	
+	@ResponseBody
+	@RequestMapping("shareContactTagInsert")
+	public int shareContactTagInsert(ContactDTO dto) {
+		String id = (String) session.getAttribute("loginID");
+		dto.setWriter("test1");
+		return Service.shareContactTagInsert(dto);
+	}
+	
 	@RequestMapping("shareContactInsert")
 	public String shareContactInsert(ContactDTO dto) throws Exception{
 		String id = (String) session.getAttribute("loginId");
 		dto.setWriter("test1");
 		Service.shareContactInsert(dto);
-		return "contact/personal";
+		return "redirect:/contact/share";
+	}
+	
+	@ResponseBody
+	@RequestMapping("shareContactInsertList")
+	public void shareContactInsertList(ContactDTO dto) throws Exception{
+		String id = (String) session.getAttribute("loginId");
+		dto.setWriter("test1");
+		Service.shareContactInsert(dto);
 	}
 	
 }

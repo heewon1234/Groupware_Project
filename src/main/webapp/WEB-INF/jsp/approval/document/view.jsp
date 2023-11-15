@@ -22,7 +22,14 @@
 					<div id="submit_div">
 						<input type='text' hidden name="doc_id" value="${docId }">
 						<input type='text' hidden name="userId" value="${userDTO.id }">
-						<button type="submit" class="button_apply">기안하기</button>
+						<c:forEach var="manager" items="${managerList}">
+                            <c:if test="${manager.id eq userDTO.id}">
+								<button type="submit" class="button_apply">결재하기</button>
+							</c:if>
+                       	</c:forEach>
+						<button type="button" id="back_btn" class="button_apply">
+							뒤로가기
+						</button>
 					</div>
 
 					<h4>결재선</h4>
@@ -92,6 +99,9 @@
 	<script>
 		$(document).ready(function() {
 			$("#top_container").load("/commons/topForm");
+		});
+		$("#back_btn").on("click", function() {
+			window.history.back();
 		});
 	</script>
 </body>

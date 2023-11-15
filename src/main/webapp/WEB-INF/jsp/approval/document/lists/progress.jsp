@@ -35,7 +35,11 @@
 							<tr>
 								<td>${list.seq}</td>
 								<td>${list.id}</td>
-								<td>${list.title}</td>
+								<td>
+									<a href="/approval/document/view?docId=${list.seq}">
+										${list.title}
+									</a>
+								</td>
 								<td>${list.draft_date}</td>
 								<td>${list.doc_type }</td>
 								<td>${list.approval_status }</td>

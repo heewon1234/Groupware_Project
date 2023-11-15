@@ -30,7 +30,7 @@
 						<th colspan="2">이름 / 소속</th>
 						<th colspan="3">휴가</th>
 						<th colspan="4">근태</th>
-						<th colspan="4">근무시간</th>
+						<th colspan="3">근무시간</th>
 					</tr>
 					<tr>
 						<th>이름(ID)</th>
@@ -45,13 +45,14 @@
 						<th>출근일수</th>
 						<th>총근무시간</th>
 						<th>일 평균</th>
-						<th>보정 평균</th>
 					</tr>
 				</thead>
 				<tbody id="workbox">
 					
 				</tbody>
 			</table>
+			<div class="div">
+			</div>
 		</div>
 	</div>
 

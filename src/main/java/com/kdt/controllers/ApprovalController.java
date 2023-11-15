@@ -198,11 +198,21 @@ public class ApprovalController {
 	
 	@RequestMapping(value="/left_item")
 	public String toLeft_item(String selectItem, Model model) {
+		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");
+		int allCount = appService.getAllCount(userDTO.getId());
+		
 		model.addAttribute("selectItem", selectItem);
+		model.addAttribute("allCount", allCount);
 		
 		return "/approval/document/left_item";
 	}
-	@RequestMapping("/work_plan_write")
+	
+	@RequestMapping("/works/workLeave_write")
+	public String work_leave_write() {
+		return "/approval/document/works/workLeave_write";
+	}
+	
+	@RequestMapping("/works/workPlan_write")
 	public String work_plan_write() {
 		return "/approval/document/works/workPlan_write";
 	}

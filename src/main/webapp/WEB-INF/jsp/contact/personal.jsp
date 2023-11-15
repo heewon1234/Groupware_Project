@@ -22,11 +22,8 @@
 </head>
 
 <body>
-
     <div class="modal_form">
-
         <div class="modal_background"></div>
-
         <form class="modal_contact_add_form" method="post" id="contact_form">
             <div class="modal_contact_add">
                 <div class="modal_title">주소 추가</div>
@@ -37,7 +34,6 @@
                             <div class="modal_toggle_button share">공유 주소록</div>
                         </div>
                         <div class="modal_body_content_form">
-
                             <div class="modal_body_content_input">
                                 <div class="modal_body_content_input_left">이름 *</div>
                                 <div class="modal_body_content_input_right">
@@ -46,7 +42,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="modal_body_content_input">
                                 <div class="modal_body_content_input_left">이메일</div>
                                 <div class="modal_body_content_input_right">
@@ -55,7 +50,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="modal_body_content_input">
                                 <div class="modal_body_content_input_left">전화</div>
                                 <div class="modal_body_content_input_right">
@@ -64,7 +58,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="modal_body_content_input">
                                 <div class="modal_body_content_input_left">태그</div>
                                 <div class="modal_body_content_input_right tag">
@@ -74,7 +67,6 @@
                                             <img src="/images/commons/body_form/left_item/default/drop.png">
                                         </div>
                                     </div>
-
                                     <!-- 여기가 리스트 받아오는 곳 -->
                                     <div class="modal_tag_select_list"></div>
 
@@ -89,14 +81,9 @@
                                 <div class="modal_body_content_input_bonus">
                                     <span class="modal_body_content_input_bonus_text">새 태그 만들기</span>
                                 </div>
-
                             </div>
-
                         </div>
-
                         <div class="modal_body_content_form_plus">
-
-
                             <div class="modal_body_content_input">
                                 <div class="modal_body_content_input_left">회사</div>
                                 <div class="modal_body_content_input_right">
@@ -107,7 +94,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="modal_body_content_input">
                                 <div class="modal_body_content_input_left">주소</div>
                                 <div class="modal_body_content_input_right">
@@ -116,7 +102,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="modal_body_content_input">
                                 <div class="modal_body_content_input_left">홈페이지</div>
                                 <div class="modal_body_content_input_right">
@@ -125,7 +110,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="modal_body_content_input">
                                 <div class="modal_body_content_input_left">생일</div>
                                 <div class="modal_body_content_input_right">
@@ -134,7 +118,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="modal_body_content_input">
                                 <div class="modal_body_content_input_left">메모</div>
                                 <div class="modal_body_content_input_right">
@@ -144,11 +127,7 @@
                                 </div>
                             </div>
                         </div>
-
-
-
                     </div>
-
                     <div class="modal_body_content_add">
 
                         <div class="modal_body_content_plus">
@@ -159,7 +138,6 @@
                             <img src="/images/contact/minus.png">추가 입력 항목 닫기
                         </div>
                     </div>
-
                     <div class="modal_body_content_form_edit">
                         <span class="modal_body_content_form_edit_text bold">편집 허용</span>
                         <fieldset class="modal_body_content_form_edit_toggle">
@@ -169,20 +147,14 @@
                         <span class="modal_body_content_form_edit_text" id="edit_toggle_text">허용 안함</span>
                         <input type="hidden" name="edit" id="hidden_edit_toggle_value" value="false">
                     </div>
-
-
                 </div>
                 <div class="modal_footer right">
                     <button class="button_cancel float_left" id="modal_cancel_button">취소</button>
                     <button class="button_apply float_right permit" id="modal_apply_button">저장</button>
-                    <button class="button_apply float_right permit" id="modal_apply_list_button">저장 후 계속
-                        추가</button>
+                    <button class="button_apply float_right permit" id="modal_apply_list_button">저장 후 계속 추가</button>
                 </div>
             </div>
-
         </form>
-
-
         <div class="modal_tag_add">
             <div class="modal_title">
                 <span>태그 만들기</span>
@@ -200,7 +172,6 @@
                 <button class="button_apply permit" id="button_apply_tag" style="margin-left: 14px">저장</button>
             </div>
         </div>
-
     </div>
 
     <!-- TOP 꼭 열어보세요.-->
@@ -210,7 +181,7 @@
     </div>
 
     <!-- 여기서부터 -->
-    >
+    
     <div class="body_form">
         <!-- 왼쪽 부분(메뉴) -->
         <div class="left_item">
@@ -241,25 +212,16 @@
                         <div class="menu_list_item">
                             <img src="/images/commons/body_form/left_item/default/company.png"> <span class="menu_list_item_text">전체</span>
                         </div>
-
-                        <!-- 여기 부분에서 포문 돌리면 될듯 -->
-                        <div class="menu_list_item">
-                            <img src="/images/commons/body_form/left_item/default/company.png">
-                            <span class="menu_list_item_text">예시 태그
-                            </span>
-                            <div class="menu_list_item_plus point">
-                                <img src="/images/commons/body_form/left_item/default/point.png">
+                        <c:forEach items="${personalTagList}" var="contact">
+                            <div class="menu_list_item">
+                                <img src="/images/commons/body_form/left_item/default/company.png">
+                                <span class="menu_list_item_text">${contact.tag}
+                                </span>
+                                <div class="menu_list_item_plus point">
+                                    <img src="/images/commons/body_form/left_item/default/point.png">
+                                </div>
                             </div>
-                        </div>
-                        
-                        <!-- 예제 돌릴 곳 -->
-                            <c:forEach items="${shareList}" var="contact">
-       						 <li>${contact.tag}</li>
-       						 </c:forEach>
-                        
-                        
-
-
+                        </c:forEach>
                         <div class="menu_list_item">
                             <img src="/images/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">미등록 태그</span>
                         </div>
@@ -278,18 +240,16 @@
                         <div class="menu_list_item">
                             <img src="/images/commons/body_form/left_item/default/company.png"> <span class="menu_list_item_text">전체</span>
                         </div>
-
-                        <!-- 여기 부분에서 포문 돌리면 될듯 -->
-                        <div class="menu_list_item">
-                            <img src="/images/commons/body_form/left_item/default/company.png">
-                            <span class="menu_list_item_text">예시 태그
-                            </span>
-                            <div class="menu_list_item_plus point">
-                                <img src="/images/commons/body_form/left_item/default/point.png">
+                        <c:forEach items="${shareTagList}" var="contact">
+                            <div class="menu_list_item">
+                                <img src="/images/commons/body_form/left_item/default/company.png">
+                                <span class="menu_list_item_text">${contact.tag}
+                                </span>
+                                <div class="menu_list_item_plus point">
+                                    <img src="/images/commons/body_form/left_item/default/point.png">
+                                </div>
                             </div>
-                        </div>
-
-
+                        </c:forEach>
                         <div class="menu_list_item">
                             <img src="/images/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">미등록 태그</span>
                         </div>
@@ -303,10 +263,7 @@
                 <div class="menu_item">
                     <img class="menu_item_img" src="/images/commons/body_form/left_item/default/trash.png" /> <span class="menu_item_text">휴지통</span>
                 </div>
-
-
             </div>
-
         </div>
 
         <!-- 오른쪽 부분(해당 메뉴의 주요 콘텐츠) -->
@@ -317,10 +274,11 @@
                 <div class="content_top">오른쪽 메뉴</div>
                 그냥 테스트<br> <br> <span>스팬 태그 테스트</span>
                 <div>디브 태그 테스트</div>
-
+                <c:forEach items="${personalContactList}" var="contact">
+                                        ${contact.tag} ${contact.name}                                         
+                        </c:forEach>
             </div>
         </div>
     </div>
 </body>
-
 </html>
