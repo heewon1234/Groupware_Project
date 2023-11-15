@@ -29,4 +29,19 @@
 		select seq from Mk_Board
 	</select>
 	
+	<!-- 모든 게시판 목록 불러오기 -->
+	<select id="selectAllBoard" resultType="com.kdt.dto.Mk_BoardDTO">
+		select * from Mk_Board
+	</select>
+	
+	<!-- 게시판 삭제 -->
+	<delete id="DropTable">
+		${sql}
+	</delete>
+	<delete id="DeleteByBoardTitle">
+		delete from ${table} where board_title=#{board_title}
+	</delete>
+	<delete id="DeleteByOriBoardTitle">
+		delete from ${table} where ori_board_title=#{board_title}
+	</delete>
 </mapper>

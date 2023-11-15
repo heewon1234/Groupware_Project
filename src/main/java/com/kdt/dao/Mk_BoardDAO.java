@@ -1,6 +1,7 @@
 package com.kdt.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,8 +39,26 @@ public class Mk_BoardDAO {
 		return db.insert("Mk_Board.createTable",sql);
 	}
 	
-	//게시글 불러오기 관련 기능
+	// 게시글 불러오기 관련 기능
 	public List<Integer> allBoardSeq(){
 		return db.selectList("Mk_Board.allBoardSeq");
 	}
+	
+	// 게시판 목록 불러오기
+	public List<Mk_BoardDTO> selectAllBoard(){
+		return db.selectList("Mk_Board.selectAllBoard");
+	}
+	
+	// 게시판 삭제
+	public int delBoard(String sql) { // drop table
+		return db.delete("Mk_Board.DropTable",sql);
+	}
+	// 게시판 관련 테이블에서 데이터 삭제
+	public int deleteByBoardTitle(Map<String,String> map) { 
+		return db.delete("Mk_Board.DeleteByBoardTitle",map);
+	}
+	public int deleteByOriBoardTitle(Map<String,String> map) { 
+		return db.delete("Mk_Board.DeleteByOriBoardTitle",map);
+	}
+	
 }

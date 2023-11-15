@@ -35,10 +35,6 @@ public class Mk_BoardController {
 		return "boards/mk_board";
 	}
 	
-	@RequestMapping("toEditBoard")
-	public String toEditBoard() {
-		return "boards/edit_board";
-	}
 
 	@RequestMapping("Mk_boardInsert")
 	public String Mk_boardInsert(Mk_BoardDTO dto, String headerList, String authorityList) {
@@ -85,4 +81,25 @@ public class Mk_BoardController {
 		return bservice.selectMemberByName(dto);
 	}
 	////////////////
+	
+	
+	// 게시판 수정 창으로 이동
+	@RequestMapping("toEditBoard")
+	public String toEditBoard(Model model) {
+		List<Mk_BoardDTO> boardList = mservice.selectAllBoard();
+		model.addAttribute("boardList",boardList);
+		return "boards/edit_board";
+	}
+	
+	// 게시판 삭제
+	@RequestMapping("toDelBoard")
+	public String toDelBoard() {
+		return "boards/delBoard";
+	}
+	
+	@RequestMapping("delBoard")
+	public String delBoard(String board_title) {
+		mservice.delBoard(board_title);
+		return "redirect:/mk_board/toEditBoard";
+	}
 }
