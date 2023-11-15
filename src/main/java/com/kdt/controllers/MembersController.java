@@ -13,10 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kdt.dto.LeavesDTO;
 import com.kdt.dto.MembersDTO;
+import com.kdt.dto.Official_CalendarDTO;
 import com.kdt.dto.OneToOneChatDTO;
 import com.kdt.dto.WorksDTO;
+import com.kdt.services.CalendarService;
 import com.kdt.services.ChatRoomService;
 import com.kdt.services.MembersService;
 import com.kdt.services.WorksService;
@@ -38,9 +41,13 @@ public class MembersController {
 	private ChatRoomService roomService;
 	
 	@Autowired
+	private CalendarService cservice;
+	
+	@Autowired
 	private WorksService wservice;
+	
 	@RequestMapping("login")
-	public String login(String id, String pw) throws Exception{
+	public String login(String id, String pw, Model model) throws Exception{
 		String shapw = EncryptionUtils.getSHA512(pw);
 		boolean result = this.mservice.isMember(id,shapw);
 		if(result) {
@@ -61,6 +68,14 @@ public class MembersController {
 		        session.setAttribute("userDTO", userDTO);
 
 		    }
+		    
+		    String org = this.mservice.getOrganization(id);
+			List<Official_CalendarDTO> list = this.cservice.selectAllO(org);
+			
+			//ObjectMapper objectMapper = new ObjectMapper();
+	        //String listAsJSON = objectMapper.writeValueAsString(list);
+	        
+			model.addAttribute("list",list);
 			return "redirect:/";
 		}
 		
