@@ -8,7 +8,7 @@
 <title>결재 작성하기</title>
 <!-- BootStrap -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="/css/approval/document/write.css">
+<link rel="stylesheet" type="text/css" href="/css/approval/document/view.css">
 <link rel="stylesheet" type="text/css" href="/css/commons/body_form/left_form/body_form_default.css">
 </head>
 <body>
@@ -40,11 +40,11 @@
 								<td>
 									<table class="innerTable" border='1'>
 										<tr>
-											<c:forEach var="manager" items="${managerList}">
+											<c:forEach var="manager" items="${managerList}" varStatus="i">
                             					<th>
                             						${manager.name}
                             						<c:if test="${manager.id eq userDTO.id}">
-													    <select name="status">
+													    <select class="status${i.index}" name="status">
 													    	<option>미결</option>
 													        <option>결재</option>
 													        <option>반려</option>
@@ -54,10 +54,21 @@
                        						</c:forEach>
 										</tr>
 										<tr>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
+											<c:forEach var="manager" items="${managerRBList}" varStatus="i">
+                            					<td class="status${i.index }">
+													<c:choose>
+														<c:when test="${manager.approval_status eq '결재' }">
+															<img id="check" src="/images/approval/check.svg">
+														</c:when>
+														<c:when test="${manager.approval_status eq '반려' }">
+															<img id="X" src="/images/approval/X.svg">
+														</c:when>
+														<c:when test="${manager.approval_status eq '미결' }">
+															<img id="minus" src="/images/approval/minus.svg">
+														</c:when>
+													</c:choose>
+                            					</td>
+                       						</c:forEach>
 										</tr>
 										<tr>
 											<c:forEach var="manager" items="${managerList}">
@@ -77,9 +88,7 @@
 
 					<h4>본문</h4>
 					<div class="input-group">
-						<textarea readonly>
-							${app.contents }
-						</textarea>
+						<textarea id="contents" readonly>${app.contents }</textarea>
 					</div>
 
 					<h4>파일 첨부</h4>
@@ -102,6 +111,26 @@
 		});
 		$("#back_btn").on("click", function() {
 			window.history.back();
+		});
+		
+		if($("img").attr("id") == "check") {
+			$("select[name='status']").val("결재").prop("selected", true);
+		} else if($("img").attr("id") == "X"){
+			$("select[name='status']").val("반려").prop("selected", true);
+		} else {
+			$("select[name='status']").val("미결").prop("selected", true);
+		}
+		
+		$("select[name='status']").on("change", function() {
+			$("td[class="+$(this).attr('class')+"]").empty();
+			
+			if ($(this).val() == '결재') {
+	        	$("td[class="+$(this).attr('class')+"]").append('<img src="/images/approval/check.svg">');
+	        } else if ($(this).val() == '반려') {
+	        	$("td[class="+$(this).attr('class')+"]").append('<img src="/images/approval/X.svg">');
+	        } else if($(this).val() == '미결') {
+	        	$("td[class="+$(this).attr('class')+"]").append('<img src="/images/approval/minus.svg">');
+	        }
 		});
 	</script>
 </body>

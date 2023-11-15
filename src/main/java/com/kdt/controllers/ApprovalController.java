@@ -4,6 +4,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,13 +64,22 @@ public class ApprovalController {
 		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");
 		ApprovalDTO app = appService.selectByDocId(docId);
 		List<ApprovalFilesDTO> filesList = appFService.selectByParentSeq(docId);
-		List<String> managerIdList = appRService.getManagerIdList(docId);
+		
+		List<ApprovalResponsiblesDTO> managerRBList = appRService.getManagerRBList(docId);
+		List<String> managerIdList = new ArrayList<>();
+		for(ApprovalResponsiblesDTO dto : managerRBList) {
+			managerIdList.add(dto.getApprover_id());
+			System.out.println(dto.getApprover_id());
+			System.out.println(dto.getApproval_status());
+		}
+		
 		List<MembersDTO> managerList = mService.getManagerList(managerIdList);
 		
 		model.addAttribute("docId", docId);
 		model.addAttribute("userDTO", userDTO);
 		model.addAttribute("app", app);
 		model.addAttribute("filesList", filesList);
+		model.addAttribute("managerRBList", managerRBList);
 		model.addAttribute("managerList", managerList);
 		
 		return "/approval/document/view";

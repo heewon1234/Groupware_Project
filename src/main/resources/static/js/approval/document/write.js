@@ -30,3 +30,19 @@ $("#apply_btn").on("click", function() {
 		$("#app_td" + (index + 1)).html($(this).prev().prev().prev().html());
 	});
 });
+
+$("#title").keyup(function() {
+	if($(this).val() != "" && $("#contents").val() != "") {
+		$("#submit_btn").removeClass("permit");
+	} else {
+		$("#submit_btn").addClass("permit");
+	}
+});
+
+$("#contents").keyup(function() {
+	if($(this).val() != "" && $("#title").val() != "") {
+		$("#submit_btn").removeClass("permit");
+	} else {
+		$("#submit_btn").addClass("permit");
+	}
+});
