@@ -96,3 +96,57 @@ a {
 	border-radius: 7px;
 	margin-top:100px;
 }
+
+
+/*출근체크*/
+
+.workcheckbox>div {
+    padding-top: 50px;
+}
+
+#workout {
+    	border: none;
+    	background-color: white;
+    }
+
+    .timebox {
+    	font-size: 30px;
+    	text-align: center;
+    }
+
+    .workinoutbox {
+    	font-size: 20px;
+    	text-align: center;
+    }
+
+    .workbtn {
+    	background-color: white;
+    	border: 1px solid grey;
+    	width: 25%;
+    	margin: 10px;
+    }
+
+    .workbtnbox {
+    	padding-left: 30px;
+    }
+
+    .highlight {
+    	background-color: aliceblue;
+    }
+    
+    
+/*달력*/
+.date-wrap {
+	width:50%;
+	height:100%;
+}
+
+table.date-month {
+	width:100%;
+	height:80%;
+}
+
+/*td {
+    text-align: center;
+    vertical-align: middle;
+}*/
