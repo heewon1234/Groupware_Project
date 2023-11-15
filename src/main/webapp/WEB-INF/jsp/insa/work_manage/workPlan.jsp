@@ -17,7 +17,6 @@
 * {
 	
 }
-
 .weekend-cell {
 	color: #a6a6a6;
 }
@@ -39,6 +38,7 @@
 
 .works_days {
 	padding: 5px;
+	text-align: center;
 }
 
 #group_UserList {
