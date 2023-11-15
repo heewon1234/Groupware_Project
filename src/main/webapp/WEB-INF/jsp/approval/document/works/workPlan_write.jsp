@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -7,12 +8,16 @@
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <title>결재 작성하기</title>
 <!-- BootStrap -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="/css/approval/document/write.css">
-<link rel="stylesheet" type="text/css" href="/css/commons/body_form/left_form/body_form_default.css">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="/css/approval/document/write.css">
+<link rel="stylesheet" type="text/css"
+	href="/css/commons/body_form/left_form/body_form_default.css">
 </head>
 <body>
-	<form action="/approval/document/insertApproval" method="post" enctype="multipart/form-data">
+	<form action="/approval/document/insertApproval" method="post"
+		enctype="multipart/form-data">
 		<div id="top_container"></div>
 		<div class="body_form">
 			<div class="left_item"></div>
@@ -26,13 +31,10 @@
 						<tbody>
 							<tr>
 								<th>문서 종류</th>
-								<td>
-									<select name="doc_type">
-										<option>근무계획</option>
-									</select>
-								</td>
+								<td name="doc_type">근무계획변경</td>
 								<th>작성자</th>
-								<td>${userDTO.organization } ${userDTO.position } ${userDTO.name }</td>
+								<td>${userDTO.organization }${userDTO.position }
+									${userDTO.name }</td>
 							</tr>
 						</tbody>
 					</table>
@@ -70,12 +72,12 @@
 
 					<h4>제목</h4>
 					<div class="input-group">
-						<input type="text" class="form-control" id="" name="title">
+						<input type="text" class="form-control" id="" name="title" value="근무계획변경" readonly>
 					</div>
 
 					<h4>본문</h4>
 					<div class="input-group">
-						<textarea name="contents"></textarea>
+						<textarea name="contents" readonly></textarea>
 					</div>
 				</div>
 			</div>
