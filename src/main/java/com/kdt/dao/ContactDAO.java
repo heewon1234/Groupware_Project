@@ -14,6 +14,14 @@ public class ContactDAO {
 	@Autowired
 	private SqlSession db;
 	
+	public List<ContactDTO> personalContactSelectAll(ContactDTO dto) {
+		return db.selectList("Contact.personal_contact_selectAll", dto);
+	}
+	
+	public List<ContactDTO> personalContactSelectBy(ContactDTO dto) {
+		return db.selectList("Contact.personal_contact_selectBy", dto);
+	}
+	
 	public List<ContactDTO> personalContactTagSelectAll(ContactDTO dto) {
 		return db.selectList("Contact.personal_contact_tag_selectAll", dto);
 	}
@@ -32,6 +40,14 @@ public class ContactDAO {
 	
 	public List<ContactDTO> shareContactTagSelectAll(ContactDTO dto) {
 		return db.selectList("Contact.share_contact_tag_selectAll", dto);
+	}
+
+	public List<ContactDTO> shareContactTagSelectAllDeplicate(ContactDTO dto) {
+		return db.selectList("Contact.share_contact_tag_selectAll_duplicate", dto);
+	}
+	
+	public int shareContactTagInsert(ContactDTO dto) {
+		return db.insert("Contact.share_contact_tag_insert", dto);
 	}
 	
 	public int shareContactInsert(ContactDTO dto) {

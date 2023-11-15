@@ -4,6 +4,21 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Contact">
 
+	<select id="personal_contact_selectAll" resultType="com.kdt.dto.ContactDTO">
+		select * from Personal_Contact where writer = #{writer}
+	</select>
+	
+<select id="personal_contact_selectBy" resultType="com.kdt.dto.ContactDTO">
+    SELECT * FROM Personal_Contact
+    WHERE writer = 'test1'
+    AND (
+        tag = #{tag}
+        OR tag LIKE CONCAT('%', #{tag}, '%')
+        OR tag LIKE CONCAT('%,', #{tag}, '%')
+        OR tag LIKE CONCAT('%', #{tag}, ',%')
+    );
+</select>
+
 	<select id="personal_contact_tag_selectAll" resultType="com.kdt.dto.ContactDTO">
 		select * from Personal_Contact_Tag where writer = #{writer}
 	</select>
@@ -29,7 +44,18 @@
 	<select id="share_contact_tag_selectAll" resultType="com.kdt.dto.ContactDTO">
 		select * from Share_Contact_Tag
 	</select>
-
+	
+	<select id="share_contact_tag_selectAll_duplicate" resultType="com.kdt.dto.ContactDTO">
+		select * from Share_Contact_Tag where tag = #{tag}
+	</select>
+	
+	<insert id="share_contact_tag_insert">
+		insert into Share_Contact_Tag(writer, tag)
+		
+		values(#{writer}, #{tag})
+	</insert>
+	
+	
 	<insert id="share_contact_insert">
 		insert into Share_Contact(tag, name, email, phone, company_name, company_rank,
 		company_department, address, link, birthday, memo, writer, edit)
