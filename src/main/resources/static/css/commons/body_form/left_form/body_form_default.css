@@ -57,7 +57,7 @@
 
 .menu_tab {
     overflow-y: auto;
-    overflow-x: hidden;
+    overflow-x: auto;
     padding: 0 24px 30px;
     height: 100%;
 }
@@ -152,7 +152,7 @@
 }
 
 .menu_list_item {
-    padding: 0 10px 0 44px;
+    padding: 0 0 0 32px;
     height: 38px;
     color: #333333;
     display: flex;
@@ -175,7 +175,10 @@
 
 .menu_list_item_text {
     font-size: 15px;
-    width: 125px;
+    width: 115px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .menu_list_item_plus {
@@ -186,6 +189,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-right:5px;
 }
 
 .menu_list_item_plus img {
