@@ -130,9 +130,11 @@
 						<span>근무현황</span>
 					</div>
 					<div class="workcurrent">
-						<table border="1" id="workform">
+						<div class="comment">
+						<table id="workform" width="100%" >
 						
 						</table>
+						</div>
 						<button class="worktime_update">근무시간 수정</button>
 					</div>
 
