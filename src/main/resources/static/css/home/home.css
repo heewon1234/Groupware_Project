@@ -139,8 +139,17 @@ a {
 
 /*출근체크*/
 
+.workcheckbox{
+	height:100%;
+}
+
 .workcheckbox>div {
     padding-top: 50px;
+}
+
+#workin {
+	border: none;
+    background-color: white;
 }
 
 #workout {
@@ -151,11 +160,13 @@ a {
     .timebox {
     	font-size: 30px;
     	text-align: center;
+    	height:25%;
     }
 
     .workinoutbox {
     	font-size: 20px;
     	text-align: center;
+    	height:25%;
     }
 
     .workbtn {
@@ -163,10 +174,12 @@ a {
     	border: 1px solid grey;
     	width: 25%;
     	margin: 10px;
+    	height:30px;
     }
 
     .workbtnbox {
     	padding-left: 30px;
+    	height:50%;
     }
 
     .highlight {
@@ -189,4 +202,12 @@ table.date-month {
 td {
     text-align: center;
     vertical-align: middle;
+    width:75px;
+    height:75px;
+}
+
+.today {
+	color:white;
+	background-color:rgb(206, 216, 255);
+	border-radius: 50%;
 }
