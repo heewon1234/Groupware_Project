@@ -145,6 +145,16 @@ public class BoardService {
 		map.put("id", id);
 		return bdao.boardContentsList(map);
 	}
+	public List<BoardDTO> BoardContentsListBy(String board_title, String id, String start, String end){ // 게시글 리스트
+		Map<String,String> map = new HashMap<>();
+		int boardSeq = mdao.selectBoardSeq(board_title);
+		map.put("oriBoardTitle", board_title);
+		map.put("board_title", "Board_"+boardSeq);
+		map.put("id", id);
+		map.put("start", start);
+		map.put("end", end);
+		return bdao.BoardContentsListBy(map);
+	}
 
 	public List<BoardDTO> FavoriteAllContentsList(String board_title,String id){
 		List<Integer> seqList = mdao.allBoardSeq();
@@ -167,6 +177,10 @@ public class BoardService {
 		dto.setBoard_title(sysBoardTitle);
 		dto.setSeq(Integer.parseInt(seq));
 		return bdao.boardContents(dto);
+	}
+	public List<BoardDTO> Notice(String board_title){
+		int seq = mdao.selectBoardSeq(board_title);
+		return bdao.Notice("Board_"+seq);
 	}
 	//
 

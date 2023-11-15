@@ -1,5 +1,6 @@
 package com.kdt.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kdt.constants.Constants;
 import com.kdt.dto.BoardDTO;
 import com.kdt.dto.FileDTO;
 import com.kdt.dto.Mk_BoardDTO;
@@ -27,31 +29,31 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/board/")
 public class BoardController {
-	
+
 	@Autowired
 	HeaderService hservice;
-	
+
 	@Autowired
 	BoardService bservice;
-	
+
 	@Autowired
 	Mk_BoardService mservice;
-	
+
 	@Autowired
 	AuthorityService aservice;
-	
+
 	@Autowired
 	ReplyService rservice;
-	
+
 	@Autowired
 	SurveyService sservice;
-	
+
 	@Autowired
 	FileService fservice;
-	
+
 	@Autowired
 	HttpSession session;
-	
+
 	// commons controller로 가라
 	@RequestMapping("sideBar")
 	public String sideBar(Model model) {
@@ -62,56 +64,96 @@ public class BoardController {
 		return "boards/sideBar";
 	}	
 	//
-	
-	
+
+
 	// R 관련 기능
 	@RequestMapping("toBoard") // 게시글 리스트 보는 곳 이동
-	public String toBoard(String board_title, Model model) {
-		
+	public String toBoard(String board_title, Model model, String cPage) {
 		if(board_title==null) {
 			if(session.getAttribute("board_title")==null) {
 				board_title="중요게시물";
 			} else {
 				board_title=(String)session.getAttribute("board_title");
 			}
-			
+
 		}
+
 		String id = (String)session.getAttribute("loginId");
 		session.setAttribute("board_title", board_title);
-		List<BoardDTO> boardContentsList;
-		if(board_title.equals("중요게시물")) {
-			boardContentsList = bservice.FavoriteAllContentsList(board_title,id);
-		} else {
-			boardContentsList = bservice.boardContentsList(board_title,id);
-		}
+
+		// 페이징 처리
+		int currentPage=1;
+		if(cPage!=null) {currentPage = Integer.parseInt(cPage);}
+		session.setAttribute("currentPage", currentPage);		
+		int start = currentPage*Constants.RECORD_COUNT_PER_PAGE-(Constants.RECORD_COUNT_PER_PAGE-1);
+		int end = currentPage*Constants.RECORD_COUNT_PER_PAGE;
 		
+		List<BoardDTO> noticeList;
+		if(board_title.equals("중요게시물")) {
+			int totalBoardContents = bservice.FavoriteAllContentsList(board_title,id).size();
+			model.addAttribute("recordTotalCount",totalBoardContents);
+		} else {
+			int totalBoardContents = bservice.boardContentsList(board_title,id).size();
+			noticeList = bservice.Notice(board_title);
+			model.addAttribute("recordTotalCount",totalBoardContents);
+			model.addAttribute("noticeList", noticeList);
+			//boardContentsList
+			
+		}
+
 		model.addAttribute("boardContentsList",boardContentsList);
+		model.addAttribute("recordCountPerPage",Constants.RECORD_COUNT_PER_PAGE);
+		model.addAttribute("naviCountPerPage",Constants.NAVI_COUNT_PER_PAGE);
+
+
+
+
+		//		List<ReplyDTO> replyList = rservice.replySelectBy(board_title, seq, String.valueOf(start), String.valueOf(end)); // 댓글 리스트
+		//		model.addAttribute("replyList",replyList);
+		//		System.out.println(replyList.size());
+		//		model.addAttribute("replyListSize",rservice.replyTotalCount(board_title, seq));
+		//		model.addAttribute("recordCountPerPage",Constants.RECORD_COUNT_PER_PAGE);
+		//		model.addAttribute("naviCountPerPage",Constants.NAVI_COUNT_PER_PAGE);
+		//
 		return "boards/contentsList_board";
 	}
-	
+
 	@RequestMapping("toContentsBoard") // 게시글 내용 보는 곳으로 이동
-	public String toContentsBoard(String seq, String board_title, Model model) {
+	public String toContentsBoard(String seq, String board_title, Model model, String rNum) {
+
 		if(board_title==null && (String)session.getAttribute("board_title")!="중요게시물") {
 			board_title= (String)session.getAttribute("board_title");
 		}
 		session.setAttribute("board_title", board_title);
-		List<ReplyDTO> replyList = rservice.replyList(board_title, seq); // 댓글 리스트
+
+		// 댓글 페이징 처리
+		int currentReplyPage=1;
+		if(rNum!=null) {currentReplyPage = Integer.parseInt(rNum);}
+		session.setAttribute("currentReplyPage", currentReplyPage);		
+		int start = currentReplyPage*Constants.RECORD_COUNT_PER_PAGE-(Constants.RECORD_COUNT_PER_PAGE-1);
+		int end = currentReplyPage*Constants.RECORD_COUNT_PER_PAGE;
+		List<ReplyDTO> replyList = rservice.replySelectBy(board_title, seq, String.valueOf(start), String.valueOf(end)); // 댓글 리스트
 		model.addAttribute("replyList",replyList);
-		
+		System.out.println(replyList.size());
+		model.addAttribute("replyListSize",rservice.replyTotalCount(board_title, seq));
+		model.addAttribute("recordCountPerPage",Constants.RECORD_COUNT_PER_PAGE);
+		model.addAttribute("naviCountPerPage",Constants.NAVI_COUNT_PER_PAGE);
+		//
+
 		BoardDTO boardContents = bservice.boardContents(board_title, seq); // 게시글 내용
 		model.addAttribute("boardContents",boardContents);
-		
+
 		model.addAttribute("surveyList", null); // 설문조사 관련
 		model.addAttribute("isVote",false);
-		
+
 		String id = (String)session.getAttribute("loginId");
-		
+
 		if(boardContents.getSurvey_question()!=null) {
 			model.addAttribute("isVote",sservice.isVote(new SurveyUserDTO(0,id,Integer.parseInt(seq),board_title)));
 			List<SurveyDTO> list = sservice.selectServeyItem(new SurveyDTO(0,board_title, Integer.parseInt(seq),null,0,0));
 			model.addAttribute("surveyList", list);
 		}
-		
+
 		// 파일 목록
 		FileDTO fdto = new FileDTO();
 		fdto.setBoard_title(board_title);
@@ -121,7 +163,7 @@ public class BoardController {
 
 		return "boards/contents_board";
 	}
-	
+
 	// C 관련 기능
 	@RequestMapping("toWriteContentsBoard") // 게시글 작성하는 곳 이동
 	public String toWriteContentsBoard(Model model) {
@@ -136,24 +178,24 @@ public class BoardController {
 		String writer = (String)session.getAttribute("loginId");
 		dto.setWriter(writer);
 		bservice.insertBoardContents(dto, items, fileList);
-		
+
 		String board_title=(String)session.getAttribute("board_title");
 		return "redirect:/board/toBoard";	
 	}
-	
+
 	// U 관련 기능
 	@RequestMapping("toEditContentsBoard") // 게시판 수정하는 곳 이동
 	public String toEditBoard(String seq, Model model) {
 		String board_title = (String)session.getAttribute("board_title");
 		String id = (String)session.getAttribute("loginId");
-		
+
 		BoardDTO boardContents = bservice.boardContents(board_title, seq);
 		List<FileDTO> fileList = fservice.selectFileList(new FileDTO(0,null,null,Integer.parseInt(seq),board_title,null));
 		List<String> headerList = hservice.selectHeader(board_title);
 		List<String> boardList = aservice.selectAuthBoard(id);
 		List<SurveyDTO> surveyItemList = sservice.selectServeyItem(new SurveyDTO(0,board_title,Integer.parseInt(seq),null,0,0));
 		boolean isExistVote = sservice.isExistVote(new SurveyDTO(0,board_title,Integer.parseInt(seq),null,0,0));
-		
+
 		model.addAttribute("isExistVote",isExistVote);
 		model.addAttribute("surveyItemList",surveyItemList);
 		model.addAttribute("boardContents",boardContents);
@@ -164,19 +206,19 @@ public class BoardController {
 
 		return "boards/edit_contents_board";
 	}
-	
+
 	@RequestMapping("updateContentsBoard")
 	public String updateContentsBoard(BoardDTO dto,String prevContents, String inputFileDelBtn, String useSurvey, String[] items, MultipartFile[] fileList) throws Exception{
 		bservice.updateContentsBoard(dto, prevContents, inputFileDelBtn, useSurvey, fileList, items);
 		return "redirect:/board/toContentsBoard?seq="+dto.getSeq();
 	}
-	
+
 	// D 관련 기능
 	@RequestMapping("toDelContents")
 	public String toDelContents() {
 		return "boards/delContents";
 	}
-	
+
 	@RequestMapping("delContents")
 	public String delContents(String seq) throws Exception{
 		String board_title = (String)session.getAttribute("board_title");
@@ -184,6 +226,6 @@ public class BoardController {
 		bservice.delContents(seq, board_title,id);
 		return "redirect:/board/toBoard";
 	}
-	
-	
+
+
 }

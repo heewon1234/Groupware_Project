@@ -5,7 +5,7 @@
 .searchBox{
     width:600px;
     height:40px;
-    border:1px solid black;
+    border:1px solid #d6d6d6;
     border-radius: 5px;
     overflow: hidden;
     margin-bottom:30px;
@@ -48,8 +48,8 @@
 
 .board_body{
     margin-top:10px;
-    border-top:1px solid black;
-    border-bottom:1px solid black;
+    border-top:1px solid #d6d6d6;
+    border-bottom:1px solid #d6d6d6;
 }
 
 .board_body .board_contents_list{
@@ -57,7 +57,7 @@
     overflow:hidden;
 }
 .board_contents_list:not(.board_contents_list:first-child){
-    border-top:1px solid black;
+    border-top:1px solid #d6d6d6;
 }
 .board_contents_list>div{
     float:left;

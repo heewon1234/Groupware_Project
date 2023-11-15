@@ -71,13 +71,18 @@ public class BoardDAO {
 	public List<BoardDTO> boardContentsList(Map<String,String> map){
 		return db.selectList("Board.boardContentsList",map);
 	}
-	
+	public List<BoardDTO> BoardContentsListBy(Map<String,String> map){
+		return db.selectList("Board.BoardContentsListBy",map);
+	}
 	public BoardDTO boardContents(BoardDTO dto) {
 		return db.selectOne("Board.boardContents",dto);
 	}
 	
 	public List<BoardDTO> FavoriteAllContentsList(Map<String,String> map){
 		return db.selectList("Board.FavoriteBoardContentsList",map);
+	}
+	public List<BoardDTO> Notice(String board_title){
+		return db.selectList("Board.Notice",board_title);
 	}
 	//
 	

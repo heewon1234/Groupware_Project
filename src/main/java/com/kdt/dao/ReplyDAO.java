@@ -1,6 +1,7 @@
 package com.kdt.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,12 @@ public class ReplyDAO {
 	
 	public List<ReplyDTO> replyList(ReplyDTO dto){
 		return db.selectList("Reply.replyList",dto);
+	}
+	public List<ReplyDTO> replySelectBy(Map<String,String> map){
+		return db.selectList("Reply.replySelectBy",map);
+	}
+	public int replyTotalCount(Map<String,String> map) {
+		return db.selectOne("Reply.replyTotalCount",map);
 	}
 	
 	public int delReply(ReplyDTO dto) {

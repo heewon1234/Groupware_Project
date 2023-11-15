@@ -83,7 +83,7 @@
                     	</c:choose>
                     </div>
                 </div>
-                <div class="board_bottom">
+                <div id="boardListFooter">
 
                 </div>
             </div>
@@ -91,5 +91,47 @@
     </div>
 	<script src="/js/board/sideBar.js" defer></script>
     <script src="/js/board/contentsList_board.js" defer></script>
+    <script>
+		if(replyListSize>0){
+			let replyFooter = document.getElementById("boardListFooter");
+			let recordTotalCount = ${replyListSize};
+			let recordCountPerPage = ${recordCountPerPage};
+			let naviCountPerPage = ${naviCountPerPage};
+			let currentPage = ${currentPage};
+		
+			let pageTotalCount = 0;
+
+			if((recordTotalCount%recordCountPerPage)>0){
+				pageTotalCount = Math.floor( recordTotalCount/recordCountPerPage ) + 1;
+			} else {
+				pageTotalCount =  recordTotalCount/ recordCountPerPage;
+			}
+
+			if(currentReplyPage<1){currenReplyPage=1;}
+			else if(currentReplyPage>pageTotalCount){currentReplyPage=pageTotalCount;}
+		
+			let startNavi = Math.floor(( currentReplyPage - 1 ) / naviCountPerPage) * naviCountPerPage + 1;
+			let endNavi = startNavi + naviCountPerPage - 1;
+			if(endNavi > pageTotalCount) {endNavi = pageTotalCount;}
+
+			let needPrev = true;
+			let needNext = true;
+		
+			if( startNavi == 1 ) { needPrev=false; }
+			if( endNavi == pageTotalCount ) { needNext = false; }
+		
+			if(needPrev) {
+				$("#boardListFooter").append("<a href='/board/toContentsBoard?rNum="+(startNavi-1)+"&seq=${boardContents.seq}'>"+ "<<"+ "</a>");
+			}
+			for(let i = startNavi; i<=endNavi; i++) {
+				$("#boardListFooter").append("<a href='/board/toContentsBoard?rNum="+ i +"&seq=${boardContents.seq}' class='naviNum'>" + i + "</a>");
+			}
+			if(needNext) {$("#boardListFooter").append("<a href='/board/toContentsBoard?rNum="+(endNavi+1)+"&seq=${boardContents.seq}'>"+ ">>"+ "</a>");}
+		
+			let childNum = currentReplyPage;
+			if(childNum>10){childNum = childNum-9;}
+			$(".naviNum:nth-child("+childNum+")").css("color","red").css("text-decoration","underline");
+		}
+	</script>
 </body>
 </html>
