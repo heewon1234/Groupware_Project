@@ -57,16 +57,16 @@
 				</div>
 				<div id="box" class="menu_list_box">
 					<div id="every" class="menu_list_item">
-						<img src="../imges/commons/body_form/left_item/default/company.png"> <span class="menu_list_item_text">전체</span>
+						<img src="../imges/commons/body_form/left_item/default/company.png"> <span class="menu_list_item_text">전체</span> ${everyCount }
 					</div>
 					<div id="pending" class="menu_list_item">
-						<img src="../imges/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">미결</span>
+						<img src="../imges/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">미결</span> ${pendingCount }
 					</div>
 					<div id="approve" class="menu_list_item">
-						<img src="../imges/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">결재</span>
+						<img src="../imges/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">결재</span> ${approveCount }
 					</div>
 					<div id="return" class="menu_list_item">
-						<img src="../imges/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">반려</span>
+						<img src="../imges/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">반려</span> ${returnCount }
 					</div>
 				</div>
 			</div>

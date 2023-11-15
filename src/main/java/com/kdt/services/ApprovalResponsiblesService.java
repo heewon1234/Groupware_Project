@@ -30,7 +30,22 @@ public class ApprovalResponsiblesService {
 		return dao.getManagerIdList(docId);
 	}
 	public int updateStatus(ApprovalResponsiblesDTO dto) {
-		System.out.println(dto.getDoc_id());
 		return dao.updateStatus(dto);
+	}
+	
+	public int getEveryCount(String id) {
+		return dao.getEveryCount(id);
+	}
+	
+	public int getPendingCount(String id) {
+		return dao.getPendingCount(id);
+	}
+	
+	public int getApproveCount(String id) {
+		return dao.getApproveCount(id);
+	}
+	
+	public int getReturnCount(String id) {
+		return dao.getReturnCount(id);
 	}
 }

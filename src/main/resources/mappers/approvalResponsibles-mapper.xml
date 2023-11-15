@@ -36,4 +36,24 @@
 		UPDATE Approval_Responsibles SET approval_status = #{approval_status}
 		where doc_id = #{doc_id} and approver_id = #{approver_id}
 	</update>
+	
+	<select id="getEveryCount" resultType="Integer">
+		select COUNT(*) from Approval_Responsibles
+		WHERE approver_id = #{id}
+	</select>
+	
+	<select id="getPendingCount" resultType="Integer">
+		select COUNT(*) from Approval_Responsibles
+		WHERE approver_id = #{id} and approval_status = '미결'
+	</select>
+	
+	<select id="getApproveCount" resultType="Integer">
+		select COUNT(*) from Approval_Responsibles
+		WHERE approver_id = #{id} and approval_status = '결재'
+	</select>
+	
+	<select id="getReturnCount" resultType="Integer">
+		select COUNT(*) from Approval_Responsibles
+		WHERE approver_id = #{id} and approval_status = '반려'
+	</select>
 </mapper>
