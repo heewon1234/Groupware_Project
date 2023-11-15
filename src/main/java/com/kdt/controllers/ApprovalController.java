@@ -201,4 +201,8 @@ public class ApprovalController {
 		
 		return "/approval/document/left_item";
 	}
+	@RequestMapping("/work_plan_write")
+	public String work_plan_write() {
+		return "/approval/document/works/workPlan_write";
+	}
 }
