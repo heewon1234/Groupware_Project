@@ -1,7 +1,18 @@
-*{box-sizing: border-box;}
+*{
+	box-sizing: border-box;
+	}
+body{
+	background-color: #d2e0fb1a;
+	margin:0px;
+}
 .homeContainer{
 	width: 100%;
 }
+
+a {
+  text-decoration-line: none;
+}
+
 #top_container {
   display: flex;
   justify-content: center;
@@ -14,13 +25,19 @@
 }
 #menu {
   display: flex;
-  justify-content: space-between;
-  padding: 30px;
+  justify-content: center;
+  align-items: center;
   background-color: #d2e0fb;
-  width: 80%;
+  width: 100%;
+}
+#menuList{
+	padding: 30px;
+	display: flex;
+  	justify-content: space-between;
+	width:80%;
 }
 
-#menu > div {
+#menuList > div {
   width: 50px; 
 }
 .title{font-size: small; width: 60px;margin-top: 5px;}
@@ -32,4 +49,50 @@
     text-align: center; /* 원 안의 텍스트 중앙 정렬 */
     line-height: 60px; /* 원 안의 텍스트 수직 중앙 정렬 */
     font-size: 24px; /* 텍스트 크기 */
+}
+
+#contents{
+	width:1000px;
+	height:1500px;
+	margin:auto;
+}
+
+#contents1{
+	width:100%;
+	min-width:1000px;
+	height:600px;
+}
+
+#workcheckContainer{
+	float:left;
+	background-color:#ffffff;
+	width:40%;
+	height:500px;
+	border-radius: 7px;
+	margin-top:100px;
+}
+
+.blank{
+	float:left;
+	width:20%;
+	height:1px;
+}
+
+#mailContainer{
+	float:left;
+	background-color:#ffffff;
+	width:40%;
+	height:500px;
+	border-radius: 7px;
+	right:0px;
+	margin-top:100px;
+}
+
+#calendarContainer{
+	clear: both;
+	background-color:#ffffff;
+	width:100%;
+	height:600px;
+	border-radius: 7px;
+	margin-top:100px;
 }

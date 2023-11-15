@@ -99,7 +99,8 @@ public class WorkController {
 	public String joindayupdate(String idList,String joindayList) throws Exception {
 		System.out.println(idList);
 		System.out.println(joindayList);
-	    wservice.leave_joindayupdate(idList, joindayList);
+	    wservice.leave_joindayupdate(idList,joindayList);
+	    wservice.updateLeaveRemainder(idList,joindayList);
 	    return "redirect:/works/workmanage";
 	}
 	

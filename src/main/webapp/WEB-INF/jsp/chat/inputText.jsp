@@ -62,7 +62,7 @@
 				<div class="inputText" id="inputText" contenteditable="true"
 					style="padding: 10px"></div>
 				<div>
-					<button id="sendBtn">전송</button>
+					<button type="button" id="sendBtn">전송</button>
 				</div>
 			</div>
 		</div>

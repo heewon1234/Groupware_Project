@@ -17,72 +17,91 @@
 <body>
 	<c:choose>
 		<c:when test="${loginId==null }">
-				<form action="/members/login" method="post">
-					<div class="loginBox">
-						<div class="loginLogo">GroupWare</div>
-						<div class="inputID">
-							<i class="fa-regular fa-user loginIcon"></i> <input type="text"
-								name="id" id="id" placeholder="input your ID" class="idbox">
-						</div>
-						<div class="inputPW">
-							<i class="fa-solid fa-lock loginIcon"></i> <input type="password"
-								name="pw" placeholder="input your PW" class="pwbox">
-						</div>
-						<div class="rememberID">
-							<input type="checkbox" id="remID">아이디 기억하기
-						</div>
-						<div class="loginButton">
-							<button id="loginbtn">LOGIN</button>
-						</div>
+			<form action="/members/login" method="post">
+				<div class="loginBox">
+					<div class="loginLogo">GroupWare</div>
+					<div class="inputID">
+						<i class="fa-regular fa-user loginIcon"></i> <input type="text"
+							name="id" id="id" placeholder="input your ID" class="idbox">
 					</div>
-				</form>
+					<div class="inputPW">
+						<i class="fa-solid fa-lock loginIcon"></i> <input type="password"
+							name="pw" placeholder="input your PW" class="pwbox">
+					</div>
+					<div class="rememberID">
+						<input type="checkbox" id="remID">아이디 기억하기
+					</div>
+					<div class="loginButton">
+						<button id="loginbtn">LOGIN</button>
+					</div>
+				</div>
+			</form>
 		</c:when>
 		<c:otherwise>
 			<div class="homeContainer">
 				<div id="top_container"></div>
 				<div id="menu_contaier">
 					<div id="menu" style="text-align: center;">
-						<div>
-							<div class="main_icon_box">
-								<i class="fa-regular fa-clipboard"></i>
-							</div>
-							<div class="title">게시판</div>
-						</div>
-						<div>
-							<a href="/calendar/official">
+						<div id="menuList">
+							<div>
 								<div class="main_icon_box">
-									<i class="fa-regular fa-calendar-days"></i>
+									<i class="fa-regular fa-clipboard"></i>
 								</div>
-							</a>
-							<div class="title">일정</div>
-						</div>
-						<div>
-							<div class="main_icon_box">
-								<i class="fa-regular fa-envelope"></i>
+								<div class="title">게시판</div>
 							</div>
-							<div class="title">사내메일</div>
-						</div>
-						<div>
-							<a href="/works/work_leave">
-							<div class="main_icon_box">
-								<i class="fa-solid fa-sitemap"></i>
+							<div>
+								<a href="/calendar/official">
+									<div class="main_icon_box">
+										<i class="fa-regular fa-calendar-days"></i>
+									</div>
+								</a>
+								<div class="title">일정</div>
 							</div>
-							</a>
-							<div class="title">인사</div>
-						</div>
-						<div>
-							<div class="main_icon_box">
-								<i class="fa-regular fa-address-book"></i>
+							<div>
+								<div class="main_icon_box">
+									<i class="fa-regular fa-envelope"></i>
+								</div>
+								<div class="title">사내메일</div>
 							</div>
 							<div class="title">주소록</div>
 						</div>
 						<div>
+							<a href="/approval/document/lists/all">
 							<div class="main_icon_box">
 								<i class="fa-regular fa-clipboard"></i>
 							</div>
 							<div class="title">결재</div>
+							</a>
+							<div>
+								<a href="/works/work_leave">
+									<div class="main_icon_box">
+										<i class="fa-solid fa-sitemap"></i>
+									</div>
+								</a>
+								<div class="title">인사</div>
+							</div>
+							<div>
+								<div class="main_icon_box">
+									<i class="fa-regular fa-address-book"></i>
+								</div>
+								<div class="title">주소록</div>
+							</div>
+							<div>
+								<div class="main_icon_box">
+									<i class="fa-regular fa-clipboard"></i>
+								</div>
+								<div class="title">결재</div>
+							</div>
 						</div>
 					</div>
+				</div>
+				<div id="contents">
+					<div id="contents1">
+						<div id="workcheckContainer">출퇴근 찍는거 들어가는 자리입니도</div>
+						<div class="blank"></div>
+						<div id="mailContainer">메일이 일정 내에 안될거같지만 일단은 메일 들어가는 자리입니다</div>
+					</div>
+					<div id="calendarContainer">달력이 들어갈 자리 입니다</div>
 				</div>
 			</div>
 		</c:otherwise>
