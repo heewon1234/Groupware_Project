@@ -33,7 +33,7 @@
 				</div>
 				<div id="lists" class="menu_list_box">
 					<div id="all"" class="menu_list_item">
-						<img src="../imges/commons/body_form/left_item/default/company.png"> <span class="menu_list_item_text">전체</span>
+						<img src="../imges/commons/body_form/left_item/default/company.png"> <span class="menu_list_item_text">전체</span> ${allCount }
 					</div>
 					<div id="wait" class="menu_list_item">
 						<img src="../imges/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">대기</span>

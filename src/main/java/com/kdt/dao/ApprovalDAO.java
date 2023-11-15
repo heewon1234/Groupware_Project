@@ -38,4 +38,8 @@ public class ApprovalDAO {
 	public ApprovalDTO selectByDocId(int docId) {
 		return db.selectOne("Approval.selectByDocId", docId);
 	}
+	
+	public int getAllCount(String id) {
+		return db.selectOne("Approval.getAllCount", id);
+	}
 }
