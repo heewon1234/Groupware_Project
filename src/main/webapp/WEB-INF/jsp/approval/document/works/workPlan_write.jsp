@@ -31,7 +31,7 @@
 						<tbody>
 							<tr>
 								<th>문서 종류</th>
-								<td name="doc_type">근무계획변경</td>
+								<td>근무계획변경</td>
 								<th>작성자</th>
 								<td>${userDTO.organization }${userDTO.position }
 									${userDTO.name }</td>

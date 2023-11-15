@@ -196,6 +196,7 @@ public class ApprovalController {
 	@RequestMapping("/insertApproval")
 	public String insertApproval(String title, String contents, String doc_type, 
 			MultipartFile[] files, @RequestParam(name = "managerID", required = false) String[] managerID) throws Exception {
+		System.out.println(title+":"+contents+":"+doc_type);
 		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");
 		ApprovalDTO appdto = new ApprovalDTO(0, userDTO.getId(), title, contents, null, "Wait", doc_type);
 		String uploadPath = "c:/uploads";
