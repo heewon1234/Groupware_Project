@@ -97,6 +97,20 @@ a {
 	margin-top:100px;
 }
 
+.verticalLine {
+	border-right: 1px solid rgb(192, 192, 192);
+    height: 80%;
+    float:left;
+    margin-top: 50px;
+}
+
+#scheduleList {
+	float:left;
+	width:45%;
+	height:100%;
+	margin-top: 70px;
+	margin-left:20px;
+}
 
 /*출근체크*/
 
@@ -139,6 +153,7 @@ a {
 .date-wrap {
 	width:50%;
 	height:100%;
+	float:left;
 }
 
 table.date-month {
@@ -146,7 +161,7 @@ table.date-month {
 	height:80%;
 }
 
-/*td {
+td {
     text-align: center;
     vertical-align: middle;
-}*/
+}

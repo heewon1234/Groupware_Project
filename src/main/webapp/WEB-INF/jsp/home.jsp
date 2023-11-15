@@ -167,6 +167,12 @@
 								</tbody>
 							</table>
 						</div>
+						<div class="verticalLine"></div>
+						<div id="scheduleList">
+							<c:forEach var="list" items="${list }">
+								<div>${list.schedule }</div>
+							</c:forEach>
+						</div>
 					</div>
 				</div>
 			</div>
