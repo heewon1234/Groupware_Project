@@ -212,7 +212,6 @@
 	opacity: 0.7;
 	cursor: not-allowed;
 }
-
 </style>
 </head>
 <body>
@@ -325,8 +324,9 @@
 		<form class="modal_contact_add_form" method="post" id="contact_form"
 			action="/approval/document/insertApproval">
 			<!-- 변경된 내용을 hidden으로 숨겨서 같이 보냄 -->
-			<input type="hidden" name="title" value="근무계획변경"> <input
-				type="hidden" name="contents">
+			<input type="hidden" id=doc_type name="doc_type" value="근무계획변경">
+			<input type="hidden" id="work_plan_title" name="title" value="근무계획변경">
+			<input type="hidden" id="work_plan_contents" name="contents">
 			<div class="modal_contact_add">
 				<div class="modal_title">결재</div>
 				<div class="modal_body">
@@ -334,9 +334,7 @@
 						<div style="margin-bottom: 20px; margin-top: 20px;">결재 라인</div>
 						<div class="grid-container">
 							<div class="grid-item" id="request">
-								신청
-								<img id="plusIcon" style="margin-top: 20px;"
-									src="/images/chats/plus-circle.svg">
+								신청 <img id="plusIcon" src="/images/chats/plus-circle.svg">
 							</div>
 							<div class="grid-item manager"></div>
 						</div>
@@ -345,30 +343,31 @@
 				<div class="modal_footer right">
 					<button type="button" class="button_cancel float_left"
 						id="modal_cancel_button">닫기</button>
-					<button class="button_apply float_right"
-						id="modal_apply_button" disabled>확인</button>
+					<button class="button_apply float_right" id="modal_apply_button"
+						disabled>확인</button>
+				</div>
+			</div>
+
+			<div class="modal_tag_add">
+				<div class="modal_title">
+					<span>신청 설정</span>
+				</div>
+				<div class="modal_body">
+					<ul>
+						<c:forEach var="list" items="${managerList }">
+							<li><span>${list.organization }</span> <span>${list.name }</span>
+								<span hidden>${list.id }</span> <input type='checkbox'
+								name='managerID' value='${list.id}'></li>
+						</c:forEach>
+					</ul>
+				</div>
+				<div class="modal_footer">
+					<button type="button" class="button_cancel" id="button_cancel_tag">취소</button>
+					<button type="button" class="button_apply" id="button_apply_tag"
+						style="margin-left: 14px">확인</button>
 				</div>
 			</div>
 		</form>
-		<div class="modal_tag_add">
-			<div class="modal_title">
-				<span>신청 설정</span>
-			</div>
-			<div class="modal_body">
-				<ul>
-					<c:forEach var="list" items="${managerList }">
-						<li><span>${list.organization }</span> <span>${list.name }</span>
-							<span hidden>${list.id }</span> <input type='checkbox'
-							name='managerID' value='${list.id}'></li>
-					</c:forEach>
-				</ul>
-			</div>
-			<div class="modal_footer">
-				<button class="button_cancel" id="button_cancel_tag">취소</button>
-				<button type="button" class="button_apply" id="button_apply_tag"
-					style="margin-left: 14px">확인</button>
-			</div>
-		</div>
 	</div>
 
 
@@ -432,6 +431,7 @@
 	    
 	    var gridItem = document.querySelector('.manager');
 
+	    //db에 넣음?
 	    var selectedNames = [];
 
 	    // 선택된 체크박스에서 이름 가져와서 배열에 추가
@@ -439,6 +439,7 @@
 	        var listItem = checkbox.parentElement;
 	        var name = listItem.querySelector('span:nth-child(2)').textContent;
 	        selectedNames.push(name);
+	       
 	    });
 	    const applyButton = $('#modal_apply_button');
 
@@ -458,6 +459,10 @@
 	// submit 확인임
 	$(document).ready(function() {
 	    $('#modal_apply_button').on('click', function() {
+	    	var workPlanTitleValue = $("#work_plan_title").val();
+	    	var workPlanContentsValue = $("#work_plan_contents").val();
+
+	    	console.log(workPlanTitleValue+" : "+workPlanContentsValue);
 	    });
 	});
 	
@@ -476,7 +481,11 @@ document.getElementById('update_workPlan_body').addEventListener('change', funct
         const headerText = $('#update_workPlan_head').children().eq(columnIndex).text();
         
         if (selectedValue !== '9시 출근') {
-            console.log('날짜:', date, '이름:', headerText, '선택된 값:', selectedValue);
+        	var logContent = '날짜: ' + date + ', 이름: ' + headerText + ', 변경요청 날짜: ' + selectedValue;
+            console.log('날짜:', date, '이름:', headerText, '변경요청:', selectedValue);
+            $("#work_plan_contents").val(function(index, currentValue) {
+                return currentValue + logContent + '\n';
+            });
         }
     }
 });
