@@ -88,11 +88,84 @@
 				</div>
 				<div id="contents">
 					<div id="contents1">
-						<div id="workcheckContainer">출퇴근 찍는거 들어가는 자리입니도</div>
+						<div id="workcheckContainer">
+							<div class="workcheckbox">
+								<div class="timebox">
+									<div>
+										<span id="clock"></span> <span id="statusText"
+											class="highlight">출근전</span>
+									</div>
+								</div>
+								<div class="workinoutbox">
+									<button id="workin" onclick="workin()">
+										출근하기<br> <br> <span id="currentinTime">00:00:00</span>
+									</button>
+									<button id="workout" onclick="workout()" disabled>
+										퇴근하기<br> <br> <span id="currentoutTime">00:00:00</span>
+									</button>
+								</div>
+								<div class="workbtnbox">
+									<button disabled onclick="changeStatus('업무중', this)"
+										class="workbtn">업무</button>
+									<button disabled onclick="changeStatus('외출중', this)"
+										class="workbtn">외출</button>
+									<button disabled onclick="changeStatus('회의중', this)"
+										class="workbtn">회의</button>
+									<button disabled onclick="changeStatus('외근중', this)"
+										class="workbtn">외근</button>
+								</div>
+							</div>
+						</div>
 						<div class="blank"></div>
 						<div id="mailContainer">메일이 일정 내에 안될거같지만 일단은 메일 들어가는 자리입니다</div>
 					</div>
-					<div id="calendarContainer">달력이 들어갈 자리 입니다</div>
+					<div id="calendarContainer">
+						<div class="date-wrap">
+							<div class="date-month">
+								<span id="month-this">2022.05</span>
+								<div class="button_wrap">
+									<button type="button" id="month-prev" class="month-move"
+										data-ym="2022-04-01"><</button>
+									<button type="button" id="month-next" class="month-move"
+										data-ym="2022-06-01">></button>
+								</div>
+							</div>
+							<table class="date-month">
+								<thead>
+									<tr>
+										<th>일</th>
+										<th>월</th>
+										<th>화</th>
+										<th>수</th>
+										<th>목</th>
+										<th>금</th>
+										<th>토</th>
+									</tr>
+								</thead>
+								<tbody id="tbl-month">
+									<tr>
+										<td class="sun"><a>1</a></td>
+										<td class=""><a href="/news/schedule?date=2022-05-02">2</a></td>
+										<td class=""><a>3</a></td>
+										<td class=""><a>4</a></td>
+										<td class="today"><a>5</a></td>
+										<td class=""><a>6</a></td>
+										<td class="sat"><a>7</a></td>
+									</tr>
+									<!-- 행 반복 -->
+									<tr>
+										<td class="sun"><a>29</a></td>
+										<td class=""><a>30</a></td>
+										<td class=""><a>31</a></td>
+										<td class=""><a></a></td>
+										<td class=""><a></a></td>
+										<td class=""><a></a></td>
+										<td class="sat"></a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
 				</div>
 			</div>
 		</c:otherwise>
@@ -147,5 +220,6 @@
 			}); 
 	    }
 	</script>
+	<script src="/js/home/home.js"></script>
 </body>
 </html>
