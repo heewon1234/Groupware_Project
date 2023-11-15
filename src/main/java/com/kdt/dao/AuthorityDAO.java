@@ -22,4 +22,8 @@ public class AuthorityDAO {
 		return db.selectList("Authority.selectAuthBoard",id);
 	}
 	
+	public List<AuthorityDTO> selectAuthMember(String board_title){
+		return db.selectList("Authority.selectAuthMember",board_title);
+	}
+	
 }

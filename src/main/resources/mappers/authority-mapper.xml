@@ -10,6 +10,11 @@
 	
 	<!-- 게시글 작성 -->
 	<select id="selectAuthBoard" resultType="String">
-		select sys_board_title from Authority where id=#{id} and authority="쓰기"
+		select ori_board_title from Authority where id=#{id} and authority="쓰기"
+	</select>
+	
+	<!-- 게시판 권한 가진 사람들 불러오기 -->
+	<select id="selectAuthMember" resultType="com.kdt.dto.AuthorityDTO">
+		select * from Authority where ori_board_title=#{board_title}
 	</select>
 </mapper>
