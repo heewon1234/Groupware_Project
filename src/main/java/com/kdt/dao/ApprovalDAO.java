@@ -38,4 +38,20 @@ public class ApprovalDAO {
 	public ApprovalDTO selectByDocId(int docId) {
 		return db.selectOne("Approval.selectByDocId", docId);
 	}
+	
+	public int getAllCount(String id) {
+		return db.selectOne("Approval.getAllCount", id);
+	}
+	
+	public int getWaitCount(String id) {
+		return db.selectOne("Approval.getWaitCount", id);
+	}
+	
+	public int getCompleteCount(String id) {
+		return db.selectOne("Approval.getCompleteCount", id);
+	}
+	
+	public int getProcessCount(String id) {
+		return db.selectOne("Approval.getProcessCount", id);
+	}
 }

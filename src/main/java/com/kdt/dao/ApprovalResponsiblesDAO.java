@@ -34,4 +34,16 @@ public class ApprovalResponsiblesDAO {
 	public int updateStatus(ApprovalResponsiblesDTO dto) {
 		return db.update("ApprovalResponsibles.updateStatus", dto);
 	}
+	public int getEveryCount(String id) {
+		return db.selectOne("ApprovalResponsibles.getEveryCount", id);
+	}
+	public int getPendingCount(String id) {
+		return db.selectOne("ApprovalResponsibles.getPendingCount", id);
+	}
+	public int getApproveCount(String id) {
+		return db.selectOne("ApprovalResponsibles.getApproveCount", id);
+	}
+	public int getReturnCount(String id) {
+		return db.selectOne("ApprovalResponsibles.getReturnCount", id);
+	}
 }

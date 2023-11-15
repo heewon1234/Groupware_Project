@@ -134,10 +134,9 @@ public class BoardService {
 		}
 	}
 
-
-
 	// 게시글 불러오기 관련
-	public List<BoardDTO> boardContentsList(String board_title, String id){ // 게시글 리스트
+	// 게시글 리스트 ( 개수 구할 때 사용 )
+	public List<BoardDTO> boardContentsList(String board_title, String id){ 
 		Map<String,String> map = new HashMap<>();
 		int boardSeq = mdao.selectBoardSeq(board_title);
 		map.put("oriBoardTitle", board_title);
@@ -145,8 +144,19 @@ public class BoardService {
 		map.put("id", id);
 		return bdao.boardContentsList(map);
 	}
-
-	public List<BoardDTO> FavoriteAllContentsList(String board_title,String id){
+	// 게시글 리스트 10개씩 가져오기
+	public List<BoardDTO> BoardContentsListBy(String board_title, String id, String start, String end){ 
+		Map<String,String> map = new HashMap<>();
+		int boardSeq = mdao.selectBoardSeq(board_title);
+		map.put("oriBoardTitle", board_title);
+		map.put("board_title", "Board_"+boardSeq);
+		map.put("id", id);
+		map.put("start", start);
+		map.put("end", end);
+		return bdao.BoardContentsListBy(map);
+	}
+	// 즐겨찾기 테이블 모든 리스트 ( 개수 구할 때 사용 )
+	public List<BoardDTO> FavoriteAllContentsList(String board_title,String id){ 
 		List<Integer> seqList = mdao.allBoardSeq();
 		List<BoardDTO> favContentsList = new ArrayList<>();
 
@@ -159,7 +169,35 @@ public class BoardService {
 		}
 		return favContentsList;
 	}
+	// 즐겨찾기 리스트 10개씩 가져오기
+	public List<BoardDTO> FavoriteListBy(String board_title,String id, String start){ 
+		List<Integer> seqList = mdao.allBoardSeq();
+		String fromBoard = "";
+		
+		for(int i=0;i<seqList.size();i++) {
+			if(i==seqList.size()-1) {
+				fromBoard+="select *, 'Board_"+seqList.get(i)+"' as board_title from Board_"+seqList.get(i);	
+			} else {			
+				fromBoard+="select *, 'Board_"+seqList.get(i)+"' as board_title from Board_"+seqList.get(i) + " union all ";
+			}
+		}
+		System.out.println(fromBoard);
+		
+		Map<String,String> map = new HashMap<>();
+		map.put("id", id);
+		map.put("fromBoard", fromBoard);
+		map.put("start", start);
 
+		return bdao.FavoriteListBy(map);
+	}
+
+	// 공지 최근 5개만 가져오기
+	public List<BoardDTO> Notice(String board_title){ 
+		int seq = mdao.selectBoardSeq(board_title);
+		return bdao.Notice("Board_"+seq);
+	}
+
+	// 게시글 내용 불러오기
 	public BoardDTO boardContents(String board_title, String seq) {		
 		int boardSeq = mdao.selectBoardSeq(board_title);
 		String sysBoardTitle = "Board_"+boardSeq;
@@ -168,6 +206,7 @@ public class BoardService {
 		dto.setSeq(Integer.parseInt(seq));
 		return bdao.boardContents(dto);
 	}
+
 	//
 
 	// 게시글 삭제 관련
@@ -193,7 +232,7 @@ public class BoardService {
 
 		// 테이블에서 데이터 삭제
 		bdao.delContents(map); // board 테이블 데이터 삭제
-		fdao.delFavContents(new FavoriteBoardDTO(0,"Board_"+boardSeq,id,parent_seq)); // 즐겨찾기 테이블 데이터 삭제
+		fdao.delFavContents(new FavoriteBoardDTO(0,"Board_"+boardSeq,board_title,id,parent_seq)); // 즐겨찾기 테이블 데이터 삭제
 		rdao.delReplyByParentSeq(new ReplyDTO(0,null,null,board_title,parent_seq,null)); // 댓글 테이블 데이터 삭제
 		filedao.delFileByParensSeq(new FileDTO(0,null,null,parent_seq,board_title,null)); // 파일 테이블 데이터 삭제
 		sdao.delSurveyByParentSeq(new SurveyDTO(0,board_title,parent_seq,null,0,0)); // Survey 테이블 데이터 삭제
@@ -214,7 +253,7 @@ public class BoardService {
 			dto.setSurvey_question(null);
 			bdao.updateSurveyQuestion(dto);
 		}
-		
+
 		if(dto.getSurvey_question()!=null) {
 			bdao.updateSurveyQuestion(dto);
 		}

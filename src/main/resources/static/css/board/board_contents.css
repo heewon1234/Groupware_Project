@@ -234,4 +234,12 @@
 }
 
 .updateCancelBtn,.updateSuccessBtn{display:none;}
-
+#replyFooter{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#replyFooter>a{
+	margin-left:10px;
+	margin-right:10px;
+}

@@ -197,11 +197,36 @@ public class ApprovalController {
 	
 	@RequestMapping(value="/left_item")
 	public String toLeft_item(String selectItem, Model model) {
+		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");
+		int allCount = appService.getAllCount(userDTO.getId());
+		int waitCount = appService.getWaitCount(userDTO.getId());
+		int completeCount = appService.getCompleteCount(userDTO.getId());
+		int processCount = appService.getProcessCount(userDTO.getId());
+		
+		int everyCount = appRService.getEveryCount(userDTO.getId());
+		int pendingCount = appRService.getPendingCount(userDTO.getId());
+		int approveCount = appRService.getApproveCount(userDTO.getId());
+		int returnCount = appRService.getReturnCount(userDTO.getId());
+		
 		model.addAttribute("selectItem", selectItem);
+		model.addAttribute("allCount", allCount);
+		model.addAttribute("waitCount", waitCount);
+		model.addAttribute("completeCount", completeCount);
+		model.addAttribute("processCount", processCount);
+		model.addAttribute("everyCount", everyCount);
+		model.addAttribute("pendingCount", pendingCount);
+		model.addAttribute("approveCount", approveCount);
+		model.addAttribute("returnCount", returnCount);
 		
 		return "/approval/document/left_item";
 	}
-	@RequestMapping("/work_plan_write")
+	
+	@RequestMapping("/works/workLeave_write")
+	public String work_leave_write() {
+		return "/approval/document/works/workLeave_write";
+	}
+	
+	@RequestMapping("/works/workPlan_write")
 	public String work_plan_write() {
 		return "/approval/document/works/workPlan_write";
 	}

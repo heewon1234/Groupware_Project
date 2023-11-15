@@ -83,4 +83,20 @@ public class ApprovalService {
 	public ApprovalDTO selectByDocId(int docId) {
 		return adao.selectByDocId(docId);
 	}
+	
+	public int getAllCount(String id) {
+		return adao.getAllCount(id);
+	}
+	
+	public int getWaitCount(String id) {
+		return adao.getWaitCount(id);
+	}
+	
+	public int getCompleteCount(String id) {
+		return adao.getCompleteCount(id);
+	}
+	
+	public int getProcessCount(String id) {
+		return adao.getProcessCount(id);
+	}
 }

@@ -7,18 +7,34 @@
 		SELECT * FROM Approval WHERE id = #{id} 
 	</select>
 	<select id="selectWaitById" resultType="com.kdt.dto.ApprovalDTO">
-		SELECT * FROM Approval WHERE id = #{id} AND approval_status = 'Wait'
+		SELECT * FROM Approval WHERE id = #{id} AND approval_status = '대기'
 	</select>
 	<select id="selectCompleteById" resultType="com.kdt.dto.ApprovalDTO">
-		SELECT * FROM Approval WHERE id = #{id} AND approval_status = 'Complete'
+		SELECT * FROM Approval WHERE id = #{id} AND approval_status = '완료'
 	</select>
 	<select id="selectProgressById" resultType="com.kdt.dto.ApprovalDTO">
-		SELECT * FROM Approval WHERE id = #{id} AND approval_status = 'Progress'
+		SELECT * FROM Approval WHERE id = #{id} AND approval_status = '진행중'
 	</select>
 	<insert id="insert" useGeneratedKeys="true" keyProperty="seq">
-		insert into Approval values (null,#{id},#{title},#{contents}, now(), 'Wait', #{doc_type})
+		insert into Approval values (null,#{id},#{title},#{contents}, now(), '대기', #{doc_type})
 	</insert>
 	<select id="selectByDocId" resultType="com.kdt.dto.ApprovalDTO">
 		SELECT * FROM Approval WHERE seq = #{docId}
+	</select>
+	<select id="getAllCount" resultType="Integer">
+		SELECT COUNT(*) FROM Approval
+		WHERE id = #{id}
+	</select>
+	<select id="getWaitCount" resultType="Integer">
+		SELECT COUNT(*) FROM Approval
+		WHERE id = #{id} and approval_status = '대기'
+	</select>
+	<select id="getCompleteCount" resultType="Integer">
+		SELECT COUNT(*) FROM Approval
+		WHERE id = #{id} and approval_status = '완료'
+	</select>
+	<select id="getProcessCount" resultType="Integer">
+		SELECT COUNT(*) FROM Approval
+		WHERE id = #{id} and approval_status = '진행중'
 	</select>
 </mapper>
