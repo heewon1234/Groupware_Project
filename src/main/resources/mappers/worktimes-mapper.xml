@@ -9,10 +9,10 @@
   		insert into WorkTimes values(null,#{id},#{work_type},CONVERT_TZ(NOW(), 'UTC', 'Asia/Seoul'))
   	</insert>
   	<select id="selectby" resultType="com.kdt.dto.WorkTimesDTO"> <!-- select를 사용할때는 resultType 설정 -->
-  		select * from WorkTimes where id=#{id} AND DATE(CONVERT_TZ(work_time, 'UTC', 'Asia/Seoul')) = CURDATE();
+  		select * from WorkTimes where id=#{id} AND DATE(CONVERT_TZ(now(), 'UTC', 'Asia/Seoul')) = CURDATE();
   	</select>
   	<select id="work_inout" resultType="com.kdt.dto.WorkTimesDTO">
-  	SELECT * FROM WorkTimes WHERE id=#{id} AND DATE(CONVERT_TZ(work_time, 'UTC', 'Asia/Seoul')) = CURDATE() and (work_type = '근무 종료' or work_type = '근무중');
+  	SELECT * FROM WorkTimes WHERE id=#{id} AND DATE(CONVERT_TZ(now(), 'UTC', 'Asia/Seoul')) = CURDATE() and (work_type = '근무 종료' or work_type = '근무중');
   	</select>
   	
   	

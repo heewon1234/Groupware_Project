@@ -88,6 +88,7 @@ function changeStatus(newStatus, button) { // 업무 외출 회의 외근 버튼
 		},
 	}).done(
 		function(resp) {
+			console.log(resp);
 			let tr = $("<tr>");
 			tr.html("<td width='100'>"
 				+ (resp[resp.length - 1].time) + "</td>"
@@ -98,6 +99,7 @@ function changeStatus(newStatus, button) { // 업무 외출 회의 외근 버튼
 		});
 
 }
+
 function updateClock() { // 시계 출력
 	var now = new Date();
 	var options = {
