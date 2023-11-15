@@ -130,7 +130,7 @@ function displayTime(elementId, timeString) {
 	currentTimeElement.innerText = newTime;
 }
 
-function work_inout() { 
+function work_inout() {
 	$.ajax({
 		url: "/works/list",
 	})
@@ -144,12 +144,15 @@ function work_inout() {
 						.querySelectorAll('.workbtn');
 					for (var i = 0; i < buttons.length; i++) {
 						buttons[i].disabled = false;
+						if (resp[resp.length - 1].work_type.trim().includes(buttons[i].textContent.trim())) {
+							buttons[i].disabled = true;
+						}
 					}
 					document.getElementById("workin").disabled = true;
 					document.getElementById("workout").disabled = false;
 					var statusText = document
 						.getElementById('statusText');
-					statusText.textContent = resp[0].work_type;
+					statusText.textContent = resp[resp.length - 1].work_type;
 					displayTime("currentinTime", resp[0].work_time);
 				}
 
