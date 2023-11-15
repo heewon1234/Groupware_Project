@@ -34,22 +34,34 @@
 	
 	<!-- 게시글 불러오기 -->
 	<select id="boardContentsList" resultType="com.kdt.dto.BoardDTO">
+	<!-- 게시글 리스트 다 가져오기 ( 사이즈 구할 때 사용 )-->
 		select b.*, #{oriBoardTitle} as board_title,case when b.seq = parent_seq then 'true' else 'false' end as favorite 
 		from ${board_title} b left join Favorite_Board f on id=#{id} and parent_seq = b.seq and board_title=#{board_title} order by seq desc
 	</select>
+	<!-- 게시글 리스트 10개씩 가져오기 -->
 	<select id="BoardContentsListBy" resultType="com.kdt.dto.BoardDTO">
 		select * from (select row_number() over(order by seq desc) as rn, b.*,#{oriBoardTitle} as board_title,case when b.seq = parent_seq then 'true' else 'false' end as favorite 
 		from ${board_title} b left join Favorite_Board f on id=#{id} and parent_seq = b.seq and board_title=#{board_title} order by seq desc) as sub 
 		where rn between ${start} and ${end};
 	</select>
+	<!-- 게시글 내용 불러오기 -->
 	<select id="boardContents" resultType="com.kdt.dto.BoardDTO">
 		select * from ${board_title} where seq=#{seq}
 	</select>
-	
+	<!-- 즐겨찾기 게시물 전체 불러오기 -->
 	<select id="FavoriteBoardContentsList" resultType="com.kdt.dto.BoardDTO">
 		select b.*,#{oriBoardTitle} as board_title, "true" as favorite from Favorite_Board f 
 		left join ${board_title} b on parent_seq=b.seq where id=#{id} and board_title=#{board_title} order by write_date desc
 	</select>
+	<!-- 즐겨찾기 게시물 10개씩 가져오기 -->
+	<select id="FavoriteListBy" resultType="com.kdt.dto.BoardDTO">
+		(select b.seq,ori_board_title as board_title,id,parent_seq,title,writer,header,notice,contents,survey_question,view_count from Favorite_Board f 
+		inner join 
+			(${fromBoard}) b 
+		on parent_seq=b.seq and f.board_title=b.board_title and id=#{id} order by write_date desc) 
+		limit ${start},10;  
+	</select>
+	<!-- 공지 내용 최근 5개 가져오기 -->
 	<select id="Notice" resultType="com.kdt.dto.BoardDTO">
 		select * from (select row_number() over(order by write_date desc) as rn, ${board_title}.* from ${board_title} where notice=true) as sub 
 		where rn between 1 and 5;

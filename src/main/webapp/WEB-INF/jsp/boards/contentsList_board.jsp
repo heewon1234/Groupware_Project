@@ -20,14 +20,16 @@
         </div>
         <div class="right_item">
             <div class="content_tab">
-                <div class="searchBox">
-                    <div class="searchIconBox">
-                        <img src="/images/board/search.png">
+                      <div class="main_search" id="searchBox">
+                        <div class="searchBox">
+                            <div class="searchIconBox">
+                                <img src="/images/commons/body_form/left_item/default/search.png" >
+                            </div>
+                            <div class="searchTextBox">
+                                <input type="text" placeholder="게시글 검색" id="searchTextBoxInput">
+                            </div>
+                        </div>
                     </div>
-                    <div class="searchTextBox">
-                        <input type="text" placeholder="게시글 검색">
-                    </div>
-                </div>
                 <div class="board_list">
                     <div class="board_top">
                         <select name="board_title">
@@ -92,9 +94,9 @@
 	<script src="/js/board/sideBar.js" defer></script>
     <script src="/js/board/contentsList_board.js" defer></script>
     <script>
-		if(replyListSize>0){
-			let replyFooter = document.getElementById("boardListFooter");
-			let recordTotalCount = ${replyListSize};
+		if(${recordTotalCount}>0){
+			let boardListFooter = document.getElementById("boardListFooter");
+			let recordTotalCount = ${recordTotalCount};
 			let recordCountPerPage = ${recordCountPerPage};
 			let naviCountPerPage = ${naviCountPerPage};
 			let currentPage = ${currentPage};
@@ -107,10 +109,10 @@
 				pageTotalCount =  recordTotalCount/ recordCountPerPage;
 			}
 
-			if(currentReplyPage<1){currenReplyPage=1;}
-			else if(currentReplyPage>pageTotalCount){currentReplyPage=pageTotalCount;}
+			if(currentPage<1){currenReplyPage=1;}
+			else if(currentPage>pageTotalCount){currentPage=pageTotalCount;}
 		
-			let startNavi = Math.floor(( currentReplyPage - 1 ) / naviCountPerPage) * naviCountPerPage + 1;
+			let startNavi = Math.floor(( currentPage - 1 ) / naviCountPerPage) * naviCountPerPage + 1;
 			let endNavi = startNavi + naviCountPerPage - 1;
 			if(endNavi > pageTotalCount) {endNavi = pageTotalCount;}
 
@@ -121,14 +123,14 @@
 			if( endNavi == pageTotalCount ) { needNext = false; }
 		
 			if(needPrev) {
-				$("#boardListFooter").append("<a href='/board/toContentsBoard?rNum="+(startNavi-1)+"&seq=${boardContents.seq}'>"+ "<<"+ "</a>");
+				$("#boardListFooter").append("<a href='/board/toBoard?cPage="+(startNavi-1)+">"+ "<<"+ "</a>");
 			}
 			for(let i = startNavi; i<=endNavi; i++) {
-				$("#boardListFooter").append("<a href='/board/toContentsBoard?rNum="+ i +"&seq=${boardContents.seq}' class='naviNum'>" + i + "</a>");
+				$("#boardListFooter").append("<a href='/board/toBoard?cPage="+ i +"' class='naviNum'>" + i + "</a>");
 			}
-			if(needNext) {$("#boardListFooter").append("<a href='/board/toContentsBoard?rNum="+(endNavi+1)+"&seq=${boardContents.seq}'>"+ ">>"+ "</a>");}
+			if(needNext) {$("#boardListFooter").append("<a href='/board/toBoard?cPage="+(endNavi+1)+"&board_title=${board_title}'>"+ ">>"+ "</a>");}
 		
-			let childNum = currentReplyPage;
+			let childNum = currentPage;
 			if(childNum>10){childNum = childNum-9;}
 			$(".naviNum:nth-child("+childNum+")").css("color","red").css("text-decoration","underline");
 		}

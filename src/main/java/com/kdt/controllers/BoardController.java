@@ -85,23 +85,31 @@ public class BoardController {
 		int currentPage=1;
 		if(cPage!=null) {currentPage = Integer.parseInt(cPage);}
 		session.setAttribute("currentPage", currentPage);		
-		int start = currentPage*Constants.RECORD_COUNT_PER_PAGE-(Constants.RECORD_COUNT_PER_PAGE-1);
+		int start = currentPage*Constants.RECORD_COUNT_PER_PAGE-(Constants.RECORD_COUNT_PER_PAGE-1)-1;
 		int end = currentPage*Constants.RECORD_COUNT_PER_PAGE;
 		
 		List<BoardDTO> noticeList;
 		if(board_title.equals("중요게시물")) {
+			// 레코드 개수 
 			int totalBoardContents = bservice.FavoriteAllContentsList(board_title,id).size();
-			model.addAttribute("recordTotalCount",totalBoardContents);
+			model.addAttribute("recordTotalCount",totalBoardContents); 
+			// 컨텐츠 리스트
+			List<BoardDTO> boardContentsList = bservice.FavoriteListBy(board_title, id, String.valueOf(start));
+			model.addAttribute("boardContentsList", boardContentsList);
 		} else {
+			// 레코드 개수
 			int totalBoardContents = bservice.boardContentsList(board_title,id).size();
-			noticeList = bservice.Notice(board_title);
 			model.addAttribute("recordTotalCount",totalBoardContents);
+			// 공지 최근 5개만
+			noticeList = bservice.Notice(board_title);
 			model.addAttribute("noticeList", noticeList);
-			//boardContentsList
 			
+			// 게시글 리스트 최신 10개
+			List<BoardDTO> boardContentsList = bservice.BoardContentsListBy(board_title, id, String.valueOf(start), String.valueOf(end));
+			model.addAttribute("boardContentsList", boardContentsList);
 		}
 
-		model.addAttribute("boardContentsList",boardContentsList);
+		//model.addAttribute("boardContentsList",noticeList);
 		model.addAttribute("recordCountPerPage",Constants.RECORD_COUNT_PER_PAGE);
 		model.addAttribute("naviCountPerPage",Constants.NAVI_COUNT_PER_PAGE);
 

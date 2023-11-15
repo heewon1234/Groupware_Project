@@ -3,7 +3,7 @@
 
 <mapper namespace="Favorite_Board">
 	<insert id="insertFav" useGeneratedKeys="true" keyProperty="seq">
-		insert into Favorite_Board values (null,#{board_title},#{id},#{parent_seq})
+		insert into Favorite_Board values (null,#{board_title},#{ori_board_title},#{id},#{parent_seq})
 	</insert>
 
 	<delete id="delFavContents">
