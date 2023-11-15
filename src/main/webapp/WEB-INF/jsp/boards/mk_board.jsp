@@ -10,7 +10,6 @@
 	<link rel="stylesheet" href="/css/commons/body_form/left_form/body_form_default.css" />
 	<link rel="stylesheet" href="/css/commons/topForm.css" />
     <link rel="stylesheet" href="/css/board/mk_board.css" />
-    <!-- <script src="js/commons/body_form/body_form_default.js"></script> -->
 </head>
 <body>
 	<div class="background"></div>

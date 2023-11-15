@@ -83,7 +83,7 @@ public class Mk_BoardController {
 	////////////////
 	
 	
-	// 게시판 수정 창으로 이동
+	// 게시판 관리창으로 이동
 	@RequestMapping("toEditBoard")
 	public String toEditBoard(Model model) {
 		List<Mk_BoardDTO> boardList = mservice.selectAllBoard();
@@ -101,5 +101,10 @@ public class Mk_BoardController {
 	public String delBoard(String board_title) {
 		mservice.delBoard(board_title);
 		return "redirect:/mk_board/toEditBoard";
+	}
+	
+	// 게시판 수정
+	public String toEditBoardDetail() {
+		return "boards/edit_board_detail";
 	}
 }

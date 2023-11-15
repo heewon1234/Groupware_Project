@@ -1,5 +1,5 @@
 $(".updateBtn").on("click",function(){
-	
+	location.href="/mk_board/toEditBoardDetail";
 });
 
 $(".delBtn").on("click",function(){
