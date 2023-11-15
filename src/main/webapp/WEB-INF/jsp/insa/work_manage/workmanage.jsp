@@ -47,7 +47,7 @@
 			<div class="div">
 				<span><button id="openModalBtn">휴가 미생성자</button></span>
 			</div>
-			
+
 			<div id="myModal" class="modal right_item">
 				<h3>휴가 미생성자</h3>
 				<hr>
@@ -68,8 +68,10 @@
 									<td><input type="text" name="idList" class="idListbox"
 										hidden> <input type="text" name="joindayList"
 										class="joindayListbox" hidden> <input type="hidden"
-										class="id" value="${i.id}"> <input type="text"
-										class="joinday" placeholder="YYYY-MM-DD 입력"></td>
+										class="id" value="${i.id}">
+										<div class="input-group mb-0">
+											<input type="text" name="name" class="form-control joinday" placeholder="YYYY-MM-DD" id="modal_body_content_input_right_name" style="font-size: 14px; height: 34px; width: 338px; padding: 0 10px;" maxlength="50">
+										</div></td>
 								</tr>
 							</c:forEach>
 						</tbody>
