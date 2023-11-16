@@ -9,6 +9,10 @@
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="/css/commons/body_form/left_form/body_form_default.css">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <style>
 * {
 	
@@ -35,6 +39,7 @@
 
 .works_days {
 	padding: 5px;
+	text-align: center;
 }
 
 #group_UserList {
@@ -103,7 +108,7 @@
 	background-color: white;
 	border-radius: 4px;
 	padding: 25px;
-	width: 600px;
+	width: 500px;
 	position: fixed;
 	top: 50%;
 	left: 50%;
@@ -135,6 +140,8 @@
 .modal_body {
 	width: 100%;
 	padding: 20px 0 30px;
+	display: flex;
+	justify-content: center;
 }
 
 .modal_body_content {
@@ -157,10 +164,9 @@
 	justify-content: flex-end;
 }
 
-.button_cancel.float_left {
+/*.button_cancel.float_left {
 	margin-right: auto;
-}
-
+}*/
 .button_apply.float_right {
 	margin-left: 14px;
 }
@@ -213,6 +219,49 @@
 	cursor: not-allowed;
 }
 
+#plusIcon {
+	filter: invert(45%) sepia(63%) saturate(1946%) hue-rotate(162deg)
+		brightness(95%) contrast(101%);
+	position: relative;
+	bottom: 1px;
+	width: 20px;
+}
+
+tr, td {
+	border: 1px solid #d4d4d4;
+}
+
+#update_workPlan select {
+	border: none;
+}
+
+#update_workPlan_head th {
+	border: 1px solid #d4d4d4;
+}
+
+#update_workPlan th, #update_workPlan td {
+	padding: 10px;
+}
+
+#update_workPlan_head, #update_workPlan_body .members, #currentTable {
+	background-color: #EFF4FC;
+}
+
+.nextMonth {
+	position: relative;
+	bottom: 2px;
+	left: 5px;
+}
+
+.prevMonth {
+	position: relative;
+	bottom: 2px;
+	right: 5px;
+}
+
+button, select {
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -220,49 +269,9 @@
 	<div class="body_form">
 		<div class="left_item"></div>
 		<div class="right_item">
-			<div id="work_contents" style="margin-left: 25px;">
-				<!-- 현재 월을 나타내는 부분 -->
-				<div
-					style="margin-bottom: 10px; display: flex; align-items: center;">
-					<div style="margin-top: 3px;">
-						<img class="prevMonth"
-							src="/images/insa/work_plan/chevron-left.svg">
-					</div>
-					<div class="currentMonth"></div>
-					<div style="margin-top: 3px;">
-						<img class="nextMonth"
-							src="/images/insa/work_plan/chevron-right.svg">
-					</div>
-				</div>
-				<div>
-					<button type="button" onclick="workPlanUpdate()">근무계획변경</button>
-				</div>
-				<table border="1">
-					<thead>
-						<tr id="tr1">
-							<!-- 데이터 추가하는 부분 -->
-							<th rowspan="2" style="padding: 5px;">이름</th>
-							<th rowspan="2" style="padding: 5px;">소속</th>
-							<!-- 두 번째 줄의 데이터 추가 -->
-							<!-- 날짜 데이터 -->
-							<!-- <th id="monthDataRow"></th> -->
-						</tr>
-						<tr id="tr2">
-							<!-- 요일 데이터 -->
-							<!-- <th id="monthDaysRow"></th> -->
-						</tr>
-					</thead>
-
-					<tbody id="userWorkData">
-					</tbody>
-				</table>
-				<div id="allUserCount" style="margin-top: 10px;"></div>
-			</div>
-			<!-- 수정 div -->
-			<div id="work_contents_update" style="display: none">
-				<div style="font-weight: bold;">근무계획 변경</div>
-				<div>
-					<div style="font-weight: bold;">적용기간</div>
+			<div class="main_tab">
+				<div id="work_contents">
+					<!-- 현재 월을 나타내는 부분 -->
 					<div
 						style="margin-bottom: 10px; display: flex; align-items: center;">
 						<div style="margin-top: 3px;">
@@ -275,45 +284,96 @@
 								src="/images/insa/work_plan/chevron-right.svg">
 						</div>
 					</div>
-				</div>
-				<div>
-					<div style="font-weight: bold;">적용대상</div>
 					<div>
-						<select id="department_Select" style="margin-top: 10px">
-						</select>
-						<div id="group_UserList" style="padding: 0px;">
-							<!-- User list will be dynamically added here -->
+						<button class="button_apply" type="button"
+							onclick="workPlanUpdate()" style="margin-bottom: 10px;">근무계획변경</button>
+					</div>
+					<table border="1" id="current_table">
+						<thead id="currentTable">
+							<tr id="tr1">
+								<!-- 데이터 추가하는 부분 -->
+								<th class="left_none" rowspan="2" style="padding: 5px;">이름</th>
+								<th rowspan="2" style="padding: 5px;">소속</th>
+								<!-- 두 번째 줄의 데이터 추가 -->
+								<!-- 날짜 데이터 -->
+								<!-- <th id="monthDataRow"></th> -->
+							</tr>
+							<tr id="tr2">
+								<!-- 요일 데이터 -->
+								<!-- <th id="monthDaysRow"></th> -->
+							</tr>
+						</thead>
+
+						<tbody id="userWorkData">
+						</tbody>
+					</table>
+					<div id="allUserCount" style="margin-top: 10px;"></div>
+				</div>
+				<!-- 수정 div -->
+				<div id="work_contents_update" style="display: none">
+					<div style="font-weight: bold; margin-bottom: 10px;">근무계획 변경</div>
+					<div>
+						<div style="font-weight: bold; margin-bottom: 10px;">적용기간</div>
+						<div
+							style="margin-bottom: 10px; display: flex; align-items: center;">
+							<div style="margin-top: 3px;">
+								<img class="prevMonth"
+									src="/images/insa/work_plan/chevron-left.svg">
+							</div>
+							<div class="currentMonth"></div>
+							<div style="margin-top: 3px;">
+								<img class="nextMonth"
+									src="/images/insa/work_plan/chevron-right.svg">
+							</div>
 						</div>
 					</div>
-				</div>
-				<div>
-					<button id="selectFinished" onclick="selectFinished()">선택완료</button>
-					<button id="reset" onclick="reset()" style="display: none">재설정</button>
-				</div>
-				<!-- 추가 설정 -->
-				<div id="set-up" style="display: none">
-					<div id="gridContainer">
-						<div class="gridItem">적용 기간</div>
-						<div class="gridItem"></div>
-						<div class="gridItem">적용 대상</div>
-						<div class="gridItem"></div>
-					</div>
-
 					<div>
-						<div>근무계획</div>
-						<table id="update_workPlan">
-							<thead>
-								<tr id="update_workPlan_head">
-								</tr>
-							</thead>
-							<tbody id="update_workPlan_body">
-
-							</tbody>
-
-						</table>
+						<div style="font-weight: bold;">적용대상</div>
+						<div>
+							<select class="form-select form-select-sm"
+								aria-label="Small select example" id="department_Select"
+								style="margin-top: 10px; margin-bottom: 10px; padding: 2px;">
+							</select>
+							<div id="group_UserList"
+								style="padding: 0px; margin-bottom: 10px;">
+								<!-- User list will be dynamically added here -->
+							</div>
+						</div>
 					</div>
 					<div>
-						<button id="openModalBtn" disabled>기안하기</button>
+						<button class="button_apply" id="selectFinished"
+							onclick="selectFinished()" disabled>선택완료</button>
+						<button class="button_apply" id="reset" onclick="reset()"
+							style="display: none">재설정</button>
+					</div>
+					<!-- 추가 설정 -->
+					<div id="set-up"
+						style="display: none; margin-top: 10px; margin-bottom: 10px;">
+						<div id="gridContainer">
+							<div class="gridItem">적용 기간</div>
+							<div class="gridItem"></div>
+							<div class="gridItem">적용 대상</div>
+							<div class="gridItem"></div>
+						</div>
+
+						<div>
+							<div
+								style="margin-top: 10px; margin-bottom: 10px; font-weight: bold;">근무계획</div>
+							<table id="update_workPlan">
+								<thead>
+									<tr id="update_workPlan_head" style="text-align: center;">
+									</tr>
+								</thead>
+								<tbody id="update_workPlan_body">
+
+								</tbody>
+
+							</table>
+						</div>
+						<div>
+							<button class="button_apply" id="openModalBtn"
+								style="margin-top: 20px;" disabled>기안하기</button>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -322,34 +382,35 @@
 
 	<div class="modal_form">
 		<div class="modal_background"></div>
-		<form class="modal_contact_add_form" method="post" id="contact_form"
-			action="/approval/document/insertApproval">
-			<!-- 변경된 내용을 hidden으로 숨겨서 같이 보냄 -->
-			<input type="hidden" name="title" value="근무계획변경"> <input
-				type="hidden" name="contents">
-			<div class="modal_contact_add">
-				<div class="modal_title">결재</div>
-				<div class="modal_body">
-					<div class="modal_body_content">
-						<div style="margin-bottom: 20px; margin-top: 20px;">결재 라인</div>
-						<div class="grid-container">
-							<div class="grid-item" id="request">
-								신청
-								<img id="plusIcon" style="margin-top: 20px;"
-									src="/images/chats/plus-circle.svg">
-							</div>
-							<div class="grid-item manager"></div>
+		<input id="loginID" type="hidden" value="${loginId }">
+		<input type="hidden" id=doc_type name="doc_type" value="근무계획변경">
+		<input type="hidden" id="work_plan_title" name="title" value="근무계획변경">
+		<input type="hidden" id="work_plan_contents" name="contents">
+
+		<input type="hidden" id="user_names" name="user_names"> <input
+			type="hidden" id="work_types" name="work_types"> <input
+			type="hidden" id="work_days" name="work_days">
+
+		<div class="modal_contact_add">
+			<div class="modal_title">결재</div>
+			<div class="modal_body">
+				<div class="modal_body_content">
+					<div class="grid-container">
+						<div class="grid-item" id="request">
+							신청 <img id="plusIcon" src="/images/chats/plus-circle.svg">
 						</div>
+						<div class="grid-item manager"></div>
 					</div>
 				</div>
-				<div class="modal_footer right">
-					<button type="button" class="button_cancel float_left"
-						id="modal_cancel_button">닫기</button>
-					<button class="button_apply float_right"
-						id="modal_apply_button" disabled>확인</button>
-				</div>
 			</div>
-		</form>
+			<div class="modal_footer" style="width: 100%;">
+				<button type="button" class="button_cancel float_left"
+					id="modal_cancel_button">닫기</button>
+				<button class="button_apply float_right" id="modal_apply_button"
+					disabled>확인</button>
+			</div>
+		</div>
+
 		<div class="modal_tag_add">
 			<div class="modal_title">
 				<span>신청 설정</span>
@@ -364,7 +425,7 @@
 				</ul>
 			</div>
 			<div class="modal_footer">
-				<button class="button_cancel" id="button_cancel_tag">취소</button>
+				<button type="button" class="button_cancel" id="button_cancel_tag">취소</button>
 				<button type="button" class="button_apply" id="button_apply_tag"
 					style="margin-left: 14px">확인</button>
 			</div>
@@ -373,8 +434,6 @@
 
 
 	<script>
-
-
 	let tag_list_open = false;
 
 	// img 버튼 눌렀을때 모달 창 띄우는거
@@ -432,6 +491,7 @@
 	    
 	    var gridItem = document.querySelector('.manager');
 
+	    //db에 넣음?
 	    var selectedNames = [];
 
 	    // 선택된 체크박스에서 이름 가져와서 배열에 추가
@@ -439,6 +499,7 @@
 	        var listItem = checkbox.parentElement;
 	        var name = listItem.querySelector('span:nth-child(2)').textContent;
 	        selectedNames.push(name);
+	       
 	    });
 	    const applyButton = $('#modal_apply_button');
 
@@ -458,13 +519,19 @@
 	// submit 확인임
 	$(document).ready(function() {
 	    $('#modal_apply_button').on('click', function() {
+	    	var workPlanTitleValue = $("#work_plan_title").val();
+	    	var workPlanContentsValue = $("#work_plan_contents").val();
+
+	    	console.log(workPlanTitleValue+" : "+workPlanContentsValue);
 	    });
 	});
 	
 	//----------------------------------------------------------------
 // 리스트를 저장할 배열
 let selectedValues = [];
-
+let user_names = [];
+let work_types = [];
+let work_days = [];
 // select 요소에서 변경이 일어났을 때 이벤트 감지
 document.getElementById('update_workPlan_body').addEventListener('change', function(event) {
     const target = event.target;
@@ -475,11 +542,55 @@ document.getElementById('update_workPlan_body').addEventListener('change', funct
         const columnIndex = Array.from(target.closest('tr').children).indexOf(target.closest('td'));
         const headerText = $('#update_workPlan_head').children().eq(columnIndex).text();
         
+		
         if (selectedValue !== '9시 출근') {
-            console.log('날짜:', date, '이름:', headerText, '선택된 값:', selectedValue);
+        	var logContent = '날짜: ' + date + ', 이름: ' + headerText + ', 근무변경요청: ' + selectedValue;
+            user_names.push(headerText);
+            work_types.push(selectedValue);
+            work_days.push(date);
+            
+            $('#user_names').val(JSON.stringify(user_names));
+            $('#work_types').val(JSON.stringify(work_types));
+            $('#work_days').val(JSON.stringify(work_days));
+            
+            $("#work_plan_contents").val(function(index, currentValue) {
+                return currentValue + logContent + '\n';
+            });
         }
-    }
 });
+$(document).ready(function() {
+    $('#modal_apply_button').on('click', function() {
+    	var approval = {
+    		id:$("#loginID").val(),
+    	    title: $("#work_plan_title").val(),
+    	    contents: $("#work_plan_contents").val(),
+    	    doc_type: $("#doc_type").val()
+    	};
+
+    	var workplan = {
+    		id:$("#loginID").val(),
+    	    user_names: $('#user_names').val(),
+    	    work_types: $('#work_types').val(),
+    	    work_days: $('#work_days').val()
+    	    
+    	};
+    	var data = {
+                approval: approval,
+                workPlan: workplan
+            };
+		console.log("approval : "+approval+"workplan : "+workplan);
+    	$.ajax({
+    	    url: '/approval/document/works/workPlan_write',
+    	    method: 'POST',
+    	    contentType: 'application/json',
+    	    data: JSON.stringify(data),
+    	    success: function(response) {
+    	        window.location.href = response;
+    	    }
+    	});
+    });
+});
+
 
 
 
@@ -497,17 +608,16 @@ document.getElementById('update_workPlan_body').addEventListener('change', funct
 
 	    dates.forEach(date => {
 	        var tableRow = $('<tr>');
-	        const cellDate = $('<td>').text(formatDate2(date));
+	        const cellDate = $('<td>').text(formatDate2(date)).addClass('members');
 	        tableRow.append(cellDate);
 
 	        userNames.forEach(userName => {
 	            const cellDate1 = $('<td>');
-	            const select = $('<select>');
+	            const select = $('<select>').css('padding', '2px');
 	            select.append('<option value="10시 출근">10시 출근</option>');
 	            select.append('<option value="9시 출근" selected>9시 출근</option>');
 	            select.append('<option value="휴무일">휴무일</option>');
 	            select.append('<option value="휴일">휴일</option>');
-	            select.append('<option value="변경 안 함">변경 안 함</option>');
 	            cellDate1.append(select);
 	            tableRow.append(cellDate1);
 	        });
@@ -813,22 +923,38 @@ $(document).on('mouseleave', '.jeng', function() {
     $("#jeng-info").css("display", "none");
 });
 // 부서 목록을 가져오는 Ajax 요청
-$.ajax({
-    url:'/members/getDepartmentList'
- }).done(function(data){
-	 $("#department_Select").empty();
+$(document).ready(function() {
+    // getDepartmentList를 통해 데이터 가져오기
+    $.ajax({
+        url:'/members/getDepartmentList'
+    }).done(function(data) {
+        // 성공적으로 데이터를 가져온 경우
+        $("#department_Select").empty();
         $("#department_Select").append('<option selected>부서 선택</option>');
         for (let i = 0; i < data.length; i++) {
             const departmentName = data[i];
             $("#department_Select").append('<option value="' + departmentName + '">' + departmentName + '</option>');
         }
- });
-$("#department_Select").on("change", function() {
-	var organization = $(this).val();
-	if (organization !== "부서 선택") {
-		loadMembersByDepartment(organization); // 초기에 oneSeq를 0로 전달
-	}
+    });
+
+    // select 요소의 변경 감지하여 버튼 활성화/비활성화 처리
+    $("#department_Select").on("change", function() {
+        var organization = $(this).val();
+        if (organization !== "부서 선택") {
+            loadMembersByDepartment(organization); // 선택한 부서의 멤버 로드
+            $('#selectFinished').prop('disabled', false); // 버튼 활성화
+        } else {
+            $('#selectFinished').prop('disabled', true); // 버튼 비활성화
+        }
+        
+        
+    });
+
+    // 페이지 로드 시 초기 상태 설정 (버튼은 비활성화)
+    $('#selectFinished').prop('disabled', true);
 });
+
+
 
 function loadMembersByDepartment(organization) {
 var userNames = [];

@@ -1,5 +1,6 @@
 package com.kdt.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,11 +40,23 @@ public class ContactController {
 	    if(dto.getTag() == null) {
 	    	List<ContactDTO> personalContactList = Service.personalContactSelectAll(dto);
 	    	model.addAttribute("personalContactList", personalContactList);
+	    	model.addAttribute("contactName", "개인 주소록");
 	    }
 	    
 	    else {
-	    	List<ContactDTO> personalContactList = Service.personalContactSelectBy(dto);
-	    	model.addAttribute("personalContactList", personalContactList);
+	    	
+	    	if(dto.getTag().equals("미등록 태그")) {
+	    		System.out.println("미태다");
+	    		List<ContactDTO> personalContactList = Service.personalContactSelectNull(dto);
+	    		model.addAttribute("personalContactList", personalContactList);
+		    	model.addAttribute("contactName", dto.getTag());
+	    	}
+	    	
+	    	else {
+		    	List<ContactDTO> personalContactList = Service.personalContactSelectBy(dto);
+		    	model.addAttribute("personalContactList", personalContactList);
+		    	model.addAttribute("contactName", dto.getTag());
+	    	}
 	    }
 	    
 		

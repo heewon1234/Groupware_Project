@@ -21,7 +21,7 @@ $(document).ready(function() {
 		$('.joinday').each(function() {
 			const inputValue = $(this).val().trim();
 			// 정규 표현식을 사용하여 YYYY-MM-DD 형식 확인
-			const regex = /^(2000|20[01]\d|2023)-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
+			const regex = /^(2000|20[01]\d|202[0-2]|2023)-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
 			if (inputValue !== "" && regex.test(inputValue)) {
 				const correspondingId = $(this).closest('tr').find('.id').val();
 				idbox.push(correspondingId);
@@ -83,7 +83,7 @@ function updateWorkformTable() {
 				"</td><td>" + (resp[i].remainder_leave) + "</td></tr>")
 			$("#workbox").append(tr);
 		}
-		$(".div").after("총 인원 :" + resp.length);
+		$(".div").append("총 인원 :" + resp.length);
 	});
 }
 

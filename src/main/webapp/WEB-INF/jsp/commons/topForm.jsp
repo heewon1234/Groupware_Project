@@ -11,7 +11,7 @@
 </head>
 <body>
     <div id="top">
-        <div class="logo">logo</div>
+        <div class="logo"><a href="/">logo</a></div>
         <div class="icon">
             <i class="fa-regular fa-comment" onclick="openPopup()"></i>
             <i class="fa-regular fa-bell"></i>

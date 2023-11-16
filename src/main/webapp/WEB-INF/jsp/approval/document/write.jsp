@@ -12,28 +12,27 @@
 <link rel="stylesheet" type="text/css" href="/css/commons/body_form/left_form/body_form_default.css">
 </head>
 <body>
-	<form action="/approval/document/insertApproval" method="post" enctype="multipart/form-data">
-		<div id="top_container"></div>
-		<div class="body_form">
-			<div class="left_item"></div>
-			<div class="right_item">
-				<div class="content_tab">
+
+	<div id="top_container"></div>
+	<div class="body_form">
+		<div class="left_item"></div>
+		<div class="right_item">
+			<div class="content_tab">
+				<form action="/approval/document/insertApproval" method="post" enctype="multipart/form-data">
 					<div id="submit_div">
-						<button type="submit" class="button_apply">기안하기</button>
+						<button type="submit" id="submit_btn" class="button_apply permit">기안하기</button>
 					</div>
 					<h4>기본 설정</h4>
 					<table class="outTable" border='1'>
 						<tbody>
 							<tr>
 								<th>문서 종류</th>
-								<td>
-									<select name="doc_type">
+								<td><select name="doc_type">
 										<option>지출결의서</option>
 										<option>업무연락</option>
-									</select>
-								</td>
+								</select></td>
 								<th>작성자</th>
-								<td>${userDTO.organization } ${userDTO.position } ${userDTO.name }</td>
+								<td>${userDTO.organization }${userDTO.position } ${userDTO.name }</td>
 							</tr>
 						</tbody>
 					</table>
@@ -72,42 +71,37 @@
 
 					<h4>제목</h4>
 					<div class="input-group">
-						<input type="text" class="form-control" id="" name="title">
+						<input type="text" class="form-control" id="title" name="title">
 					</div>
 
 					<h4>본문</h4>
 					<div class="input-group">
-						<textarea name="contents"></textarea>
+						<textarea name="contents" id="contents"></textarea>
 					</div>
 
 					<h4>파일 첨부</h4>
 					<div class="input-group">
 						<input type="file" name="files" multiple>
 					</div>
-				</div>
+				</form>
 			</div>
 		</div>
+	</div>
 
-		<div id="modalContainer_apply" class="modalContainer hidden">
-			<div class="modalContent">
-				<div align="center">신청 설정</div>
-				<ul>
-					<c:forEach var="list" items="${managerList }">
-						<li>
-							<span>${list.organization }</span>  
-							<span>${list.name }</span> 
-							<span hidden>${list.id }</span> 
-							<input type='checkbox' name='managerID' value='${list.id}'>
-						</li>
-					</c:forEach>
-				</ul>
-				<div class="modalButton_div" align="center">
-					<button type="button" id="apply_btn" class="button_apply">확인</button>
-					<button type="button" id="cancle_btn" class="modalButton_apply button_cancel">취소</button>
-				</div>
+	<div id="modalContainer_apply" class="modalContainer hidden">
+		<div class="modalContent">
+			<div align="center">신청 설정</div>
+			<ul>
+				<c:forEach var="list" items="${managerList }">
+					<li><span>${list.organization }</span> <span>${list.name }</span> <span hidden>${list.id }</span> <input type='checkbox' value='${list.id}'></li>
+				</c:forEach>
+			</ul>
+			<div class="modalButton_div" align="center">
+				<button type="button" id="apply_btn" class="button_apply">확인</button>
+				<button type="button" id="cancle_btn" class="modalButton_apply button_cancel">취소</button>
 			</div>
 		</div>
-	</form>
+	</div>
 	<script src="/js/approval/document/write.js"></script>
 </body>
 </html>

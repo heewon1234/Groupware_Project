@@ -27,8 +27,8 @@
 		where approver_id = #{id} and approval_status = "반려"
 	</select>
 	
-	<select id="getManagerIdList" resultType="String">
-		select approver_id from Approval_Responsibles
+	<select id="getManagerRBList" resultType="com.kdt.dto.ApprovalResponsiblesDTO">
+		select * from Approval_Responsibles
 		where doc_id = #{docId};
 	</select>
 	
