@@ -67,6 +67,11 @@ public class BoardDAO {
 	}
 	//
 	
+	// 조회수
+	public int viewCountUpdate(Map<String,String> map) {
+		return db.update("Board.viewCountUpdate",map);
+	}
+	
 	// 게시글 불러오기
 	public List<BoardDTO> boardContentsList(Map<String,String> map){
 		return db.selectList("Board.boardContentsList",map);
@@ -81,7 +86,7 @@ public class BoardDAO {
 	public List<BoardDTO> FavoriteAllContentsList(Map<String,String> map){
 		return db.selectList("Board.FavoriteBoardContentsList",map);
 	}
-	public List<BoardDTO> FavoriteListBy(Map<String,String> map){
+	public List<Map<String,String>> FavoriteListBy(Map<String,String> map){
 		return db.selectList("Board.FavoriteListBy",map);
 	}
 	public List<BoardDTO> Notice(String board_title){

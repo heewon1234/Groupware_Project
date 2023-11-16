@@ -21,6 +21,10 @@ public class FileDAO {
 	public List<FileDTO> selectFileList(FileDTO dto){
 		return db.selectList("File.selectFileList",dto);
 	}
+	public List<String> selectFileByBoardTitle(String board_title){
+		return db.selectList("File.selectFileByBoardTitle",board_title);
+	}
+	
 	
 	public int delFileByParensSeq(FileDTO dto) {
 		return db.delete("File.delFileByParensSeq",dto);

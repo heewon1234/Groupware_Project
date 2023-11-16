@@ -7,6 +7,6 @@
 	</insert>
 
 	<delete id="delFavContents">
-		delete from Favorite_Board where seq=${seq}
+		delete from Favorite_Board where ori_board_title=#{ori_board_title} and id=#{id} and parent_seq=#{parent_seq}
 	</delete>
 </mapper>

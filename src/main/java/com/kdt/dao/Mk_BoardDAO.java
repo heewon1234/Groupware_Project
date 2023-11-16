@@ -45,6 +45,9 @@ public class Mk_BoardDAO {
 	}
 	
 	// 게시글 불러오기 관련 기능
+	public String selectNameType(String board_title) {
+		return db.selectOne("Mk_Board.selectNameType",board_title);
+	}
 	public List<Integer> allBoardSeq(){
 		return db.selectList("Mk_Board.allBoardSeq");
 	}
