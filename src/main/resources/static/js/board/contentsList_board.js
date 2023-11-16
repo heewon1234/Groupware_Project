@@ -31,7 +31,6 @@ $(".favorite").on("click",function(){
 			method:"POST"
 		}).done(function(resp){
 			alert("즐겨찾기가 등록되었습니다");
-			favDiv.attr("data-seq",resp);
 		}).catch(function(resp){
 			alert("즐겨찾기 등록에 실패하였습니다");
 		});
@@ -39,11 +38,11 @@ $(".favorite").on("click",function(){
 		
 	} else if(imgSrc===fav){ // 즐겨찾기 제거
 		$(this).children("img").attr("src",notFav);
-		let seq = $(this).attr("data-seq");
+		let parent_seq = $(this).attr("data-index");
 		
 		$.ajax({
 			url:"/favorite/delFavContents",
-			data:{seq:seq,board_title:board_title},
+			data:{parent_seq:parent_seq,ori_board_title:board_title},
 			method:"POST"
 		}).done(function(resp){
 			alert("즐겨찾기가 제거되었습니다");

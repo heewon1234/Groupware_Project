@@ -89,7 +89,7 @@
             </div>
         </div>
     </div>
-	<script src="/js/board/sideBar.js" defer></script>
     <script src="/js/board/write_contents_board.js" defer></script>
+    <script src="/js/board/sideBar.js" defer></script>
 </body>
 </html>

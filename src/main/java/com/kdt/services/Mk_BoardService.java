@@ -1,5 +1,9 @@
 package com.kdt.services;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,9 +15,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.kdt.dao.AuthorityDAO;
+import com.kdt.dao.FileDAO;
 import com.kdt.dao.HeaderDAO;
 import com.kdt.dao.Mk_BoardDAO;
 import com.kdt.dto.AuthorityDTO;
+import com.kdt.dto.FileDTO;
 import com.kdt.dto.HeaderDTO;
 import com.kdt.dto.Mk_BoardDTO;
 
@@ -28,6 +34,9 @@ public class Mk_BoardService {
 
 	@Autowired
 	AuthorityDAO adao;
+
+	@Autowired
+	FileDAO fdao;
 
 	@Autowired
 	private Gson gson;
@@ -83,30 +92,40 @@ public class Mk_BoardService {
 	public Mk_BoardDTO boardDetail(String board_title) {
 		return mdao.boardDetail(board_title);
 	}
-	
+	public String selectNameType(String board_title) {
+		return mdao.selectNameType(board_title);
+	}
 	//
 
 	// 게시판 삭제
 	@Transactional
-	public void delBoard(String board_title) {
+	public void delBoard(String board_title) throws Exception{
 		int boardSeq = mdao.selectBoardSeq(board_title);
 
 		// drop table
 		String sql = "drop table Board_"+boardSeq;
 		mdao.delBoard(sql);
 
+		// 서버 파일 날리기
+		List<String> fileList = fdao.selectFileByBoardTitle(board_title);
+		String realPath = "E:/uploads";
+		File uploadPath = new File(realPath);
+		for(String file:fileList) {
+			Path path = Paths.get(uploadPath + "/" + file);
+			Files.deleteIfExists(path);
+		}
 		// 게시판 관련 내용 삭제
 		Map<String,String> map = new HashMap<>();
 		map.put("board_title", board_title);
 
 		String[] boardTitleTable = {"Mk_Board", "File", "Header", "Reply", "Survey", "Survey_User"};
 		String[] oriBoardTitleTable = {"Authority","Favorite_Board"};
-		
+
 		for(String table : boardTitleTable) {
 			map.put("table", table);
 			mdao.deleteByBoardTitle(map);
 		}
-		
+
 		for(String table : oriBoardTitleTable) {
 			map.put("table", table);
 			mdao.deleteByOriBoardTitle(map);
@@ -114,7 +133,7 @@ public class Mk_BoardService {
 
 	}
 	//
-	
+
 	// 게시판 수정
 	@Transactional
 	public void editBoardDetail(Mk_BoardDTO dto, String headerList, String authorityList, String prevBoardTitle) {
@@ -126,27 +145,27 @@ public class Mk_BoardService {
 		map.put("name_type", dto.getName_type());
 		map.put("use_header", String.valueOf(dto.isUse_header()));
 		map.put("prevBoardTitle", prevBoardTitle);
-		
+
 		mdao.editBoardDetail(map); 
-		
+
 		// 관련 테이블 이름 변경
 		String[] boardTitleTable = {"Mk_Board", "File", "Reply", "Survey", "Survey_User"};
 		String[] oriBoardTitleTable = {"Favorite_Board"};
-		
+
 		for(String table : boardTitleTable) {
 			map.put("table", table);
 			mdao.editBoardByTitle(map);
 		}
-		
+
 		for(String table : oriBoardTitleTable) {
 			map.put("table", table);
 			mdao.editBoardByOriBoardTitle(map);
 		}
-		
+
 		// header 테이블, authority 테이블 데이터 삭제
 		hdao.deleteHeader(prevBoardTitle);
 		adao.deleteAuthority(prevBoardTitle);
-		
+
 		// header 테이블, authority 테이블에 새로 insert
 		int boardSeq = mdao.selectBoardSeq(dto.getBoard_title());
 		System.out.println("authorityList"+authorityList);
@@ -155,7 +174,7 @@ public class Mk_BoardService {
 		for(AuthorityDTO auth : authorityMember) {
 			adao.authorityInsert(new AuthorityDTO(0,auth.getId(),dto.getBoard_title(),"Board_"+boardSeq,auth.getAuthority()));
 		}
-		
+
 		if(dto.isUse_header()) {
 			String[] headers = gson.fromJson(headerList, String[].class);
 			for(String header:headers) {
