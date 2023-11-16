@@ -108,7 +108,7 @@ public class Mk_BoardService {
 
 		// 서버 파일 날리기
 		List<String> fileList = fdao.selectFileByBoardTitle(board_title);
-		String realPath = "E:/uploads";
+		String realPath = "C:/uploads";
 		File uploadPath = new File(realPath);
 		for(String file:fileList) {
 			Path path = Paths.get(uploadPath + "/" + file);

@@ -45,7 +45,7 @@
 	<select id="BoardContentsListBy" resultType="com.kdt.dto.BoardDTO">
 		select * from (select row_number() over(order by seq desc) as rn, b.*,#{oriBoardTitle} as board_title,case when b.seq = parent_seq then 'true' else 'false' end as favorite 
 		from ${board_title} b left join Favorite_Board f on id=#{id} and parent_seq = b.seq and board_title=#{board_title} order by seq desc) as sub 
-		where rn between ${start} and ${end};
+		where rn between ${start} and ${end}
 	</select>
 	<!-- 게시글 내용 불러오기 -->
 	<select id="boardContents" resultType="com.kdt.dto.BoardDTO">
@@ -77,6 +77,37 @@
 				(${fromBoard}) b 
 				on parent_seq=b.seq and f.board_title=b.board_title and id=#{id} order by write_date desc) as unionTable
         	inner join Mk_Board m on unionTable.board_title = m.board_title order by write_date desc limit ${start},10 
+	</select>
+	<!-- 즐겨찾기 게시물 검색 -->
+	<select id="SearchFavoriteListBy" resultMap="authBoardDTO">
+		select unionTable.*,name_type from        
+			(select b.seq,ori_board_title as board_title,parent_seq,title,writer,id,write_date, header,notice,view_count from Favorite_Board f 
+			inner join 
+				(${fromBoard}) b 
+				on parent_seq=b.seq and f.board_title=b.board_title and id=#{id} order by write_date desc) as unionTable
+        	inner join Mk_Board m on unionTable.board_title = m.board_title where title like #{searchText} or writer like #{searchText} 
+        	order by write_date desc limit ${start},10 
+	</select>
+	<select id="countSearchList" resultType="int">
+		select count(*) from        
+			(select b.seq,ori_board_title as board_title,parent_seq,title,writer,id,write_date, header,notice,view_count from Favorite_Board f 
+			inner join 
+				(${fromBoard}) b 
+				on parent_seq=b.seq and f.board_title=b.board_title and id=#{id} order by write_date desc) as unionTable
+        	inner join Mk_Board m on unionTable.board_title = m.board_title where title like #{searchText} or writer like #{searchText} 
+        	order by write_date desc
+	</select>
+	
+	<!-- 일반 게시판 검색 -->
+	<select id="searchContentsListBy" resultType="com.kdt.dto.BoardDTO">
+		select b.*,#{oriBoardTitle} as board_title, case when b.seq = parent_seq then 'true' else 'false' end as favorite 
+		from ${board_title} b left join Favorite_Board f on id=#{id} and parent_seq = b.seq and board_title=#{board_title}
+		where title like #{searchText} or writer like #{searchText} order by write_date desc limit ${start},10
+	</select>
+	<select id="searchCountContentsListBy" resultType="int">
+		select count(*)
+		from ${board_title} b left join Favorite_Board f on id=#{id} and parent_seq = b.seq and board_title=#{board_title}
+		where title like #{searchText} or writer like #{searchText} order by write_date desc
 	</select>
 	<!-- 공지 내용 최근 5개 가져오기 -->
 	<select id="Notice" resultType="com.kdt.dto.BoardDTO">

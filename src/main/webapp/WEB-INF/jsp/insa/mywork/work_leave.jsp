@@ -54,14 +54,15 @@
 						<span>휴가현황</span>
 					</div>
 					<div class="leavebox">
+						<div class="allleave">
+							<span>총 휴가</span><br> <br> ${i.leave_day}일
+						</div>
+						<div class="useleave">
+							<span>사용 휴가</span><br> <br> ${i.leave_use}일
+						</div>
 						<div class="remainder">
 							<span>잔여 휴가</span><br> <br> ${i.leave_remainder}일
 						</div>
-						<div class="leaveapply">
-							<a href="#">휴가 현황</a><br> <br>
-							<button>휴가 신청</button>
-						</div>
-
 					</div>
 				</div>
 				<div class="worktime">

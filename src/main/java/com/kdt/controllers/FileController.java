@@ -30,7 +30,7 @@ public class FileController {
 	public List<String> upload(MultipartFile[] fileList) throws Exception{
 		
 		List<String> list = new ArrayList<>();
-		String realPath = "E:/uploads";
+		String realPath = "C:/uploads";
 		File uploadPath = new File(realPath); 
 		if(!uploadPath.exists()) { 
 			uploadPath.mkdir();
@@ -51,7 +51,7 @@ public class FileController {
 	
 	@RequestMapping("download")
 	public void download(String oriName, String sysName, HttpServletResponse response) throws Exception{
-		String realPath =  "E:/uploads";
+		String realPath =  "C:/uploads";
 		File targetFile = new File(realPath + "/" + sysName);
 
 		oriName = new String(oriName.getBytes("utf8"),"ISO-8859-1");
