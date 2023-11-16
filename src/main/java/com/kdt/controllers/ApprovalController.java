@@ -77,8 +77,14 @@ public class ApprovalController {
 
 		List<ApprovalResponsiblesDTO> managerRBList = appRService.getManagerRBList(docId);
 		List<String> managerIdList = new ArrayList<>();
+		
+		for(ApprovalResponsiblesDTO dto : managerRBList) {
+			managerIdList.add(dto.getApprover_id());
+		}
 
-		List<MembersDTO> managerList = mService.getManagerList(managerIdList);
+		List<MembersDTO> managerList = mService.getManagerListById(managerIdList);
+		
+		System.out.println("managerList:"+managerList);
 
 		model.addAttribute("docId", docId);
 		model.addAttribute("userDTO", userDTO);
@@ -206,6 +212,8 @@ public class ApprovalController {
 		String uploadPath = "c:/uploads";
 
 		appService.insert(appdto, files, uploadPath, managerID);
+		
+		
 
 		return "redirect:/approval/document/lists/all";
 	}
@@ -255,7 +263,7 @@ public class ApprovalController {
 	    System.out.println(approvalDTO);
 	    System.out.println(requestData.get("workPlan"));
 	    
-	    appService.insertWorkPlan(approvalDTO, workPlanDTO, managerID);
+	    //appService.insertWorkPlan(approvalDTO, workPlanDTO, managerID);
 
 	    // 나머지 처리
 	    return "/works_plan/workPlan";
