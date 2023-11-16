@@ -67,6 +67,11 @@ public class BoardDAO {
 	}
 	//
 	
+	// 조회수
+	public int viewCountUpdate(Map<String,String> map) {
+		return db.update("Board.viewCountUpdate",map);
+	}
+	
 	// 게시글 불러오기
 	public List<BoardDTO> boardContentsList(Map<String,String> map){
 		return db.selectList("Board.boardContentsList",map);

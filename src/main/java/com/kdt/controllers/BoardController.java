@@ -154,7 +154,9 @@ public class BoardController {
 		fdto.setParent_seq(Integer.parseInt(seq));
 		List<FileDTO> fileList = fservice.selectFileList(fdto);
 		model.addAttribute("fileList",fileList);
-
+		
+		bservice.viewCountUpdate(board_title, seq);
+		
 		return "boards/contents_board";
 	}
 

@@ -133,8 +133,17 @@ public class BoardService {
 			filedao.insertFile(new FileDTO(0,sys_name,ori_name,parent_seq,board_title,"tag"));
 		}
 	}
-
+	
 	// 게시글 불러오기 관련
+	// 조회수
+	public int viewCountUpdate(String board_title, String seq) {
+		Map<String,String> map = new HashMap<>();
+		int boardSeq = mdao.selectBoardSeq(board_title);
+		map.put("board_title", "Board_"+boardSeq);
+		map.put("seq", seq);
+		return bdao.viewCountUpdate(map);
+	}
+	
 	// 게시글 리스트 ( 개수 구할 때 사용 )
 	public List<BoardDTO> boardContentsList(String board_title, String id){ 
 		Map<String,String> map = new HashMap<>();
