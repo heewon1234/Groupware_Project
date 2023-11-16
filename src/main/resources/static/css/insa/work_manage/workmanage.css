@@ -2,14 +2,15 @@ thead tr {
 	background-color: #EFF4FC;
 }
 .right_item{
-	width: calc(0% - 276px)!important;
-    height: calc(70% - 60px)!important;
+	min-width:600px !important;
+	height: calc(40% - 60px)!important;
 }
 .modal {
+	width: calc(0% - 276px)!important;
 	display: none;
 	position: fixed;
-	top: 20%;
-	left: 5%;
+	top: 30%;
+	left: 25%;
 	padding: 20px;
 	background-color: #fff;
 	border: 1px solid #ccc;

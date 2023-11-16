@@ -38,7 +38,7 @@ let add_authority_member_list = () => {
 $("#member_add_complete").on("click",function(){
 	tempAuthority = authority;
 	$(".modal").css("display","none");
-	
+	console.log(authority.length);
 	add_authority_member_list();
 })
 
@@ -50,6 +50,8 @@ $("#member_add_cancel").on("click",function(){
 })
 
 $(".authority_member_add_btn").on("click",function(){
+	tempAuthority = authority;
+	console.log(tempAuthority);
 	$(".modal").css("display","block");
 	authority = [];
 	$("#member_list_box_body").find("input[type='checkbox']").prop("checked",false);
@@ -324,7 +326,7 @@ $("#header_add_btn").on("click",function(){
 	
 	$("#header_add_input").val("");
 	headerList.push(text);
-	
+	console.log(headerList);
 	let boxDiv = $("<div>");
 	boxDiv.addClass("header_list_box");
 	boxDiv.attr("data-index",headerList.length-1);
@@ -360,6 +362,35 @@ $(document).on("click",".header_del_btn",function(){
 	console.log(headerList);
 })
 
+// 게시판 이름 중복 체크
+$("#board_title_input").keyup(function(){
+	if($("#board_title_input").val()==""){
+		$("#dupCheckDiv").html("");
+	} else{
+		let titleRegex = /^[가-힣A-Za-z0-9]{1,30}$/;
+		let titleResult = titleRegex.test($("#board_title_input").val());
+		
+		if(titleResult){
+			$("#dupCheckDiv").html("올바른 게시판 이름 형식입니다").css("color","black");
+			$.ajax({
+				url:"/mk_board/isExistName",
+				data:{board_title:$("#board_title_input").val()},
+				method:"POST"
+			}).done(function(resp){
+				console.log(resp);
+				if(resp){
+					$("#dupCheckDiv").html("중복된 이름입니다").css("color","red");
+				} else{
+					$("#dupCheckDiv").html("사용 가능한 이름입니다").css("color","blue");;
+				}
+			})
+		} else{
+			$("#dupCheckDiv").html("게시판 이름은 영어 대소문자 / 한글 / 숫자 1~30 글자로 작성해주세요").css("color","red");
+		}
+		
+	}
+})
+
 //submit
 $("#frmBtn").on("click",function(){
 	
@@ -367,17 +398,33 @@ $("#frmBtn").on("click",function(){
 		alert("게시판 이름을 입력하세요");
 		$("#board_title_input").focus();
 		return false;
+	};
+	
+	if($("#dupCheckDiv").html()!="사용 가능한 이름입니다"){
+		alert("게시판 이름을 다시 확인해주세요");
+		return false;
 	}
 	
+	let authorityDisplay = $(".authority").css("display");
+	let headerDisplay = $(".header").css("display");
+	if(authorityDisplay == 'none' || headerDisplay == 'none'){
+		alert("페이지가 완전히 로딩되지 않았습니다");
+		return false;
+	}
 	
 	let authorityList = authority.map(item=>{
 		delete item.name;
 		delete item.organization;
 		delete item.job_name;
-		delete item.position;
-		
+		delete item.position;		
 		return item;
-	})
+	});
+	
+	if(authorityList.length==0){
+		alert("권한은 1명 이상 추가해야 합니다");
+		return false;
+	}
+	
 	$("#authorityList").val(JSON.stringify(authorityList));
 	$("#headerList").val(JSON.stringify(headerList));
 	$("#frm").submit();
@@ -408,3 +455,6 @@ $(document).on("change",".auth_write",function(){
 	console.log(authority);
 });
 
+$("#backBtn").on("click",function(){
+	location.href="/mk_board/toEditBoard";
+});

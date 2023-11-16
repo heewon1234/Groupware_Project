@@ -19,4 +19,17 @@
   <update id="update">
 		Update Works set organization = #{organization} where id = #{id};
 	</update>
+	<select id="existstoday" resultType="Int">
+		SELECT count(*) FROM WorkPlan WHERE id = #{id} AND DATE(work_day) = CURDATE();
+	</select>
+	<update id="addworklate">
+	<![CDATA[
+	UPDATE Works SET work_late = work_late + 1 WHERE id = #{id} AND TIME(CONVERT_TZ(now(), 'UTC', 'Asia/Seoul')) > '09:00:00';
+	]]>
+	</update>
+	<update id="addworkearly">
+	<![CDATA[
+		UPDATE Works SET work_early = work_early + 1 WHERE id = #{id} AND TIME(CONVERT_TZ(now(), 'UTC', 'Asia/Seoul')) < '18:00:00';
+	]]>
+	</update>
   </mapper>

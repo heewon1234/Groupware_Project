@@ -126,4 +126,13 @@ public void updateLeaveRemainder(String idList, String joindayList) throws Excep
 	    }
 	    return;
 	}
+public int existstoday(String ID)throws Exception{
+	return wdao.existstoday(ID);
+}
+public int addworklate(String ID)throws Exception{
+	return wdao.addworklate(ID);
+}
+public int addworkearly(String ID)throws Exception{
+	return wdao.addworkearly(ID);
+}
 }

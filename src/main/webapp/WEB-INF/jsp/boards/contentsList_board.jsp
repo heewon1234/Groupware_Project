@@ -115,6 +115,10 @@
 	<script src="/js/board/sideBar.js" defer></script>
     <script src="/js/board/contentsList_board.js" defer></script>
     <script>
+    	if("${auth}"!=''){
+    		alert("해당 게시판에 접근할 수 있는 권한이 없습니다");
+    	}
+    
 		if(${recordTotalCount}>0){
 			let boardListFooter = document.getElementById("boardListFooter");
 			let recordTotalCount = ${recordTotalCount};

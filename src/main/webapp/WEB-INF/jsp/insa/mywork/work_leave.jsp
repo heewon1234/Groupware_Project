@@ -73,7 +73,7 @@
 							<span>근무 일수</span> <br> <br> ${i.all_workday}일
 						</div>
 						<div class="allworktile">
-							<span>총 근무 시간</span> <br> <br> ${i.all_worktime }시간
+							<span>총 근무 시간</span> <br> <br> ${i.averagehours }:${i.averageminute } 시간
 						</div>
 					</div>
 				</div>

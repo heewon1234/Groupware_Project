@@ -12,4 +12,9 @@
 	<select id="selectHeader" resultType="String">
 		select Header from Header where board_title=#{board_title}
 	</select>
+	
+	<!-- 게시판 수정 -->
+	<delete id="deleteHeader">
+		delete from Header where board_title=#{preBoardTitle}
+	</delete>
 </mapper>

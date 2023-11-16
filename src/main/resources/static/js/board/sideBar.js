@@ -1,4 +1,4 @@
-$("#left_item").load("/board/sideBar");
+$("#left_item").load("/mk_board/sideBar");
 
 $(document).on("click","#toWriteContentsBoardBtn",function(){
 	location.href="/board/toWriteContentsBoard";
@@ -6,7 +6,20 @@ $(document).on("click","#toWriteContentsBoardBtn",function(){
 
 $(document).on("click",".menu_list_item",function(){
 	let board_title = $(this).attr("data-boardTitle");
-	location.href="/board/toBoard?board_title="+board_title;
+	$.ajax({
+		url:"/authority/isExistAuth",
+		method:"POST",
+		data:{board_title:board_title}
+	}).done(function(resp){
+		if(resp){
+			location.href="/board/toBoard?board_title="+board_title;
+		} else{
+			alert("게시판에 접근할 수 있는 권한이 없습니다");
+			return false;
+		}
+		
+	})
+	
 });
 
 $(document).on("click","#toMkBoardBtn",function(){

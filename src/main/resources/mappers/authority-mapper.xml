@@ -3,9 +3,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Authority">
+	<resultMap id="authMemberMap" type="java.util.HashMap">
+    	<result column="id" property="id"/>
+    	<result column="name" property="name"/>
+    	<result column="authority" property="authority"/>
+    	<result column="organization" property="organization"/>
+    	<result column="job_name" property="job_name"/>
+    	<result column="position" property="position"/>	
+	</resultMap>
+	<!-- 권한 검사 -->
+	<select id="isExistAuth" resultType="boolean">
+		select count(*) from Authority where id=#{id} and ori_board_title=#{board_title}
+	</select>
 	<!-- 게시판 생성 -->
 	<insert id="authorityInsert">
-		insert into Authority values (null,#{id},#{sys_board_title},#{ori_board_title},#{authority})
+		insert into Authority values (null,#{id},#{ori_board_title},#{sys_board_title},#{authority})
 	</insert>
 	
 	<!-- 게시글 작성 -->
@@ -14,7 +26,12 @@
 	</select>
 	
 	<!-- 게시판 권한 가진 사람들 불러오기 -->
-	<select id="selectAuthMember" resultType="com.kdt.dto.AuthorityDTO">
-		select * from Authority where ori_board_title=#{board_title}
+	<select id="selectAuthMember" resultMap="authMemberMap">
+		select a.id,name,authority,organization,job_name,position from Authority a inner join Members m on a.id=m.id where ori_board_title=#{board_title}
 	</select>
+	
+	<!-- 게시판 수정 -->
+	<delete id="deleteAuthority">
+		delete from Authority where ori_board_title=#{preBoardTitle}
+	</delete>
 </mapper>

@@ -14,12 +14,13 @@ public class Mk_BoardDAO {
 	@Autowired
 	private SqlSession db;
 	
-	public List<Mk_BoardDTO> select_board_type_group(){
-		return db.selectList("Mk_Board.select_board_type_group");
+	
+	public List<Mk_BoardDTO> select_board_type_group(String id){
+		return db.selectList("Mk_Board.select_board_type_group",id);
 	}
 	
-	public List<Mk_BoardDTO> select_board_type_all(){
-		return db.selectList("Mk_Board.select_board_type_all");
+	public List<Mk_BoardDTO> select_board_type_all(String id){
+		return db.selectList("Mk_Board.select_board_type_all",id);
 	}
 	
 	public int selectBoardSeq(String board_title) {
@@ -29,6 +30,10 @@ public class Mk_BoardDAO {
 	
 	public String selectBoardName(int seq) {
 		return db.selectOne("Mk_Board.selectBoardName",seq);
+	}
+	
+	public boolean isExistName(String board_title) {
+		return db.selectOne("Mk_Board.isExistName",board_title);
 	}
 	
 	//게시판 생성 관련
@@ -62,6 +67,18 @@ public class Mk_BoardDAO {
 	}
 	public int deleteByOriBoardTitle(Map<String,String> map) { 
 		return db.delete("Mk_Board.DeleteByOriBoardTitle",map);
+	}
+	
+	// 게시판 수정
+	public int editBoardDetail(Map<String,String> map) {
+		return db.update("Mk_Board.editBoardDetail",map);
+	
+	}
+	public int editBoardByTitle(Map<String,String> map) {
+		return db.update("Mk_Board.editBoardByTitle",map);
+	}
+	public int editBoardByOriBoardTitle(Map<String,String> map) {
+		return db.update("Mk_Board.editBoardByOriBoardTitle",map);
 	}
 	
 }

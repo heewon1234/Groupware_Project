@@ -1,32 +1,43 @@
-
-/* 기존에 사용하던 메뉴 선택했을때 선택된 페이지 파란색으로 배경색 바꾸는 효과 주는거
+// 왼쪽에서 목록 선택하면 해당 부분 select 되는것
 $(document).ready(function() {
     $('.menu_item, .menu_list_item').click(function() {
         $('.menu_item, .menu_list_item').removeClass('select');
         $(this).addClass('select');
-    });
-}); 
-*/
-
-
-
-// 드롭 다운 메뉴 펼치고 접으면서 사진 회전
-$(document).ready(function() {
-    $('.menu_list_button').click(function() {
-        // 클릭된 menu_list_button 요소의 부모인 menu_list에서 menu_list_box를 찾아 현재 상태를 확인하고 변경
-        var menuListBox = $(this).siblings('.menu_list_box');
-        var menuListImages = $(this).find('.menu_list_button_drop img');
-        
-        
-        if (menuListBox.css('display') === 'none' || menuListBox.css('display') === '') {
-            menuListBox.css('display', 'block');
-            menuListImages.css('transform', '');
-            menuListImages.css('transition', 'all ease 0.2s');
-        } else {
-            menuListBox.css('display', 'none');
-            menuListImages.css('transform', 'rotate( 180deg )');
-            menuListImages.css('transition', 'all ease 0.2s');
-            // menu_list_button
-        }
+        console.log("셀렉트 콘솔");
     });
 });
+
+// 메뉴 열고 닫고, 화살표 이미지 회전
+$(document).ready(function() {
+    $(".menu_list_button").click(function() {
+        let parent = $(this).closest('.menu_list');
+        let child = parent.find('.menu_list_box');
+
+        child.toggle();
+
+        if (child.css('display') === 'none' || child.css('display') === '') {
+            parent.find('.menu_list_button_drop img').css('transform', 'rotate( 180deg )');
+        }
+        else {
+            parent.find('.menu_list_button_drop img').css('transform', '');
+        }
+
+    });
+});
+
+// 드롭다운 메뉴 + 버튼 테스트
+$(document).ready(function() {
+    $(".menu_list_button_plus").on('click', function() {
+        console.log("드롭 다운 메뉴에 있는 + 버튼 테스트");
+        return false;
+    });
+});
+
+// 드롭다운 메뉴  버튼 테스트
+$(document).ready(function() {
+    $(".menu_list_item_plus.point").on('click', function() {
+        console.log("드롭 다운 메뉴에 있는 ... 버튼 테스트 ");
+        return false;
+    });
+});
+

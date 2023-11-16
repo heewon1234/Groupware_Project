@@ -66,5 +66,14 @@ public class WorksDAO {
 	public int updateLeaveRemainder(LeavesDTO dto)throws Exception{
 		return db.update("Leaves.updateLeaveRemainder",dto);
 	}
+	public int existstoday(String ID)throws Exception{
+		return db.selectOne("Works.existstoday",ID);
+	}
+	public int addworklate(String ID)throws Exception{
+		return db.update("Works.addworklate",ID);
+	}
+	public int addworkearly(String ID)throws Exception{
+		return db.update("Works.addworkearly",ID);
+	}
 	
 }
