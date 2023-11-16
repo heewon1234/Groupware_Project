@@ -81,7 +81,7 @@ public class InsaManageController {
 	@RequestMapping(value="/left_item")
 	public String toLeft_item(String selectItem, Model model) {
 		model.addAttribute("selectItem", selectItem);
-		return "/insa/manage/left_item";
+		return "/insa/left_item";
 	}
 	
 }

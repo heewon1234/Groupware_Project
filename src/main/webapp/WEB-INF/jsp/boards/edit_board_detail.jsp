@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<link rel="stylesheet" href="/css/commons/body_form/left_form/body_form_default.css" />
 	<link rel="stylesheet" href="/css/commons/topForm.css" />
@@ -48,7 +49,7 @@
             <button id="member_add_complete">추가</button>
         </div>
     </div>
-    <div class="top">TOP</div>
+    <div class="top" id="top_container"></div>
     <div class="body_form">
         <div class="left_item" id="left_item">
 

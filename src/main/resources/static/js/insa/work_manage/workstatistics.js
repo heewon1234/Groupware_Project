@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	$(".left_item").load("/works/manage_left_item?selectItem=workstatistics");
+	$(".left_item").load("/insa/manage/left_item?selectItem=workstatistics");
 });
 
 function updateWorkformTable() {

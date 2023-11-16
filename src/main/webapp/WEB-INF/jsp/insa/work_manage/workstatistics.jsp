@@ -13,8 +13,6 @@
 	href="/css/insa/work_manage/workstatistics.css">
 <link rel="stylesheet" type="text/css"
 	href="/css/insa/manage/common.css">
-<link rel="stylesheet" type="text/css"
-	href="/css/commons/body_form/left_form/body_form_default.css">
 </head>
 <body>
 	<div class="top">TOP</div>
