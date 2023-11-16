@@ -109,7 +109,7 @@ public class BoardService {
 
 		// File 테이블 insert
 		// input type = file
-		String realPath = "E:/uploads";
+		String realPath = "C:/uploads";
 		File uploadPath = new File(realPath); 
 		if(!uploadPath.exists()) { 
 			uploadPath.mkdir();
@@ -133,7 +133,7 @@ public class BoardService {
 			filedao.insertFile(new FileDTO(0,sys_name,ori_name,parent_seq,board_title,"tag"));
 		}
 	}
-	
+
 	// 게시글 불러오기 관련
 	// 조회수
 	public int viewCountUpdate(String board_title, String seq) {
@@ -143,7 +143,7 @@ public class BoardService {
 		map.put("seq", seq);
 		return bdao.viewCountUpdate(map);
 	}
-	
+
 	// 게시글 리스트 ( 개수 구할 때 사용 )
 	public List<BoardDTO> boardContentsList(String board_title, String id){ 
 		Map<String,String> map = new HashMap<>();
@@ -180,18 +180,10 @@ public class BoardService {
 	}
 	// 즐겨찾기 리스트 10개씩 가져오기
 	public List<Map<String,String>> FavoriteListBy(String board_title,String id, String start){ 
-		List<Integer> seqList = mdao.allBoardSeq();
-		String fromBoard = "";
 		
-		for(int i=0;i<seqList.size();i++) {
-			if(i==seqList.size()-1) {
-				fromBoard+="select *, 'Board_"+seqList.get(i)+"' as board_title from Board_"+seqList.get(i);	
-			} else {			
-				fromBoard+="select *, 'Board_"+seqList.get(i)+"' as board_title from Board_"+seqList.get(i) + " union all ";
-			}
-		}
+		String fromBoard = boardSeqList();
 		System.out.println(fromBoard);
-		
+
 		Map<String,String> map = new HashMap<>();
 		map.put("id", id);
 		map.put("fromBoard", fromBoard);
@@ -200,6 +192,65 @@ public class BoardService {
 		return bdao.FavoriteListBy(map);
 	}
 
+	// 검색 기능
+	// 즐겨찾기 게시판
+	public List<Map<String,String>> SearchFavoriteListBy(String id, String start,String searchText){
+		String fromBoard = boardSeqList();
+		searchText = "%"+searchText+"%";
+		Map<String,String> map = new HashMap<>();
+		map.put("id", id);
+		map.put("fromBoard", fromBoard);
+		map.put("start", start);
+		map.put("searchText", searchText);
+		
+		return bdao.SearchFavoriteListBy(map);
+	}
+	
+	public int countSearchList(String id, String start,String searchText) {
+		searchText = "%"+searchText+"%";
+		String fromBoard = boardSeqList();
+		Map<String,String> map = new HashMap<>();
+		map.put("id", id);
+		map.put("fromBoard", fromBoard);
+		map.put("start", start);
+		map.put("searchText", searchText);
+		
+		return bdao.countSearchList(map);
+	}
+	// 일반게시판
+	public List<BoardDTO> searchContentsListBy(String board_title, String id, String start, String searchText){
+		searchText = "%"+searchText+"%";
+		Map<String,String> map = new HashMap<>();
+		int boardSeq = mdao.selectBoardSeq(board_title);
+		map.put("oriBoardTitle", board_title);
+		map.put("board_title", "Board_"+boardSeq);
+		map.put("id", id);
+		map.put("start", start);
+		map.put("searchText", searchText);
+		return bdao.searchContentsListBy(map);
+	}
+	public int searchCountContentsListBy(String board_title, String id, String searchText) {
+		searchText = "%"+searchText+"%";
+		Map<String,String> map = new HashMap<>();
+		int boardSeq = mdao.selectBoardSeq(board_title);
+		map.put("board_title", "Board_"+boardSeq);
+		map.put("id", id);
+		map.put("searchText", searchText);
+		return bdao.searchCountContentsListBy(map);
+	}
+	private String boardSeqList() {
+		List<Integer> seqList = mdao.allBoardSeq();
+		String fromBoard = "";
+		for(int i=0;i<seqList.size();i++) {
+			if(i==seqList.size()-1) {
+				fromBoard+="select *, 'Board_"+seqList.get(i)+"' as board_title from Board_"+seqList.get(i);	
+			} else {			
+				fromBoard+="select *, 'Board_"+seqList.get(i)+"' as board_title from Board_"+seqList.get(i) + " union all ";
+			}
+		}
+		return fromBoard;
+	}
+	// 일반 게시판
 	// 공지 최근 5개만 가져오기
 	public List<BoardDTO> Notice(String board_title){ 
 		int seq = mdao.selectBoardSeq(board_title);
@@ -231,7 +282,7 @@ public class BoardService {
 
 		// 서버 파일 삭제
 		List<FileDTO> fileList = filedao.selectFileList(new FileDTO(0,null,null,parent_seq,board_title,null));
-		String realPath = "E:/uploads";
+		String realPath = "C:/uploads";
 		File uploadPath = new File(realPath);
 		for(FileDTO file : fileList) {
 			Path path = Paths.get(uploadPath + "/" + file.getSys_name());
@@ -268,7 +319,7 @@ public class BoardService {
 		}
 
 		// 파일 테이블 업데이트
-		String realPath = "E:/uploads";
+		String realPath = "C:/uploads";
 		File uploadPath = new File(realPath);
 
 		// input type=file

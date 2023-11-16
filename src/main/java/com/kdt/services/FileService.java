@@ -19,7 +19,7 @@ public class FileService {
 	FileDAO fdao;
 	
 	public void deleteServerFile(String sys_name) throws Exception{
-		String realPath = "E:/uploads";
+		String realPath = "C:/uploads";
 		File uploadPath = new File(realPath);
 		Path path = Paths.get(uploadPath + "/" + sys_name);
 		Files.deleteIfExists(path);
