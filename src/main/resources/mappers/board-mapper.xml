@@ -100,7 +100,7 @@
 	
 	<!-- 일반 게시판 검색 -->
 	<select id="searchContentsListBy" resultType="com.kdt.dto.BoardDTO">
-		select *,#{oriBoardTitle} as board_title, case when b.seq = parent_seq then 'true' else 'false' end as favorite 
+		select b.*,#{oriBoardTitle} as board_title, case when b.seq = parent_seq then 'true' else 'false' end as favorite 
 		from ${board_title} b left join Favorite_Board f on id=#{id} and parent_seq = b.seq and board_title=#{board_title}
 		where title like #{searchText} or writer like #{searchText} order by write_date desc limit ${start},10
 	</select>
