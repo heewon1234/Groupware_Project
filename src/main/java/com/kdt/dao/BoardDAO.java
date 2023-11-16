@@ -102,7 +102,7 @@ public class BoardDAO {
 		return db.selectOne("Board.countSearchList",map);
 	}
 	public List<BoardDTO> searchContentsListBy(Map<String,String> map){
-		return db.selectList("Board.SearchFavoriteListBy",map);
+		return db.selectList("Board.searchContentsListBy",map);
 	}
 	public int searchCountContentsListBy(Map<String,String> map) {
 		return db.selectOne("Board.searchCountContentsListBy",map);

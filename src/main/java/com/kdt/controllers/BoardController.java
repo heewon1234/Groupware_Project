@@ -1,6 +1,6 @@
 package com.kdt.controllers;
 
-import java.util.ArrayList;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 
@@ -13,7 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kdt.constants.Constants;
 import com.kdt.dto.BoardDTO;
 import com.kdt.dto.FileDTO;
-import com.kdt.dto.Mk_BoardDTO;
 import com.kdt.dto.ReplyDTO;
 import com.kdt.dto.SurveyDTO;
 import com.kdt.dto.SurveyUserDTO;
@@ -58,8 +57,14 @@ public class BoardController {
 	// R 관련 기능
 
 	@RequestMapping("toBoard") // 게시글 리스트 보는 곳 이동
-	public String toBoard(String board_title, Model model, String cPage) {
-		
+	public String toBoard(String board_title, Model model, String cPage) throws Exception{
+
+		if(session.getAttribute("searchText") != null && cPage != null) {
+			String searchText = (String)session.getAttribute("searchText");
+			String encodedSearchText = URLEncoder.encode(searchText, "UTF-8");
+			return "redirect:/board/search?searchText="+encodedSearchText+"&cPage="+cPage;
+		}
+
 		if(board_title==null) {
 			if(session.getAttribute("board_title")==null) {
 				board_title="중요게시물";
@@ -85,7 +90,7 @@ public class BoardController {
 		session.setAttribute("currentPage", currentPage);		
 		int start = currentPage*Constants.RECORD_COUNT_PER_PAGE-(Constants.RECORD_COUNT_PER_PAGE-1)-1;
 		int end = currentPage*Constants.RECORD_COUNT_PER_PAGE;
-		
+		System.out.println("5");
 		List<BoardDTO> noticeList;
 		if(board_title.equals("중요게시물")) {
 			// 레코드 개수 
@@ -120,10 +125,12 @@ public class BoardController {
 	@RequestMapping("search")
 	public String search(String searchText, String cPage, Model model) {
 		
-		if(searchText==null) {
-			System.out.println("null임");
+		if(searchText.isEmpty()) {
+			session.removeAttribute("searchText");
 			return "redirect:/board/toBoard";
 		}
+		
+		session.setAttribute("searchText", searchText);
 		
 		int currentPage=1;
 		if(cPage!=null) {currentPage = Integer.parseInt(cPage);}
@@ -145,12 +152,13 @@ public class BoardController {
 		} else {
 			int totalBoardContents = bservice.searchCountContentsListBy(board_title, id, searchText);
 			model.addAttribute("recordTotalCount",totalBoardContents); 
-			
+			System.out.println("1");
 			List<BoardDTO> boardContentsList = bservice.searchContentsListBy(board_title,id,String.valueOf(start),searchText);
 			model.addAttribute("boardContentsList", boardContentsList);
-			
+			System.out.println("보드이름:"+boardContentsList.get(0).getBoard_title());
 			String name_type = mservice.selectNameType(board_title);
 			model.addAttribute("name_type",name_type);
+			System.out.println("3");
 		}
 		
 		model.addAttribute("recordCountPerPage",Constants.RECORD_COUNT_PER_PAGE);
