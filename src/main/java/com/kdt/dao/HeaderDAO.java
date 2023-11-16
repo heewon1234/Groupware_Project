@@ -21,4 +21,8 @@ public class HeaderDAO {
 	public List<String> selectHeader(String board_title){
 		return db.selectList("Header.selectHeader",board_title);
 	}
+	
+	public int deleteHeader(String preBoardTitle) {
+		return db.delete("Header.deleteHeader",preBoardTitle);
+	}
 }

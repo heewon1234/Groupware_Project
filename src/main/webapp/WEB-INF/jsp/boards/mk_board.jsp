@@ -64,6 +64,7 @@
                     <div class="name_input" >
                         <input type="text" placeholder="&nbsp게시판 이름을 입력하세요." name="board_title" id="board_title_input">
                     </div>
+                    <div id='dupCheckDiv'></div>
                 </div>
                 <div class="board_type">
                     <div class="board_type_text">게시판 종류</div>
@@ -99,8 +100,8 @@
                  <div class="header">
                     <div class="header_text">말머리 설정</div>
                     <div class="header_type">
-                        <div><input type="radio" name="header" value="true" class="header_input_check"> 사용</div>
-                        <div><input type="radio" name="header" value="false" class="header_input_check" checked> 사용 안 함</div>
+                        <div><input type="radio" name="use_header" value="true" class="header_input_check"> 사용</div>
+                        <div><input type="radio" name="use_header" value="false" class="header_input_check" checked> 사용 안 함</div>
                     </div>
                     <div class="headerBox" id="headerBox">
                         <div class="header_add">
@@ -111,7 +112,7 @@
                     </div>
                 </div>
                 <div class="buttons">
-                    <button type="button">취소</button>
+                    <button type="button" id="backBtn">취소</button>
                     <button id="frmBtn">생성</button>
                 </div>
             </div>
@@ -120,8 +121,5 @@
     </div>
     <script src="/js/board/mk_board.js" defer></script>
    	<script src="/js/board/sideBar.js" defer></script>
-   
-    	
-
 </body>
 </html>

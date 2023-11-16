@@ -54,21 +54,10 @@ public class BoardController {
 	@Autowired
 	HttpSession session;
 
-	// commons controller로 가라
-	@RequestMapping("sideBar")
-	public String sideBar(Model model) {
-		List<Mk_BoardDTO> group_list = mservice.select_board_type_group();
-		List<Mk_BoardDTO> all_list = mservice.select_board_type_all();
-		model.addAttribute("group_list",group_list);
-		model.addAttribute("all_list",all_list);
-		return "boards/sideBar";
-	}	
-	//
-
-
 	// R 관련 기능
 	@RequestMapping("toBoard") // 게시글 리스트 보는 곳 이동
 	public String toBoard(String board_title, Model model, String cPage) {
+		
 		if(board_title==null) {
 			if(session.getAttribute("board_title")==null) {
 				board_title="중요게시물";
@@ -79,6 +68,13 @@ public class BoardController {
 		}
 
 		String id = (String)session.getAttribute("loginId");
+		if(!board_title.equals("중요게시물")) {
+			boolean auth = aservice.isExistAuth(id, board_title);
+			if(!auth) {
+				model.addAttribute("auth",auth);
+				board_title="중요게시물";
+			}
+		}
 		session.setAttribute("board_title", board_title);
 
 		// 페이징 처리
@@ -113,16 +109,6 @@ public class BoardController {
 		model.addAttribute("recordCountPerPage",Constants.RECORD_COUNT_PER_PAGE);
 		model.addAttribute("naviCountPerPage",Constants.NAVI_COUNT_PER_PAGE);
 
-
-
-
-		//		List<ReplyDTO> replyList = rservice.replySelectBy(board_title, seq, String.valueOf(start), String.valueOf(end)); // 댓글 리스트
-		//		model.addAttribute("replyList",replyList);
-		//		System.out.println(replyList.size());
-		//		model.addAttribute("replyListSize",rservice.replyTotalCount(board_title, seq));
-		//		model.addAttribute("recordCountPerPage",Constants.RECORD_COUNT_PER_PAGE);
-		//		model.addAttribute("naviCountPerPage",Constants.NAVI_COUNT_PER_PAGE);
-		//
 		return "boards/contentsList_board";
 	}
 

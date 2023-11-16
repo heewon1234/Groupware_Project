@@ -3,10 +3,10 @@
 
 <mapper namespace="Mk_Board">
 	<select id="select_board_type_group" resultType="com.kdt.dto.Mk_BoardDTO">
-		select * from Mk_Board where board_type='group'
+		select m.* from Mk_Board m inner join Authority a on board_title = ori_board_title where a.id=#{id} and board_type='group'
 	</select>
 	<select id="select_board_type_all" resultType="com.kdt.dto.Mk_BoardDTO">
-		select * from Mk_Board where board_type='all'
+		select m.* from Mk_Board m inner join Authority a on board_title = ori_board_title where a.id=#{id} and board_type='all'
 	</select>
 	<select id="selectBoardSeq" resultType="int">
 		select seq from Mk_Board where board_title=#{board_title}
@@ -15,6 +15,10 @@
 		select board_title from Mk_Board where seq=#{seq}
 	</select>
 	
+	<!-- 게시판 이름 중복 체크 -->
+	<select id="isExistName" resultType="boolean">
+		select count(*) from Mk_Board where board_title=#{board_title}
+	</select>
 	<!-- 게시판 생성 -->
 	<insert id="Mk_boardInsert" useGeneratedKeys="true" keyProperty="seq">
 		insert into Mk_Board values (null, #{id}, #{board_title}, #{board_type}, #{name_type}, #{use_header}, default)
@@ -49,4 +53,13 @@
 	</delete>
 	
 	<!-- 게시판 수정 -->
+	<update id="editBoardDetail">
+		update Mk_Board set board_title=#{board_title}, board_type=#{board_type}, name_type=#{name_type}, use_header=${use_header} where board_title=#{prevBoardTitle}
+	</update>
+	<update id="editBoardByTitle">
+		update ${table} set board_title=#{board_title} where board_title=#{prevBoardTitle}
+	</update>
+	<update id="editBoardByOriBoardTitle">
+		update ${table} set ori_board_title=#{board_title} where ori_board_title=#{prevBoardTitle}
+	</update>
 </mapper>
