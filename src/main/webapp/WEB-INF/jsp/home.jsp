@@ -117,7 +117,7 @@
 					</div>
 					<div id="calendarContainer">
 						<div class="date-wrap">
-							<div class="date-month">
+							<div class="date-month" id="month">
 								<div class="button_wrap">
 									<img id="month-prev" class="month-move" src="/images/insa/work_plan/chevron-left.svg">
 									<span id="month-this"></span>
