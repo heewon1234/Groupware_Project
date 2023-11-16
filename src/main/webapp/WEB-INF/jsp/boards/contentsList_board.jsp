@@ -19,17 +19,19 @@
             
         </div>
         <div class="right_item">
-            <div class="content_tab">
-                      <div class="main_search" id="searchBox">
+        	<div class="content_tab">
+            	<form id="searchFrm" action="/board/search">
+                	<div class="main_search" id="searchBox">
                         <div class="searchBox">
-                            <div class="searchIconBox">
-                                <img src="/images/commons/body_form/left_item/default/search.png" >
+                           	<div class="searchIconBox">
+                                <img src="/images/commons/body_form/left_item/default/search.png" id="searchBtn">
                             </div>
                             <div class="searchTextBox">
-                                <input type="text" placeholder="게시글 검색" id="searchTextBoxInput">
+                                <input type="text" placeholder="제목 / 작성자 검색" id="searchTextBoxInput" maxlength='30' name="searchText">
                             </div>
                         </div>
                     </div>
+                </form>
                 <div class="board_list">
                     <div class="board_top">
                         <select name="board_title">

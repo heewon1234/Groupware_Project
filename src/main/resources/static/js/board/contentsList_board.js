@@ -52,3 +52,7 @@ $(".favorite").on("click",function(){
 		});
 	}
 });
+
+$("#searchBtn").on("click",function(){
+	$("#searchFrm").submit();
+});
