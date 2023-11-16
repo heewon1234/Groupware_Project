@@ -66,7 +66,7 @@
     	padding-left: 5px;
     	font-size: 15px;
     	float: left;
-    	width: 50%;
+    	width: 33%;
     	align-content: center;
     	padding-top: 50px;
     	text-align: center;
@@ -76,10 +76,6 @@
     	font-weight: bolder;
     }
 
-    .leavebox>div>button {
-    	border: 1px solid grey;
-    	background-color: white;
-    }
 
     .worktimebox>div {
     	float: left;
