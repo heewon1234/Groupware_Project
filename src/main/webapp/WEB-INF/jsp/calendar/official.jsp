@@ -42,10 +42,10 @@
 		<div class="left_item">
 			<div class="menu_tab">
 				<div id="official" class="menu_item">
-					<img class="menu_item_img" src="/imges/commons/body_form/left_item/default/trash.png" /> <span class="menu_item_text">회사 일정</span>
+					<img class="menu_item_img" src="/images/commons/body_form/left_item/default/favorites.png" /> <span class="menu_item_text">회사 일정</span>
 				</div>
 				<div id="personal" class="menu_item">
-					<img class="menu_item_img" src="/imges/commons/body_form/left_item/default/trash.png" /> <span class="menu_item_text">개인 일정</span>
+					<img class="menu_item_img" src="/images/commons/body_form/left_item/default/information.png" /> <span class="menu_item_text">개인 일정</span>
 				</div>
 			</div>
 		</div>

@@ -118,14 +118,10 @@
 					<div id="calendarContainer">
 						<div class="date-wrap">
 							<div class="date-month">
-								<span id="month-this"></span>
 								<div class="button_wrap">
-									<button type="button" id="month-prev" class="month-move">
-										<img class="prevMonth" src="/images/insa/work_plan/chevron-left.svg">
-									</button>
-									<button type="button" id="month-next" class="month-move">
-										<img class="nextMonth" src="/images/insa/work_plan/chevron-right.svg">
-									</button>
+									<img id="month-prev" class="month-move" src="/images/insa/work_plan/chevron-left.svg">
+									<span id="month-this"></span>
+									<img id="month-next" class="month-move" src="/images/insa/work_plan/chevron-right.svg">
 								</div>
 							</div>
 							<table class="date-month">

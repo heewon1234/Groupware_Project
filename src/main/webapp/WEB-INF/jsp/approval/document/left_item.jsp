@@ -8,6 +8,11 @@
 <link rel="stylesheet" type="text/css" href="/css/commons/body_form/left_form/body_form_default.css">
 <script src="/js/commons/body_form/body_form_default.js"></script>
 <script src="/js/approval/document/common.js"></script>
+<style>
+	.count {
+		margin : 0 0 3px 5px;
+	}
+</style>
 </head>
 
 <body>
@@ -33,16 +38,16 @@
 				</div>
 				<div id="lists" class="menu_list_box">
 					<div id="all"" class="menu_list_item">
-						<img src="../imges/commons/body_form/left_item/default/company.png"> <span class="menu_list_item_text">전체</span> ${allCount }
+						<img src="../imges/commons/body_form/left_item/default/company.png"> <span class="menu_list_item_text">전체</span> <span class="count">${allCount }</span>
 					</div>
 					<div id="wait" class="menu_list_item">
-						<img src="../imges/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">대기</span> ${waitCount }
+						<img src="../imges/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">대기</span> <span class="count">${waitCount }</span>
 					</div>
 					<div id="complete" class="menu_list_item">
-						<img src="../imges/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">완료</span> ${completeCount }
+						<img src="../imges/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">완료</span> <span class="count">${completeCount }</span>
 					</div>
 					<div id="progress" class="menu_list_item">
-						<img src="../imges/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">진행</span> ${processCount }
+						<img src="../imges/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">진행</span> <span class="count">${processCount }</span>
 					</div>
 				</div>
 			</div>
@@ -57,16 +62,16 @@
 				</div>
 				<div id="box" class="menu_list_box">
 					<div id="every" class="menu_list_item">
-						<img src="../imges/commons/body_form/left_item/default/company.png"> <span class="menu_list_item_text">전체</span> ${everyCount }
+						<img src="../imges/commons/body_form/left_item/default/company.png"> <span class="menu_list_item_text">전체</span> <span class="count">${everyCount }</span>
 					</div>
 					<div id="pending" class="menu_list_item">
-						<img src="../imges/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">미결</span> ${pendingCount }
+						<img src="../imges/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">미결</span> <span class="count">${pendingCount }</span>
 					</div>
 					<div id="approve" class="menu_list_item">
-						<img src="../imges/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">결재</span> ${approveCount }
+						<img src="../imges/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">결재</span> <span class="count">${approveCount }</span>
 					</div>
 					<div id="return" class="menu_list_item">
-						<img src="../imges/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">반려</span> ${returnCount }
+						<img src="../imges/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">반려</span> <span class="count">${returnCount }</span>
 					</div>
 				</div>
 			</div>
