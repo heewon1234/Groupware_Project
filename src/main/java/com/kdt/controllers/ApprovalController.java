@@ -256,17 +256,53 @@ public class ApprovalController {
 	    Gson gson = new Gson();
 	    
 	    String approvalJson = gson.toJson(requestData.get("approval")); 
-	    ApprovalDTO approvalDTO = gson.fromJson(approvalJson, ApprovalDTO.class); 
+	    ApprovalDTO approvalDTO = gson.fromJson(approvalJson, ApprovalDTO.class);
 	    
 	    String workPlanJson = gson.toJson(requestData.get("workPlan")); 
 	    WorkPlanDTO workPlanDTO = gson.fromJson(workPlanJson, WorkPlanDTO.class); 
+	    String workDays = workPlanDTO.getWork_days();
+	    String workTypes = workPlanDTO.getWork_types();
+	    String userNames = workPlanDTO.getUser_names();
+
+	    workDays = workDays.substring(1, workDays.length() - 1); // Remove square brackets
+	    workTypes = workTypes.substring(1, workTypes.length() - 1);
+	    userNames = userNames.substring(1, userNames.length() - 1);
+
+	    String[] workDaysArray = workDays.split(",");
+	    String[] workTypesArray = workTypes.split(",");
+	    String[] userNamesArray = userNames.split(",");
+	    System.out.println(workDaysArray);
+	    System.out.println(workTypesArray);
+	    System.out.println(userNamesArray);
+
+	    int length = workDaysArray.length;
+	    System.out.println(length);
+
+	    List<WorkPlanDTO> newDTOList = new ArrayList<>();
+	    for (int i = 0; i < length; i++) {
+	        String workDay = workDaysArray[i].replaceAll("[\"']", "");
+	        String workType = workTypesArray[i].replaceAll("[\"']", "");
+	        String userName = userNamesArray[i].replaceAll("[\"']", "");
+
+	        WorkPlanDTO newDTO = new WorkPlanDTO(0, null, userName, workType, workDay, 0, null);
+	        newDTOList.add(newDTO);
+	        System.out.println("가변 dto : "+newDTO);
+	    }
+
+	    for (WorkPlanDTO dto : newDTOList) {
+	        dto.setId(workPlanDTO.getId());
+	    }
+	    System.out.println("새로운리스트 : "+newDTOList);
+
+	    
+	    
 	    List<String> managerIDList = (List<String>) requestData.get("managerID");
 	    String[] managerID = managerIDList.toArray(new String[0]);
 
 	    System.out.println(approvalDTO);
 	    System.out.println(requestData.get("workPlan"));
 	    
-	    appService.insertWorkPlan(approvalDTO, workPlanDTO, managerID);
+	    appService.insertWorkPlan(approvalDTO, newDTOList, managerID);
 
 	    return "/works_plan/workPlan";
 	}

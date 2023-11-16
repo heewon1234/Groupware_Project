@@ -104,11 +104,12 @@ public class ApprovalService {
 		return adao.getProcessCount(id);
 	}
 	@Transactional
-	public void insertWorkPlan(ApprovalDTO appdto, WorkPlanDTO wpdto, String[] managerID) {
+	public void insertWorkPlan(ApprovalDTO appdto, List<WorkPlanDTO> workPlanDTOList, String[] managerID) {
 		int parent_seq = adao.insert(appdto);
-		wpdto.setDoc_id(parent_seq);
-		
-		wpdao.insert(wpdto);
+		for (WorkPlanDTO wpdto : workPlanDTOList) {
+	        wpdto.setDoc_id(parent_seq);
+	        wpdao.insert(wpdto);
+	    }
 		
 		for(String id : managerID) {
 			ardao.insert(new ApprovalResponsiblesDTO(0, parent_seq, id, "미결"));
