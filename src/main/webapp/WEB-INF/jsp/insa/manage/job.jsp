@@ -20,7 +20,7 @@
 			<div class="content_tab">
 				<div class="title">
 					<h3>직위/직무 관리</h3>
-					<hr>
+					<hr class="title_hr">
 				</div>
 				<div class="contents">
 					<h4>직위 관리</h4>
