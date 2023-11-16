@@ -53,7 +53,7 @@
 	<script src="/js/approval/document/table.js"></script>
 	<script>
 		$(document).ready(function() {
-			$(".left_item").load("/approval/document/left_item?selectItem=wait");
+			$(".left_item").load("/approval/document/left_item?selectItem=wait&approval_status=${list.approval_status}");
 		});
 	</script>
 </body>

@@ -35,6 +35,10 @@ public class ApprovalDAO {
 		return dto.getSeq();
 	}
 	
+	public int delete(int doc_id) {
+		return db.delete("Approval.delete", doc_id);
+	}
+	
 	public ApprovalDTO selectByDocId(int docId) {
 		return db.selectOne("Approval.selectByDocId", docId);
 	}

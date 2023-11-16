@@ -47,6 +47,10 @@ public class ApprovalService {
 		return adao.selectProgressById(id);
 	}
 	
+	public int delete(int doc_id) {
+		return adao.delete(doc_id);
+	}
+	
 	@Transactional
 	public void insert(ApprovalDTO dto, MultipartFile[] files, String path, String[] managerID) throws Exception {
 		int parent_seq = adao.insert(dto);

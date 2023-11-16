@@ -27,6 +27,9 @@
 								<button type="submit" class="button_apply">결재하기</button>
 							</c:if>
                        	</c:forEach>
+                       	<c:if test="${app.approval_status eq '대기'}">
+							<button type="button" id="delete_btn" class="button_apply">삭제하기</button>
+						</c:if>
 						<button type="button" id="back_btn" class="button_apply">
 							뒤로가기
 						</button>
@@ -58,13 +61,13 @@
                             					<td class="status${i.index }">
 													<c:choose>
 														<c:when test="${manager.approval_status eq '결재' }">
-															<img id="check" src="/images/approval/check.svg">
+															<img id="check" src="/images/approval/check.svg" class="status${i.index }">
 														</c:when>
 														<c:when test="${manager.approval_status eq '반려' }">
-															<img id="X" src="/images/approval/X.svg">
+															<img id="X" src="/images/approval/X.svg" class="status${i.index }">
 														</c:when>
 														<c:when test="${manager.approval_status eq '미결' }">
-															<img id="minus" src="/images/approval/minus.svg">
+															<img id="minus" src="/images/approval/minus.svg" class="status${i.index }">
 														</c:when>
 													</c:choose>
                             					</td>
@@ -109,27 +112,32 @@
 		$(document).ready(function() {
 			$("#top_container").load("/commons/topForm");
 		});
+		$("#delete_btn").on("click", function() {
+			location.href = "/approval/document/delete?doc_id=${docId}"
+		});
 		$("#back_btn").on("click", function() {
 			window.history.back();
 		});
-		
-		if($("img").attr("id") == "check") {
-			$("select[name='status']").val("결재").prop("selected", true);
-		} else if($("img").attr("id") == "X"){
-			$("select[name='status']").val("반려").prop("selected", true);
-		} else {
-			$("select[name='status']").val("미결").prop("selected", true);
-		}
+
+		$("img").each(function() {
+			if($(this).attr('id') == "check") {
+				$("select."+$(this).attr("class")).val("결재").prop("selected", true);
+			} else if($(this).attr('id') == "X") {
+				$("select."+$(this).attr("class")).val("반려").prop("selected", true);
+			} else {
+				$("select."+$(this).attr("class")).val("미결").prop("selected", true);
+			}
+		});
 		
 		$("select[name='status']").on("change", function() {
-			$("td[class="+$(this).attr('class')+"]").empty();
+			$("td."+$(this).attr('class')).empty();
 			
 			if ($(this).val() == '결재') {
-	        	$("td[class="+$(this).attr('class')+"]").append('<img src="/images/approval/check.svg">');
+	        	$("td."+$(this).attr('class')).append('<img src="/images/approval/check.svg">');
 	        } else if ($(this).val() == '반려') {
-	        	$("td[class="+$(this).attr('class')+"]").append('<img src="/images/approval/X.svg">');
+	        	$("td."+$(this).attr('class')).append('<img src="/images/approval/X.svg">');
 	        } else if($(this).val() == '미결') {
-	        	$("td[class="+$(this).attr('class')+"]").append('<img src="/images/approval/minus.svg">');
+	        	$("td."+$(this).attr('class')).append('<img src="/images/approval/minus.svg">');
 	        }
 		});
 	</script>
