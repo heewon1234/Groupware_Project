@@ -131,7 +131,7 @@ public class Mk_BoardController {
 	}
 	
 	@RequestMapping("delBoard")
-	public String delBoard(String board_title) {
+	public String delBoard(String board_title) throws Exception{
 		mservice.delBoard(board_title);
 		return "redirect:/mk_board/toEditBoard";
 	}

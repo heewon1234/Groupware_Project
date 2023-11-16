@@ -3,13 +3,10 @@
 	width: 80%;
     display: flex;
     align-items: center;
-    justify-content: space-between; 
+    /*justify-content: space-between;*/
     border-bottom: 1px solid #eeeeee;
 }
 
-.icon {
-    margin-left: auto; 
-}
 .icon i {
     margin-left: 10px;
 }
@@ -33,3 +30,35 @@
 	border-radius: 10px;
 }
 
+#menuSelect {
+	font-size:11pt;
+}
+
+#menuSelectDiv {
+	margin-left:20px;
+	margin-right:70%;
+}
+
+#menuCollection {
+	position:fixed;
+	z-index:2;
+	top:6%;
+	left:11%;
+	width:300px;
+	background-color: #ffffff;
+	border-radius: 10px;
+	padding:10px;
+}
+
+
+#left {
+	width:50%;
+}
+
+#right {
+	width:50%;
+}
+
+.menu {
+	height:35px;
+}

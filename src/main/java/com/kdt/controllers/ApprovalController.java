@@ -71,7 +71,7 @@ public class ApprovalController {
 	}
 
 	@RequestMapping("/view")
-	public String view(int docId ,Model model) throws Exception {
+	public String view(int docId, Model model) throws Exception {
 		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");
 		ApprovalDTO app = appService.selectByDocId(docId);
 		List<ApprovalFilesDTO> filesList = appFService.selectByParentSeq(docId);
@@ -120,7 +120,15 @@ public class ApprovalController {
 
 		return "redirect:/approval/document/box/every";
 	}
-
+	
+	@RequestMapping("/delete")
+	public String delete(int doc_id) throws Exception {
+		appService.delete(doc_id);
+		
+		
+		return "redirect:/approval/document/lists/all";
+	}
+ 
 	@RequestMapping("/lists/all")
 	public String listsAll(Model model) throws Exception {
 		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");

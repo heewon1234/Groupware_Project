@@ -35,14 +35,23 @@
                         <div class="board_contents_title">${boardContents.title}</div>
                         <div class="contents_info_datail">
                         	<div id="boardSeq">글번호 ${boardContents.seq}</div> |
-                            <div>${boardContents.writer}</div> |
+                            <div>
+                            	<c:choose>
+                            		<c:when test="${name_type eq 'identity' }">
+                            			${boardContents.writer}
+                            		</c:when>
+                            		<c:otherwise>
+                            			익명
+                            		</c:otherwise>
+                            	</c:choose>
+                            </div> |
                             <div>${board_title}</div> |
                             <div>조회수 ${boardContents.view_count }</div>
                         </div>
                     </div>
                     <div class="contents_write_date">
                     	<div>${boardContents.write_date }</div>
-                    	<div><button id="contentsDelBtn">삭제</button></div>
+                    	<div><c:if test="${boardContents.writer eq loginId }"><button id="contentsDelBtn">삭제</button></c:if></div>
                     </div>
                 </div>
                 <div class="contents-file">
@@ -94,7 +103,7 @@
                 </div>
                 <div class="buttons">
                  	<button id="backBtn">뒤로가기</button>
-                    <button id="contentsUpdateBtn">수정</button> 
+                    <c:if test="${boardContents.writer eq loginId }"><button id="contentsUpdateBtn">수정</button></c:if>
                 </div>
                 <div class="reply_box">
                 	<form action="/reply/insertReply" method="post">
@@ -120,15 +129,26 @@
 										<div class="reply_list" data-index='${i.seq }'>
     										<div class="reply_list_info">
     											<input type="hidden" name="seq" value='${i.seq }'>
-        										<div>${i.writer }</div>
+        										<div>
+        											<c:choose>
+                            							<c:when test="${name_type eq 'identity' }">
+                            								${i.writer }
+                            							</c:when>
+                            							<c:otherwise>
+                            								익명
+                            							</c:otherwise>
+                            						</c:choose>
+        										</div>
         										<div>${i.write_date }</div>
     										</div>
     										<div class="reply_list_contents">
         										${i.contents }
     										</div>
     										<div class="reply_list_edit_buttons">
-    											<button class="replyDelBtn" type="button">삭제</button>
-        										<button class="replyUpdateBtn" type="button">수정</button>
+    											<c:if test="${i.writer eq loginId }">
+    												<button class="replyDelBtn" type="button">삭제</button>
+        											<button class="replyUpdateBtn" type="button">수정</button>
+    											</c:if>
         										<button class="updateCancelBtn" type="button">취소</button>
         										<button class="updateSuccessBtn">수정완료</button>
     										</div>

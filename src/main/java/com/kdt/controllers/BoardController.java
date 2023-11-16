@@ -2,6 +2,7 @@ package com.kdt.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -55,6 +56,7 @@ public class BoardController {
 	HttpSession session;
 
 	// R 관련 기능
+
 	@RequestMapping("toBoard") // 게시글 리스트 보는 곳 이동
 	public String toBoard(String board_title, Model model, String cPage) {
 		
@@ -90,8 +92,9 @@ public class BoardController {
 			int totalBoardContents = bservice.FavoriteAllContentsList(board_title,id).size();
 			model.addAttribute("recordTotalCount",totalBoardContents); 
 			// 컨텐츠 리스트
-			List<BoardDTO> boardContentsList = bservice.FavoriteListBy(board_title, id, String.valueOf(start));
+			List<Map<String,String>> boardContentsList = bservice.FavoriteListBy(board_title, id, String.valueOf(start));
 			model.addAttribute("boardContentsList", boardContentsList);
+			model.addAttribute("name_type",null);
 		} else {
 			// 레코드 개수
 			int totalBoardContents = bservice.boardContentsList(board_title,id).size();
@@ -103,15 +106,58 @@ public class BoardController {
 			// 게시글 리스트 최신 10개
 			List<BoardDTO> boardContentsList = bservice.BoardContentsListBy(board_title, id, String.valueOf(start), String.valueOf(end));
 			model.addAttribute("boardContentsList", boardContentsList);
+			
+			String name_type = mservice.selectNameType(board_title);
+			model.addAttribute("name_type",name_type);
 		}
-
-		//model.addAttribute("boardContentsList",noticeList);
+		
 		model.addAttribute("recordCountPerPage",Constants.RECORD_COUNT_PER_PAGE);
 		model.addAttribute("naviCountPerPage",Constants.NAVI_COUNT_PER_PAGE);
 
 		return "boards/contentsList_board";
 	}
 
+	@RequestMapping("search")
+	public String search(String searchText, String cPage, Model model) {
+		
+		if(searchText==null) {
+			System.out.println("null임");
+			return "redirect:/board/toBoard";
+		}
+		
+		int currentPage=1;
+		if(cPage!=null) {currentPage = Integer.parseInt(cPage);}
+		session.setAttribute("currentPage", currentPage);		
+		int start = currentPage*Constants.RECORD_COUNT_PER_PAGE-(Constants.RECORD_COUNT_PER_PAGE-1)-1;
+		int end = currentPage*Constants.RECORD_COUNT_PER_PAGE;
+		
+		String board_title = (String)session.getAttribute("board_title");
+		String id = (String)session.getAttribute("loginId");
+		
+		if(board_title.equals("중요게시물")) {
+			
+			int totalBoardContents = bservice.countSearchList(id, String.valueOf(start), searchText);
+			model.addAttribute("recordTotalCount",totalBoardContents); 
+			
+			List<Map<String,String>> boardContentsList = bservice.SearchFavoriteListBy(id, String.valueOf(start), searchText);
+			model.addAttribute("boardContentsList",boardContentsList);
+			model.addAttribute("name_type",null);
+		} else {
+			int totalBoardContents = bservice.searchCountContentsListBy(board_title, id, searchText);
+			model.addAttribute("recordTotalCount",totalBoardContents); 
+			
+			List<BoardDTO> boardContentsList = bservice.searchContentsListBy(board_title,id,String.valueOf(start),searchText);
+			model.addAttribute("boardContentsList", boardContentsList);
+			
+			String name_type = mservice.selectNameType(board_title);
+			model.addAttribute("name_type",name_type);
+		}
+		
+		model.addAttribute("recordCountPerPage",Constants.RECORD_COUNT_PER_PAGE);
+		model.addAttribute("naviCountPerPage",Constants.NAVI_COUNT_PER_PAGE);
+		return "boards/contentsList_board";
+	}
+	
 	@RequestMapping("toContentsBoard") // 게시글 내용 보는 곳으로 이동
 	public String toContentsBoard(String seq, String board_title, Model model, String rNum) {
 
@@ -135,7 +181,7 @@ public class BoardController {
 		//
 
 		BoardDTO boardContents = bservice.boardContents(board_title, seq); // 게시글 내용
-		model.addAttribute("boardContents",boardContents);
+		
 
 		model.addAttribute("surveyList", null); // 설문조사 관련
 		model.addAttribute("isVote",false);
@@ -154,7 +200,14 @@ public class BoardController {
 		fdto.setParent_seq(Integer.parseInt(seq));
 		List<FileDTO> fileList = fservice.selectFileList(fdto);
 		model.addAttribute("fileList",fileList);
-
+		
+		// 게시판 이름 타입
+		String name_type = mservice.selectNameType(board_title);
+		model.addAttribute("name_type",name_type);
+		
+		bservice.viewCountUpdate(board_title, seq);
+		boardContents.setView_count(boardContents.getView_count()+1);
+		model.addAttribute("boardContents",boardContents);
 		return "boards/contents_board";
 	}
 

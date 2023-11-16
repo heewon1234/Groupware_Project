@@ -29,6 +29,9 @@
 	<!-- 게시판 생성 -->
 	
 	<!-- 게시글 불러오기 -->
+	<select id="selectNameType" resultType="String">
+		select name_type from Mk_Board where board_title=#{board_title}
+	</select>
 	<select id="allBoardSeq" resultType="int">
 		select seq from Mk_Board
 	</select>
