@@ -33,7 +33,7 @@
 	</insert>
 	<!-- 조회수 -->
 	<update id="viewCountUpdate">
-		update #{board_title} set view_count = view_count + 1 where seq = #{seq}
+		update ${board_title} set view_count = view_count + 1 where seq = #{seq}
 	</update>
 	<!-- 게시글 불러오기 -->
 	<select id="boardContentsList" resultType="com.kdt.dto.BoardDTO">
@@ -52,17 +52,31 @@
 		select * from ${board_title} where seq=#{seq}
 	</select>
 	<!-- 즐겨찾기 게시물 전체 불러오기 -->
+	<resultMap id="authBoardDTO" type="java.util.HashMap">
+    	<result column="seq" property="seq"/>
+    	<result column="board_title" property="board_title"/>
+    	<result column="id" property="id"/>
+    	<result column="parent_seq" property="parent_seq"/>
+    	<result column="title" property="title"/>
+    	<result column="writer" property="writer"/>	
+    	<result column="header" property="header"/>	
+    	<result column="notice" property="notice"/>	
+    	<result column="view_count" property="view_count"/>	
+    	<result column="write_date" property="write_date"/>	
+    	<result column="name_type" property="name_type"/>	
+	</resultMap>
 	<select id="FavoriteBoardContentsList" resultType="com.kdt.dto.BoardDTO">
 		select b.*,#{oriBoardTitle} as board_title, "true" as favorite from Favorite_Board f 
 		left join ${board_title} b on parent_seq=b.seq where id=#{id} and board_title=#{board_title} order by write_date desc
 	</select>
 	<!-- 즐겨찾기 게시물 10개씩 가져오기 -->
-	<select id="FavoriteListBy" resultType="com.kdt.dto.BoardDTO">
-		(select b.seq,ori_board_title as board_title,id,parent_seq,title,writer,header,notice,contents,survey_question,view_count from Favorite_Board f 
-		inner join 
-			(${fromBoard}) b 
-		on parent_seq=b.seq and f.board_title=b.board_title and id=#{id} order by write_date desc) 
-		limit ${start},10;  
+	<select id="FavoriteListBy" resultMap="authBoardDTO">
+		select unionTable.*,name_type from        
+			(select b.seq,ori_board_title as board_title,id,parent_seq,title,writer,write_date, header,notice,view_count from Favorite_Board f 
+			inner join 
+				(${fromBoard}) b 
+				on parent_seq=b.seq and f.board_title=b.board_title and id=#{id} order by write_date desc) as unionTable
+        	inner join Mk_Board m on unionTable.board_title = m.board_title order by write_date desc limit ${start},10 
 	</select>
 	<!-- 공지 내용 최근 5개 가져오기 -->
 	<select id="Notice" resultType="com.kdt.dto.BoardDTO">

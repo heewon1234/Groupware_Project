@@ -179,7 +179,7 @@ public class BoardService {
 		return favContentsList;
 	}
 	// 즐겨찾기 리스트 10개씩 가져오기
-	public List<BoardDTO> FavoriteListBy(String board_title,String id, String start){ 
+	public List<Map<String,String>> FavoriteListBy(String board_title,String id, String start){ 
 		List<Integer> seqList = mdao.allBoardSeq();
 		String fromBoard = "";
 		

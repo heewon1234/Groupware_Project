@@ -31,8 +31,11 @@ public class FavoriteController {
 	@ResponseBody
 	@RequestMapping("delFavContents")
 	public int delFavContents(FavoriteBoardDTO dto) {
-		String id = (String)session.getAttribute("loginID");
+		String id = (String)session.getAttribute("loginId");
 		dto.setId(id);
+		System.out.println("board_title:"+dto.getOri_board_title());
+		System.out.println("parent_seq:"+dto.getParent_seq());
+	
 		return fservice.delFavContents(dto);
 	}
 	

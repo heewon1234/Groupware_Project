@@ -2,6 +2,7 @@ package com.kdt.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -90,8 +91,9 @@ public class BoardController {
 			int totalBoardContents = bservice.FavoriteAllContentsList(board_title,id).size();
 			model.addAttribute("recordTotalCount",totalBoardContents); 
 			// 컨텐츠 리스트
-			List<BoardDTO> boardContentsList = bservice.FavoriteListBy(board_title, id, String.valueOf(start));
+			List<Map<String,String>> boardContentsList = bservice.FavoriteListBy(board_title, id, String.valueOf(start));
 			model.addAttribute("boardContentsList", boardContentsList);
+			model.addAttribute("name_type",null);
 		} else {
 			// 레코드 개수
 			int totalBoardContents = bservice.boardContentsList(board_title,id).size();
@@ -103,8 +105,11 @@ public class BoardController {
 			// 게시글 리스트 최신 10개
 			List<BoardDTO> boardContentsList = bservice.BoardContentsListBy(board_title, id, String.valueOf(start), String.valueOf(end));
 			model.addAttribute("boardContentsList", boardContentsList);
+			
+			String name_type = mservice.selectNameType(board_title);
+			model.addAttribute("name_type",name_type);
 		}
-
+		
 		//model.addAttribute("boardContentsList",noticeList);
 		model.addAttribute("recordCountPerPage",Constants.RECORD_COUNT_PER_PAGE);
 		model.addAttribute("naviCountPerPage",Constants.NAVI_COUNT_PER_PAGE);
@@ -135,7 +140,7 @@ public class BoardController {
 		//
 
 		BoardDTO boardContents = bservice.boardContents(board_title, seq); // 게시글 내용
-		model.addAttribute("boardContents",boardContents);
+		
 
 		model.addAttribute("surveyList", null); // 설문조사 관련
 		model.addAttribute("isVote",false);
@@ -155,8 +160,13 @@ public class BoardController {
 		List<FileDTO> fileList = fservice.selectFileList(fdto);
 		model.addAttribute("fileList",fileList);
 		
-		bservice.viewCountUpdate(board_title, seq);
+		// 게시판 이름 타입
+		String name_type = mservice.selectNameType(board_title);
+		model.addAttribute("name_type",name_type);
 		
+		bservice.viewCountUpdate(board_title, seq);
+		boardContents.setView_count(boardContents.getView_count()+1);
+		model.addAttribute("boardContents",boardContents);
 		return "boards/contents_board";
 	}
 
