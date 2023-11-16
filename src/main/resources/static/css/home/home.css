@@ -137,6 +137,25 @@ a {
 	font-size: 9pt;
 }
 
+.button_wrap {
+	display:flex;
+	align-items: center;
+}
+
+#month-prev, #month-next {
+	width:20px;
+	height:20px;
+}
+
+#month-prev:hover, #month-next:hover {
+	cursor:pointer;
+}
+
+#month-this {
+	font-weight: bold;
+	font-size:15pt;
+}
+
 /*출근체크*/
 
 .workcheckbox{
