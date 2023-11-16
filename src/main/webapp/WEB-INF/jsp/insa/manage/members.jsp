@@ -13,7 +13,6 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/css/insa/manage/members.css">
 <link rel="stylesheet" type="text/css" href="/css/insa/manage/common.css">
-<link rel="stylesheet" type="text/css" href="/css/commons/body_form/left_form/body_form_default.css">
 </head>
 <body>
 	<div class="top">TOP</div>

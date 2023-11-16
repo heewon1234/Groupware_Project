@@ -7,8 +7,6 @@
 <meta charset="UTF-8">
 <title>근무계획 수립</title>
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="/css/commons/body_form/left_form/body_form_default.css">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script
@@ -815,7 +813,7 @@ $(document).ready(function() {
 
 $(document).ready(function() {
 	$("#top_container").load("/commons/topForm");
-	$(".left_item").load("/works/manage_left_item?selectItem=workPlan");
+	$(".left_item").load("/insa/manage/left_item?selectItem=workPlan");
 	
 // 주말을 제외한 정을 추가하는 함수
 function createScheduleCell(date) {
