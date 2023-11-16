@@ -18,6 +18,9 @@
 	<insert id="insert" useGeneratedKeys="true" keyProperty="seq">
 		insert into Approval values (null,#{id},#{title},#{contents}, now(), '대기', #{doc_type})
 	</insert>
+	<delete id="delete">
+		DELETE FROM Approval WHERE seq = #{doc_id}
+	</delete>
 	<select id="selectByDocId" resultType="com.kdt.dto.ApprovalDTO">
 		SELECT * FROM Approval WHERE seq = #{docId}
 	</select>
