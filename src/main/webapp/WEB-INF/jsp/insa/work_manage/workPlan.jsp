@@ -557,6 +557,7 @@ document.getElementById('update_workPlan_body').addEventListener('change', funct
                 return currentValue + logContent + '\n';
             });
         }
+    }
 });
 $(document).ready(function() {
     $('#modal_apply_button').on('click', function() {
@@ -578,7 +579,6 @@ $(document).ready(function() {
                 approval: approval,
                 workPlan: workplan
             };
-		console.log("approval : "+approval+"workplan : "+workplan);
     	$.ajax({
     	    url: '/approval/document/works/workPlan_write',
     	    method: 'POST',
