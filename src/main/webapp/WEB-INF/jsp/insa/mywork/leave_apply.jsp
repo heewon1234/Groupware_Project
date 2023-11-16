@@ -8,8 +8,13 @@
 <title>결재 작성하기</title>
 <!-- BootStrap -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="/css/approval/document/write.css">
+<link rel="stylesheet" type="text/css" href="/css/insa/mywork/leave_apply.css">
 <link rel="stylesheet" type="text/css" href="/css/commons/body_form/left_form/body_form_default.css">
+
+
+
+
+</head>
 </head>
 <body>
 	<form action="/approval/document/insertApproval" method="post" enctype="multipart/form-data">
@@ -26,11 +31,7 @@
 						<tbody>
 							<tr>
 								<th>문서 종류</th>
-								<td>
-									<select name="doc_type">
-										<option>근무~~~</option>
-									</select>
-								</td>
+								<td>휴가 신청</td>
 								<th>작성자</th>
 								<td>${userDTO.organization } ${userDTO.position } ${userDTO.name }</td>
 							</tr>

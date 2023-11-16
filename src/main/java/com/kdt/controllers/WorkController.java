@@ -143,9 +143,6 @@ public class WorkController {
 		return "/insa/mywork/leave_apply";
 	}
 	
-		
-		
-	
 	@RequestMapping("getUserList")
 	@ResponseBody
 	public List<MembersDTO> getUserList(Model model)throws Exception {
