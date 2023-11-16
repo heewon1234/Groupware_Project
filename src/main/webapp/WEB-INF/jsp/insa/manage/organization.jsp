@@ -20,7 +20,7 @@
 			<div class="content_tab">
 				<div class="title">
 					<h3>조직 관리</h3>
-					<hr>
+					<hr class="title_hr">
 				</div>
 				<div class="chart-box">
 					<div id="chart_div"></div>
