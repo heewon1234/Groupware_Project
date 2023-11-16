@@ -99,16 +99,16 @@ public class WorkController {
 		model.addAttribute("list",list);
 		return list;
 	}
-	@RequestMapping("left_item")
+	/*@RequestMapping("left_item")
 	public String toLeft_item(String selectItem, Model model) {
 		model.addAttribute("selectItem", selectItem);
-		return "/insa/mywork/left_item";
-	}
-	@RequestMapping("manage_left_item")
+		return "/insa/left_item";
+	}*/
+	/*@RequestMapping("manage_left_item")
 	public String tomanage_Left_item(String selectItem, Model model) {
 		model.addAttribute("selectItem", selectItem);
 		return "/insa/work_manage/left_item";
-	}
+	}*/
 	@ResponseBody
 	@RequestMapping("statisticslist") // 근무통계 출력
 	public List<WorkstatisticsDTO> statisticslist(Model model)throws Exception  {
