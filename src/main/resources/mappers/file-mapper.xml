@@ -9,7 +9,9 @@
 	<select id="selectFileList" resultType="com.kdt.dto.FileDTO">
 		select * from File where parent_seq=#{parent_seq} and board_title=#{board_title}
 	</select>
-	
+	<select id="selectFileByBoardTitle" resultType="String">
+		select sys_name from File where board_title=#{board_title}
+	</select>
 	<delete id="delFileByParensSeq">
 		delete from File where parent_seq=#{parent_seq} and board_title=#{board_title}
 	</delete>

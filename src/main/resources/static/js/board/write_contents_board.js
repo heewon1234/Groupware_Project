@@ -1,5 +1,4 @@
 $(document).ready(function() {
-	$("#left_item").load("/board/sideBar");
 			
 	$("#summernote").summernote({
 		width: 1500,
@@ -161,6 +160,24 @@ $("#frmBtn").on("click",function(){
 		return false;
 	}
 	
+	if($("input[name='useSurvey']:checked").val()=="true"){
+
+		if($("input[name='survey_question']").val()==''){
+			alert("질문을 입력해주세요");
+			return false;
+		}
+		
+		let itemValues = [];
+		
+		let items = $(document).find("input[name='items']");
+		items.map((index,item)=>itemValues.push(item.value))
+		
+		if(itemValues.filter(item=>item != '').length<2){
+			alert("설문조사 항목은 2개 이상 입력해야합니다");
+			return false;
+		}
+	}
+
 	if($("#header").val()=="말머리 없음"){
 		$("#header").val("");
 	}

@@ -57,7 +57,16 @@
                             						${i.title }
                             					</a>
                             				</div>
-                           					<div class="board_contents_writer">${i.writer }</div>
+                           					<div class="board_contents_writer">
+                           						<c:choose>
+                            						<c:when test="${name_type eq 'identity' }">
+                            								${i.writer }
+                            						</c:when>
+                            						<c:otherwise>
+                            								익명
+                            						</c:otherwise>
+                            					</c:choose>
+                           					</div>
                             				<div class="view_count">${i.view_count }</div>
                           	  				<div class="board_title">${i.board_title}</div>
                             				<div class="board_contents_write_date">${i.write_date }</div>
@@ -67,14 +76,16 @@
                     			<c:forEach var="i" items="${boardContentsList}">
                     				<div class="board_contents_list">
                             			<div class="favorite" data-index='${i.seq }'>
-                            				<c:choose>
-                            					<c:when test="${i.favorite }">
-                            						<img src="/images/commons/body_form/left_item/default/favorites.png" >
-                            					</c:when>
-                            					<c:otherwise>
-                            						<img src="/images/board/notFavorite.png" >
-                            					</c:otherwise>
-                            				</c:choose> 	
+                            				<c:if test="${board_title ne '중요게시물' }">
+                            					<c:choose>
+                            						<c:when test="${i.favorite}">
+                            							<img src="/images/commons/body_form/left_item/default/favorites.png" >
+                            						</c:when>
+                            						<c:otherwise>
+                            							<img src="/images/board/notFavorite.png">
+                            						</c:otherwise>
+                            					</c:choose> 	
+                            				</c:if>                           				
                             			</div>
                             			<div class="board_contents_title">
                             				<c:choose>
@@ -96,7 +107,16 @@
                             					</c:otherwise>
                             				</c:choose>
                             			</div>
-                           				<div class="board_contents_writer">${i.writer }</div>
+                           				<div class="board_contents_writer">
+                           					<c:choose>
+                            					<c:when test="${name_type eq 'identity' or (board_title eq '중요게시물' and i.name_type eq 'identity')}">
+                            							${i.writer }
+                            					</c:when>
+                            					<c:otherwise>
+                            							익명
+                            					</c:otherwise>
+                            				</c:choose>
+                           				</div>
                             			<div class="view_count">${i.view_count }</div>
                           	  			<div class="board_title">${i.board_title}</div>
                             			<div class="board_contents_write_date">${i.write_date }</div>

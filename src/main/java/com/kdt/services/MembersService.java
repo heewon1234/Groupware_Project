@@ -131,7 +131,7 @@ public class MembersService {
 		return managerList;
 	}
 
-	public List<MembersDTO> getManagerList(List<String> managerIdList) {
+	public List<MembersDTO> getManagerListById(List<String> managerIdList) {
 		List<MembersDTO> managerList = new ArrayList<>();
 
 		for (String id : managerIdList) {

@@ -12,9 +12,11 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kdt.dao.ApprovalDAO;
 import com.kdt.dao.ApprovalFilesDAO;
 import com.kdt.dao.ApprovalResponsiblesDAO;
+import com.kdt.dao.WorkPlanDAO;
 import com.kdt.dto.ApprovalDTO;
 import com.kdt.dto.ApprovalFilesDTO;
 import com.kdt.dto.ApprovalResponsiblesDTO;
+import com.kdt.dto.WorkPlanDTO;
 
 import jakarta.transaction.Transactional;
 
@@ -26,6 +28,8 @@ public class ApprovalService {
 	private ApprovalFilesDAO afdao;
 	@Autowired
 	private ApprovalResponsiblesDAO ardao;
+	@Autowired
+	private WorkPlanDAO wpdao;
 	
 	public List<ApprovalDTO> selectById(String id) {
 		return adao.selectbyId(id);
@@ -99,7 +103,15 @@ public class ApprovalService {
 	public int getProcessCount(String id) {
 		return adao.getProcessCount(id);
 	}
-	public int insertWorkPlan(ApprovalDTO dto) {
-		return adao.insert(dto);
+	@Transactional
+	public void insertWorkPlan(ApprovalDTO appdto, WorkPlanDTO wpdto, String[] managerID) {
+		int parent_seq = adao.insert(appdto);
+		wpdto.setDoc_id(parent_seq);
+		
+		wpdao.insert(wpdto);
+		
+		for(String id : managerID) {
+			ardao.insert(new ApprovalResponsiblesDTO(0, parent_seq, id, "미결"));
+		}
 	}
 }
