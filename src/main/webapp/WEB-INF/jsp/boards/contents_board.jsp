@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 	<link rel="stylesheet" href="/css/commons/body_form/left_form/body_form_default.css" />
 	<link rel="stylesheet" href="/css/commons/topForm.css" />
     <link rel="stylesheet" href="/css/board/board_contents.css" />
@@ -14,7 +15,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-	<div class="top">TOP</div>
+	<div class="top" id="top_container"></div>
     <div class="body_form">
         <div class="left_item" id="left_item">
 
