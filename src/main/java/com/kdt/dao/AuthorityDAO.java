@@ -1,6 +1,7 @@
 package com.kdt.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,10 @@ public class AuthorityDAO {
 	@Autowired
 	private SqlSession db;
 	
+	public boolean isExistAuth(Map<String,String> map) {
+		return db.selectOne("Authority.isExistAuth",map);
+	}
+	
 	public int authorityInsert(AuthorityDTO dto) {
 		return db.insert("Authority.authorityInsert",dto);
 	}
@@ -22,8 +27,12 @@ public class AuthorityDAO {
 		return db.selectList("Authority.selectAuthBoard",id);
 	}
 	
-	public List<AuthorityDTO> selectAuthMember(String board_title){
+	public List<Map<String,String>> selectAuthMember(String board_title){
 		return db.selectList("Authority.selectAuthMember",board_title);
+	}
+	
+	public int deleteAuthority(String preBoardTitle) {
+		return db.delete("Authority.deleteAuthority",preBoardTitle);
 	}
 	
 }
