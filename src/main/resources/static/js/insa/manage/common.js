@@ -13,3 +13,8 @@ $(document).ready(function() {
 		location.href = "/works_plan/" + $(this).attr('id');
 	});
 });
+$(document).ready(function() {
+	$('.main_button').click(function() {
+		location.href = "/works/leave_apply";
+	});
+});

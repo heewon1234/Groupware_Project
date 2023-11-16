@@ -9,9 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kdt.dto.LeavesDTO;
+import com.kdt.dto.MembersDTO;
 import com.kdt.dto.WorkTimesDTO;
 import com.kdt.dto.WorksDTO;
 import com.kdt.dto.WorkstatisticsDTO;
+import com.kdt.services.JobTitleService;
+import com.kdt.services.MembersService;
+import com.kdt.services.OrganizationService;
 import com.kdt.services.WorksService;
 
 import jakarta.servlet.http.HttpSession;
@@ -24,6 +28,12 @@ public class WorkController {
 	private HttpSession session;
 	@Autowired
 	private WorksService wservice;
+	@Autowired
+	private MembersService mservice;
+	@Autowired
+	private OrganizationService orgService;
+	@Autowired
+	private JobTitleService jobService;
 	
 	
 	@RequestMapping("work_leave")
@@ -122,7 +132,25 @@ public class WorkController {
 	    wservice.updateLeaveRemainder(idList,joindayList);
 	    return "redirect:/works/workmanage";
 	}
+	@RequestMapping("leave_apply")
+	public String toleave_apply(Model model) {
+		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");
+		List<String> managerOrgList = orgService.getManagerOrgList(userDTO.getOrganization());
+		List<String> managerPositionList = jobService.getManagerPosition(userDTO.getPosition());
+		List<MembersDTO> managerList = mservice.getManagerList(managerOrgList, managerPositionList);
+		model.addAttribute("userDTO", userDTO);
+		model.addAttribute("managerList", managerList);
+		return "/insa/mywork/leave_apply";
+	}
 	
+		
+		
+	
+	@RequestMapping("getUserList")
+	@ResponseBody
+	public List<MembersDTO> getUserList(Model model)throws Exception {
+		return mservice.getUserList();
+	}
 	
 	
 
