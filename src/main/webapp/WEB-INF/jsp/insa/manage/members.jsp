@@ -22,7 +22,7 @@
 			<div class="content_tab">
 				<div class="title">
 					<h3>임직원 관리</h3>
-					<hr>
+					<hr class="title_hr">
 				</div>
 				<c:if test="${rank <= 5}">
     				<div id="add_div">
