@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -259,13 +260,14 @@ public class ApprovalController {
 	    
 	    String workPlanJson = gson.toJson(requestData.get("workPlan")); 
 	    WorkPlanDTO workPlanDTO = gson.fromJson(workPlanJson, WorkPlanDTO.class); 
-	    
+	    List<String> managerIDList = (List<String>) requestData.get("managerID");
+	    String[] managerID = managerIDList.toArray(new String[0]);
+
 	    System.out.println(approvalDTO);
 	    System.out.println(requestData.get("workPlan"));
 	    
-	    //appService.insertWorkPlan(approvalDTO, workPlanDTO, managerID);
+	    appService.insertWorkPlan(approvalDTO, workPlanDTO, managerID);
 
-	    // 나머지 처리
 	    return "/works_plan/workPlan";
 	}
 

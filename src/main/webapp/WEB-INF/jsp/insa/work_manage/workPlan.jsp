@@ -483,7 +483,8 @@ button, select {
 	    $('.modal_tag_add').css('display', 'none');
 	});
 
-
+	var selectedNames = [];
+	var managerIDs = [];
 	// 사람 설정
 	$(document).on("click", "#button_apply_tag", function() {
 		console.log("manager");
@@ -492,13 +493,15 @@ button, select {
 	    var gridItem = document.querySelector('.manager');
 
 	    //db에 넣음?
-	    var selectedNames = [];
+	    
 
 	    // 선택된 체크박스에서 이름 가져와서 배열에 추가
 	    checkboxes.forEach(function(checkbox) {
 	        var listItem = checkbox.parentElement;
 	        var name = listItem.querySelector('span:nth-child(2)').textContent;
+	        var managerID = listItem.querySelector('span:nth-child(3)').textContent;
 	        selectedNames.push(name);
+	        managerIDs.push(managerID);
 	       
 	    });
 	    const applyButton = $('#modal_apply_button');
@@ -547,11 +550,12 @@ document.getElementById('update_workPlan_body').addEventListener('change', funct
         	var logContent = '날짜: ' + date + ', 이름: ' + headerText + ', 근무변경요청: ' + selectedValue;
             user_names.push(headerText);
             work_types.push(selectedValue);
-            work_days.push(date);
+            work_days.push(currentYear+"년 "+date);
             
             $('#user_names').val(JSON.stringify(user_names));
             $('#work_types').val(JSON.stringify(work_types));
             $('#work_days').val(JSON.stringify(work_days));
+            console.log($('#user_names').val());
             
             $("#work_plan_contents").val(function(index, currentValue) {
                 return currentValue + logContent + '\n';
@@ -575,9 +579,12 @@ $(document).ready(function() {
     	    work_days: $('#work_days').val()
     	    
     	};
+    	
+        
     	var data = {
                 approval: approval,
-                workPlan: workplan
+                workPlan: workplan,
+                managerID: managerIDs
             };
     	$.ajax({
     	    url: '/approval/document/works/workPlan_write',
