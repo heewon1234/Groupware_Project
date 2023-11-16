@@ -1,5 +1,5 @@
 $("#left_item").load("/mk_board/sideBar");
-$("#top_container").load("/commons/topForm");
+
 $(document).on("click","#toWriteContentsBoardBtn",function(){
 	location.href="/board/toWriteContentsBoard";
 });
