@@ -13,7 +13,6 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/css/insa/manage/members.css">
 <link rel="stylesheet" type="text/css" href="/css/insa/manage/common.css">
-<link rel="stylesheet" type="text/css" href="/css/commons/body_form/left_form/body_form_default.css">
 </head>
 <body>
 	<div class="top">TOP</div>
@@ -23,7 +22,7 @@
 			<div class="content_tab">
 				<div class="title">
 					<h3>임직원 관리</h3>
-					<hr>
+					<hr class="title_hr">
 				</div>
 				<c:if test="${rank <= 5}">
     				<div id="add_div">

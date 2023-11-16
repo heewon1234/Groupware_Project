@@ -2,7 +2,7 @@ var inTimeActivated = false;
 var outTimeActivated = false;
 
 $(document).ready(function() {
-	$(".left_item").load("/works/left_item?selectItem=work_leave");
+	$(".left_item").load("/insa/manage/left_item?selectItem=work_leave");
 });
 function workin() {
 	updateinTime();
