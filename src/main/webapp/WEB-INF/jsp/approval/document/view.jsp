@@ -27,10 +27,10 @@
 								<button type="submit" class="button_apply">결재하기</button>
 							</c:if>
                        	</c:forEach>
-                       	<c:if test="${app.approval_status eq '대기'}">
+                       	<c:if test="${app.approval_status eq '대기' and userDTO.id eq app.id}">
 							<button type="button" id="delete_btn" class="button_apply">삭제하기</button>
 						</c:if>
-						<button type="button" id="back_btn" class="button_apply">
+						<button type="button" id="back_btn" class="button_cancel">
 							뒤로가기
 						</button>
 					</div>

@@ -89,8 +89,12 @@
 }
 
 /* 아이콘 스타일 (선택 사항) */
-.fa-regular, .fa-solid {
+.icon>.fa-regular {
     font-size: 29px; /* 아이콘 크기 (선택 사항) */
+}
+
+.icon .fa-solid {
+	font-size: 29px; /* 아이콘 크기 (선택 사항) */
 }
 
 /*----------------전체 사람 리스트*/
