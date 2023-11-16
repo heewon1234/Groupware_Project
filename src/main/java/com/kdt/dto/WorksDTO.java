@@ -114,7 +114,9 @@ public class WorksDTO {
 		return  formattedAverageTime;
 		 }
 		
-	
+	public int getLeave_day() {
+		return this.getLeave_remainder()+this.getLeave_use();
+	}
 	
 	
 }

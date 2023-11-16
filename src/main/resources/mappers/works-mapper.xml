@@ -20,7 +20,7 @@
 		Update Works set organization = #{organization} where id = #{id};
 	</update>
 	<select id="existstoday" resultType="Int">
-		SELECT count(*) FROM WorkPlan WHERE id = #{id} AND DATE(work_day) = CURDATE();
+		SELECT count(*) FROM WorkPlan WHERE id = #{id} AND DATE(work_days) = CURDATE();
 	</select>
 	<update id="addworklate">
 	<![CDATA[
