@@ -13,7 +13,7 @@
 </head>
 <body>
 
-	<div id="top_container"></div>
+	<div class="top_container"></div>
 	<div class="body_form">
 		<div class="left_item"></div>
 		<div class="right_item">
@@ -103,5 +103,14 @@
 		</div>
 	</div>
 	<script src="/js/approval/document/write.js"></script>
+	<script>
+		$(document).ready(function() {
+			$(".top_container").load("/commons/topForm");
+		});
+	
+		$(document).ready(function() {
+			$(".left_item").load("/approval/document/left_item");
+		});
+	</script>
 </body>
 </html>

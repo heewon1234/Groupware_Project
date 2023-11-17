@@ -89,7 +89,7 @@
 }
 
 /* 아이콘 스타일 (선택 사항) */
-.icon>.fa-regular {
+.icon .fa-regular {
     font-size: 29px; /* 아이콘 크기 (선택 사항) */
 }
 

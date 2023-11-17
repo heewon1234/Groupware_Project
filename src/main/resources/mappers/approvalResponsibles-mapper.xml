@@ -17,7 +17,7 @@
 		where approver_id = #{id} and approval_status = "미결"
 	</select>
 	
-	<select id="getApproveDocIdByUserId" resultType="Integer">
+	<select id="getApprovalDocIdByUserId" resultType="Integer">
 		select doc_id from Approval_Responsibles
 		where approver_id = #{id} and approval_status = "결재"
 	</select>
@@ -47,7 +47,7 @@
 		WHERE approver_id = #{id} and approval_status = '미결'
 	</select>
 	
-	<select id="getApproveCount" resultType="Integer">
+	<select id="getApprovalCount" resultType="Integer">
 		select COUNT(*) from Approval_Responsibles
 		WHERE approver_id = #{id} and approval_status = '결재'
 	</select>
