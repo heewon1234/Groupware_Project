@@ -27,7 +27,7 @@ $("#add_jr_btn").on("click", function() {
 });
 
 // 직위 입력칸과 그 입력칸을 삭제할 수 있는 버튼 생성
-$(".add_jt_btn").on("click", function() {
+$(".fa-circle-plus").on("click", function() {
 	if (jt_count == 0) {
 		let div = $("<div>");
 		div.css("display", "inline-block");
@@ -70,22 +70,22 @@ $(document).on("click", "#del_jt_btn", function() {
 // 직무 리스트에서 직무 삭제
 $(".remove_jr_btn").on("click", function() {
 	let result = confirm('삭제하시겠습니까?');
-		if (result) {
-			location.href = "/job/deleteJobRole?job_name="
-				+ $(this).prev().html();
-		} else {
-		}
-	});
+	if (result) {
+		location.href = "/job/deleteJobRole?job_name="
+			+ $(this).prev().html();
+	} else {
+	}
+});
 
 // 직위 리스트에서 직위 삭제
 $(".remove_jt_btn").on("click", function() {
 	let result = confirm('삭제하시겠습니까?');
-		if (result) {
-			location.href = "/job/deleteJobTitle?position="
-				+ $(this).prev().html();
-		} else {
-		}
-	});
+	if (result) {
+		location.href = "/job/deleteJobTitle?position="
+			+ $(this).prev().html();
+	} else {
+	}
+});
 
 // 텍스트 클릭 시 'X' 버튼 보이기/숨기기
 $(".parent_span").on("click", "span", function() {
@@ -94,4 +94,9 @@ $(".parent_span").on("click", "span", function() {
 
 $(document).ready(function() {
 	$(".left_item").load("/insa/manage/left_item?selectItem=job");
+	$(".top_container").load("/commons/topForm");
+});
+
+$(document).ready(function() {
+	
 });

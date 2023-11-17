@@ -74,6 +74,7 @@ $("#all_check").on("click", function() {
 
 $(document).ready(function() {
 	$(".left_item").load("/insa/manage/left_item?selectItem=members");
+	$(".top_container").load("/commons/topForm");
 });
 
 
