@@ -1,6 +1,8 @@
 @charset "UTF-8";
 
-@charset "UTF-8";
+#logout{
+	font-size:29px;
+}
 
 /* div{border:1px solid black;} */
 .note-modal-backdrop{display:none !important;}
