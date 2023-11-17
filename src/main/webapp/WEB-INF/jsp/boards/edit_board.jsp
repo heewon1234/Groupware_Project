@@ -12,18 +12,6 @@
     <link rel="stylesheet" href="/css/board/board_edit.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/js/commons/body_form/body_form_default.js" defer></script>
-    <style>
-       	#selectDiv{
-    		color: #333333 !important;
-			background-color:transparent !important;
-			font-weight:normal;
-    	}
-    	#toEditBoardBtn{
-    		background-color: #DAE8F8;
-   			color: #056AC9;
-    		font-weight: bold;
-    	}
-    </style>
 </head>
 <body>
 	
