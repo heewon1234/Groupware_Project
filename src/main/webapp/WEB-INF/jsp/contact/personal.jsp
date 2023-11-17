@@ -26,7 +26,7 @@
     <div class="modal_form">
         <div class="modal_background"></div>
         <form class="modal_contact_add_form" method="post" id="contact_form">
-            <div class="modal_contact_add">
+            <div class="modal_contact_add" id="modal_contact_add">
                 <div class="modal_title">주소 추가</div>
                 <div class="modal_body">
                     <div class="modal_body_content">
@@ -89,9 +89,9 @@
                                 <div class="modal_body_content_input_left">회사</div>
                                 <div class="modal_body_content_input_right">
                                     <div class="input-group mb-0">
-                                        <input type="text" name="companyName" class="form-control" placeholder="회사" style="font-size: 14px; height: 34px; max-width: 120px; padding: 0 10px;" maxlength="50">
-                                        <input type="text" name="companyRank" class="form-control" placeholder="부서" style="font-size: 14px; height: 34px; max-width: 120px; padding: 0 10px; margin: 0 0 0 10px;" maxlength="50">
-                                        <input type="text" name="companyDepartment" class="form-control" placeholder="직급" style="font-size: 14px; height: 34px; max-width: 118px; padding: 0 10px; margin: 0 0 0 10px;" maxlength="50">
+                                        <input type="text" name="company_name" class="form-control" placeholder="회사" style="font-size: 14px; height: 34px; max-width: 120px; padding: 0 10px;" maxlength="50">
+                                        <input type="text" name="company_department" class="form-control" placeholder="부서" style="font-size: 14px; height: 34px; max-width: 120px; padding: 0 10px; margin: 0 0 0 10px;" maxlength="50">
+                                        <input type="text" name="company_rank" class="form-control" placeholder="직급" style="font-size: 14px; height: 34px; max-width: 118px; padding: 0 10px; margin: 0 0 0 10px;" maxlength="50">
                                     </div>
                                 </div>
                             </div>
@@ -156,7 +156,164 @@
                 </div>
             </div>
         </form>
-        <div class="modal_tag_add">
+
+
+           <form class="modal_contact_edit_form" method="post" id="contact_form_edit">
+            <div class="modal_contact_add" id="modal_contact_add_edit">
+                <div class="modal_title">주소 수정</div>
+                <div class="modal_body">
+                    <div class="modal_body_content">
+                        <div class="modal_body_content_form">
+                            <div class="modal_body_content_input">
+                                <div class="modal_body_content_input_left">이름 *</div>
+                                <div class="modal_body_content_input_right">
+                                    <div class="input-group mb-0">
+                                        <input type="text" name="name" class="form-control" placeholder="이름을 입력하세요." id="modal_body_content_edit_right_name" style="font-size: 14px; height: 34px; width: 338px; padding: 0 10px;" maxlength="50">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal_body_content_input">
+                                <div class="modal_body_content_input_left">이메일</div>
+                                <div class="modal_body_content_input_right">
+                                    <div class="input-group mb-0">
+                                        <input type="text" name="email" class="form-control" placeholder="이메일을 입력하세요." id="modal_body_content_edit_right_email" style="font-size: 14px; height: 34px; width: 338px; padding: 0 10px;" maxlength="50">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal_body_content_input">
+                                <div class="modal_body_content_input_left">전화</div>
+                                <div class="modal_body_content_input_right">
+                                    <div class="input-group mb-0">
+                                        <input type="text" name="phone" class="form-control" placeholder="전화번호를 입력하세요." id="modal_body_content_edit_right_phone" style="font-size: 14px; height: 34px; width: 338px; padding: 0 10px;" maxlength="50">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal_body_content_input">
+                                <div class="modal_body_content_input_left">태그</div>
+                                <div class="modal_body_content_input_right tag">
+                                    <div class="modal_tag">
+                                        <span class="modal_tag_left_text">선택</span>
+                                        <div class="modal_tag_right_drop">
+                                            <img src="/images/commons/body_form/left_item/default/drop.png">
+                                        </div>
+                                    </div>
+                                    <!-- 여기가 리스트 받아오는 곳 -->
+                                    <div class="modal_tag_select_list"></div>
+
+                                    <!-- 선택된 리스트들이 들어가는 곳 -->
+                                    <div class="modal_tag_list"></div>
+
+                                    <!-- 숨김 처리 하는 태그 리스트 담을 곳 -->
+                                    <div class="hidden_tag_list">
+                                       <input type="hidden" id="hidden_tag_list_update" name="tag">
+                                       <input type="hidden" id="modal_body_content_edit_right_seq" name="seq">
+                                    </div>
+                                </div>
+                                <div class="modal_body_content_input_bonus">
+                                    <span class="modal_body_content_input_bonus_text">새 태그 만들기</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal_body_content_form_plus">
+                            <div class="modal_body_content_input">
+                                <div class="modal_body_content_input_left">회사</div>
+                                <div class="modal_body_content_input_right">
+                                    <div class="input-group mb-0">
+                                        <input type="text" name="company_name" class="form-control" id="modal_body_content_edit_right_companyName" placeholder="회사" style="font-size: 14px; height: 34px; max-width: 120px; padding: 0 10px;" maxlength="50">
+                                        <input type="text" name="company_department" class="form-control" id="modal_body_content_edit_right_companyDepartment" placeholder="부서" style="font-size: 14px; height: 34px; max-width: 120px; padding: 0 10px; margin: 0 0 0 10px;" maxlength="50">
+                                        <input type="text" name="company_rank" class="form-control" id="modal_body_content_edit_right_companyRank" placeholder="직급" style="font-size: 14px; height: 34px; max-width: 118px; padding: 0 10px; margin: 0 0 0 10px;" maxlength="50">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal_body_content_input">
+                                <div class="modal_body_content_input_left">주소</div>
+                                <div class="modal_body_content_input_right">
+                                    <div class="input-group mb-0">
+                                        <input type="text" name="address" class="form-control" id="modal_body_content_edit_right_address" placeholder="주소를 입력하세요." style="font-size: 14px; height: 34px; width: 378px; padding: 0 10px;" maxlength="50">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal_body_content_input">
+                                <div class="modal_body_content_input_left">홈페이지</div>
+                                <div class="modal_body_content_input_right">
+                                    <div class="input-group mb-0">
+                                        <input type="text" name="link" class="form-control" id="modal_body_content_edit_right_link" placeholder="홈페이지 주소를 입력하세요." style="font-size: 14px; height: 34px; width: 378px; padding: 0 10px;" maxlength="50">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal_body_content_input">
+                                <div class="modal_body_content_input_left">생일</div>
+                                <div class="modal_body_content_input_right">
+                                    <div class="input-group mb-0">
+                                        <input type="text" name="birthday" class="form-control" id="modal_body_content_edit_right_birthday" placeholder="YYYYMMDD" style="font-size: 14px; height: 34px; width: 378px; padding: 0 10px;" maxlength="50">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal_body_content_input">
+                                <div class="modal_body_content_input_left">메모</div>
+                                <div class="modal_body_content_input_right">
+                                    <div class="input-group mb-0">
+                                        <textarea name="memo" class="modal_body_content_textarea" id="modal_body_content_edit_right_memo" placeholder="내용을 입력하세요."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal_body_content_add">
+
+                        <div class="modal_body_content_plus">
+                            <img src="/images/contact/plus.png">입력 항목 추가
+                        </div>
+
+                        <div class="modal_body_content_minus">
+                            <img src="/images/contact/minus.png">추가 입력 항목 닫기
+                        </div>
+                    </div>
+                    <div class="modal_body_content_form_edit">
+                        <span class="modal_body_content_form_edit_text bold">편집 허용</span>
+                        <fieldset class="modal_body_content_form_edit_toggle">
+                            <label> <input role="switch" type="checkbox" class="edit_toggle" />
+                            </label>
+                        </fieldset>
+                        <span class="modal_body_content_form_edit_text" id="edit_toggle_text">허용 안함</span>
+                        <input type="hidden" name="edit" id="hidden_edit_toggle_value" value="false">
+                    </div>
+                </div>
+                <div class="modal_footer right">
+                    <button class="button_delete float_left" id="modal_update_delete">삭제</button>
+                    <button class="button_cancel float_right" id="modal_update_cancel">취소</button>
+                    <button class="button_apply float_right" id="modal_update_apply">수정</button>
+                </div>
+            </div>
+
+        </form>        
+        
+        <div class="modal_contact_read">
+            <div class="modal_title" id="read_title"></div>
+            <div class="modal_body" id="read_body">
+            	<div class="modal_body_content_form" id="read_content_form"></div>
+            </div>
+            <div class="modal_footer">
+            	<button class="button_cancel" id="modal_read_cancel">닫기</button>
+                <button class="button_apply" id="modal_read_edit" style="margin-left: 14px;">수정</button>
+            </div>
+        </div>
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+        
+        
+        
+        
+        <!-- 일반 모달창 -->
+        <div class="modal_tag_add" id="modal_tag_add_nomal">
             <div class="modal_title">
                 <span>태그 만들기</span>
             </div>
@@ -174,6 +331,25 @@
             </div>
         </div>
     </div>
+    <!-- 다이렉트 모달창 -->
+        <div class="modal_tag_add" id="modal_tag_add_direct" >
+            <div class="modal_title">
+                <span>태그 만들기</span>
+            </div>
+            <div class="modal_body">
+                <div class="input-group mb-0">
+                    <input type="text" id="modal_new_tag_input_direct" class="form-control" placeholder="새로 생성할 태그명을 입력하세요.">
+                </div>
+                <div class="modal_tag_duplication_error">
+                    <img src="/images/contact/dup_error.png"> 태그 이름이 이미 있습니다.
+                </div>
+            </div>
+            <div class="modal_footer">
+                <button class="button_cancel" id="button_cancel_tag_direct">취소</button>
+                <button class="button_apply permit" id="button_apply_tag_direct" style="margin-left: 14px">저장</button>
+            </div>
+        </div>
+    </div>    
 
     <!-- TOP 꼭 열어보세요.-->
     <div class="top_form">
@@ -208,8 +384,11 @@
                             <img src="/images/commons/body_form/left_item/default/drop.png" />
                         </div>
                         <span class="menu_list_button_text">개인 주소록</span>
-                        <div class="menu_list_button_plus">
+                        <div class="menu_list_button_plus" id="personal_drop_tag_add">
                             <img src="/images/commons/body_form/left_item/default/plus.png" />
+                            <div class="menu_list_button_plus_hover">
+                                태그 만들기
+                            </div>
                         </div>
                     </div>
                     <div class="menu_list_box">
@@ -231,16 +410,19 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- 드롭 다운 메뉴 (리스트 내용에 마우스 올리면 설정 메뉴 나옴) -->
+                
+                <!-- 드롭 다운 메뉴 (추가 효과 없음) -->
                 <div class="menu_list">
                     <div class="menu_list_button plus">
                         <div class="menu_list_button_drop">
                             <img src="/images/commons/body_form/left_item/default/drop.png" />
                         </div>
                         <span class="menu_list_button_text">공유 주소록</span>
-                        <div class="menu_list_button_plus">
+                        <div class="menu_list_button_plus" id="personal_drop_tag_add">
                             <img src="/images/commons/body_form/left_item/default/plus.png" />
+                            <div class="menu_list_button_plus_hover">
+                                태그 만들기
+                            </div>
                         </div>
                     </div>
                     <div class="menu_list_box">
@@ -261,15 +443,7 @@
                             <img src="/images/commons/body_form/left_item/default/alarm.png"> <span class="menu_list_item_text">미등록 태그</span>
                         </div>
                     </div>
-                </div>
-
-                <!-- 구별선 -->
-                <hr class="div_hr">
-
-                <!-- 일반 메뉴 -->
-                <div class="menu_item">
-                    <img class="menu_item_img" src="/images/commons/body_form/left_item/default/trash.png" /> <span class="menu_item_text">휴지통</span>
-                </div>
+                </div>                
             </div>
         </div>
 
@@ -283,7 +457,7 @@
                                 <img src="/images/commons/body_form/right_item/default/search.png">
                             </div>
                             <div class="searchTextBox">
-                                <input type="text" placeholder="게시글 검색" id="searchTextBoxInput">
+                                <input type="text" placeholder="이름, 회사명, 전화번호 검색" id="personal_search_input">
                             </div>
                         </div>
                         <div class="countBox">
@@ -312,7 +486,7 @@
                                     <div class="main_category_name">${contact.name}</div>
                                     <div class="main_category_email">${contact.email}</div>
                                     <div class="main_category_phone">${contact.phone}</div>
-                                    <div class="main_category_companyName">${contact.companyName}</div>
+                                    <div class="main_category_companyName">${contact.company_name}</div>
                                     <div class="main_category_tag">
                                         <div class="main_tag_list">
                                             <c:if test="${not empty contact.tag}">

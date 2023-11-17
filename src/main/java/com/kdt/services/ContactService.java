@@ -42,6 +42,23 @@ public class ContactService {
 		return this.dao.personalContactInsert(dto);
 	}
 	
+	public List<ContactDTO> personalContactRead(ContactDTO dto) {
+		return this.dao.personalContactRead(dto);
+	}
+	
+	public int personalContactUpdate(ContactDTO dto) {
+		return this.dao.personalContactUpdate(dto);
+	}
+	
+	public int personalContactDelete(ContactDTO dto) {
+		return this.dao.personalContactDelete(dto);
+	}
+	
+	public List<ContactDTO> personalContactSearch(String keyword) {
+		return this.dao.personalContactSearch(keyword);
+	}
+	
+	
 	public List<ContactDTO> shareContactTagSelectAll(ContactDTO dto) {
 		return this.dao.shareContactTagSelectAll(dto);
 	}
