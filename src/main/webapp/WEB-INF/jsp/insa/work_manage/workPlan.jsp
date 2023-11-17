@@ -260,6 +260,9 @@ tr, td {
 button, select {
 	cursor: pointer;
 }
+#current_table{
+min-width: 1180px;
+}
 </style>
 </head>
 <body>
