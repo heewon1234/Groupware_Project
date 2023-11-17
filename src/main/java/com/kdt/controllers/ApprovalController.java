@@ -191,15 +191,15 @@ public class ApprovalController {
 		return "/approval/document/box/pending";
 	}
 
-	@RequestMapping("/box/approve")
-	public String boxApprove(Model model) throws Exception {
+	@RequestMapping("/box/approval")
+	public String boxApproval(Model model) throws Exception {
 		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");
-		List<Integer> docIdList = appRService.getApproveDocIdByUserId(userDTO.getId());
+		List<Integer> docIdList = appRService.getApprovalDocIdByUserId(userDTO.getId());
 		List<ApprovalDTO> appList = appService.selectListByDocId(docIdList);
 
 		model.addAttribute("appList", appList);
 
-		return "/approval/document/box/approve";
+		return "/approval/document/box/approval";
 	}
 
 	@RequestMapping("/box/return")
@@ -237,7 +237,7 @@ public class ApprovalController {
 
 		int everyCount = appRService.getEveryCount(userDTO.getId());
 		int pendingCount = appRService.getPendingCount(userDTO.getId());
-		int approveCount = appRService.getApproveCount(userDTO.getId());
+		int approvalCount = appRService.getApprovalCount(userDTO.getId());
 		int returnCount = appRService.getReturnCount(userDTO.getId());
 
 		model.addAttribute("selectItem", selectItem);
@@ -247,7 +247,7 @@ public class ApprovalController {
 		model.addAttribute("processCount", processCount);
 		model.addAttribute("everyCount", everyCount);
 		model.addAttribute("pendingCount", pendingCount);
-		model.addAttribute("approveCount", approveCount);
+		model.addAttribute("approvalCount", approvalCount);
 		model.addAttribute("returnCount", returnCount);
 
 		return "/approval/document/left_item";

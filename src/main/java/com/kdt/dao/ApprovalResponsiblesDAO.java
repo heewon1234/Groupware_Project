@@ -22,8 +22,8 @@ public class ApprovalResponsiblesDAO {
 	public List<Integer> getPendingDocIdByUserId(String id) {
 		return db.selectList("ApprovalResponsibles.getPendingDocIdByUserId", id);
 	}
-	public List<Integer> getApproveDocIdByUserId(String id) {
-		return db.selectList("ApprovalResponsibles.getApproveDocIdByUserId", id);
+	public List<Integer> getApprovalDocIdByUserId(String id) {
+		return db.selectList("ApprovalResponsibles.getApprovalDocIdByUserId", id);
 	}
 	public List<Integer> getReturnDocIdByUserId(String id) {
 		return db.selectList("ApprovalResponsibles.getReturnDocIdByUserId", id);
@@ -40,8 +40,8 @@ public class ApprovalResponsiblesDAO {
 	public int getPendingCount(String id) {
 		return db.selectOne("ApprovalResponsibles.getPendingCount", id);
 	}
-	public int getApproveCount(String id) {
-		return db.selectOne("ApprovalResponsibles.getApproveCount", id);
+	public int getApprovalCount(String id) {
+		return db.selectOne("ApprovalResponsibles.getApprovalCount", id);
 	}
 	public int getReturnCount(String id) {
 		return db.selectOne("ApprovalResponsibles.getReturnCount", id);
