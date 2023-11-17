@@ -435,7 +435,56 @@ min-width: 1180px;
 
 
 	<script>
+	function workPlanUpdate() {
+        $('#work_contents').css("display", "none");
+        $('#work_contents_update').css("display", "block");
+    }
+    function selectFinished() {
+        $('#set-up').css("display", "block");
+        $('#reset').css("display", "block");
+        $('#selectFinished').css("display", "none");
+    }
+    function reset() {
+        $('#set-up').css("display", "none");
+        $('#selectFinished').css("display", "block");
+        $('#reset').css("display", "none");
+    }
 	$(document).ready(function() {
+		// 이름 소속을 가져오는 ajax
+		$.ajax({
+		    url: '/works_plan/getUserList'
+		}).done(function (data) {
+		    var tableBody = $("#userWorkData").empty();
+		    var { dates, daysOfWeek, currentMonth } = generateMonthlyDates(); // dates 변수를 전역으로 이동
+		    for (let i = 0; i < data.length; i++) {
+		        let member = data[i];
+		        var tableRow = $('<tr>').addClass('memberRow');
+		        var nameCell = $('<td>').text(member.name);
+		        var departmentCell = $('<td>').text(member.organization);
+		        tableRow.append(nameCell, departmentCell);
+
+		        // 주말을 제외하고 정을 추가하는 td 코드를 생성하여 추가
+		        dates.forEach(date => {
+		            let scheduleCell = createScheduleCell(date);
+		            tableRow.append(scheduleCell);
+		        });
+
+		        tableBody.append(tableRow);
+		    }
+
+		    var tableRowDate = $('#tr1'); // 날짜가 들어갈 행
+		    dates.forEach(date => {
+		        let cellDate = $('<td>').text(formatDate(date)).addClass('works_days');
+		        tableRowDate.append(cellDate);
+		    });
+		        var tableRowDays = $('#tr2'); // 요일이 들어갈 행
+		    daysOfWeek.forEach(day => {
+		        let cellDay = $('<td>').text(day).addClass('works_days');
+		        tableRowDays.append(cellDay);
+		    });
+
+		});
+		
 	let tag_list_open = false;
 
 	// img 버튼 눌렀을때 모달 창 띄우는거
@@ -558,40 +607,7 @@ function dayIsWeekend(date) {
     return isSaturday(date) || isSunday(date);
 }
 
-// 이름 소속을 가져오는 ajax
-$.ajax({
-    url: '/works_plan/getUserList'
-}).done(function (data) {
-    var tableBody = $("#userWorkData").empty();
-    var { dates, daysOfWeek, currentMonth } = generateMonthlyDates(); // dates 변수를 전역으로 이동
-    for (let i = 0; i < data.length; i++) {
-        let member = data[i];
-        var tableRow = $('<tr>').addClass('memberRow');
-        var nameCell = $('<td>').text(member.name);
-        var departmentCell = $('<td>').text(member.organization);
-        tableRow.append(nameCell, departmentCell);
 
-        // 주말을 제외하고 정을 추가하는 td 코드를 생성하여 추가
-        dates.forEach(date => {
-            let scheduleCell = createScheduleCell(date);
-            tableRow.append(scheduleCell);
-        });
-
-        tableBody.append(tableRow);
-    }
-
-    var tableRowDate = $('#tr1'); // 날짜가 들어갈 행
-    dates.forEach(date => {
-        let cellDate = $('<td>').text(formatDate(date)).addClass('works_days');
-        tableRowDate.append(cellDate);
-    });
-        var tableRowDays = $('#tr2'); // 요일이 들어갈 행
-    daysOfWeek.forEach(day => {
-        let cellDay = $('<td>').text(day).addClass('works_days');
-        tableRowDays.append(cellDay);
-    });
-
-});
 
 // 날짜 데이터를 생성하는 함수
 function generateMonthlyDates() {
@@ -762,20 +778,7 @@ document.getElementById('update_workPlan_body').addEventListener('change', funct
         return month + "월 "+ day + "일";
     }
 
-	 function workPlanUpdate() {
-	        $('#work_contents').css("display", "none");
-	        $('#work_contents_update').css("display", "block");
-	    }
-	    function selectFinished() {
-	        $('#set-up').css("display", "block");
-	        $('#reset').css("display", "block");
-	        $('#selectFinished').css("display", "none");
-	    }
-	    function reset() {
-	        $('#set-up').css("display", "none");
-	        $('#selectFinished').css("display", "block");
-	        $('#reset').css("display", "none");
-	    }
+	 
 	    
 	    function formatDate1(date) {
 	        let year = date.getFullYear();
