@@ -432,25 +432,22 @@ button, select {
 
 
 	<script>
+	$(document).ready(function() {
 	let tag_list_open = false;
 
 	// img 버튼 눌렀을때 모달 창 띄우는거
-	$(document).ready(function() {
 	    $('#openModalBtn').click(function() {
 	    	$('.modal_form').css('display', 'block');
 	    	$('#modal_apply_button').prop('disabled', true);
 	    });
-	});
 
 	// 모달창에서 취소 누르면 모달창 꺼지는거
-	$(document).ready(function() {
 	    $('#modal_cancel_button').click(function() {
 	    	$('.grid-item.manager').empty();
 	    	$('#openModalBtn').prop('disabled', true);
 	        $('.modal_form').css('display', 'none');
 	        $('#update_workPlan_body select').val('9시 출근');
 	    });
-	});
 	
 
 	// 태그 선택 박스 이외에 다른 곳이 클릭 됐을 때 
@@ -518,14 +515,12 @@ button, select {
 
 	});
 	// submit 확인임
-	$(document).ready(function() {
 	    $('#modal_apply_button').on('click', function() {
 	    	var workPlanTitleValue = $("#work_plan_title").val();
 	    	var workPlanContentsValue = $("#work_plan_contents").val();
 
 	    	console.log(workPlanTitleValue+" : "+workPlanContentsValue);
 	    });
-	});
 	
 	//----------------------------------------------------------------
 	
@@ -654,7 +649,6 @@ document.getElementById('update_workPlan_body').addEventListener('change', funct
         }
     }
 });
-$(document).ready(function() {
     $('#modal_apply_button').on('click', function() {
     	var approval = {
     		id:$("#loginID").val(),
@@ -687,7 +681,6 @@ $(document).ready(function() {
     	    }
     	});
     });
-});
 
 
 
@@ -723,7 +716,6 @@ $(document).ready(function() {
 	        tableBody.append(tableRow);
 	    });
 	}
-	$(document).ready(function() {
 		$('#update_workPlan_body').on('change', 'select', function() {
 			$('#openModalBtn').prop('disabled', true);
 		    let noChange = true;
@@ -739,7 +731,6 @@ $(document).ready(function() {
 		    } else {
 		        $('#openModalBtn').prop('disabled', false);
 		    }
-		});
 		});
 
 	let today = new Date();
@@ -917,7 +908,6 @@ $(document).ready(function() {
 	    //});   
 
 
-$(document).ready(function() {
 	$("#top_container").load("/commons/topForm");
 	$(".left_item").load("/insa/manage/left_item?selectItem=workPlan");
 	
@@ -946,7 +936,7 @@ $(document).on('mouseleave', '.jeng', function() {
     $("#jeng-info").css("display", "none");
 });
 // 부서 목록을 가져오는 Ajax 요청
-$(document).ready(function() {
+
     // getDepartmentList를 통해 데이터 가져오기
     $.ajax({
         url:'/members/getDepartmentList'
@@ -975,7 +965,6 @@ $(document).ready(function() {
 
     // 페이지 로드 시 초기 상태 설정 (버튼은 비활성화)
     $('#selectFinished').prop('disabled', true);
-});
 
 
 
