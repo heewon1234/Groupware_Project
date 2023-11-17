@@ -216,4 +216,15 @@ public class MembersController {
 		model.addAttribute("userDTO", userDTO);
 		return "/insa/myInfo";
 	}
+	
+	@RequestMapping("/updateMember")
+	public String updateMember(String pw, String zipcode, String phone, String email, String address1, String address2) {
+		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");
+		String shapw = EncryptionUtils.getSHA512(pw);
+		MembersDTO dto = new MembersDTO(userDTO.getId(), shapw, null, null, null, null, null, phone, email, zipcode, address1, address2, null);
+		
+		mservice.updateMember(dto);
+		
+		return "redirect:/members/myInfo";
+	}
 }

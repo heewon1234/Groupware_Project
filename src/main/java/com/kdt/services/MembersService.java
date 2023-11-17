@@ -148,4 +148,8 @@ public class MembersService {
 	public int countUser() {
 		return mdao.countUser();
 	}
+	
+	public int updateMember(MembersDTO dto) {
+		return mdao.updateMember(dto);
+	}
 }
