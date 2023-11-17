@@ -5,8 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>글 작성</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<title>게시판 생성</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+	integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<link rel="stylesheet" href="/css/commons/body_form/left_form/body_form_default.css" />
 	<link rel="stylesheet" href="/css/commons/topForm.css" />
@@ -63,7 +66,8 @@
                 <div class="name">
                     <div class="name_text">이름</div>
                     <div class="name_input" >
-                        <input type="text" placeholder="&nbsp게시판 이름을 입력하세요." name="board_title" id="board_title_input">
+                    	<input type="text" class="form-control" placeholder="새로 생성할 태그명을 입력하세요." placeholder="&nbsp게시판 이름을 입력하세요." name="board_title" id="board_title_input">
+                        <!--  <input type="text" placeholder="&nbsp게시판 이름을 입력하세요." name="board_title" id="board_title_input">-->
                     </div>
                     <div id='dupCheckDiv'></div>
                 </div>
