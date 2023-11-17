@@ -39,9 +39,40 @@
         insert into Personal_Contact(tag, name, email, phone, company_name, company_rank,
         company_department, address, link, birthday, memo, writer)
 
-        values(#{tag}, #{name}, #{email}, #{phone}, #{companyName}, #{companyRank},
-        #{companyDepartment}, #{address}, #{link}, #{birthday}, #{memo}, #{writer})
+        values(#{tag}, #{name}, #{email}, #{phone}, #{company_name}, #{company_rank},
+        #{company_department}, #{address}, #{link}, #{birthday}, #{memo}, #{writer})
     </insert>
+    
+    <select id="personal_contact_read" resultType="com.kdt.dto.ContactDTO">
+        select * from Personal_Contact where seq = #{seq}
+    </select>
+    
+	<select id="personal_contact_update" resultType="com.kdt.dto.ContactDTO">
+    	update Personal_Contact set
+    	name = #{name},
+    	email = #{email},
+    	phone = #{phone},
+    	tag = #{tag},
+    	company_name = #{company_name},
+    	company_rank = #{company_rank},
+    	company_department = #{company_department},
+    	address = #{address},
+    	link = #{link},
+    	birthday = #{birthday},
+    	memo = #{memo}
+    	where seq = #{seq}
+	</select>
+	
+	<delete id="personal_contact_delete">
+	delete from Personal_Contact where seq = #{seq}
+	</delete>
+	
+	
+	 <select id="personal_contact_search" resultType="com.kdt.dto.ContactDTO">
+        SELECT * FROM Personal_Contact
+        WHERE name LIKE CONCAT('%', #{keyword}, '%') or company_name LIKE CONCAT('%', #{keyword}, '%') or phone LIKE CONCAT('%', #{keyword}, '%')
+    </select>
+	
 
     <select id="share_contact_tag_selectAll" resultType="com.kdt.dto.ContactDTO">
         select * from Share_Contact_Tag
@@ -61,8 +92,8 @@
         insert into Share_Contact(tag, name, email, phone, company_name, company_rank,
         company_department, address, link, birthday, memo, writer, edit)
 
-        values(#{tag}, #{name}, #{email}, #{phone}, #{companyName}, #{companyRank},
-        #{companyDepartment}, #{address}, #{link}, #{birthday}, #{memo}, #{writer}, #{edit})
+        values(#{tag}, #{name}, #{email}, #{phone}, #{company_name}, #{company_rank},
+        #{company_department}, #{address}, #{link}, #{birthday}, #{memo}, #{writer}, #{edit})
     </insert>
 
 </mapper>

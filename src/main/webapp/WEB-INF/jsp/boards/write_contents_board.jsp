@@ -5,8 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<title>게시글 작성</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+	integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
@@ -44,7 +47,7 @@
                     <div class="board_contents_title_box">
                         <div class="info_text_title">제목</div>
                         <div>
-                            <input type="text" placeholder="제목을 입력하세요" name="title">
+                        	<input type="text" class="form-control" placeholder="제목을 입력하세요" name="title" maxlength="100" id="header_add_input">
                         </div>
                         <div>
                             <input type="checkbox" name="notice" value="false"> &nbsp;공지로 등록
@@ -68,22 +71,28 @@
                         <div id="surveyBox">
                             <div class="questionBox surveyContents">
                                 <div class="surveyText">질문</div>
-                                <div class="surveyInputBox"><input type="text" placeholder="질문을 입력해주세요" name="survey_question"></div>
+                                <div class="surveyInputBox">
+                                	<input type="text" class="form-control" placeholder="질문을 입력해주세요" name="survey_question" maxlength="100">
+                                </div>
                             </div>
                             <div class="itemBox surveyContents">
                                 <div class="surveyText">항목</div>
-                                <div class="surveyInputBox"><input type="text" placeholder="항목을 입력해주세요" name="items"></div>
+                                <div class="surveyInputBox">
+                                	<input type="text" class="form-control"placeholder="항목을 입력해주세요" name="items" maxlength="100">
+                                </div>
                                 <div><img src="/images/commons/body_form/left_item/default/plus.png" class="add_item_btn"/></div>
                             </div>
                             <div class="itemBox surveyContents">
                                 <div class="surveyText">항목</div>
-                                <div class="surveyInputBox"><input type="text" placeholder="항목을 입력해주세요" name="items"></div>
+                                <div class="surveyInputBox">
+                                	<input type="text" class="form-control"placeholder="항목을 입력해주세요" name="items" maxlength="100">
+                                </div>
                                 <div><img src="/images/commons/body_form/left_item/default/plus.png" class="add_item_btn"/></div>
                             </div>
                         </div>
                     </div>
                     <div class="buttons">
-                        <button type="button">취소</button>
+                        <button type="button" id="backBtn">취소</button>
                         <button id="frmBtn">등록</button>
                     </div>
                 </form>

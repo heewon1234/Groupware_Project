@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>게시판 삭제</title>
 <link rel="stylesheet" href="/css/board/delContents.css" />
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
