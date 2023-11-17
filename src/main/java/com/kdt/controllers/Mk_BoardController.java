@@ -63,6 +63,7 @@ public class Mk_BoardController {
 	// 게시판 목록 불러오기
 	@RequestMapping("toMk_board")
 	public String toMk_board(Model model){
+		model.addAttribute("Mk_Board","게시판 만들기");
 		List<String> organizationList = bservice.selectAllOrganization(); // member service로 바꿀 예정		
 		model.addAttribute("organizationList",organizationList);
 		return "boards/mk_board";

@@ -19,7 +19,7 @@
             <div class="menu_tab">
 
                 <!-- 일반 메뉴 -->
-                <div class="menu_item" id="toFavoriteBoardBtn">
+                <div class="menu_item" id="toFavoriteBoardBtn" data-boardTitle="중요게시물">
                     <img src="/images/commons/body_form/left_item/default/favorites.png" />
                     <span class="menu_item_text">중요게시물</span>
                 </div>
@@ -72,8 +72,11 @@
                     <img class="menu_item_img" src="/images/board/setting.png" />
                     <span class="menu_item_text">게시판 관리</span>
                 </div>
-                
             </div>
-
+            <script>
+            	$('.menu_item, .menu_list_item').removeClass('select');
+            	let select = $(document).find(".menu_list_item[data-boardTitle='${board_title}'], .menu_item[data-boardTitle='${board_title}']");
+            	select.addClass('select').attr("id","selectDiv");
+            </script>
 </body>
 </html>

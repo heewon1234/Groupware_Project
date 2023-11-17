@@ -253,8 +253,11 @@ public class BoardService {
 	// 일반 게시판
 	// 공지 최근 5개만 가져오기
 	public List<BoardDTO> Notice(String board_title){ 
+		Map<String,String> map = new HashMap<>();
 		int seq = mdao.selectBoardSeq(board_title);
-		return bdao.Notice("Board_"+seq);
+		map.put("board_title", "Board_"+seq);
+		map.put("ori_board_title", board_title);	
+		return bdao.Notice(map);
 	}
 
 	// 게시글 내용 불러오기

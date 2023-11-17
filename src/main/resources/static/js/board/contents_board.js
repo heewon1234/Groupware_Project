@@ -2,9 +2,12 @@ let board_title = $(".contents_info_datail>div:nth-child(3)").html().trim();
 let parent_seq = $("#boardSeq").html().split("글번호")[1].trim();
 
 let voteResult = (resp) => {
+	let totalCount = resp[0].totalVote;
 	for(let i=0;i<resp.length;i++){
-		let ratio = (resp[i].vote / resp[i].totalVote) * 100;
-			
+		let ratio = 0;
+		if(totalCount!=0){
+			ratio = (resp[i].vote / resp[i].totalVote) * 100;
+		}
 		let divBox = $("<div>");
 		divBox.addClass("survey_item");
 				
@@ -14,8 +17,13 @@ let voteResult = (resp) => {
 		let graphDiv = $("<div>");
 		graphDiv.addClass("graph");
 						
-		let colorDiv = $("<div>");				
-		colorDiv.css("width",ratio+"%").css("height","100%").css("background-color","rgb(104, 183, 251)");
+		let colorDiv = $("<div>");
+		if(ratio==0){
+			colorDiv.css("width","100%").css("height","100%").css("background-color","gainsboro");
+		} else{
+			colorDiv.css("width",ratio+"%").css("height","100%").css("background-color","rgb(104, 183, 251)");
+		}				
+		
 			
 		graphDiv.append(colorDiv);
 			
@@ -31,6 +39,15 @@ let voteResult = (resp) => {
 		$("#surveyVoteBox").css("display","none");
 	}
 };
+
+$("#showResultBtn").on("click",function(){
+	$.ajax({
+		url:"/survey/voteList",
+		data:{parent_seq:parent_seq}
+	}).done(function(resp){
+		voteResult(resp);
+	});
+});
 
 if($(".contents").attr("data-vote")=='true'){
 	

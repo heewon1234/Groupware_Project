@@ -1,6 +1,7 @@
 package com.kdt.controllers;
 
 import java.net.URLEncoder;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
@@ -232,6 +233,7 @@ public class BoardController {
 	public String insertBoardContents(BoardDTO dto,String[] items, MultipartFile[] fileList) throws Exception{
 		String writer = (String)session.getAttribute("loginId");
 		dto.setWriter(writer);
+		dto.setWrite_date(new Timestamp(System.currentTimeMillis()));
 		bservice.insertBoardContents(dto, items, fileList);
 
 		String board_title=(String)session.getAttribute("board_title");
