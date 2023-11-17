@@ -12,6 +12,7 @@ $(document).on("click", ".remove_org_btn", function() {
 
 $(document).ready(function() {
 	$(".left_item").load("/insa/manage/left_item?selectItem=org");
+	$(".top_container").load("/commons/topForm");
 });
 
 $("#level").keyup(function() {
