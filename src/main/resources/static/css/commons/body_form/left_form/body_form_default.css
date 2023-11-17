@@ -57,9 +57,10 @@
 
 .menu_tab {
     overflow-y: auto;
-    overflow-x: auto;
+    overflow-x: hidden;
     padding: 0 24px 30px;
     height: 100%;
+    max-height: 785px;
 }
 .menu_item {
     height: 38px;
@@ -122,7 +123,11 @@
 
 .menu_list_button.plus:hover {
     background-color: #F7FAFF;
-} 
+}
+
+.menu_list_button_plus:hover .menu_list_button_plus_hover {
+    display:flex;
+}  
 
 .menu_list_button_plus {
     width: 30px;
@@ -134,6 +139,7 @@
     align-items: center;
     margin-left:auto;
     margin-right:5px;
+    position: relative;
 }
 
 .menu_list_button_plus img {
@@ -145,6 +151,33 @@
 .menu_list_button_plus:hover{
     background-color: rgba(159, 166, 173, 0.2);
 }
+
+.menu_list_button_plus_hover {		
+    background-color: #404040;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    height: 23px;
+    letter-spacing: -0.25px;
+    width: 80px;
+    position: absolute;
+    top:40px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    content: "";
+  }
+
+  .menu_list_button_plus_hover::after {  		
+    border-bottom: 8px solid #404040;
+    border-left: 7px solid #EFF4FC;
+    border-right: 7px solid #EFF4FC;
+    position: absolute;
+    top: -8px;
+    width: 5px;
+    content: "";
+  }
 
 .menu_list_box {
     width: 100%;
@@ -178,6 +211,7 @@
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+    max-width: 140px;
 }
 
 .menu_list_item_plus {
@@ -259,6 +293,16 @@
     box-shadow: none !important;
 }
 
+.button_footer {
+    display: flex;
+    justify-content: center;
+}
+
+.button_footer.right {
+    display: flex;
+    justify-content: flex-end;
+}
+
 .button_cancel {
     box-shadow: none;
     background-color: #ebebeb;
@@ -273,6 +317,14 @@
 
 .button_cancel:hover {
     background-color: #d6d6d6;
+}
+
+.button_cancel.float_left {
+    margin-right:auto;
+}
+
+.button_cancel.float_right {
+    margin-left:14px;
 }
 
 .button_apply {
@@ -295,3 +347,32 @@
     pointer-events: none;
     opacity: .4;
 }
+
+.button_apply.float_right {
+    margin-left:14px;
+}
+
+.button_delete {
+	box-shadow: none;
+    background-color: #909090;
+    border-radius: 4px;
+    color: white;
+    padding: 0 20px 0px;
+    height: 34px;
+    font-size: 14px;
+    border: none;
+} 
+
+.button_delete.float_left {
+    margin-right:auto;
+}
+
+.button_delete.float_right {
+    margin-left:14px;
+}
+
+.button_delete:hover {
+    background-color: #575757;
+}
+
+
