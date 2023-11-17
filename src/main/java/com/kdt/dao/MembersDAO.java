@@ -91,4 +91,7 @@ public class MembersDAO {
 	public int countUser() {
 		return db.selectOne("Members.countUser");
 	}
+	public int updateMember(MembersDTO dto) {
+		return db.update("Members.updateMember", dto);
+	}
 }
