@@ -26,8 +26,6 @@ public class ContactDAO {
 		return db.selectList("Contact.personal_contact_selectNull", dto);
 	}
 	
-	
-	
 	public List<ContactDTO> personalContactTagSelectAll(ContactDTO dto) {
 		return db.selectList("Contact.personal_contact_tag_selectAll", dto);
 	}
@@ -38,6 +36,22 @@ public class ContactDAO {
 	
 	public int personalContactTagInsert(ContactDTO dto) {
 		return db.insert("Contact.personal_contact_tag_insert", dto);
+	}
+	
+	public List<ContactDTO> personalContactRead(ContactDTO dto) {
+		return db.selectList("Contact.personal_contact_read", dto);
+	}
+	
+	public int personalContactUpdate(ContactDTO dto) {
+		return db.update("Contact.personal_contact_update", dto);
+	}
+	
+	public int personalContactDelete(ContactDTO dto) {
+		return db.update("Contact.personal_contact_delete", dto);
+	}
+	
+	public List<ContactDTO> personalContactSearch(String keyword) {
+		return db.selectList("Contact.personal_contact_search", keyword);
 	}
 	
 	public int personalContactInsert(ContactDTO dto) {

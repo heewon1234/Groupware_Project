@@ -53,11 +53,8 @@
 	<script src="/js/approval/document/table.js"></script>
 	<script>
 		$(document).ready(function() {
-			$(".top_container").load("/commons/topForm");
-		});
-	
-		$(document).ready(function() {
 			$(".left_item").load("/approval/document/left_item?selectItem=wait");
+			$(".top_container").load("/commons/topForm");
 		});
 	</script>
 </body>

@@ -5,12 +5,27 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<title>게시판 수정</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+	integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<link rel="stylesheet" href="/css/commons/body_form/left_form/body_form_default.css" />
 	<link rel="stylesheet" href="/css/commons/topForm.css" />
     <link rel="stylesheet" href="/css/board/mk_board.css" />
+    <style>
+    	#selectDiv{
+    		color: #333333 !important;
+			background-color:transparent !important;
+			font-weight:normal;
+    	}
+    	#toEditBoardBtn{
+    		background-color: #DAE8F8;
+   			color: #056AC9;
+    		font-weight: bold;
+    	}
+    </style>
 </head>
 <body>
 	<div class="background"></div>
@@ -63,7 +78,7 @@
                 <div class="name">
                     <div class="name_text">이름</div>
                     <div class="name_input" >
-                        <input type="text" placeholder="&nbsp게시판 이름을 입력하세요." name="board_title" id="board_title_input" value="${boardDetail.board_title }">
+                        <input type="text" class="form-control" placeholder="게시판 이름을 입력하세요." name="board_title" id="board_title_input" style="width:500px;" value="${boardDetail.board_title }">
                     </div>
                     <div id='dupCheckDiv'></div>
                 </div>

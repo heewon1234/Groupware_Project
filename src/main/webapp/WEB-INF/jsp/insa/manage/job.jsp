@@ -13,7 +13,7 @@
 </head>
 
 <body>
-	<div class="top">TOP</div>
+	<div class="top_container"></div>
 	<div class="body_form">
 		<div class="left_item"></div>
 		<div class="right_item">
@@ -23,7 +23,7 @@
 					<hr class="title_hr">
 				</div>
 				<div class="contents">
-					<h4>직위 관리</h4>
+					<span class="h4_span">직위 관리</span>
 					<form action="/job/insertJobTitle">
 						<table>
 							<tbody>
@@ -41,7 +41,7 @@
 											</c:forEach>
 										</td>
 										<td align="right">
-											<span class="add_jt_btn btns">+</span>
+											<i class="fa-solid fa-circle-plus" style="color: #bec3c9;"></i>
 										</td>
 									</tr>
 								</c:forEach>

@@ -23,16 +23,18 @@
 						<button type="submit" id="submit_btn" class="button_apply permit">기안하기</button>
 					</div>
 					<h4>기본 설정</h4>
-					<table class="outTable" border='1'>
+					<table id="setting" class="outTable" border='1'>
 						<tbody>
 							<tr>
 								<th>문서 종류</th>
-								<td><select name="doc_type">
+								<td>
+									<select name="doc_type">
 										<option>지출결의서</option>
 										<option>업무연락</option>
-								</select></td>
+									</select>
+								</td>
 								<th>작성자</th>
-								<td>${userDTO.organization }${userDTO.position } ${userDTO.name }</td>
+								<td>${userDTO.organization } ${userDTO.position } ${userDTO.name }</td>
 							</tr>
 						</tbody>
 					</table>
@@ -41,7 +43,7 @@
 					<table id="approvalTable" class="outTable" border='1'>
 						<tbody>
 							<tr>
-								<th>신청 <span class="modalButton_apply btns">+</span>
+								<th>신청 <i class="fa-solid fa-circle-plus modalButton_apply" style="color: #bec3c9;"></i>
 								</th>
 								<td>
 									<table class="innerTable" border='1'>
@@ -90,12 +92,18 @@
 
 	<div id="modalContainer_apply" class="modalContainer hidden">
 		<div class="modalContent">
-			<div align="center">신청 설정</div>
-			<ul>
-				<c:forEach var="list" items="${managerList }">
-					<li><span>${list.organization }</span> <span>${list.name }</span> <span hidden>${list.id }</span> <input type='checkbox' value='${list.id}'></li>
-				</c:forEach>
-			</ul>
+			<div class="modalTitle">신청 설정</div>
+			<div class="managerList">
+				<ul>
+					<c:forEach var="list" items="${managerList }">
+						<li><span>${list.organization }</span>
+							<span>${list.name }</span>
+							<span hidden>${list.id }</span>
+							<input type='checkbox' value='${list.id}'>
+						</li>
+					</c:forEach>
+				</ul>
+			</div>
 			<div class="modalButton_div" align="center">
 				<button type="button" id="apply_btn" class="button_apply">확인</button>
 				<button type="button" id="cancle_btn" class="modalButton_apply button_cancel">취소</button>

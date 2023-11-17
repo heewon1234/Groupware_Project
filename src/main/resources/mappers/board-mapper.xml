@@ -29,7 +29,7 @@
 	
 	<!-- 게시글 등록 -->
 	<insert id="insertBoardContents" useGeneratedKeys="true" keyProperty="seq">
-		insert into ${board_title} values (null,#{title},#{writer},default,#{header},#{notice},#{contents},#{survey_question},default)
+		insert into ${board_title} values (null,#{title},#{writer},#{write_date},#{header},#{notice},#{contents},#{survey_question},default)
 	</insert>
 	<!-- 조회수 -->
 	<update id="viewCountUpdate">
@@ -111,7 +111,7 @@
 	</select>
 	<!-- 공지 내용 최근 5개 가져오기 -->
 	<select id="Notice" resultType="com.kdt.dto.BoardDTO">
-		select * from (select row_number() over(order by write_date desc) as rn, ${board_title}.* from ${board_title} where notice=true) as sub 
+		select *, #{ori_board_title} as board_title from (select row_number() over(order by write_date desc) as rn, ${board_title}.* from ${board_title} where notice=true) as sub 
 		where rn between 1 and 5;
 	</select>
 	<!-- 게시글 삭제 -->

@@ -37,6 +37,11 @@ $(document).ready(function() {
 	});
 });
 
+$("#updateCancelBtn").on("click",function(){
+	let seq = $("input[name='seq']").val();
+	location.href="/board/toContentsBoard?seq="+seq;
+});
+
 $("#board_title").change(function(){
 	$("#header").empty();
 	
@@ -115,6 +120,8 @@ $(document).on("click",".add_item_btn",function(){
 	itemInput.attr("placeholder","항목을 입력해주세요");
 	itemInput.attr("name","items");
 	itemInput.attr("type","text");
+	itemInput.attr("maxlength","100");
+	itemInput.addClass("form-control");
 	surveyInputBox.append(itemInput);
 	
 	let imgDiv = $("<div>");
