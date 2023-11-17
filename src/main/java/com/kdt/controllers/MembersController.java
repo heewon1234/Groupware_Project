@@ -107,10 +107,7 @@ public class MembersController {
 		this.mservice.signup(dto);
 		return "redirect:/insa/manage/members";
 	}
-	
-	//
-	//
-	//
+
 	@RequestMapping(value = "/updateWorkForm")
 	public String updateWorkForm(String idList, String workForm) throws Exception {
 		mservice.updateWorkForm(idList, workForm);
@@ -211,5 +208,12 @@ public class MembersController {
 	@ResponseBody
 	public List<MembersDTO> selectAll() throws Exception {
 		return mservice.selectAll();
+	}
+	
+	@RequestMapping("/myInfo")
+	public String myInfo(Model model) {
+		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");
+		model.addAttribute("userDTO", userDTO);
+		return "/insa/myInfo";
 	}
 }
