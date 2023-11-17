@@ -25,7 +25,7 @@
 					<hr class="title_hr">
 				</div>
 				<div class="contents">
-					<form action="/members/updateMember">
+					<form action="/members/updateMember" method="post">
 						<table>
 							<tbody>
 								<tr>
@@ -46,26 +46,26 @@
 								</tr>
 								<tr>
 									<th>전화번호</th>
-									<td><input type='text' val="${userDTO.phone }"></td>
+									<td><input type='text' name="phone" value="${userDTO.phone }"></td>
 								</tr>
 								<tr>
 									<th>email</th>
-									<td><input type='text' val="${userDTO.email }"></td>
+									<td><input type='text' name="email" value="${userDTO.email }"></td>
 								</tr>
 								<tr>
 									<th>우편번호</th>
 									<td>
-										<input type='text' id="postcode" name='zipcode' ${userDTO.zipcode }>
+										<input type='text' id="postcode" name='zipcode' value="${userDTO.zipcode }">
 										<input type="button" class="apply_btn" id="postcode_btn" value="우편번호 찾기" onclick="execDaumPostcode()">
 									</td>
 								</tr>
 								<tr>
 									<th>주소</th>
-									<td><input type='text' id="address" name='address1' ${userDTO.address1 }></td>
+									<td><input type='text' id="address" name='address1' value="${userDTO.address1 }"></td>
 								</tr>
 								<tr>
 									<th>상세주소</th>
-									<td><input type='text' id="detailAddress"name='address2' ${userDTO.address2 }></td>
+									<td><input type='text' id="detailAddress" name='address2' value="${userDTO.address2 }"></td>
 								</tr>
 							</tbody>
 						</table>

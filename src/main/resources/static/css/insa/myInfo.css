@@ -26,6 +26,6 @@ button[type="submit"] {
 	margin-bottom: 20px;
 }
 
-input {
+#address, #detailAddress {
 	width: 30%;
 }
