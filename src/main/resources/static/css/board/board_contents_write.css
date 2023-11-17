@@ -1,5 +1,7 @@
 @charset "UTF-8";
-
+#logout{
+	font-size:29px;
+}
 /* div{border:1px solid black;} */
 .note-modal-backdrop{display:none !important;}
 .content_tab>form>div:not(.board_contents_file_box):not(.board_contents_box){

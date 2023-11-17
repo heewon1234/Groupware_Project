@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시판</title>
+<title>${board_title }</title>
 	<link rel="stylesheet" href="/css/commons/body_form/left_form/body_form_default.css" />
     <link rel="stylesheet" href="/css/board/board_favorite.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

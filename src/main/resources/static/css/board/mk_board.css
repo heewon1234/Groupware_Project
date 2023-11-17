@@ -1,7 +1,18 @@
 @charset "UTF-8";
-
+#logout{
+	font-size:29px;
+}
 /* div{border:1px solid black;}  */
-
+#selectDiv{
+    color: #333333 !important;
+	background-color:transparent !important;
+	font-weight:normal;
+}
+#toMkBoardBtn{
+    background-color: #DAE8F8;
+   	color: #056AC9;
+    font-weight: bold;
+}
 .content_tab>div:not(.title){
 	margin-bottom:20px;
 	padding-bottom:0px;	
