@@ -43,8 +43,19 @@
 	</select>
 	<!-- 게시글 리스트 10개씩 가져오기 -->
 	<select id="BoardContentsListBy" resultType="com.kdt.dto.BoardDTO">
-		select * from (select row_number() over(order by seq desc) as rn, b.*,#{oriBoardTitle} as board_title,case when b.seq = parent_seq then 'true' else 'false' end as favorite 
-		from ${board_title} b left join Favorite_Board f on id=#{id} and parent_seq = b.seq and board_title=#{board_title} order by seq desc) as sub 
+		select 
+			seq,title,board_title,name as writer, write_date, header,notice,contents,survey_question,view_count,favorite 
+		from 
+			(select 
+				row_number() over(order by seq desc) as rn, 
+				b.*,#{oriBoardTitle} as board_title,
+				case when b.seq = parent_seq then 'true' else 'false' end as favorite 
+			from ${board_title} b 
+			left join Favorite_Board f 
+			on id=#{id} and parent_seq = b.seq and board_title=#{board_title} 
+			order by seq desc) 
+		as sub 
+		inner join Members m on writer=id
 		where rn between ${start} and ${end}
 	</select>
 	<!-- 게시글 내용 불러오기 -->
