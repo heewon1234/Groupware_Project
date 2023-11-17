@@ -76,11 +76,3 @@ a {
 .menu {
 	height:35px;
 }
-
-.hidden {
-	display: none !important;
-}
-
-.show {
-	display: flex !important;
-}
