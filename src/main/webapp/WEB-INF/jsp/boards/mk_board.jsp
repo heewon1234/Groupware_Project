@@ -14,6 +14,18 @@
 	<link rel="stylesheet" href="/css/commons/body_form/left_form/body_form_default.css" />
 	<link rel="stylesheet" href="/css/commons/topForm.css" />
     <link rel="stylesheet" href="/css/board/mk_board.css" />
+    <style>
+       	#selectDiv{
+    		color: #333333 !important;
+			background-color:transparent !important;
+			font-weight:normal;
+    	}
+    	#toMkBoardBtn{
+    		background-color: #DAE8F8;
+   			color: #056AC9;
+    		font-weight: bold;
+    	}
+    </style>
 </head>
 <body>
 	<div class="background"></div>
@@ -125,5 +137,6 @@
     </div>
     <script src="/js/board/mk_board.js" defer></script>
    	<script src="/js/board/sideBar.js" defer></script>
+
 </body>
 </html>
