@@ -35,6 +35,8 @@ public class ReplyController {
 	}
 	@RequestMapping("delReply")
 	public String delReply(ReplyDTO dto) {
+		String board_title = (String)session.getAttribute("board_title");
+		dto.setBoard_title(board_title);
 		rservice.delReply(dto);
 		return "redirect:/board/toContentsBoard?seq="+dto.getParent_seq();
 	}

@@ -28,7 +28,7 @@
                	 	</div>
                 </c:if>
                <div class="board_contents_info">
-                    <div class="favorite"><img src="/images/commons/body_form/left_item/default/favorites.png" /></div>
+                   <!--  <div class="favorite"><img src="/images/commons/body_form/left_item/default/favorites.png" /></div> -->
                     <div class="profile">
                         <img src="/images/commons/body_form/left_item/default/information.png" />
                     </div>

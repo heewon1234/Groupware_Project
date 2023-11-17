@@ -58,11 +58,28 @@
     align-items: center;
     justify-content: space-evenly;;
 }
-.buttons>button{
-    width:80px;
-    height:30px;
-    border:1px solid gainsboro;
-    border-radius: 5px;
-
+.buttons>button:first-child{
+    box-shadow: none;
+    background-color: #2985db;
+    border: solid 1px #056ac9;
+    border-radius: 4px;
+    color: white;
+    padding: 0 20px 0px;
+    height: 34px;
+    font-size: 14px;
 }
+.buttons>button:first-child:hover{background-color: #056ac9;}
+
+.buttons>button:last-child{
+    box-shadow: none;
+    background-color: #ebebeb;
+    border: solid 1px #d6d6d6;
+    border-radius: 4px;
+    color: #333;
+    padding: 0 20px 0px;
+    height: 34px;
+    cursor: pointer;
+    font-size: 14px;
+}
+.buttons>button:last-child:hover{ background-color: #d6d6d6;}
 

@@ -66,8 +66,7 @@
                 <div class="name">
                     <div class="name_text">이름</div>
                     <div class="name_input" >
-                    	<input type="text" class="form-control" placeholder="새로 생성할 태그명을 입력하세요." placeholder="&nbsp게시판 이름을 입력하세요." name="board_title" id="board_title_input">
-                        <!--  <input type="text" placeholder="&nbsp게시판 이름을 입력하세요." name="board_title" id="board_title_input">-->
+                    	<input type="text" class="form-control" placeholder="게시판 이름을 입력하세요." name="board_title" id="board_title_input" style="width:500px;">
                     </div>
                     <div id='dupCheckDiv'></div>
                 </div>
@@ -109,8 +108,8 @@
                         <div><input type="radio" name="use_header" value="false" class="header_input_check" checked> 사용 안 함</div>
                     </div>
                     <div class="headerBox" id="headerBox">
-                        <div class="header_add">
-                            <div><input placeholder="&nbsp;말머리를 입력하세요" id="header_add_input"></div>
+                        <div class="header_add">                       
+                            <div><input placeholder="&nbsp;말머리를 입력하세요" id="header_add_input" maxlength="50"></div>
                             <div><img src="/images/commons/body_form/left_item/default/plus.png" id="header_add_btn"></div>
                         </div>
 						<div id="header_list_border"></div>

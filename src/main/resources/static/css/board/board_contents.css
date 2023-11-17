@@ -10,10 +10,15 @@
     margin-bottom:10px;
 }
 .noticeBox>button{
-    width:80px;
-    height:33px;
-    border:1px solid gainsboro;
-    border-radius: 5px;
+    box-shadow: none;
+    background-color: #ebebeb;
+    border: solid 1px #d6d6d6;
+    border-radius: 4px;
+    color: #333;
+    padding: 0 20px 0px;
+    height: 34px;
+    cursor: pointer;
+    font-size: 14px;
     font-weight: bold;
 }
 
@@ -28,33 +33,47 @@
     float:left;
     height:100%;
 }
-.board_contents_info>div:first-child{
+/*.board_contents_info>div:first-child{
     width:5%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 .favorite>img{width:30%;}
-.board_contents_info>div:nth-child(2){
+*/
+.board_contents_info>div:nth-child(1){
     width:7%;
     display: flex;
     align-items: center;
 }
 .profile>img{width:80%;}
-.board_contents_info>div:nth-child(3){
+.board_contents_info>div:nth-child(2){
     width:78%;
     padding-left:10px;
 }
-.board_contents_info>div:nth-child(4){
+.board_contents_info>div:nth-child(3){
+	width:15%;
     height:100%;
 }
-.contents_write_date>div:first-child{height:60%;}
-.contents_write_date>div:last-child{height:40%;}
-.contents_write_date button{
-    width:80px;
-    height:30px;
-    border-radius: 5px;
+.contents_write_date>div:first-child{
+	text-align: end;
+	height:60%;
 }
+.contents_write_date>div:last-child{
+	height:40%;
+	text-align: end;
+}
+.contents_write_date button{
+   	box-shadow: none;
+    background-color: #2985db;
+    border: solid 1px #056ac9;
+    border-radius: 4px;
+    color: white;
+    padding: 0 20px 0px;
+    height: 34px;
+    font-size: 14px;
+}
+.contents_write_date button:hover{background-color: #056ac9;}
 .contents_info>div{
     display: flex;
     align-items: center;
@@ -84,8 +103,6 @@
 	margin-bottom:10px;
 	margin-left:25px;
 }
-
-
 
 .contents{
     min-height:300px;
@@ -142,9 +159,16 @@
     justify-content: space-evenly;
 }
 .survey_btns>button{
-    width:80px;
-    height:30px;
-    border-radius: 5px;
+	width:98px;
+    box-shadow: none;
+    background-color: #ebebeb;
+    border: solid 1px #d6d6d6;
+    border-radius: 4px;
+    color: #333;
+    padding: 0 20px 0px;
+    height: 34px;
+    cursor: pointer;
+    font-size: 14px;
 }
 
 .buttons{
@@ -157,11 +181,31 @@
     padding:0px;
     margin-left:25px;
 }
-.buttons>button{
-    width:80px;
-    height:30px;
-    border-radius: 5px;
+.buttons>button:first-child{
+	width:98px;
+    box-shadow: none;
+    background-color: #ebebeb;
+    border: solid 1px #d6d6d6;
+    border-radius: 4px;
+    color: #333;
+    padding: 0 20px 0px;
+    height: 34px;
+    cursor: pointer;
+    font-size: 14px;
 }
+.buttons>button:first-child:hover{background-color: #d6d6d6;}
+.buttons>button:last-child{
+	width:98px;
+    box-shadow: none;
+    background-color: #2985db;
+    border: solid 1px #056ac9;
+    border-radius: 4px;
+    color: white;
+    padding: 0 20px 0px;
+    height: 34px;
+    font-size: 14px;
+}
+.buttons>button:last-child:hover{ background-color: #056ac9;}
 
 .input_reply_box{
     overflow: hidden;
@@ -189,11 +233,17 @@
 }
 .reply_button{width:7%;}
 .reply_button>button{
-    width:80px;
-    height:30px;
-    border-radius: 5px;
+    box-shadow: none;
+    background-color: #ebebeb;
+    border: solid 1px #d6d6d6;
+    border-radius: 4px;
+    color: #333;
+    padding: 0 20px 0px;
+    height: 34px;
+    cursor: pointer;
+    font-size: 14px;
 }
-
+.reply_button>button:hover{background-color: #d6d6d6;}
 .reply_list_box{
     border:1px solid gainsboro;
     padding:10px;
@@ -232,7 +282,31 @@
     align-items: center;
     margin-bottom:10px;
 }
-
+.reply_list_edit_buttons>button:not(.updateSuccessBtn){
+	width:75px;
+	box-shadow: none;
+    background-color: #ebebeb;
+    border: solid 1px #d6d6d6;
+    border-radius: 4px;
+    color: #333;
+    padding: 0 20px 0px;
+    cursor: pointer;
+    font-size: 14px;
+    height:25px;
+}
+.reply_list_edit_buttons>button:hover:not(.updateSuccessBtn){background-color: #d6d6d6;}
+.updateSuccessBtn{
+	width:98px;
+	box-shadow: none;
+    background-color: #2985db;
+    border: solid 1px #056ac9;
+    border-radius: 4px;
+    color: white;
+    padding: 0 20px 0px;
+    height: 34px;
+    font-size: 14px;
+}
+.updateSuccessBtn:hover{ background-color: #056ac9;}
 .updateCancelBtn,.updateSuccessBtn{display:none;}
 #replyFooter{
 	display: flex;
