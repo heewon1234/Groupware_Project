@@ -11,96 +11,97 @@
 <link rel="stylesheet" type="text/css" href="/css/commons/topForm.css">
 </head>
 <body>
-	<div id="top">
-		<div class="logo">
+	<div id="topFormTop">
+		<div class="topFormLogo">
 			<a href="/">logo</a>
 		</div>
-		<div id="menuSelectDiv">
-			오피스 홈 <i id="menuSelect" class="fa-solid fa-chevron-down"></i>
+		<div id="topFormMenuSelectDiv">
+			오피스 홈 <i id="topFormMenuSelect" class="fa-solid fa-chevron-down"></i>
 		</div>
-		<div class="icon">
+		<div class="topFormIcon">
 			<i class="fa-regular fa-comment" onclick="openPopup()"></i> <i
 				class="fa-regular fa-bell"></i> <i class="fa-regular fa-circle-user"
-				id="logout"></i>
+				id="topFormLogout"></i>
 		</div>
 	</div>
-	<div id="menuCollection" style="display: none;">
-		<div id="left">
-			<div class="menu">
-				<i class="fa-regular fa-clipboard menuIcon"></i> 게시판
+	<div id="topFormMenuCollection" style="display: none;">
+		<div>전체메뉴</div>
+		<div id="topFormSelectMenu">
+			<div id="topFormLeft">
+				<div class="topFormMenu">
+					<i class="fa-regular fa-clipboard menuIcon"></i> 게시판
+				</div>
+				<div class="topFormMenu">
+					<a href="/calendar/official"> <i
+						class="fa-regular fa-calendar-days menuIcon"></i> 일정
+					</a>
+				</div>
+				<div class="topFormMenu">
+					<a href="/works/work_leave"> <i
+						class="fa-solid fa-sitemap menuIcon"></i> 인사
+					</a>
+				</div>
 			</div>
-			<div class="menu">
-				<a href="/calendar/official">
-					<i class="fa-regular fa-calendar-days menuIcon"></i> 일정
-				</a>
-			</div>
-			<div class="menu">
-				<a href="/works/work_leave">
-					<i class="fa-solid fa-sitemap menuIcon"></i> 인사
-				</a>
-			</div>
-		</div>
-		<div id="right">
-			<div class="menu">
-				<i class="fa-regular fa-address-book menuIcon"></i> 주소록
-			</div>
-			<div class="menu">
-				<a href="/approval/document/lists/all">
-					<i class="fa-regular fa-clipboard menuIcon"></i> 결재
-				</a>
+			<div id="topFormRight">
+				<div class="topFormMenu">
+					<i class="fa-regular fa-address-book menuIcon"></i> 주소록
+				</div>
+				<div class="topFormMenu">
+					<a href="/approval/document/lists/all"> <i
+						class="fa-regular fa-clipboard menuIcon"></i> 결재
+					</a>
+				</div>
 			</div>
 		</div>
 	</div>
-	<div class="logout" style="display: none;">
-		<div>${userDTO.organization } ${userDTO.position } ${userDTO.name }</div>
-		<div>${userDTO.id } </div>
+	<div class="topFormLogout" style="display: none;">
+		<div>${userDTO.organization }${userDTO.position }${userDTO.name }</div>
+		<div>${userDTO.id }</div>
 		<div>
-			<a href="/members/myInfo">마이페이지</a>
-			<a href="/members/logout"><button id="logoutbtn">LOGOUT</button></a>
+			<a href="/members/myInfo">마이페이지</a> <a href="/members/logout"><button
+					id="topFormLogoutBtn">LOGOUT</button></a>
 		</div>
 	</div>
-	<div id="realPopup"></div>
-
+	<div id="topFormrealPopup"></div>
 
 
 	<script>
-        $(document).ready(function() {
-        	$("#realPopup").load("/chats/chatting");
-        	
-        	let logout = false;
-        	
-        	$("#logout").on("click",function(){
-        		if(logout == false) {
-        			$(".logout").css("display","");
-                	logout = true;
-        		} else {
-        			$(".logout").css("display","none");
-                	logout = false;
-        		}
-            });
-        	
+		$(document).ready(function() {
+			$("#topFormrealPopup").load("/chats/chatting");
+
+			let logout = false;
+
+			$("#topFormLogout").on("click", function() {
+				if (logout == false) {
+					$(".topFormLogout").css("display", "");
+					logout = true;
+				} else {
+					$(".topFormLogout").css("display", "none");
+					logout = false;
+				}
+			});
+
 			let menu = false;
-        	
-        	$("#menuSelectDiv").on("click",function(){
-        		if(menu == false) {
-        			$("#menuCollection").css("display","flex");
-        			menu = true;
-        		} else {
-        			$("#menuCollection").css("display","none");
-        			menu = false;
-        		}
-            });
-        });
-        
-        $("#logoutbtn").on("click",function(){
-    		let memberout = confirm("로그아웃 하시겠습니까?");
-    		if(!memberout){
-    			return false;
-    		} else {
-    			alert("로그아웃 되었습니다.");
-    		}
-    	});
-        
-    </script>
+
+			$("#topFormMenuSelectDiv").on("click", function() {
+				if (menu == false) {
+					$("#topFormMenuCollection").css("display", "flex");
+					menu = true;
+				} else {
+					$("#topFormMenuCollection").css("display", "none");
+					menu = false;
+				}
+			});
+		});
+
+		$("#topFormLogoutbtn").on("click", function() {
+			let memberout = confirm("로그아웃 하시겠습니까?");
+			if (!memberout) {
+				return false;
+			} else {
+				alert("로그아웃 되었습니다.");
+			}
+		});
+	</script>
 </body>
 </html>
