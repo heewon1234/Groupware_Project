@@ -46,8 +46,19 @@ a {
     background-color: #ffffff;
     border-radius: 10px;
     text-align: center;
+    padding-bottom: 12px;
+    
 }
-
+#topFormProfile{
+  	display: flex;
+    align-items: center;
+}
+#topFormProfileImg i{
+	font-size: 50px;
+}
+#topFormProfileImg{
+	margin-left: 4px;
+}
 #topFormMenuSelect {
     font-size: 11pt;
 }
@@ -62,6 +73,9 @@ a {
     margin-left: 20px;
     margin-right: 70%;
     cursor: pointer;
+}
+#topFormProfileContents{
+	margin-left: 20px;
 }
 
 #topFormMenuCollection {
@@ -98,4 +112,12 @@ a {
 
 .topFormMenu {
     height: 35px;
+}
+.topFormLogoutInBottom {
+	margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+#topFormLogoutBtn{
+	padding: 5px;
 }
