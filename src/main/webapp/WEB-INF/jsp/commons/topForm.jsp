@@ -52,7 +52,12 @@
 		</div>
 	</div>
 	<div class="logout" style="display: none;">
-		<a href="/members/logout"><button id="logoutbtn">LOGOUT</button></a>
+		<div>${userDTO.organization } ${userDTO.position } ${userDTO.name }</div>
+		<div>${userDTO.id } </div>
+		<div>
+			<a href="/members/myInfo">마이페이지</a>
+			<a href="/members/logout"><button id="logoutbtn">LOGOUT</button></a>
+		</div>
 	</div>
 	<div id="realPopup"></div>
 
@@ -66,7 +71,7 @@
         	
         	$("#logout").on("click",function(){
         		if(logout == false) {
-        			$(".logout").css("display","flex");
+        			$(".logout").css("display","");
                 	logout = true;
         		} else {
         			$(".logout").css("display","none");

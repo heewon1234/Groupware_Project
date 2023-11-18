@@ -44,9 +44,11 @@
 					<div id="menu" style="text-align: center;">
 						<div id="menuList">
 							<div>
-								<div class="main_icon_box">
-									<i class="fa-regular fa-clipboard"></i>
-								</div>
+								<a href="/board/toBoard">
+									<div class="main_icon_box">
+										<i class="fa-regular fa-clipboard"></i>
+									</div>
+								</a>
 								<div class="title">게시판</div>
 							</div>
 							<div>

@@ -1,5 +1,7 @@
 @charset "UTF-8";
-
+#logout{
+	font-size:29px;
+}
 /* div{border: 1px solid black;}  */
 
 .content_tab>div{width:1500px;}
@@ -42,17 +44,18 @@
 .favorite>img{width:30%;}
 */
 .board_contents_info>div:nth-child(1){
-    width:7%;
+    width:5%;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
-.profile>img{width:80%;}
+.profileDiv>img{width:80%;}
 .board_contents_info>div:nth-child(2){
     width:78%;
     padding-left:10px;
 }
 .board_contents_info>div:nth-child(3){
-	width:15%;
+	width:17%;
     height:100%;
 }
 .contents_write_date>div:first-child{

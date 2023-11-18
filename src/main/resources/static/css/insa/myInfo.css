@@ -1,0 +1,31 @@
+table {
+	border: none;
+	margin-top: 20px;
+	width: 95%;
+}
+
+table, th, td {
+	border-collapse: collapse;
+}
+
+tr {
+	margin-bottom: 5px;
+}
+
+th {
+	width: 10%;
+	font-weight: 400;
+}
+
+td {
+	padding-left: 70px;
+}
+
+button[type="submit"] {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+#address, #detailAddress {
+	width: 30%;
+}
