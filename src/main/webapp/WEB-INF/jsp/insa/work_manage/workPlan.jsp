@@ -322,6 +322,8 @@ min-width: 1180px;
 									src="/images/insa/work_plan/chevron-left.svg">
 							</div>
 							<div class="currentMonth"></div>
+							<input class="cMonth" type="hidden">
+							<input class="cYear" type="hidden">
 							<div style="margin-top: 3px;">
 								<img class="nextMonth"
 									src="/images/insa/work_plan/chevron-right.svg">
@@ -704,18 +706,18 @@ document.getElementById('update_workPlan_body').addEventListener('change', funct
 
 
 
-	function updateWorkPlanTable(userNames) {
+	function updateWorkPlanTable(userNames,dates) {
 	    var tableHeader = $("#update_workPlan_head").empty();
 	    var tableCol = $('<th>');
 	    tableHeader.append(tableCol);
-
+	    
 	    userNames.forEach(name => {
 	        const tableHeaderCell = $('<th>').text(name);
 	        tableHeader.append(tableHeaderCell);
 	    });
 
 	    var tableBody = $("#update_workPlan_body").empty();
-
+	    console.log(dates);
 	    dates.forEach(date => {
 	        var tableRow = $('<tr>');
 	        const cellDate = $('<td>').text(formatDate2(date)).addClass('members');
@@ -770,6 +772,7 @@ document.getElementById('update_workPlan_body').addEventListener('change', funct
 
 	    return dates;
 	}
+	
 
 	function formatDate2(date) {
         let year = date.getFullYear();
@@ -777,7 +780,6 @@ document.getElementById('update_workPlan_body').addEventListener('change', funct
         let day = date.getDate();
         return month + "월 "+ day + "일";
     }
-
 	 
 	    
 	    function formatDate1(date) {
@@ -811,13 +813,15 @@ document.getElementById('update_workPlan_body').addEventListener('change', funct
 	        updateData(); // 페이지 로딩 시 데이터 초기화
 	        updateCurrentMonth();
 	        updateCurrentMonth(today.getFullYear(),currentMonth);
-
+	        
 	        // 왼쪽 버튼 클릭 시 이벤트 처리
 	        $(".prevMonth").click(function () {
 	            currentMonth--;
 	            updateMonth();
 	            updateData(today.getFullYear(),currentMonth); // 이전 월 변경 시 데이터 갱신
 	            updateCurrentMonth(today.getFullYear(), currentMonth);
+	            let dates = generateDatesForMonth(today.getFullYear(), currentMonth);
+	            updateWorkPlanTable(userNames, dates);
 	        });
 
 	        // 오른쪽 버튼 클릭 시 이벤트 처리
@@ -826,6 +830,10 @@ document.getElementById('update_workPlan_body').addEventListener('change', funct
 	            updateMonth();
 	            updateData(today.getFullYear(),currentMonth); // 다음 월 변경 시 데이터 갱신
 	            updateCurrentMonth(today.getFullYear(), currentMonth);
+	            //loadMembersByDepartment(organization, function(userNames) {
+	                let dates = generateDatesForMonth(today.getFullYear(), currentMonth);
+	                updateWorkPlanTable(userNames, dates);
+	           // });
 	        });
 	        
 
@@ -847,6 +855,11 @@ document.getElementById('update_workPlan_body').addEventListener('change', funct
 
 	            // 현재 월 표시
 	            currentMonthElement.text(today.getFullYear() + "년 " + currentMonth + "월");
+	            $(".cMonth").val(today.getFullYear());
+	            $(".cYear").val(currentMonth);
+	            console.log($(".cMonth").val(today.getFullYear()));
+	            console.log($(".cYear").val(currentMonth));
+	            ///////////////////////////////////////////
 	            
 	        }
 	       
@@ -974,8 +987,8 @@ $(document).on('mouseleave', '.jeng', function() {
 
 
 
-function loadMembersByDepartment(organization) {
 var userNames = [];
+function loadMembersByDepartment(organization) {
     $.ajax({
         url: '/members/selectAll',
         // 필요한 데이터 전달
@@ -999,7 +1012,9 @@ var userNames = [];
         }
 
         // 데이터를 모두 추가한 뒤 updateWorkPlanTable 함수 호출
-        updateWorkPlanTable(userNames);
+        //updateWorkPlanTable(userNames);
+        let dates = generateDatesForMonth(today.getFullYear(), currentMonth);
+        updateWorkPlanTable(userNames, dates);
     });
 }
 
