@@ -55,11 +55,22 @@
 		</div>
 	</div>
 	<div class="topFormLogout" style="display: none;">
-		<div>${userDTO.organization }${userDTO.position }${userDTO.name }</div>
-		<div>${userDTO.id }</div>
-		<div>
-			<a href="/members/myInfo">마이페이지</a> <a href="/members/logout"><button
-					id="topFormLogoutBtn">LOGOUT</button></a>
+		<div id="topFormProfile">
+			<div id="topFormProfileImg">
+				<i class="fa-regular fa-circle-user"></i>
+			</div>
+			<div id="topFormProfileContents">
+				<div>${userDTO.organization }${userDTO.position }(${userDTO.name })</div>
+				<div style="margin-top: 3px; text-align: left;">${userDTO.id }</div>
+			</div>
+		</div>
+		<div class="topFormLogoutInBottom">
+			<div style="margin: 5px;">
+				<a href="/members/myInfo" style="font-size: 14px;">내 정보</a>
+			</div>
+			<div>
+				<a href="/members/logout"><button id="topFormLogoutBtn">로그아웃</button></a>
+			</div>
 		</div>
 	</div>
 	<div id="topFormrealPopup"></div>
