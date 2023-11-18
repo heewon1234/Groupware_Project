@@ -57,33 +57,34 @@
 	<!-- 실제 팝업 내용 -->
 	<div class="popup" id="popup">
 		<input id="loginID" type="hidden" value="${loginId }">
-		<div class="top">
+		<div class="chattingTop">
 			<span class="close-button" onclick="closePopup()">&times;</span>
 			<div id="logo" class="dragHandle">logo</div>
 			<div class="profile">
-				<div class="img">
+				<div class="chattingImg">
 					<i class="fa-regular fa-circle-user"></i>
 				</div>
-				<div class="user">
-					<div class="name">
-						<input id="name" value="${name }" style="border: none;" readonly>
+				<div class="chattingUser">
+					<div class="chattingName">
+						<input id="chattingName" value="${name }" style="border: none;"
+							disabled>
 					</div>
 					<div class="position">
 						<input id="position" value="${position }" style="border: none;"
-							readonly>
+							disabled>
 					</div>
 				</div>
 			</div>
 		</div>
 		<hr>
 		<div class="chat_body" id="popupBody">
-			<div class="left">
+			<div class="chattingLeft">
 				<i class="fa-regular fa-user" onclick="openchatMember()"></i> <i
 					class="fa-regular fa-comments" onclick="openchatGroupList()"></i><i
 					class="fa-solid fa-bars" onclick="openchatGmember()"
 					style="position: absolute; bottom: 0; margin-bottom: 40px;"></i>
 			</div>
-			<div class="right" id="roomList">
+			<div class="chattingRight" id="roomList">
 				<hr>
 				<div class="allList">
 					<select id="departmentSelect" style="margin-top: 10px">
@@ -139,8 +140,8 @@
 							<div id="searchBox">
 								<img alt="" src="/images/chats/search.svg"
 									onclick="searchGroup()"> <input id="searchGroup_input"
-									type="text" placeholder="채팅방 검색" style="border: none;"> <img id="x"
-									alt="" src="/images/chats/x.svg"
+									type="text" placeholder="채팅방 검색" style="border: none;">
+								<img id="x" alt="" src="/images/chats/x.svg"
 									onclick="hideSearchContainer()">
 							</div>
 						</div>
@@ -185,8 +186,7 @@
 
 			<div id="messageForm">
 				<div class="chatBox">
-					<div class="inputText" id="inputText" contenteditable="true"
-						style="padding: 10px"></div>
+					<div class="inputText" id="inputText" contenteditable="true"></div>
 					<div>
 						<button id="sendBtn">전송</button>
 					</div>
@@ -197,7 +197,7 @@
 		<div class="box" id="groupJSP" style="display: none">
 			<input id="groupUserName" type="hidden" value="${name}"> <input
 				id="loginID" type="hidden" value="${loginId}"> <input
-				id="groupSeq" value="${groupSeq}">
+				type="hidden" id="groupSeq" value="${groupSeq}">
 			<div class="inputTop" style="padding-top: 10px; padding-left: 10px">
 				<span class="close-button" onclick="closeGroupChat()">&times;</span>
 				<div class="myProfile">
@@ -205,10 +205,9 @@
 						<i class="fa-regular fa-comment"></i>
 					</div>
 					<div class="other">
+						<input id="groupChatting" value="그룹 채팅 " style="border: none;font-weight: bold;font-size: medium;margin-left: -1px;" disabled="disabled">
 						<input id="groupName" value="${groupName}" style="border: none;"
 							disabled="disabled">
-						<!-- <input id="organization"
-						value="${organization} " style="border: none;" disabled="disabled"> -->
 					</div>
 				</div>
 			</div>
@@ -216,8 +215,7 @@
 
 			<div id="messageForm">
 				<div class="chatBox">
-					<div class="inputText" id="groupinputText" contenteditable="true"
-						style="padding: 10px"></div>
+					<div class="inputText" id="groupinputText" contenteditable="true"></div>
 					<div>
 						<button id="sendGroupBtn">전송</button>
 					</div>

@@ -263,6 +263,12 @@ button, select {
 #current_table{
 min-width: 1180px;
 }
+#work_contents{
+width: 100%;
+}
+#current_table{
+width: 98%;
+}
 </style>
 </head>
 <body>
