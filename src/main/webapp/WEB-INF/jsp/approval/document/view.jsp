@@ -108,12 +108,8 @@
 	</div>
 	<script src="/js/approval/document/view.js"></script>
 	<script>
-		$(document).ready(function() {
-			$(".top_container").load("/commons/topForm");
-		});
-	
-		$(document).ready(function() {
-			$(".left_item").load("/approval/document/left_item");
+		$("#delete_btn").on("click", function() {
+			location.href = "/approval/document/delete?doc_id=${docId}"
 		});
 	</script>
 </body>

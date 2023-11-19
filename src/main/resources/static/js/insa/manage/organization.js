@@ -15,18 +15,19 @@ $(document).ready(function() {
 	$(".top_container").load("/commons/topForm");
 });
 
-$("#level").keyup(function() {
-	if($(this).val() != "" && $("#organization").val() != "") {
-		$("#submit_btn").removeClass("permit");
-	} else {
-		$("#submit_btn").addClass("permit");
-	}
+function checkFields() {
+
+  if ($("#level").val() != "" && $("#organization").val() != "" && $("#manager").val() != "상위조직명") {
+    $("#submit_btn").removeClass("permit");
+  } else {
+    $("#submit_btn").addClass("permit");
+  }
+}
+
+$("#level, #organization").on("keyup", function() {
+  checkFields();
 });
 
-$("#organization").keyup(function() {
-	if($(this).val() != "" && $("#level").val() != "") {
-		$("#submit_btn").removeClass("permit");
-	} else {
-		$("#submit_btn").addClass("permit");
-	}
+$("#manager").on("change", function() {
+  checkFields();
 });

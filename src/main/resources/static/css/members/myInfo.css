@@ -4,6 +4,10 @@ table {
 	width: 95%;
 }
 
+h3 {
+	font-size: 22px;
+}
+
 table, th, td {
 	border-collapse: collapse;
 }
@@ -13,7 +17,7 @@ tr {
 }
 
 th {
-	width: 10%;
+	width: 20%;
 	font-weight: 400;
 }
 
@@ -24,6 +28,11 @@ td {
 button[type="submit"] {
 	margin-top: 20px;
 	margin-bottom: 20px;
+}
+
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
 }
 
 #address, #detailAddress {
