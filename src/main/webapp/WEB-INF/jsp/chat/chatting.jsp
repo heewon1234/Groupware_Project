@@ -427,11 +427,11 @@ function updateGroupChatList() {
 
 //그룹채팅방 여는 코드
 function groupChat(groupName, groupSeq) {
-	if (stompClient && stompClient.subscriptions) {
+	/*if (stompClient && stompClient.subscriptions) {
         Object.keys(stompClient.subscriptions).forEach(function (subscriptionId) {
             stompClient.unsubscribe(subscriptionId);
         });
-    }
+    }*/
 	getPreviousGroupMessages(groupSeq);
 	$("#groupName").val(groupName);
     $("#groupSeq").val(groupSeq);
@@ -724,11 +724,11 @@ function getPreviousGroupMessages(groupSeq) {
 		});
 
 		function openOneChat(friendName, organization, oneSeq) {
-			if (stompClient && stompClient.subscriptions) {
+			/*if (stompClient && stompClient.subscriptions) {
 		        Object.keys(stompClient.subscriptions).forEach(function (subscriptionId) {
 		            stompClient.unsubscribe(subscriptionId);
 		        });
-		    }
+		    }*/
 			
 			let currentUserName = $("#otherName").val(friendName);
 		    $("#organization").val(organization);
