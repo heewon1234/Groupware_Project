@@ -11,12 +11,6 @@
 <!-- BootStrap -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/css/members/myInfo.css">
-<style>
-	img {
-		width : 100%;
-		height : 100%;
-	}
-</style>
 </head>
 
 <body>
@@ -86,69 +80,5 @@
 		</div>
 	</div>
 	<script src="/js/members/myInfo.js"></script>
-	<script>
-		let pwRegex = /^([\w\d\W]){8,}$/;
-
-		let pwCheck = false;
-		let pwReCheck = false;
-		let phoneCheck = false;
-
-		$(".button_apply").on("click", function() {
-
-			if ($("pw").val() != "") {
-				if (!pwRegex.test($("#pw").val()) && $("#pw").val() != "") {
-					pwCheck = false;
-				} else {
-					pwCheck = true;
-				}
-
-				if ($("#pw").val() != $("#repw").val()) {
-					pwReCheck = false;
-				} else {
-					pwReCheck = true;
-				}
-			}
-
-			if (pwCheck == false) {
-				alert("비밀번호는 대문자와 특수문자 포함 8글자 이상이여야 합니다.");
-				return false;
-			}
-			if (pwReCheck == false) {
-				alert("비밀번호 재입력이 일치하지 않습니다.");
-				return false;
-			}
-
-			let signup = confirm("내 정보를 수정하시겠습니까?");
-			if (!signup) {
-				return false;
-			} else {
-				alert("수정이 완료되었습니다.");
-				return true;
-			}
-		});
-
-		$("#input-file").on("change",function(e) {
-			$("#profileImage-div").empty();
-			$("#profile_image").val("");
-
-			let formData = new FormData(); // 자바스크립트로 form태그를 만듬
-			for (let i = 0; i < e.target.files.length; i++) {
-				formData.append("files", e.target.files[i]); // 각 이미지를 FormData에 추가
-			}
-			$.ajax({
-				url : "/file/imageUpload",
-				method : "post",
-				data : formData,
-				processData : false, // 파일 바이너리로 그래로 가야해 인코딩도 하지마
-				contentType : false, // 데이터 타입 건드리지마
-			}).done(function(resp) {
-				for (let i = 0; i < e.target.files.length; i++) {
-					var imgTag = "<img src='"+ resp[i]+ "'>";
-					$('#profileImage-div').append(imgTag);
-					$("#profile_image").val(resp[i]);
-				}
-			});
-		});
-	</script>
 </body>
 </html>
