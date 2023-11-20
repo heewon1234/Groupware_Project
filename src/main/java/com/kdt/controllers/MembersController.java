@@ -147,8 +147,8 @@ public class MembersController {
 		// 사용자 목록에서 ID를 추출
 		List<String> userIDs = new ArrayList<>();
 		for (MembersDTO member : list) {
+			System.out.println(member);
 			userIDs.add(member.getId());
-			System.out.println(member.getProfile_image());
 		}
 		System.out.println(userIDs);
 

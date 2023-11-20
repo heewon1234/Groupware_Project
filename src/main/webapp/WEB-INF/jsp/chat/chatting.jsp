@@ -545,12 +545,12 @@ function getPreviousGroupMessages(groupSeq) {
 							if (listData.length > 0) {
 								for (var i = 0; i < listData.length; i++) {
 									var friend = listData[i];
+									console.log(friend.profile_image);
 									var $row = $("<div>").addClass("table-row");
 
-									var $iconCell = $("<div>")
-											.html(
-													'<i class="fa-regular fa-circle-user"></i>')
-											.css("display", "inline-block");
+									var $iconCell = $("<div>").html(
+										    '<img class="selectAllProfileImg" src="' + friend.profile_image + '" onerror="this.onerror=null; this.src=\'/images/commons/person-circle.svg\';">'
+										).css("display", "inline-block").addClass("iconCell");
 									$iconCell.on("click", function() {
 										onOneChat();
 									});
@@ -663,10 +663,9 @@ function getPreviousGroupMessages(groupSeq) {
 										var $row = $("<div>").addClass(
 												"table-row");
 
-										var $iconCell = $("<div>")
-												.html(
-														'<i class="fa-regular fa-circle-user"></i>')
-												.css("display", "inline-block");
+										var $iconCell = $("<div>").html(
+											    '<img class="selectAllProfileImg" src="' + friend.profile_image + '" onerror="this.onerror=null; this.src=\'/images/commons/person-circle.svg\';">'
+											).css("display", "inline-block").addClass("iconCell");
 										$iconCell.on("click", function() {
 											onOneChat();
 										});
