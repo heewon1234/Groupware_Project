@@ -16,7 +16,8 @@
 	
 }
 
-.weekend-cell {
+.
+weekend-cell {
 	color: #a6a6a6;
 }
 

@@ -32,4 +32,7 @@
 		UPDATE Works SET work_early = work_early + 1 WHERE id = #{id} AND TIME(CONVERT_TZ(now(), 'UTC', 'Asia/Seoul')) < '18:00:00';
 	]]>
 	</update>
+	<select id="work_current_selectByName" resultType="com.kdt.dto.WorkPlanDTO">
+		SELECT * FROM WorkPlan WHERE user_names = #{name} and approval_status='완료';
+	</select>
   </mapper>
