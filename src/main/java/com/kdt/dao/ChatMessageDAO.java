@@ -24,6 +24,7 @@ public class ChatMessageDAO {
 		return db.selectList("ChatMessage.getPreviousMessages", oneSeq); 
 	}
 	public List<ChatMessageDTO> getPreviousGroupMessages(String groupSeq){ 
-		return db.selectList("ChatMessage.getPreviousGroupMessages", groupSeq); 
+		List<ChatMessageDTO> list= db.selectList("ChatMessage.getPreviousGroupMessages", groupSeq); 
+		return list;
 	}
 }

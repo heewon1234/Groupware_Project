@@ -511,13 +511,17 @@ function getPreviousGroupMessages(groupSeq) {
             for (var i = 0; i < previousMessages.length; i++) {
                 var previousMessage = previousMessages[i];
                 var messageContainer = $("<div class='message-container'></div>");
+					    
+			    var userImgContainer = $("<div class='otherImg'>").html(
+				        '<img class="otherProfileImg" src="' + previousMessages.profile_image + '" onerror="this.onerror=null; this.src=\'/images/commons/person-circle.svg\';">'
+			    ).css("display", "inline-block")
 			    var userIDContainer = $("<div class='user-id'></div>").text(previousMessage.userID);
 			    var messageTextContainer = $("<div class='message-text'></div>").html(previousMessage.message);
 			    if (currentUserName == previousMessage.userID) { 
                     messageContainer.addClass('own-message'); 
                 }
 			    
-			    messageContainer.append(userIDContainer).append(messageTextContainer);
+			    messageContainer.append(userImgContainer).append(userIDContainer).append(messageTextContainer);
                 $('.chatGroupForm').append(messageContainer);
             }
             groupKeepScrollBottom();    
