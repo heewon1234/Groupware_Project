@@ -74,7 +74,7 @@
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
-						<form action="/calendar/pcreate" method="post">
+						<form action="/calendar/pcreate" method="post" onsubmit="return validateForm()">
 							<div class="modal-body">
 								<div class="form-group">
 									<label for="taskId" class="col-form-label">일정 내용</label> <input
@@ -211,6 +211,22 @@
 		});
 		calendar.render();
 	});
+	
+	function validateForm() {
+		var content = $("#calendar_content").val();
+		var start_date = $("#calendar_start_date").val();
+		var end_date = $("#calendar_end_date").val();
+
+		if (content == null || content == "") {
+			return false;
+		} else if (start_date == "" || end_date == "") {
+			return false;
+		} else if (new Date(end_date) - new Date(start_date) < 0) { // date 타입으로 변경 후 확인
+			return false;
+		} else { // 정상적인 입력 시
+			return true;
+		}
+    }
 	
 	$(document).ready(function() {
 		$('#official').click(function() {
