@@ -2,6 +2,9 @@ let board_title = $(".contents_info_datail>div:nth-child(3)").html().trim();
 let parent_seq = $("#boardSeq").html().split("글번호")[1].trim();
 
 let voteResult = (resp) => {
+	$("#surveyResult").empty();
+	if($(".backVoteDiv").length>0){$(".backVoteDiv").remove();}
+
 	let totalCount = resp[0].totalVote;
 	for(let i=0;i<resp.length;i++){
 		let ratio = 0;
@@ -46,7 +49,26 @@ $("#showResultBtn").on("click",function(){
 		data:{parent_seq:parent_seq}
 	}).done(function(resp){
 		voteResult(resp);
+		let box = $("<div>");
+		let hr=$("<hr>");
+		let btnDiv = $("<div>");
+		btnDiv.css("margin-top","10px");
+		btnDiv.css("text-align","center");
+		let button = $("<button>");
+		button.addClass("backVoteBtn");
+		button.append("투표하기");
+		btnDiv.append(button);
+		box.addClass("backVoteDiv");
+		box.append(hr);
+		box.append(btnDiv);
+		$("#surveyResultBox").append(box);
+		
 	});
+});
+
+$(document).on("click",".backVoteBtn",function(){
+	$("#surveyResultBox").css("display","none");
+	$("#surveyVoteBox").css("display","block");
 });
 
 if($(".contents").attr("data-vote")=='true'){

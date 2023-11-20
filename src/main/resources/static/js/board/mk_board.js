@@ -118,12 +118,13 @@ $(document).on("click",".add_member_btn",function(){
 	if($(this).attr("src")=="/images/commons/body_form/left_item/default/plus.png"){
 		$(this).attr("src","/images/board/del.png");
 		let job_name = $(this).parent("div").text().trim();
+		let organization = $(this).parents(".member_dept_detail_box").prev("div").text().trim();
 		let jobDiv = $(this).parent("div");
 		let completeDiv = $("<div>");
 		completeDiv.addClass("member_datail_box");
 		$.ajax({
 			url:"/mk_board/selectByJobName",
-			data:{"job_name":job_name}
+			data:{"job_name":job_name,"organization":organization}
 		}).done(function(resp){
 			for(let i=0;i<resp.length;i++){
 			
@@ -166,10 +167,7 @@ let add_auth_member_list = () => {
 		let div = $("<div>");
 		let spanName = $("<span>");
 		spanName.append(authority[i].name);
-		let spanDel = $("<span>");
-		spanDel.append("&times;");
 		div.append(spanName);
-		div.append(spanDel);
 		$("#auth_member_list").append(div);
 	}
 }
@@ -294,6 +292,15 @@ $(document).on("click",".authDelBtn",function(resp){
 });
 
 //말머리 추가
+
+$(".header_type>div").on("click",function(){
+	let checkbox = $(this).children("input");
+	if(!checkbox.prop("checked")){
+		checkbox.prop("checked",true).trigger("change");
+	}
+	
+})
+
 $(".header_input_check").change(function(){
 	console.log($(this).val());
 	if($(this).val()=='true'){
@@ -431,6 +438,21 @@ $("#frmBtn").on("click",function(){
 });
 
 
+
+$(".board_type_select>div").on("click",function(){
+	let checkbox = $(this).children("input");
+	if(!checkbox.prop("checked")){
+		checkbox.prop("checked",true).trigger("change");;
+	};
+
+});
+
+$(".name_type_select>div").on("click",function(){
+	let checkbox = $(this).children("input");
+	if(!checkbox.prop("checked")){
+		checkbox.prop("checked",true).trigger("change");
+	}
+})
 
 $("input[name='board_type']").change(function(){
 	if($(this).val()=="all"){

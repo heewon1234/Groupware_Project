@@ -45,6 +45,8 @@ public class Mk_BoardController {
 		String id = (String)session.getAttribute("loginId");
 		List<Mk_BoardDTO> group_list = mservice.select_board_type_group(id);
 		List<Mk_BoardDTO> all_list = mservice.select_board_type_all(id);
+		boolean isBoardAdmin = mservice.isBoardAdmin(id);
+		model.addAttribute("isBoardAdmin",isBoardAdmin);
 		model.addAttribute("group_list",group_list);
 		model.addAttribute("all_list",all_list);
 		return "boards/sideBar";
@@ -92,8 +94,11 @@ public class Mk_BoardController {
 	
 	@ResponseBody
 	@RequestMapping("selectByJobName")
-	public List<String> selectByJobName(String job_name){
-		return bservice.selectByJobName(job_name);
+	public List<String> selectByJobName(String job_name, String organization){
+		MembersDTO dto = new MembersDTO();
+		dto.setOrganization(organization);
+		dto.setJob_name(job_name);
+		return bservice.selectByJobName(dto);
 		
 	}
 	
@@ -120,7 +125,8 @@ public class Mk_BoardController {
 	// 게시판 관리창으로 이동
 	@RequestMapping("toEditBoard")
 	public String toEditBoard(Model model) {
-		List<Mk_BoardDTO> boardList = mservice.selectAllBoard();
+		String id = (String)session.getAttribute("loginId");
+		List<Mk_BoardDTO> boardList = mservice.selectBoardById(id);
 		model.addAttribute("boardList",boardList);
 		return "boards/edit_board";
 	}
