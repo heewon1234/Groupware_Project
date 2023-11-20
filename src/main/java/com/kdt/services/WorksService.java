@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.kdt.dao.WorksDAO;
 import com.kdt.dto.LeavesDTO;
-import com.kdt.dto.MembersDTO;
+import com.kdt.dto.WorkPlanDTO;
 import com.kdt.dto.WorkTimesDTO;
 import com.kdt.dto.WorksDTO;
 import com.kdt.dto.WorkstatisticsDTO;
@@ -17,7 +17,7 @@ public class WorksService {
 
 	@Autowired
 	private WorksDAO wdao;
-	
+
 	public List<WorksDTO> select(String id)throws Exception{
 		return wdao.select(id);
 	}
@@ -35,7 +35,7 @@ public class WorksService {
 	}
 	public void leave_delete(String idList)throws Exception {
 		String list[] = idList.split(",");
-		
+
 		for(String id : list) {
 			wdao.leave_delete(id);
 		}
@@ -43,7 +43,7 @@ public class WorksService {
 	}
 	public void work_delete(String idList)throws Exception {
 		String list[] = idList.split(",");
-		
+
 		for(String id : list) {
 			wdao.work_delete(id);
 		}
@@ -51,29 +51,29 @@ public class WorksService {
 	}
 	public void work_update(String idList, String org) {
 		String list[] = idList.split(",");
-		
+
 		for(String id : list) {
 			WorksDTO dto = new WorksDTO();
 			dto.setId(id);
 			dto.setOrganization(org);
 			wdao.work_update(dto);
 		}
-		
+
 		return;
 	}
 	public void leave_update(String idList, String org) {
 		String list[] = idList.split(",");
-		
+
 		for(String id : list) {
 			LeavesDTO dto = new LeavesDTO();
 			dto.setId(id);
 			dto.setOrganization(org);
 			wdao.leave_update(dto);
 		}
-		
+
 		return;
 	}
-	
+
 	public List<WorkTimesDTO> work_inout(String id)throws Exception{
 		return wdao.work_inout(id);
 	}
@@ -87,54 +87,58 @@ public class WorksService {
 		return wdao.leavenull();
 	}
 	public void leave_joindayupdate(String idList, String joindayList) throws Exception {
-	    
 
-	    String idArray[] = idList.split(",");
-	    String joindayArray[] = joindayList.split(",");
 
-	    for (int i = 0; i < idArray.length; i++) {
-	        LeavesDTO dto = new LeavesDTO();
-	        dto.setId(idArray[i]);
-	        
-	        if (i < joindayArray.length && joindayArray[i] != null && !joindayArray[i].isEmpty()) {
-	            dto.setJoinday(joindayArray[i]);
-	        } else {
-	            dto.setJoinday(null);
-	        }
+		String idArray[] = idList.split(",");
+		String joindayArray[] = joindayList.split(",");
 
-	        wdao.leave_joindayupdate(dto);
-	    }
-	    return;
+		for (int i = 0; i < idArray.length; i++) {
+			LeavesDTO dto = new LeavesDTO();
+			dto.setId(idArray[i]);
+
+			if (i < joindayArray.length && joindayArray[i] != null && !joindayArray[i].isEmpty()) {
+				dto.setJoinday(joindayArray[i]);
+			} else {
+				dto.setJoinday(null);
+			}
+
+			wdao.leave_joindayupdate(dto);
+		}
+		return;
 	}
-public void updateLeaveRemainder(String idList, String joindayList) throws Exception {
-	    
+	public void updateLeaveRemainder(String idList, String joindayList) throws Exception {
 
-	    String idArray[] = idList.split(",");
-	    String joindayArray[] = joindayList.split(",");
 
-	    for (int i = 0; i < idArray.length; i++) {
-	        LeavesDTO dto = new LeavesDTO();
-	        dto.setId(idArray[i]);
-	        
-	        if (i < joindayArray.length && joindayArray[i] != null && !joindayArray[i].isEmpty()) {
-	            dto.setJoinday(joindayArray[i]);
-	        } else {
-	            dto.setJoinday(null);
-	        }
+		String idArray[] = idList.split(",");
+		String joindayArray[] = joindayList.split(",");
 
-	        wdao.updateLeaveRemainder(dto);
-	    }
-	    return;
+		for (int i = 0; i < idArray.length; i++) {
+			LeavesDTO dto = new LeavesDTO();
+			dto.setId(idArray[i]);
+
+			if (i < joindayArray.length && joindayArray[i] != null && !joindayArray[i].isEmpty()) {
+				dto.setJoinday(joindayArray[i]);
+			} else {
+				dto.setJoinday(null);
+			}
+
+			wdao.updateLeaveRemainder(dto);
+		}
+		return;
 	}
-public int existstoday(String ID)throws Exception{
-	return wdao.existstoday(ID);
-}
-public int addworklate(String ID)throws Exception{
-	return wdao.addworklate(ID);
-}
-public int addworkearly(String ID)throws Exception{
-	return wdao.addworkearly(ID);
-}
+	public int existstoday(String ID)throws Exception{
+		return wdao.existstoday(ID);
+	}
+	public int addworklate(String ID)throws Exception{
+		return wdao.addworklate(ID);
+	}
+	public int addworkearly(String ID)throws Exception{
+		return wdao.addworkearly(ID);
+	}
+	public List<WorkPlanDTO> work_current_selectByName(String name)throws Exception{
+		return wdao.work_current_selectByName(name);
+	}
+
 public int addworkday(String ID)throws Exception{
 	return wdao.addworkday(ID);
 	}

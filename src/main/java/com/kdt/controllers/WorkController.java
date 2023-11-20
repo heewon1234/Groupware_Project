@@ -62,16 +62,16 @@ public class WorkController {
 		System.out.println(today);
 		if(today==0 && dto.getWork_type().equals("근무중")) { // 09시 이후 출근 클릭
 			wservice.insert(dto);
-			wservice.addworklate(ID);
-			wservice.addworknotcheck(ID);
+			wservice.addworklate(ID); // 지각 추가
+			wservice.addworknotcheck(ID); // 전날 퇴근을 안찍었다면 퇴근 미체크 추가
 		List<WorkTimesDTO> tlist = wservice.selectby(ID);
 		model.addAttribute("tlist",tlist);
 		return tlist;
 		}
 		else if(today==0 && dto.getWork_type().equals("근무 종료")) { // 18시 이전 퇴근 클릭
 			wservice.insert(dto);
-			wservice.addworkearly(ID);
-			wservice.addworkday(ID);
+			wservice.addworkearly(ID); // 조기 퇴근 추가
+			wservice.addworkday(ID); // 근무일 수 추가
 			wservice.addworkminutetime(ID); // 근무시간 추가
 		List<WorkTimesDTO> tlist = wservice.selectby(ID);
 		model.addAttribute("tlist",tlist);

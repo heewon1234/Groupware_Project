@@ -71,4 +71,7 @@ SET work_notcheck = (
 WHERE id=#{id};
  ]]>
 	</update>
-</mapper>
+	<select id="work_current_selectByName" resultType="com.kdt.dto.WorkPlanDTO">
+		SELECT * FROM WorkPlan WHERE user_names = #{name} and approval_status='완료';
+	</select>
+  </mapper>
