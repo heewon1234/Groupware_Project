@@ -269,6 +269,9 @@ width: 100%;
 #current_table{
 width: 98%;
 }
+.jeng,.weekend-cell{
+text-align: center;
+}
 </style>
 </head>
 <body>

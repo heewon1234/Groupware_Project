@@ -37,7 +37,12 @@
                 	<input type="text" class="form-control" id="organization" name="organization" placeholder="조직명">
                 </div>
                 <div class="input-group">
-                	<input type="text" class="form-control" id="manager" name="manager" placeholder="상위조직명">
+                	<select id="manager" class="form-control" name="manager">
+                		<option>상위조직명</option>
+                		<c:forEach items="${orgList}" var="org">
+                			<option>${org.organization }</option>
+                		</c:forEach>
+                	</select>
                 </div>
                 <div class="input-group">
                 	<input type="text" class="form-control" id="level" name="level" placeholder="조직 레벨">

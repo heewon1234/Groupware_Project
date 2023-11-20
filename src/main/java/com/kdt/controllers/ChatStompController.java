@@ -29,12 +29,24 @@ public class ChatStompController {
 	@Autowired
 	private Gson gson;
 	
+//	@MessageMapping("/oneToOne/sendMessage/{oneSeq}")
+//	@SendTo("/topic/oneToOne/{oneSeq}")
+//	public ChatMessageDTO oneToOne_insert(@Payload ChatMessageDTO message, @DestinationVariable int oneSeq) throws Exception {
+//	    System.out.println(message);
+//		chatMessageService.insert(message);
+//	    return message;
+//	}
 	@MessageMapping("/oneToOne/sendMessage/{oneSeq}")
 	@SendTo("/topic/oneToOne/{oneSeq}")
 	public ChatMessageDTO oneToOne_insert(@Payload ChatMessageDTO message, @DestinationVariable int oneSeq) throws Exception {
+	    // 개행 문자(\n)를 <br> 태그로 변환
+		System.out.println(message.getMessage());
+		System.out.println(message.getRoomID());
+		System.out.println(message.getUserID());
 	    chatMessageService.insert(message);
 	    return message;
 	}
+
 
 	@ResponseBody
 	@RequestMapping("/getPreviousMessages/{oneSeq}")//login된 userID를 where절로 줘야함 이름임

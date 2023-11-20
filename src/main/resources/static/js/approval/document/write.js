@@ -43,3 +43,10 @@ $("#contents").keyup(function() {
 		$("#submit_btn").addClass("permit");
 	}
 });
+
+$("#submit_btn").on("click", function() {
+	if($("#app_th1").html().trim() === "") {
+		alert("신청 인원을 최소 1명 이상 선택해주세요.");
+		return false;
+	}
+});

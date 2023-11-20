@@ -213,15 +213,30 @@ public class MembersController {
 	@RequestMapping("/myInfo")
 	public String myInfo(Model model) {
 		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");
+		userDTO = mservice.loginUser(userDTO.getId());
 		model.addAttribute("userDTO", userDTO);
-		return "/insa/myInfo";
+		return "/members/myInfo";
+	}
+	
+	@RequestMapping("/left_item")
+	public String leftItem() {
+		return "/members/left_item";
 	}
 	
 	@RequestMapping("/updateMember")
-	public String updateMember(String pw, String zipcode, String phone, String email, String address1, String address2) {
+	public String updateMember(String pw, String zipcode, String phone, String email, String address1, String address2, String profile_image) {
 		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");
-		String shapw = EncryptionUtils.getSHA512(pw);
-		MembersDTO dto = new MembersDTO(userDTO.getId(), shapw, null, null, null, null, null, phone, email, zipcode, address1, address2, null);
+		String shapw;
+		
+		if(pw=="") {
+			shapw = userDTO.getPw();
+		} else {
+			shapw = EncryptionUtils.getSHA512(pw);
+		}
+		
+		System.out.println(profile_image);
+		
+		MembersDTO dto = new MembersDTO(userDTO.getId(), shapw, null, null, null, null, null, phone, email, zipcode, address1, address2, profile_image);
 		
 		mservice.updateMember(dto);
 		

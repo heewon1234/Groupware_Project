@@ -14,7 +14,7 @@
 		INSERT INTO Organization VALUES(#{organization}, #{level}, #{manager})
 	</insert>
 	<delete id="delete">
-		DELETE FROM organization WHERE organization = #{organization} OR manager = #{organization}
+		DELETE FROM Organization WHERE organization = #{organization} OR manager = #{organization}
 	</delete>
 	<select id="getManagerOrg" resultType="String">
 		SELECT manager
