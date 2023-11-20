@@ -18,7 +18,7 @@
 </head>
 <body>
 	<div class="background"></div>
-    <div class="modal">
+    <div class="mkboard modal">
         <div>사용자 추가하기</div>
         <div class="member">
             <div class="member_list">

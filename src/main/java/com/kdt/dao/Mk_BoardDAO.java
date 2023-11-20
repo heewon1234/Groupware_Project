@@ -14,6 +14,9 @@ public class Mk_BoardDAO {
 	@Autowired
 	private SqlSession db;
 	
+	public boolean isBoardAdmin(String id) {
+		return db.selectOne("Mk_Board.isBoardAdmin",id);
+	}
 	
 	public List<Mk_BoardDTO> select_board_type_group(String id){
 		return db.selectList("Mk_Board.select_board_type_group",id);
@@ -55,6 +58,9 @@ public class Mk_BoardDAO {
 	// 게시판 목록 불러오기
 	public List<Mk_BoardDTO> selectAllBoard(){
 		return db.selectList("Mk_Board.selectAllBoard");
+	}
+	public List<Mk_BoardDTO> selectBoardById(String id){
+		return db.selectList("Mk_Board.selectBoardById",id);
 	}
 	public Mk_BoardDTO boardDetail(String board_title) {
 		return db.selectOne("Mk_Board.BoardDetail",board_title);

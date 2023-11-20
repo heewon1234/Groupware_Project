@@ -23,13 +23,6 @@
         <div class="right_item">
             <div class="content_tab">
                 <div class="title">게시판 만들기</div>
-                <div class="select_box">
-                    <select class="select">
-                        <option value="every">모든 게시판</option>
-                        <option value="all">전사 게시판</option>
-                        <option value="group">그룹 게시판</option>
-                    </select>
-                </div>
                 <div class="board_list_box">
                 	<div class="board_index">
                         <div class="board_index_check"></div>
@@ -76,7 +69,6 @@
         </div>
     </div>	
     <script src="/js/board/sideBar.js" defer></script>
-    <script src="/js/board/edit_board.js" defer></script>
-             
+    <script src="/js/board/edit_board.js" defer></script>             
 </body>
 </html>
