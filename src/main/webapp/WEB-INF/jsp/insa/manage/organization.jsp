@@ -34,7 +34,7 @@
 		<form action="/org/insert">
 			<div class="modalContent">
 				<div class="input-group">
-                	<input type="text" class="form-control" id="organization" name="organization" placeholder="조직명">
+                	<input type="text" class="form-control" id="org_input" name="organization" placeholder="조직명">
                 </div>
                 <div class="input-group">
                 	<select id="manager" class="form-control" name="manager">
@@ -73,7 +73,7 @@
 			<c:forEach items="${orgList}" var="org">
 				array.push([{
 								v : "${org.organization}",
-								f : '<span>${org.organization}</span> <a class="remove_org_btn btn"><i class="fa-solid fa-circle-xmark" style="color: #bec3c9;"></i></a><div>${org.count}</div>'
+								f : '<span class="org_span">${org.organization}</span> <a class="remove_org_btn btn"><i class="fa-solid fa-circle-xmark" style="color: #bec3c9;"></i></a><div>${org.count}</div>'
 							}, "${org.manager}", "${org.level}" ]);
 			</c:forEach>
 			data.addRows(array);
