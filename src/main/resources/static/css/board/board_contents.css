@@ -3,9 +3,8 @@
 	font-size:29px;
 }
 /* div{border: 1px solid black;}  */
-
+.content_tab{padding-right:25px;}
 .content_tab>div{
-	width:100%;
 	min-width:600px;
 }
 .backVoteBtn{
@@ -43,21 +42,13 @@
     overflow: hidden;
     height:100px;
     border-bottom:1px solid black;
-    padding:0px;
     margin-left:25px;
 }
 .board_contents_info>div{
     float:left;
     height:100%;
 }
-/*.board_contents_info>div:first-child{
-    width:5%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.favorite>img{width:30%;}
-*/
+
 .board_contents_info>div:nth-child(1){
     width:5%;
     display: flex;
@@ -224,7 +215,7 @@
     font-size: 14px;
 }
 .buttons>button:last-child:hover{ background-color: #056ac9;}
-
+.reply_box{padding-right:0px;}
 .input_reply_box{
     overflow: hidden;
     height:100px;
