@@ -1,36 +1,71 @@
 
 //----------------------------
-const inputTop = $(".inputTop");
-const inputJSP = $("#inputJSP");
+//일대일 채팅 움직이는 것
+const inputTop = document.querySelector(".inputTop");
+const inputJSP = document.getElementById("inputJSP");
 
 let isDragging5 = false;
-let offsetX5, offsetY5;
+let startX, startY, offsetX5, offsetY5;
 
-// 마우스 다운 이벤트를 처리합니다.
-inputTop.on('mousedown', (e) => {
+inputTop.addEventListener('mousedown', (e) => {
     isDragging5 = true;
+    startX = e.pageX - inputJSP.offsetLeft;
+    startY = e.pageY - inputJSP.offsetTop;
 
-    // 로고 내부에서 클릭한 위치를 계산하여 offsetX5, offsetY5로 설정합니다.
-    offsetX5 = e.clientX - inputJSP[0].getBoundingClientRect().left + 50;
-    offsetY5 = e.clientY - inputJSP[0].getBoundingClientRect().top - 280;
-
-    // 마우스 이벤트의 기본 동작을 막아 마우스 커서가 고정됩니다.
     e.preventDefault();
 });
 
-// 마우스 이동 이벤트를 처리합니다.
-$(document).on('mousemove', (e) => {
+document.addEventListener('mousemove', (e) => {
     if (isDragging5) {
-        // 팝업 창을 마우스 포인터 위치로 이동합니다.
-        const newX5 = e.clientX - offsetX5;
-        const newY5 = e.clientY - offsetY5;
+        offsetX5 = e.pageX - startX;
+        offsetY5 = e.pageY - startY;
 
-        inputJSP.css('left', newX5 + 'px');
-        inputJSP.css('top', newY5 + 'px');
+        inputJSP.style.left = offsetX5 + 'px';
+        inputJSP.style.top = offsetY5 + 'px';
     }
 });
 
-$(document).on('mouseup', () => {
+document.addEventListener('mouseup', () => {
     isDragging5 = false;
 });
+
+
+document.addEventListener('mouseup', () => {
+    isDragging5 = false;
+});
+
+
 //----------------------------
+//그룹 채팅 움직이는 것
+const groupInputTop = document.querySelector(".groupInputTop");
+const groupJSP = document.getElementById("groupJSP");
+
+let isDragging10 = false;
+let startX1, startY1, offsetX10, offsetY10;
+
+groupInputTop.addEventListener('mousedown', (e) => {
+    isDragging10 = true;
+    startX1 = e.pageX - groupJSP.offsetLeft;
+    startY1 = e.pageY - groupJSP.offsetTop;
+
+    e.preventDefault();
+});
+
+document.addEventListener('mousemove', (e) => {
+    if (isDragging10) {
+        offsetX10 = e.pageX - startX1;
+        offsetY10 = e.pageY - startY1;
+
+        groupJSP.style.left = offsetX10 + 'px';
+        groupJSP.style.top = offsetY10 + 'px';
+    }
+});
+
+document.addEventListener('mouseup', () => {
+    isDragging10 = false;
+});
+
+
+document.addEventListener('mouseup', () => {
+    isDragging10 = false;
+});
