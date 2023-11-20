@@ -57,7 +57,7 @@
 	<div class="topFormLogout" style="display: none;">
 		<div id="topFormProfile">
 			<div id="topFormProfileImg">
-				<i class="fa-regular fa-circle-user"></i>
+				<img src="${userDTO.profile_image}">
 			</div>
 			<div id="topFormProfileContents">
 				<div>${userDTO.organization }${userDTO.position }(${userDTO.name })</div>

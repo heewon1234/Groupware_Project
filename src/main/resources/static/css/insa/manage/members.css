@@ -3,6 +3,10 @@ select {
 	margin-top: 20px;
 }
 
+select#select {
+	width : auto;
+}
+
 thead tr {
 	background-color: #EFF4FC;
 }
