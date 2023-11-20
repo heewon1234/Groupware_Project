@@ -176,11 +176,11 @@ width: 60px;
 			<input id="userName" type="hidden" value="${name}"> <input
 				id="loginID" type="hidden" value="${loginId}"> <input
 				id="oneSeq" type="hidden" value="${oneSeq}">
-			<div class="inputTop" style="padding-top: 10px; padding-left: 10px">
+			<div class="inputTop" style="padding-top: 10px; padding-left: 5px">
 				<span class="close-button" onclick="closeOneChat()">&times;</span>
 				<div class="myProfile">
-					<div class="myimg">
-						<i class="fa-regular fa-circle-user"></i>
+					<div class="ownImg">
+						
 					</div>
 					<div class="other">
 						<input id="otherName" value="${friendName}" style="border: none;"
@@ -207,7 +207,7 @@ width: 60px;
 				id="loginID" type="hidden" value="${loginId}"> <input
 				type="hidden" id="groupSeq" value="${groupSeq}">
 			<div class="groupInputTop"
-				style="padding-top: 10px; padding-left: 10px">
+				style="padding-top: 10px; padding-left: 5px">
 				<span class="close-button" onclick="closeGroupChat()">&times;</span>
 				<div class="myProfile">
 					<div class="myimg">
@@ -545,12 +545,12 @@ function getPreviousGroupMessages(groupSeq) {
 							if (listData.length > 0) {
 								for (var i = 0; i < listData.length; i++) {
 									var friend = listData[i];
+									console.log(friend.profile_image);
 									var $row = $("<div>").addClass("table-row");
 
-									var $iconCell = $("<div>")
-											.html(
-													'<i class="fa-regular fa-circle-user"></i>')
-											.css("display", "inline-block");
+									var $iconCell = $("<div>").html(
+										    '<img class="selectAllProfileImg" src="' + friend.profile_image + '" onerror="this.onerror=null; this.src=\'/images/commons/person-circle.svg\';">'
+										).css("display", "inline-block").addClass("iconCell");
 									$iconCell.on("click", function() {
 										onOneChat();
 									});
@@ -565,7 +565,7 @@ function getPreviousGroupMessages(groupSeq) {
 											.on(
 													"click",
 													(function(clickedUserName,
-															clickedUserId) {
+															clickedUserId,profileImg) {
 														return function() {
 															console
 																	.log(clickedUserName);
@@ -574,6 +574,14 @@ function getPreviousGroupMessages(groupSeq) {
 																	.val();
 															var otherID = clickedUserId;
 															var organization = friend.organization;
+															console.log(profileImg);
+															console.log(clickedUserName);
+															$(".ownImg").html("");
+															$(".ownImg").append(
+																    $("<div class='oneImg'>").html(
+																        '<img class="ownProfileImg" src="' + profileImg + '" onerror="this.onerror=null; this.src=\'/images/commons/person-circle.svg\';">'
+																    ).css("display", "inline-block")
+																);
 
 															var oneSeq = null;
 															for (var i = 0; i < OneToOneChatDTOList.length; i++) {
@@ -593,7 +601,7 @@ function getPreviousGroupMessages(groupSeq) {
 															}
 
 														};
-													})(friend.name, friend.id));
+													})(friend.name, friend.id,friend.profile_image));
 									$row.append($nameCell);
 									$friend_list.append($row);
 								}
@@ -663,10 +671,9 @@ function getPreviousGroupMessages(groupSeq) {
 										var $row = $("<div>").addClass(
 												"table-row");
 
-										var $iconCell = $("<div>")
-												.html(
-														'<i class="fa-regular fa-circle-user"></i>')
-												.css("display", "inline-block");
+										var $iconCell = $("<div>").html(
+											    '<img class="selectAllProfileImg" src="' + friend.profile_image + '" onerror="this.onerror=null; this.src=\'/images/commons/person-circle.svg\';">'
+											).css("display", "inline-block").addClass("iconCell");
 										$iconCell.on("click", function() {
 											onOneChat();
 										});
@@ -683,14 +690,19 @@ function getPreviousGroupMessages(groupSeq) {
 														"click",
 														(function(
 																clickedUserName,
-																clickedUserId) {
+																clickedUserId,profileImg) {
 															return function() {
 																var loginID = $(
 																		"#loginID")
 																		.val();
 																var otherID = clickedUserId;
 																var organization = friend.organization;
-
+																$(".ownImg").html("");
+																$(".ownImg").append(
+																	    $("<div class='oneImg'>").html(
+																	        '<img class="ownProfileImg" src="' + profileImg + '" onerror="this.onerror=null; this.src=\'/images/commons/person-circle.svg\';">'
+																	    ).css("display", "inline-block")
+																	);
 																var oneSeq = null;
 																for (var i = 0; i < OneToOneChatDTOList.length; i++) {
 																	var chatRoom = OneToOneChatDTOList[i];
@@ -709,7 +721,7 @@ function getPreviousGroupMessages(groupSeq) {
 																}
 															};
 														})(friend.name,
-																friend.id));
+																friend.id,friend.profile_image));
 
 										$row.append($nameCell);
 

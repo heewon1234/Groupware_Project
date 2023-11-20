@@ -18,6 +18,7 @@
     background-color: #b2c7da;
     overflow: auto;
     padding-bottom: 10px;
+    margin-top: 6px;
 }
 #messageForm{
     height: 20%;
@@ -107,4 +108,18 @@
 }
 .own-message>.user-id{
 	display: none;
+}
+.ownImg{
+	width: 50px;
+	height: 50px;
+}
+.oneImg{
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+    overflow: hidden;
+}
+.ownProfileImg{
+	width: 50px;
+	height: 50px;
 }
