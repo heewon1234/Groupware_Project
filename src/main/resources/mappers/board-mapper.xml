@@ -36,10 +36,9 @@
 		update ${board_title} set view_count = view_count + 1 where seq = #{seq}
 	</update>
 	<!-- 게시글 불러오기 -->
-	<select id="boardContentsList" resultType="com.kdt.dto.BoardDTO">
+	<select id="boardContentsList" resultType="int">
 	<!-- 게시글 리스트 다 가져오기 ( 사이즈 구할 때 사용 )-->
-		select b.*, #{oriBoardTitle} as board_title,case when b.seq = parent_seq then 'true' else 'false' end as favorite 
-		from ${board_title} b left join Favorite_Board f on id=#{id} and parent_seq = b.seq and board_title=#{board_title} order by seq desc
+		select count(*) from ${board_title} 
 	</select>
 	<!-- 게시글 리스트 10개씩 가져오기 -->
 	<select id="BoardContentsListBy" resultType="com.kdt.dto.BoardDTO">
@@ -76,9 +75,9 @@
     	<result column="write_date" property="write_date"/>	
     	<result column="name_type" property="name_type"/>	
 	</resultMap>
-	<select id="FavoriteBoardContentsList" resultType="com.kdt.dto.BoardDTO">
-		select b.*,#{oriBoardTitle} as board_title, "true" as favorite from Favorite_Board f 
-		left join ${board_title} b on parent_seq=b.seq where id=#{id} and board_title=#{board_title} order by write_date desc
+	<!-- 즐겨찾기 게시물 개수 -->
+	<select id="CountFavList" resultType="int">
+		select count(*) from Favorite_Board where id = #{id}
 	</select>
 	<!-- 즐겨찾기 게시물 10개씩 가져오기 -->
 	<select id="FavoriteListBy" resultMap="authBoardDTO">
@@ -101,12 +100,10 @@
 	</select>
 	<select id="countSearchList" resultType="int">
 		select count(*) from        
-			(select b.seq,ori_board_title as board_title,parent_seq,title,writer,id,write_date, header,notice,view_count from Favorite_Board f 
-			inner join 
-				(${fromBoard}) b 
-				on parent_seq=b.seq and f.board_title=b.board_title and id=#{id} order by write_date desc) as unionTable
-        	inner join Mk_Board m on unionTable.board_title = m.board_title where title like #{searchText} or writer like #{searchText} 
-        	order by write_date desc
+			(select * 
+			from Favorite_Board f 
+			inner join (${fromBoard}) b on parent_seq=b.seq and f.board_title=b.board_title and id=#{id}) as unionTable
+        where title like #{searchText} or writer like #{searchText} 
 	</select>
 	
 	<!-- 일반 게시판 검색 -->
@@ -116,9 +113,8 @@
 		where title like #{searchText} or writer like #{searchText} order by write_date desc limit ${start},10
 	</select>
 	<select id="searchCountContentsListBy" resultType="int">
-		select count(*)
-		from ${board_title} b left join Favorite_Board f on id=#{id} and parent_seq = b.seq and board_title=#{board_title}
-		where title like #{searchText} or writer like #{searchText} order by write_date desc
+		select count(*) from ${board_title}
+		where title like #{searchText} or writer like #{searchText}
 	</select>
 	<!-- 공지 내용 최근 5개 가져오기 -->
 	<select id="Notice" resultType="com.kdt.dto.BoardDTO">

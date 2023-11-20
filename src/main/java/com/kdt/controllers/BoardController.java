@@ -70,14 +70,9 @@ public class BoardController {
 			String encodedSearchText = URLEncoder.encode(searchText, "UTF-8");
 			return "redirect:/board/search?searchText="+encodedSearchText+"&cPage="+cPage;
 		}
-
+		
 		if(board_title==null) {
-			if(session.getAttribute("board_title")==null) {
-				board_title="중요게시물";
-			} else {
-				board_title=(String)session.getAttribute("board_title");
-			}
-
+			board_title = session.getAttribute("board_title")==null?"중요게시물":(String)session.getAttribute("board_title");
 		}
 
 		String id = (String)session.getAttribute("loginId");
@@ -96,21 +91,21 @@ public class BoardController {
 		session.setAttribute("currentPage", currentPage);		
 		int start = currentPage*Constants.RECORD_COUNT_PER_PAGE-(Constants.RECORD_COUNT_PER_PAGE-1)-1;
 		int end = currentPage*Constants.RECORD_COUNT_PER_PAGE;
-		System.out.println("5");
+		
 		List<BoardDTO> noticeList;
 		if(board_title.equals("중요게시물")) {
 			// 레코드 개수 
-			int totalBoardContents = bservice.FavoriteAllContentsList(board_title,id).size();
+			int totalBoardContents = bservice.FavoriteAllContentsList(id);
 			model.addAttribute("recordTotalCount",totalBoardContents); 
 			// 컨텐츠 리스트
 			List<Map<String,String>> boardContentsList = bservice.FavoriteListBy(board_title, id, String.valueOf(start));
-			System.out.println(boardContentsList.isEmpty());
 			model.addAttribute("boardContentsList", boardContentsList);
 			model.addAttribute("name_type",null);
 		} else {
 			// 레코드 개수
-			int totalBoardContents = bservice.boardContentsList(board_title,id).size();
+			int totalBoardContents = bservice.boardContentsList(board_title);
 			model.addAttribute("recordTotalCount",totalBoardContents);
+			
 			// 공지 최근 5개만
 			noticeList = bservice.Notice(board_title);
 			model.addAttribute("noticeList", noticeList);
@@ -157,7 +152,7 @@ public class BoardController {
 			model.addAttribute("boardContentsList",boardContentsList);
 			model.addAttribute("name_type",null);
 		} else {
-			int totalBoardContents = bservice.searchCountContentsListBy(board_title, id, searchText);
+			int totalBoardContents = bservice.searchCountContentsListBy(board_title, searchText);
 			model.addAttribute("recordTotalCount",totalBoardContents); 
 			System.out.println("1");
 			List<BoardDTO> boardContentsList = bservice.searchContentsListBy(board_title,id,String.valueOf(start),searchText);
