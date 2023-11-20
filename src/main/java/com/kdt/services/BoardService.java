@@ -145,13 +145,9 @@ public class BoardService {
 	}
 
 	// 게시글 리스트 ( 개수 구할 때 사용 )
-	public List<BoardDTO> boardContentsList(String board_title, String id){ 
-		Map<String,String> map = new HashMap<>();
+	public int boardContentsList(String board_title){ 
 		int boardSeq = mdao.selectBoardSeq(board_title);
-		map.put("oriBoardTitle", board_title);
-		map.put("board_title", "Board_"+boardSeq);
-		map.put("id", id);
-		return bdao.boardContentsList(map);
+		return bdao.boardContentsList("Board_"+boardSeq);
 	}
 	// 게시글 리스트 10개씩 가져오기
 	public List<BoardDTO> BoardContentsListBy(String board_title, String id, String start, String end){ 
@@ -165,18 +161,8 @@ public class BoardService {
 		return bdao.BoardContentsListBy(map);
 	}
 	// 즐겨찾기 테이블 모든 리스트 ( 개수 구할 때 사용 )
-	public List<BoardDTO> FavoriteAllContentsList(String board_title,String id){ 
-		List<Integer> seqList = mdao.allBoardSeq();
-		List<BoardDTO> favContentsList = new ArrayList<>();
-
-		Map<String,String> map = new HashMap<>();
-		map.put("id", id);
-		for(int seq:seqList) {
-			map.put("oriBoardTitle", mdao.selectBoardName(seq));
-			map.put("board_title", "Board_"+seq);
-			favContentsList.addAll(bdao.FavoriteAllContentsList(map));
-		}
-		return favContentsList;
+	public int FavoriteAllContentsList(String id){ 
+		return bdao.FavoriteAllContentsList(id);
 	}
 	// 즐겨찾기 리스트 10개씩 가져오기
 	public List<Map<String,String>> FavoriteListBy(String board_title,String id, String start){ 
@@ -190,6 +176,13 @@ public class BoardService {
 		map.put("start", start);
 
 		return bdao.FavoriteListBy(map);
+	}
+	public List<BoardDTO> homeFavList(String id){
+		String fromBoard = boardSeqList();
+		Map<String,String> map = new HashMap<>();
+		map.put("id", id);
+		map.put("fromBoard", fromBoard);
+		return bdao.homeFavList(map);
 	}
 
 	// 검색 기능
@@ -212,7 +205,6 @@ public class BoardService {
 		Map<String,String> map = new HashMap<>();
 		map.put("id", id);
 		map.put("fromBoard", fromBoard);
-		map.put("start", start);
 		map.put("searchText", searchText);
 		
 		return bdao.countSearchList(map);
@@ -229,12 +221,11 @@ public class BoardService {
 		map.put("searchText", searchText);
 		return bdao.searchContentsListBy(map);
 	}
-	public int searchCountContentsListBy(String board_title, String id, String searchText) {
+	public int searchCountContentsListBy(String board_title,String searchText) {
 		searchText = "%"+searchText+"%";
 		Map<String,String> map = new HashMap<>();
 		int boardSeq = mdao.selectBoardSeq(board_title);
 		map.put("board_title", "Board_"+boardSeq);
-		map.put("id", id);
 		map.put("searchText", searchText);
 		return bdao.searchCountContentsListBy(map);
 	}

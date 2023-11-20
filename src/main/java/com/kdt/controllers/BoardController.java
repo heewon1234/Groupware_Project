@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kdt.constants.Constants;
 import com.kdt.dto.BoardDTO;
 import com.kdt.dto.FileDTO;
+import com.kdt.dto.MembersDTO;
 import com.kdt.dto.ReplyDTO;
 import com.kdt.dto.SurveyDTO;
 import com.kdt.dto.SurveyUserDTO;
@@ -21,6 +22,7 @@ import com.kdt.services.AuthorityService;
 import com.kdt.services.BoardService;
 import com.kdt.services.FileService;
 import com.kdt.services.HeaderService;
+import com.kdt.services.MembersService;
 import com.kdt.services.Mk_BoardService;
 import com.kdt.services.ReplyService;
 import com.kdt.services.SurveyService;
@@ -55,6 +57,9 @@ public class BoardController {
 	@Autowired
 	HttpSession session;
 
+	@Autowired
+	MembersService memberService;
+	
 	// R 관련 기능
 
 	@RequestMapping("toBoard") // 게시글 리스트 보는 곳 이동
@@ -65,14 +70,9 @@ public class BoardController {
 			String encodedSearchText = URLEncoder.encode(searchText, "UTF-8");
 			return "redirect:/board/search?searchText="+encodedSearchText+"&cPage="+cPage;
 		}
-
+		
 		if(board_title==null) {
-			if(session.getAttribute("board_title")==null) {
-				board_title="중요게시물";
-			} else {
-				board_title=(String)session.getAttribute("board_title");
-			}
-
+			board_title = session.getAttribute("board_title")==null?"중요게시물":(String)session.getAttribute("board_title");
 		}
 
 		String id = (String)session.getAttribute("loginId");
@@ -91,21 +91,21 @@ public class BoardController {
 		session.setAttribute("currentPage", currentPage);		
 		int start = currentPage*Constants.RECORD_COUNT_PER_PAGE-(Constants.RECORD_COUNT_PER_PAGE-1)-1;
 		int end = currentPage*Constants.RECORD_COUNT_PER_PAGE;
-		System.out.println("5");
+		
 		List<BoardDTO> noticeList;
 		if(board_title.equals("중요게시물")) {
 			// 레코드 개수 
-			int totalBoardContents = bservice.FavoriteAllContentsList(board_title,id).size();
+			int totalBoardContents = bservice.FavoriteAllContentsList(id);
 			model.addAttribute("recordTotalCount",totalBoardContents); 
 			// 컨텐츠 리스트
 			List<Map<String,String>> boardContentsList = bservice.FavoriteListBy(board_title, id, String.valueOf(start));
-			System.out.println(boardContentsList.isEmpty());
 			model.addAttribute("boardContentsList", boardContentsList);
 			model.addAttribute("name_type",null);
 		} else {
 			// 레코드 개수
-			int totalBoardContents = bservice.boardContentsList(board_title,id).size();
+			int totalBoardContents = bservice.boardContentsList(board_title);
 			model.addAttribute("recordTotalCount",totalBoardContents);
+			
 			// 공지 최근 5개만
 			noticeList = bservice.Notice(board_title);
 			model.addAttribute("noticeList", noticeList);
@@ -152,7 +152,7 @@ public class BoardController {
 			model.addAttribute("boardContentsList",boardContentsList);
 			model.addAttribute("name_type",null);
 		} else {
-			int totalBoardContents = bservice.searchCountContentsListBy(board_title, id, searchText);
+			int totalBoardContents = bservice.searchCountContentsListBy(board_title, searchText);
 			model.addAttribute("recordTotalCount",totalBoardContents); 
 			System.out.println("1");
 			List<BoardDTO> boardContentsList = bservice.searchContentsListBy(board_title,id,String.valueOf(start),searchText);
@@ -184,7 +184,6 @@ public class BoardController {
 		int end = currentReplyPage*Constants.RECORD_COUNT_PER_PAGE;
 		List<ReplyDTO> replyList = rservice.replySelectBy(board_title, seq, String.valueOf(start), String.valueOf(end)); // 댓글 리스트
 		model.addAttribute("replyList",replyList);
-		System.out.println(replyList.size());
 		model.addAttribute("replyListSize",rservice.replyTotalCount(board_title, seq));
 		model.addAttribute("recordCountPerPage",Constants.RECORD_COUNT_PER_PAGE);
 		model.addAttribute("naviCountPerPage",Constants.NAVI_COUNT_PER_PAGE);
@@ -214,6 +213,18 @@ public class BoardController {
 		// 게시판 이름 타입
 		String name_type = mservice.selectNameType(board_title);
 		model.addAttribute("name_type",name_type);
+		
+		// 내 프로필 사진
+		String profile = memberService.loginUser(id).getProfile_image();
+		String myProfile = profile==null?null:profile;
+		model.addAttribute("myProfile",myProfile);
+		
+		// 작성자 이름, 프로필사진
+		MembersDTO writerDTO = memberService.loginUser(boardContents.getWriter());
+		String writerProfile = writerDTO.getProfile_image()==null ? null : writerDTO.getProfile_image();
+		String writerName = writerDTO.getName();
+		model.addAttribute("writerProfile",writerProfile);
+		model.addAttribute("writerName",writerName);
 		
 		bservice.viewCountUpdate(board_title, seq);
 		boardContents.setView_count(boardContents.getView_count()+1);

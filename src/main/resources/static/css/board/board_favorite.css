@@ -76,7 +76,8 @@
    font-size: 13px;
 }
 .board_list{
-    width:1500px;
+    width:100%;
+	min-width:600px;
 }
 
 .board_top{
@@ -125,7 +126,8 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width:1500px;
+	width:100%;
+	min-width:600px;
 }
 #boardListFooter>a{
 	margin-left:10px;

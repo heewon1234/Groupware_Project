@@ -21,14 +21,16 @@
 }
 .content_tab>div:not(.title)>div{margin-bottom:10px;}
 .contents_title{
-    width:1500px;
+    width:100%;
+	min-width:600px;
     height:50px;
     font-size:25px;
     font-weight: bold;
     padding-bottom:0px;	
 }
 .name{
-	width:1500px;
+	width:100%;
+	min-width:600px;
 
 }
 .name>.name_text{
@@ -44,7 +46,8 @@
 }
 
 .board_type{
-	width:1500px;
+	width:100%;
+	min-width:600px;
 }
 .board_type_text{font-weight: bold;}
 .board_type_select{
@@ -61,7 +64,10 @@
 .name_type_select>div:hover{cursor:pointer;}
 .name_type_select>div:last-child{margin-left:50px;}
 
-.authority{width:1500px;}
+.authority{
+	width:100%;
+	min-width:600px;
+}
 .authority_text{font-weight: bold;}
 .authority_member_add{
     overflow: hidden;
@@ -122,14 +128,20 @@
     padding-bottom:3px;
 }
 
-.header{width:1500px;}
+.header{
+	width:100%;
+	min-width:600px;
+}
 .header_text{font-weight: bold;}
 .header_type{overflow: hidden;}
 .header_type>div{float:left;}
 .header_type>div:hover{cursor: pointer;}
 .header_type>div:last-child{margin-left:50px;}
 
-.buttons{width:1500px;}
+.buttons{
+	width:100%;
+	min-width:600px;
+}
 .buttons>button{
     box-shadow: none;
     background-color: #ebebeb;

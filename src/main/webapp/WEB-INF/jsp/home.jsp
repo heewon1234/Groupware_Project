@@ -115,7 +115,23 @@
 							</div>
 						</div>
 						<div class="blank"></div>
-						<div id="mailContainer">메일 대신 주소록이나 게시판 들어갈 자리 입니도</div>
+						<div id="mailContainer">
+							<div>즐겨찾기 게시판</div>
+							<c:choose>
+								<c:when test="${empty favBoardList }">
+									<div class="emptyFavBoardList">게시글이 존재하지 않습니다</div>
+								</c:when>
+								<c:otherwise>
+									<c:forEach items="${favBoardList}" var="i">
+										<div>
+											<a href="/board/toContentsBoard?board_title=${i.board_title }&seq=${i.seq}">
+											${i.title }
+											</a>
+										</div>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
+						</div>
 					</div>
 					<div id="calendarContainer">
 						<div class="date-wrap">
