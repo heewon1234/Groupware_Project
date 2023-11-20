@@ -100,10 +100,10 @@
 	</select>
 	<select id="countSearchList" resultType="int">
 		select count(*) from        
-			(select * 
-			from Favorite_Board f 
-			inner join (${fromBoard}) b on parent_seq=b.seq and f.board_title=b.board_title and id=#{id}) as unionTable
-        where title like #{searchText} or writer like #{searchText} 
+			(select * from Favorite_Board f 
+			inner join (${fromBoard}) b 
+				on parent_seq=b.seq and f.board_title=b.board_title and id=#{id})
+        	where title like #{searchText} or writer like #{searchText} 
 	</select>
 	
 	<!-- 일반 게시판 검색 -->
