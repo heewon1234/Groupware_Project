@@ -109,6 +109,11 @@
 	<div class="body_form">
 		<!-- 왼쪽 부분(메뉴) -->
 		<div class="left_item">
+			<div class="button_tab">
+				<button class="main_button">
+					<span>일정 추가</span>
+				</button>
+			</div>
 			<div class="menu_tab">
 				<div id="official" class="menu_item">
 					<img class="menu_item_img"
@@ -186,48 +191,6 @@
 			timeZone : 'UTC',
 			initialView : 'dayGridMonth',
 			events : events,
-			headerToolbar : {
-				center : 'addEventButton' // headerToolbar에 버튼을 추가
-			},
-			customButtons : {
-				addEventButton : { // 추가한 버튼 설정
-					text : "일정 추가", // 버튼 내용
-					click : function() { // 버튼 클릭 시 이벤트 추가
-						$("#calendarModal").modal("show"); // modal 나타내기
-
-						$("#addCalendar").off("click").on(
-								"click",
-								function() { // modal의 추가 버튼 클릭 시
-									var content = $("#calendar_content").val();
-									var start_date = $("#calendar_start_date")
-											.val();
-									var end_date = $("#calendar_end_date")
-											.val();
-
-									//내용 입력 여부 확인
-									if (content == null || content == "") {
-										alert("내용을 입력하세요.");
-									} else if (start_date == ""
-											|| end_date == "") {
-										alert("날짜를 입력하세요.");
-									} else if (new Date(end_date)
-											- new Date(start_date) < 0) { // date 타입으로 변경 후 확인
-										alert("종료일이 시작일보다 먼저입니다.");
-									} else { // 정상적인 입력 시
-										var obj = {
-											"title" : content,
-											"start" : start_date,
-											"end" : end_date
-										}//전송할 객체 생성
-
-										//서버로 해당 객체를 전달해서 DB 연동 가능
-										calendar.addEvent(obj);
-										$("#calendarModal").modal("hide");
-									}
-								});
-					}
-				}
-			},
 			eventClick : function(info) {
 				if (confirm("'" + info.event.title + "' 일정을 삭제하시겠습니까 ?")) {
 					// 확인 클릭 시
@@ -295,6 +258,43 @@
 		}
 	}
 
+	$(".main_button").on("click",function(){
+		$("#calendarModal").modal("show");
+		
+		$("#addCalendar").off("click").on(
+				"click",
+				function() { // modal의 추가 버튼 클릭 시
+					var content = $("#calendar_content").val();
+					var start_date = $("#calendar_start_date")
+							.val();
+					var end_date = $("#calendar_end_date")
+							.val();
+
+					//내용 입력 여부 확인
+					if (content == null || content == "") {
+						alert("내용을 입력하세요.");
+					} else if (start_date == ""
+							|| end_date == "") {
+						alert("날짜를 입력하세요.");
+					} else if (new Date(end_date)
+							- new Date(start_date) < 0) { // date 타입으로 변경 후 확인
+						alert("종료일이 시작일보다 먼저입니다.");
+					} else { // 정상적인 입력 시
+						var obj = {
+							"title" : content,
+							"start" : start_date,
+							"end" : end_date
+						}//전송할 객체 생성
+
+						//서버로 해당 객체를 전달해서 DB 연동 가능
+						calendar.addEvent(obj);
+						$("#calendarModal").modal("hide");
+					}
+				});
+	});
+	
+	
+	
 	$(document).ready(function() {
 		$('#official').click(function() {
 			location.href = "/calendar/official";
