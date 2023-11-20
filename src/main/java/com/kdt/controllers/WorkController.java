@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kdt.dto.LeavesDTO;
 import com.kdt.dto.MembersDTO;
+import com.kdt.dto.WorkPlanDTO;
 import com.kdt.dto.WorkTimesDTO;
 import com.kdt.dto.WorksDTO;
 import com.kdt.dto.WorkstatisticsDTO;
@@ -154,7 +155,13 @@ public class WorkController {
 	public List<MembersDTO> getUserList(Model model)throws Exception {
 		return mservice.getUserList();
 	}
-	
+	@RequestMapping("work_current")
+	   public String work_current(Model model)throws Exception {
+	      String name = (String) session.getAttribute("name");
+	      List<WorkPlanDTO> WorkPlanList = wservice.work_current_selectByName(name);
+	      model.addAttribute("WorkPlanList", WorkPlanList);
+	      return "/insa/mywork/work_current";
+	   }
 	
 
 }
