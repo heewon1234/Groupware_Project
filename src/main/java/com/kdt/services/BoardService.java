@@ -177,6 +177,13 @@ public class BoardService {
 
 		return bdao.FavoriteListBy(map);
 	}
+	public List<BoardDTO> homeFavList(String id){
+		String fromBoard = boardSeqList();
+		Map<String,String> map = new HashMap<>();
+		map.put("id", id);
+		map.put("fromBoard", fromBoard);
+		return bdao.homeFavList(map);
+	}
 
 	// 검색 기능
 	// 즐겨찾기 게시판

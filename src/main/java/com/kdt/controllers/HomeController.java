@@ -1,15 +1,13 @@
 package com.kdt.controllers;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.kdt.dto.FavoriteBoardDTO;
+import com.kdt.dto.BoardDTO;
 import com.kdt.dto.Official_CalendarDTO;
 import com.kdt.services.BoardService;
 import com.kdt.services.CalendarService;
@@ -38,7 +36,9 @@ public class HomeController {
 		if(id != null) {
 			String org = this.mservice.getOrganization(id);
 			List<Official_CalendarDTO> list = this.cservice.selectAllO(org);
+			List<BoardDTO> favBoardList = bservice.homeFavList(id);
 			model.addAttribute("list",list);
+			model.addAttribute("favBoardList",favBoardList);
 		}
 		return "home";
 	}

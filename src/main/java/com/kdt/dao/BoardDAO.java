@@ -90,6 +90,9 @@ public class BoardDAO {
 	public List<BoardDTO> Notice(Map<String,String> map){
 		return db.selectList("Board.Notice",map);
 	}
+	public List<BoardDTO> homeFavList(Map<String,String> map){
+		return db.selectList("Board.homeFavList",map);
+	}
 	//
 
 	// 게시글 검색
