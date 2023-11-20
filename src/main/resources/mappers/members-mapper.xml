@@ -88,7 +88,7 @@
 	</select>
 	<update id="updateMember">
 		UPDATE Members
-		SET phone = #{phone}, email = #{email}, zipcode = #{zipcode}, address1 = #{address1}, address2 = #{address2}
+		SET pw = #{pw}, phone = #{phone}, email = #{email}, zipcode = #{zipcode}, address1 = #{address1}, address2 = #{address2}, profile_image = #{profile_image}
 		WHERE id = #{id}; 
 	</update>
 </mapper>
