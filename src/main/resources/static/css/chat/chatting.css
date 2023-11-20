@@ -31,18 +31,18 @@
     align-items: center; 
     margin-top: 20px;
     margin-right: 58%;
+    width: 100%;
 }
 
 /* 이미지 스타일 (선택 사항) */
-.chattingImg {
-    margin-right: 18px;
-    margin-left: 10px;
+#chattingImg {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    margin-right: 15px;
+    margin-left: 6px;
 }
 
-/*top 아이콘 스타일 (선택 사항) */
-.chattingTop .fa-regular.fa-circle-user {
-    font-size: 50px; /* 아이콘 크기 (선택 사항) */
-}
 
 /* 사용자 정보 스타일 */
 .chattingUser {
@@ -56,6 +56,7 @@
 }
 .chattingTop{
     height: 18%;
+    width: 100%;
 }
 /* 부모 컨테이너 스타일 */
 .chat_body {
