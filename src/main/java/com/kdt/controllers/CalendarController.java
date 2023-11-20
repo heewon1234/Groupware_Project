@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kdt.dto.MembersDTO;
 import com.kdt.dto.Official_CalendarDTO;
 import com.kdt.dto.Personal_CalendarDTO;
 import com.kdt.services.CalendarService;
+import com.kdt.services.JobTitleService;
 import com.kdt.services.MembersService;
 
 import jakarta.servlet.http.HttpSession;
@@ -28,15 +30,24 @@ public class CalendarController {
 	@Autowired
 	private MembersService mservice;
 	
+	@Autowired
+	private JobTitleService jtService;
+	
 	@RequestMapping("official")
 	public String ocalendar(Model model) throws Exception{
 		String id = (String) session.getAttribute("loginId");
+		
+		MembersDTO userDTO = mservice.loginUser(id);
+		String position = userDTO.getPosition();
+		int rank = jtService.getRank(position);
+		
 		String org = this.mservice.getOrganization(id);
 		List<Official_CalendarDTO> list = this.cservice.selectAllO(org);
 		
 		ObjectMapper objectMapper = new ObjectMapper();
         String listAsJSON = objectMapper.writeValueAsString(list);
         
+        model.addAttribute("rank",rank);
 		model.addAttribute("list",listAsJSON);
 		return "calendar/official";
 	}
