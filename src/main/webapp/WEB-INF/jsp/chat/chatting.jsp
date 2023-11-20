@@ -19,7 +19,7 @@
 	display: none;
 }
 /* Define your modal styles here */
-.modal {
+.ChatModal {
 	display: none;
 	position: fixed;
 	z-index: 1;
@@ -30,7 +30,7 @@
 	background-color: rgba(0, 0, 0, 0.5);
 }
 
-.modal-content {
+.ChatModal-content {
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -160,8 +160,8 @@ width: 60px;
 			</div>
 		</div>
 		<!-- 그룹 선택 모달 창 -->
-		<div id="groupUserModal" class="modal">
-			<div class="modal-content" style="width: 300px; height: 500px;">
+		<div id="groupUserModal" class="ChatModal">
+			<div class="ChatModal-content" style="width: 300px; height: 500px;">
 				<span class="close" id="groupModalClose">&times;</span>
 				<h2>사용자 선택</h2>
 				<ul id="groupUserList">
@@ -176,11 +176,11 @@ width: 60px;
 			<input id="userName" type="hidden" value="${name}"> <input
 				id="loginID" type="hidden" value="${loginId}"> <input
 				id="oneSeq" type="hidden" value="${oneSeq}">
-			<div class="inputTop" style="padding-top: 10px; padding-left: 10px">
+			<div class="inputTop" style="padding-top: 10px; padding-left: 5px">
 				<span class="close-button" onclick="closeOneChat()">&times;</span>
 				<div class="myProfile">
-					<div class="myimg">
-						<i class="fa-regular fa-circle-user"></i>
+					<div class="ownImg">
+						
 					</div>
 					<div class="other">
 						<input id="otherName" value="${friendName}" style="border: none;"
@@ -207,7 +207,7 @@ width: 60px;
 				id="loginID" type="hidden" value="${loginId}"> <input
 				type="hidden" id="groupSeq" value="${groupSeq}">
 			<div class="groupInputTop"
-				style="padding-top: 10px; padding-left: 10px">
+				style="padding-top: 10px; padding-left: 5px">
 				<span class="close-button" onclick="closeGroupChat()">&times;</span>
 				<div class="myProfile">
 					<div class="myimg">
@@ -565,7 +565,7 @@ function getPreviousGroupMessages(groupSeq) {
 											.on(
 													"click",
 													(function(clickedUserName,
-															clickedUserId) {
+															clickedUserId,profileImg) {
 														return function() {
 															console
 																	.log(clickedUserName);
@@ -574,6 +574,14 @@ function getPreviousGroupMessages(groupSeq) {
 																	.val();
 															var otherID = clickedUserId;
 															var organization = friend.organization;
+															console.log(profileImg);
+															console.log(clickedUserName);
+															$(".ownImg").html("");
+															$(".ownImg").append(
+																    $("<div class='oneImg'>").html(
+																        '<img class="ownProfileImg" src="' + profileImg + '" onerror="this.onerror=null; this.src=\'/images/commons/person-circle.svg\';">'
+																    ).css("display", "inline-block")
+																);
 
 															var oneSeq = null;
 															for (var i = 0; i < OneToOneChatDTOList.length; i++) {
@@ -593,7 +601,7 @@ function getPreviousGroupMessages(groupSeq) {
 															}
 
 														};
-													})(friend.name, friend.id));
+													})(friend.name, friend.id,friend.profile_image));
 									$row.append($nameCell);
 									$friend_list.append($row);
 								}
@@ -682,14 +690,19 @@ function getPreviousGroupMessages(groupSeq) {
 														"click",
 														(function(
 																clickedUserName,
-																clickedUserId) {
+																clickedUserId,profileImg) {
 															return function() {
 																var loginID = $(
 																		"#loginID")
 																		.val();
 																var otherID = clickedUserId;
 																var organization = friend.organization;
-
+																$(".ownImg").html("");
+																$(".ownImg").append(
+																	    $("<div class='oneImg'>").html(
+																	        '<img class="ownProfileImg" src="' + profileImg + '" onerror="this.onerror=null; this.src=\'/images/commons/person-circle.svg\';">'
+																	    ).css("display", "inline-block")
+																	);
 																var oneSeq = null;
 																for (var i = 0; i < OneToOneChatDTOList.length; i++) {
 																	var chatRoom = OneToOneChatDTOList[i];
@@ -708,7 +721,7 @@ function getPreviousGroupMessages(groupSeq) {
 																}
 															};
 														})(friend.name,
-																friend.id));
+																friend.id,friend.profile_image));
 
 										$row.append($nameCell);
 

@@ -63,7 +63,6 @@ public class WorkController {
 		if(today==0 && dto.getWork_type().equals("근무중")) { // 09시 이후 출근 클릭
 			wservice.insert(dto);
 			wservice.addworklate(ID); // 지각 추가
-			wservice.addworknotcheck(ID); // 전날 퇴근을 안찍었다면 퇴근 미체크 추가
 		List<WorkTimesDTO> tlist = wservice.selectby(ID);
 		model.addAttribute("tlist",tlist);
 		return tlist;
@@ -79,7 +78,6 @@ public class WorkController {
 		}
 		else {
 			wservice.insert(dto);
-			wservice.addworknotcheck(ID);
 			List<WorkTimesDTO> tlist = wservice.selectby(ID);
 			model.addAttribute("tlist",tlist);
 			return tlist;
@@ -91,6 +89,7 @@ public class WorkController {
 	public List<WorkTimesDTO> list(Model model)throws Exception  {
 		String ID = (String) session.getAttribute("loginId");
 		List<WorkTimesDTO> tlist = wservice.selectby(ID);
+		wservice.addworknotcheck(ID);
 		model.addAttribute("tlist",tlist);
 		return tlist;
 	}
