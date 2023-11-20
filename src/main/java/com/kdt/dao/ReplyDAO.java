@@ -16,7 +16,6 @@ public class ReplyDAO {
 	private SqlSession db;
 	
 	public int insertReply(ReplyDTO dto) {
-		System.out.println("멀쩡");
 		return db.insert("Reply.insertReply",dto);
 	}
 	

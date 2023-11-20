@@ -57,8 +57,6 @@ public class Mk_BoardController {
 	@RequestMapping("isExistName")
 	public boolean isExistName(String board_title) {
 		boolean result = mservice.isExistName(board_title);
-		System.out.println(board_title);
-		System.out.println(result);
 		return result;
 	}
 	

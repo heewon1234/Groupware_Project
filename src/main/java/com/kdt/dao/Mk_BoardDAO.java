@@ -27,7 +27,6 @@ public class Mk_BoardDAO {
 	}
 	
 	public int selectBoardSeq(String board_title) {
-		System.out.println(board_title);
 		return db.selectOne("Mk_Board.selectBoardSeq",board_title);
 	}
 	

@@ -19,7 +19,6 @@ $.ajax({ // 말머리 담아두기
 }).done(function(resp){
 	headerList = resp;
 	$(".header").css("display","block");
-	console.log(headerList);
 });
 
 $("#editFormBtn").on("click",function(){
@@ -57,8 +56,7 @@ $("#editFormBtn").on("click",function(){
 	
 	$("#authorityList").val(JSON.stringify(authorityList));
 	$("#headerList").val(JSON.stringify(headerList));
-	console.log($("#authorityList").val());
-	console.log($("#headerList").val());
+
 
 	$("#frm").submit();
 });

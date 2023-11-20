@@ -144,7 +144,6 @@ public class Mk_BoardService {
 	// 게시판 수정
 	@Transactional
 	public void editBoardDetail(Mk_BoardDTO dto, String headerList, String authorityList, String prevBoardTitle) {
-		System.out.println(dto.getName_type());
 		// mk_board 테이블 업데이트
 		Map<String,String> map = new HashMap<>();
 		map.put("board_title", dto.getBoard_title());
@@ -175,9 +174,7 @@ public class Mk_BoardService {
 
 		// header 테이블, authority 테이블에 새로 insert
 		int boardSeq = mdao.selectBoardSeq(dto.getBoard_title());
-		System.out.println("authorityList"+authorityList);
 		List<AuthorityDTO> authorityMember = gson.fromJson(authorityList, new TypeToken<List<AuthorityDTO>>() {}.getType());
-		System.out.println("authorityMember"+authorityMember);
 		for(AuthorityDTO auth : authorityMember) {
 			adao.authorityInsert(new AuthorityDTO(0,auth.getId(),dto.getBoard_title(),"Board_"+boardSeq,auth.getAuthority()));
 		}

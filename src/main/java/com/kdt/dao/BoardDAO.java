@@ -34,7 +34,6 @@ public class BoardDAO {
 
 	public List<String> selectByJobName(MembersDTO dto){
 		List<String> list = db.selectList("Board.selectByJobName",dto);
-		System.out.println(list.size());
 		return list;
 	}
 
@@ -48,7 +47,6 @@ public class BoardDAO {
 
 	public MembersDTO selectMemberByName(MembersDTO dto){
 		MembersDTO list = db.selectOne("Board.selectMemberByName",dto);
-		System.out.println(dto.getJob_name());
 		return list;
 	}
 	//

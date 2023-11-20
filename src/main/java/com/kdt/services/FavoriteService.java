@@ -17,7 +17,6 @@ public class FavoriteService {
 	Mk_BoardDAO mdao;
 	
 	public int insertFav(FavoriteBoardDTO dto) {
-		System.out.println(dto.getOri_board_title());
 		int seq = mdao.selectBoardSeq(dto.getOri_board_title());
 		dto.setBoard_title("Board_"+seq);
 		return fdao.insertFav(dto);
