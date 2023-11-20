@@ -148,6 +148,7 @@ public class MembersController {
 		List<String> userIDs = new ArrayList<>();
 		for (MembersDTO member : list) {
 			userIDs.add(member.getId());
+			System.out.println(member.getProfile_image());
 		}
 		System.out.println(userIDs);
 

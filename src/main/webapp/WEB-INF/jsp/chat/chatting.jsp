@@ -50,6 +50,13 @@
 	background-color: lightblue;
 	cursor: pointer;
 }
+#chattingProfileImg{
+width: 60px;
+    border-radius: 50%;
+    margin-right: 2px;
+    height: 60px;
+    overflow: hidden;
+}
 </style>
 </head>
 <body>
@@ -61,8 +68,9 @@
 			<span class="close-button" onclick="closePopup()">&times;</span>
 			<div id="logo" class="dragHandle">logo</div>
 			<div class="profile">
-				<div class="chattingImg">
-					<i class="fa-regular fa-circle-user"></i>
+				<div id="chattingImg">
+					<img id="chattingProfileImg" src="${userDTO.profile_image}"
+						onerror="this.onerror=null; this.src='/images/commons/person-circle.svg';">
 				</div>
 				<div class="chattingUser">
 					<div class="chattingName">
@@ -195,10 +203,11 @@
 		</div>
 		<!-- 그룹 채팅방 -->
 		<div class="box" id="groupJSP" style="display: none">
-			<input id="groupUserName" type="hidden"  value="${name}"> <input
+			<input id="groupUserName" type="hidden" value="${name}"> <input
 				id="loginID" type="hidden" value="${loginId}"> <input
 				type="hidden" id="groupSeq" value="${groupSeq}">
-			<div class="groupInputTop" style="padding-top: 10px; padding-left: 10px">
+			<div class="groupInputTop"
+				style="padding-top: 10px; padding-left: 10px">
 				<span class="close-button" onclick="closeGroupChat()">&times;</span>
 				<div class="myProfile">
 					<div class="myimg">
