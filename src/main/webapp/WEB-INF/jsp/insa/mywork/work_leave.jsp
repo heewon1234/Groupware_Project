@@ -8,15 +8,12 @@
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <title>Insert title here</title>
 </head>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css"
-	href="/css/insa/mywork/work_leave.css">
-<link rel="stylesheet" type="text/css"
-	href="/css/insa/manage/common.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/css/insa/mywork/work_leave.css">
+<link rel="stylesheet" type="text/css" href="/css/insa/manage/common.css">
 </head>
 <body>
-	<div class="top">TOP</div>
+	<div id="top_container"></div>
 	<div class="body_form">
 		<div class="left_item"></div>
 		<div class="right_item">

@@ -15,7 +15,7 @@
 	href="/css/insa/manage/common.css">
 </head>
 <body>
-	<div class="top">TOP</div>
+	<div id="top_container"></div>
 	<div class="body_form">
 		<div class="left_item"></div>
 		<div class="right_item">

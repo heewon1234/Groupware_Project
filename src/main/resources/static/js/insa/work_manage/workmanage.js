@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	$(".left_item").load("/insa/manage/left_item?selectItem=workmanage");
+	$("#top_container").load("/commons/topForm");
 });
 
 var myModal = document.getElementById('myModal');

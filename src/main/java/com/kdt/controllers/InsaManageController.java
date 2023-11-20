@@ -80,6 +80,8 @@ public class InsaManageController {
 	
 	@RequestMapping(value="/left_item")
 	public String toLeft_item(String selectItem, Model model) {
+		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");
+		model.addAttribute("userDTO", userDTO);
 		model.addAttribute("selectItem", selectItem);
 		return "/insa/left_item";
 	}

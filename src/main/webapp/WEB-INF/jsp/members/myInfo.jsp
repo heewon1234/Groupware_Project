@@ -74,6 +74,7 @@
 							</tbody>
 						</table>
 						<button type="submit" class="button_apply">저장</button>
+						<button type="button" id="back_btn" class="button_cancel">뒤로가기</button>
 					</form>
 				</div>
 			</div>

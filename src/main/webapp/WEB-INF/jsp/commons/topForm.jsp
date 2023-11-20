@@ -60,8 +60,9 @@
 				<img src="${userDTO.profile_image}" onerror="this.onerror=null; this.src='/images/commons/person-circle.svg';">
 			</div>
 			<div id="topFormProfileContents">
-				<div>${userDTO.organization }${userDTO.position }(${userDTO.name })</div>
-				<div style="margin-top: 3px; text-align: left;">${userDTO.id }</div>
+				<div>${userDTO.organization }</div>
+				<div>${userDTO.position }(${userDTO.name })</div>
+				<div>${userDTO.id }</div>
 			</div>
 		</div>
 		<div class="topFormLogoutInBottom">
@@ -69,7 +70,7 @@
 				<a href="/members/myInfo" style="font-size: 14px;">내 정보</a>
 			</div>
 			<div>
-				<a href="/members/logout"><button id="topFormLogoutBtn">로그아웃</button></a>
+				<a href="/members/logout"><button id="topFormLogoutBtn" class="button_cancel">로그아웃</button></a>
 			</div>
 		</div>
 	</div>

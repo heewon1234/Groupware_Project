@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,9 +48,6 @@ i{margin-right: 8px;}
 					<div id="work_current" class="menu_list_item mywork">
 						<i class="fa-solid fa-calendar-days"></i> <span class="menu_list_item_text">근무 현황</span>
 					</div>
-					<div id="dpwork_current" class="menu_list_item mywork">
-						<img src="/images/commons/body_form/left_item/insa/bar-chart.svg" style="margin-right: 4px;"> <span class="menu_list_item_text">부서 근무 현황</span>
-					</div>
 				</div>
 			</div>
 			<!-- 드롭 다운 메뉴 (추가 효과 없음) -->
@@ -75,26 +73,28 @@ i{margin-right: 8px;}
 			</div>
 			
 
-			<!-- 드롭 다운 메뉴 (추가 효과 없음) -->
-			<div class="menu_list">
-				<div class="menu_list_button">
-					<div class="menu_list_button_drop">
-						<img src="/images/commons/body_form/left_item/default/drop.png" />
+			<c:if test="${userDTO.organization eq '관리부'}">
+				<!-- 드롭 다운 메뉴 (추가 효과 없음) -->
+				<div class="menu_list">
+					<div class="menu_list_button">
+						<div class="menu_list_button_drop">
+							<img src="/images/commons/body_form/left_item/default/drop.png" />
+						</div>
+						<span class="menu_list_button_text">조직/임직원 관리</span>
 					</div>
-					<span class="menu_list_button_text">조직/임직원 관리</span>
+					<div class="menu_list_box">
+						<div id="org" class="menu_list_item manage">
+							<img src="/images/commons/body_form/left_item/insa/people.svg"> <span class="menu_list_item_text">조직 관리 </span>
+						</div>
+						<div id="members" class="menu_list_item manage">
+							<img src="/images/commons/body_form/left_item/insa/person-fill.svg"> <span class="menu_list_item_text">임직원 관리</span>
+						</div>
+						<div id="job" class="menu_list_item manage">
+							<img src="/images/commons/body_form/left_item/insa/id-badge.svg"> <span class="menu_list_item_text">직위/직무 설정</span>
+						</div>
+					</div>
 				</div>
-				<div class="menu_list_box">
-					<div id="org" class="menu_list_item manage">
-						<img src="/images/commons/body_form/left_item/insa/people.svg"> <span class="menu_list_item_text">조직 관리 </span>
-					</div>
-					<div id="members" class="menu_list_item manage">
-						<img src="/images/commons/body_form/left_item/insa/person-fill.svg"> <span class="menu_list_item_text">임직원 관리</span>
-					</div>
-					<div id="job" class="menu_list_item manage">
-						<img src="/images/commons/body_form/left_item/insa/id-badge.svg"> <span class="menu_list_item_text">직위/직무 설정</span>
-					</div>
-				</div>
-			</div>
+			</c:if>
 
 		</div>
 	</div>

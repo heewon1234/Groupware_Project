@@ -46,7 +46,8 @@
 			<span class="close-button" onclick="closeOneChat()">&times;</span>
 			<div class="myProfile">
 				<div class="myimg">
-					<i class="fa-regular fa-circle-user"></i>
+					<img id="chattingProfileImg" src="${userDTO.profile_image}"
+						onerror="this.onerror=null; this.src='/images/commons/person-circle.svg';">
 				</div>
 				<div class="other">
 					<input id="otherName" value="${friendName}" style="border: none;"

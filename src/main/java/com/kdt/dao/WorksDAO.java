@@ -76,6 +76,16 @@ public class WorksDAO {
 	public int addworkearly(String ID)throws Exception{
 		return db.update("Works.addworkearly",ID);
 	}
+	public int addworkday(String ID)throws Exception{
+		return db.update("Works.addworkday",ID);
+	}
+	
+	public int addworkminutetime(String ID)throws Exception{
+		return db.update("Works.addworkminutetime",ID);
+	}
+	public int addworknotcheck(String ID)throws Exception{
+		return db.update("Works.addworknotcheck",ID);
+	}
 	public List<WorkPlanDTO> work_current_selectByName(String name)throws Exception{
 		return db.selectList("Works.work_current_selectByName",name);
 	}

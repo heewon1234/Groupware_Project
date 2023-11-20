@@ -10,6 +10,16 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/css/approval/document/write.css">
 <link rel="stylesheet" type="text/css" href="/css/commons/body_form/left_form/body_form_default.css">
+<style>
+.modal_title {
+	width: 100%;
+	padding-bottom: 14px;
+	border-bottom: 1px solid #ebebeb;
+	font-size: 16px;
+	font-weight: bold;
+	color: #333333;
+}
+</style>
 </head>
 <body>
 
@@ -43,7 +53,7 @@
 					<table id="approvalTable" class="outTable" border='1'>
 						<tbody>
 							<tr>
-								<th>신청 <i class="fa-solid fa-circle-plus modalButton_apply" style="color: #bec3c9;"></i>
+								<th>신청 <img id="plusIcon" class="modalButton_apply" src="/images/approval/plus-circle.svg">
 								</th>
 								<td>
 									<table class="innerTable" border='1'>
@@ -91,8 +101,8 @@
 	</div>
 
 	<div id="modalContainer_apply" class="modalContainer hidden">
-		<div class="modalContent">
-			<div class="modalTitle">신청 설정</div>
+		<div class="modalContent" style="padding: 25px;">
+			<div class="modal_title">신청 설정</div>
 			<div class="managerList">
 				<ul>
 					<c:forEach var="list" items="${managerList }">
@@ -105,8 +115,8 @@
 				</ul>
 			</div>
 			<div class="modalButton_div" align="center">
-				<button type="button" id="apply_btn" class="button_apply">확인</button>
 				<button type="button" id="cancle_btn" class="modalButton_apply button_cancel">취소</button>
+				<button type="button" id="apply_btn" class="button_apply">확인</button>
 			</div>
 		</div>
 	</div>

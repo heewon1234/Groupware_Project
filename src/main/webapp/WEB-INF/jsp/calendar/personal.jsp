@@ -8,7 +8,7 @@
 <title>Personal Calendar</title>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <link rel="stylesheet" type="text/css" href="/css/calendar/calendar.css">
-
+<link rel="stylesheet" href="/css/commons/topForm.css" />
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/fullcalendar@5.7.0/main.min.css">
 <script type="text/javascript"
@@ -38,10 +38,82 @@
 
 </head>
 <body>
-	<div class="top_form">TOP</div>
+	<div class="top_form">
+		<div id="top_container">
+			<div id="topFormTop">
+				<div class="topFormLogo">
+					<a href="/">logo</a>
+				</div>
+				<div id="topFormMenuSelectDiv">
+					오피스 홈 <i id="topFormMenuSelect" class="fa-solid fa-chevron-down"></i>
+				</div>
+				<div class="topFormIcon">
+					<i class="fa-regular fa-comment" onclick="openPopup()"></i> <i
+						class="fa-regular fa-bell"></i> <i
+						class="fa-regular fa-circle-user" id="topFormLogout"></i>
+				</div>
+			</div>
+			<div id="topFormMenuCollection" style="display: none;">
+				<div>전체메뉴</div>
+				<div id="topFormSelectMenu">
+					<div id="topFormLeft">
+						<div class="topFormMenu">
+							<i class="fa-regular fa-clipboard menuIcon"></i> 게시판
+						</div>
+						<div class="topFormMenu">
+							<a href="/calendar/official"> <i
+								class="fa-regular fa-calendar-days menuIcon"></i> 일정
+							</a>
+						</div>
+						<div class="topFormMenu">
+							<a href="/works/work_leave"> <i
+								class="fa-solid fa-sitemap menuIcon"></i> 인사
+							</a>
+						</div>
+					</div>
+					<div id="topFormRight">
+						<div class="topFormMenu">
+							<i class="fa-regular fa-address-book menuIcon"></i> 주소록
+						</div>
+						<div class="topFormMenu">
+							<a href="/approval/document/lists/all"> <i
+								class="fa-regular fa-clipboard menuIcon"></i> 결재
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="topFormLogout" style="display: none;">
+				<div id="topFormProfile">
+					<div id="topFormProfileImg">
+						<img src="${userDTO.profile_image}">
+					</div>
+					<div id="topFormProfileContents">
+						<div>${userDTO.organization }${userDTO.position }(${userDTO.name })</div>
+						<div style="margin-top: 3px; text-align: left;">${userDTO.id }</div>
+					</div>
+				</div>
+				<div class="topFormLogoutInBottom">
+					<div style="margin: 5px;">
+						<a href="/members/myInfo" style="font-size: 14px;">내 정보</a>
+					</div>
+					<div>
+						<a href="/members/logout"><button id="topFormLogoutBtn">로그아웃</button></a>
+					</div>
+				</div>
+			</div>
+			<div id="topFormrealPopup"></div>
+
+		</div>
+	</div>
 	<div class="body_form">
 		<!-- 왼쪽 부분(메뉴) -->
 		<div class="left_item">
+			<div class="button_tab">
+				<button class="main_button">
+					<span>일정 추가</span>
+				</button>
+			</div>
 			<div class="menu_tab">
 				<div class="menu_item" id="official">
 					<img
@@ -120,48 +192,6 @@
 			timeZone : 'UTC',
 			initialView : 'dayGridMonth',
 			events : events,
-			headerToolbar : {
-				center : 'addEventButton' // headerToolbar에 버튼을 추가
-			},
-			customButtons : {
-				addEventButton : { // 추가한 버튼 설정
-					text : "일정 추가", // 버튼 내용
-					click : function() { // 버튼 클릭 시 이벤트 추가
-						$("#calendarModal").modal("show"); // modal 나타내기
-
-						$("#addCalendar").off("click").on(
-								"click",
-								function() { // modal의 추가 버튼 클릭 시
-									var content = $("#calendar_content").val();
-									var start_date = $("#calendar_start_date")
-											.val();
-									var end_date = $("#calendar_end_date")
-											.val();
-
-									//내용 입력 여부 확인
-									if (content == null || content == "") {
-										alert("내용을 입력하세요.");
-									} else if (start_date == ""
-											|| end_date == "") {
-										alert("날짜를 입력하세요.");
-									} else if (new Date(end_date)
-											- new Date(start_date) < 0) { // date 타입으로 변경 후 확인
-										alert("종료일이 시작일보다 먼저입니다.");
-									} else { // 정상적인 입력 시
-										var obj = {
-											"title" : content,
-											"start" : start_date,
-											"end" : end_date
-										}//전송할 객체 생성
-
-										//서버로 해당 객체를 전달해서 DB 연동 가능
-										calendar.addEvent(obj);
-										$("#calendarModal").modal("hide");
-									}
-								});
-					}
-				}
-			},
 			eventClick: function (info){
                 if(confirm("'"+ info.event.title +"' 일정을 삭제하시겠습니까 ?")){
                     // 확인 클릭 시
@@ -178,9 +208,7 @@
                             }
                         })
                     })
-                }
-
-                
+                }    
             },
             
             eventDrop: function (info){
@@ -228,6 +256,41 @@
 		}
     }
 	
+	$(".main_button").on("click",function(){
+		$("#calendarModal").modal("show");
+		
+		$("#addCalendar").off("click").on(
+				"click",
+				function() { // modal의 추가 버튼 클릭 시
+					var content = $("#calendar_content").val();
+					var start_date = $("#calendar_start_date")
+							.val();
+					var end_date = $("#calendar_end_date")
+							.val();
+
+					//내용 입력 여부 확인
+					if (content == null || content == "") {
+						alert("내용을 입력하세요.");
+					} else if (start_date == ""
+							|| end_date == "") {
+						alert("날짜를 입력하세요.");
+					} else if (new Date(end_date)
+							- new Date(start_date) < 0) { // date 타입으로 변경 후 확인
+						alert("종료일이 시작일보다 먼저입니다.");
+					} else { // 정상적인 입력 시
+						var obj = {
+							"title" : content,
+							"start" : start_date,
+							"end" : end_date
+						}//전송할 객체 생성
+
+						//서버로 해당 객체를 전달해서 DB 연동 가능
+						calendar.addEvent(obj);
+						$("#calendarModal").modal("hide");
+					}
+				});
+	});
+	
 	$(document).ready(function() {
 		$('#official').click(function() {
 			location.href = "/calendar/official";
@@ -236,8 +299,42 @@
 		$('#personal').click(function() {
 			location.href = "/calendar/personal";
 		});
+		
+		$("#topFormrealPopup").load("/chats/chatting");
+
+		let logout = false;
+
+		$("#topFormLogout").on("click", function() {
+			if (logout == false) {
+				$(".topFormLogout").css("display", "");
+				logout = true;
+			} else {
+				$(".topFormLogout").css("display", "none");
+				logout = false;
+			}
+		});
+
+		let menu = false;
+
+		$("#topFormMenuSelectDiv").on("click", function() {
+			if (menu == false) {
+				$("#topFormMenuCollection").css("display", "flex");
+				menu = true;
+			} else {
+				$("#topFormMenuCollection").css("display", "none");
+				menu = false;
+			}
+		});
 	});
 	
+	$("#topFormLogoutbtn").on("click", function() {
+		let memberout = confirm("로그아웃 하시겠습니까?");
+		if (!memberout) {
+			return false;
+		} else {
+			alert("로그아웃 되었습니다.");
+		}
+	});
 	
 </script>
 </html>

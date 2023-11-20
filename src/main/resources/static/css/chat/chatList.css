@@ -68,3 +68,17 @@ border: none;
 	    font-size: medium;
 	    font-weight: bold;
 }
+.selectAllProfileImg {
+    width: 35px;
+    height: 35px;
+}
+.iconCell{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.table-row{
+	display: flex;
+    align-items: center;
+}

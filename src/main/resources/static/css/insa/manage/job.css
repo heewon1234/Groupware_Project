@@ -1,12 +1,17 @@
 table {
 	margin-top: 20px;
 	width: 95%;
+	border-collapse: collapse;
+}
+
+i {
+    cursor: pointer;
 }
 
 table, th, td {
 	border-top: 1px solid black;
 	border-bottom: 1px solid black;
-	border-collapse: collapse;
+	
 }
 
 th {
@@ -20,8 +25,9 @@ button[type="submit"] {
 	margin-bottom: 20px;
 }
 
-h4, .h4_span {
+.h4_span {
 	font-weight: 700;
+	margin-right: 20px;
 }
 
 td.jt_div {
@@ -31,14 +37,6 @@ td.jt_div {
 
 .parent_span {
 	margin-right: 20px;
-}
-
-.h4_span {
-	margin-right: 20px;
-}
-
-.fa-circle-plus {
-    cursor: pointer;
 }
 
 .hidden {
@@ -51,6 +49,7 @@ td.jt_div {
 
 #add_jr_btn {
 	color: #779ec0 !important;
+	text-decoration-line: none;
 }
 
 #jr_contents {
