@@ -118,8 +118,6 @@
 						<div id="selectedDates">
 						</div>
 						<!-- 연차, 경조사 선택을 위한 select 엘리먼트 -->
-						<select id="dateSelect">
-						</select>
 						<div class="leave_select">
 							<input id="loginID" type="hidden" value="${loginId }"> 
 							<input type="hidden" id=doc_type name="doc_type" value="휴가신청">

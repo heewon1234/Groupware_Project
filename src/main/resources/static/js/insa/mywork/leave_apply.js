@@ -84,7 +84,8 @@ function isSunday(date) {
 function dayIsWeekend(date) {
 	return isSaturday(date) || isSunday(date);
 }
-
+let selectedDates = [];
+let tdarray = [];
 // 이름 소속을 가져오는 ajax
 $(document).ready(function() {
 	loadData();
@@ -102,7 +103,7 @@ $(document).ready(function() {
 				tableRow.append(nameCell, departmentCell);
 			}
 			var tableRowDate = $('#tr1'); // 날짜가 들어갈 행
-			let num1 = 1;
+			let num1 = 0;
 			dates.forEach(date => {
 				
 				let cellDate = $('<td>').text(formatDate(date)).addClass('td'+num1++);
@@ -110,7 +111,7 @@ $(document).ready(function() {
 			});
 			var tableRowDays = $('#tr2'); // 요일이 들어갈 행
 			var tableRowSelect = $('#tr3');
-			let num2 = 1;
+			let num2 = 0;
 			daysOfWeek.forEach(day => {
 				
 				let cellDay = $('<td>').text(day).addClass('td' + num2);
@@ -119,7 +120,7 @@ $(document).ready(function() {
 				tableRowSelect.append(td);
 			});
 
-			let selectedDates = [];
+			
 
 			tableRowSelect.on('click', 'td', function() {
 				let selectedClass = $(this).attr('class'); // 클릭한 td의 클래스 값 가져오기
@@ -131,31 +132,35 @@ $(document).ready(function() {
 				}
 
 				let isSelected = $(this).hasClass('selected-td');
-				$(this).toggleClass('selected-td', !isSelected);
+				$(this).addClass("selected-td")
 				
 				let clickedRowText = tableRowDate.find('.' + selectedClass).text().trim();
     			let formattedDate = formatDate3(new Date(today.getFullYear(), currentMonth - 1, parseInt(clickedRowText)));
-    			console.log(formattedDate);
-
-				// 선택된 날짜를 배열에 추가 또는 제거
-				 let clickedDate = new Date(today.getFullYear(), currentMonth - 1, clickedRowText);
-				 console.log(clickedDate);
+ 
 				if (isSelected) {
 					// 배열에서 해당 날짜를 제거
-					selectedDates = selectedDates.filter(date => date !== formattedDate);
-					console.log(selectedDates);
 				} else {
 					// 배열에 해당 날짜를 추가
 					selectedDates.push(formattedDate);
-					console.log(selectedDates);
+					tdarray.push(selectedClass)
 				}
 				
-				$('#selectedDates').text(selectedDates);
+					
+					console.log(tdarray);
+				$('#selectedDates').empty();
+				for(i=0;i<selectedDates.length;i++){
+					var tableRow = $('<tr>').addClass('div'+i);
+					tableRow.append(selectedDates[i]);
+					tableRow.append("<select><option value='연차'>연차</option><option value='경조사'>경조사</option></select>");
+					tableRow.append("<button id='deleteleave' class='div"+i+" "+tdarray[i]+"'>X</button>");
+					tableRow.append("<br>");
+					$('#selectedDates').append(tableRow);
+				}
 				
-
+				
 				// 선택된 날짜들을 select로 연차 경조사 선택 가능하게 만들기
-				var exampleDates = ['연차', '경조사'];
-				updateSelectOptions(exampleDates);
+				
+				
 
 				if (selectedDates.length > 0) {
 					$('#leave_apply').css('display', 'block');
@@ -168,15 +173,31 @@ $(document).ready(function() {
 	}
 });
 
-function updateSelectOptions(dates) {
-	// 기존의 옵션 제거
-	$('#dateSelect').empty();
+$(document).on("click", "#deleteleave", function(e) {
+	e.preventDefault();
+    // 클릭한 버튼의 클래스를 가져옴
+    var buttonClass = $(this).attr('class');
+    
+    var classArray = buttonClass.split(' ');
 
-	// 새로운 옵션 추가
-	for (var i = 0; i < dates.length; i++) {
-		$('#dateSelect').append('<option value="' + dates[i] + '">' + dates[i] + '</option>');
-	}
-}
+	 var dateToRemove = $("." + classArray[0]).text().trim().substring(0, 10);
+	 var tdRemove = classArray[1];
+	console.log(dateToRemove);
+	console.log(tdRemove);
+
+    // selectedDates 배열에서 해당 날짜를 찾아 제거
+    var indexToRemove = selectedDates.indexOf(dateToRemove);
+    var indextotdRemove = tdarray.indexOf(tdRemove);
+    if (indexToRemove !== -1) {
+        selectedDates.splice(indexToRemove, 1);
+    }
+    if (indextotdRemove !== -1) {
+        tdarray.splice(indextotdRemove, 1);
+    }
+    // 클래스와 일치하는 엘리먼트를 제거
+    $("." + classArray[0]).remove(); // div
+    $("#tr3 ." + classArray[1]).removeClass('selected-td'); //td
+});
 
 // 날짜 데이터를 생성하는 함수
 function generateMonthlyDates() {
@@ -362,7 +383,7 @@ function updateData(updateYear, updateMonth) {
 			var departmentCell = $('<td>').text(member.organization);
 			tableRow.append(nameCell, departmentCell);
 		}
-		let num = 1;
+		let num = 0;
 		dates.forEach(date => {
 			let cellDate = $('<td>').text(formatDate(date)).addClass('td'+num);
 			tableRowDate.append(cellDate);
