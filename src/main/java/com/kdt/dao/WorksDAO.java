@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kdt.dto.LeavesDTO;
 import com.kdt.dto.MembersDTO;
+import com.kdt.dto.WorkPlanDTO;
 import com.kdt.dto.WorkTimesDTO;
 import com.kdt.dto.WorksDTO;
 import com.kdt.dto.WorkstatisticsDTO;
@@ -74,6 +75,9 @@ public class WorksDAO {
 	}
 	public int addworkearly(String ID)throws Exception{
 		return db.update("Works.addworkearly",ID);
+	}
+	public List<WorkPlanDTO> work_current_selectByName(String name)throws Exception{
+		return db.selectList("Works.work_current_selectByName",name);
 	}
 	
 }
