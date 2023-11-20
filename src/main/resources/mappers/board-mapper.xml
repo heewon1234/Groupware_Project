@@ -14,7 +14,7 @@
 		select JOB_NAME from (select * from Members where organization=#{organization}) as job group by job_name
 	</select>
 	<select id="selectByJobName" resultType="String">
-		select name from Members where JOB_NAME=#{job_name};
+		select name from Members where JOB_NAME=#{job_name} and organization=#{organization};
 	</select>
 	<select id="selectMemberByOrganization" resultType="com.kdt.dto.MembersDTO">
 		select * from Members where organization=#{organization}
@@ -43,8 +43,19 @@
 	</select>
 	<!-- 게시글 리스트 10개씩 가져오기 -->
 	<select id="BoardContentsListBy" resultType="com.kdt.dto.BoardDTO">
-		select * from (select row_number() over(order by seq desc) as rn, b.*,#{oriBoardTitle} as board_title,case when b.seq = parent_seq then 'true' else 'false' end as favorite 
-		from ${board_title} b left join Favorite_Board f on id=#{id} and parent_seq = b.seq and board_title=#{board_title} order by seq desc) as sub 
+		select 
+			seq,title,board_title,name as writer, write_date, header,notice,contents,survey_question,view_count,favorite 
+		from 
+			(select 
+				row_number() over(order by seq desc) as rn, 
+				b.*,#{oriBoardTitle} as board_title,
+				case when b.seq = parent_seq then 'true' else 'false' end as favorite 
+			from ${board_title} b 
+			left join Favorite_Board f 
+			on id=#{id} and parent_seq = b.seq and board_title=#{board_title} 
+			order by seq desc) 
+		as sub 
+		inner join Members m on writer=id
 		where rn between ${start} and ${end}
 	</select>
 	<!-- 게시글 내용 불러오기 -->
@@ -71,12 +82,12 @@
 	</select>
 	<!-- 즐겨찾기 게시물 10개씩 가져오기 -->
 	<select id="FavoriteListBy" resultMap="authBoardDTO">
-		select unionTable.*,name_type from        
-			(select b.seq,ori_board_title as board_title,id,parent_seq,title,writer,write_date, header,notice,view_count from Favorite_Board f 
-			inner join 
-				(${fromBoard}) b 
-				on parent_seq=b.seq and f.board_title=b.board_title and id=#{id} order by write_date desc) as unionTable
-        	inner join Mk_Board m on unionTable.board_title = m.board_title order by write_date desc limit ${start},10 
+		select
+			b.seq, ori_board_title as board_title, title, write_date,header, notice, view_count, name_type, name as writer
+		from Favorite_Board f
+		inner join (${fromBoard}) as b on f.board_title = b.board_title and parent_seq = b.seq and id =#{id}
+		inner join Mk_Board m on ori_board_title = m.board_title
+		inner join Members mem on writer=mem.id order by write_date desc limit ${start},10
 	</select>
 	<!-- 즐겨찾기 게시물 검색 -->
 	<select id="SearchFavoriteListBy" resultMap="authBoardDTO">
