@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kdt.dto.GroupChatDTO;
 import com.kdt.dto.MembersDTO;
 import com.kdt.dto.OneToOneChatDTO;
 import com.kdt.services.ChatRoomService;
+import com.kdt.services.MembersService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -26,10 +26,14 @@ public class ChatController {
 	private HttpSession hsession;
 	@Autowired
 	private ChatRoomService service;
-
+	@Autowired
+	private MembersService mservice;
 	
 	@RequestMapping("/chatting")
-	public String chatting(HttpServletRequest request) {
+	public String chatting(HttpSession session,HttpServletRequest request,Model model) {
+		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");
+		userDTO = mservice.loginUser(userDTO.getId());
+		model.addAttribute("userDTO", userDTO);
 		return "chat/chatting";
 	}
 	@RequestMapping("/groupInputText")
