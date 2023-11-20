@@ -7,11 +7,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kdt.dto.AuthorityDTO;
 import com.kdt.dto.BoardDTO;
-import com.kdt.dto.HeaderDTO;
+import com.kdt.dto.FavoriteBoardDTO;
 import com.kdt.dto.MembersDTO;
-import com.kdt.dto.Mk_BoardDTO;
 
 @Repository
 public class BoardDAO {
@@ -34,8 +32,8 @@ public class BoardDAO {
 		return db.selectList("Board.selectByOrganization",organization);
 	}
 
-	public List<String> selectByJobName(String job_name){
-		List<String> list = db.selectList("Board.selectByJobName",job_name);
+	public List<String> selectByJobName(MembersDTO dto){
+		List<String> list = db.selectList("Board.selectByJobName",dto);
 		System.out.println(list.size());
 		return list;
 	}
@@ -121,5 +119,4 @@ public class BoardDAO {
 		return db.update("Board.updateSurveyQuestion",dto);
 	}
 	//
-
 }

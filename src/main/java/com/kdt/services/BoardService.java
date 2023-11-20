@@ -68,8 +68,8 @@ public class BoardService {
 		return bdao.selectByOrganization(organization);
 	}
 
-	public List<String> selectByJobName(String job_name){
-		return bdao.selectByJobName(job_name);
+	public List<String> selectByJobName(MembersDTO dto){
+		return bdao.selectByJobName(dto);
 	}
 	public List<MembersDTO> selectMemberByOrganization(String organization){
 		return bdao.selectMemberByOrganization(organization);
@@ -434,5 +434,4 @@ public class BoardService {
 
 		return imgSrcList;
 	}
-
 }

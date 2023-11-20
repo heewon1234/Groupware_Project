@@ -99,6 +99,7 @@ public class BoardController {
 			model.addAttribute("recordTotalCount",totalBoardContents); 
 			// 컨텐츠 리스트
 			List<Map<String,String>> boardContentsList = bservice.FavoriteListBy(board_title, id, String.valueOf(start));
+			System.out.println(boardContentsList.isEmpty());
 			model.addAttribute("boardContentsList", boardContentsList);
 			model.addAttribute("name_type",null);
 		} else {

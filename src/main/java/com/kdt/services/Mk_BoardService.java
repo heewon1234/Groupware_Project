@@ -42,6 +42,10 @@ public class Mk_BoardService {
 	private Gson gson;
 
 	// sideBar 관련 
+	public boolean isBoardAdmin(String id) {
+		return mdao.isBoardAdmin(id);
+	}
+	
 	public List<Mk_BoardDTO> select_board_type_group(String id){
 		return mdao.select_board_type_group(id);
 	}
@@ -88,6 +92,9 @@ public class Mk_BoardService {
 	// 게시판 불러오기
 	public List<Mk_BoardDTO> selectAllBoard(){
 		return mdao.selectAllBoard();
+	}
+	public List<Mk_BoardDTO> selectBoardById(String id){
+		return mdao.selectBoardById(id);
 	}
 	public Mk_BoardDTO boardDetail(String board_title) {
 		return mdao.boardDetail(board_title);

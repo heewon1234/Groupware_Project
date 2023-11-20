@@ -1,7 +1,3 @@
-$("#delete_btn").on("click", function() {
-	location.href = "/approval/document/delete?doc_id=${docId}"
-});
-
 $("#back_btn").on("click", function() {
 	window.history.back();
 });
@@ -26,4 +22,9 @@ $("select[name='status']").on("change", function() {
 	} else if ($(this).val() == '미결') {
 		$("td." + $(this).attr('class')).append('<img src="/images/approval/minus.svg">');
 	}
+});
+
+$(document).ready(function() {
+	$(".top_container").load("/commons/topForm");
+	$(".left_item").load("/approval/document/left_item");
 });

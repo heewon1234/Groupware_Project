@@ -47,6 +47,7 @@ $(".favorite").on("click",function(){
 		}).done(function(resp){
 			alert("즐겨찾기가 제거되었습니다");
 			favDiv.removeAttr("data-seq");
+			reload();
 		}).catch(function(resp){
 			alert("즐겨찾기 제거에 실패하였습니다");
 		});

@@ -11,6 +11,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -63,6 +64,17 @@ public class FileController {
 			dos.write(fileContents);
 			dos.flush();
 		}	
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/imageUpload",method=RequestMethod.POST)
+	public List<String> imageUpload(MultipartFile[] files) throws Exception {
+		// 이미지를 저장할 디렉토리 경로 설정
+		String upload = "C:/uploads";
+
+		List<String> fileUrls = fservice.imageUpload(files, upload);
+
+		return fileUrls;
 	}
 	
 	@ResponseBody

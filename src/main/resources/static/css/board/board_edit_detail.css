@@ -9,12 +9,12 @@
 	font-weight:normal;
 }
 #selectDiv:hover{background-color: #F7FAFF;}
-#toMkBoardBtn{
+#toEditBoardBtn{
     background-color: #DAE8F8;
    	color: #056AC9;
     font-weight: bold;
 }
-#toMkBoardBtn:hover{background-color: #F7FAFF;}
+#toEditBoardBtn:hover{background-color: #F7FAFF;}
 .content_tab>div:not(.title){
 	margin-bottom:20px;
 	padding-bottom:0px;	
