@@ -73,7 +73,7 @@
 			<c:forEach items="${orgList}" var="org">
 				array.push([{
 								v : "${org.organization}",
-								f : '<span>${org.organization}</span> <a class="remove_org_btn btn">X</a><div>${org.count}</div>'
+								f : '<span>${org.organization}</span> <a class="remove_org_btn btn"><i class="fa-solid fa-circle-xmark" style="color: #bec3c9;"></i></a><div>${org.count}</div>'
 							}, "${org.manager}", "${org.level}" ]);
 			</c:forEach>
 			data.addRows(array);

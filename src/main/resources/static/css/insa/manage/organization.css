@@ -15,16 +15,8 @@ input {
 }
 
 .btn {
-	font-size: 15px;
-	display: inline-block;
-	width: 16px;
-	height: 16px;
-	border-radius: 50%;
-	text-align: center;
-	color: #fff;
-	background: #bec3c9;
 	cursor: pointer;
-	line-height: 10px;
+
 }
 
 #chart_div {

@@ -2,9 +2,11 @@
     box-sizing: border-box;
 }
 
-a {
-    text-decoration: none;
+a, a:hover {
+    text-decoration-line: none;
+  	color: inherit;
 }
+
 
 #topFormTop {
     width: 100%;
