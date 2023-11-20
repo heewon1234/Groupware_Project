@@ -29,7 +29,14 @@
                 </c:if>
                <div class="board_contents_info">
                     <div class="profileDiv">
-                        <img src="/images/commons/body_form/left_item/default/information.png" />
+                    	<c:choose>
+                    		<c:when test="${empty writerProfile}">
+                    			<img src="/images/commons/person-circle.svg" />
+                    		</c:when>
+                    		<c:otherwise>
+                    			<img src="${writerProfile }" style="border-radius:100%; border:1px solid black;">
+                    		</c:otherwise>
+                    	</c:choose>
                     </div>
                     <div class="contents_info">
                         <div class="board_contents_title">${boardContents.title}</div>
@@ -38,7 +45,7 @@
                             <div>
                             	<c:choose>
                             		<c:when test="${name_type eq 'identity' }">
-                            			${boardContents.writer}
+                            			${writerName }
                             		</c:when>
                             		<c:otherwise>
                             			익명
@@ -110,7 +117,15 @@
                 		<input type="hidden" name="parent_seq" value='${boardContents.seq }'>
                     	<div class="input_reply_box">
                       		<div class="reply_profile">
-                       	    	<img src="/images/commons/body_form/left_item/default/information.png" />
+                      			<c:choose>
+                      				<c:when test="${empty myProfile }">
+                      					<img src="/images/commons/person-circle.svg" />
+                      				</c:when>
+                      				<c:otherwise>
+                      					<img src="${myProfile}" style="border-radius:100%; border:1px solid black;"/>
+                      				</c:otherwise>
+                      			</c:choose>
+                       	    	
                         	</div>
                         	<div class="reply_input">
                             	<textarea placeholder="댓글을 입력하세요" name="contents"></textarea>
