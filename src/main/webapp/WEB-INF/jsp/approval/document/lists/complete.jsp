@@ -12,6 +12,7 @@
 <!-- BootStrap -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/css/commons/body_form/left_form/body_form_default.css">
+<link rel="stylesheet" type="text/css" href="/css/approval/document/table.css">
 </head>
 <body>
 	<div class="top_container"></div>
