@@ -57,7 +57,7 @@
 	<div class="topFormLogout" style="display: none;">
 		<div id="topFormProfile">
 			<div id="topFormProfileImg">
-				<img src="${userDTO.profile_image}">
+				<img src="${userDTO.profile_image}" onerror="this.onerror=null; this.src='/images/commons/person-circle.svg';">
 			</div>
 			<div id="topFormProfileContents">
 				<div>${userDTO.organization }${userDTO.position }(${userDTO.name })</div>

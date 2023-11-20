@@ -11,6 +11,7 @@ body{
 
 a {
   text-decoration-line: none;
+  color: inherit;
 }
 
 #top_container {
