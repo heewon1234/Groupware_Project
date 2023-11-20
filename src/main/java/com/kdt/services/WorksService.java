@@ -135,4 +135,14 @@ public int addworklate(String ID)throws Exception{
 public int addworkearly(String ID)throws Exception{
 	return wdao.addworkearly(ID);
 }
+public int addworkday(String ID)throws Exception{
+	return wdao.addworkday(ID);
+	}
+
+public int addworkminutetime(String ID)throws Exception{
+	return wdao.addworkminutetime(ID);
+}
+public int addworknotcheck(String ID)throws Exception{
+	return wdao.addworknotcheck(ID);
+}
 }

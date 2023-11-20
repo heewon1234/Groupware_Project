@@ -63,6 +63,7 @@ public class WorkController {
 		if(today==0 && dto.getWork_type().equals("근무중")) { // 09시 이후 출근 클릭
 			wservice.insert(dto);
 			wservice.addworklate(ID);
+			wservice.addworknotcheck(ID);
 		List<WorkTimesDTO> tlist = wservice.selectby(ID);
 		model.addAttribute("tlist",tlist);
 		return tlist;
@@ -70,12 +71,15 @@ public class WorkController {
 		else if(today==0 && dto.getWork_type().equals("근무 종료")) { // 18시 이전 퇴근 클릭
 			wservice.insert(dto);
 			wservice.addworkearly(ID);
+			wservice.addworkday(ID);
+			wservice.addworkminutetime(ID); // 근무시간 추가
 		List<WorkTimesDTO> tlist = wservice.selectby(ID);
 		model.addAttribute("tlist",tlist);
 		return tlist;
 		}
 		else {
 			wservice.insert(dto);
+			wservice.addworknotcheck(ID);
 			List<WorkTimesDTO> tlist = wservice.selectby(ID);
 			model.addAttribute("tlist",tlist);
 			return tlist;
@@ -133,11 +137,14 @@ public class WorkController {
 	    return "redirect:/works/workmanage";
 	}
 	@RequestMapping("leave_apply")
-	public String toleave_apply(Model model) {
+	public String toleave_apply(Model model)throws Exception {
 		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");
+		String ID = (String) session.getAttribute("loginId");
+		List<WorksDTO> list = wservice.select(ID);
 		List<String> managerOrgList = orgService.getManagerOrgList(userDTO.getOrganization());
 		List<String> managerPositionList = jobService.getManagerPosition(userDTO.getPosition());
 		List<MembersDTO> managerList = mservice.getManagerList(managerOrgList, managerPositionList);
+		model.addAttribute("list", list);
 		model.addAttribute("userDTO", userDTO);
 		model.addAttribute("managerList", managerList);
 		return "/insa/mywork/leave_apply";

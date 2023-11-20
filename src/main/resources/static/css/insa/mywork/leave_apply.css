@@ -4,54 +4,54 @@ h4 {
 	padding: 15px 0 15px 0;
 }
 
-table {
+.upbox .innerTable>table {
 	text-align: center;
 }
 
-th {
+.upbox .innerTable>th {
 	background: #f9f9f9;
 	font-weight: 400;
 }
 
-textarea {
+.upbox textarea {
 	width: 100%;
 	height: 200px;
 	resize: none;
 }
 
-.outTable {
+.upbox .outTable {
 	margin-left: 24px !important;
 	border-collapse: collapse;
 	width: 80%;
 }
 
-.outTable th {
+.upbox .outTable th {
 	width: 5%;
 }
 
-.outTable td {
+.upbox .outTable td {
 	padding: 0;
 }
 
-.innerTable {
+.upbox .innerTable {
 	width: 100%;
 	height: 100%;
 }
 
-.innerTable th,
-td {
+.upbox .innerTable th,
+.upbox td {
 	width: 25% !important;
 }
 
-.innerTable tr:nth-child(odd) {
+.upbox .innerTable tr:nth-child(odd) {
 	height: 20%;
 }
 
-.innerTable tr:nth-child(even) {
+.upbox .innerTable tr:nth-child(even) {
 	height: 60%;
 }
 
-.input-group {
+.upbox .input-group {
 	padding-top: 0px !important;
 	width: 80%;
 }
@@ -113,3 +113,120 @@ td {
 #approvalTable {
 	height: 200px;
 }
+.modal_tag_add {
+	z-index: 6;
+	background-color: white;
+	border-radius: 4px;
+	padding: 25px;
+	width: 400px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	display: none;
+}
+.modal_background {
+	background: rgba(0, 0, 0, 0.5);
+	position: fixed;
+	z-index: 4;
+	width: 100%;
+	height: 100%;
+	display: none;
+}
+/* 달력 */
+#calendarContainer{
+	clear: both;
+	background-color:#ffffff;
+	width:70%;
+	height:600px;
+	border-radius: 7px;
+	margin-top:100px;
+}
+
+.verticalLine {
+	border-right: 1px solid rgb(192, 192, 192);
+    height: 80%;
+    float:left;
+    margin-top: 50px;
+}
+
+#scheduleList {
+	float:left;
+	width:45%;
+	height:100%;
+	margin-top: 70px;
+	margin-left:20px;
+}
+
+.schedules {
+	display: flex;
+	align-items: center;
+}
+
+.circle {
+	width:10px;
+	height:10px;
+	border-radius: 50%;
+	background-color:#d2e0fb;
+	float:left;
+	margin-right: 10px
+}
+
+.schedule {
+	float:left;
+	margin-right: 10px
+}
+
+
+
+.button_wrap {
+	display:flex;
+	align-items: center;
+}
+
+#month-prev, #month-next {
+	width:20px;
+	height:20px;
+}
+
+#month-prev:hover, #month-next:hover {
+	cursor:pointer;
+}
+
+#month-this {
+	font-weight: bold;
+	font-size:15pt;
+}
+ .date-wrap {
+	width:50%;
+	height:100%;
+	float:left;
+}
+
+.calendar-container table.date-month {
+	width:100%;
+}
+
+.calendar-container td {
+    text-align: center;
+    vertical-align: middle;
+    width:75px;
+    height:75px;
+}
+
+ .today {
+	color:white;
+	background-color:rgb(206, 216, 255);
+	border-radius: 50%;
+}
+
+ #month {
+	margin-bottom:70px;
+}
+#calendartd td {
+	width: 30px;
+	height: 30px;
+}
+.selected-td {
+        background-color: rgb(0, 0, 255); /* 배경색을 적절히 설정하세요 */
+    }
