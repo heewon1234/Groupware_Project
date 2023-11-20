@@ -87,8 +87,8 @@ public class BoardDAO {
 	public List<Map<String,String>> FavoriteListBy(Map<String,String> map){
 		return db.selectList("Board.FavoriteListBy",map);
 	}
-	public List<BoardDTO> Notice(String board_title){
-		return db.selectList("Board.Notice",board_title);
+	public List<BoardDTO> Notice(Map<String,String> map){
+		return db.selectList("Board.Notice",map);
 	}
 	//
 

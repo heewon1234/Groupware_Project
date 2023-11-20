@@ -10,21 +10,20 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/css/insa/manage/job.css">
 <link rel="stylesheet" type="text/css" href="/css/insa/manage/common.css">
-<link rel="stylesheet" type="text/css" href="/css/commons/body_form/left_form/body_form_default.css">
 </head>
 
 <body>
-	<div class="top">TOP</div>
+	<div class="top_container"></div>
 	<div class="body_form">
 		<div class="left_item"></div>
 		<div class="right_item">
 			<div class="content_tab">
 				<div class="title">
 					<h3>직위/직무 관리</h3>
-					<hr>
+					<hr class="title_hr">
 				</div>
 				<div class="contents">
-					<h4>직위 관리</h4>
+					<span class="h4_span">직위 관리</span>
 					<form action="/job/insertJobTitle">
 						<table>
 							<tbody>
@@ -42,7 +41,7 @@
 											</c:forEach>
 										</td>
 										<td align="right">
-											<span class="add_jt_btn btns">+</span>
+											<i class="fa-solid fa-circle-plus" style="color: #bec3c9;"></i>
 										</td>
 									</tr>
 								</c:forEach>

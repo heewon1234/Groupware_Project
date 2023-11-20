@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시판 수정</title>
+<title>게시판 관리</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 	<link rel="stylesheet" href="/css/commons/body_form/left_form/body_form_default.css" />
 	<link rel="stylesheet" href="/css/commons/topForm.css" />

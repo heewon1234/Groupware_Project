@@ -6,9 +6,9 @@ public class ContactDTO {
 	private String email;
 	private String phone;
 	private String tag;
-	private String companyName;
-	private String companyRank;
-	private String companyDepartment;
+	private String company_name;
+	private String company_rank;
+	private String company_department;
 	private String address;
 	private String link;
 	private String birthday;
@@ -21,8 +21,8 @@ public class ContactDTO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ContactDTO(int seq, String name, String email, String phone, String tag, String companyName,
-			String companyRank, String companyDepartment, String address, String link, String birthday, String memo,
+	public ContactDTO(int seq, String name, String email, String phone, String tag, String company_name,
+			String company_rank, String company_department, String address, String link, String birthday, String memo,
 			String edit, String writer) {
 		super();
 		this.seq = seq;
@@ -30,9 +30,9 @@ public class ContactDTO {
 		this.email = email;
 		this.phone = phone;
 		this.tag = tag;
-		this.companyName = companyName;
-		this.companyRank = companyRank;
-		this.companyDepartment = companyDepartment;
+		this.company_name = company_name;
+		this.company_rank = company_rank;
+		this.company_department = company_department;
 		this.address = address;
 		this.link = link;
 		this.birthday = birthday;
@@ -81,28 +81,28 @@ public class ContactDTO {
 		this.tag = tag;
 	}
 
-	public String getCompanyName() {
-		return companyName;
+	public String getCompany_name() {
+		return company_name;
 	}
 
-	public void setCompanyName(String companyName) {
-		this.companyName = companyName;
+	public void setCompany_name(String company_name) {
+		this.company_name = company_name;
 	}
 
-	public String getCompanyRank() {
-		return companyRank;
+	public String getCompany_rank() {
+		return company_rank;
 	}
 
-	public void setCompanyRank(String companyRank) {
-		this.companyRank = companyRank;
+	public void setCompany_rank(String company_rank) {
+		this.company_rank = company_rank;
 	}
 
-	public String getCompanyDepartment() {
-		return companyDepartment;
+	public String getCompany_department() {
+		return company_department;
 	}
 
-	public void setCompanyDepartment(String companyDepartment) {
-		this.companyDepartment = companyDepartment;
+	public void setCompany_department(String company_department) {
+		this.company_department = company_department;
 	}
 
 	public String getAddress() {
@@ -152,6 +152,6 @@ public class ContactDTO {
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
-
+	
 	
 }

@@ -86,4 +86,9 @@
 	<select id="countUser" resultType="int">
 		SELECT count(*) FROM Members
 	</select>
+	<update id="updateMember">
+		UPDATE Members
+		SET pw = #{pw}, phone = #{phone}, email = #{email}, zipcode = #{zipcode}, address1 = #{address1}, address2 = #{address2}, profile_image = #{profile_image}
+		WHERE id = #{id}; 
+	</update>
 </mapper>

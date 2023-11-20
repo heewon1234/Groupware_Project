@@ -1,7 +1,18 @@
 @charset "UTF-8";
-
+#logout{
+	font-size:29px;
+}
 /* div{border:1px solid black;}  */
-
+#selectDiv{
+    color: #333333 !important;
+	background-color:transparent !important;
+	font-weight:normal;
+}
+#toMkBoardBtn{
+    background-color: #DAE8F8;
+   	color: #056AC9;
+    font-weight: bold;
+}
 .content_tab>div:not(.title){
 	margin-bottom:20px;
 	padding-bottom:0px;	
@@ -114,18 +125,29 @@
 
 .buttons{width:1500px;}
 .buttons>button{
-    width:70px;
-    height:35px;
-    border-radius: 5px;
-    border:1px solid gainsboro;
-    font-weight: bold;
+    box-shadow: none;
+    background-color: #ebebeb;
+    border: solid 1px #d6d6d6;
+    border-radius: 4px;
+    color: #333;
+    padding: 0 20px 0px;
+    height: 34px;
+    cursor: pointer;
+    font-size: 14px;
 }
+.buttons>button:first-child:hover{background-color: #d6d6d6;}
 .buttons>button:last-child{
     margin-left:30px;
-    background-color: rgba(0, 128, 255, 0.507);
-    border:1px solid rgba(0, 128, 255, 0.5);
+    box-shadow: none;
+    background-color: #2985db;
+    border: solid 1px #056ac9;
+    border-radius: 4px;
+    color: white;
+    padding: 0 20px 0px;
+    height: 34px;
+    font-size: 14px;
 }
-
+.buttons>button:last-child:hover{background-color: #056ac9;}
 .modal{
     position:fixed;
     top: 50%;
@@ -284,6 +306,9 @@
     width:100%;
     height:30px;
     border:none;
+}
+.header_add>div>input:focus{
+	outline:none;
 }
 .header_add img{ width:60%;}
 .header_add{border-bottom:1px solid black;}

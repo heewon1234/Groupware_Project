@@ -1,12 +1,12 @@
 package com.kdt.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kdt.dto.ContactDTO;
@@ -34,8 +34,6 @@ public class ContactController {
 		
 		model.addAttribute("personalTagList", personalTagList);
 	    model.addAttribute("shareTagList", shareTagList);
-	    
-	    System.out.println(dto.getTag());
 	   
 	    if(dto.getTag() == null) {
 	    	List<ContactDTO> personalContactList = Service.personalContactSelectAll(dto);
@@ -87,6 +85,14 @@ public class ContactController {
 		return Service.personalContactTagInsert(dto);
 	}
 	
+	@RequestMapping("personalContactTagInsertDirect")
+	public String personalContactTagInsertDirect(ContactDTO dto) {
+		String id = (String) session.getAttribute("loginID");
+		dto.setWriter("test1");
+		Service.personalContactTagInsert(dto);
+		return "redirect:/contact/personal";
+	}
+	
 	@RequestMapping("personalContactInsert")
 	public String personalContactInsert(ContactDTO dto) throws Exception{
 		String id = (String) session.getAttribute("loginId");
@@ -101,6 +107,55 @@ public class ContactController {
 		String id = (String) session.getAttribute("loginId");
 		dto.setWriter("test1");
 		Service.personalContactInsert(dto);
+	}
+	
+	@ResponseBody
+	@RequestMapping("personalContactRead")
+	public List<ContactDTO> personalContactRead(ContactDTO dto) throws Exception{
+		String id = (String) session.getAttribute("loginId");
+		dto.setWriter("test1");
+				List<ContactDTO> personalContactList = Service.personalContactRead(dto);
+				return personalContactList;
+	}
+	
+	@RequestMapping("personalContactUpdate")
+	public String personalContactUpdate(ContactDTO dto) throws Exception{
+		String id = (String) session.getAttribute("loginId");
+		dto.setWriter("test1");
+		Service.personalContactUpdate(dto);
+		return "redirect:/contact/personal";
+	}
+	
+	@RequestMapping("personalContactDelete")
+	public String personalContactDelete(ContactDTO dto) throws Exception{
+		String id = (String) session.getAttribute("loginId");
+		dto.setWriter("test1");
+		Service.personalContactDelete(dto);
+		System.out.println(dto.getSeq());
+		return "redirect:/contact/personal";
+	}
+	
+	@RequestMapping("personalContactSearch")
+	public String personalContactDelete(@RequestParam("keyword") String keyword, Model model) throws Exception {
+		ContactDTO dto = new ContactDTO();
+		
+		String id = (String) session.getAttribute("loginId");
+	    dto.setWriter("test1");
+	    
+	    System.out.println(keyword);
+	    
+	    List<ContactDTO> personalContactList = Service.personalContactSearch(keyword);
+	    System.out.println(personalContactList.size());
+    	model.addAttribute("personalContactList", personalContactList);
+    	model.addAttribute("contactName", "검색된 항목");
+    	
+		List<ContactDTO> personalTagList = Service.personalContactTagSelectAll(dto);
+		List<ContactDTO> shareTagList = Service.shareContactTagSelectAll(dto);
+		
+		model.addAttribute("personalTagList", personalTagList);
+	    model.addAttribute("shareTagList", shareTagList);
+	    
+    	return "contact/personal";
 	}
 	
 	@ResponseBody

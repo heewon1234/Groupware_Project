@@ -19,8 +19,8 @@ public class ApprovalResponsiblesService {
 	public List<Integer> getPendingDocIdByUserId(String id) {
 		return dao.getPendingDocIdByUserId(id);
 	}
-	public List<Integer> getApproveDocIdByUserId(String id) {
-		return dao.getApproveDocIdByUserId(id);
+	public List<Integer> getApprovalDocIdByUserId(String id) {
+		return dao.getApprovalDocIdByUserId(id);
 	}
 	public List<Integer> getReturnDocIdByUserId(String id) {
 		return dao.getReturnDocIdByUserId(id);
@@ -41,8 +41,8 @@ public class ApprovalResponsiblesService {
 		return dao.getPendingCount(id);
 	}
 	
-	public int getApproveCount(String id) {
-		return dao.getApproveCount(id);
+	public int getApprovalCount(String id) {
+		return dao.getApprovalCount(id);
 	}
 	
 	public int getReturnCount(String id) {

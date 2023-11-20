@@ -14,7 +14,7 @@
 <link rel="stylesheet" type="text/css" href="/css/commons/body_form/left_form/body_form_default.css">
 </head>
 <body>
-	<div class="top">TOP</div>
+	<div class="top_container"></div>
 	<div class="body_form">
 		<div class="left_item"></div>
 		<div class="right_item">
@@ -54,6 +54,7 @@
 	<script>
 		$(document).ready(function() {
 			$(".left_item").load("/approval/document/left_item?selectItem=complete");
+			$(".top_container").load("/commons/topForm");
 		});
 	</script>
 </body>

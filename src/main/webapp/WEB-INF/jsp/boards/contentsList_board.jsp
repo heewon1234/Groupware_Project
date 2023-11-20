@@ -5,15 +5,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시판</title>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<title>${board_title }</title>
 	<link rel="stylesheet" href="/css/commons/body_form/left_form/body_form_default.css" />
     <link rel="stylesheet" href="/css/board/board_favorite.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/js/commons/body_form/body_form_default.js" defer></script>
 </head>
 <body>
-	<div class="top" >
+	<div class="top">
 		<div id="top_container" ></div>
 	</div>
     <div class="body_form">

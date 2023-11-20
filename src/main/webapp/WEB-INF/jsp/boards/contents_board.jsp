@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>게시글</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 	<link rel="stylesheet" href="/css/commons/body_form/left_form/body_form_default.css" />
 	<link rel="stylesheet" href="/css/commons/topForm.css" />
@@ -28,8 +28,8 @@
                	 	</div>
                 </c:if>
                <div class="board_contents_info">
-                    <div class="favorite"><img src="/images/commons/body_form/left_item/default/favorites.png" /></div>
-                    <div class="profile">
+                   <!--  <div class="favorite"><img src="/images/commons/body_form/left_item/default/favorites.png" /></div> -->
+                    <div class="profileDiv">
                         <img src="/images/commons/body_form/left_item/default/information.png" />
                     </div>
                     <div class="contents_info">

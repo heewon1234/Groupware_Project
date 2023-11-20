@@ -107,10 +107,7 @@ public class MembersController {
 		this.mservice.signup(dto);
 		return "redirect:/insa/manage/members";
 	}
-	
-	//
-	//
-	//
+
 	@RequestMapping(value = "/updateWorkForm")
 	public String updateWorkForm(String idList, String workForm) throws Exception {
 		mservice.updateWorkForm(idList, workForm);
@@ -211,5 +208,38 @@ public class MembersController {
 	@ResponseBody
 	public List<MembersDTO> selectAll() throws Exception {
 		return mservice.selectAll();
+	}
+	
+	@RequestMapping("/myInfo")
+	public String myInfo(Model model) {
+		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");
+		userDTO = mservice.loginUser(userDTO.getId());
+		model.addAttribute("userDTO", userDTO);
+		return "/members/myInfo";
+	}
+	
+	@RequestMapping("/left_item")
+	public String leftItem() {
+		return "/members/left_item";
+	}
+	
+	@RequestMapping("/updateMember")
+	public String updateMember(String pw, String zipcode, String phone, String email, String address1, String address2, String profile_image) {
+		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");
+		String shapw;
+		
+		if(pw=="") {
+			shapw = userDTO.getPw();
+		} else {
+			shapw = EncryptionUtils.getSHA512(pw);
+		}
+		
+		System.out.println(profile_image);
+		
+		MembersDTO dto = new MembersDTO(userDTO.getId(), shapw, null, null, null, null, null, phone, email, zipcode, address1, address2, profile_image);
+		
+		mservice.updateMember(dto);
+		
+		return "redirect:/members/myInfo";
 	}
 }

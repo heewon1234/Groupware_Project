@@ -14,7 +14,7 @@
 <link rel="stylesheet" type="text/css" href="/css/commons/body_form/left_form/body_form_default.css">
 </head>
 <body>
-	<div class="top">TOP</div>
+	<div class="top_container"></div>
 	<div class="body_form">
 		<div class="left_item"></div>
 		<div class="right_item">
@@ -53,7 +53,8 @@
 	<script src="/js/approval/document/table.js"></script>
 	<script>
 		$(document).ready(function() {
-			$(".left_item").load("/approval/document/left_item?selectItem=wait&approval_status=${list.approval_status}");
+			$(".left_item").load("/approval/document/left_item?selectItem=wait");
+			$(".top_container").load("/commons/topForm");
 		});
 	</script>
 </body>

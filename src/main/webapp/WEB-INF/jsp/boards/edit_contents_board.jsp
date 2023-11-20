@@ -5,7 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>  
+<title>게시글 수정</title>  
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+	integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
@@ -44,16 +48,24 @@
                         </div>
                         <div>
                             <select id="header" name="header">
-                                <c:forEach var="i" items="${headerList }"> 
-                                	<c:choose>
-                                		<c:when test="${boardContents.header eq i }">
-                                			<option selected value="${i }">${i }</option>
-                                		</c:when>
-                                		<c:otherwise>
-                                			<option value="${i }">${i }</option>
-                                		</c:otherwise>
-                                	</c:choose>
-                                </c:forEach>
+                            	<c:choose>
+                            		<c:when test="${empty headerList }">
+                            			<option selected>말머리 없음</option>
+                            		</c:when>
+                            		<c:otherwise>
+                            			<option>말머리 없음</option>
+                            			<c:forEach var="i" items="${headerList }"> 
+                                			<c:choose>
+                                				<c:when test="${boardContents.header eq i }">
+                                					<option selected value="${i }">${i }</option>
+                                				</c:when>
+                                				<c:otherwise>
+                                					<option value="${i }">${i }</option>
+                                				</c:otherwise>
+                                			</c:choose>
+                                		</c:forEach>
+                            		</c:otherwise>
+                            	</c:choose> 
                             </select>
                         </div>
                         <div></div>
@@ -61,7 +73,7 @@
                     <div class="board_contents_title_box">
                         <div class="info_text_title">제목</div>
                         <div>
-                            <input type="text" placeholder="제목을 입력하세요" name="title" value='${boardContents.title }'>
+                        	<input type="text" class="form-control" placeholder="제목을 입력하세요" name="title" maxlength="100" id="header_add_input" value='${boardContents.title }'>
                         </div>
                         <div>
                         	<c:choose>
@@ -127,12 +139,16 @@
                         		<div id="surveyBox">
                             		<div class="questionBox surveyContents">
                                 		<div class="surveyText">질문</div>
-                                		<div class="surveyInputBox"><input type="text" placeholder="질문을 입력해주세요" name="survey_question" value="${boardContents.survey_question }"></div>
+                                		<div class="surveyInputBox">
+                                			<input type="text" class="form-control" placeholder="질문을 입력해주세요" name="survey_question" value="${boardContents.survey_question }" maxlength="100">
+                                		</div>
                             		</div>
                             		<c:forEach items="${surveyItemList }" var="i">
                             			<div class="itemBox surveyContents">
                                 			<div class="surveyText">항목</div>
-                                			<div class="surveyInputBox"><input type="text" placeholder="항목을 입력해주세요" name="items" value="${i.items }"></div>
+                                			<div class="surveyInputBox">
+                                				<input type="text" class="form-control" placeholder="항목을 입력해주세요" name="items" maxlength="100" value="${i.items }">
+                                			</div>
                                 			<div><img src="/images/commons/body_form/left_item/default/plus.png" class="add_item_btn"/></div>
                             			</div>
                             		</c:forEach>  	
@@ -142,16 +158,22 @@
                         		<div id="surveyBox" class="notUseSurveyBox">
                             		<div class="questionBox surveyContents">
                                 		<div class="surveyText">질문</div>
-                                		<div class="surveyInputBox"><input type="text" placeholder="질문을 입력해주세요" name="survey_question"></div>
+                                		<div class="surveyInputBox">
+                                			<input type="text" class="form-control" placeholder="질문을 입력해주세요" name="survey_question" maxlength="100">
+                                		</div>
                             		</div>
                             		<div class="itemBox surveyContents">
                                 		<div class="surveyText">항목</div>
-                                		<div class="surveyInputBox"><input type="text" placeholder="항목을 입력해주세요" name="items"></div>
+                                		<div class="surveyInputBox">
+                                			<input type="text" class="form-control"placeholder="항목을 입력해주세요" name="items" maxlength="100">
+                                		</div>
                                 		<div><img src="/images/commons/body_form/left_item/default/plus.png" class="add_item_btn"/></div>
                             		</div>
                             		<div class="itemBox surveyContents">
                                			<div class="surveyText">항목</div>
-                                		<div class="surveyInputBox"><input type="text" placeholder="항목을 입력해주세요" name="items"></div>
+                                		<div class="surveyInputBox">
+                                			<input type="text" class="form-control"placeholder="항목을 입력해주세요" name="items" maxlength="100">
+                                		</div>
                                 		<div><img src="/images/commons/body_form/left_item/default/plus.png" class="add_item_btn"/></div>
                             		</div>
                         		</div>
@@ -159,7 +181,7 @@
                         </c:choose>                                           
                     </div>
                     <div class="buttons">
-                        <button type="button">취소</button>
+                        <button type="button" id="updateCancelBtn">취소</button>
                         <button id="frmBtn">등록</button>
                     </div>
                 </form>

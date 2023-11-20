@@ -1,64 +1,129 @@
-*{box-sizing: border-box;}
-#top {
-	width: 80%;
+* {
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+#topFormTop {
+    width: 100%;
     display: flex;
     align-items: center;
-    /*justify-content: space-between;*/
+    justify-content: center;
     border-bottom: 1px solid #eeeeee;
 }
 
-.icon i {
+.topFormIcon i {
     margin-left: 10px;
 }
 
-.icon i:hover {
-	cursor:pointer;
+.topFormIcon i:hover {
+    cursor: pointer;
 }
 
-.logo, .icon {
-    margin: 5px; 
+.topFormLogo {
+    margin: 5px;
     font-size: 25px;
+    margin-left: 30px;
 }
 
-.logout{
-	position:fixed;
-	z-index:2;
-	top:6%;
-	right:11%;
-	width:100px;
-	background-color: #ffffff;
-	border-radius: 10px;
+.topFormIcon {
+    margin: 5px;
+    font-size: 25px;
+    margin-left: auto; /* 아이콘을 오른쪽으로 이동 */
+    margin-right: 50px;
 }
 
-#menuSelect {
-	font-size:11pt;
+.topFormLogout {
+	padding: 20px;
+	border: 1px solid black;
+    position: fixed;
+    z-index: 2;
+    top: 44px;
+    right: 3%;
+    width: 300px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    text-align: center;
+    padding-bottom: 12px;
+    
+}
+#topFormProfile{
+  	display: flex;
+    align-items: center;
+}
+#topFormProfileImg i{
+	font-size: 50px;
+}
+#topFormProfileImg{
+	margin-left: 4px;
+}
+#topFormMenuSelect {
+    font-size: 11pt;
+}
+#topFormLeft i,
+#topFormRight i {
+    width: 18px;
+    text-align: center;
 }
 
-#menuSelectDiv {
-	margin-left:20px;
-	margin-right:70%;
+
+#topFormMenuSelectDiv {
+    margin-left: 20px;
+    margin-right: 70%;
+    cursor: pointer;
+}
+#topFormProfileContents{
+	margin-left: 20px;
 }
 
-#menuCollection {
-	position:fixed;
-	z-index:2;
-	top:6%;
-	left:11%;
-	width:300px;
-	background-color: #ffffff;
-	border-radius: 10px;
-	padding:10px;
+#topFormMenuCollection {
+	border: 1px solid black;
+    position: fixed;
+    z-index: 2;
+    top: 44px;
+    left: 8%;
+    width: 300px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    padding-left: 30px;
+    flex-direction: column;
+    padding-bottom: 8px;
 }
 
-
-#left {
-	width:50%;
+#topFormMenuCollection > div:first-child {
+    margin-bottom: 10px;
+    font-weight: bold;
 }
 
-#right {
-	width:50%;
+#topFormSelectMenu {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+#topFormLeft{
+	margin-left: 5%;
+}
+#topFormRight{
+	margin-right: 10%;
 }
 
-.menu {
-	height:35px;
+.topFormMenu {
+    height: 35px;
+}
+.topFormLogoutInBottom {
+	margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+#topFormLogoutBtn{
+	padding: 5px;
+}
+
+#topFormProfileImg img {
+	width: 70px;
+	height: 70px;
+	border-radius: 50%;
 }

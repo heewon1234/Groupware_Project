@@ -11,17 +11,16 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/css/insa/manage/organization.css">
 <link rel="stylesheet" type="text/css" href="/css/insa/manage/common.css">
-<link rel="stylesheet" type="text/css" href="/css/commons/body_form/left_form/body_form_default.css">
 </head>
 <body>
-	<div class="top">TOP</div>
+	<div class="top_container"></div>
 	<div class="body_form">
 		<div class="left_item"></div>
 		<div class="right_item">
 			<div class="content_tab">
 				<div class="title">
 					<h3>조직 관리</h3>
-					<hr>
+					<hr class="title_hr">
 				</div>
 				<div class="chart-box">
 					<div id="chart_div"></div>
@@ -38,7 +37,12 @@
                 	<input type="text" class="form-control" id="organization" name="organization" placeholder="조직명">
                 </div>
                 <div class="input-group">
-                	<input type="text" class="form-control" id="manager" name="manager" placeholder="상위조직명">
+                	<select id="manager" class="form-control" name="manager">
+                		<option>상위조직명</option>
+                		<c:forEach items="${orgList}" var="org">
+                			<option>${org.organization }</option>
+                		</c:forEach>
+                	</select>
                 </div>
                 <div class="input-group">
                 	<input type="text" class="form-control" id="level" name="level" placeholder="조직 레벨">

@@ -120,6 +120,8 @@ $(document).on("click",".add_item_btn",function(){
 	itemInput.attr("placeholder","항목을 입력해주세요");
 	itemInput.attr("name","items");
 	itemInput.attr("type","text");
+	itemInput.attr("maxlength","100");
+	itemInput.addClass("form-control");
 	surveyInputBox.append(itemInput);
 	
 	let imgDiv = $("<div>");
@@ -182,3 +184,7 @@ $("#frmBtn").on("click",function(){
 		$("#header").val("");
 	}
 })
+
+$("#backBtn").on("click",function(){
+	location.href="/board/toBoard";
+});

@@ -34,26 +34,27 @@
 }
 
 /* 이미지 스타일 (선택 사항) */
-.img {
-    margin-right: 20px; /* 이미지와 텍스트 사이 여백 (선택 사항) */
+.chattingImg {
+    margin-right: 18px;
+    margin-left: 10px;
 }
 
 /*top 아이콘 스타일 (선택 사항) */
-.top .fa-regular.fa-circle-user {
+.chattingTop .fa-regular.fa-circle-user {
     font-size: 50px; /* 아이콘 크기 (선택 사항) */
 }
 
 /* 사용자 정보 스타일 */
-.user {
+.chattingUser {
     display: flex; /* 사용자 정보 요소를 가로로 배열 */
     flex-direction: column; /* 요소를 세로로 배열 (기본적으로) */
 }
 
 /* 사용자 정보 요소 사이 여백 (선택 사항) */
-.user > div {
+.chattingUser > div {
     margin-right: 10px;
 }
-.top{
+.chattingTop{
     height: 18%;
 }
 /* 부모 컨테이너 스타일 */
@@ -65,7 +66,7 @@
 }
 
 /* 왼쪽 아이콘 컨테이너 스타일 */
-.left {
+.chattingLeft {
     display: flex; /* 내부 요소들을 가로로 배열 */
     flex-direction: column;
     background-color: #d2e0fb;
@@ -73,38 +74,24 @@
     width: 20%;
     height: 100%;
 }
-.right{
+.chattingRight{
     width: 80%;
     height: 100%;
     padding: 20px;
 }
 
 /* 왼쪽 아이콘 스타일 (선택 사항) */
-.left i {
+.chattingLeft i {
     margin-right: 10px;
     margin-bottom: 10px;
     margin-left: 20px;
     margin-top: 15px;
-
+    font-size: 25px;
 }
 
-/* 아이콘 스타일 (선택 사항) */
-.icon>.fa-regular {
-    font-size: 29px; /* 아이콘 크기 (선택 사항) */
-}
-
-.icon .fa-solid {
-	font-size: 29px; /* 아이콘 크기 (선택 사항) */
-}
 
 /*----------------전체 사람 리스트*/
 .Thead, #departmentSelect{font-size: larger;font-weight: bold;}
-.pimg {
-    margin-right: 10px; 
-}
-.pimg i{
-    font-size: 35px;
-}
 
 /* 텍스트 컨테이너 스타일 (선택 사항) */
 .person {
@@ -117,7 +104,7 @@
 .person > div {
     margin-right: 10px;
 }
-.name{
+.chattingName{
     font-size:medium;
     font-weight: bold;
 }
@@ -138,4 +125,8 @@ hr{
 	margin-bottom: 10px;
 }
 .oneChat{margin-left: 8px;}
+.table-row i,#friend_list i{
+	font-size: 25px;
+	margin-right: 3px;
+}
 

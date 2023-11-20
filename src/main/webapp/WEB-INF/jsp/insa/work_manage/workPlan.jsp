@@ -7,8 +7,6 @@
 <meta charset="UTF-8">
 <title>근무계획 수립</title>
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="/css/commons/body_form/left_form/body_form_default.css">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script
@@ -262,10 +260,22 @@ tr, td {
 button, select {
 	cursor: pointer;
 }
+#current_table{
+min-width: 1180px;
+}
+#work_contents{
+width: 100%;
+}
+#current_table{
+width: 98%;
+}
+.jeng,.weekend-cell{
+text-align: center;
+}
 </style>
 </head>
 <body>
-	<div id="top_container" style="width: 100%;"></div>
+	<div id="top_container"></div>
 	<div class="body_form">
 		<div class="left_item"></div>
 		<div class="right_item">
@@ -321,6 +331,8 @@ button, select {
 									src="/images/insa/work_plan/chevron-left.svg">
 							</div>
 							<div class="currentMonth"></div>
+							<input class="cMonth" type="hidden">
+							<input class="cYear" type="hidden">
 							<div style="margin-top: 3px;">
 								<img class="nextMonth"
 									src="/images/insa/work_plan/chevron-right.svg">
@@ -382,9 +394,9 @@ button, select {
 
 	<div class="modal_form">
 		<div class="modal_background"></div>
-		<input id="loginID" type="hidden" value="${loginId }">
-		<input type="hidden" id=doc_type name="doc_type" value="근무계획변경">
-		<input type="hidden" id="work_plan_title" name="title" value="근무계획변경">
+		<input id="loginID" type="hidden" value="${loginId }"> <input
+			type="hidden" id=doc_type name="doc_type" value="근무계획변경"> <input
+			type="hidden" id="work_plan_title" name="title" value="근무계획변경">
 		<input type="hidden" id="work_plan_contents" name="contents">
 
 		<input type="hidden" id="user_names" name="user_names"> <input
@@ -434,25 +446,71 @@ button, select {
 
 
 	<script>
+	function workPlanUpdate() {
+        $('#work_contents').css("display", "none");
+        $('#work_contents_update').css("display", "block");
+    }
+    function selectFinished() {
+        $('#set-up').css("display", "block");
+        $('#reset').css("display", "block");
+        $('#selectFinished').css("display", "none");
+    }
+    function reset() {
+        $('#set-up').css("display", "none");
+        $('#selectFinished').css("display", "block");
+        $('#reset').css("display", "none");
+    }
+	$(document).ready(function() {
+		// 이름 소속을 가져오는 ajax
+		$.ajax({
+		    url: '/works_plan/getUserList'
+		}).done(function (data) {
+		    var tableBody = $("#userWorkData").empty();
+		    var { dates, daysOfWeek, currentMonth } = generateMonthlyDates(); // dates 변수를 전역으로 이동
+		    for (let i = 0; i < data.length; i++) {
+		        let member = data[i];
+		        var tableRow = $('<tr>').addClass('memberRow');
+		        var nameCell = $('<td>').text(member.name);
+		        var departmentCell = $('<td>').text(member.organization);
+		        tableRow.append(nameCell, departmentCell);
+
+		        // 주말을 제외하고 정을 추가하는 td 코드를 생성하여 추가
+		        dates.forEach(date => {
+		            let scheduleCell = createScheduleCell(date);
+		            tableRow.append(scheduleCell);
+		        });
+
+		        tableBody.append(tableRow);
+		    }
+
+		    var tableRowDate = $('#tr1'); // 날짜가 들어갈 행
+		    dates.forEach(date => {
+		        let cellDate = $('<td>').text(formatDate(date)).addClass('works_days');
+		        tableRowDate.append(cellDate);
+		    });
+		        var tableRowDays = $('#tr2'); // 요일이 들어갈 행
+		    daysOfWeek.forEach(day => {
+		        let cellDay = $('<td>').text(day).addClass('works_days');
+		        tableRowDays.append(cellDay);
+		    });
+
+		});
+		
 	let tag_list_open = false;
 
 	// img 버튼 눌렀을때 모달 창 띄우는거
-	$(document).ready(function() {
 	    $('#openModalBtn').click(function() {
 	    	$('.modal_form').css('display', 'block');
 	    	$('#modal_apply_button').prop('disabled', true);
 	    });
-	});
 
 	// 모달창에서 취소 누르면 모달창 꺼지는거
-	$(document).ready(function() {
 	    $('#modal_cancel_button').click(function() {
 	    	$('.grid-item.manager').empty();
 	    	$('#openModalBtn').prop('disabled', true);
 	        $('.modal_form').css('display', 'none');
 	        $('#update_workPlan_body select').val('9시 출근');
 	    });
-	});
 	
 
 	// 태그 선택 박스 이외에 다른 곳이 클릭 됐을 때 
@@ -520,16 +578,74 @@ button, select {
 
 	});
 	// submit 확인임
-	$(document).ready(function() {
 	    $('#modal_apply_button').on('click', function() {
 	    	var workPlanTitleValue = $("#work_plan_title").val();
 	    	var workPlanContentsValue = $("#work_plan_contents").val();
 
 	    	console.log(workPlanTitleValue+" : "+workPlanContentsValue);
 	    });
-	});
 	
 	//----------------------------------------------------------------
+	
+// 주말을 제외한 정을 추가하는 함수
+function createScheduleCell(date) {
+    if (dayIsWeekend(date)) {
+        // 주말인 경우
+        if (isSaturday(date)) {
+            return $('<td>').text('휴무').addClass('weekend-cell');
+        } else if (isSunday(date)) {
+            return $('<td>').text('휴일').addClass('weekend-cell');
+        } else {
+            return $('<td>'); // 다른 주말인 경우 비어있는 td 반환
+        }
+    } else {
+        return $('<td>').text('정').addClass('jeng');
+    }
+}
+
+// 토요일인지 확인하는 함수
+function isSaturday(date) {
+    return date.getDay() === 6;
+}
+
+// 일요일인지 확인하는 함수
+function isSunday(date) {
+    return date.getDay() === 0;
+}
+
+// 주말인지 확인하는 함수 (토요일 또는 일요일인지 확인)
+function dayIsWeekend(date) {
+    return isSaturday(date) || isSunday(date);
+}
+
+
+
+// 날짜 데이터를 생성하는 함수
+function generateMonthlyDates() {
+    let today = new Date();
+    let currentMonth = today.getMonth() + 1; // 0-based index
+    let currentYear = today.getFullYear();
+
+    let firstDayOfMonth = new Date(currentYear, currentMonth - 1, 1);
+    let lastDayOfMonth = new Date(currentYear, currentMonth, 0);
+
+    let dates = [];
+    let daysOfWeek = [];
+
+    for (let day = firstDayOfMonth; day <= lastDayOfMonth; day.setDate(day.getDate() + 1)) {
+        dates.push(new Date(day));
+        daysOfWeek.push(day.toLocaleDateString('ko-KR', { weekday: 'short' }));
+    }
+    return { dates, daysOfWeek, currentMonth };
+}
+
+// 날짜를 문자열로 변환하는 함수
+function formatDate(date) {
+    return date.getDate(); // 날짜의 일자만 반환
+}	
+	
+	
+	
 // 리스트를 저장할 배열
 let selectedValues = [];
 let user_names = [];
@@ -563,7 +679,6 @@ document.getElementById('update_workPlan_body').addEventListener('change', funct
         }
     }
 });
-$(document).ready(function() {
     $('#modal_apply_button').on('click', function() {
     	var approval = {
     		id:$("#loginID").val(),
@@ -596,23 +711,22 @@ $(document).ready(function() {
     	    }
     	});
     });
-});
 
 
 
 
-	function updateWorkPlanTable(userNames) {
+	function updateWorkPlanTable(userNames,dates) {
 	    var tableHeader = $("#update_workPlan_head").empty();
 	    var tableCol = $('<th>');
 	    tableHeader.append(tableCol);
-
+	    
 	    userNames.forEach(name => {
 	        const tableHeaderCell = $('<th>').text(name);
 	        tableHeader.append(tableHeaderCell);
 	    });
 
 	    var tableBody = $("#update_workPlan_body").empty();
-
+	    console.log(dates);
 	    dates.forEach(date => {
 	        var tableRow = $('<tr>');
 	        const cellDate = $('<td>').text(formatDate2(date)).addClass('members');
@@ -632,7 +746,6 @@ $(document).ready(function() {
 	        tableBody.append(tableRow);
 	    });
 	}
-	$(document).ready(function() {
 		$('#update_workPlan_body').on('change', 'select', function() {
 			$('#openModalBtn').prop('disabled', true);
 		    let noChange = true;
@@ -649,19 +762,18 @@ $(document).ready(function() {
 		        $('#openModalBtn').prop('disabled', false);
 		    }
 		});
-		});
 
-	const today = new Date();
-	const currentYear = today.getFullYear();
-	const currentMonth = today.getMonth() + 1;
+	let today = new Date();
+	let currentYear = today.getFullYear();
+	let currentMonth = today.getMonth() + 1;
 
-	const dates = generateDatesForMonth(currentYear, currentMonth);
+	let dates = generateDatesForMonth(currentYear, currentMonth);
 
 	function generateDatesForMonth(year, month) {
-	    const firstDayOfMonth = new Date(year, month - 1, 1);
-	    const lastDayOfMonth = new Date(year, month, 0);
+	    let firstDayOfMonth = new Date(year, month - 1, 1);
+	    let lastDayOfMonth = new Date(year, month, 0);
 
-	    const dates = [];
+	    let dates = [];
 
 	    for (let day = firstDayOfMonth; day <= lastDayOfMonth; day.setDate(day.getDate() + 1)) {
 	        dates.push(new Date(day));
@@ -669,82 +781,75 @@ $(document).ready(function() {
 
 	    return dates;
 	}
+	
 
 	function formatDate2(date) {
-        const year = date.getFullYear();
-        const month = date.getMonth() + 1;
-        const day = date.getDate();
+        let year = date.getFullYear();
+        let month = date.getMonth() + 1;
+        let day = date.getDate();
         return month + "월 "+ day + "일";
     }
-
-	 function workPlanUpdate() {
-	        $('#work_contents').css("display", "none");
-	        $('#work_contents_update').css("display", "block");
-	    }
-	    function selectFinished() {
-	        $('#set-up').css("display", "block");
-	        $('#reset').css("display", "block");
-	        $('#selectFinished').css("display", "none");
-	    }
-	    function reset() {
-	        $('#set-up').css("display", "none");
-	        $('#selectFinished').css("display", "block");
-	        $('#reset').css("display", "none");
-	    }
+	 
 	    
 	    function formatDate1(date) {
-	        const year = date.getFullYear();
-	        const month = date.getMonth() + 1;
-	        const day = date.getDate();
+	        let year = date.getFullYear();
+	        let month = date.getMonth() + 1;
+	        let day = date.getDate();
 	        return year + "년 " + month + "월 "+ day + "일";
 	    }
 
 	    function updateCurrentMonth(year, month) {
 	        var gridItem2 = $("#gridContainer .gridItem:nth-child(2)");
 
-	        const firstDayOfMonth = new Date(year, month - 1, 1);
-	        const lastDayOfMonth = new Date(year, month, 0);
+	        let firstDayOfMonth = new Date(year, month - 1, 1);
+	        let lastDayOfMonth = new Date(year, month, 0);
 
-	        const formattedFirstDay = formatDate1(firstDayOfMonth);
-	        const formattedLastDay = formatDate1(lastDayOfMonth);
+	        let formattedFirstDay = formatDate1(firstDayOfMonth);
+	        let formattedLastDay = formatDate1(lastDayOfMonth);
 	        
-	        const newText = formattedFirstDay + " ~ " + formattedLastDay;
+	        let newText = formattedFirstDay + " ~ " + formattedLastDay;
 	        gridItem2.text(newText);
 	    }
 	    
 
 
-	    $(document).ready(function () {
 	        // 현재 날짜 정보
-	        const today = new Date();
-	        let currentMonth = today.getMonth() + 1; // 1부터 시작하는 월
-
+	        /*const today = new Date();
+	        let currentMonth = today.getMonth() + 1; // 1부터 시작하는 월*/
+	    //$(document).ready(function() {
 	        // 초기화 함수 호출
 	        updateMonth();
 	        updateData(); // 페이지 로딩 시 데이터 초기화
 	        updateCurrentMonth();
 	        updateCurrentMonth(today.getFullYear(),currentMonth);
-
+	        
 	        // 왼쪽 버튼 클릭 시 이벤트 처리
 	        $(".prevMonth").click(function () {
 	            currentMonth--;
 	            updateMonth();
-	            updateData(); // 월 변경 시 데이터 갱신
+	            updateData(today.getFullYear(),currentMonth); // 이전 월 변경 시 데이터 갱신
 	            updateCurrentMonth(today.getFullYear(), currentMonth);
+	            let dates = generateDatesForMonth(today.getFullYear(), currentMonth);
+	            updateWorkPlanTable(userNames, dates);
 	        });
 
 	        // 오른쪽 버튼 클릭 시 이벤트 처리
 	        $(".nextMonth").click(function () {
 	            currentMonth++;
 	            updateMonth();
-	            updateData(); // 월 변경 시 데이터 갱신
+	            updateData(today.getFullYear(),currentMonth); // 다음 월 변경 시 데이터 갱신
 	            updateCurrentMonth(today.getFullYear(), currentMonth);
+	            //loadMembersByDepartment(organization, function(userNames) {
+	                let dates = generateDatesForMonth(today.getFullYear(), currentMonth);
+	                updateWorkPlanTable(userNames, dates);
+	           // });
 	        });
+	        
 
 	        // 월 갱신 함수
 	        function updateMonth() {
 	            // 날짜를 표시할 엘리먼트
-	            const currentMonthElement = $(".currentMonth");
+	            let currentMonthElement = $(".currentMonth");
 
 	            // 이전 달로 이동했을 때 처리
 	            if (currentMonth < 1) {
@@ -759,153 +864,82 @@ $(document).ready(function() {
 
 	            // 현재 월 표시
 	            currentMonthElement.text(today.getFullYear() + "년 " + currentMonth + "월");
+	            $(".cMonth").val(today.getFullYear());
+	            $(".cYear").val(currentMonth);
+	            console.log($(".cMonth").val(today.getFullYear()));
+	            console.log($(".cYear").val(currentMonth));
+	            ///////////////////////////////////////////
 	            
 	        }
 	       
 
-	        // 데이터 갱신 함수
-	        function updateData() {
-	            // AJAX request to get user list
+	        function updateMonthlyDates(updateYear, updateMonth) {
+	            let firstDayOfMonth = new Date(updateYear, updateMonth - 1, 1);
+	            let lastDayOfMonth = new Date(updateYear, updateMonth, 0);
+
+	            let dates = [];
+	            let daysOfWeek = [];
+
+	            for (let day = firstDayOfMonth; day <= lastDayOfMonth; day.setDate(day.getDate() + 1)) {
+	                dates.push(new Date(day));
+	                daysOfWeek.push(day.toLocaleDateString('ko-KR', { weekday: 'short' }));
+	            }
+	            
+	            return { dates, daysOfWeek };
+	        }
+
+
+	        function updateData(updateYear, updateMonth) {
 	            $.ajax({
 	                url: '/works_plan/getUserList',
-	                data: { month: currentMonth }, // 월 정보 전달
+	                data: { month: currentMonth },
 	            }).done(function (data) {
 	                var tableBody = $("#userWorkData").empty();
-	                var { dates, daysOfWeek } = generateMonthlyDates(); // dates 변수를 전역으로 이동
-
+	                var tableRowDate = $("#tr1").empty();
+	                var tableRowDays = $("#tr2").empty();
+	                
+	                var nameHeader = $('<th>').addClass('left_none').attr('rowspan', '2').css('padding', '5px').text('이름');
+	                var departmentHeader = $('<th>').attr('rowspan', '2').css('padding', '5px').text('소속');
+	                tableRowDate.append(nameHeader, departmentHeader);
+	                
+	                var { dates, daysOfWeek } = updateMonthlyDates(updateYear,updateMonth);
 	                for (let i = 0; i < data.length; i++) {
-	                    const member = data[i];
-	                    var tableRow = $('<tr>').addClass('memberRow');
+	                	let tableRow = $('<tr>').addClass('memberRow');
+	                    let member = data[i];
+	                    console.log("멤버" + member);
 	                    var nameCell = $('<td>').text(member.name);
 	                    var departmentCell = $('<td>').text(member.organization);
 	                    tableRow.append(nameCell, departmentCell);
 
 	                    // 주말을 제외하고 정을 추가하는 td 코드를 생성하여 추가
 	                    dates.forEach(date => {
-	                        const scheduleCell = createScheduleCell(date);
+	                        var scheduleCell = createScheduleCell(date);
 	                        tableRow.append(scheduleCell);
 	                    });
 
 	                    tableBody.append(tableRow);
 	                }
 
-	                // 업데이트할 행과 열 선택
-	                var tableRowDate = $('#tr1');
-	                var tableRowDays = $('#tr2');
-
-	                // 기존 내용 제거
-	                tableRowDate.empty();
-	                tableRowDays.empty();
-
-	                // 날짜 업데이트
 	                dates.forEach(date => {
-	                    const cellDate = $('<td>').text(formatDate(date)).addClass('works_days');
+	                    let cellDate = $('<td>').text(formatDate(date)).addClass('works_days');
 	                    tableRowDate.append(cellDate);
 	                });
-
-	                // 요일 업데이트
 	                daysOfWeek.forEach(day => {
-	                    const cellDay = $('<td>').text(day).addClass('works_days');
+	                    let cellDay = $('<td>').text(day).addClass('works_days');
 	                    tableRowDays.append(cellDay);
 	                });
 	                
+	                
+	                
 	            });
 	        }
-	    });
+	    //});   
 
-$(document).ready(function() {
+
 	$("#top_container").load("/commons/topForm");
-	$(".left_item").load("/works/manage_left_item?selectItem=workPlan");
+	$(".left_item").load("/insa/manage/left_item?selectItem=workPlan");
 	
-// 주말을 제외한 정을 추가하는 함수
-function createScheduleCell(date) {
-    if (dayIsWeekend(date)) {
-        // 주말인 경우
-        if (isSaturday(date)) {
-            return $('<td>').text('휴무').addClass('weekend-cell');
-        } else if (isSunday(date)) {
-            return $('<td>').text('휴일').addClass('weekend-cell');
-        } else {
-            return $('<td>'); // 다른 주말인 경우 비어있는 td 반환
-        }
-    } else {
-        return $('<td>').text('정').addClass('jeng');
-    }
-}
 
-// 토요일인지 확인하는 함수
-function isSaturday(date) {
-    return date.getDay() === 6;
-}
-
-// 일요일인지 확인하는 함수
-function isSunday(date) {
-    return date.getDay() === 0;
-}
-
-// 주말인지 확인하는 함수 (토요일 또는 일요일인지 확인)
-function dayIsWeekend(date) {
-    return isSaturday(date) || isSunday(date);
-}
-
-// 이름 소속을 가져오는 ajax
-$.ajax({
-    url: '/works_plan/getUserList'
-}).done(function (data) {
-    var tableBody = $("#userWorkData").empty();
-    var { dates, daysOfWeek, currentMonth } = generateMonthlyDates(); // dates 변수를 전역으로 이동
-    for (let i = 0; i < data.length; i++) {
-        const member = data[i];
-        var tableRow = $('<tr>').addClass('memberRow');
-        var nameCell = $('<td>').text(member.name);
-        var departmentCell = $('<td>').text(member.organization);
-        tableRow.append(nameCell, departmentCell);
-
-        // 주말을 제외하고 정을 추가하는 td 코드를 생성하여 추가
-        dates.forEach(date => {
-            const scheduleCell = createScheduleCell(date);
-            tableRow.append(scheduleCell);
-        });
-
-        tableBody.append(tableRow);
-    }
-
-    var tableRowDate = $('#tr1'); // 날짜가 들어갈 행
-    dates.forEach(date => {
-        const cellDate = $('<td>').text(formatDate(date)).addClass('works_days');
-        tableRowDate.append(cellDate);
-    });
-    var tableRowDays = $('#tr2'); // 요일이 들어갈 행
-    daysOfWeek.forEach(day => {
-        const cellDay = $('<td>').text(day).addClass('works_days');
-        tableRowDays.append(cellDay);
-    });
-    
-});
-
-// 날짜 데이터를 생성하는 함수
-function generateMonthlyDates() {
-    const today = new Date();
-    const currentMonth = today.getMonth() + 1; // 0-based index
-    const currentYear = today.getFullYear();
-
-    const firstDayOfMonth = new Date(currentYear, currentMonth - 1, 1);
-    const lastDayOfMonth = new Date(currentYear, currentMonth, 0);
-
-    const dates = [];
-    const daysOfWeek = [];
-
-    for (let day = firstDayOfMonth; day <= lastDayOfMonth; day.setDate(day.getDate() + 1)) {
-        dates.push(new Date(day));
-        daysOfWeek.push(day.toLocaleDateString('ko-KR', { weekday: 'short' }));
-    }
-    return { dates, daysOfWeek, currentMonth };
-}
-
-// 날짜를 문자열로 변환하는 함수
-function formatDate(date) {
-    return date.getDate(); // 날짜의 일자만 반환
-}
 //총 인원을 가져오는 ajax
 $.ajax({
     url: '/members/countUser'
@@ -930,7 +964,7 @@ $(document).on('mouseleave', '.jeng', function() {
     $("#jeng-info").css("display", "none");
 });
 // 부서 목록을 가져오는 Ajax 요청
-$(document).ready(function() {
+
     // getDepartmentList를 통해 데이터 가져오기
     $.ajax({
         url:'/members/getDepartmentList'
@@ -939,7 +973,7 @@ $(document).ready(function() {
         $("#department_Select").empty();
         $("#department_Select").append('<option selected>부서 선택</option>');
         for (let i = 0; i < data.length; i++) {
-            const departmentName = data[i];
+            let departmentName = data[i];
             $("#department_Select").append('<option value="' + departmentName + '">' + departmentName + '</option>');
         }
     });
@@ -959,12 +993,11 @@ $(document).ready(function() {
 
     // 페이지 로드 시 초기 상태 설정 (버튼은 비활성화)
     $('#selectFinished').prop('disabled', true);
-});
 
 
 
-function loadMembersByDepartment(organization) {
 var userNames = [];
+function loadMembersByDepartment(organization) {
     $.ajax({
         url: '/members/selectAll',
         // 필요한 데이터 전달
@@ -988,22 +1021,11 @@ var userNames = [];
         }
 
         // 데이터를 모두 추가한 뒤 updateWorkPlanTable 함수 호출
-        updateWorkPlanTable(userNames);
+        //updateWorkPlanTable(userNames);
+        let dates = generateDatesForMonth(today.getFullYear(), currentMonth);
+        updateWorkPlanTable(userNames, dates);
     });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 });

@@ -20,7 +20,6 @@ textarea {
 }
 
 .outTable {
-	margin-left: 24px !important;
 	border-collapse: collapse;
 	width: 80%;
 }
@@ -56,16 +55,8 @@ td {
 	width: 80%;
 }
 
-.btns {
-	display: inline-block;
-	width: 20px;
-	height: 20px;
-	border-radius: 50%;
-	text-align: center;
-	color: #fff;
-	background: #bec3c9;
+.fa-circle-plus {
 	cursor: pointer;
-	line-height: 17px;
 }
 
 .modalContainer {
@@ -88,10 +79,23 @@ td {
 	padding: 15px;
 }
 
+.modalTitle {
+	font-size: 18px;
+	font-weight: 600;
+	margin-bottom: 10px;
+	text-align: center;
+}
+
 .modalButton_div {
 	position: absolute;
     bottom: 15px;
     left: 75px;
+}
+
+.managerList {
+	width: 100%;
+    height: 60%;
+	overflow: auto;
 }
 
 .hidden {
@@ -112,4 +116,18 @@ td {
 
 #approvalTable {
 	height: 200px;
+}
+
+#setting {
+	height: 20px;
+}
+
+#setting td{
+	height: 100%;
+}
+
+#setting select {
+	width: 100%;
+	height: 100%;
+	text-align: center;
 }

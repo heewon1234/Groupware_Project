@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/css/commons/body_form/left_form/body_form_default.css">
 <script src="/js/commons/body_form/body_form_default.js"></script>
-<script src="/js/approval/document/common.js"></script>
+<script src="/js/approval/document/left_item.js"></script>
 <!-- font-awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <style>
@@ -49,7 +49,7 @@
 						<img src="/images/commons/body_form/left_item/approval/hourglass.svg"> <span class="menu_list_item_text">대기</span> <span class="count">${waitCount }</span>
 					</div>
 					<div id="complete" class="menu_list_item">
-						<img src="/images/commons/body_form/left_item/approval/check-circle.svg"> <span class="menu_list_item_text"> <span class="menu_list_item_text">완료</span> <span class="count">${completeCount }</span>
+						<img src="/images/commons/body_form/left_item/approval/check-circle.svg"> <span class="menu_list_item_text">완료</span> <span class="count">${completeCount }</span>
 					</div>
 					<div id="progress" class="menu_list_item">
 						<i class="fa-solid fa-spinner"></i> <span class="menu_list_item_text">진행</span> <span class="count">${processCount }</span>
@@ -70,10 +70,10 @@
 						<img src="/images/commons/body_form/left_item/approval/file-text.svg"> <span class="menu_list_item_text">전체</span> <span class="count">${everyCount }</span>
 					</div>
 					<div id="pending" class="menu_list_item">
-						<img src="/images/commons/body_form/left_item/approval/file-text.svg"> <span class="menu_list_item_text">미결</span> <span class="count">${pendingCount }</span>
+						<img src="/images/commons/body_form/left_item/approval/hourglass.svg"> <span class="menu_list_item_text">미결</span> <span class="count">${pendingCount }</span>
 					</div>
-					<div id="approve" class="menu_list_item">
-						<img src="/images/commons/body_form/left_item/approval/checklist.svg"> <span class="menu_list_item_text">결재</span> <span class="count">${approveCount }</span>
+					<div id="approval" class="menu_list_item">
+						<img src="/images/commons/body_form/left_item/approval/checklist.svg"> <span class="menu_list_item_text">결재</span> <span class="count">${approvalCount }</span>
 					</div>
 					<div id="return" class="menu_list_item">
 						<img src="/images/commons/body_form/left_item/approval/circle-slash.svg"> <span class="menu_list_item_text">반려</span> <span class="count">${returnCount }</span>

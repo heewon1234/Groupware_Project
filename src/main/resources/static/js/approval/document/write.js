@@ -1,11 +1,3 @@
-$(document).ready(function() {
-	$("#top_container").load("/commons/topForm");
-});
-
-$(document).ready(function() {
-	$(".left_item").load("/approval/document/left_item");
-});
-
 $("input[type='checkbox']").on("click", function() {
 	let count = $("input[type='checkbox']").length;
 
@@ -49,5 +41,12 @@ $("#contents").keyup(function() {
 		$("#submit_btn").removeClass("permit");
 	} else {
 		$("#submit_btn").addClass("permit");
+	}
+});
+
+$("#submit_btn").on("click", function() {
+	if($("#app_th1").html().trim() === "") {
+		alert("신청 인원을 최소 1명 이상 선택해주세요.");
+		return false;
 	}
 });
