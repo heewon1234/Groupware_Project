@@ -34,8 +34,10 @@
 											<c:forEach items="${jobTitleList}" var="job">
 												<c:if test="${job.job_rank eq i}">
 													<span class="parent_span"> 
-														<span><c:out value="${job.position}" /></span> 
-														<a class="remove_jt_btn btns hidden">X</a>
+														<span class="jobPosition_span"><c:out value="${job.position}" /></span> 
+														<a class="remove_jt_btn btns hidden">
+															<i class="fa-solid fa-xmark fa-sm"></i>
+														</a>
 													</span>
 												</c:if>
 											</c:forEach>
@@ -47,7 +49,7 @@
 								</c:forEach>
 							</tbody>
 						</table>
-						<button type="submit" class="button_apply">저장</button>
+						<button type="submit" id="apply_jobTitle" class="button_apply">저장</button>
 					</form>
 	
 					<div>
@@ -61,17 +63,22 @@
 						<div id="jr_contents">
 							<c:forEach var="job" items="${jobRoleList}">
 								<span class="parent_span"> 
-									<span>${job.job_name}</span> 
-									<a class="remove_jr_btn btns hidden">X</a>
+									<span class="jobName_span">${job.job_name}</span> 
+									<a class="remove_jr_btn btns hidden">
+										<i class="fa-solid fa-xmark fa-sm"></i>
+									</a>
 								</span>
 							</c:forEach>
 						</div>
-						<button type="submit" class="button_apply">저장</button>
+						<button type="submit" id="apply_jobRole" class="button_apply">저장</button>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
 	<script src="/js/insa/manage/job.js"></script>
+	<script>
+	
+	</script>
 </body>
 </html>

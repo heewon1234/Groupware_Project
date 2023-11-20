@@ -43,7 +43,7 @@
 					<table id="approvalTable" class="outTable" border='1'>
 						<tbody>
 							<tr>
-								<th>신청 <i class="fa-solid fa-circle-plus modalButton_apply" style="color: #bec3c9;"></i>
+								<th>신청 <img id="plusIcon" src="/images/approval/plus-circle.svg">
 								</th>
 								<td>
 									<table class="innerTable" border='1'>
