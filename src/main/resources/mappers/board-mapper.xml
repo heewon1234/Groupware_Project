@@ -125,5 +125,4 @@
 	<update id="updateSurveyQuestion">
 		update ${board_title} set survey_question=#{survey_question} where seq=#{seq}
 	</update>
-
 </mapper>
