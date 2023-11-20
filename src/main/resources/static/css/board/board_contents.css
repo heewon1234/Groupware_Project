@@ -4,7 +4,10 @@
 }
 /* div{border: 1px solid black;}  */
 
-.content_tab>div{width:1500px;}
+.content_tab>div{
+	width:100%;
+	min-width:600px;
+}
 .backVoteBtn{
 	width:98px;
     box-shadow: none;

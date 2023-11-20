@@ -5,7 +5,8 @@
 /* div{border:1px solid black;} */
 .note-modal-backdrop{display:none !important;}
 .content_tab>form>div:not(.board_contents_file_box):not(.board_contents_box){
-    width:1500px;
+    width:100%;
+	min-width:600px;
     overflow: hidden;
     margin-bottom:10px;
 }
@@ -39,7 +40,8 @@
 	
 }
 .board_contents_file_box{
-    width:1500px;
+    width:100%;
+	min-width:600px;
     padding:10px;
     border: 1px dotted gainsboro;
     margin-top:10px;
