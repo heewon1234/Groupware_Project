@@ -20,7 +20,7 @@ i {
 	<!-- 왼쪽 부분(메뉴) -->
 	<div class="left_item">
 		<div class="mywork menu_list_item select">
-			<i class="fa-solid fa-calendar"></i> <span class="menu_list_item_text">내 정보 관리</span>
+			<img src="/images/commons/body_form/left_item/members/person-fill.svg"> <span class="menu_list_item_text">내 정보 관리</span>
 		</div>
 	</div>
 </body>
