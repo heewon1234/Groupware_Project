@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
+import com.kdt.dto.ApplyLeaveDTO;
 import com.kdt.dto.ApprovalDTO;
 import com.kdt.dto.ApprovalFilesDTO;
 import com.kdt.dto.ApprovalResponsiblesDTO;
@@ -225,7 +226,8 @@ public class ApprovalController {
 
 		return "redirect:/approval/document/lists/all";
 	}
-
+	
+	
 	@RequestMapping(value="/left_item")
 	public String toLeft_item(String selectItem, Model model) {
 		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");
@@ -251,10 +253,20 @@ public class ApprovalController {
 
 		return "/approval/document/left_item";
 	}
-
-	@RequestMapping("/works/workLeave_write")
-	public String work_leave_write() {
-		return "/approval/document/works/workLeave_write";
+	@ResponseBody
+	@RequestMapping(value="/works/workLeave_write")
+	public String work_leave_write(String title,String work_type,String work_day,String approvalname)throws Exception {
+		String ID = (String) session.getAttribute("loginId");
+		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");
+		String name = userDTO.getName();
+		System.out.println(userDTO.getName());
+		ApprovalDTO adto = new ApprovalDTO(0, ID, title, "contents", null, null, "휴가신청");
+		ApprovalResponsiblesDTO ardto = new ApprovalResponsiblesDTO(0,0,approvalname,null);
+		ApplyLeaveDTO aldto = new ApplyLeaveDTO(0,ID,name,work_type,work_day,0,null);
+		appService.leaveinsert(adto);
+		appService.aleaveinsert(aldto);
+		appRService.arleaveinsert(ardto);
+		return "/works/work_leave";
 	}
 	
 	@RequestMapping("/works/workPlan_write")

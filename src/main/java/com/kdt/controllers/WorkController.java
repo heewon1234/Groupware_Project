@@ -90,7 +90,8 @@ public class WorkController {
 	public List<WorkTimesDTO> list(Model model)throws Exception  {
 		String ID = (String) session.getAttribute("loginId");
 		List<WorkTimesDTO> tlist = wservice.selectby(ID);
-		wservice.addworknotcheck(ID);
+		wservice.addworknotcheck(ID); // 퇴근 미체크 추가
+		  							  // 결근 추가
 		model.addAttribute("tlist",tlist);
 		return tlist;
 	}
