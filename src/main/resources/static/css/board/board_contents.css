@@ -5,7 +5,19 @@
 /* div{border: 1px solid black;}  */
 
 .content_tab>div{width:1500px;}
-
+.backVoteBtn{
+	width:98px;
+    box-shadow: none;
+    background-color: #ebebeb;
+    border: solid 1px #d6d6d6;
+    border-radius: 4px;
+    color: #333;
+    padding: 0 20px 0px;
+    height: 34px;
+    cursor: pointer;
+    font-size: 14px;
+}
+.backVoteBtn:hover{background-color: #d6d6d6;}
 .noticeBox{
     height:40px;
     display: flex;

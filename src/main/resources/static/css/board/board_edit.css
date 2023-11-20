@@ -8,6 +8,9 @@
 	background-color:transparent !important;
 	font-weight:normal;
 }
+#selectDiv:hover{
+	background-color: #F7FAFF !important;
+}
 #toEditBoardBtn{
 	background-color: #DAE8F8;
 	color: #056AC9;

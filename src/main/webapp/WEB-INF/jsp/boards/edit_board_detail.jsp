@@ -13,7 +13,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<link rel="stylesheet" href="/css/commons/body_form/left_form/body_form_default.css" />
 	<link rel="stylesheet" href="/css/commons/topForm.css" />
-    <link rel="stylesheet" href="/css/board/mk_board.css" />
+    <link rel="stylesheet" href="/css/board/board_edit_detail.css" />
 </head>
 <body>
 	<div class="background"></div>
