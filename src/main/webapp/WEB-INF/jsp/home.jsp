@@ -116,15 +116,18 @@
 						</div>
 						<div class="blank"></div>
 						<div id="mailContainer">
-							<c:forEach></c:forEach>
 							<div>즐겨찾기 게시판</div>
 							<c:choose>
 								<c:when test="${empty favBoardList }">
-									게시글이 존재하지 않습니다
+									<div class="emptyFavBoardList">게시글이 존재하지 않습니다</div>
 								</c:when>
 								<c:otherwise>
 									<c:forEach items="${favBoardList}" var="i">
-										<a><div>게시글1</div></a>
+										<div>
+											<a href="/board/toContentsBoard?board_title=${i.board_title }&seq=${i.seq}">
+											${i.title }
+											</a>
+										</div>
 									</c:forEach>
 								</c:otherwise>
 							</c:choose>
