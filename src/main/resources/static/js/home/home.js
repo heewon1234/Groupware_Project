@@ -289,6 +289,7 @@ function drawMonth(date) {
     
     $(function () {
         var date = (new Date()).toISOString().substring(0, 10);
+        
         drawMonth(date);
     
         $('.month-move').on('click', function (e) {

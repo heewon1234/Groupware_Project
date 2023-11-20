@@ -2,25 +2,29 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
-  <mapper namespace="Works">
-  	 <select id="select" resultType="com.kdt.dto.WorksDTO"> <!-- select를 사용할때는 resultType 설정 -->
-  		select * from Works where id=#{id} 
-  	</select>
-  	<select id="selectList" resultType="com.kdt.dto.WorkstatisticsDTO">
-  		select * from Works
-  	</select>
-  	<insert id="insert">
-  		insert into Works values(#{id},#{name},#{organization},default,default,default,default,default,default,default,default)
-  	</insert>
-  	<delete id="delete">
-  		delete from Works where id=#{id}
-  </delete>
-  <update id="update">
-		Update Works set organization = #{organization} where id = #{id};
+
+<mapper namespace="Works">
+	<select id="select" resultType="com.kdt.dto.WorksDTO"> <!-- select를 사용할때는 resultType 설정 -->
+		select * from Works where id=#{id}
+	</select>
+	<select id="selectList"
+		resultType="com.kdt.dto.WorkstatisticsDTO">
+		select * from Works
+	</select>
+	<insert id="insert">
+		insert into Works
+		values(#{id},#{name},#{organization},default,default,default,default,default,default,default,default)
+	</insert>
+	<delete id="delete">
+		delete from Works where id=#{id}
+	</delete>
+	<update id="update">
+		Update Works set organization = #{organization} where
+		id = #{id};
 	</update>
 	<select id="existstoday" resultType="Int">
-		SELECT count(*) FROM WorkPlan WHERE id = #{id} AND DATE(work_days) = CURDATE();
+		SELECT count(*) FROM
+		WorkPlan WHERE id = #{id} AND DATE(work_days) = CURDATE();
 	</select>
 	<update id="addworklate">
 	<![CDATA[
@@ -31,6 +35,41 @@
 	<![CDATA[
 		UPDATE Works SET work_early = work_early + 1 WHERE id = #{id} AND TIME(CONVERT_TZ(now(), 'UTC', 'Asia/Seoul')) < '18:00:00';
 	]]>
+	</update>
+	<update id="addworkday">
+		update Works set all_workday = all_workday + 1 where
+		id = #{id}
+	</update>
+	<update id="addworkminutetime">
+	<![CDATA[
+     UPDATE Works
+SET all_worktime = all_worktime + TIMESTAMPDIFF(Minute,
+                                (SELECT MIN(wt.work_time)
+                                 FROM WorkTimes wt
+                                 WHERE wt.id = #{id} AND DATE(wt.work_time) = CURDATE() AND wt.work_type = '근무중'),
+                                (SELECT MIN(wt.work_time)
+                                 FROM WorkTimes wt
+                                 WHERE wt.id = #{id} AND DATE(wt.work_time) = CURDATE() AND wt.work_type = '근무 종료'))
+WHERE id = #{id} AND DATE((SELECT MIN(wt.work_time)
+                               FROM WorkTimes wt
+                               WHERE wt.id = #{id} AND DATE(wt.work_time) = CURDATE() AND wt.work_type = '근무중')) = CURDATE();  
+                               ]]>
+	</update>
+	<update id="addworknotcheck">
+<![CDATA[
+UPDATE Works w
+SET work_notcheck = (
+    SELECT COUNT(*) AS count
+    FROM (
+        SELECT id
+        FROM WorkTimes
+        GROUP BY id, work_time
+        HAVING SUM(CASE WHEN work_type = '근무중' THEN 1 ELSE 0 END) > 0
+           AND SUM(CASE WHEN work_type = '근무 종료' THEN 1 ELSE 0 END) = 0
+    ) wt
+)
+WHERE id=#{id};
+ ]]>
 	</update>
 	<select id="work_current_selectByName" resultType="com.kdt.dto.WorkPlanDTO">
 		SELECT * FROM WorkPlan WHERE user_names = #{name} and approval_status='완료';
