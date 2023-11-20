@@ -10,8 +10,6 @@
 }
 
 .body_form {
-    position: absolute;
-    top: 60px;
     width: 100%;
     height: calc(100% - 60px);
 }
@@ -20,8 +18,8 @@
     float: left;
     width: 276px;
     height: 100%;
-    position: fixed;
-    background-color: #EFF4FC;     
+    background-color: #EFF4FC;  
+    margin-top:60px;
 }
 
 .right_item {
@@ -29,8 +27,8 @@
     width: calc(100% - 276px);
     height: calc(100% - 60px);
     min-width: 950px;
-    margin-left: 276px;
     overflow: auto;
+    margin-top:60px;
 }
 
 #calendarBox{
