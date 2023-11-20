@@ -2,16 +2,19 @@
     box-sizing: border-box;
 }
 
+body {
+	height:100%;
+}
+
 .top_form {
     width: 100%;
     height: 60px;
     position: fixed;
     background-color: white;
+    z-index:10;
 }
 
 .body_form {
-    position: absolute;
-    top: 60px;
     width: 100%;
     height: calc(100% - 60px);
 }
@@ -19,9 +22,9 @@
 .left_item {
     float: left;
     width: 276px;
-    height: 100%;
-    position: fixed;
-    background-color: #EFF4FC;     
+    height: 850px;
+    background-color: #EFF4FC;  
+    margin-top:60px;
 }
 
 .right_item {
@@ -29,8 +32,8 @@
     width: calc(100% - 276px);
     height: calc(100% - 60px);
     min-width: 950px;
-    margin-left: 276px;
     overflow: auto;
+    margin-top:60px;
 }
 
 #calendarBox{

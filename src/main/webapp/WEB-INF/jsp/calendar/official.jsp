@@ -8,7 +8,9 @@
 <title>Official Calendar</title>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <link rel="stylesheet" type="text/css" href="/css/calendar/calendar.css">
-
+<link rel="stylesheet" href="/css/commons/topForm.css" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/fullcalendar@5.7.0/main.min.css">
 <script type="text/javascript"
@@ -28,24 +30,95 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 
 <style>
-#official{
+#official {
 	background-color: #DAE8F8;
-    color: #056AC9;
+	color: #056AC9;
 }
 </style>
 
 </head>
 <body>
-	<div class="top_form">TOP</div>
+	<div class="top_form">
+		<div id="top_container">
+			<div id="topFormTop">
+				<div class="topFormLogo">
+					<a href="/">logo</a>
+				</div>
+				<div id="topFormMenuSelectDiv">
+					오피스 홈 <i id="topFormMenuSelect" class="fa-solid fa-chevron-down"></i>
+				</div>
+				<div class="topFormIcon">
+					<i class="fa-regular fa-comment" onclick="openPopup()"></i> <i
+						class="fa-regular fa-bell"></i> <i
+						class="fa-regular fa-circle-user" id="topFormLogout"></i>
+				</div>
+			</div>
+			<div id="topFormMenuCollection" style="display: none;">
+				<div>전체메뉴</div>
+				<div id="topFormSelectMenu">
+					<div id="topFormLeft">
+						<div class="topFormMenu">
+							<i class="fa-regular fa-clipboard menuIcon"></i> 게시판
+						</div>
+						<div class="topFormMenu">
+							<a href="/calendar/official"> <i
+								class="fa-regular fa-calendar-days menuIcon"></i> 일정
+							</a>
+						</div>
+						<div class="topFormMenu">
+							<a href="/works/work_leave"> <i
+								class="fa-solid fa-sitemap menuIcon"></i> 인사
+							</a>
+						</div>
+					</div>
+					<div id="topFormRight">
+						<div class="topFormMenu">
+							<i class="fa-regular fa-address-book menuIcon"></i> 주소록
+						</div>
+						<div class="topFormMenu">
+							<a href="/approval/document/lists/all"> <i
+								class="fa-regular fa-clipboard menuIcon"></i> 결재
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="topFormLogout" style="display: none;">
+				<div id="topFormProfile">
+					<div id="topFormProfileImg">
+						<img src="${userDTO.profile_image}">
+					</div>
+					<div id="topFormProfileContents">
+						<div>${userDTO.organization }${userDTO.position }(${userDTO.name })</div>
+						<div style="margin-top: 3px; text-align: left;">${userDTO.id }</div>
+					</div>
+				</div>
+				<div class="topFormLogoutInBottom">
+					<div style="margin: 5px;">
+						<a href="/members/myInfo" style="font-size: 14px;">내 정보</a>
+					</div>
+					<div>
+						<a href="/members/logout"><button id="topFormLogoutBtn">로그아웃</button></a>
+					</div>
+				</div>
+			</div>
+			<div id="topFormrealPopup"></div>
+
+		</div>
+	</div>
 	<div class="body_form">
 		<!-- 왼쪽 부분(메뉴) -->
 		<div class="left_item">
 			<div class="menu_tab">
 				<div id="official" class="menu_item">
-					<img class="menu_item_img" src="/images/commons/body_form/left_item/default/favorites.png" /> <span class="menu_item_text">회사 일정</span>
+					<img class="menu_item_img"
+						src="/images/commons/body_form/left_item/default/favorites.png" />
+					<span class="menu_item_text">회사 일정</span>
 				</div>
 				<div id="personal" class="menu_item">
-					<img class="menu_item_img" src="/images/commons/body_form/left_item/default/information.png" /> <span class="menu_item_text">개인 일정</span>
+					<img class="menu_item_img"
+						src="/images/commons/body_form/left_item/default/information.png" />
+					<span class="menu_item_text">개인 일정</span>
 				</div>
 			</div>
 		</div>
@@ -56,7 +129,7 @@
 				<div id="calendar"></div>
 			</div>
 
-			<div class="modal fade" id="calendarModal" tabindex="-1"
+			<div class="modal fade abc" id="calendarModal" tabindex="-1"
 				role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
@@ -67,7 +140,8 @@
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
-						<form action="/calendar/ocreate" method="post" onsubmit="return validateForm()">
+						<form action="/calendar/ocreate" method="post"
+							onsubmit="return validateForm()">
 							<div class="modal-body">
 								<div class="form-group">
 									<label for="taskId" class="col-form-label">일정 내용</label> <input
@@ -98,14 +172,14 @@
 	let list = ${list};
 	var events = [];
 	list.forEach(function(item) {
-	    events.push({
-	        title: item.schedule,
-	        start: item.startday,
-	        end: item.endday,
-	        seq: item.seq
-	    });
+		events.push({
+			title : item.schedule,
+			start : item.startday,
+			end : item.endday,
+			seq : item.seq
+		});
 	});
-	
+
 	document.addEventListener('DOMContentLoaded', function() {
 		var calendarEl = document.getElementById('calendar');
 		var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -154,56 +228,57 @@
 					}
 				}
 			},
-			eventClick: function (info){
-                if(confirm("'"+ info.event.title +"' 일정을 삭제하시겠습니까 ?")){
-                    // 확인 클릭 시
-                    info.event.remove();
-                    
-                    var seq = info.event.extendedProps.seq;
-                    
-                    $(function deleteData(){
-                        $.ajax({
-                            url: "/calendar/odelete",
-                            method: "POST",
-                            data: {
-                            	seq:seq
-                            }
-                        })
-                    })
-                }
+			eventClick : function(info) {
+				if (confirm("'" + info.event.title + "' 일정을 삭제하시겠습니까 ?")) {
+					// 확인 클릭 시
+					info.event.remove();
 
-                
-            },
-            
-            eventDrop: function (info){
-                var seq = info.event.extendedProps.seq;
-                var title = info.event._def.title;
-                var start = info.event._instance.range.start;
-                var end = info.event._instance.range.end;
-                
-                var startTimestamp = start.toISOString().slice(0, 19).replace('T', ' ');
-                var endTimestamp = end.toISOString().slice(0, 19).replace('T', ' ');
+					var seq = info.event.extendedProps.seq;
 
-                $(function deleteData() {
-                    $.ajax({
-                        url: "/calendar/oupdate",
-                        method: "POST",
-                        data: {
-                        	seq:seq,
-                        	title:title,
-                        	start:startTimestamp,
-                        	end:endTimestamp
-                        }
-                    })
-                })
-            },
-			
+					$(function deleteData() {
+						$.ajax({
+							url : "/calendar/odelete",
+							method : "POST",
+							data : {
+								seq : seq
+							}
+						})
+					})
+				}
+
+			},
+
+			eventDrop : function(info) {
+				var seq = info.event.extendedProps.seq;
+				var title = info.event._def.title;
+				var start = info.event._instance.range.start;
+				var end = info.event._instance.range.end;
+
+				var startTimestamp = start.toISOString().slice(0, 19).replace(
+						'T', ' ');
+				var endTimestamp = end.toISOString().slice(0, 19).replace('T',
+						' ');
+
+				$(function deleteData() {
+					$.ajax({
+						url : "/calendar/oupdate",
+						method : "POST",
+						data : {
+							seq : seq,
+							title : title,
+							start : startTimestamp,
+							end : endTimestamp
+						}
+					})
+				})
+			},
+
 			editable : true, // false로 변경 시 draggable 작동 x
 			displayEventTime : false
 		});
 		calendar.render();
 	});
-	
+
 	function validateForm() {
 		var content = $("#calendar_content").val();
 		var start_date = $("#calendar_start_date").val();
@@ -218,8 +293,8 @@
 		} else { // 정상적인 입력 시
 			return true;
 		}
-    }
-	
+	}
+
 	$(document).ready(function() {
 		$('#official').click(function() {
 			location.href = "/calendar/official";
@@ -228,7 +303,41 @@
 		$('#personal').click(function() {
 			location.href = "/calendar/personal";
 		});
+		
+		$("#topFormrealPopup").load("/chats/chatting");
+
+		let logout = false;
+
+		$("#topFormLogout").on("click", function() {
+			if (logout == false) {
+				$(".topFormLogout").css("display", "");
+				logout = true;
+			} else {
+				$(".topFormLogout").css("display", "none");
+				logout = false;
+			}
+		});
+
+		let menu = false;
+
+		$("#topFormMenuSelectDiv").on("click", function() {
+			if (menu == false) {
+				$("#topFormMenuCollection").css("display", "flex");
+				menu = true;
+			} else {
+				$("#topFormMenuCollection").css("display", "none");
+				menu = false;
+			}
+		});
 	});
 	
-	</script>
+	$("#topFormLogoutbtn").on("click", function() {
+		let memberout = confirm("로그아웃 하시겠습니까?");
+		if (!memberout) {
+			return false;
+		} else {
+			alert("로그아웃 되었습니다.");
+		}
+	});
+</script>
 </html>
