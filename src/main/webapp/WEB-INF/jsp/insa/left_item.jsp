@@ -73,7 +73,7 @@ i{margin-right: 8px;}
 			</div>
 			
 
-			<c:if test="${userDTO.job_name eq '사이트관리자'}">
+			<c:if test="${userDTO.organization eq '관리부'}">
 				<!-- 드롭 다운 메뉴 (추가 효과 없음) -->
 				<div class="menu_list">
 					<div class="menu_list_button">
