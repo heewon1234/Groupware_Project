@@ -129,7 +129,7 @@
 				<div id="calendar"></div>
 			</div>
 
-			<div class="modal fade" id="calendarModal" tabindex="-1"
+			<div class="modal fade abc" id="calendarModal" tabindex="-1"
 				role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
@@ -304,7 +304,7 @@
 			location.href = "/calendar/personal";
 		});
 		
-		//$("#topFormrealPopup").load("/chats/chatting");
+		$("#topFormrealPopup").load("/chats/chatting");
 
 		let logout = false;
 

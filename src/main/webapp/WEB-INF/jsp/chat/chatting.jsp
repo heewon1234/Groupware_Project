@@ -19,7 +19,7 @@
 	display: none;
 }
 /* Define your modal styles here */
-.modal {
+.ChatModal {
 	display: none;
 	position: fixed;
 	z-index: 1;
@@ -30,7 +30,7 @@
 	background-color: rgba(0, 0, 0, 0.5);
 }
 
-.modal-content {
+.ChatModal-content {
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -160,8 +160,8 @@ width: 60px;
 			</div>
 		</div>
 		<!-- 그룹 선택 모달 창 -->
-		<div id="groupUserModal" class="modal">
-			<div class="modal-content" style="width: 300px; height: 500px;">
+		<div id="groupUserModal" class="ChatModal">
+			<div class="ChatModal-content" style="width: 300px; height: 500px;">
 				<span class="close" id="groupModalClose">&times;</span>
 				<h2>사용자 선택</h2>
 				<ul id="groupUserList">

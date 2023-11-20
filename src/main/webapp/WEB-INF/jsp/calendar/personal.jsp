@@ -8,7 +8,7 @@
 <title>Personal Calendar</title>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <link rel="stylesheet" type="text/css" href="/css/calendar/calendar.css">
-
+<link rel="stylesheet" href="/css/commons/topForm.css" />
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/fullcalendar@5.7.0/main.min.css">
 <script type="text/javascript"
@@ -38,7 +38,74 @@
 
 </head>
 <body>
-	<div class="top_form">TOP</div>
+	<div class="top_form">
+		<div id="top_container">
+			<div id="topFormTop">
+				<div class="topFormLogo">
+					<a href="/">logo</a>
+				</div>
+				<div id="topFormMenuSelectDiv">
+					오피스 홈 <i id="topFormMenuSelect" class="fa-solid fa-chevron-down"></i>
+				</div>
+				<div class="topFormIcon">
+					<i class="fa-regular fa-comment" onclick="openPopup()"></i> <i
+						class="fa-regular fa-bell"></i> <i
+						class="fa-regular fa-circle-user" id="topFormLogout"></i>
+				</div>
+			</div>
+			<div id="topFormMenuCollection" style="display: none;">
+				<div>전체메뉴</div>
+				<div id="topFormSelectMenu">
+					<div id="topFormLeft">
+						<div class="topFormMenu">
+							<i class="fa-regular fa-clipboard menuIcon"></i> 게시판
+						</div>
+						<div class="topFormMenu">
+							<a href="/calendar/official"> <i
+								class="fa-regular fa-calendar-days menuIcon"></i> 일정
+							</a>
+						</div>
+						<div class="topFormMenu">
+							<a href="/works/work_leave"> <i
+								class="fa-solid fa-sitemap menuIcon"></i> 인사
+							</a>
+						</div>
+					</div>
+					<div id="topFormRight">
+						<div class="topFormMenu">
+							<i class="fa-regular fa-address-book menuIcon"></i> 주소록
+						</div>
+						<div class="topFormMenu">
+							<a href="/approval/document/lists/all"> <i
+								class="fa-regular fa-clipboard menuIcon"></i> 결재
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="topFormLogout" style="display: none;">
+				<div id="topFormProfile">
+					<div id="topFormProfileImg">
+						<img src="${userDTO.profile_image}">
+					</div>
+					<div id="topFormProfileContents">
+						<div>${userDTO.organization }${userDTO.position }(${userDTO.name })</div>
+						<div style="margin-top: 3px; text-align: left;">${userDTO.id }</div>
+					</div>
+				</div>
+				<div class="topFormLogoutInBottom">
+					<div style="margin: 5px;">
+						<a href="/members/myInfo" style="font-size: 14px;">내 정보</a>
+					</div>
+					<div>
+						<a href="/members/logout"><button id="topFormLogoutBtn">로그아웃</button></a>
+					</div>
+				</div>
+			</div>
+			<div id="topFormrealPopup"></div>
+
+		</div>
+	</div>
 	<div class="body_form">
 		<!-- 왼쪽 부분(메뉴) -->
 		<div class="left_item">
@@ -236,8 +303,42 @@
 		$('#personal').click(function() {
 			location.href = "/calendar/personal";
 		});
+		
+		$("#topFormrealPopup").load("/chats/chatting");
+
+		let logout = false;
+
+		$("#topFormLogout").on("click", function() {
+			if (logout == false) {
+				$(".topFormLogout").css("display", "");
+				logout = true;
+			} else {
+				$(".topFormLogout").css("display", "none");
+				logout = false;
+			}
+		});
+
+		let menu = false;
+
+		$("#topFormMenuSelectDiv").on("click", function() {
+			if (menu == false) {
+				$("#topFormMenuCollection").css("display", "flex");
+				menu = true;
+			} else {
+				$("#topFormMenuCollection").css("display", "none");
+				menu = false;
+			}
+		});
 	});
 	
+	$("#topFormLogoutbtn").on("click", function() {
+		let memberout = confirm("로그아웃 하시겠습니까?");
+		if (!memberout) {
+			return false;
+		} else {
+			alert("로그아웃 되었습니다.");
+		}
+	});
 	
 </script>
 </html>
