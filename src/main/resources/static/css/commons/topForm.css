@@ -76,6 +76,12 @@ a {
 }
 #topFormProfileContents{
 	margin-left: 20px;
+	text-align: left;
+}
+
+#topFormProfileContents>div:nth-child(2),
+#topFormProfileContents>div:nth-child(3) {
+	font-size: 13px;
 }
 
 #topFormMenuCollection {
@@ -123,7 +129,7 @@ a {
 }
 
 #topFormProfileImg img {
-	width: 70px;
-	height: 70px;
+	width: 60px;
+	height: 60px;
 	border-radius: 50%;
 }

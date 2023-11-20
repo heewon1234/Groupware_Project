@@ -33,6 +33,7 @@ $(".fa-circle-plus").on("click", function() {
 		div.css("display", "inline-block");
 
 		let input_position = $("<input type='text' >");
+		input_position.attr("id", "job_position_input");
 		input_position.attr("name", "position");
 
 		let input_job_rank = $("<input type='text' hidden>");
@@ -95,4 +96,29 @@ $(".parent_span").on("click", "span", function() {
 $(document).ready(function() {
 	$(".left_item").load("/insa/manage/left_item?selectItem=job");
 	$(".top_container").load("/commons/topForm");
+});
+
+let jobPositionList = [];
+let jobNameList = [];
+
+for (let i = 0; i < $(".jobPosition_span").length; i++) {
+	jobPositionList.push($(".jobPosition_span").eq(i).html());
+}
+
+for (let i = 0; i < $(".jobName_span").length; i++) {
+	jobNameList.push($(".jobName_span").eq(i).html());
+}
+
+$("#apply_jobTitle").on("click", function() {
+	if (jobPositionList.some((job) => job == $("#job_position_input").val())) {
+		alert("동일한 직위명이 존재합니다.");
+		return false;
+	} else { }
+});
+
+$("#apply_jobRole").on("click", function() {
+	if (jobNameList.some((job) => job == $("#job_name_input").val())) {
+		alert("동일한 직무명이 존재합니다.");
+		return false;
+	} else { }
 });

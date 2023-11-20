@@ -131,3 +131,11 @@ td {
 	height: 100%;
 	text-align: center;
 }
+
+#plusIcon {
+   filter: invert(45%) sepia(63%) saturate(1946%) hue-rotate(162deg)
+      brightness(95%) contrast(101%);
+   position: relative;
+   bottom: 2px;
+   width: 20px;
+}
