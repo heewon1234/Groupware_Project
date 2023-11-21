@@ -98,6 +98,8 @@ $(document).ready(function() {
 	$(".top_container").load("/commons/topForm");
 });
 
+
+// 직무명&직위명 리스트 생성
 let jobPositionList = [];
 let jobNameList = [];
 
@@ -108,7 +110,9 @@ for (let i = 0; i < $(".jobPosition_span").length; i++) {
 for (let i = 0; i < $(".jobName_span").length; i++) {
 	jobNameList.push($(".jobName_span").eq(i).html());
 }
+//
 
+// 중복되는 직위명을 입력시 경고창
 $("#apply_jobTitle").on("click", function() {
 	if (jobPositionList.some((job) => job == $("#job_position_input").val())) {
 		alert("동일한 직위명이 존재합니다.");
@@ -116,6 +120,7 @@ $("#apply_jobTitle").on("click", function() {
 	} else { }
 });
 
+// 중복되는 직무명 입력시 경고창
 $("#apply_jobRole").on("click", function() {
 	if (jobNameList.some((job) => job == $("#job_name_input").val())) {
 		alert("동일한 직무명이 존재합니다.");

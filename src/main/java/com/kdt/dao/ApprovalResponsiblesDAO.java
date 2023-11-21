@@ -46,4 +46,7 @@ public class ApprovalResponsiblesDAO {
 	public int getReturnCount(String id) {
 		return db.selectOne("ApprovalResponsibles.getReturnCount", id);
 	}
+	public int arleaveinsert(ApprovalResponsiblesDTO ardto)throws Exception{
+		return db.insert("ApprovalResponsibles.arleaveinsert",ardto);
+	}
 }

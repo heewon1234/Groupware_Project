@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.kdt.dto.ChatMessageDTO;
-import com.kdt.dto.GroupChatDTO;
 import com.kdt.services.ChatMessageService;
 import com.kdt.services.ChatRoomService;
 

@@ -5,86 +5,78 @@ $(document).ready(function() {
 $(document).ready(function() {
 	$("#top_container").load("/commons/topForm");
 });
-
-$("input[type='checkbox']").on("click", function() {
-	let count = $("input[type='checkbox']").length;
-
-	if (count > 4) {
-		$(this).prop("checked", false);
-	}
+$(document).ready(function() {
+    // 각 체크박스에 대한 이벤트 리스너 추가
+    $("input[name='managerID']").on("change", function() {
+        // 체크박스 상태에 따라 동작 수행
+        if ($(this).prop("checked")) {
+            // 체크됐을 때의 동작
+            var managerId = $(this).val();
+            var managerName = $(this).siblings("span").eq(1).text();
+            console.log("체크됐음 - ID: " + managerId + ", Name: " + managerName);
+			$("#button_apply_tag").removeClass("permit");
+        } else {
+            // 체크가 해제됐을 때의 동작
+            var managerId = $(this).val();
+            var managerName = $(this).siblings("span").eq(1).text();
+            console.log("체크 해제됨 - ID: " + managerId + ", Name: " + managerName);
+           if ($("input[name='managerID']:checked").length === 0) {
+            $("#button_apply_tag").addClass("permit");
+        }
+        }
+        
+    });
 });
-
+var checkedManagerValues = [];
+var checkedManagers;
 $(".modalButton_apply").on("click", function() {
 	// 모달 폼 보이기/숨기기 토글
 	$('.modal_tag_add').css('display', 'block');
 	$('.modal_background').css('display', 'block');
+	
+	 $("#button_apply_tag").on("click", function(e) {
+		 e.preventDefault();
+		 
+		  $("#approvalTable .innerTable th").text("");
+        // 체크된 checkbox 값을 가져오기
+         checkedManagers = $("input[name='managerID']:checked");
+        // 비어있는 td에 값 넣기
+        checkedManagers.each(function(index, element) {
+            var managerName = $(element).siblings("span").eq(1).text();
+            $("#app_tr th").eq(index).text(managerName);
+        });
+
+        $(".modal_tag_add").hide();
+        $(".modal_background").hide();
+        
+         if (checkedManagers.length > 0 && selectedDates.length > 0) {
+            $(".button_apply").removeClass("permit");
+        }
+		 checkedManagerValues = []; // 배열 초기화
+
+        checkedManagers.each(function(index, element) {
+            var managerValue = $(element).val();
+            checkedManagerValues.push(managerValue);
+        });
+
+        console.log(checkedManagerValues);
+			
 });
+		 
+    });
+    // 취소 버튼 클릭 시
+    $("#button_cancel_tag").on("click", function(e) {
+		e.preventDefault();
+		$("#approvalTable .innerTable th").text("");
+         $(".modal_tag_add").hide();
+         $(".modal_background").hide();
+    });
 
-$("#apply_btn").on("click", function() {
-	// 모달 폼 보이기/숨기기 토글
-	$("#modalContainer_apply").toggleClass("hidden show");
-	$('.modal_background').css('display', 'none');
 
-	$(".app").empty();
 
-	$("#modalContainer_apply input[type='checkbox']:checked").each(function(index) {
-		let input = $("<input type='text' hidden>");
-		input.attr("name", "managerID");
-		input.val($(this).prev().html());
 
-		$("#app_th" + (index + 1)).html($(this).prev().prev().html());
-		$("#app_th" + (index + 1)).append(input);
-		$("#app_td" + (index + 1)).html($(this).prev().prev().prev().html());
-	});
-});
-
-$("#title").keyup(function() {
-	if ($(this).val() != "" && $("#contents").val() != "") {
-		$("#submit_btn").removeClass("permit");
-	} else {
-		$("#submit_btn").addClass("permit");
-	}
-});
-
-$("#contents").keyup(function() {
-	if ($(this).val() != "" && $("#title").val() != "") {
-		$("#submit_btn").removeClass("permit");
-	} else {
-		$("#submit_btn").addClass("permit");
-	}
-});
-/*달력*/
-// 주말을 제외한 정을 추가하는 함수
-function createScheduleCell(date) {
-	if (dayIsWeekend(date)) {
-		// 주말인 경우
-		if (isSaturday(date)) {
-			return $('<td>').text('휴무').addClass('weekend-cell');
-		} else if (isSunday(date)) {
-			return $('<td>').text('휴일').addClass('weekend-cell');
-		} else {
-			return $('<td>'); // 다른 주말인 경우 비어있는 td 반환
-		}
-	} else {
-		return $('<td>').text('정').addClass('jeng');
-	}
-}
-
-// 토요일인지 확인하는 함수
-function isSaturday(date) {
-	return date.getDay() === 6;
-}
-
-// 일요일인지 확인하는 함수
-function isSunday(date) {
-	return date.getDay() === 0;
-}
-
-// 주말인지 확인하는 함수 (토요일 또는 일요일인지 확인)
-function dayIsWeekend(date) {
-	return isSaturday(date) || isSunday(date);
-}
 let selectedDates = [];
+let selectedbox = [];
 let tdarray = [];
 // 이름 소속을 가져오는 ajax
 $(document).ready(function() {
@@ -105,22 +97,21 @@ $(document).ready(function() {
 			var tableRowDate = $('#tr1'); // 날짜가 들어갈 행
 			let num1 = 0;
 			dates.forEach(date => {
-				
-				let cellDate = $('<td>').text(formatDate(date)).addClass('td'+num1++);
+				let cellDate = $('<td>').text(formatDate(date)).addClass('td' + num1++);
 				tableRowDate.append(cellDate);
 			});
 			var tableRowDays = $('#tr2'); // 요일이 들어갈 행
 			var tableRowSelect = $('#tr3');
 			let num2 = 0;
 			daysOfWeek.forEach(day => {
-				
+
 				let cellDay = $('<td>').text(day).addClass('td' + num2);
 				tableRowDays.append(cellDay);
 				let td = $('<td>').addClass('td' + num2++);
 				tableRowSelect.append(td);
 			});
 
-			
+
 
 			tableRowSelect.on('click', 'td', function() {
 				let selectedClass = $(this).attr('class'); // 클릭한 td의 클래스 값 가져오기
@@ -133,10 +124,10 @@ $(document).ready(function() {
 
 				let isSelected = $(this).hasClass('selected-td');
 				$(this).addClass("selected-td")
-				
+
 				let clickedRowText = tableRowDate.find('.' + selectedClass).text().trim();
-    			let formattedDate = formatDate3(new Date(today.getFullYear(), currentMonth - 1, parseInt(clickedRowText)));
- 
+				let formattedDate = formatDate3(new Date(today.getFullYear(), currentMonth - 1, parseInt(clickedRowText)));
+
 				if (isSelected) {
 					// 배열에서 해당 날짜를 제거
 				} else {
@@ -144,24 +135,27 @@ $(document).ready(function() {
 					selectedDates.push(formattedDate);
 					tdarray.push(selectedClass)
 				}
-				
-					
-					console.log(tdarray);
+
+
+				console.log(tdarray);
 				$('#selectedDates').empty();
-				for(i=0;i<selectedDates.length;i++){
-					var tableRow = $('<tr>').addClass('div'+i);
+				$('#selectleavetype').empty();
+				for (i = 0; i < selectedDates.length; i++) {
+					var tableRow = $('<tr>').addClass('div' + i);
 					tableRow.append(selectedDates[i]);
-					tableRow.append("<select><option value='연차'>연차</option><option value='경조사'>경조사</option></select>");
-					tableRow.append("<button id='deleteleave' class='div"+i+" "+tdarray[i]+"'>X</button>");
+					tableRow.append("<button id='deleteleave' class='div" + i + " " + tdarray[i] + "'>X</button>");
 					tableRow.append("<br>");
 					$('#selectedDates').append(tableRow);
+					$('#selectleaveday').text("선택일수" + selectedDates.length + "일");
 				}
-				
-				
-				// 선택된 날짜들을 select로 연차 경조사 선택 가능하게 만들기
-				
-				
+				$('#selectleavetype').append("<select><option value='연차'>연차</option><option value='경조사'>경조사</option></select>");
 
+				// 선택된 날짜들을 select로 연차 경조사 선택 가능하게 만들기
+
+	
+				 if (checkedManagers.length > 0 && selectedDates.length > 0) {
+            $(".button_apply").removeClass("permit");
+        }
 				if (selectedDates.length > 0) {
 					$('#leave_apply').css('display', 'block');
 				} else {
@@ -175,28 +169,40 @@ $(document).ready(function() {
 
 $(document).on("click", "#deleteleave", function(e) {
 	e.preventDefault();
-    // 클릭한 버튼의 클래스를 가져옴
-    var buttonClass = $(this).attr('class');
-    
-    var classArray = buttonClass.split(' ');
 
-	 var dateToRemove = $("." + classArray[0]).text().trim().substring(0, 10);
-	 var tdRemove = classArray[1];
+	// 클릭한 버튼의 클래스를 가져옴
+	var buttonClass = $(this).attr('class');
+
+	var classArray = buttonClass.split(' ');
+
+	var dateToRemove = $("." + classArray[0]).text().trim().substring(0, 10);
+	console.log($("." + classArray[0]).text().trim());
+	var tdRemove = classArray[1];
 	console.log(dateToRemove);
 	console.log(tdRemove);
 
-    // selectedDates 배열에서 해당 날짜를 찾아 제거
-    var indexToRemove = selectedDates.indexOf(dateToRemove);
-    var indextotdRemove = tdarray.indexOf(tdRemove);
-    if (indexToRemove !== -1) {
-        selectedDates.splice(indexToRemove, 1);
-    }
-    if (indextotdRemove !== -1) {
-        tdarray.splice(indextotdRemove, 1);
-    }
-    // 클래스와 일치하는 엘리먼트를 제거
-    $("." + classArray[0]).remove(); // div
-    $("#tr3 ." + classArray[1]).removeClass('selected-td'); //td
+	// selectedDates 배열에서 해당 날짜를 찾아 제거
+	var indexToRemove = selectedDates.indexOf(dateToRemove);
+	var indextotdRemove = tdarray.indexOf(tdRemove);
+	if (indexToRemove !== -1) {
+		selectedDates.splice(indexToRemove, 1);
+	}
+	if (indextotdRemove !== -1) {
+		tdarray.splice(indextotdRemove, 1);
+	}
+	// 클래스와 일치하는 엘리먼트를 제거
+	$("." + classArray[0]).remove(); // div
+	$("#tr3 ." + classArray[1]).removeClass('selected-td'); //td
+	$('#selectleaveday').text("선택일수" + selectedDates.length + "일");
+	 if (checkedManagers.length > 0 && selectedDates.length > 0) {
+            $(".button_apply").removeClass("permit");
+        }
+	if (selectedDates.length > 0) {
+		$('#leave_apply').css('display', 'block');
+	} else {
+		$('#leave_apply').css('display', 'none');
+	}
+
 });
 
 // 날짜 데이터를 생성하는 함수
@@ -273,10 +279,10 @@ function formatDate1(date) {
 	return year + "년 " + month + "월 " + day + "일";
 }
 function formatDate3(date) {
-    let year = date.getFullYear();
-    let month = date.getMonth() + 1;
-    let day = date.getDate();
-    return year + '-' + (month < 10 ? '0' : '') + month + '-' + (day < 10 ? '0' : '') + day;
+	let year = date.getFullYear();
+	let month = date.getMonth() + 1;
+	let day = date.getDate();
+	return year + '-' + (month < 10 ? '0' : '') + month + '-' + (day < 10 ? '0' : '') + day;
 }
 function updateCurrentMonth(year, month) {
 	var gridItem2 = $("#gridContainer .gridItem:nth-child(2)");
@@ -385,7 +391,7 @@ function updateData(updateYear, updateMonth) {
 		}
 		let num = 0;
 		dates.forEach(date => {
-			let cellDate = $('<td>').text(formatDate(date)).addClass('td'+num);
+			let cellDate = $('<td>').text(formatDate(date)).addClass('td' + num);
 			tableRowDate.append(cellDate);
 		});
 
@@ -396,3 +402,29 @@ function updateData(updateYear, updateMonth) {
 
 	});
 }
+$(document).ready(function() {
+	$("#submit_button").on("click", function() {
+		let title = document.getElementById('work_leave_title').value; // 휴가신청
+		console.log("title: " + title);
+		let work_type = $('#selectleavetype select option:selected').val(); // 경조사인지 연차인지
+		console.log("worktype: " + work_type);
+		let approvalname = checkedManagerValues.join(',');
+		$("#work_days").val(selectedDates.join(','));
+		let work_day = document.getElementById('work_days').value;
+		console.log(work_day);
+		$.ajax({
+			url: '/approval/document/works/workLeave_write',
+			data: {
+			title: title,
+			work_type:work_type,
+			work_day:work_day,
+			approvalname:approvalname
+		},
+		}).done(function(resp) {
+			alert("ggod");
+			window.location.href = resp;
+		});
+
+	});
+})
+

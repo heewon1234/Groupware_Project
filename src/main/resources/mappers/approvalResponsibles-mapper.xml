@@ -6,7 +6,9 @@
 	<insert id="insert">
 		INSERT INTO Approval_Responsibles VALUES(NULL, #{doc_id}, #{approver_id}, "미결")
 	</insert>
-	
+	<insert id="arleaveinsert">
+		INSERT INTO Approval_Responsibles VALUES(NULL, #{doc_id}, #{approver_id}, "미결")
+	</insert>
 	<select id="getDocIdByUserId" resultType="Integer">
 		select doc_id from Approval_Responsibles
 		where approver_id = #{id};

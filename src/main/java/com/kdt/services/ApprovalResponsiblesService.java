@@ -48,4 +48,14 @@ public class ApprovalResponsiblesService {
 	public int getReturnCount(String id) {
 		return dao.getReturnCount(id);
 	}
+	public void arleaveinsert(ApprovalResponsiblesDTO ardto)throws Exception{
+		String list[] = ardto.getApprover_id().split(",");
+
+		for(String approver_id : list) {
+			ardto.setApprover_id(approver_id);
+			dao.arleaveinsert(ardto);
+		}
+
+		return;
+	}
 }

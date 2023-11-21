@@ -50,12 +50,13 @@
 	background-color: lightblue;
 	cursor: pointer;
 }
-#chattingProfileImg{
-width: 60px;
-    border-radius: 50%;
-    margin-right: 2px;
-    height: 60px;
-    overflow: hidden;
+
+#chattingProfileImg {
+	width: 60px;
+	border-radius: 50%;
+	margin-right: 2px;
+	height: 60px;
+	overflow: hidden;
 }
 </style>
 </head>
@@ -70,6 +71,9 @@ width: 60px;
 			<div class="profile">
 				<div id="chattingImg">
 					<img id="chattingProfileImg" src="${userDTO.profile_image}"
+						onerror="this.onerror=null; this.src='/images/commons/person-circle.svg';">
+					<input type="text" hidden id="loginUserProfile"
+						value="${userDTO.profile_image}"
 						onerror="this.onerror=null; this.src='/images/commons/person-circle.svg';">
 				</div>
 				<div class="chattingUser">
@@ -179,9 +183,7 @@ width: 60px;
 			<div class="inputTop" style="padding-top: 10px; padding-left: 5px">
 				<span class="close-button" onclick="closeOneChat()">&times;</span>
 				<div class="myProfile">
-					<div class="ownImg">
-						
-					</div>
+					<div class="ownImg"></div>
 					<div class="other">
 						<input id="otherName" value="${friendName}" style="border: none;"
 							disabled="disabled"> <input id="organization"
@@ -451,16 +453,19 @@ function groupChat(groupName, groupSeq) {
             var message = JSON.parse(response.body);
             var messageText = message.message;
             let currentUserName = $("#groupUserName").val();
-
-				var messageContainer = $("<div class='message-container'></div>");
-			    var userIDContainer = $("<div class='user-id'></div>").text(message.userID);
-			    var messageTextContainer = $("<div class='message-text'></div>").html(message.message);
-			    if (currentUserName == message.userID) { 
-                    messageContainer.addClass('own-message'); 
-                }
-			    
-			    messageContainer.append(userIDContainer).append(messageTextContainer);
-                $('.chatGroupForm').append(messageContainer);
+                var messageContainer = $("<div class='message-container'></div>");
+		        var messageRigterContainer = $("<div class='message-righter'></div>");
+		    	var userImgContainer = $("<div class='otherImg'>").html(
+		    				        '<img class="otherProfileImg" src="' + message.profile_image + '" onerror="this.onerror=null; this.src=\'/images/commons/person-circle.svg\';">'
+		    			    ).css("display", "inline-block")
+		    	var userIDContainer = $("<div class='user-id'></div>").text(message.userID);
+		    	var messageTextContainer = $("<div class='message-text'></div>").html(messageText);
+		    	if (currentUserName == message.userID) { 
+		            messageContainer.addClass('own-message'); 
+		            }
+		    	messageRigterContainer.append(userIDContainer).append(messageTextContainer)
+		    	messageContainer.append(userImgContainer,messageRigterContainer);
+		        $('.chatGroupForm').append(messageContainer);
                 groupKeepScrollBottom();
         }, function (error) {
             console.error('Subscription error: ', error);
@@ -480,6 +485,7 @@ function groupChat(groupName, groupSeq) {
 function sendGroupMessage(groupSeq) {
     var message = $('#groupinputText').html();
     var groupSeq = $('#groupSeq').val();
+    let loginUserProfile = $("#loginUserProfile").val();
 
     if (message) {
        var userID = $('#groupUserName').val();
@@ -490,6 +496,7 @@ function sendGroupMessage(groupSeq) {
        stompClient.send('/app/group/sendMessage/' + groupSeq,
              {}, JSON.stringify({
                 type : "CHAT",
+                profile_image:loginUserProfile,
                 messageType : messageType,
                 userID : userID,
                 message : message,
@@ -511,17 +518,17 @@ function getPreviousGroupMessages(groupSeq) {
             for (var i = 0; i < previousMessages.length; i++) {
                 var previousMessage = previousMessages[i];
                 var messageContainer = $("<div class='message-container'></div>");
-					    
+                var messageRigterContainer = $("<div class='message-righter'></div>");
 			    var userImgContainer = $("<div class='otherImg'>").html(
-				        '<img class="otherProfileImg" src="' + previousMessages.profile_image + '" onerror="this.onerror=null; this.src=\'/images/commons/person-circle.svg\';">'
+				        '<img class="otherProfileImg" src="' + previousMessage.profile_image + '" onerror="this.onerror=null; this.src=\'/images/commons/person-circle.svg\';">'
 			    ).css("display", "inline-block")
 			    var userIDContainer = $("<div class='user-id'></div>").text(previousMessage.userID);
 			    var messageTextContainer = $("<div class='message-text'></div>").html(previousMessage.message);
 			    if (currentUserName == previousMessage.userID) { 
                     messageContainer.addClass('own-message'); 
                 }
-			    
-			    messageContainer.append(userImgContainer).append(userIDContainer).append(messageTextContainer);
+			    messageRigterContainer.append(userIDContainer).append(messageTextContainer)
+			    messageContainer.append(userImgContainer,messageRigterContainer);
                 $('.chatGroupForm').append(messageContainer);
             }
             groupKeepScrollBottom();    
@@ -626,15 +633,18 @@ function getPreviousGroupMessages(groupSeq) {
 		            console.log("현재 사용자"+currentUserName);
 		            for (var i = 0; i < previousMessages.length; i++) {
 		                let previousMessage = previousMessages[i];
-		                let messageContainer = $("<div class='message-container'></div>");
-		                let userIDContainer = $("<div class='user-id'></div>").text(previousMessage.userID);
-		                let messageTextContainer = $("<div class='message-text'></div>").html(previousMessage.message);
-		                
-		                if (currentUserName == previousMessage.userID) {
-		                    messageContainer.addClass('own-message');
+		                var messageContainer = $("<div class='message-container'></div>");
+		                var messageRigterContainer = $("<div class='message-righter'></div>");
+					    var userImgContainer = $("<div class='otherImg'>").html(
+						        '<img class="otherProfileImg" src="' + previousMessage.profile_image + '" onerror="this.onerror=null; this.src=\'/images/commons/person-circle.svg\';">'
+					    ).css("display", "inline-block")
+					    var userIDContainer = $("<div class='user-id'></div>").text(previousMessage.userID);
+					    var messageTextContainer = $("<div class='message-text'></div>").html(previousMessage.message);
+					    if (currentUserName == previousMessage.userID) { 
+		                    messageContainer.addClass('own-message'); 
 		                }
-		                
-		                messageContainer.append(userIDContainer).append(messageTextContainer);
+					    messageRigterContainer.append(userIDContainer).append(messageTextContainer)
+					    messageContainer.append(userImgContainer,messageRigterContainer);
 		                $('.chatForm').append(messageContainer);
 		            }
 		            keepScrollBottom();
@@ -766,14 +776,18 @@ function getPreviousGroupMessages(groupSeq) {
 		                var messageText = message.message;
 		                let currentUserName = $("#userName").val();
 		                if (message.type === 'CHAT') {
-		                	let messageContainer = $("<div class='message-container'></div>");
-		                	let userIDContainer = $("<div class='user-id'></div>").text(message.userID);
-		                	let messageTextContainer = $("<div class='message-text'></div>").html(messageText);
-		                	if (currentUserName === message.userID) {
-		                        messageContainer.addClass('own-message')
+		                    var messageContainer = $("<div class='message-container'></div>");
+		                    var messageRigterContainer = $("<div class='message-righter'></div>");
+		    			    var userImgContainer = $("<div class='otherImg'>").html(
+		    				        '<img class="otherProfileImg" src="' + message.profile_image + '" onerror="this.onerror=null; this.src=\'/images/commons/person-circle.svg\';">'
+		    			    ).css("display", "inline-block")
+		    			    var userIDContainer = $("<div class='user-id'></div>").text(message.userID);
+		    			    var messageTextContainer = $("<div class='message-text'></div>").html(messageText);
+		    			    if (currentUserName == message.userID) { 
+		                        messageContainer.addClass('own-message'); 
 		                    }
-		                	
-		                	messageContainer.append(userIDContainer).append(messageTextContainer);
+		    			    messageRigterContainer.append(userIDContainer).append(messageTextContainer)
+		    			    messageContainer.append(userImgContainer,messageRigterContainer);
 		                    $('.chatForm').append(messageContainer);
 		                    keepScrollBottom();
 		                }
@@ -800,6 +814,7 @@ function getPreviousGroupMessages(groupSeq) {
 		function sendMessage(oneSeq) {
 		    var message = $('#inputText').html();
             var oneSeq = $('#oneSeq').val();
+            let loginUserProfile = $("#loginUserProfile").val();
             var currentTime = new Date(); 
             var time = new Date().getTime(); 
             var hours = currentTime.getHours();
@@ -825,6 +840,7 @@ function getPreviousGroupMessages(groupSeq) {
                stompClient.send('/app/oneToOne/sendMessage/' + oneSeq,
                      {}, JSON.stringify({
                         type : "CHAT",
+                        profile_image:loginUserProfile,
                         messageType : messageType,
                         userID : userID,
                         message : message,

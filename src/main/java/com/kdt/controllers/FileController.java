@@ -69,7 +69,7 @@ public class FileController {
 	@RequestMapping(value="/imageUpload",method=RequestMethod.POST)
 	public List<String> imageUpload(MultipartFile[] files) throws Exception {
 		// 이미지를 저장할 디렉토리 경로 설정
-		String upload = "C:/uploads";
+		String upload = "C:/uploads/profile_image/";
 
 		List<String> fileUrls = fservice.imageUpload(files, upload);
 

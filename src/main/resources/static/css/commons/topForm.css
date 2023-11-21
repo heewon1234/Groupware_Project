@@ -135,3 +135,27 @@ a, a:hover {
 	height: 60px;
 	border-radius: 50%;
 }
+
+.button_cancel {
+    box-shadow: none;
+    background-color: #ebebeb;
+    border: solid 1px #d6d6d6;
+    border-radius: 4px;
+    color: #333;
+    padding: 0 20px 0px;
+    height: 34px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.button_cancel:hover {
+    background-color: #d6d6d6;
+}
+
+.button_cancel.float_left {
+    margin-right:auto;
+}
+
+.button_cancel.float_right {
+    margin-left:14px;
+}
