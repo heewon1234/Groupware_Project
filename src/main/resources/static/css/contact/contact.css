@@ -39,8 +39,66 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
     display: none;
+}
+
+.modal_tag_edit {
+    z-index: 6;
+    background-color: white;
+    border-radius: 4px;
+    padding: 25px;
+    width: 400px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+}
+
+.modal_tag_delete{
+    z-index: 6;
+    background-color: white;
+    border-radius: 4px;
+    padding: 25px;
+    width: 600px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+}
+
+.modal_body_delete_message {
+    font-size: 13px;
+    padding: 0 0 20px;
+}
+
+.modal_body_delete_radio_select {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.modal_body_delete_radio_select_left {
+    width: 16px;
+    height: 16px;
+    border: solid 1px black;
+    border-radius: 100%;
+}
+
+.modal_body_delete_radio_select_right {
+    margin-left: 6px;
+    font-size: 13px;;
+}
+
+.modal_body_delete_radio_select_left.checked{
+    box-sizing: border-box;
+    border: 5px solid #2985db;
+}
+
+.modal_body_delete_radio_select_right.checked{
+    color: #2985db;
+    font-weight: bold;
 }
 
 .modal_title {
@@ -339,6 +397,21 @@
 }
 
 .modal_tag_duplication_error img {
+    width: 13px;
+    height: 13px;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+.modal_tag_regex_error {
+    font-size: 13px;
+    margin-top: 8px;
+    display: none;
+    align-items: center;
+    color: #d50000;
+}
+
+.modal_tag_regex_error img {
     width: 13px;
     height: 13px;
     vertical-align: middle;
