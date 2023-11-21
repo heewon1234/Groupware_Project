@@ -28,7 +28,9 @@ let plus_tag_type;
 let plus_tag_name;
 
 // TOP 불러오기
-$("#top_container").load("/commons/topForm");
+$(document).ready(function() {
+	$("#top_container").load("/commons/topForm");
+});
 
 // 선택한 요소에 Select 클래스 붙이기 // 온로드
 $(document).ready(function() {
@@ -271,7 +273,7 @@ function modal_contact_read_add_data(element, type) {
 				}
 				if (resp[i].edit == "true") {
 					$("#modal_footer_read").
-							append(`<button class="button_cancel" onclick="modal_cancel_button('read_modal',event)">닫기</button>
+						append(`<button class="button_cancel" onclick="modal_cancel_button('read_modal',event)">닫기</button>
 								<button class="button_apply" onclick="modal_read_edit('share')" style="margin-left: 14px;">수정</button>`);
 				}
 

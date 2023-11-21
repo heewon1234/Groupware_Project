@@ -10,6 +10,7 @@
 
 <link rel="stylesheet" href="/css/contact/contact.css" />
 <link rel="stylesheet" href="/css/commons/body_form/left_form/body_form_default.css" />
+<link rel="stylesheet" href="/css/commons/topForm.css" />
 
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <script src="/js/contact/contact.js"></script>

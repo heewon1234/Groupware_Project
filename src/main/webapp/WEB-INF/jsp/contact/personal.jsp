@@ -10,6 +10,7 @@
 
 <link rel="stylesheet" href="/css/contact/contact.css" />
 <link rel="stylesheet" href="/css/commons/body_form/left_form/body_form_default.css" />
+<link rel="stylesheet" href="/css/commons/topForm.css" />
 
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <script src="/js/contact/contact.js"></script>
@@ -176,7 +177,7 @@
 					</div>
 				</div>
 				<div class="modal_footer right">
-					<button class="button_cancel float_left"  id="modal_cancel_button">취소</button>
+					<button class="button_cancel float_left" id="modal_cancel_button">취소</button>
 					<button class="button_apply float_right permit" id="modal_apply_button">저장</button>
 					<button class="button_apply float_right permit" id="modal_apply_list_button">저장 후 계속
 						추가</button>
@@ -341,7 +342,9 @@
 				</div>
 				<div class="modal_footer right">
 					<button class="button_delete float_left" onclick="modal_update_delete('personal')">삭제</button>
-					<button class="button_cancel float_right" onclick="modal_cancel_button('contact_update_modal',event)">취소</button>
+					<button class="button_cancel float_right"
+						onclick="modal_cancel_button('contact_update_modal',event)"
+					>취소</button>
 					<button class="button_apply float_right" onclick="modal_update_apply('personal')">수정</button>
 				</div>
 			</div>
@@ -441,7 +444,9 @@
 		</div>
 		<div class="modal_body">
 			<div class="input-group mb-0">
-				<input type="text" class="form-control" id="modal_tag_input_edit" onkeyup="edit_form_new_tag_deplicate('edit', this)">
+				<input type="text" class="form-control" id="modal_tag_input_edit"
+					onkeyup="edit_form_new_tag_deplicate('edit', this)"
+				>
 			</div>
 			<div class="modal_tag_duplication_error">
 				<img src="/images/contact/dup_error.png"> 태그 이름이 이미 있습니다.
@@ -600,7 +605,7 @@
 								>
 							</div>
 						</div>
-						<div class="countBox">						
+						<div class="countBox">
 							<span id="select_contact_tag">${contactName}</span><span
 								style="color: blue; font-weight: bold; margin: 0 0px 0 5px"
 							>${personalContactList.size()}</span>개
