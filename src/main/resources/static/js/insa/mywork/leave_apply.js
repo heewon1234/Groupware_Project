@@ -37,13 +37,13 @@ $(".modalButton_apply").on("click", function() {
 	 $("#button_apply_tag").on("click", function(e) {
 		 e.preventDefault();
 		 
-		  $("#approvalTable .innerTable td").text("");
+		  $("#approvalTable .innerTable th").text("");
         // 체크된 checkbox 값을 가져오기
          checkedManagers = $("input[name='managerID']:checked");
         // 비어있는 td에 값 넣기
         checkedManagers.each(function(index, element) {
             var managerName = $(element).siblings("span").eq(1).text();
-            $("#app_tr td").eq(index).text(managerName);
+            $("#app_tr th").eq(index).text(managerName);
         });
 
         $(".modal_tag_add").hide();
@@ -67,7 +67,7 @@ $(".modalButton_apply").on("click", function() {
     // 취소 버튼 클릭 시
     $("#button_cancel_tag").on("click", function(e) {
 		e.preventDefault();
-		$("#approvalTable .innerTable td").text("");
+		$("#approvalTable .innerTable th").text("");
          $(".modal_tag_add").hide();
          $(".modal_background").hide();
     });

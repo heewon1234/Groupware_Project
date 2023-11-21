@@ -51,7 +51,7 @@ public class FileService {
 				String sysName = UUID.randomUUID()+"_"+oriName;//파일이름이 겹치지 않게 해준다.
 				//-----아직 임시 저장소
 				file.transferTo(new File(dir+"/"+sysName));
-				fileUrls.add("/uploads/" + sysName);
+				fileUrls.add("/uploads/profile_image/" + sysName);
 			}
 		}
 		
