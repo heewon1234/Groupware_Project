@@ -48,13 +48,13 @@
 									</th>
 									<td>
 										<table class="innerTable" border='1'>
-											<tr>
+											<tr id="app_tr">
 												<th id="app_th1" class="app"></th>
 												<th id="app_th2" class="app"></th>
 												<th id="app_th3" class="app"></th>
 												<th id="app_th4" class="app"></th>
 											</tr>
-											<tr id="app_tr">
+											<tr>
 												<td></td>
 												<td></td>
 												<td></td>

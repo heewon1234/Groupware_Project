@@ -59,9 +59,6 @@ public class ApprovalDAO {
 	public int getProcessCount(String id) {
 		return db.selectOne("Approval.getProcessCount", id);
 	}
-	public int leaveinsert(ApprovalDTO adto)throws Exception{
-		return db.insert("Approval.leaveinsert",adto);
-	}
 	public int aleaveinsert(ApplyLeaveDTO aldto)throws Exception{
 		return db.insert("Approval.aleaveinsert",aldto);
 	}
