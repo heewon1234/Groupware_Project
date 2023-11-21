@@ -182,5 +182,8 @@ updateWorkformTable()
 $(document).ready(function() {
 	work_inout();
 });
+$(".worktime_update").on("click", function() {
+	alert("업데이트중입니다");
+});
 // 1초마다 시계 업데이트
 setInterval(updateClock, 1000);

@@ -156,6 +156,9 @@ $(document).ready(function() {
 				 if (checkedManagers.length > 0 && selectedDates.length > 0) {
             $(".button_apply").removeClass("permit");
         }
+        else{
+			arlet("결재자를 우선 선택해주세요");
+		}
 				if (selectedDates.length > 0) {
 					$('#leave_apply').css('display', 'block');
 				} else {
@@ -310,7 +313,7 @@ updateCurrentMonth();
 updateCurrentMonth(today.getFullYear(), currentMonth);
 
 // 왼쪽 버튼 클릭 시 이벤트 처리
-$(".prevMonth").click(function() {
+/*$(".prevMonth").click(function() {
 	currentMonth--;
 	updateMonth();
 	updateData(today.getFullYear(), currentMonth); // 이전 월 변경 시 데이터 갱신
@@ -324,7 +327,7 @@ $(".nextMonth").click(function() {
 	updateData(today.getFullYear(), currentMonth); // 다음 월 변경 시 데이터 갱신
 	updateCurrentMonth(today.getFullYear(), currentMonth);
 });
-
+*/
 
 // 월 갱신 함수
 function updateMonth() {
@@ -424,7 +427,6 @@ $(document).ready(function() {
 			alert("ggod");
 			window.location.href = resp;
 		});
-
 	});
 })
 
