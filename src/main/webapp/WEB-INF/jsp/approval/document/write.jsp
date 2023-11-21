@@ -109,7 +109,7 @@
 						<li><span>${list.organization }</span>
 							<span>${list.name }</span>
 							<span hidden>${list.id }</span>
-							<input type='checkbox' value='${list.id}'>
+							<input type='checkbox' class="id_checkBox" value='${list.id}'>
 						</li>
 					</c:forEach>
 				</ul>
