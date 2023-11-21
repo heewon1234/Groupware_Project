@@ -1,4 +1,4 @@
-
+let prevHeader = [];
 let board_title = $("#prevBoardTitle").val();
 $(".authority").css("display","none");
 $(".header").css("display","none");
@@ -18,10 +18,27 @@ $.ajax({ // 말머리 담아두기
 	method:"POST"
 }).done(function(resp){
 	headerList = resp;
+	prevHeader = resp;
 	$(".header").css("display","block");
 });
 
 $("#editFormBtn").on("click",function(){
+	let change = false;
+	if(prevHeader.length==headerList.length){
+		for(let i=0;i<prevHeader.length;i++){
+			for(let j=0;j<prevHeader.length;j++){
+				if(prevHeader[i]!=headerList[j]){
+					change = true;
+					break;
+				}
+			}
+			if(change){break;}
+		}
+		if(change){$("#changeHeader").val("true")}
+	} else{
+		$("#changeHeader").val("true")
+	}
+	
 	
 	if($("#board_title_input").val()==""){
 		alert("게시판 이름을 입력하세요");
