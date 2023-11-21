@@ -93,5 +93,5 @@ $("#input-file").on("change", function(e) {
 });
 
 $("#back_btn").on("click", function() {
-	window.history.back();
+	location.href="/";
 });

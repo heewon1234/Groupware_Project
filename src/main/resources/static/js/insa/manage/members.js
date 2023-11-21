@@ -26,17 +26,17 @@ $('.dataTables_filter input').unbind().bind('keyup', function() {
 
 });
 
-$("input[type='checkbox']").on("change", function() {
+$(document).on("change", "input[type='checkbox']", function() {
 	// 체크박스 이벤트 발생하면 체크된 인원 수 반영
 	$("#checked_count").html($(".chk_box:checked").length);
 
 	// 체크가 하나라도 되어있다면 수정 버튼 보이기
 	if ($("input[type='checkbox']:checked").length > 0) {
-		$(".modalButton").removeClass("invisbale");
+		$(".modalButton").removeClass("invisible");
 	}
 	// 그렇지 않다면 수정 버튼 숨기기
 	else {
-		$(".modalButton").addClass("invisbale");
+		$(".modalButton").addClass("invisible");
 	}
 });
 
