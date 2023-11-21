@@ -10,6 +10,7 @@
 
 <link rel="stylesheet" href="/css/contact/contact.css" />
 <link rel="stylesheet" href="/css/commons/body_form/left_form/body_form_default.css" />
+<link rel="stylesheet" href="/css/commons/topForm.css" />
 
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <script src="/js/contact/contact.js"></script>
@@ -353,9 +354,8 @@
 			<div class="modal_body" id="read_body">
 				<div class="modal_body_content_form" id="read_content_form"></div>
 			</div>
-			<div class="modal_footer">
-				<button class="button_cancel" onclick="modal_cancel_button('read_modal'),event">닫기</button>
-				<button class="button_apply" onclick="modal_read_edit('share')" style="margin-left: 14px;">수정</button>
+			<div class="modal_footer" id="modal_footer_read">
+				
 			</div>
 		</div>
 
@@ -485,7 +485,7 @@
 	<!-- TOP 꼭 열어보세요.-->
 	<div class="top_form">
 		<!-- 실제로는 이 곳에 TOP 글씨를 지우시고 TOP을 불러오는 코드를 넣으시면 됩니다. -->
-		TOP
+		<div id="top_container"></div>
 	</div>
 
 	<!-- 여기서부터 -->
