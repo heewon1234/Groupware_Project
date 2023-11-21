@@ -18,13 +18,23 @@ function workin() {
 	}
 }
 function workout() {
-	updateoutTime();
-	changeStatus('근무 종료', this);
-	document.getElementById("workout").disabled = true;
-	var buttons = document.querySelectorAll('.workbtn');
-	for (var i = 0; i < buttons.length; i++) {
-		buttons[i].disabled = true;
+	var userConfirmed = confirm('퇴근은 하루에 한 번만 체크할 수 있습니다. 퇴근하시겠습니까? ');
+
+
+	if (userConfirmed) {
+		updateoutTime();
+		changeStatus('근무 종료', this);
+		document.getElementById("workout").disabled = true;
+		var buttons = document.querySelectorAll('.workbtn');
+		for (var i = 0; i < buttons.length; i++) {
+			buttons[i].disabled = true;
+		}
+
+	} else {
+
+
 	}
+
 }
 
 function updateinTime() { // 출근하기 클릭 시 시간 출력
