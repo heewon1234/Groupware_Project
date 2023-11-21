@@ -235,7 +235,7 @@ public class MembersController {
 			shapw = EncryptionUtils.getSHA512(pw);
 		}
 		
-		System.out.println(profile_image);
+		System.out.println("image:"+profile_image);
 		
 		MembersDTO dto = new MembersDTO(userDTO.getId(), shapw, null, null, null, null, null, phone, email, zipcode, address1, address2, profile_image);
 		
