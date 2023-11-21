@@ -261,9 +261,10 @@ public class ApprovalController {
 		String name = userDTO.getName();
 		System.out.println(userDTO.getName());
 		ApprovalDTO adto = new ApprovalDTO(0, ID, title, "contents", null, null, "휴가신청");
-		ApprovalResponsiblesDTO ardto = new ApprovalResponsiblesDTO(0,0,approvalname,null);
-		ApplyLeaveDTO aldto = new ApplyLeaveDTO(0,ID,name,work_type,work_day,0,null);
-		appService.leaveinsert(adto);
+		int seq = appService.leaveinsert(adto);
+		ApprovalResponsiblesDTO ardto = new ApprovalResponsiblesDTO(0,seq,approvalname,null);
+		ApplyLeaveDTO aldto = new ApplyLeaveDTO(0,ID,name,work_type,work_day,seq,null);
+		
 		appService.aleaveinsert(aldto);
 		appRService.arleaveinsert(ardto);
 		return "/works/work_leave";

@@ -121,7 +121,7 @@ public class ApprovalService {
 		}
 	}
 	public int leaveinsert(ApprovalDTO adto)throws Exception{
-		return adao.leaveinsert(adto);
+		return adao.insert(adto);
 	}
 	public void aleaveinsert(ApplyLeaveDTO aldto)throws Exception{
 		String list[] = aldto.getWork_days().split(",");
