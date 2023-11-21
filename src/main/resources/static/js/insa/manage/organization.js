@@ -6,7 +6,7 @@ $(".modalButton").on("click", function() {
 $(document).on("click", ".remove_org_btn", function() {
 	let result = confirm('삭제하시겠습니까?');
 	if (result) {
-		location.href = "/org/delete?organization="+ $(this).prev().html();
+		location.href = "/org/delete?organization=" + $(this).prev().html();
 	} else { }
 });
 
@@ -17,17 +17,33 @@ $(document).ready(function() {
 
 function checkFields() {
 
-  if ($("#level").val() != "" && $("#organization").val() != "" && $("#manager").val() != "상위조직명") {
-    $("#submit_btn").removeClass("permit");
-  } else {
-    $("#submit_btn").addClass("permit");
-  }
+	if ($("#level").val() != "" && $("#org_input").val() != "" && $("#manager").val() != "상위조직명") {
+		$("#submit_btn").removeClass("permit");
+	} else {
+		$("#submit_btn").addClass("permit");
+	}
 }
 
-$("#level, #organization").on("keyup", function() {
-  checkFields();
+$("#level, #org_input").on("keyup", function() {
+	checkFields();
 });
 
 $("#manager").on("change", function() {
-  checkFields();
+	checkFields();
+});
+
+// 동일 조직명 존재시 경고창 출력
+$("button[type='submit']").on("click", function() {
+	// 조직명 리스트 생성
+	let organizationList = [];
+	// 조직명 리스트에 값 삽입
+	for (let i = 0; i < $(".org_span").length; i++) {
+		organizationList.push($(".org_span").eq(i).html());
+	}
+
+
+	if (organizationList.some((org) => org == $("#org_input").val())) {
+		alert("동일한 조직명이 존재합니다.");
+		return false;
+	} else { }
 });

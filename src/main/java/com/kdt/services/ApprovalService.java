@@ -13,6 +13,7 @@ import com.kdt.dao.ApprovalDAO;
 import com.kdt.dao.ApprovalFilesDAO;
 import com.kdt.dao.ApprovalResponsiblesDAO;
 import com.kdt.dao.WorkPlanDAO;
+import com.kdt.dto.ApplyLeaveDTO;
 import com.kdt.dto.ApprovalDTO;
 import com.kdt.dto.ApprovalFilesDTO;
 import com.kdt.dto.ApprovalResponsiblesDTO;
@@ -119,4 +120,18 @@ public class ApprovalService {
 			ardao.insert(new ApprovalResponsiblesDTO(0, parent_seq, id, "미결"));
 		}
 	}
+	public int leaveinsert(ApprovalDTO adto)throws Exception{
+		return adao.leaveinsert(adto);
+	}
+	public void aleaveinsert(ApplyLeaveDTO aldto)throws Exception{
+		String list[] = aldto.getWork_days().split(",");
+
+		for(String work_day : list) {
+			aldto.setWork_days(work_day);
+			adao.aleaveinsert(aldto);
+		}
+
+		return;
+	}
+	
 }
