@@ -271,10 +271,10 @@
 	//전체 인원수를 불러오는 코드
 	$.ajax({
 		type : "POST",
-		url : "/chats/oneAllRecordCount",
+		url : "/members/selectAll",
 		dataType : "json",
 		success : function(data) {
-			$(".Thead").html("전체 " + data);
+			$(".Thead").html("전체 " + (data.length-1));
 		},
 		error : function() {
 			console.log("새로운 레코드 수를 가져오지 못했습니다.");
