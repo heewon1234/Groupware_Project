@@ -168,7 +168,10 @@ public class BoardService {
 	public List<Map<String,String>> FavoriteListBy(String board_title,String id, String start){ 
 		
 		String fromBoard = boardSeqList();
-
+		if(fromBoard.isEmpty()) {
+			List<Map<String,String>> list = new ArrayList<>();
+			return list;
+		}
 		Map<String,String> map = new HashMap<>();
 		map.put("id", id);
 		map.put("fromBoard", fromBoard);
@@ -177,7 +180,12 @@ public class BoardService {
 		return bdao.FavoriteListBy(map);
 	}
 	public List<BoardDTO> homeFavList(String id){
+		
 		String fromBoard = boardSeqList();
+		if(fromBoard.isEmpty()) {
+			List<BoardDTO> list = new ArrayList<>();
+			return list;
+		}
 		Map<String,String> map = new HashMap<>();
 		map.put("id", id);
 		map.put("fromBoard", fromBoard);

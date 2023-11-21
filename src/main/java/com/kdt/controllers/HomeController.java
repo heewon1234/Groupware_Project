@@ -37,8 +37,9 @@ public class HomeController {
 			String org = this.mservice.getOrganization(id);
 			List<Official_CalendarDTO> list = this.cservice.selectAllO(org);
 			List<BoardDTO> favBoardList = bservice.homeFavList(id);
-			model.addAttribute("list",list);
 			model.addAttribute("favBoardList",favBoardList);
+			model.addAttribute("list",list);
+			
 		}
 		return "home";
 	}
