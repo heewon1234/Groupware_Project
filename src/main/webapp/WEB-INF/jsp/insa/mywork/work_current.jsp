@@ -163,16 +163,13 @@ margin-left: 3px;
 										workTime.text('휴무일');
 									} else {
 								        let listLen = $("#listLen").val();
-								        console.log(listLen);
 					                  	 workTime.text('정 9:00 ~ 18:00');
 										for (let j = 0; j < listLen; j++) {
-											console.log(j);
 								            var updateDate = $("#updateWorkTime_" + j).val();
 								            var numbersOnly = updateDate.replace(/\D/g, '');
 								            var updateYear = numbersOnly.substring(0, 4);
 								            var updateMonth = numbersOnly.substring(4, 6);
 								            var updateDay = numbersOnly.substring(6, 8);
-								            console.log(updateYear+":"+updateMonth+":"+updateDay);
 								            if (year == updateYear && month == updateMonth && i == updateDay) {
 								                let updateWorkContents = $("#updateWorkContents_" + j).val(); // updateWorkContents 변수 정의
 

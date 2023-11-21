@@ -37,8 +37,6 @@ public class WorkPlanController {
 		List<String> managerOrgList = orgService.getManagerOrgList(userDTO.getOrganization());
 		List<String> managerPositionList = jobService.getManagerPosition(userDTO.getPosition());
 		List<MembersDTO> managerList = mservice.getManagerList(managerOrgList, managerPositionList);
-		System.out.println("매니저"+managerList);
-		System.out.println("매니저2"+managerPositionList);
 		model.addAttribute("userDTO", userDTO);
 		model.addAttribute("managerList", managerList);
 		return "/insa/work_manage/workPlan";

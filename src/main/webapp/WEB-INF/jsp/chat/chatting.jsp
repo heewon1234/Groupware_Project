@@ -67,7 +67,7 @@
 		<input id="loginID" type="hidden" value="${loginId }">
 		<div class="chattingTop">
 			<span class="close-button" onclick="closePopup()">&times;</span>
-			<div id="logo" class="dragHandle">logo</div>
+			<div id="logo" class="dragHandle"><img id="chattingLogo" src="/images/commons/logo.png"></div>
 			<div class="profile">
 				<div id="chattingImg">
 					<img id="chattingProfileImg" src="${userDTO.profile_image}"
@@ -449,7 +449,6 @@ function groupChat(groupName, groupSeq) {
 	$("#groupJSP").css("display", "block");
 	
         stompClient.subscribe('/topic/group/' + groupSeq, function (response) {
-            console.log('Received message: ' + response.body);
             var message = JSON.parse(response.body);
             var messageText = message.message;
             let currentUserName = $("#groupUserName").val();
@@ -556,7 +555,6 @@ function getPreviousGroupMessages(groupSeq) {
 							if (listData.length > 0) {
 								for (var i = 0; i < listData.length; i++) {
 									var friend = listData[i];
-									console.log(friend.profile_image);
 									var $row = $("<div>").addClass("table-row");
 
 									var $iconCell = $("<div>").html(
@@ -578,15 +576,11 @@ function getPreviousGroupMessages(groupSeq) {
 													(function(clickedUserName,
 															clickedUserId,profileImg) {
 														return function() {
-															console
-																	.log(clickedUserName);
 															var loginID = $(
 																	"#loginID")
 																	.val();
 															var otherID = clickedUserId;
 															var organization = friend.organization;
-															console.log(profileImg);
-															console.log(clickedUserName);
 															$(".ownImg").html("");
 															$(".ownImg").append(
 																    $("<div class='oneImg'>").html(
@@ -600,8 +594,6 @@ function getPreviousGroupMessages(groupSeq) {
 																if (chatRoom.loggedInUserID === loginID
 																		&& chatRoom.otherUserID === otherID) {
 																	oneSeq = chatRoom.oneSeq;
-																	console
-																			.log(oneSeq);
 																	openOneChat(
 																			clickedUserName,
 																			friend.organization,
@@ -630,7 +622,6 @@ function getPreviousGroupMessages(groupSeq) {
 		        success: function(data) {
 		            var previousMessages = data;
 		            let currentUserName = $("#userName").val();
-		            console.log("현재 사용자"+currentUserName);
 		            for (var i = 0; i < previousMessages.length; i++) {
 		                let previousMessage = previousMessages[i];
 		                var messageContainer = $("<div class='message-container'></div>");
@@ -723,8 +714,6 @@ function getPreviousGroupMessages(groupSeq) {
 																	if (chatRoom.loggedInUserID === loginID
 																			&& chatRoom.otherUserID === otherID) {
 																		oneSeq = chatRoom.oneSeq;
-																		console
-																				.log(oneSeq);
 																		openOneChat(
 																				clickedUserName,
 																				friend.organization,
@@ -771,7 +760,6 @@ function getPreviousGroupMessages(groupSeq) {
 		    $("#inputJSP").css("display", "block");
 
 		            stompClient.subscribe('/topic/oneToOne/' + oneSeq, function (response) {
-		                console.log('Received message: ' + response.body);
 		                var message = JSON.parse(response.body);
 		                var messageText = message.message;
 		                let currentUserName = $("#userName").val();
