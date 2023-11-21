@@ -13,7 +13,7 @@
 <body>
 	<div id="topFormTop">
 		<div class="topFormLogo">
-			<a href="/">logo</a>
+			<a href="/"><img src="/images/commons/logo.png" alt="..."></a>
 		</div>
 		<div id="topFormMenuSelectDiv">
 			오피스 홈 <i id="topFormMenuSelect" class="fa-solid fa-chevron-down"></i>
