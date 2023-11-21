@@ -125,7 +125,7 @@
 									<c:forEach items="${favBoardList}" var="i">
 										<div>
 											<a href="/board/toContentsBoard?board_title=${i.board_title }&seq=${i.seq}">
-											${i.title }
+											${i.title } 
 											</a>
 										</div>
 									</c:forEach>
