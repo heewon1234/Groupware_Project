@@ -162,8 +162,8 @@ public class Mk_BoardController {
 	}
 	
 	@RequestMapping("editBoardDetail")
-	public String editBoardDetail(Mk_BoardDTO dto, String headerList, String authorityList, String prevBoardTitle) {
-		mservice.editBoardDetail(dto, headerList, authorityList, prevBoardTitle);
+	public String editBoardDetail(Mk_BoardDTO dto, String headerList, String authorityList, String prevBoardTitle, String changeHeader) {
+		mservice.editBoardDetail(dto, headerList, authorityList, prevBoardTitle, changeHeader);
 		return "redirect:/mk_board/toEditBoard";
 	}
 }

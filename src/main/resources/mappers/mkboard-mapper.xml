@@ -24,7 +24,7 @@
 	</select>
 	<!-- 게시판 생성 -->
 	<insert id="Mk_boardInsert" useGeneratedKeys="true" keyProperty="seq">
-		insert into Mk_Board values (null, #{id}, #{board_title}, #{board_type}, #{name_type}, #{use_header}, default)
+		insert into Mk_Board values (null, #{id}, #{board_title}, #{board_type}, #{name_type}, #{use_header}, #{mk_date})
 	</insert>
 	<insert id="createTable">
 		${sql}

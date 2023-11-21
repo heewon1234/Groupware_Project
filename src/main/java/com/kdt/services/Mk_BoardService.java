@@ -4,6 +4,7 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +20,6 @@ import com.kdt.dao.FileDAO;
 import com.kdt.dao.HeaderDAO;
 import com.kdt.dao.Mk_BoardDAO;
 import com.kdt.dto.AuthorityDTO;
-import com.kdt.dto.FileDTO;
 import com.kdt.dto.HeaderDTO;
 import com.kdt.dto.Mk_BoardDTO;
 
@@ -61,6 +61,7 @@ public class Mk_BoardService {
 	// 게시판 생성
 	@Transactional
 	public void Mk_boardInsert(Mk_BoardDTO dto, String headerList, String authorityList) {
+		dto.setMk_date(new Timestamp(System.currentTimeMillis()));
 		mdao.Mk_boardInsert(dto);
 		String sys_board_title = "Board_"+dto.getSeq();
 
@@ -143,7 +144,7 @@ public class Mk_BoardService {
 
 	// 게시판 수정
 	@Transactional
-	public void editBoardDetail(Mk_BoardDTO dto, String headerList, String authorityList, String prevBoardTitle) {
+	public void editBoardDetail(Mk_BoardDTO dto, String headerList, String authorityList, String prevBoardTitle, String changeHeader) {
 		// mk_board 테이블 업데이트
 		Map<String,String> map = new HashMap<>();
 		map.put("board_title", dto.getBoard_title());
@@ -169,7 +170,7 @@ public class Mk_BoardService {
 		}
 
 		// header 테이블, authority 테이블 데이터 삭제
-		hdao.deleteHeader(prevBoardTitle);
+		
 		adao.deleteAuthority(prevBoardTitle);
 
 		// header 테이블, authority 테이블에 새로 insert
@@ -181,8 +182,11 @@ public class Mk_BoardService {
 
 		if(dto.isUse_header()) {
 			String[] headers = gson.fromJson(headerList, String[].class);
-			for(String header:headers) {
-				hdao.headerInsert(new HeaderDTO(0,dto.getBoard_title(),header));
+			if(changeHeader.equals("true")) {
+				hdao.deleteHeader(prevBoardTitle);
+				for(String header:headers) {
+					hdao.headerInsert(new HeaderDTO(0,dto.getBoard_title(),header));
+				}
 			}
 		}	
 	}

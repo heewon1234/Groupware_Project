@@ -180,6 +180,7 @@
                     <button type="button" id="backBtn">취소</button>
                     <button id="editFormBtn">생성</button>
                 </div>
+                <input type="hidden" name="changeHeader" value="false" id="changeHeader">
             </div>
         </div>
         </form>
