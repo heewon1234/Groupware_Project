@@ -354,7 +354,7 @@
 				<div class="modal_body_content_form" id="read_content_form"></div>
 			</div>
 			<div class="modal_footer">
-				<button class="button_cancel" onclick="modal_cancel_button('read_modal'),event">닫기</button>
+				<button class="button_cancel" onclick="modal_cancel_button('read_modal',event)">닫기</button>
 				<button class="button_apply" onclick="modal_read_edit('personal')" style="margin-left: 14px;">수정</button>
 			</div>
 		</div>

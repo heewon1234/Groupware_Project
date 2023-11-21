@@ -271,21 +271,23 @@ function modal_contact_read_add_data(element, type) {
 				}
 				if (resp[i].edit == "true") {
 					$("#modal_footer_read").
-						append("<button class='button_cancel' id='modal_read_cancel'>닫기</button>" +
-							"<button class='button_apply' onclick='modal_read_edit(`share`)' style='margin-left: 14px;' >수정</button>");
+							append(`<button class="button_cancel" onclick="modal_cancel_button('read_modal',event)">닫기</button>
+								<button class="button_apply" onclick="modal_read_edit('share')" style="margin-left: 14px;">수정</button>`);
 				}
 
+
 				else if (resp[i].edit == "false") {
-					if (loginId == resp[i].writer || loginId == 'admin') {
+					if (loginId == resp[i].writer) {
 						$("#modal_footer_read").
-							append("<button class='button_cancel' id='modal_read_cancel'>닫기</button>" +
-								"<button class='button_apply' onclick='modal_read_edit(`share`)' style='margin-left: 14px;' >수정</button>");
+							append(`<button class="button_cancel" onclick="modal_cancel_button('read_modal',event)">닫기</button>
+								<button class="button_apply" onclick="modal_read_edit('share')" style="margin-left: 14px;">수정</button>`);
 					}
 					else {
 						$("#modal_footer_read").
-							append("<button class='button_cancel' id='modal_read_cancel'>닫기</button>");
+							append(`<button class="button_cancel" onclick="modal_cancel_button('read_modal',event)">닫기</button>`);
 					}
 				}
+				console.log(resp[i].edit);
 			}
 		});
 	}
@@ -873,6 +875,45 @@ function edit_form_new_tag_deplicate(type, element) {
 	}
 
 }
+
+// 새 태그 생성(노말)
+$(document).on("click", "#button_apply_tag", function() {
+	let tag_input = $("#modal_new_tag_input").val();
+
+	if (contactType == "personal") {
+		$.ajax({
+			url: "/contact/personalContactTagInsert",
+			type: "GET",
+			data: {
+				tag: tag_input
+			}
+		}).done(function() {
+			$("#modal_new_tag_input").val("");
+			$('#modal_contact_add').css('z-index', '5');
+			$('#modal_contact_add').css('border', '');
+			$('#modal_contact_add').css('box-shadow', '');
+			$('#modal_tag_add_nomal').css('display', 'none');
+			$('#button_apply_tag').addClass('permit');
+			$('.modal_background').css('z-index', '4');
+		});
+	} else if (contactType == "share") {
+		$.ajax({
+			url: "/contact/shareContactTagInsert",
+			type: "GET",
+			data: {
+				tag: tag_input
+			}
+		}).done(function() {
+			$("#modal_new_tag_input").val("");
+			$('#modal_contact_add').css('z-index', '5');
+			$('#modal_contact_add').css('border', '');
+			$('#modal_contact_add').css('box-shadow', '');
+			$('#modal_tag_add_nomal').css('display', 'none');
+			$('#button_apply_tag').addClass('permit');
+			$('.modal_background').css('z-index', '4');
+		});
+	}
+});
 
 // 새 태그 생성(수정창)
 function button_apply_tag_update(type) {
