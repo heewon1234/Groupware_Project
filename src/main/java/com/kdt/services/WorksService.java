@@ -149,4 +149,7 @@ public int addworkminutetime(String ID)throws Exception{
 public int addworknotcheck(String ID)throws Exception{
 	return wdao.addworknotcheck(ID);
 }
+public String selectbyname(String name)throws Exception{
+	return wdao.selectbyname(name);
+}
 }

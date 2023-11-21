@@ -89,5 +89,8 @@ public class WorksDAO {
 	public List<WorkPlanDTO> work_current_selectByName(String name)throws Exception{
 		return db.selectList("Works.work_current_selectByName",name);
 	}
+	public String selectbyname(String name)throws Exception{
+		return db.selectOne("Works.selectbyname",name);
+	}
 	
 }

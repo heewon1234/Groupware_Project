@@ -19,7 +19,7 @@ $(document).ready(function() {
 
 
 
-		$('.joinday').each(function() {
+		$('.joinday').each(function(e) {
 			const inputValue = $(this).val().trim();
 			// 정규 표현식을 사용하여 YYYY-MM-DD 형식 확인
 			const regex = /^(2000|20[01]\d|202[0-2]|2023)-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
@@ -27,16 +27,16 @@ $(document).ready(function() {
 				const correspondingId = $(this).closest('tr').find('.id').val();
 				idbox.push(correspondingId);
 				joindaybox.push(inputValue);
-			} else if (inputValue !== "") {
+			
+		}else if (inputValue !== "") {
 				// 올바른 형식이 아닌 경우에 대한 처리
 				alert("날짜는 YYYY-MM-DD 형식이어야 하며 2000-01-01부터 입력 가능합니다. ");
 				return;
 			}
 		});
-
-		// 값이 없는 경우에 대한 처리
 		if (joindaybox.length === 0) {
 			alert("날짜를 입력하세요.");
+			e.preventDefault();
 			return;
 		}
 		console.log("idbox:", idbox);
