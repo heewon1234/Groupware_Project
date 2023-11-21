@@ -58,16 +58,20 @@ $(".modalButton_apply").on("click", function() {
             var managerValue = $(element).val();
             checkedManagerValues.push(managerValue);
         });
-
-        console.log(checkedManagerValues);
-			
+		$('#calendartd').css('display', 'block');
 });
 		 
     });
     // 취소 버튼 클릭 시
     $("#button_cancel_tag").on("click", function(e) {
+		if(selectedDates.length > 0){
+			alert("휴가신청을 삭제한 뒤 시도해주세요");
+			return;
+		}
 		e.preventDefault();
 		$("#approvalTable .innerTable th").text("");
+		$('#leave_apply').css('display', 'none');
+		$('#calendartd').css('display', 'none');
          $(".modal_tag_add").hide();
          $(".modal_background").hide();
     });

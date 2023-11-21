@@ -88,7 +88,19 @@
 					<div class="spanbox">
 						<span>근무계획</span>
 					</div>
-					<div class="workplanbox"></div>
+					<div class="workplanbox">
+						<div class="calendar_icon">
+							
+							<div class="div_body">
+								<div class="div_header"></div>
+								<div class="div_footer"></div>
+							</div>
+							
+						</div>
+						<div class="work_plan_list">
+							
+						</div>
+					</div>
 				</div>
 				<div class="check">
 					<div class="spanbox">

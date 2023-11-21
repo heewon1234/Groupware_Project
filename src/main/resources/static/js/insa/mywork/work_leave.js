@@ -4,7 +4,38 @@ var outTimeActivated = false;
 $(document).ready(function() {
 	$(".left_item").load("/insa/manage/left_item?selectItem=work_leave");
 	$("#top_container").load("/commons/topForm");
+	
+	$.ajax({ // 버튼 클릭 시 ajax로 해당 업무 추가
+		url: "/works/workplanlist",
+		
+	}).done(
+		function(resp) {
+			
+		var currentDate = new Date();
+
+        // 월, 일, 요일을 추출합니다.
+        var month = (currentDate.getMonth() + 1).toString().padStart(2, '0'); // 0부터 시작하므로 +1
+        var day = currentDate.getDate().toString().padStart(2, '0');
+        var dayOfWeek = getDayOfWeek(currentDate.getDay());
+        
+        $(".div_body").before(month+"월");
+        $(".div_header").append(day+"일");
+        $(".div_footer").append(dayOfWeek);
+        if(resp==""){
+			$(".work_plan_list").append("9시 출근");
+		}
+		else{
+			 $(".work_plan_list").append(resp);
+		}
+       
+		});
+		
+	
 });
+ function getDayOfWeek(dayNumber) {
+        var daysOfWeek = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
+        return daysOfWeek[dayNumber];
+    }
 function workin() {
 	updateinTime();
 	changeStatus('근무중', this);
@@ -36,6 +67,7 @@ function workout() {
 	}
 
 }
+
 
 function updateinTime() { // 출근하기 클릭 시 시간 출력
 	var currentinTimeArea = document.getElementById("workin");
@@ -107,6 +139,7 @@ function changeStatus(newStatus, button) { // 업무 외출 회의 외근 버튼
 				+ (resp[resp.length - 1].work_type)
 				+ "</td></tr>")
 			$("#workform").append(tr);
+			$('.comment').scrollTop($('.comment')[0].scrollHeight);
 		});
 
 }
@@ -124,12 +157,14 @@ function updateWorkformTable() { // 화면에 근무중 업무중 등 출력하�
 		url: "/works/list",
 	}).done(
 		function(resp) {
+			
 			for (let i = 0; i < resp.length; i++) {
 				let tr = $("<tr>");
 				tr.html("<td width='100'>" + (resp[i].time)
 					+ "</td>" + "<td width='100'>"
 					+ (resp[i].work_type) + "</td></tr>")
 				$("#workform").append(tr);
+				$('.comment').scrollTop($('.comment')[0].scrollHeight);
 			}
 		});
 }

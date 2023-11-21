@@ -95,6 +95,12 @@ public class WorkController {
 		model.addAttribute("tlist",tlist);
 		return tlist;
 	}
+	@ResponseBody
+	@RequestMapping("workplanlist") // 근무현황판 출력
+	public String workplanlist(Model model)throws Exception  {
+		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");
+		return wservice.selectbyname(userDTO.getName());
+	}
 	
 	@ResponseBody
 	@RequestMapping("work_inout") // 출근시간 퇴근시간 시간 출력
