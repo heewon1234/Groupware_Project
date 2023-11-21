@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kdt.dto.LeavesDTO;
 import com.kdt.dto.MembersDTO;
 import com.kdt.dto.Official_CalendarDTO;
@@ -77,10 +76,11 @@ public class MembersController {
 	        
 			model.addAttribute("list",list);
 			return "redirect:/";
+		} else {
+			boolean login = false;
+			model.addAttribute("login",login);
 		}
-		
-		
-		return "redirect:/";
+		return "home";
 	}
 	
 	@RequestMapping("logout")

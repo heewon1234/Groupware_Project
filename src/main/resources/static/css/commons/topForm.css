@@ -7,6 +7,9 @@ a, a:hover {
   	color: inherit;
 }
 
+#logo {
+	min-width:80px;
+}
 
 #topFormTop {
     width: 100%;
@@ -35,6 +38,7 @@ a, a:hover {
     font-size: 25px;
     margin-left: auto; /* 아이콘을 오른쪽으로 이동 */
     margin-right: 50px;
+    min-width:119px;
 }
 
 .topFormLogout {
@@ -75,6 +79,7 @@ a, a:hover {
     margin-left: 20px;
     margin-right: 70%;
     cursor: pointer;
+    min-width:88px;
 }
 #topFormProfileContents{
 	margin-left: 20px;

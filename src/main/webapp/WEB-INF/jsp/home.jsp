@@ -17,7 +17,13 @@
 <body>
 	<c:choose>
 		<c:when test="${loginId==null }">
-			<form action="/members/login" method="post">
+			<c:if test="${login == false}">
+			    <script>
+			    	console.log(${login});
+			        alert("아이디 또는 비밀번호를 확인해주세요");
+			    </script>
+			</c:if>
+			<form id="myForm" action="/members/login" method="post">
 				<div class="loginBox">
 					<div class="loginLogo">GroupWare</div>
 					<div class="inputID">
@@ -26,7 +32,7 @@
 					</div>
 					<div class="inputPW">
 						<i class="fa-solid fa-lock loginIcon"></i> <input type="password"
-							name="pw" placeholder="input your PW" class="pwbox">
+							name="pw" id="pw" placeholder="input your PW" class="pwbox">
 					</div>
 					<div class="rememberID">
 						<input type="checkbox" id="remID">아이디 기억하기
@@ -224,6 +230,16 @@
 				}
 			}); 
 	    }
+		
+		document.getElementById('myForm').addEventListener('submit', function(event) {
+			let id = document.getElementById("id");
+			let pw = document.getElementById("pw");
+			if (id == null || pw == null) {
+			    alert("아이디와 비밀번호를 입력해주세요");
+			    event.preventDefault();
+			  }
+		});
+		
 	</script>
 	<script src="/js/home/home.js"></script>
 </body>
