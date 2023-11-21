@@ -5,8 +5,8 @@
 <mapper namespace="ChatMessage">
 
 	<insert id="insert">
-		insert into messages(roomID,userID,message,messageType,type)
-		values(#{roomID},#{userID},#{message},#{messageType},#{type})
+		insert into messages(roomID,profile_image,userID,message,messageType,type)
+		values(#{roomID},#{profile_image},#{userID},#{message},#{messageType},#{type})
 	</insert>
 	
 	<select id="selectByType"
@@ -15,12 +15,10 @@
 	</select>
 	<select id="getPreviousMessages"
 		resultType="com.kdt.dto.ChatMessageDTO">
-		select msg.*,profile_image from messages as msg
-		inner join Members on userId = name where roomID =#{oneSeq } and messageType='one';
+		select * from messages where roomID =#{oneSeq } and messageType='one';
 	</select>
 	<select id="getPreviousGroupMessages"
 		resultType="com.kdt.dto.ChatMessageDTO">
-		select msg.*,profile_image from messages as msg
-		inner join Members on userId = name where roomID =#{groupSeq} and messageType='group';
+		select * from messages  where roomID =#{groupSeq} and messageType='group';
 	</select>
 </mapper>
