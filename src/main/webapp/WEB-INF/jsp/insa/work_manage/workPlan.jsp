@@ -432,7 +432,7 @@ text-align: center;
 				<ul>
 					<c:forEach var="list" items="${managerList }">
 						<li><span>${list.organization }</span> <span>${list.name }</span>
-							<span hidden>${list.id }</span> <input type='checkbox'
+							<span hidden>${list.id }</span> <input class="mCheckbox" type='checkbox'
 							name='managerID' value='${list.id}'></li>
 					</c:forEach>
 				</ul>
@@ -447,6 +447,13 @@ text-align: center;
 
 
 	<script>
+	$(".mCheckbox").on("click", function() {
+		   let count = $(".mCheckbox:checked").length;
+
+		   if (count > 4) {
+		      $(this).prop("checked", false);
+		   }
+		});
 	function workPlanUpdate() {
         $('#work_contents').css("display", "none");
         $('#work_contents_update').css("display", "block");
