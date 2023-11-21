@@ -65,7 +65,7 @@ public class InsaManageController {
 		List<JobTitleDTO> jobTitleList = jtService.selectAll();
 		List<JobRoleDTO> jobRoleList = jrService.selectAll();
 		List<OrganizationDTO> orgList = orgService.selectAll();
-		List<MembersDTO> membersList = mService.selectAll();
+		List<MembersDTO> membersList = mService.selectAllExceptMe(id);
 		List<String> workFormList = mService.selectWorkForm();
 		
 		model.addAttribute("rank",rank);

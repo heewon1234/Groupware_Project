@@ -37,6 +37,11 @@ public class MembersDAO {
 		return db.selectList("Members.selectAll");
 	}
 	
+	public List<MembersDTO> selectAllExceptMe(String id) {
+
+		return db.selectList("Members.selectAllExceptMe", id);
+	}
+	
 	public int updateWorkForm(MembersDTO dto) {
 		return db.update("Members.updateWorkForm", dto);
 	}

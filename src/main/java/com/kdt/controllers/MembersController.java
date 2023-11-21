@@ -135,6 +135,7 @@ public class MembersController {
 		mservice.deleteMember(idList);
 		wservice.leave_delete(idList);
 		wservice.work_delete(idList);
+	
 		return "redirect:/insa/manage/members";
 	}
 	//채팅 관련 기능입니다.

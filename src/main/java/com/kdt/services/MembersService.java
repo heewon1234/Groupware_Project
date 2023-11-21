@@ -38,6 +38,10 @@ public class MembersService {
 	public List<MembersDTO> selectAll() {
 		return mdao.selectAll();
 	}
+	
+	public List<MembersDTO> selectAllExceptMe(String id) {
+		return mdao.selectAllExceptMe(id);
+	}
 
 	public void updateWorkForm(String idList, String workForm) {
 		String list[] = idList.split(",");
