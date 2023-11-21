@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kdt.dto.ApplyLeaveDTO;
 import com.kdt.dto.ApprovalDTO;
 
 @Repository
@@ -57,5 +58,11 @@ public class ApprovalDAO {
 	
 	public int getProcessCount(String id) {
 		return db.selectOne("Approval.getProcessCount", id);
+	}
+	public int leaveinsert(ApprovalDTO adto)throws Exception{
+		return db.insert("Approval.leaveinsert",adto);
+	}
+	public int aleaveinsert(ApplyLeaveDTO aldto)throws Exception{
+		return db.insert("Approval.aleaveinsert",aldto);
 	}
 }

@@ -18,6 +18,12 @@
 	<insert id="insert" useGeneratedKeys="true" keyProperty="seq">
 		insert into Approval values (null,#{id},#{title},#{contents}, now(), '대기', #{doc_type})
 	</insert>
+	<insert id="leaveinsert">
+		insert into Approval values (null,#{id},#{title},#{contents},now(),'대기',#{doc_type})
+	</insert>
+	<insert id="aleaveinsert">
+		insert into ApplyLeave values (null,#{id},#{user_names},#{work_types},#{work_days},0,default)
+	</insert>
 	<delete id="delete">
 		DELETE FROM Approval WHERE seq = #{doc_id}
 	</delete>

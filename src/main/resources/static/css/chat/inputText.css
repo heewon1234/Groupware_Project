@@ -76,15 +76,19 @@
 }
 .message-container{
 	display: flex;
-    flex-direction: row;
-    align-items: flex-end;
     margin-top: 8px;
+}
+.message-righter{
+    display: flex;
+    flex-direction: column;
 }
 .user-id{
 	font-weight: bold;
 	display:inline-block;
 	align-self: flex-start;
 	padding-right: 5px;
+	margin-left: 5px;
+    font-size: 14px;
 }
 .message-text{
 	margin-right: 10px;
@@ -95,6 +99,7 @@
 	padding-right: 10px;
     padding-left: 10px;
     margin-left: 5px;
+    margin-top: 3px;
 }
 .own-message{
 	 display: flex;
@@ -103,10 +108,10 @@
     justify-content: flex-end; /* 수평 방향으로 오른쪽 정렬 */
     margin-top: 8px;
 }
-.own-message>.message-text{
+.own-message>.message-righter>.message-text,.own-message>.message-text{
 	background-color: #ffe936;
 }
-.own-message>.user-id{
+.own-message>.message-righter>.user-id,.own-message>.otherImg>.otherProfileImg,.own-message>.user-id{
 	display: none;
 }
 .ownImg{
@@ -122,4 +127,14 @@
 .ownProfileImg{
 	width: 50px;
 	height: 50px;
+}
+.otherImg{
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+    overflow: hidden;
+}
+.otherProfileImg{
+	width: 30px;
+	height: 30px;
 }
