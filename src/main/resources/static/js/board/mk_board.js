@@ -38,7 +38,6 @@ let add_authority_member_list = () => {
 $("#member_add_complete").on("click",function(){
 	tempAuthority = authority;
 	$(".modal").css("display","none");
-	console.log(authority.length);
 	add_authority_member_list();
 })
 
@@ -51,7 +50,6 @@ $("#member_add_cancel").on("click",function(){
 
 $(".authority_member_add_btn").on("click",function(){
 	tempAuthority = authority;
-	console.log(tempAuthority);
 	$(".modal").css("display","block");
 	authority = [];
 	$("#member_list_box_body").find("input[type='checkbox']").prop("checked",false);
@@ -225,7 +223,6 @@ $(document).on("change",".jobName_check",function(){
 			add_auth_member_list();
 		})
 		let inputCheck = $(this).parent("div").next(".member_datail_box");
-		console.log(inputCheck);
 		inputCheck.find("input[type='checkbox']").prop("checked",true);
 	} else{		
 		authority = authority.filter(item=>item.job_name!==job_name && item.authority !== authority);
@@ -254,7 +251,6 @@ $(document).on("change",".name_check",function(){
 	
 	let name = $(this).parent("div").text().trim();
 	let job_name = $(this).parents(".member_datail_box").prev("div").text().trim();
-	console.log(job_name);
 	let organization = $(this).parents(".member_dept_detail_box").prev("div").text().trim();
 	if($(this).prop("checked")){
 		$.ajax({
@@ -266,8 +262,6 @@ $(document).on("change",".name_check",function(){
 			add_auth_member_list();
 		})
 	} else{
-		
-		console.log(parents.text().trim());
 		authority = authority.filter(item=>item.job_name!==job_name && item.authority !== authority && item.name !== name);
 		add_auth_member_list();
 		parents.find("input[type='checkbox']").prop("checked",false);
@@ -286,7 +280,6 @@ $("#auth_member_reset_btn").on("click",function(){
 // 멤버 제거
 $(document).on("click",".authDelBtn",function(resp){
 	let index = $(this).parents(".auth_member").attr("data-index");
-	console.log(index);
 	authority.splice(index,1);
 	$(this).parents(".auth_member").remove();
 });
@@ -302,7 +295,6 @@ $(".header_type>div").on("click",function(){
 })
 
 $(".header_input_check").change(function(){
-	console.log($(this).val());
 	if($(this).val()=='true'){
 		$("#headerBox").css("display","block");
 	} else{
@@ -333,7 +325,6 @@ $("#header_add_btn").on("click",function(){
 	
 	$("#header_add_input").val("");
 	headerList.push(text);
-	console.log(headerList);
 	let boxDiv = $("<div>");
 	boxDiv.addClass("header_list_box");
 	boxDiv.attr("data-index",headerList.length-1);
@@ -366,7 +357,6 @@ $(document).on("click",".header_del_btn",function(){
 	let index = $(this).parents(".header_list_box").attr("data-index");
 	$(this).parents(".header_list_box").remove();
 	headerList.splice(index,1);
-	console.log(headerList);
 })
 
 // 게시판 이름 중복 체크
@@ -384,7 +374,6 @@ $("#board_title_input").keyup(function(){
 				data:{board_title:$("#board_title_input").val()},
 				method:"POST"
 			}).done(function(resp){
-				console.log(resp);
 				if(resp){
 					$("#dupCheckDiv").html("중복된 이름입니다").css("color","red");
 				} else{
@@ -474,7 +463,6 @@ $("input[name='board_type']").change(function(){
 $(document).on("change",".auth_write",function(){
 	let index = $(this).parents(".auth_member").attr("data-index");
 	authority[index].authority = "쓰기";
-	console.log(authority);
 });
 
 $("#backBtn").on("click",function(){

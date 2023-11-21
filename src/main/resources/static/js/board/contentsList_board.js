@@ -4,12 +4,10 @@ $(document).ready(function() {
     var searchBox = $('.searchBox');
 
     myInput.on('focus', function() {
-        console.log('Input 요소가 포커스를 받았습니다.');
         searchBox.addClass('focus');
     });
 
     myInput.on('blur', function() {
-        console.log('Input 요소에서 포커스가 빠졌습니다.');
         searchBox.removeClass('focus');
     });
 });

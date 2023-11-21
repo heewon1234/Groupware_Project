@@ -154,13 +154,10 @@ public class BoardController {
 		} else {
 			int totalBoardContents = bservice.searchCountContentsListBy(board_title, searchText);
 			model.addAttribute("recordTotalCount",totalBoardContents); 
-			System.out.println("1");
 			List<BoardDTO> boardContentsList = bservice.searchContentsListBy(board_title,id,String.valueOf(start),searchText);
 			model.addAttribute("boardContentsList", boardContentsList);
-			System.out.println("보드이름:"+boardContentsList.get(0).getBoard_title());
 			String name_type = mservice.selectNameType(board_title);
 			model.addAttribute("name_type",name_type);
-			System.out.println("3");
 		}
 		
 		model.addAttribute("recordCountPerPage",Constants.RECORD_COUNT_PER_PAGE);

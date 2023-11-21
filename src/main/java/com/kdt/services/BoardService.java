@@ -168,7 +168,6 @@ public class BoardService {
 	public List<Map<String,String>> FavoriteListBy(String board_title,String id, String start){ 
 		
 		String fromBoard = boardSeqList();
-		System.out.println(fromBoard);
 
 		Map<String,String> map = new HashMap<>();
 		map.put("id", id);

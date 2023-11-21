@@ -175,6 +175,5 @@ $("#frmBtn").on("click",function(){
 $(".inputFileDelBtn").on("click",function(){
 	let sys_name = $(this).attr("data-name");
 	delInputFileList.push(sys_name);
-	console.log(delInputFileList);
 	$(this).parents(".fileListDiv").remove();
 });

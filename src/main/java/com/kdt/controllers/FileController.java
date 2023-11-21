@@ -41,7 +41,6 @@ public class FileController {
 			for(MultipartFile file : fileList) {
 				String ori_name = file.getOriginalFilename();
 				String sys_name = UUID.randomUUID() + "_" + ori_name;
-				System.out.println(sys_name);
 				file.transferTo(new File(uploadPath+"/"+sys_name));
 				list.add("/uploads/"+sys_name);
 			}
