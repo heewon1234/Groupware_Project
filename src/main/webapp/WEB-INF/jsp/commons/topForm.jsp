@@ -29,7 +29,9 @@
 		<div id="topFormSelectMenu">
 			<div id="topFormLeft">
 				<div class="topFormMenu">
-					<i class="fa-regular fa-clipboard menuIcon"></i> 게시판
+					<a href="/board/toBoard">
+						<i class="fa-regular fa-clipboard menuIcon"></i> 게시판
+					</a>
 				</div>
 				<div class="topFormMenu">
 					<a href="/calendar/official"> <i

@@ -6,8 +6,13 @@ body {
 	height:100%;
 }
 
-a, a:hover {
+a {
     text-decoration-line: none;
+    color:black !important;
+}
+
+a:hover {
+	text-decoration: none !important;
     color:black !important;
 }
 
