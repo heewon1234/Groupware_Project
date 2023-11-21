@@ -78,11 +78,11 @@
 				</div>
 				<div class="chattingUser">
 					<div class="chattingName">
-						<input id="chattingName" value="${name }" style="border: none;"
+						<input id="chattingName" value="${name }" style="border: none; background-color: white;"
 							disabled>
 					</div>
 					<div class="position">
-						<input id="position" value="${position }" style="border: none;"
+						<input id="position" value="${position }" style="border: none;background-color: white;"
 							disabled>
 					</div>
 				</div>
@@ -185,9 +185,9 @@
 				<div class="myProfile">
 					<div class="ownImg"></div>
 					<div class="other">
-						<input id="otherName" value="${friendName}" style="border: none;"
+						<input id="otherName" value="${friendName}" style="border: none;background-color: white; "
 							disabled="disabled"> <input id="organization"
-							value="${organization} " style="border: none;"
+							value="${organization} " style="border: none;background-color: white;"
 							disabled="disabled">
 					</div>
 				</div>
@@ -217,9 +217,9 @@
 					</div>
 					<div class="other">
 						<input id="groupChatting" value="그룹 채팅 "
-							style="border: none; font-weight: bold; font-size: medium; margin-left: -1px;"
+							style="border: none; font-weight: bold; font-size: medium; margin-left: -1px;background-color: white;"
 							disabled="disabled"> <input id="groupName"
-							value="${groupName}" style="border: none;" disabled="disabled">
+							value="${groupName}" style="border: none;background-color: white;" disabled="disabled">
 					</div>
 				</div>
 			</div>

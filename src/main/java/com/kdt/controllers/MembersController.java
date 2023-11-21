@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kdt.dto.LeavesDTO;
 import com.kdt.dto.MembersDTO;
 import com.kdt.dto.Official_CalendarDTO;
@@ -76,11 +77,10 @@ public class MembersController {
 	        
 			model.addAttribute("list",list);
 			return "redirect:/";
-		} else {
-			boolean login = false;
-			model.addAttribute("login",login);
 		}
-		return "home";
+		
+		
+		return "redirect:/";
 	}
 	
 	@RequestMapping("logout")
@@ -135,7 +135,6 @@ public class MembersController {
 		mservice.deleteMember(idList);
 		wservice.leave_delete(idList);
 		wservice.work_delete(idList);
-	
 		return "redirect:/insa/manage/members";
 	}
 	//채팅 관련 기능입니다.
@@ -236,7 +235,7 @@ public class MembersController {
 			shapw = EncryptionUtils.getSHA512(pw);
 		}
 		
-		System.out.println("image:"+profile_image);
+		System.out.println(profile_image);
 		
 		MembersDTO dto = new MembersDTO(userDTO.getId(), shapw, null, null, null, null, null, phone, email, zipcode, address1, address2, profile_image);
 		

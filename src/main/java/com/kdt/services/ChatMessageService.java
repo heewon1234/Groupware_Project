@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kdt.dao.ChatMessageDAO;
 import com.kdt.dto.ChatMessageDTO;
+import com.kdt.dto.MembersDTO;
 
 @Service
 public class ChatMessageService {
@@ -26,5 +27,8 @@ public class ChatMessageService {
 	}
 	public List<ChatMessageDTO> getPreviousGroupMessages(String groupSeq) {
 		return dao.getPreviousGroupMessages(groupSeq);
+	}
+	public void updateProfile(List<MembersDTO> updateProfile) {
+		 dao.updateProfile(updateProfile);
 	}
 }

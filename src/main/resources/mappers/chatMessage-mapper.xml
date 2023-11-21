@@ -19,4 +19,9 @@
 		resultType="com.kdt.dto.ChatMessageDTO">
 		select * from Messages  where roomID =#{groupSeq} and messageType='group';
 	</select>
+	<update id="updateProfile" parameterType="map">
+		UPDATE Messages 
+        SET profile_image = #{profileImage} 
+        WHERE userID = #{memberName}
+	</update>
 </mapper>
