@@ -38,7 +38,6 @@ public class ChatGroupRoomController {
 	@ResponseBody
 	public List<GroupChatDTO> groupSelectInvited() throws Exception {
 		String name = (String) session.getAttribute("name");
-		System.out.println(name);
 	    List<GroupChatDTO> allGroups = service.groupSelectAll();
 	    List<GroupChatDTO> invitedGroups = new ArrayList<>();
 

@@ -13,7 +13,6 @@ public class WorkPlanDAO {
 	private SqlSession db;
 	
 	public void insert(WorkPlanDTO dto) {
-		System.out.println(dto.getDoc_id());
 		db.insert("WorkPlan.insert", dto);
 	}
 

@@ -546,7 +546,6 @@ text-align: center;
 	var managerIDs = [];
 	// 사람 설정
 	$(document).on("click", "#button_apply_tag", function() {
-		console.log("manager");
 		var checkboxes = document.querySelectorAll('input[name="managerID"]:checked');
 	    
 	    var gridItem = document.querySelector('.manager');
@@ -582,8 +581,6 @@ text-align: center;
 	    $('#modal_apply_button').on('click', function() {
 	    	var workPlanTitleValue = $("#work_plan_title").val();
 	    	var workPlanContentsValue = $("#work_plan_contents").val();
-
-	    	console.log(workPlanTitleValue+" : "+workPlanContentsValue);
 	    });
 	
 	//----------------------------------------------------------------
@@ -672,7 +669,6 @@ document.getElementById('update_workPlan_body').addEventListener('change', funct
             $('#user_names').val(JSON.stringify(user_names));
             $('#work_types').val(JSON.stringify(work_types));
             $('#work_days').val(JSON.stringify(work_days));
-            console.log($('#user_names').val());
             
             $("#work_plan_contents").val(function(index, currentValue) {
                 return currentValue + logContent + '\n';
@@ -727,7 +723,6 @@ document.getElementById('update_workPlan_body').addEventListener('change', funct
 	    });
 
 	    var tableBody = $("#update_workPlan_body").empty();
-	    console.log(dates);
 	    dates.forEach(date => {
 	        var tableRow = $('<tr>');
 	        const cellDate = $('<td>').text(formatDate2(date)).addClass('members');
@@ -867,10 +862,6 @@ document.getElementById('update_workPlan_body').addEventListener('change', funct
 	            currentMonthElement.text(today.getFullYear() + "년 " + currentMonth + "월");
 	            $(".cMonth").val(today.getFullYear());
 	            $(".cYear").val(currentMonth);
-	            console.log($(".cMonth").val(today.getFullYear()));
-	            console.log($(".cYear").val(currentMonth));
-	            ///////////////////////////////////////////
-	            
 	        }
 	       
 
@@ -907,7 +898,6 @@ document.getElementById('update_workPlan_body').addEventListener('change', funct
 	                for (let i = 0; i < data.length; i++) {
 	                	let tableRow = $('<tr>').addClass('memberRow');
 	                    let member = data[i];
-	                    console.log("멤버" + member);
 	                    var nameCell = $('<td>').text(member.name);
 	                    var departmentCell = $('<td>').text(member.organization);
 	                    tableRow.append(nameCell, departmentCell);
@@ -951,7 +941,6 @@ $.ajax({
 //마우스를 올린 경우
 $(document).on('mouseenter', '.jeng', function(e) {
     // "정"에 관한 정보를 표시
-    console.log("정");
     $("#jeng-info").css({
         display: "block",
         top: e.pageY - 50, // 마우스 현재 위치보다 조금 위에 나타나도록 조절

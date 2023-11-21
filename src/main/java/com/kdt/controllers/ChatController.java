@@ -39,9 +39,7 @@ public class ChatController {
 	@RequestMapping("/groupInputText")
 	public String inputText(@RequestParam("groupName") String groupName,@RequestParam("groupSeq") int groupSeq, Model model) {
 		model.addAttribute("groupName", groupName);
-		System.out.println(groupName);
 		model.addAttribute("groupSeq", groupSeq);
-		System.out.println(groupSeq);
 		return "chat/groupInputText";
 	}
 	
@@ -68,7 +66,6 @@ public class ChatController {
 		String id = (String)hsession.getAttribute("loginID");
 		List<MembersDTO> searchList = service.searchUser(searchValue);
 		List<OneToOneChatDTO> OneToOneChatDTOList = service.selectAll(id);
-		System.out.println(OneToOneChatDTOList);
 		Map<String, Object> responseData = new HashMap<>();
 		responseData.put("searchList", searchList);
 		responseData.put("OneToOneChatDTOList", OneToOneChatDTOList);

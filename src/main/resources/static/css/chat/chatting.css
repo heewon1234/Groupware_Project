@@ -29,7 +29,6 @@
 .profile {
     display: flex; 
     align-items: center; 
-    margin-top: 20px;
     margin-right: 58%;
     width: 100%;
 }
@@ -129,4 +128,7 @@ hr{
 .table-row i,#friend_list i{
 	font-size: 25px;
 	margin-right: 3px;
+}
+#chattingLogo{
+	width: 63px;
 }

@@ -92,11 +92,9 @@ function searchUser() {
         success: function (response) {
 			var listData = response.searchList;
 			var OneToOneChatDTOList = response.OneToOneChatDTOList;
-			console.log(response);
 			$("#friend_list").empty();
 			
 			listData.forEach(function(friend) {
-    console.log(friend.name);
     var $row = $("<div>").addClass("table-row");
     var $iconCell = $("<div>")
         .html('<i class="fa-regular fa-circle-user"></i>')
@@ -112,7 +110,6 @@ function searchUser() {
         "click",
         (function (clickedUserName, clickedUserId) {
             return function () {
-                console.log(clickedUserName);
                 var loginID = $("#loginID").val();
                 var otherID = clickedUserId;
                 var organization = friend.organization;
@@ -121,7 +118,6 @@ function searchUser() {
                     var chatRoom = OneToOneChatDTOList[i];
                     if (chatRoom.loggedInUserID === loginID && chatRoom.otherUserID === otherID) {
                         oneSeq = chatRoom.oneSeq;
-                        console.log(oneSeq);
                         openOneChat(clickedUserName, organization, oneSeq);
                         getPreviousMessages(oneSeq);
                         break;
@@ -155,7 +151,6 @@ function searchGroup() {
         data: { groupValue: groupValue },
         success: function(data) {
             // 성공 시 실행되는 콜백 함수
-            console.log("group방 업데이트" + data);
             var $chatroom_list = $(".chatroom_list");
 
             // 데이터를 비우고 새로 받아온 데이터로 업데이트
@@ -180,9 +175,7 @@ function searchGroup() {
                 // 클릭 이벤트 처리
                 $nameCell.on("click", function() {
                     // 클릭 시 실행할 로직 추가
-                    console.log("Clicked group:", group.groupName);
                     groupChat(group.groupName, group.groupSeq);
-                    console.log(group.groupSeq);
                     
                 });
 
