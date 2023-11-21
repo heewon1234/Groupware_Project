@@ -1,5 +1,5 @@
-$("input[type='checkbox']").on("click", function() {
-	let count = $("input[type='checkbox']").length;
+$(".id_checkBox").on("click", function() {
+	let count = $(".id_checkBox:checked").length;
 
 	if (count > 4) {
 		$(this).prop("checked", false);
