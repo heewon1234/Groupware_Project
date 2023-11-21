@@ -5,20 +5,20 @@
 <mapper namespace="ChatMessage">
 
 	<insert id="insert">
-		insert into messages(roomID,profile_image,userID,message,messageType,type)
+		insert into Messages(roomID,profile_image,userID,message,messageType,type)
 		values(#{roomID},#{profile_image},#{userID},#{message},#{messageType},#{type})
 	</insert>
 	
 	<select id="selectByType"
 		resultType="com.kdt.dto.ChatMessageDTO">
-		SELECT * FROM messages where type = #{type} and MessageSeq=#{MessageSeq}
+		SELECT * FROM Messages where type = #{type} and MessageSeq=#{MessageSeq}
 	</select>
 	<select id="getPreviousMessages"
 		resultType="com.kdt.dto.ChatMessageDTO">
-		select * from messages where roomID =#{oneSeq } and messageType='one';
+		select * from Messages where roomID =#{oneSeq } and messageType='one';
 	</select>
 	<select id="getPreviousGroupMessages"
 		resultType="com.kdt.dto.ChatMessageDTO">
-		select * from messages  where roomID =#{groupSeq} and messageType='group';
+		select * from Messages  where roomID =#{groupSeq} and messageType='group';
 	</select>
 </mapper>
