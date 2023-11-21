@@ -21,14 +21,16 @@
 }
 .content_tab>div:not(.title)>div{margin-bottom:10px;}
 .contents_title{
-    width:1500px;
+    width:100%;
+	min-width:600px;
     height:50px;
     font-size:25px;
     font-weight: bold;
     padding-bottom:0px;	
 }
 .name{
-	width:1500px;
+	width:100%;
+	min-width:600px;
 
 }
 .name>.name_text{
@@ -44,7 +46,8 @@
 }
 
 .board_type{
-	width:1500px;
+	width:100%;
+	min-width:600px;
 }
 .board_type_text{font-weight: bold;}
 .board_type_select{
@@ -54,14 +57,20 @@
 .board_type_select>div:hover{cursor:pointer;}
 .board_type_select>div:last-child{margin-left:50px;}
 
-.name_type{width:1500px;}
+.name_type{
+	width:100%;
+	min-width:600px;
+}
 .name_type_text{font-weight: bold;}
 .name_type_select{overflow: hidden;}
 .name_type_select>div{float:left;}
 .name_type_select>div:hover{cursor:pointer;}
 .name_type_select>div:last-child{margin-left:50px;}
 
-.authority{width:1500px;}
+.authority{
+	width:100%;
+	min-width:600px;
+}
 .authority_text{font-weight: bold;}
 .authority_member_add{
     overflow: hidden;

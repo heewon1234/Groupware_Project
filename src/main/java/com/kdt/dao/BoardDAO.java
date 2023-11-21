@@ -71,8 +71,8 @@ public class BoardDAO {
 	}
 
 	// 게시글 불러오기
-	public List<BoardDTO> boardContentsList(Map<String,String> map){
-		return db.selectList("Board.boardContentsList",map);
+	public int boardContentsList(String board_title){
+		return db.selectOne("Board.boardContentsList",board_title);
 	}
 	public List<BoardDTO> BoardContentsListBy(Map<String,String> map){
 		return db.selectList("Board.BoardContentsListBy",map);
@@ -81,14 +81,17 @@ public class BoardDAO {
 		return db.selectOne("Board.boardContents",dto);
 	}
 
-	public List<BoardDTO> FavoriteAllContentsList(Map<String,String> map){
-		return db.selectList("Board.FavoriteBoardContentsList",map);
+	public int FavoriteAllContentsList(String id){
+		return db.selectOne("Board.CountFavList",id);
 	}
 	public List<Map<String,String>> FavoriteListBy(Map<String,String> map){
 		return db.selectList("Board.FavoriteListBy",map);
 	}
 	public List<BoardDTO> Notice(Map<String,String> map){
 		return db.selectList("Board.Notice",map);
+	}
+	public List<BoardDTO> homeFavList(Map<String,String> map){
+		return db.selectList("Board.homeFavList",map);
 	}
 	//
 

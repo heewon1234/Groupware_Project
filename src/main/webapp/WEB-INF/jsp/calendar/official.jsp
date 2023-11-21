@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -109,11 +110,13 @@
 	<div class="body_form">
 		<!-- 왼쪽 부분(메뉴) -->
 		<div class="left_item">
-			<div class="button_tab">
-				<button class="main_button">
-					<span>일정 추가</span>
-				</button>
-			</div>
+			<c:if test="${rank <= 5}">
+    			<div class="button_tab">
+					<button class="main_button">
+						<span>일정 추가</span>
+					</button>
+				</div>
+			</c:if>
 			<div class="menu_tab">
 				<div id="official" class="menu_item">
 					<img class="menu_item_img"

@@ -16,7 +16,10 @@
 	color: #056AC9;
 	font-weight: bold;
 }
-.content_tab>div{width:1500px;}
+.content_tab{padding-right:25px;}
+.content_tab>div{
+	min-width:600px;
+}
 
 .title{
     font-weight: bold;
