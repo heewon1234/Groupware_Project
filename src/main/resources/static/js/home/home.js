@@ -159,7 +159,8 @@ function work_inout() {
 						buttons[i].disabled = false;
 						if (resp[resp.length - 1].work_type.trim().includes(buttons[i].textContent.trim())) {
 							buttons[i].disabled = true;
-						}$("#work-out").addClass("img-disabled");
+						}$("#work-in").addClass("img-disabled");
+						$("#work-out").removeClass("img-disabled");
 					}
 					document.getElementById("workin").disabled = true;
 					document.getElementById("workout").disabled = false;
