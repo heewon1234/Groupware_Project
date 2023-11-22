@@ -13,23 +13,33 @@ $(document).ready(function() {
             // 체크됐을 때의 동작
             var managerId = $(this).val();
             var managerName = $(this).siblings("span").eq(1).text();
-            console.log("체크됐음 - ID: " + managerId + ", Name: " + managerName);
-			$("#button_apply_tag").removeClass("permit");
+            if($("input[name='managerID']:checked").length > 4){
+				 $("#button_apply_tag").addClass("permit");
+			}else{
+				$("#button_apply_tag").removeClass("permit");
+			}
+			
         } else {
             // 체크가 해제됐을 때의 동작
             var managerId = $(this).val();
             var managerName = $(this).siblings("span").eq(1).text();
-            console.log("체크 해제됨 - ID: " + managerId + ", Name: " + managerName);
-           if ($("input[name='managerID']:checked").length === 0) {
+           if ($("input[name='managerID']:checked").length === 0 || $("input[name='managerID']:checked").length > 4) {
             $("#button_apply_tag").addClass("permit");
-        }
+            }
+            else{
+				$("#button_apply_tag").removeClass("permit");
+			}
+        
         }
         
     });
 });
 var checkedManagerValues = [];
 var checkedManagers;
+							
+					
 $(".modalButton_apply").on("click", function() {
+	
 	// 모달 폼 보이기/숨기기 토글
 	$('.modal_tag_add').css('display', 'block');
 	$('.modal_background').css('display', 'block');
@@ -118,6 +128,14 @@ $(document).ready(function() {
 
 
 			tableRowSelect.on('click', 'td', function() {
+				 var leaveRemainder = document.getElementById('remainder').value;
+				 console.log(leaveRemainder);
+				 console.log(selectedDates.length);
+				if(selectedDates.length >= leaveRemainder){
+					alert("보유한 휴가일 이상을 신청하실수 없습니다.");
+					return;
+				}
+				
 				let selectedClass = $(this).attr('class'); // 클릭한 td의 클래스 값 가져오기
 				let dayText = $(this).text().trim();
 
@@ -133,7 +151,6 @@ $(document).ready(function() {
 				let formattedDate = formatDate3(new Date(today.getFullYear(), currentMonth - 1, parseInt(clickedRowText)));
 
 				if (isSelected) {
-					// 배열에서 해당 날짜를 제거
 				} else {
 					// 배열에 해당 날짜를 추가
 					selectedDates.push(formattedDate);
@@ -141,7 +158,6 @@ $(document).ready(function() {
 				}
 
 
-				console.log(tdarray);
 				$('#selectedDates').empty();
 				$('#selectleavetype').empty();
 				for (i = 0; i < selectedDates.length; i++) {
@@ -183,10 +199,7 @@ $(document).on("click", "#deleteleave", function(e) {
 	var classArray = buttonClass.split(' ');
 
 	var dateToRemove = $("." + classArray[0]).text().trim().substring(0, 10);
-	console.log($("." + classArray[0]).text().trim());
 	var tdRemove = classArray[1];
-	console.log(dateToRemove);
-	console.log(tdRemove);
 
 	// selectedDates 배열에서 해당 날짜를 찾아 제거
 	var indexToRemove = selectedDates.indexOf(dateToRemove);
@@ -384,11 +397,8 @@ function updateData(updateYear, updateMonth) {
 		// 기존에 선택된 td 요소의 클래스 제거
 		$('#tr3 .selected-td').removeClass('selected-td');
 
-		console.log(data);
-		console.log(updateYear + " : " + updateMonth);
 
 		var { dates, daysOfWeek } = updateMonthlyDates(updateYear, updateMonth);
-		console.log(dates + " : " + daysOfWeek);
 		for (let i = 0; i < data.length; i++) {
 			let member = data[i];
 			// var tableRow = $('<tr>').addClass('memberRow');
@@ -418,7 +428,6 @@ $(document).ready(function() {
 		let work_day = document.getElementById('work_days').value;
 		document.getElementById('work_leave_contents').value = " 휴가 유형 : "+ work_type + " 휴가신청 날짜 : " + work_day;
 		let contents = document.getElementById('work_leave_contents').value;
-		console.log(contents);
 		
 		$.ajax({
 			url: '/approval/document/works/workLeave_write',
