@@ -701,9 +701,6 @@ function updateLists(selectedValues) {
     $('#user_names').val(JSON.stringify(user_names));
     $('#work_types').val(JSON.stringify(work_types));
     $('#work_days').val(JSON.stringify(work_days));
-    console.log(user_names);
-    console.log(work_types);
-    console.log(user_names);
 
     $("#work_plan_contents").val(selectedValues.map(selectedValue =>
         '날짜: ' + selectedValue.date + ', 이름: ' + selectedValue.user + ', 근무변경요청: ' + selectedValue.value + '\n'
@@ -1001,15 +998,15 @@ $(document).on('mouseleave', '.jeng', function() {
             $("#department_Select").append('<option value="' + departmentName + '">' + departmentName + '</option>');
         }
     });
-    let userNames = []; 
+    let userNames = [];
     // select 요소의 변경 감지하여 버튼 활성화/비활성화 처리
     $("#department_Select").on("change", function() {
         var organization = $(this).val();
         if (organization !== "부서 선택") {
-            loadMembersByDepartment(organization); // 선택한 부서의 멤버 로드
-            $('#selectFinished').prop('disabled', false); // 버튼 활성화
+            loadMembersByDepartment(organization);
+            $('#selectFinished').prop('disabled', false);
         } else {
-            $('#selectFinished').prop('disabled', true); // 버튼 비활성화
+            $('#selectFinished').prop('disabled', true); 
         }
         
         
@@ -1048,7 +1045,6 @@ let userNames = [];
         //updateWorkPlanTable(userNames);
         let dates = generateDatesForMonth(today.getFullYear(), currentMonth);
         updateWorkPlanTable(userNames, dates);
-        console.log(userNames);
     });
 }
 
