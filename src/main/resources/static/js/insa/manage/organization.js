@@ -1,5 +1,8 @@
+
 $(".modalButton").on("click", function() {
+	// 모달 폼 보이기/숨기기 토글
 	$(".modalContainer").toggleClass("hidden show");
+	// 모달 컨테이너 내용 비우기
 	$(".modalContainer input").val("");
 });
 

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,16 +11,6 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/css/approval/document/write.css">
 <link rel="stylesheet" type="text/css" href="/css/commons/body_form/left_form/body_form_default.css">
-<style>
-.modal_title {
-	width: 100%;
-	padding-bottom: 14px;
-	border-bottom: 1px solid #ebebeb;
-	font-size: 16px;
-	font-weight: bold;
-	color: #333333;
-}
-</style>
 </head>
 <body>
 
@@ -104,15 +95,23 @@
 		<div class="modalContent" style="padding: 25px;">
 			<div class="modal_title">신청 설정</div>
 			<div class="managerList">
-				<ul>
-					<c:forEach var="list" items="${managerList }">
-						<li><span>${list.organization }</span>
-							<span>${list.name }</span>
-							<span hidden>${list.id }</span>
-							<input type='checkbox' class="id_checkBox" value='${list.id}'>
-						</li>
-					</c:forEach>
-				</ul>
+				<c:choose>
+					<c:when test="${fn:length(managerList) == 0}">
+						<span>표시할 상사가 없습니다.</span>
+					</c:when>
+					<c:otherwise>
+						<ul>
+							<c:forEach var="list" items="${managerList }">
+								<li>
+									<span>${list.organization }</span> 
+									<span>${list.name }</span> 
+									<span hidden>${list.id }</span> 
+									<input type='checkbox' class="id_checkBox" value='${list.id}'>
+								</li>
+							</c:forEach>
+						</ul>
+					</c:otherwise>
+				</c:choose>
 			</div>
 			<div class="modalButton_div" align="center">
 				<button type="button" id="cancle_btn" class="modalButton_apply button_cancel">취소</button>
