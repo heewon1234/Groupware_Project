@@ -57,34 +57,7 @@ public class BoardService {
 	private Gson gson;
 
 	// MemberService로 가시오
-	public List<MembersDTO> selectAllMembers(){
-		return bdao.selectAllMembers();
-	}
-	public List<String> selectAllOrganization(){
-		return bdao.selectAllOrganization();
-	}
-
-	public List<String> selectByOrganization(String organization){
-		return bdao.selectByOrganization(organization);
-	}
-
-	public List<String> selectByJobName(MembersDTO dto){
-		return bdao.selectByJobName(dto);
-	}
-	public List<MembersDTO> selectMemberByOrganization(String organization){
-		return bdao.selectMemberByOrganization(organization);
-	}
-
-	public List<MembersDTO> selectMemberByOrganizationAndJobName(String organization,String job_name){
-		Map<String,String> map = new HashMap<>();
-		map.put("organization", organization);
-		map.put("job_name", job_name);
-		return bdao.selectMemberByOrganizationAndJobName(map);
-	}
-
-	public MembersDTO selectMemberByName(MembersDTO dto){
-		return bdao.selectMemberByName(dto);
-	}
+	
 	//
 
 	// 게시글 등록 관련

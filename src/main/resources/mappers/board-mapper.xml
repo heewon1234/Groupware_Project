@@ -4,27 +4,7 @@
 <mapper namespace="Board">
 	
 	<!-- member-mapper로 옮겨라 -->
-	<select id="selectAllMembers" resultType="com.kdt.dto.MembersDTO">
-		select * from Members;
-	</select>
-	<select id="selectAllOrganization" resultType="String">
-		select organization from Members group by organization
-	</select>
-	<select id="selectByOrganization" resultType="String">
-		select JOB_NAME from (select * from Members where organization=#{organization}) as job group by job_name
-	</select>
-	<select id="selectByJobName" resultType="String">
-		select name from Members where JOB_NAME=#{job_name} and organization=#{organization};
-	</select>
-	<select id="selectMemberByOrganization" resultType="com.kdt.dto.MembersDTO">
-		select * from Members where organization=#{organization}
-	</select>
-	<select id="selectMemberByOrganizationAndJobName" resultType="com.kdt.dto.MembersDTO">
-		select * from Members where organization=#{organization} and JOB_NAME=#{job_name}
-	</select>
-	<select id="selectMemberByName" resultType="com.kdt.dto.MembersDTO">
-		select * from Members where organization=#{organization} and JOB_NAME=#{job_name} and name=#{name}
-	</select>
+	
 	<!-- 옮겨라 -->
 	
 	<!-- 게시글 등록 -->

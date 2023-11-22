@@ -244,4 +244,46 @@ public class MembersController {
 
 		return "redirect:/members/myInfo";
 	}
+	
+	// 게시판 권한 줄 때 사용
+	@ResponseBody
+	@RequestMapping("selectAllMembers")
+	public List<MembersDTO> selectAllMembers(){
+		return mservice.selectAllMembers();
+	}
+	
+	@ResponseBody
+	@RequestMapping("selectByOrganization")
+	public List<String> selectByOrganization(String organization){
+		return mservice.selectByOrganization(organization);
+	}
+	
+	@ResponseBody
+	@RequestMapping("selectByJobName")
+	public List<String> selectByJobName(String job_name, String organization){
+		MembersDTO dto = new MembersDTO();
+		dto.setOrganization(organization);
+		dto.setJob_name(job_name);
+		return mservice.selectByJobName(dto);
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping("selectMemberByOrganization")
+	public List<MembersDTO> selectMemberByOrganization(String organization){
+		return mservice.selectMemberByOrganization(organization);
+	}
+	
+	@ResponseBody
+	@RequestMapping("selectMemberByOrganizationAndJobName")
+	public List<MembersDTO> selectMemberByOrganizationAndJobName(String organization, String job_name){
+		return mservice.selectMemberByOrganizationAndJobName(organization,job_name);
+	}
+	
+	@ResponseBody
+	@RequestMapping("selectMemberByName")
+	public MembersDTO selectMemberByName(MembersDTO dto){
+		return mservice.selectMemberByName(dto);
+	}
+	//
 }

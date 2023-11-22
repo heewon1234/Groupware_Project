@@ -90,6 +90,9 @@ public class MembersDAO {
 	    parameters.put("position", position);
 		return db.selectList("Members.getManager", parameters);
 	}
+	public String getJobName(String id) {
+		return db.selectOne("Members.getJobName",id);
+	}
 	public MembersDTO selectById(String id) {
 		return db.selectOne("Members.selectById", id);
 	}
@@ -99,4 +102,36 @@ public class MembersDAO {
 	public int updateMember(MembersDTO dto) {
 		return db.update("Members.updateMember", dto);
 	}
+	
+	// 게시판 권한 줄 때 사용
+	public List<MembersDTO> selectAllMembers(){
+		return db.selectList("Members.selectAllMembers");
+	}
+
+	public List<String> selectAllOrganization(){
+		return db.selectList("Members.selectAllOrganization");
+	}
+
+	public List<String> selectByOrganization(String organization){
+		return db.selectList("Members.selectByOrganization",organization);
+	}
+
+	public List<String> selectByJobName(MembersDTO dto){
+		List<String> list = db.selectList("Members.selectByJobName",dto);
+		return list;
+	}
+
+	public List<MembersDTO> selectMemberByOrganization(String organization){
+		return db.selectList("Members.selectMemberByOrganization",organization);
+	}
+
+	public List<MembersDTO> selectMemberByOrganizationAndJobName(Map<String,String> map){
+		return db.selectList("Members.selectMemberByOrganizationAndJobName",map);
+	}
+
+	public MembersDTO selectMemberByName(MembersDTO dto){
+		MembersDTO list = db.selectOne("Members.selectMemberByName",dto);
+		return list;
+	}
+	// 게시판 권한 줄 때 사용
 }
