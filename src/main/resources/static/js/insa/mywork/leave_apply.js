@@ -416,13 +416,18 @@ $(document).ready(function() {
 		let approvalname = checkedManagerValues.join(',');
 		$("#work_days").val(selectedDates.join(','));
 		let work_day = document.getElementById('work_days').value;
+		document.getElementById('work_leave_contents').value = " 휴가 유형 : "+ work_type + " 휴가신청 날짜 : " + work_day;
+		let contents = document.getElementById('work_leave_contents').value;
+		console.log(contents);
+		
 		$.ajax({
 			url: '/approval/document/works/workLeave_write',
 			data: {
 			title: title,
 			work_type:work_type,
 			work_day:work_day,
-			approvalname:approvalname
+			approvalname:approvalname,
+			contents : contents
 		},
 		}).done(function(resp) {
 			alert("휴가가 신청되었습니다");

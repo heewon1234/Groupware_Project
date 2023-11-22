@@ -73,6 +73,7 @@ public class WorkController {
 			wservice.addworkearly(ID); // 조기 퇴근 추가
 			wservice.addworkday(ID); // 근무일 수 추가
 			wservice.addworkminutetime(ID); // 근무시간 추가
+			wservice.addworknotcheck(ID); // 퇴근 미체크 추가
 		List<WorkTimesDTO> tlist = wservice.selectby(ID);
 		model.addAttribute("tlist",tlist);
 		return tlist;
@@ -90,8 +91,6 @@ public class WorkController {
 	public List<WorkTimesDTO> list(Model model)throws Exception  {
 		String ID = (String) session.getAttribute("loginId");
 		List<WorkTimesDTO> tlist = wservice.selectby(ID);
-		wservice.addworknotcheck(ID); // 퇴근 미체크 추가
-		  							  // 결근 추가
 		model.addAttribute("tlist",tlist);
 		return tlist;
 	}

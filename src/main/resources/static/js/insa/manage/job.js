@@ -5,6 +5,7 @@ let jt_count = 0;
 
 // 직무 입력칸과 그 입력칸을 삭제할 수 있는 버튼 생성
 $("#add_jr_btn").on("click", function() {
+	// 생성된 직무 입력칸이 없으면 생성
 	if (jr_count == 0) {
 		let div = $("<div>");
 		div.css("display", "inline-block");
@@ -28,6 +29,7 @@ $("#add_jr_btn").on("click", function() {
 
 // 직위 입력칸과 그 입력칸을 삭제할 수 있는 버튼 생성
 $(".fa-circle-plus").on("click", function() {
+	// 생성된 직위 입력칸이 없으면 생성
 	if (jt_count == 0) {
 		let div = $("<div>");
 		div.css("display", "inline-block");
@@ -72,18 +74,15 @@ $(document).on("click", "#del_jt_btn", function() {
 $(".remove_jr_btn").on("click", function() {
 	let result = confirm('삭제하시겠습니까?');
 	if (result) {
-		location.href = "/job/deleteJobRole?job_name="
-			+ $(this).prev().html();
-	} else {
-	}
+		location.href = "/job/deleteJobRole?job_name="+ $(this).prev().html();
+	} else {}
 });
 
 // 직위 리스트에서 직위 삭제
 $(".remove_jt_btn").on("click", function() {
 	let result = confirm('삭제하시겠습니까?');
 	if (result) {
-		location.href = "/job/deleteJobTitle?position="
-			+ $(this).prev().html();
+		location.href = "/job/deleteJobTitle?position="+ $(this).prev().html();
 	} else {
 	}
 });
@@ -98,32 +97,33 @@ $(document).ready(function() {
 	$(".top_container").load("/commons/topForm");
 });
 
-
-// 직무명&직위명 리스트 생성
-let jobPositionList = [];
-let jobNameList = [];
-
-for (let i = 0; i < $(".jobPosition_span").length; i++) {
-	jobPositionList.push($(".jobPosition_span").eq(i).html());
-}
-
-for (let i = 0; i < $(".jobName_span").length; i++) {
-	jobNameList.push($(".jobName_span").eq(i).html());
-}
+// 동일 직무명&직위명 입력시 경고창
+	// 직무명&직위명 리스트 생성
+	let jobPositionList = [];
+	let jobNameList = [];
+	
+	for (let i = 0; i < $(".jobPosition_span").length; i++) {
+		jobPositionList.push($(".jobPosition_span").eq(i).html());
+	}
+	
+	for (let i = 0; i < $(".jobName_span").length; i++) {
+		jobNameList.push($(".jobName_span").eq(i).html());
+	}
+	//
+	
+	// 중복되는 직위명을 입력시 경고창
+	$("#apply_jobTitle").on("click", function() {
+		if (jobPositionList.some((job) => job == $("#job_position_input").val())) {
+			alert("동일한 직위명이 존재합니다.");
+			return false;
+		} else { }
+	});
+	
+	// 중복되는 직무명 입력시 경고창
+	$("#apply_jobRole").on("click", function() {
+		if (jobNameList.some((job) => job == $("#job_name_input").val())) {
+			alert("동일한 직무명이 존재합니다.");
+			return false;
+		} else { }
+	});
 //
-
-// 중복되는 직위명을 입력시 경고창
-$("#apply_jobTitle").on("click", function() {
-	if (jobPositionList.some((job) => job == $("#job_position_input").val())) {
-		alert("동일한 직위명이 존재합니다.");
-		return false;
-	} else { }
-});
-
-// 중복되는 직무명 입력시 경고창
-$("#apply_jobRole").on("click", function() {
-	if (jobNameList.some((job) => job == $("#job_name_input").val())) {
-		alert("동일한 직무명이 존재합니다.");
-		return false;
-	} else { }
-});

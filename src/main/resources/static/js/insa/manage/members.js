@@ -1,30 +1,32 @@
-var table = $("#myTable").DataTable({
-	lengthChange: false,
-	info: false,
-	"language": {
-		"search": "으로 검색:"	
-	}
-});
-
-// Search 셀렉트 추가
-$('#myTable_filter').prepend('<select id="select"></select>');
-
-// Search 셀렉트에 항목 자동 추가
-$('#myTable > thead > tr').children().each(function(indexInArray, valueOfElement) {
-
-	$('#select').append('<option>' + valueOfElement.innerHTML + '</option>');
-
-});
-
-// Search를 셀렉트의 값만 검색하도록 설정
-// 기존 있던 검색 기능을 unbind()하고 재설정
-$('.dataTables_filter input').unbind().bind('keyup', function() {
-
-	var colIndex = document.querySelector('#select').selectedIndex;
-
-	table.column(colIndex).search(this.value).draw();
-
-});
+// DataTable 설정
+	var table = $("#myTable").DataTable({
+		// 테이블 크기 조절 기능 끄기
+		lengthChange: false,
+		// 테이블 정보 출력 기능 끄기
+		info: false,
+		"language": {
+			"search": "으로 검색:"	
+		}
+	});
+	
+	// Search 셀렉트 추가
+	$('#myTable_filter').prepend('<select id="select"></select>');
+	
+	// Search 셀렉트에 항목 자동 추가
+	$('#myTable > thead > tr').children().each(function(indexInArray, valueOfElement) {
+		$('#select').append('<option>' + valueOfElement.innerHTML + '</option>');
+	});
+	
+	// Search를 셀렉트의 값만 검색하도록 설정
+	// 기존 있던 검색 기능을 unbind()하고 재설정
+	$('.dataTables_filter input').unbind().bind('keyup', function() {
+	
+		var colIndex = document.querySelector('#select').selectedIndex;
+	
+		table.column(colIndex).search(this.value).draw();
+	
+	});
+//
 
 $(document).on("change", "input[type='checkbox']", function() {
 	// 체크박스 이벤트 발생하면 체크된 인원 수 반영

@@ -259,6 +259,8 @@ public class ApprovalController {
 		String ID = (String) session.getAttribute("loginId");
 		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");
 		String name = userDTO.getName();
+		contents =" 신청인 : " + name + contents  ;
+		System.out.println("controller" + contents);
 		System.out.println(userDTO.getName());
 		ApprovalDTO adto = new ApprovalDTO(0, ID, title,contents, null, null, "휴가신청");
 		int seq = appService.leaveinsert(adto);

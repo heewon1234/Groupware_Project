@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -282,6 +283,7 @@ text-align: center;
 		<div class="right_item">
 			<div class="main_tab">
 				<div id="work_contents">
+				<input id="userName" type="hidden" value="${name}">
 					<!-- 현재 월을 나타내는 부분 -->
 					<div
 						style="margin-bottom: 10px; display: flex; align-items: center;">
@@ -429,13 +431,23 @@ text-align: center;
 				<span>신청 설정</span>
 			</div>
 			<div class="modal_body">
-				<ul>
-					<c:forEach var="list" items="${managerList }">
-						<li><span>${list.organization }</span> <span>${list.name }</span>
-							<span hidden>${list.id }</span> <input class="mCheckbox" type='checkbox'
-							name='managerID' value='${list.id}'></li>
-					</c:forEach>
-				</ul>
+				<c:choose>
+					<c:when test="${fn:length(managerList) == 0}">
+						<span>표시할 상사가 없습니다.</span>
+					</c:when>
+					<c:otherwise>
+						<ul>
+							<c:forEach var="list" items="${managerList }">
+								<li>
+									<span>${list.organization }</span> 
+									<span>${list.name }</span> 
+									<span hidden>${list.id }</span> 
+									<input type='checkbox' class="id_checkBox" value='${list.id}'>
+								</li>
+							</c:forEach>
+						</ul>
+					</c:otherwise>
+				</c:choose>
 			</div>
 			<div class="modal_footer">
 				<button type="button" class="button_cancel" id="button_cancel_tag">취소</button>
@@ -651,38 +663,62 @@ function formatDate(date) {
 	
 	
 	
-// 리스트를 저장할 배열
 let selectedValues = [];
-let user_names = [];
-let work_types = [];
-let work_days = [];
-// select 요소에서 변경이 일어났을 때 이벤트 감지
+
 document.getElementById('update_workPlan_body').addEventListener('change', function(event) {
     const target = event.target;
+    let logUser = $("#userName").val();
 
     if (target.tagName === 'SELECT') {
         const selectedValue = target.value;
         const date = target.closest('tr').querySelector('td:first-child').textContent;
         const columnIndex = Array.from(target.closest('tr').children).indexOf(target.closest('td'));
         const headerText = $('#update_workPlan_head').children().eq(columnIndex).text();
-        
-		
-        if (selectedValue !== '9시 출근') {
-        	var logContent = '날짜: ' + date + ', 이름: ' + headerText + ', 근무변경요청: ' + selectedValue;
-            user_names.push(headerText);
-            work_types.push(selectedValue);
-            work_days.push(currentYear+"년 "+date);
-            
-            $('#user_names').val(JSON.stringify(user_names));
-            $('#work_types').val(JSON.stringify(work_types));
-            $('#work_days').val(JSON.stringify(work_days));
-            
-            $("#work_plan_contents").val(function(index, currentValue) {
-                return currentValue + logContent + '\n';
-            });
+
+        const existingIndex = selectedValues.findIndex(item => item.date === date && item.user === headerText);
+
+        if (logUser === headerText) {
+            if (selectedValue === '9시 출근') {
+                if (existingIndex !== -1) {
+                    selectedValues.splice(existingIndex, 1);
+                    updateLists(selectedValues);
+                }
+            } else {
+                if (existingIndex !== -1) {
+                    selectedValues[existingIndex] = { date, user: headerText, value: selectedValue };
+                } else {
+                    selectedValues.push({ date, user: headerText, value: selectedValue });
+                }
+                updateLists(selectedValues);
+            }
+        } else {
+            target.value = '9시 출근';
+            alert('다른 사용자의 근무 변경은 불가능합니다.');
         }
     }
 });
+
+function updateLists(selectedValues) {
+    let user_names = [];
+    let work_types = [];
+    let work_days = [];
+
+    selectedValues.forEach(selectedValue => {
+        user_names.push(selectedValue.user);
+        work_types.push(selectedValue.value);
+        work_days.push(currentYear + "년 " + selectedValue.date);
+    });
+
+    $('#user_names').val(JSON.stringify(user_names));
+    $('#work_types').val(JSON.stringify(work_types));
+    $('#work_days').val(JSON.stringify(work_days));
+
+    $("#work_plan_contents").val(selectedValues.map(selectedValue =>
+        '날짜: ' + selectedValue.date + ', 이름: ' + selectedValue.user + ', 근무변경요청: ' + selectedValue.value + '\n'
+    ).join(''));
+}
+
+
     $('#modal_apply_button').on('click', function() {
     	var approval = {
     		id:$("#loginID").val(),
@@ -716,39 +752,38 @@ document.getElementById('update_workPlan_body').addEventListener('change', funct
     	});
     });
 
+    function updateWorkPlanTable(userNames,dates) {
+        var tableHeader = $("#update_workPlan_head").empty();
+        var tableCol = $('<th>');
+        tableHeader.append(tableCol);
+        
+        userNames.forEach(name => {
+            const tableHeaderCell = $('<th>').text(name);
+            tableHeader.append(tableHeaderCell);
+        });
+
+        var tableBody = $("#update_workPlan_body").empty();
+        dates.forEach(date => {
+            var tableRow = $('<tr>');
+            const cellDate = $('<td>').text(formatDate2(date)).addClass('members');
+            tableRow.append(cellDate);
+
+            userNames.forEach(userName => {
+                const cellDate1 = $('<td>');
+                const select = $('<select>').css('padding', '2px');
+                select.append('<option value="10시 출근">10시 출근</option>');
+                select.append('<option value="9시 출근" selected>9시 출근</option>');
+                select.append('<option value="휴무일">휴무일</option>');
+                select.append('<option value="휴일">휴일</option>');
+                cellDate1.append(select);
+                tableRow.append(cellDate1);
+            });
+
+            tableBody.append(tableRow);
+        });
+    }
 
 
-
-	function updateWorkPlanTable(userNames,dates) {
-	    var tableHeader = $("#update_workPlan_head").empty();
-	    var tableCol = $('<th>');
-	    tableHeader.append(tableCol);
-	    
-	    userNames.forEach(name => {
-	        const tableHeaderCell = $('<th>').text(name);
-	        tableHeader.append(tableHeaderCell);
-	    });
-
-	    var tableBody = $("#update_workPlan_body").empty();
-	    dates.forEach(date => {
-	        var tableRow = $('<tr>');
-	        const cellDate = $('<td>').text(formatDate2(date)).addClass('members');
-	        tableRow.append(cellDate);
-
-	        userNames.forEach(userName => {
-	            const cellDate1 = $('<td>');
-	            const select = $('<select>').css('padding', '2px');
-	            select.append('<option value="10시 출근">10시 출근</option>');
-	            select.append('<option value="9시 출근" selected>9시 출근</option>');
-	            select.append('<option value="휴무일">휴무일</option>');
-	            select.append('<option value="휴일">휴일</option>');
-	            cellDate1.append(select);
-	            tableRow.append(cellDate1);
-	        });
-
-	        tableBody.append(tableRow);
-	    });
-	}
 		$('#update_workPlan_body').on('change', 'select', function() {
 			$('#openModalBtn').prop('disabled', true);
 		    let noChange = true;
@@ -974,15 +1009,15 @@ $(document).on('mouseleave', '.jeng', function() {
             $("#department_Select").append('<option value="' + departmentName + '">' + departmentName + '</option>');
         }
     });
-
+    let userNames = [];
     // select 요소의 변경 감지하여 버튼 활성화/비활성화 처리
     $("#department_Select").on("change", function() {
         var organization = $(this).val();
         if (organization !== "부서 선택") {
-            loadMembersByDepartment(organization); // 선택한 부서의 멤버 로드
-            $('#selectFinished').prop('disabled', false); // 버튼 활성화
+            loadMembersByDepartment(organization);
+            $('#selectFinished').prop('disabled', false);
         } else {
-            $('#selectFinished').prop('disabled', true); // 버튼 비활성화
+            $('#selectFinished').prop('disabled', true); 
         }
         
         
@@ -993,8 +1028,8 @@ $(document).on('mouseleave', '.jeng', function() {
 
 
 
-var userNames = [];
 function loadMembersByDepartment(organization) {
+let userNames = [];
     $.ajax({
         url: '/members/selectAll',
         // 필요한 데이터 전달
