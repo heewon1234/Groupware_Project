@@ -18,7 +18,7 @@ function updateWorkformTable() {
 	            + (resp[i].averagehours)+":"+ (resp[i].averageminute) +"</td></tr>");
 	            $("#workbox").append(tr);
 	        }
-	        $(".div").after("총 인원 :" + resp.length);
+	        $(".div").append("총 인원 :" + resp.length);
 	    });
 	}
     updateWorkformTable()
