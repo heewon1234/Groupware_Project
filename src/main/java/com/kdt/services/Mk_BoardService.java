@@ -193,7 +193,6 @@ public class Mk_BoardService {
 		for(AuthorityDTO auth : authorityMember) {
 			adao.authorityInsert(new AuthorityDTO(0,auth.getId(),dto.getBoard_title(),"Board_"+boardSeq,auth.getAuthority()));
 		}
-		System.out.println("헤더 바뀜"+changeHeader);
 		if(dto.isUse_header()) {
 			String[] headers = gson.fromJson(headerList, String[].class);
 			if(changeHeader.equals("true")) {
