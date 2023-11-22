@@ -50,6 +50,9 @@ $(document).ready(function() {
 	});
 });
 
+// 페이징
+
+
 
 // 모달 창 OPEN
 function modal_open_button(type) {

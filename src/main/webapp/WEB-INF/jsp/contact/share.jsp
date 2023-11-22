@@ -177,7 +177,7 @@
 					</div>
 				</div>
 				<div class="modal_footer right">
-					<button class="button_cancel float_left"  id="modal_cancel_button">취소</button>
+					<button class="button_cancel float_left" id="modal_cancel_button">취소</button>
 					<button class="button_apply float_right permit" id="modal_apply_button">저장</button>
 					<button class="button_apply float_right permit" id="modal_apply_list_button">저장 후 계속
 						추가</button>
@@ -342,7 +342,9 @@
 				</div>
 				<div class="modal_footer right">
 					<button class="button_delete float_left" onclick="modal_update_delete('share')">삭제</button>
-					<button class="button_cancel float_right" onclick="modal_cancel_button('contact_update_modal',event)">취소</button>
+					<button class="button_cancel float_right"
+						onclick="modal_cancel_button('contact_update_modal',event)"
+					>취소</button>
 					<button class="button_apply float_right" onclick="modal_update_apply('share')">수정</button>
 				</div>
 			</div>
@@ -354,9 +356,7 @@
 			<div class="modal_body" id="read_body">
 				<div class="modal_body_content_form" id="read_content_form"></div>
 			</div>
-			<div class="modal_footer" id="modal_footer_read">
-				
-			</div>
+			<div class="modal_footer" id="modal_footer_read"></div>
 		</div>
 
 		<!-- 일반 모달창 -->
@@ -441,7 +441,9 @@
 		</div>
 		<div class="modal_body">
 			<div class="input-group mb-0">
-				<input type="text" class="form-control" id="modal_tag_input_edit" onkeyup="edit_form_new_tag_deplicate('edit', this)">
+				<input type="text" class="form-control" id="modal_tag_input_edit"
+					onkeyup="edit_form_new_tag_deplicate('edit', this)"
+				>
 			</div>
 			<div class="modal_tag_duplication_error">
 				<img src="/images/contact/dup_error.png"> 태그 이름이 이미 있습니다.
@@ -503,13 +505,6 @@
 			<!-- 메뉴 리스트 있는 부분 -->
 			<div class="menu_tab">
 
-				<!-- 일반 메뉴 -->
-				<div class="menu_item">
-					<img src="/images/commons/body_form/left_item/default/favorites.png" /> <span
-						class="menu_item_text"
-					>중요 주소록</span>
-				</div>
-
 				<!-- 드롭 다운 메뉴 (추가 효과 없음) -->
 				<div class="menu_list">
 					<div class="menu_list_button plus">
@@ -524,13 +519,13 @@
 					</div>
 					<div class="menu_list_box">
 						<div class="menu_list_item">
-							<img src="/images/commons/body_form/left_item/default/company.png"> <span
+							<img src="/images/commons/body_form/left_item/default/label.png"> <span
 								class="menu_list_item_text"
 							>전체</span>
 						</div>
 						<c:forEach items="${personalTagList}" var="contact">
 							<div class="menu_list_item">
-								<img src="/images/commons/body_form/left_item/default/company.png"> <span
+								<img src="/images/commons/body_form/left_item/default/label.png"> <span
 									class="menu_list_item_text"
 								>${contact.tag} </span>
 								<div class="menu_list_item_plus point">
@@ -540,7 +535,7 @@
 							</div>
 						</c:forEach>
 						<div class="menu_list_item">
-							<img src="/images/commons/body_form/left_item/default/alarm.png"> <span
+							<img src="/images/commons/body_form/left_item/default/label.png"> <span
 								class="menu_list_item_text"
 							>미등록 태그</span>
 						</div>
@@ -561,22 +556,23 @@
 					</div>
 					<div class="menu_list_box">
 						<div class="menu_list_item">
-							<img src="/images/commons/body_form/left_item/default/company.png"> <span
+							<img src="/images/commons/body_form/left_item/default/label.png"> <span
 								class="menu_list_item_text"
 							>전체</span>
 						</div>
 						<c:forEach items="${shareTagList}" var="contact">
 							<div class="menu_list_item">
-								<img src="/images/commons/body_form/left_item/default/company.png"> <span
+								<img src="/images/commons/body_form/left_item/default/label.png"> <span
 									class="menu_list_item_text"
 								>${contact.tag} </span>
 								<div class="menu_list_item_plus point">
 									<img src="/images/commons/body_form/left_item/default/point.png">
+									<div class="menu_list_item_plus_hover">태그 편집</div>
 								</div>
 							</div>
 						</c:forEach>
 						<div class="menu_list_item">
-							<img src="/images/commons/body_form/left_item/default/alarm.png"> <span
+							<img src="/images/commons/body_form/left_item/default/label.png"> <span
 								class="menu_list_item_text"
 							>미등록 태그</span>
 						</div>
@@ -600,10 +596,10 @@
 								>
 							</div>
 						</div>
-						<div class="countBox">						
+						<div class="countBox">
 							<span id="select_contact_tag">${contactName}</span><span
 								style="color: blue; font-weight: bold; margin: 0 0px 0 5px"
-							>${shareContactList.size()}</span>개
+							>${replyListSize}</span>개
 						</div>
 					</div>
 
@@ -622,7 +618,6 @@
 							<c:forEach var="contact" items="${shareContactList}">
 								<div class="main_category cursor" onclick="modal_contact_read_add_data(this, 'share')">
 									<div class="main_category_favorite">
-										<img src="/images/commons/body_form/right_item/default/favorites.png">
 									</div>
 									<div class="main_category_seq">${contact.seq}</div>
 									<div class="main_category_name">${contact.name}</div>
@@ -652,6 +647,14 @@
 						</c:otherwise>
 					</c:choose>
 				</div>
+				<div class="main_footer_page">
+					<input type="hidden" value="${replyListSize}" id="replyListSize">
+					<input type="hidden" value="${recordCountPerPage}" id="recordCountPerPage">
+					<input type="hidden" value="${naviCountPerPage}" id="naviCountPerPage">
+					<input type="hidden" value="${contactCurrentPage}" id="contactCurrentPage">
+					<input type="hidden" value="${hiddenKeyword}" id="hiddenKeyword">
+					<div id="replyFooter"></div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -660,5 +663,105 @@
 		<div class="menu_list_item_plus_click_item" id="check_item_update">이름 변경</div>
 	</div>
 </body>
+<script>
+	let replyListSize = $("#replyListSize").val();
+	if (replyListSize > 0) {
+		let replyFooter = $("#replyFooter");
+		let recordTotalCount = parseInt(replyListSize);
+		let recordCountPerPage = parseInt($("#recordCountPerPage").val());
+		let naviCountPerPage = parseInt($("#naviCountPerPage").val());
+		let currentReplyPage = parseInt($("#contactCurrentPage").val());
+		let hiddenKeyword = $("#hiddenKeyword").val();
 
+		console.log(recordTotalCount);
+		console.log(recordCountPerPage);
+		console.log(naviCountPerPage);
+		console.log(replyListSize);
+		console.log(currentReplyPage);
+		console.log(replyListSize);
+
+		let pageTotalCount = 0;
+
+		if ((recordTotalCount % recordCountPerPage) > 0) {
+			pageTotalCount = Math.floor(recordTotalCount / recordCountPerPage) + 1;
+		} else {
+			pageTotalCount = recordTotalCount / recordCountPerPage;
+		}
+
+		if (currentReplyPage < 1) {
+			currentReplyPage = 1;
+		} else if (currentReplyPage > pageTotalCount) {
+			currentReplyPage = pageTotalCount;
+		}
+
+		let startNavi = Math.floor((currentReplyPage - 1) / naviCountPerPage)
+				* naviCountPerPage + 1;
+		let endNavi = startNavi + naviCountPerPage - 1;
+		console.log("startNavi" + startNavi);
+		console.log("endNavi" + endNavi);
+		console.log("naviCountPerPage" + naviCountPerPage);
+		if (endNavi > pageTotalCount) {
+			endNavi = pageTotalCount;
+		}
+
+		let needPrev = true;
+		let needNext = true;
+
+		if (startNavi == 1) {
+			needPrev = false;
+		}
+		if (endNavi == pageTotalCount) {
+			needNext = false;
+		}
+
+		let callTagName = $("#select_contact_tag").html();
+
+		if (!hiddenKeyword) {
+			if (needPrev) {
+				$("#replyFooter").append(
+						"<a href='/contact/share?cPage=" + (startNavi - 1)
+								+ "'>" + "<<" + "</a>");
+			}
+
+			for (let i = startNavi; i <= endNavi; i++) {
+				$("#replyFooter").append(
+						"<a href='/contact/share?&tag=" + callTagName
+								+ "&cPage=" + i + "' class='naviNum_" + i
+								+ "'>" + i + "</a>");
+			}
+
+			if (needNext) {
+				$("#replyFooter").append(
+						"<a href='/contact/share?cPage=" + (endNavi + 1) + "'>"
+								+ ">>" + "</a>");
+			}
+		}
+
+		else if (hiddenKeyword) {
+			if (needPrev) {
+				$("#replyFooter").append(
+						"<a href='/contact/shareContactSearch?keyword= "
+								+ hiddenKeyword + "&cPage=" + (startNavi - 1)
+								+ "'>" + "<<" + "</a>");
+			}
+
+			for (let i = startNavi; i <= endNavi; i++) {
+				$("#replyFooter").append(
+						"<a href='/contact/shareContactSearch?keyword="
+								+ hiddenKeyword + "&cPage=" + i
+								+ "' class='naviNum_" + i + "'>" + i + "</a>");
+			}
+
+			if (needNext) {
+				$("#replyFooter").append(
+						"<a href='/contact/shareContactSearch?keyword="
+								+ hiddenKeyword + "&cPage=" + (endNavi + 1)
+								+ "'>" + ">>" + "</a>");
+			}
+		}
+
+		$(".naviNum_" + currentReplyPage).css("color", "red").css(
+				"text-decoration", "underline");
+	}
+</script>
 </html>
