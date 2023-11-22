@@ -133,7 +133,7 @@ public class Mk_BoardService {
 		Map<String,String> map = new HashMap<>();
 		map.put("board_title", board_title);
 
-		String[] boardTitleTable = {"Mk_Board", "File", "Header", "Reply", "Survey", "Survey_User"};
+		String[] boardTitleTable = {"File", "Header", "Reply", "Survey", "Survey_User"};
 		String[] oriBoardTitleTable = {"Authority","Favorite_Board"};
 
 		for(String table : boardTitleTable) {
@@ -145,6 +145,9 @@ public class Mk_BoardService {
 			map.put("table", table);
 			mdao.deleteByOriBoardTitle(map);
 		}
+		
+		map.put("table", "Mk_Board");
+		mdao.deleteByBoardTitle(map);
 
 	}
 	//
