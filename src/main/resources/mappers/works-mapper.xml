@@ -66,7 +66,7 @@ SET work_notcheck = (
         GROUP BY id, work_time
         HAVING SUM(CASE WHEN work_type = '근무중' THEN 1 ELSE 0 END) > 0
            AND SUM(CASE WHEN work_type = '근무 종료' THEN 1 ELSE 0 END) = 0
-    ) wt
+    ) wt WHERE id=#{id}
 )
 WHERE id=#{id};
  ]]>

@@ -9,7 +9,8 @@ function workin() {
 	changeStatus('근무중', this);
 	document.getElementById("workin").disabled = true;
 	document.getElementById("workout").disabled = false;
-
+	$("#work-out").removeClass("img-disabled");
+	 $("#work-in").addClass("img-disabled");
 	// 다른 버튼 활성화
 	var buttons = document.querySelectorAll('.workbtn');
 	for (var i = 0; i < buttons.length; i++) {
@@ -28,7 +29,7 @@ function workout() {
 		for (var i = 0; i < buttons.length; i++) {
 			buttons[i].disabled = true;
 		}
-
+		$("#work-out").addClass("img-disabled");
 	} else {
 
 
@@ -158,7 +159,7 @@ function work_inout() {
 						buttons[i].disabled = false;
 						if (resp[resp.length - 1].work_type.trim().includes(buttons[i].textContent.trim())) {
 							buttons[i].disabled = true;
-						}
+						}$("#work-out").addClass("img-disabled");
 					}
 					document.getElementById("workin").disabled = true;
 					document.getElementById("workout").disabled = false;
@@ -174,6 +175,8 @@ function work_inout() {
 					for (var i = 0; i < buttons.length; i++) {
 						buttons[i].disabled = true;
 					}
+					$("#work-out").addClass("img-disabled");
+	 				$("#work-in").addClass("img-disabled");
 					document.getElementById("workin").disabled = true;
 					document.getElementById("workout").disabled = true;
 					var statusText = document
