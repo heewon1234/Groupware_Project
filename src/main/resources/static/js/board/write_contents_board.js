@@ -182,7 +182,6 @@ $("#frmBtn").on("click",function(){
 	}
 	
 	if($("#summernote").val().length>2000){
-		console.log($("#summernote").val());
 		alert("게시글 내용은 최대 2000자 입니다");
 		return false;
 	}

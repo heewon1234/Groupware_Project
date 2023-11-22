@@ -77,7 +77,6 @@ public class BoardController {
 		}
 		if(!board_title.equals("중요게시물")) {
 			boolean auth = aservice.isExistAuth(id, board_title);
-			System.out.println(!memberService.getJobName(id).equals("관리")+"d");
 			if(!auth && !memberService.getJobName(id).equals("관리")) {
 				model.addAttribute("auth",auth);
 				board_title="중요게시물";

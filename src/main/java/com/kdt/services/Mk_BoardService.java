@@ -168,7 +168,6 @@ public class Mk_BoardService {
 		map.put("prevBoardTitle", prevBoardTitle);
 
 		mdao.editBoardDetail(map); 
-		System.out.println(dto.isUse_header());
 
 		// 관련 테이블 이름 변경
 		String[] boardTitleTable = {"Mk_Board", "File", "Reply", "Survey", "Survey_User"};
