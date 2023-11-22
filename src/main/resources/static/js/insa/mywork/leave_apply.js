@@ -129,8 +129,6 @@ $(document).ready(function() {
 
 			tableRowSelect.on('click', 'td', function() {
 				 var leaveRemainder = document.getElementById('remainder').value;
-				 console.log(leaveRemainder);
-				 console.log(selectedDates.length);
 				if(selectedDates.length >= leaveRemainder){
 					alert("보유한 휴가일 이상을 신청하실수 없습니다.");
 					return;
