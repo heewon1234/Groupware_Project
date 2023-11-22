@@ -107,7 +107,7 @@ $(document).on("click",".add_item_btn",function(){
 		alert("항목 추가는 5개가 최대입니다");
   	  	return false;
 	}
-	
+	$(".surveyContents img").attr("src","/images/board/remove.png").attr("class","del_item_btn");
 	let surveyContents = $("<div>");
 	surveyContents.addClass("surveyContents");
 	

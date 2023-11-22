@@ -357,7 +357,7 @@ $(document).on("click",".header_del_btn",function(){
 	let index = $(this).parents(".header_list_box").attr("data-index");
 	$(this).parents(".header_list_box").remove();
 	headerList.splice(index,1);
-})
+});
 
 // 게시판 이름 중복 체크
 $("#board_title_input").keyup(function(){

@@ -11,7 +11,6 @@
 	<link rel="stylesheet" href="/css/commons/topForm.css" />
     <link rel="stylesheet" href="/css/board/board_edit.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/js/commons/body_form/body_form_default.js" defer></script>
 </head>
 <body>
 	

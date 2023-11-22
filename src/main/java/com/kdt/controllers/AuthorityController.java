@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kdt.services.AuthorityService;
+import com.kdt.services.MembersService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -21,6 +22,8 @@ public class AuthorityController {
 	
 	@Autowired
 	AuthorityService aservice;
+	@Autowired
+	MembersService mservice;
 	
 	@ResponseBody
 	@RequestMapping("selectAuthMember")
@@ -32,7 +35,9 @@ public class AuthorityController {
 	@RequestMapping("isExistAuth")
 	public boolean isExistAuth(String board_title){
 		String id = (String)session.getAttribute("loginId");
-		return aservice.isExistAuth(id,board_title);
+		boolean admin = mservice.getJobName(id).equals("관리");
+		boolean result = admin || aservice.isExistAuth(id,board_title);
+		return result;
 	}
 	
 	
