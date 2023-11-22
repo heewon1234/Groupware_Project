@@ -62,4 +62,13 @@ public class ApprovalDAO {
 	public int aleaveinsert(ApplyLeaveDTO aldto)throws Exception{
 		return db.insert("Approval.aleaveinsert",aldto);
 	}
+	public String work_type(int doc_id)throws Exception{
+		return db.selectOne("Approval.work_type",doc_id);
+	}
+	public int count(int doc_id)throws Exception{
+		return db.selectOne("Approval.count",doc_id);
+	}
+	public String getID(int doc_id) {
+		return db.selectOne("Approval.getID",doc_id);
+	}
 }

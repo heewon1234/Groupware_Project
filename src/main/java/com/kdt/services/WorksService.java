@@ -152,4 +152,13 @@ public int addworknotcheck(String ID)throws Exception{
 public String selectbyname(String name)throws Exception{
 	return wdao.selectbyname(name);
 }
+public int updateyleave(WorksDTO dto)throws Exception{
+	return wdao.updateyleave(dto);
+}
+public int updatefleave(WorksDTO dto)throws Exception{
+	return wdao.updatefleave(dto);
+}
+public int updateleave(WorksDTO dto)throws Exception{
+	return wdao.updateleave(dto);
+}
 }
