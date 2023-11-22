@@ -24,6 +24,10 @@
 		SELECT * FROM Members;
 	</select>
 	
+	<select id="selectAllExceptMe" resultType="com.kdt.dto.MembersDTO">
+		SELECT * FROM Members where id != #{id};
+	</select>
+	
 	<update id="updateWorkForm">
 		Update Members set work_form = #{work_form} where id = #{id};
 	</update>

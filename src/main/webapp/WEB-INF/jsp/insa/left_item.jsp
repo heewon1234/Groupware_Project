@@ -51,7 +51,7 @@ i{margin-right: 8px;}
 				</div>
 			</div>
 			<!-- 드롭 다운 메뉴 (추가 효과 없음) -->
-			
+			<c:if test="${userDTO.job_name eq '관리'}">
 			<div class="menu_list">
 				<div class="menu_list_button">
 					<div class="menu_list_button_drop">
@@ -71,7 +71,7 @@ i{margin-right: 8px;}
 					</div>
 				</div>
 			</div>
-			
+			</c:if>
 
 			<c:if test="${userDTO.job_name eq '관리'}">
 				<!-- 드롭 다운 메뉴 (추가 효과 없음) -->

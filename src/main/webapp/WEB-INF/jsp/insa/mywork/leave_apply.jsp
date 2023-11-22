@@ -72,24 +72,26 @@
 							</tbody>
 						</table>
 					</div>
+					
+					
+					<div id="calendartd" style="margin-left:24px;display: none;">
 					<h4>휴가 현황</h4>
 					<c:forEach var="i" items="${list }">
-							<h4>잔여 휴가 ${i.leave_remainder}일</h4>
+							<br><h4>잔여 휴가 ${i.leave_remainder}일</h4><br>
 					</c:forEach>
-					
-					<div  
-						style="margin-bottom: 10px; display: flex; align-items: center;">
-						<div style="margin-top: 3px;">
+						<span style="margin-top: 3px;">
 							<img class="prevMonth"
 								src="/images/insa/work_plan/chevron-left.svg">
-						</div>
-						<div class="currentMonth"></div>
-						<div style="margin-top: 3px;">
+						</span>
+						<span class="currentMonth">
+						
+						</span>
+						<span style="margin-top: 3px;">
 							<img class="nextMonth"
 								src="/images/insa/work_plan/chevron-right.svg">
-						</div>
-					</div>
-					<div id="calendartd" style="margin-left: 24px">
+						</span>
+					
+					
 						<table border="1" id="current_table" style="width: 90%;">
 							<thead id="currentTable">
 								<tr id="tr1">
@@ -107,6 +109,7 @@
 							
 							</tbody>
 						</table>
+						</div>
 					</div>
 
 					<div id="leave_apply" style="display: none">

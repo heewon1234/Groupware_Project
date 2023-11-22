@@ -2,98 +2,255 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Contact">
 
-    <select id="personal_contact_selectAll" resultType="com.kdt.dto.ContactDTO">
-        select * from Personal_Contact where writer = #{writer}
-    </select>
-
-    <select id="personal_contact_selectBy" resultType="com.kdt.dto.ContactDTO">
-        SELECT * FROM Personal_Contact
-        WHERE writer = 'test1'
-        AND (
-        tag = #{tag}
-        OR tag LIKE CONCAT('%', #{tag}, '%')
-        OR tag LIKE CONCAT('%,', #{tag}, '%')
-        OR tag LIKE CONCAT('%', #{tag}, ',%')
-        );
-    </select>
-
-    <select id="personal_contact_selectNull" resultType="com.kdt.dto.ContactDTO">
-        select * from Personal_Contact where writer = #{writer} and tag = ''
-    </select>
-
-    <select id="personal_contact_tag_selectAll" resultType="com.kdt.dto.ContactDTO">
-        select * from Personal_Contact_Tag where writer = #{writer}
-    </select>
-
-    <select id="personal_contact_tag_selectAll_duplicate" resultType="com.kdt.dto.ContactDTO">
-        select * from Personal_Contact_Tag where writer = #{writer} and tag = #{tag}
-    </select>
-
-    <insert id="personal_contact_tag_insert">
-        insert into Personal_Contact_Tag(writer, tag)
-
-        values(#{writer}, #{tag})
-    </insert>
-
-    <insert id="personal_contact_insert">
-        insert into Personal_Contact(tag, name, email, phone, company_name, company_rank,
-        company_department, address, link, birthday, memo, writer)
-
-        values(#{tag}, #{name}, #{email}, #{phone}, #{company_name}, #{company_rank},
-        #{company_department}, #{address}, #{link}, #{birthday}, #{memo}, #{writer})
-    </insert>
-    
-    <select id="personal_contact_read" resultType="com.kdt.dto.ContactDTO">
-        select * from Personal_Contact where seq = #{seq}
-    </select>
-    
-	<select id="personal_contact_update" resultType="com.kdt.dto.ContactDTO">
-    	update Personal_Contact set
-    	name = #{name},
-    	email = #{email},
-    	phone = #{phone},
-    	tag = #{tag},
-    	company_name = #{company_name},
-    	company_rank = #{company_rank},
-    	company_department = #{company_department},
-    	address = #{address},
-    	link = #{link},
-    	birthday = #{birthday},
-    	memo = #{memo}
-    	where seq = #{seq}
+	<select id="personal_contact_selectAll"
+		resultType="com.kdt.dto.ContactDTO">
+		select * from Personal_Contact where writer = #{writer}
 	</select>
-	
+
+	<select id="share_contact_selectAll"
+		resultType="com.kdt.dto.ContactDTO">
+		select * from Share_Contact
+	</select>
+
+	<select id="personal_contact_selectNull"
+		resultType="com.kdt.dto.ContactDTO">
+		select * from Personal_Contact where writer = #{writer} and
+		tag = ''
+	</select>
+
+	<select id="share_contact_selectNull"
+		resultType="com.kdt.dto.ContactDTO">
+		select * from Share_Contact where tag = ''
+	</select>
+
+	<select id="personal_contact_selectBy"
+		resultType="com.kdt.dto.ContactDTO">
+		SELECT * FROM Personal_Contact
+		WHERE writer = #{writer}
+		AND (
+		tag = #{tag}
+		OR tag LIKE CONCAT('%', #{tag}, '%')
+		OR tag LIKE
+		CONCAT('%,', #{tag}, '%')
+		OR tag LIKE CONCAT('%', #{tag}, ',%')
+		);
+	</select>
+
+	<select id="share_contact_selectBy"
+		resultType="com.kdt.dto.ContactDTO">
+		SELECT * FROM Share_Contact
+		WHERE (
+		tag = #{tag}
+		OR tag LIKE
+		CONCAT('%', #{tag}, '%')
+		OR tag LIKE CONCAT('%,', #{tag}, '%')
+		OR tag
+		LIKE CONCAT('%', #{tag}, ',%')
+		);
+	</select>
+
+	<select id="personal_contact_tag_selectAll"
+		resultType="com.kdt.dto.ContactDTO">
+		select * from Personal_Contact_Tag where writer = #{writer}
+	</select>
+
+	<select id="personal_contact_tag_selectAll_duplicate"
+		resultType="com.kdt.dto.ContactDTO">
+		select * from Personal_Contact_Tag where writer = #{writer}
+		and tag = #{tag}
+	</select>
+
+	<select id="share_contact_tag_selectAll_duplicate"
+		resultType="com.kdt.dto.ContactDTO">
+		select * from Share_Contact_Tag where tag = #{tag}
+	</select>
+
+	<insert id="personal_contact_tag_insert">
+		insert into Personal_Contact_Tag(writer, tag)
+
+		values(#{writer}, #{tag})
+	</insert>
+
+	<insert id="personal_contact_insert">
+		insert into Personal_Contact(tag, name, email, phone,
+		company_name,
+		company_rank,
+		company_department, address, link, birthday,
+		memo, writer)
+
+		values(#{tag}, #{name}, #{email}, #{phone},
+		#{company_name}, #{company_rank},
+		#{company_department}, #{address},
+		#{link}, #{birthday}, #{memo},
+		#{writer})
+	</insert>
+
+	<select id="personal_contact_read"
+		resultType="com.kdt.dto.ContactDTO">
+		select * from Personal_Contact where seq = #{seq}
+	</select>
+
+	<select id="share_contact_read"
+		resultType="com.kdt.dto.ContactDTO">
+		select * from Share_Contact where seq = #{seq}
+	</select>
+
+	<update id="personal_contact_update">
+		update Personal_Contact set
+		name = #{name},
+		email =
+		#{email},
+		phone = #{phone},
+		tag = #{tag},
+		company_name = #{company_name},
+		company_rank = #{company_rank},
+		company_department =
+		#{company_department},
+		address = #{address},
+		link = #{link},
+		birthday =
+		#{birthday},
+		memo = #{memo}
+		where seq = #{seq}
+	</update>
+
+	<update id="share_contact_update">
+		update Share_Contact set
+		name = #{name},
+		email =
+		#{email},
+		phone = #{phone},
+		tag = #{tag},
+		company_name = #{company_name},
+		company_rank = #{company_rank},
+		company_department =
+		#{company_department},
+		address = #{address},
+		link = #{link},
+		birthday =
+		#{birthday},
+		memo = #{memo}
+		where seq = #{seq}
+	</update>
+
 	<delete id="personal_contact_delete">
-	delete from Personal_Contact where seq = #{seq}
+		delete from Personal_Contact where seq = #{seq}
+	</delete>
+
+	<delete id="share_contact_delete">
+		delete from Share_Contact where seq = #{seq}
 	</delete>
 	
-	
-	 <select id="personal_contact_search" resultType="com.kdt.dto.ContactDTO">
-        SELECT * FROM Personal_Contact
-        WHERE name LIKE CONCAT('%', #{keyword}, '%') or company_name LIKE CONCAT('%', #{keyword}, '%') or phone LIKE CONCAT('%', #{keyword}, '%')
-    </select>
-	
+	<select id="personal_contact_search"
+		resultType="com.kdt.dto.ContactDTO">
+		SELECT * FROM Personal_Contact
+		WHERE (name LIKE CONCAT('%',
+		#{keyword}, '%')
+		OR company_name LIKE CONCAT('%', #{keyword}, '%')
+		OR
+		phone LIKE CONCAT('%', #{keyword}, '%'))
+		AND writer = #{writer}
+	</select>
 
-    <select id="share_contact_tag_selectAll" resultType="com.kdt.dto.ContactDTO">
-        select * from Share_Contact_Tag
-    </select>
+	<select id="share_contact_search"
+		resultType="com.kdt.dto.ContactDTO">
+		SELECT * FROM Share_Contact
+		WHERE name LIKE CONCAT('%',
+		#{keyword}, '%') or company_name LIKE
+		CONCAT('%', #{keyword}, '%') or
+		phone LIKE CONCAT('%', #{keyword},
+		'%')
+	</select>
 
-    <select id="share_contact_tag_selectAll_duplicate" resultType="com.kdt.dto.ContactDTO">
-        select * from Share_Contact_Tag where tag = #{tag}
-    </select>
+	<update id="personal_contact_tag_rename">
+		update Personal_Contact_Tag set tag = #{new_tagname}
+		where writer = #{writer} and tag = #{ori_tagname};
+	</update>
 
-    <insert id="share_contact_tag_insert">
-        insert into Share_Contact_Tag(writer, tag)
+	<update id="share_contact_tag_rename">
+		update Share_Contact_Tag set tag = #{new_tagname}
+		where tag = #{ori_tagname};
+	</update>
 
-        values(#{writer}, #{tag})
-    </insert>
+	<update id="personal_contact_tag_retag_list">
+		update Personal_Contact set tag = #{tag} where seq =
+		${seq};
+	</update>
 
-    <insert id="share_contact_insert">
-        insert into Share_Contact(tag, name, email, phone, company_name, company_rank,
-        company_department, address, link, birthday, memo, writer, edit)
+	<update id="share_contact_tag_retag_list">
+		update Share_Contact set tag = #{tag} where seq =
+		${seq};
+	</update>
 
-        values(#{tag}, #{name}, #{email}, #{phone}, #{company_name}, #{company_rank},
-        #{company_department}, #{address}, #{link}, #{birthday}, #{memo}, #{writer}, #{edit})
-    </insert>
+	<delete id="personal_tag_delete_radio_all_contact">
+		DELETE FROM Personal_Contact
+		WHERE writer = #{writer}
+		AND (
+		tag = #{tag}
+		OR tag LIKE CONCAT('%', #{tag}, '%')
+		OR tag LIKE
+		CONCAT('%,', #{tag}, '%')
+		OR tag LIKE CONCAT('%', #{tag}, ',%')
+		);
+	</delete>
+
+	<delete id="share_tag_delete_radio_all_contact">
+		DELETE FROM Share_Contact
+		WHERE (
+		tag = #{tag}
+		OR tag
+		LIKE CONCAT('%', #{tag}, '%')
+		OR tag LIKE
+		CONCAT('%,', #{tag}, '%')
+		OR
+		tag LIKE CONCAT('%', #{tag}, ',%')
+		);
+	</delete>
+
+	<delete id="personal_tag_delete_radio_all_tag">
+		delete from Personal_Contact_Tag where tag = #{tag}
+		and writer = #{writer}
+	</delete>
+
+	<delete id="share_tag_delete_radio_all_tag">
+		delete from Share_Contact_Tag where tag = #{tag}
+	</delete>
+
+	<update id="personal_tag_delete_radio_tag_contact">
+		UPDATE Personal_Contact SET tag = #{tag} WHERE seq =
+		#{seq}
+	</update>
+
+	<update id="share_tag_delete_radio_tag_contact">
+		UPDATE Share_Contact SET tag = #{tag} WHERE seq =
+		#{seq}
+	</update>
+
+	<select id="share_contact_tag_selectAll"
+		resultType="com.kdt.dto.ContactDTO">
+		select * from Share_Contact_Tag
+	</select>
+
+
+
+	<insert id="share_contact_tag_insert">
+		insert into Share_Contact_Tag(writer, tag)
+
+		values(#{writer}, #{tag})
+	</insert>
+
+	<insert id="share_contact_insert">
+		insert into Share_Contact(tag, name, email, phone,
+		company_name,
+		company_rank,
+		company_department, address, link, birthday,
+		memo, writer, edit)
+
+		values(#{tag}, #{name}, #{email}, #{phone},
+		#{company_name}, #{company_rank},
+		#{company_department}, #{address},
+		#{link}, #{birthday}, #{memo},
+		#{writer}, #{edit})
+	</insert>
 
 </mapper>

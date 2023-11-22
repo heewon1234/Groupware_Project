@@ -177,7 +177,7 @@
 					</div>
 				</div>
 				<div class="modal_footer right">
-					<button class="button_cancel float_left" id="modal_cancel_button">취소</button>
+					<button class="button_cancel float_left"  id="modal_cancel_button">취소</button>
 					<button class="button_apply float_right permit" id="modal_apply_button">저장</button>
 					<button class="button_apply float_right permit" id="modal_apply_list_button">저장 후 계속
 						추가</button>
@@ -228,7 +228,7 @@
 							<div class="modal_body_content_input">
 								<div class="modal_body_content_input_left">태그</div>
 								<div class="modal_body_content_input_right tag">
-									<div class="modal_tag" onclick="tag_list_opener('personal')">
+									<div class="modal_tag" onclick="tag_list_opener('share')">
 										<span class="modal_tag_left_text">선택</span>
 										<div class="modal_tag_right_drop">
 											<img src="/images/commons/body_form/left_item/default/drop.png">
@@ -341,11 +341,9 @@
 					</div>
 				</div>
 				<div class="modal_footer right">
-					<button class="button_delete float_left" onclick="modal_update_delete('personal')">삭제</button>
-					<button class="button_cancel float_right"
-						onclick="modal_cancel_button('contact_update_modal',event)"
-					>취소</button>
-					<button class="button_apply float_right" onclick="modal_update_apply('personal')">수정</button>
+					<button class="button_delete float_left" onclick="modal_update_delete('share')">삭제</button>
+					<button class="button_cancel float_right" onclick="modal_cancel_button('contact_update_modal',event)">취소</button>
+					<button class="button_apply float_right" onclick="modal_update_apply('share')">수정</button>
 				</div>
 			</div>
 
@@ -356,9 +354,8 @@
 			<div class="modal_body" id="read_body">
 				<div class="modal_body_content_form" id="read_content_form"></div>
 			</div>
-			<div class="modal_footer">
-				<button class="button_cancel" onclick="modal_cancel_button('read_modal',event)">닫기</button>
-				<button class="button_apply" onclick="modal_read_edit('personal')" style="margin-left: 14px;">수정</button>
+			<div class="modal_footer" id="modal_footer_read">
+				
 			</div>
 		</div>
 
@@ -395,7 +392,7 @@
 		<div class="modal_body">
 			<div class="input-group mb-0">
 				<input type="text" id="modal_new_tag_input_from_edit" class="form-control"
-					placeholder="새로 생성할 태그명을 입력하세요." onclick="edit_form_new_tag_deplicate('personal', 'this')"
+					placeholder="새로 생성할 태그명을 입력하세요." onclick="edit_form_new_tag_deplicate('share', 'this')"
 				>
 			</div>
 			<div class="modal_tag_duplication_error">
@@ -408,7 +405,7 @@
 		<div class="modal_footer">
 			<button class="button_cancel" id="button_cancel_tag" onclick="button_cancel_tag()">취소</button>
 			<button class="button_apply tag permit" id="button_apply_tag_update"
-				onclick="button_apply_tag_update('personal')" style="margin-left: 14px"
+				onclick="button_apply_tag_update('share')" style="margin-left: 14px"
 			>저장</button>
 		</div>
 	</div>
@@ -444,9 +441,7 @@
 		</div>
 		<div class="modal_body">
 			<div class="input-group mb-0">
-				<input type="text" class="form-control" id="modal_tag_input_edit"
-					onkeyup="edit_form_new_tag_deplicate('edit', this)"
-				>
+				<input type="text" class="form-control" id="modal_tag_input_edit" onkeyup="edit_form_new_tag_deplicate('edit', this)">
 			</div>
 			<div class="modal_tag_duplication_error">
 				<img src="/images/contact/dup_error.png"> 태그 이름이 이미 있습니다.
@@ -516,7 +511,7 @@
 				</div>
 
 				<!-- 드롭 다운 메뉴 (추가 효과 없음) -->
-				<div class="menu_list" id="select_menu_list">
+				<div class="menu_list">
 					<div class="menu_list_button plus">
 						<div class="menu_list_button_drop">
 							<img src="/images/commons/body_form/left_item/default/drop.png" />
@@ -553,7 +548,7 @@
 				</div>
 
 				<!-- 드롭 다운 메뉴 (추가 효과 없음) -->
-				<div class="menu_list">
+				<div class="menu_list" id="select_menu_list">
 					<div class="menu_list_button plus">
 						<div class="menu_list_button_drop">
 							<img src="/images/commons/body_form/left_item/default/drop.png" />
@@ -601,14 +596,14 @@
 							</div>
 							<div class="searchTextBox">
 								<input type="text" placeholder="이름, 회사명, 전화번호 검색" id="searchTextBoxInput"
-									class="search_input_personal" onkeydown="search(event, 'personal')"
+									class="search_input_share" onkeydown="search(event, 'share')"
 								>
 							</div>
 						</div>
-						<div class="countBox">
+						<div class="countBox">						
 							<span id="select_contact_tag">${contactName}</span><span
 								style="color: blue; font-weight: bold; margin: 0 0px 0 5px"
-							>${personalContactList.size()}</span>개
+							>${shareContactList.size()}</span>개
 						</div>
 					</div>
 
@@ -623,9 +618,9 @@
 				</div>
 				<div class="main_body">
 					<c:choose>
-						<c:when test="${personalContactList.size() > 0}">
-							<c:forEach var="contact" items="${personalContactList}">
-								<div class="main_category cursor" onclick="modal_contact_read_add_data(this, 'personal')">
+						<c:when test="${shareContactList.size() > 0}">
+							<c:forEach var="contact" items="${shareContactList}">
+								<div class="main_category cursor" onclick="modal_contact_read_add_data(this, 'share')">
 									<div class="main_category_favorite">
 										<img src="/images/commons/body_form/right_item/default/favorites.png">
 									</div>

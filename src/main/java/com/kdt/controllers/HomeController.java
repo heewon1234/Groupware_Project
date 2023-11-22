@@ -39,8 +39,10 @@ public class HomeController {
 			List<BoardDTO> favBoardList = bservice.homeFavList(id);
 			model.addAttribute("favBoardList",favBoardList);
 			model.addAttribute("list",list);
+			return "home";
 			
 		}
+		
 		return "home";
 	}
 	

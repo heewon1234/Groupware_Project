@@ -93,10 +93,10 @@
 						<input type="checkbox" id="all_check"> 
 						<span id="checked_count">0</span>
 					</span>
-					<a class="modalButton modalButton_workForm btns invisbale">근로형태 수정</a> 
-					<a class="modalButton modalButton_org btns invisbale">소속조직 수정</a> 
-					<a class="modalButton modalButton_position btns invisbale">직위 수정</a> 
-					<a class="modalButton modalButton_delete btns invisbale">삭제</a>
+					<a class="modalButton modalButton_workForm btns invisible">근로형태 수정</a> 
+					<a class="modalButton modalButton_org btns invisible">소속조직 수정</a> 
+					<a class="modalButton modalButton_position btns invisible">직위 수정</a> 
+					<a class="modalButton modalButton_delete btns invisible">삭제</a>
 				</div>
 						
 				<table id="myTable" class="compact">
@@ -201,5 +201,8 @@
 		</form>
 	</div>
 	<script src="/js/insa/manage/members.js"></script>
+	<script>
+	
+	</script>
 </body>
 </html>

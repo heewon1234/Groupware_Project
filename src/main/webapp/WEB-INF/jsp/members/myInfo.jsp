@@ -30,7 +30,7 @@
 								<div id="profileImage-div" style="width: 150px; height: 150px">
 									<img src="${userDTO.profile_image }">
 								</div>
-								<input type="text" id="profile_image" name="profile_image" hidden>
+								<input type="text" id="profile_image" name="profile_image" value="${userDTO.profile_image }" hidden>
 								<tr>
 									<th>프로필 사진</th>
 									<td><input type="file" id="input-file"></td>

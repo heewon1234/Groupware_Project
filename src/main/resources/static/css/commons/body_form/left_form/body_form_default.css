@@ -231,6 +231,70 @@
     width: 18px;
 }
 
+.menu_list_item_plus.point {
+    position: relative;
+}
+
+.menu_list_item_plus_hover {		
+    background-color: #404040;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    height: 23px;
+    letter-spacing: -0.25px;
+    width: 70px;
+    position: absolute;
+    top:40px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    content: "";
+  }
+
+  .menu_list_item_plus_hover::after {  		
+    border-bottom: 8px solid #404040;
+    border-left: 7px solid #EFF4FC;
+    border-right: 7px solid #EFF4FC;
+    position: absolute;
+    top: -8px;
+    width: 5px;
+    content: "";
+}
+
+.menu_list_item_plus.point:hover .menu_list_item_plus_hover {
+    display:flex;
+}
+
+.menu_list_item_plus_click {
+    display: none;
+    position: absolute;
+    top: 70px;
+    width: 150px;
+    height: 94px;
+    border: solid 1px red;
+    z-index: 5;
+    margin-top: 10px;
+    padding: 10px 0 10px;
+    background-color: white;
+    border: #707070 solid 1px;
+    border-radius: 2px;
+    box-shadow: 2px 5px 4px 0 rgba(0,0,0,.16);
+}
+
+.menu_list_item_plus_click_item {
+    height: 36px;
+    display:flex;
+    align-items: center;
+    padding: 0 20px 0 20px;
+    color: #606266;
+    cursor: pointer;
+}
+
+.menu_list_item_plus_click_item:hover {
+    background-color: #EFF4FC;
+}
+
 .menu_list_item_plus.point img {
     margin: 0 !important;
 }
