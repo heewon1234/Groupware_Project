@@ -1,5 +1,7 @@
 package com.kdt.controllers;
 
+import java.sql.Timestamp;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +26,7 @@ public class ReplyController {
 		dto.setWriter((String)session.getAttribute("loginId"));
 		String contents = dto.getContents().replaceAll("\n", "<br>");
 		dto.setContents(contents);
+		dto.setWrite_date(new Timestamp(System.currentTimeMillis()));
 		dto.setBoard_title((String)session.getAttribute("board_title"));
 		rservice.insertReply(dto);
 		return "redirect:/board/toContentsBoard?seq="+dto.getParent_seq();

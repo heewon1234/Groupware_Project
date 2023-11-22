@@ -140,6 +140,10 @@
 	<script src="/js/board/sideBar.js" defer></script>
     <script src="/js/board/contentsList_board.js" defer></script>
     <script>
+    	if("${authBoard}"=="false"){
+    		alert("쓰기 권한 있는 게시판이 없습니다.");
+    	}
+    
     	let reload = function(){
     		if("${board_title}"=="중요게시물"){
     			location.reload();

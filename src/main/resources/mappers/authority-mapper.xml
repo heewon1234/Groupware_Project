@@ -15,6 +15,9 @@
 	<select id="isExistAuth" resultType="boolean">
 		select count(*) from Authority where id=#{id} and ori_board_title=#{board_title}
 	</select>
+	<select id="isAuthBoardExist" resultType="boolean">
+		select count(*) from Authority where id=#{id}
+	</select>
 	<!-- 게시판 생성 -->
 	<insert id="authorityInsert">
 		insert into Authority values (null,#{id},#{ori_board_title},#{sys_board_title},#{authority})

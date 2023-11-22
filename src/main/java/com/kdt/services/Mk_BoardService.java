@@ -50,8 +50,15 @@ public class Mk_BoardService {
 		return mdao.select_board_type_group(id);
 	}
 
+	public List<Mk_BoardDTO> selectAllboard_type_group(){
+		return mdao.selectAllboard_type_group();
+	}
+	
 	public List<Mk_BoardDTO> select_board_type_all(String id){
 		return mdao.select_board_type_all(id);
+	}
+	public List<Mk_BoardDTO> selectAllboard_type_all(){
+		return mdao.selectAllboard_type_all();
 	}
 	//
 	//게시판 이름 중복 체크

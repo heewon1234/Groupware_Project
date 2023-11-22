@@ -66,7 +66,7 @@ $(".add_dept_btn").on("click",function(){
 		let orgDiv = $(this).parent("div");
 		$(this).attr("src","/images/board/del.png");
 		$.ajax({
-			url:"/mk_board/selectByOrganization",
+			url:"/members/selectByOrganization",
 			data:{"organization":organization}
 		}).done(function(resp){
 			let completeDiv = $("<div>");
@@ -121,7 +121,7 @@ $(document).on("click",".add_member_btn",function(){
 		let completeDiv = $("<div>");
 		completeDiv.addClass("member_datail_box");
 		$.ajax({
-			url:"/mk_board/selectByJobName",
+			url:"/members/selectByJobName",
 			data:{"job_name":job_name,"organization":organization}
 		}).done(function(resp){
 			for(let i=0;i<resp.length;i++){
@@ -175,7 +175,7 @@ $(document).on("change",".organization_check",function(){
 	authority = authority.filter(item => item.organization !== organization);
 	if($(this).prop('checked')){		
 		$.ajax({
-			url:"/mk_board/selectMemberByOrganization",
+			url:"/members/selectMemberByOrganization",
 			data:{"organization":organization}
 		}).done(function(resp){
 			for(let i=0;i<resp.length;i++){
@@ -213,7 +213,7 @@ $(document).on("change",".jobName_check",function(){
 	
 	if($(this).prop('checked')){
 		$.ajax({
-			url:"/mk_board/selectMemberByOrganizationAndJobName",
+			url:"/members/selectMemberByOrganizationAndJobName",
 			data:{"job_name":job_name,"organization":organization}
 		}).done(function(resp){
 			for(let i=0;i<resp.length;i++){
@@ -254,7 +254,7 @@ $(document).on("change",".name_check",function(){
 	let organization = $(this).parents(".member_dept_detail_box").prev("div").text().trim();
 	if($(this).prop("checked")){
 		$.ajax({
-			url:"/mk_board/selectMemberByName",
+			url:"/members/selectMemberByName",
 			data:{"organization":organization,"job_name":job_name,"name":name}
 		}).done(function(resp){
 			authority.push({"id":resp.id,"name":resp.name,"authority":"읽기","organization":resp.organization,"job_name":resp.job_name,"position":resp.position});
@@ -446,7 +446,7 @@ $(".name_type_select>div").on("click",function(){
 $("input[name='board_type']").change(function(){
 	if($(this).val()=="all"){
 		$.ajax({
-			url:"/mk_board/selectAllMembers"
+			url:"/members/selectAllMembers"
 		}).done(function(resp){
 			authority = [];
 			for(let i=0;i<resp.length;i++){

@@ -19,6 +19,10 @@ public class AuthorityDAO {
 		return db.selectOne("Authority.isExistAuth",map);
 	}
 	
+	public boolean isAuthBoardExist(String id) {
+		return db.selectOne("Authority.isAuthBoardExist",id);
+	}
+	
 	public int authorityInsert(AuthorityDTO dto) {
 		return db.insert("Authority.authorityInsert",dto);
 	}

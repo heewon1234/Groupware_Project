@@ -21,11 +21,16 @@ public class Mk_BoardDAO {
 	public List<Mk_BoardDTO> select_board_type_group(String id){
 		return db.selectList("Mk_Board.select_board_type_group",id);
 	}
+	public List<Mk_BoardDTO> selectAllboard_type_group(){
+		return db.selectList("Mk_Board.selectAllboard_type_group");
+	}
 	
 	public List<Mk_BoardDTO> select_board_type_all(String id){
 		return db.selectList("Mk_Board.select_board_type_all",id);
 	}
-	
+	public List<Mk_BoardDTO> selectAllboard_type_all(){
+		return db.selectList("Mk_Board.selectAllboard_type_all");
+	}
 	public int selectBoardSeq(String board_title) {
 		return db.selectOne("Mk_Board.selectBoardSeq",board_title);
 	}
@@ -64,6 +69,7 @@ public class Mk_BoardDAO {
 	public Mk_BoardDTO boardDetail(String board_title) {
 		return db.selectOne("Mk_Board.BoardDetail",board_title);
 	}
+	
 	
 	// 게시판 삭제
 	public int delBoard(String sql) { // drop table

@@ -126,8 +126,15 @@ $(document).on("click",".add_item_btn",function(){
 	
 	let imgDiv = $("<div>");
 	let img = $("<img>");
-	img.attr("src","/images/commons/body_form/left_item/default/plus.png");
-	img.addClass("add_item_btn");
+	if($("input[name='items']").length==4){
+		img.attr("src","/images/board/remove.png");
+		img.addClass("del_item_btn");
+	} else{
+		img.attr("src","/images/board/plus.png");
+		img.addClass("add_item_btn");
+	}
+	
+	
 	imgDiv.append(img);
 	
 	surveyContents.append(surveyText);
@@ -135,6 +142,18 @@ $(document).on("click",".add_item_btn",function(){
 	surveyContents.append(imgDiv);
 	
 	$("#surveyBox").append(surveyContents);
+});
+
+$(document).on("click",".del_item_btn",function(){
+	if($("input[name='items']").length==2){
+		alert("설문조사 항목은 반드시 2개 이상이어야 합니다");
+		return false;
+	}
+	
+	$(this).parents(".surveyContents").remove();
+	$(".surveyContents img").attr("src","/images/board/remove.png").attr("class","del_item_btn");
+	$(".del_item_btn").last().attr("src","/images/board/plus.png").attr("class","add_item_btn");
+	
 });
 
 $("input[name='notice']").change(function(){
