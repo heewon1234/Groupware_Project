@@ -17,13 +17,6 @@ public class BoardDAO {
 	@Autowired
 	private SqlSession db;
 
-
-
-	// memberdao로 옮겨라
-
-	//
-
-
 	// 게시글 등록 관련
 	public int insertBoardContents(BoardDTO dto) {
 		db.insert("insertBoardContents",dto);
@@ -90,6 +83,13 @@ public class BoardDAO {
 	}
 	public int updateSurveyQuestion(BoardDTO dto) {
 		return db.update("Board.updateSurveyQuestion",dto);
+	}
+	public int updateSetHeaderNull(Map<String,String> map) {
+		return db.update("Board.updateSetHeaderNull",map);
+	}
+	
+	public int headerSetNullAll(String board_title) {
+		return db.update("Board.headerSetNullAll",board_title);
 	}
 	//
 }

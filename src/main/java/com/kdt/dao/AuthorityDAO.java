@@ -18,7 +18,9 @@ public class AuthorityDAO {
 	public boolean isExistAuth(Map<String,String> map) {
 		return db.selectOne("Authority.isExistAuth",map);
 	}
-	
+	public boolean isWriteAuthExist(String id) {
+		return db.selectOne("Authority.isWriteAuthExist",id);
+	}
 	public boolean isAuthBoardExist(String id) {
 		return db.selectOne("Authority.isAuthBoardExist",id);
 	}

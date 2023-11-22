@@ -11,7 +11,6 @@
 	<link rel="stylesheet" href="/css/commons/topForm.css" />
     <link rel="stylesheet" href="/css/board/board_contents.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/js/commons/body_form/body_form_default.js" defer></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
 </head>
 <body>
@@ -128,7 +127,7 @@
                        	    	
                         	</div>
                         	<div class="reply_input">
-                            	<textarea placeholder="댓글을 입력하세요" name="contents"></textarea>
+                            	<textarea placeholder="댓글을 입력하세요" name="contents" maxlength="200"></textarea>
                         	</div>
                         	<div class="reply_button">
                             	<button>등록</button>

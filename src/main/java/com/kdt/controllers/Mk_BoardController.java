@@ -46,7 +46,6 @@ public class Mk_BoardController {
 	public String sideBar(Model model) {
 		String id = (String)session.getAttribute("loginId");
 		String jobName = memberservice.getJobName(id);
-		System.out.println(jobName);
 		List<Mk_BoardDTO> group_list = new ArrayList<>();
 		List<Mk_BoardDTO> all_list = new ArrayList<>();
 		

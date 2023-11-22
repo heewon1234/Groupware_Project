@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kdt.constants.Constants;
 import com.kdt.dto.ContactDTO;
 import com.kdt.services.ContactService;
 
@@ -29,7 +30,7 @@ public class ContactController {
 	private HttpSession session;
 
 	@RequestMapping("personal")
-	public String personal(ContactDTO dto, Model model) {
+	public String personal(ContactDTO dto, Model model, String cPage) {
 		session.setAttribute("pagingType", "personal");
 		String id = (String) session.getAttribute("loginId");
 		dto.setWriter(id);
@@ -40,24 +41,46 @@ public class ContactController {
 		model.addAttribute("personalTagList", personalTagList);
 		model.addAttribute("shareTagList", shareTagList);
 
-		if (dto.getTag() == null) {
-			List<ContactDTO> personalContactList = Service.personalContactSelectAll(dto);
+		// 페이징
+		int contactCurrentPage = 1;
+		if (cPage != null) {
+			contactCurrentPage = Integer.parseInt(cPage);
+		}
+
+		session.setAttribute("contactCurrentPage", contactCurrentPage);
+		int start = contactCurrentPage * Constants.RECORD_COUNT_PER_PAGE - (Constants.RECORD_COUNT_PER_PAGE - 1) - 1;
+		int end = contactCurrentPage * Constants.RECORD_COUNT_PER_PAGE;
+
+		model.addAttribute("recordCountPerPage", Constants.RECORD_COUNT_PER_PAGE);
+		model.addAttribute("naviCountPerPage", Constants.NAVI_COUNT_PER_PAGE);
+
+		if (dto.getTag() == null || dto.getTag().equals("개인 주소록")) {
+			List<ContactDTO> personalContactList = Service.personalContactSelectAll(dto, start);
+			int personalContactCount = Service.personal_total_count(dto);
+
 			model.addAttribute("personalContactList", personalContactList);
 			model.addAttribute("contactName", "개인 주소록");
+			model.addAttribute("replyListSize", personalContactCount);
+
 		}
 
 		else {
-
 			if (dto.getTag().equals("미등록 태그")) {
-				List<ContactDTO> personalContactList = Service.personalContactSelectNull(dto);
+				List<ContactDTO> personalContactList = Service.personalContactSelectNull(dto, start);
+				int personalContactCount = Service.personal_total_count_by_tag_null(dto);
+
 				model.addAttribute("personalContactList", personalContactList);
 				model.addAttribute("contactName", dto.getTag());
+				model.addAttribute("replyListSize", personalContactCount);
 			}
 
 			else {
-				List<ContactDTO> personalContactList = Service.personalContactSelectBy(dto);
+				List<ContactDTO> personalContactList = Service.personalContactSelectBy(dto, start);
+				int personalContactCount = Service.personal_total_count_by_tag(dto);
+
 				model.addAttribute("personalContactList", personalContactList);
 				model.addAttribute("contactName", dto.getTag());
+				model.addAttribute("replyListSize", personalContactCount);
 			}
 		}
 
@@ -65,7 +88,7 @@ public class ContactController {
 	}
 
 	@RequestMapping("share")
-	public String share(ContactDTO dto, Model model) {
+	public String share(ContactDTO dto, Model model, String cPage) {
 		String id = (String) session.getAttribute("loginId");
 		dto.setWriter(id);
 
@@ -75,24 +98,47 @@ public class ContactController {
 		model.addAttribute("personalTagList", personalTagList);
 		model.addAttribute("shareTagList", shareTagList);
 
-		if (dto.getTag() == null) {
-			List<ContactDTO> shareContactList = Service.shareContactSelectAll(dto);
+		// 페이징
+		int contactCurrentPage = 1;
+		if (cPage != null) {
+			contactCurrentPage = Integer.parseInt(cPage);
+		}
+
+		session.setAttribute("contactCurrentPage", contactCurrentPage);
+		int start = contactCurrentPage * Constants.RECORD_COUNT_PER_PAGE - (Constants.RECORD_COUNT_PER_PAGE - 1) - 1;
+		int end = contactCurrentPage * Constants.RECORD_COUNT_PER_PAGE;
+
+		model.addAttribute("recordCountPerPage", Constants.RECORD_COUNT_PER_PAGE);
+		model.addAttribute("naviCountPerPage", Constants.NAVI_COUNT_PER_PAGE);
+
+		if (dto.getTag() == null || dto.getTag().equals("공유 주소록")) {
+			List<ContactDTO> shareContactList = Service.shareContactSelectAll(dto, start);
+			int shareContactCount = Service.share_total_count(dto);
+
 			model.addAttribute("shareContactList", shareContactList);
 			model.addAttribute("contactName", "공유 주소록");
+			model.addAttribute("replyListSize", shareContactCount);
 		}
 
 		else {
 
 			if (dto.getTag().equals("미등록 태그")) {
-				List<ContactDTO> shareContactList = Service.shareContactSelectNull(dto);
+				List<ContactDTO> shareContactList = Service.shareContactSelectNull(dto, start);
+				int shareContactCount = Service.share_total_count_by_tag_null(dto);
+
 				model.addAttribute("shareContactList", shareContactList);
 				model.addAttribute("contactName", dto.getTag());
+				model.addAttribute("replyListSize", shareContactCount);
 			}
 
 			else {
-				List<ContactDTO> shareContactList = Service.shareContactSelectBy(dto);
+				List<ContactDTO> shareContactList = Service.shareContactSelectBy(dto, start);
+				int shareContactCount = Service.share_total_count_by_tag(dto);
+
 				model.addAttribute("shareContactList", shareContactList);
 				model.addAttribute("contactName", dto.getTag());
+				model.addAttribute("replyListSize", shareContactCount);
+
 			}
 		}
 		return "contact/share";
@@ -200,18 +246,18 @@ public class ContactController {
 		List<ContactDTO> personalContactList = Service.personalContactRead(dto);
 		return personalContactList;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("shareContactRead")
 	public Map<String, Object> shareContactRead(ContactDTO dto) throws Exception {
 		String id = (String) session.getAttribute("loginId");
 		List<ContactDTO> shareContactList = Service.shareContactRead(dto);
-		
-		Map<String, Object> result = new HashMap<>();
-	    result.put("shareContactList", shareContactList);
-	    result.put("id", id);
 
-	    return result;
+		Map<String, Object> result = new HashMap<>();
+		result.put("shareContactList", shareContactList);
+		result.put("id", id);
+
+		return result;
 	}
 
 	@RequestMapping("personalContactUpdate")
@@ -221,7 +267,7 @@ public class ContactController {
 		Service.personalContactUpdate(dto);
 		return "redirect:/contact/personal";
 	}
-	
+
 	@RequestMapping("shareContactUpdate")
 	public String shareContactUpdate(ContactDTO dto) throws Exception {
 		String id = (String) session.getAttribute("loginId");
@@ -237,7 +283,7 @@ public class ContactController {
 		Service.personalContactDelete(dto);
 		return "redirect:/contact/personal";
 	}
-	
+
 	@RequestMapping("shareContactDelete")
 	public String shareContactDelete(ContactDTO dto) throws Exception {
 		String id = (String) session.getAttribute("loginId");
@@ -247,42 +293,83 @@ public class ContactController {
 	}
 
 	@RequestMapping("personalContactSearch")
-	public String personalContactSearch(@RequestParam("keyword") String keyword, Model model) throws Exception {
+	public String personalContactSearch(@RequestParam("keyword") String keyword, Model model, String cPage)
+			throws Exception {
 		ContactDTO dto = new ContactDTO();
 
 		String id = (String) session.getAttribute("loginId");
 		dto.setWriter(id);
 
-		List<ContactDTO> personalContactList = Service.personalContactSearch(dto, keyword);
+		// 페이징
+		int contactCurrentPage = 1;
+		if (cPage != null) {
+			contactCurrentPage = Integer.parseInt(cPage);
+		}
+
+		session.setAttribute("contactCurrentPage", contactCurrentPage);
+		int start = contactCurrentPage * Constants.RECORD_COUNT_PER_PAGE - (Constants.RECORD_COUNT_PER_PAGE - 1) - 1;
+		int end = contactCurrentPage * Constants.RECORD_COUNT_PER_PAGE;
+
+		List<ContactDTO> personalContactList = Service.personalContactSearch(dto, keyword, start);
+
 		model.addAttribute("personalContactList", personalContactList);
 		model.addAttribute("contactName", "검색된 항목");
+		model.addAttribute("hiddenKeyword", keyword);
+
+		model.addAttribute("recordCountPerPage", Constants.RECORD_COUNT_PER_PAGE);
+		model.addAttribute("naviCountPerPage", Constants.NAVI_COUNT_PER_PAGE);
 
 		List<ContactDTO> personalTagList = Service.personalContactTagSelectAll(dto);
 		List<ContactDTO> shareTagList = Service.shareContactTagSelectAll(dto);
 
 		model.addAttribute("personalTagList", personalTagList);
 		model.addAttribute("shareTagList", shareTagList);
+
+		int personalContactCount = Service.personal_total_count_by_keyword(dto, keyword);
+
+		model.addAttribute("personalContactList", personalContactList);
+		model.addAttribute("replyListSize", personalContactCount);
 
 		return "contact/personal";
 	}
 
 	@RequestMapping("shareContactSearch")
-	public String shareContactSearch(@RequestParam("keyword") String keyword, Model model) throws Exception {
+	public String shareContactSearch(@RequestParam("keyword") String keyword, Model model, String cPage)
+			throws Exception {
 		ContactDTO dto = new ContactDTO();
 
 		String id = (String) session.getAttribute("loginId");
 		dto.setWriter(id);
 
-		List<ContactDTO> shareContactList = Service.shareContactSearch(dto, keyword);
+		// 페이징
+		int contactCurrentPage = 1;
+		if (cPage != null) {
+			contactCurrentPage = Integer.parseInt(cPage);
+		}
+
+		session.setAttribute("contactCurrentPage", contactCurrentPage);
+		int start = contactCurrentPage * Constants.RECORD_COUNT_PER_PAGE - (Constants.RECORD_COUNT_PER_PAGE - 1) - 1;
+		int end = contactCurrentPage * Constants.RECORD_COUNT_PER_PAGE;
+
+		List<ContactDTO> shareContactList = Service.shareContactSearch(dto, keyword, start);
+
 		model.addAttribute("shareContactList", shareContactList);
 		model.addAttribute("contactName", "검색된 항목");
+		model.addAttribute("hiddenKeyword", keyword);
 
+		model.addAttribute("recordCountPerPage", Constants.RECORD_COUNT_PER_PAGE);
+		model.addAttribute("naviCountPerPage", Constants.NAVI_COUNT_PER_PAGE);
+		
 		List<ContactDTO> personalTagList = Service.personalContactTagSelectAll(dto);
 		List<ContactDTO> shareTagList = Service.shareContactTagSelectAll(dto);
 
 		model.addAttribute("personalTagList", personalTagList);
 		model.addAttribute("shareTagList", shareTagList);
 
+		int shareContactCount = Service.share_total_count_by_keyword(dto, keyword);
+
+		model.addAttribute("personalContactList", shareContactList);
+		model.addAttribute("replyListSize", shareContactCount);
 		return "contact/share";
 	}
 
@@ -298,7 +385,7 @@ public class ContactController {
 
 		Service.personalContactTagRename(ori_tagname, new_tagname, dto);
 
-		List<ContactDTO> personalContactList = Service.personalContactSelectBy(dto);
+		List<ContactDTO> personalContactList = Service.personalContactSelectBy_TagRenameSelect(dto);
 
 		for (int i = 0; i < personalContactList.size(); i++) {
 			String[] toTagList = personalContactList.get(i).getTag().split(",");
@@ -331,7 +418,7 @@ public class ContactController {
 		dto.setTag(ori_tagname);
 
 		Service.shareContactTagRename(ori_tagname, new_tagname);
-		List<ContactDTO> shareContactList = Service.shareContactSelectBy(dto);
+		List<ContactDTO> shareContactList = Service.shareContactSelectBy_TagRenameSelect(dto);
 
 		for (int i = 0; i < shareContactList.size(); i++) {
 			String[] toTagList = shareContactList.get(i).getTag().split(",");
@@ -361,7 +448,7 @@ public class ContactController {
 		Service.personalContactTagDeleteRadioAllTag(dto);
 		return "redirect:/contact/personal";
 	}
-	
+
 	@RequestMapping("shareContactTagDeleteRadioAll")
 	public String shareContactTagDeleteRadioAll(ContactDTO dto) throws Exception {
 		String id = (String) session.getAttribute("loginId");
@@ -379,7 +466,7 @@ public class ContactController {
 
 		Service.personalContactTagDeleteRadioAllTag(dto);
 
-		List<ContactDTO> personalContactList = Service.personalContactSelectBy(dto);
+		List<ContactDTO> personalContactList = Service.personalContactSelectBy_TagRenameSelect(dto);
 
 		for (int i = 0; i < personalContactList.size(); i++) {
 			String[] toTagList = personalContactList.get(i).getTag().split(",");
@@ -408,7 +495,7 @@ public class ContactController {
 
 		Service.shareContactTagDeleteRadioAllTag(dto);
 
-		List<ContactDTO> shareContactList = Service.shareContactSelectBy(dto);
+		List<ContactDTO> shareContactList = Service.shareContactSelectBy_TagRenameSelect(dto);
 
 		for (int i = 0; i < shareContactList.size(); i++) {
 			String[] toTagList = shareContactList.get(i).getTag().split(",");

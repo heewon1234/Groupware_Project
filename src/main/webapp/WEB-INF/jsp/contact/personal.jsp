@@ -508,13 +508,6 @@
 			<!-- 메뉴 리스트 있는 부분 -->
 			<div class="menu_tab">
 
-				<!-- 일반 메뉴 -->
-				<div class="menu_item">
-					<img src="/images/commons/body_form/left_item/default/favorites.png" /> <span
-						class="menu_item_text"
-					>중요 주소록</span>
-				</div>
-
 				<!-- 드롭 다운 메뉴 (추가 효과 없음) -->
 				<div class="menu_list" id="select_menu_list">
 					<div class="menu_list_button plus">
@@ -529,13 +522,13 @@
 					</div>
 					<div class="menu_list_box">
 						<div class="menu_list_item">
-							<img src="/images/commons/body_form/left_item/default/company.png"> <span
+							<img src="/images/commons/body_form/left_item/default/label.png"> <span
 								class="menu_list_item_text"
 							>전체</span>
 						</div>
 						<c:forEach items="${personalTagList}" var="contact">
 							<div class="menu_list_item">
-								<img src="/images/commons/body_form/left_item/default/company.png"> <span
+								<img src="/images/commons/body_form/left_item/default/label.png"> <span
 									class="menu_list_item_text"
 								>${contact.tag} </span>
 								<div class="menu_list_item_plus point">
@@ -545,7 +538,7 @@
 							</div>
 						</c:forEach>
 						<div class="menu_list_item">
-							<img src="/images/commons/body_form/left_item/default/alarm.png"> <span
+							<img src="/images/commons/body_form/left_item/default/label.png"> <span
 								class="menu_list_item_text"
 							>미등록 태그</span>
 						</div>
@@ -566,22 +559,23 @@
 					</div>
 					<div class="menu_list_box">
 						<div class="menu_list_item">
-							<img src="/images/commons/body_form/left_item/default/company.png"> <span
+							<img src="/images/commons/body_form/left_item/default/label.png"> <span
 								class="menu_list_item_text"
 							>전체</span>
 						</div>
 						<c:forEach items="${shareTagList}" var="contact">
 							<div class="menu_list_item">
-								<img src="/images/commons/body_form/left_item/default/company.png"> <span
+								<img src="/images/commons/body_form/left_item/default/label.png"> <span
 									class="menu_list_item_text"
 								>${contact.tag} </span>
 								<div class="menu_list_item_plus point">
 									<img src="/images/commons/body_form/left_item/default/point.png">
+									<div class="menu_list_item_plus_hover">태그 편집</div>
 								</div>
 							</div>
 						</c:forEach>
 						<div class="menu_list_item">
-							<img src="/images/commons/body_form/left_item/default/alarm.png"> <span
+							<img src="/images/commons/body_form/left_item/default/label.png"> <span
 								class="menu_list_item_text"
 							>미등록 태그</span>
 						</div>
@@ -608,7 +602,7 @@
 						<div class="countBox">
 							<span id="select_contact_tag">${contactName}</span><span
 								style="color: blue; font-weight: bold; margin: 0 0px 0 5px"
-							>${personalContactList.size()}</span>개
+							>${replyListSize}</span>개
 						</div>
 					</div>
 
@@ -627,7 +621,6 @@
 							<c:forEach var="contact" items="${personalContactList}">
 								<div class="main_category cursor" onclick="modal_contact_read_add_data(this, 'personal')">
 									<div class="main_category_favorite">
-										<img src="/images/commons/body_form/right_item/default/favorites.png">
 									</div>
 									<div class="main_category_seq">${contact.seq}</div>
 									<div class="main_category_name">${contact.name}</div>
@@ -657,6 +650,14 @@
 						</c:otherwise>
 					</c:choose>
 				</div>
+				<div class="main_footer_page">
+					<input type="hidden" value="${replyListSize}" id="replyListSize">
+					<input type="hidden" value="${recordCountPerPage}" id="recordCountPerPage">
+					<input type="hidden" value="${naviCountPerPage}" id="naviCountPerPage">
+					<input type="hidden" value="${contactCurrentPage}" id="contactCurrentPage">
+					<input type="hidden" value="${hiddenKeyword}" id="hiddenKeyword">
+					<div id="replyFooter"></div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -665,5 +666,105 @@
 		<div class="menu_list_item_plus_click_item" id="check_item_update">이름 변경</div>
 	</div>
 </body>
+<script>
+	let replyListSize = $("#replyListSize").val();
+	if (replyListSize > 0) {
+		let replyFooter = $("#replyFooter");
+		let recordTotalCount = parseInt(replyListSize);
+		let recordCountPerPage = parseInt($("#recordCountPerPage").val());
+		let naviCountPerPage = parseInt($("#naviCountPerPage").val());
+		let currentReplyPage = parseInt($("#contactCurrentPage").val());
+		let hiddenKeyword = $("#hiddenKeyword").val();
 
+		console.log(recordTotalCount);
+		console.log(recordCountPerPage);
+		console.log(naviCountPerPage);
+		console.log(replyListSize);
+		console.log(currentReplyPage);
+		console.log(replyListSize);
+
+		let pageTotalCount = 0;
+
+		if ((recordTotalCount % recordCountPerPage) > 0) {
+			pageTotalCount = Math.floor(recordTotalCount / recordCountPerPage) + 1;
+		} else {
+			pageTotalCount = recordTotalCount / recordCountPerPage;
+		}
+
+		if (currentReplyPage < 1) {
+			currentReplyPage = 1;
+		} else if (currentReplyPage > pageTotalCount) {
+			currentReplyPage = pageTotalCount;
+		}
+
+		let startNavi = Math.floor((currentReplyPage - 1) / naviCountPerPage)
+				* naviCountPerPage + 1;
+		let endNavi = startNavi + naviCountPerPage - 1;
+		console.log("startNavi" + startNavi);
+		console.log("endNavi" + endNavi);
+		console.log("naviCountPerPage" + naviCountPerPage);
+		if (endNavi > pageTotalCount) {
+			endNavi = pageTotalCount;
+		}
+
+		let needPrev = true;
+		let needNext = true;
+
+		if (startNavi == 1) {
+			needPrev = false;
+		}
+		if (endNavi == pageTotalCount) {
+			needNext = false;
+		}
+
+		let callTagName = $("#select_contact_tag").html();
+
+		if (!hiddenKeyword) {
+			if (needPrev) {
+				$("#replyFooter").append(
+						"<a href='/contact/personal?cPage=" + (startNavi - 1)
+								+ "'>" + "<<" + "</a>");
+			}
+
+			for (let i = startNavi; i <= endNavi; i++) {
+				$("#replyFooter").append(
+						"<a href='/contact/personal?&tag=" + callTagName
+								+ "&cPage=" + i + "' class='naviNum_" + i
+								+ "'>" + i + "</a>");
+			}
+
+			if (needNext) {
+				$("#replyFooter").append(
+						"<a href='/contact/personal?cPage=" + (endNavi + 1)
+								+ "'>" + ">>" + "</a>");
+			}
+		}
+
+		else if (hiddenKeyword) {
+			if (needPrev) {
+				$("#replyFooter").append(
+						"<a href='/contact/personalContactSearch?keyword= "
+								+ hiddenKeyword + "&cPage=" + (startNavi - 1)
+								+ "'>" + "<<" + "</a>");
+			}
+
+			for (let i = startNavi; i <= endNavi; i++) {
+				$("#replyFooter").append(
+						"<a href='/contact/personalContactSearch?keyword="
+								+ hiddenKeyword + "&cPage=" + i
+								+ "' class='naviNum_" + i + "'>" + i + "</a>");
+			}
+
+			if (needNext) {
+				$("#replyFooter").append(
+						"<a href='/contact/personalContactSearch?keyword="
+								+ hiddenKeyword + "&cPage=" + (endNavi + 1)
+								+ "'>" + ">>" + "</a>");
+			}
+		}
+
+		$(".naviNum_" + currentReplyPage).css("color", "red").css(
+				"text-decoration", "underline");
+	}
+</script>
 </html>

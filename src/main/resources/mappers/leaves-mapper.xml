@@ -47,4 +47,10 @@
         id = #{id};
     ]]>
 </update>
+<update id="updateyleave">
+update Leaves set year_leave = year_leave +#{leave_use} where id = #{id};
+</update>
+<update id="updatefleave">
+update Leaves set family_event_leave = family_event_leave + #{leave_use} where id = #{id};
+</update>
 </mapper>

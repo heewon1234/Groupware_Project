@@ -32,7 +32,7 @@ a:hover {
 .left_item {
     float: left;
     width: 276px;
-    height: 850px;
+    height: 902px;
     background-color: #EFF4FC;  
     margin-top:60px;
 }
@@ -49,6 +49,18 @@ a:hover {
 #calendarBox{
 	width:70%;
 	margin:30px;
+}
+
+#topFormLogoutBtn {
+	box-shadow: none;
+    background-color: #ebebeb;
+    border: solid 1px #d6d6d6;
+    border-radius: 4px;
+    color: #333;
+    padding: 0 20px 0px;
+    height: 34px;
+    cursor: pointer;
+    font-size: 14px;
 }
 
 /* left 메뉴 style*/
@@ -78,7 +90,6 @@ a:hover {
     overflow-y: auto;
     overflow-x: hidden;
     padding: 0 24px 30px;
-    height: 100%;
 }
 .menu_item {
     height: 38px;

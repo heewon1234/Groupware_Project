@@ -39,8 +39,6 @@ $(document).ready(function() {
 			e.preventDefault();
 			return;
 		}
-		console.log("idbox:", idbox);
-		console.log("joindaybox:", joindaybox);
 
 		$(".idListbox").val(idbox.join(','));
 		$(".joindayListbox").val(joindaybox.join(','));
@@ -73,7 +71,6 @@ function updateWorkformTable() {
 	$.ajax({
 		url: "/works/workmanagelist",
 	}).done(function(resp) {
-		console.log(resp.length);
 		for (let i = 0; i < resp.length; i++) {
 			let tr = $("<tr>");
 			tr.html("<td>" + (resp[i].name) + "(" + (resp[i].id) + ")</td><td>" + (resp[i].joinday) +

@@ -78,6 +78,7 @@
 					<div id="calendartd" style="margin-left:24px;display: none;">
 					<h4>휴가 현황</h4>
 					<c:forEach var="i" items="${list }">
+					<input type="hidden" id="remainder"  value="${i.leave_remainder}"> 
 							<br><h4>잔여 휴가 ${i.leave_remainder}일</h4><br>
 					</c:forEach>
 						<span style="margin-top: 3px;">
@@ -151,7 +152,7 @@
 									<span>${list.organization }</span> 
 									<span>${list.name }</span> 
 									<span hidden>${list.id }</span> 
-									<input type='checkbox' class="id_checkBox" value='${list.id}'>
+									<input type='checkbox' class="id_checkBox" name='managerID' value='${list.id}'>
 								</li>
 							</c:forEach>
 						</ul>
@@ -163,7 +164,8 @@
 				<button type="button" class="button_apply permit" id="button_apply_tag" style="margin-left: 14px">확인</button>
 			</div>
 		</div>
-		<div class="modal_background"></div>
+		<div class="modal_background"></div>			
 	<script src="/js/insa/mywork/leave_apply.js"></script>
+	
 </body>
 </html>

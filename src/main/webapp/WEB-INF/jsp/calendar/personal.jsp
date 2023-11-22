@@ -72,7 +72,9 @@
 					</div>
 					<div id="topFormRight">
 						<div class="topFormMenu">
+						<a href="/contact/personal">
 							<i class="fa-regular fa-address-book menuIcon"></i> 주소록
+							</a>
 						</div>
 						<div class="topFormMenu">
 							<a href="/approval/document/lists/all"> <i

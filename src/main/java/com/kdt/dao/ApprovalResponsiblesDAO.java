@@ -49,4 +49,7 @@ public class ApprovalResponsiblesDAO {
 	public int arleaveinsert(ApprovalResponsiblesDTO ardto)throws Exception{
 		return db.insert("ApprovalResponsibles.arleaveinsert",ardto);
 	}
+	public int capplyleave(int doc_id)throws Exception{
+		return db.selectOne("ApprovalResponsibles.capplyleave",doc_id);
+	}
 }

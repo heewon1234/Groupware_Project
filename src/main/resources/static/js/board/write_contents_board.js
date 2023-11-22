@@ -1,7 +1,7 @@
 $(document).ready(function() {
 			
 	$("#summernote").summernote({
-		width: 1500,
+		width: '100%',
 	    height: null,
 	    minHeight: 380,
 	    maxHeight: null,
@@ -107,7 +107,7 @@ $(document).on("click",".add_item_btn",function(){
 		alert("항목 추가는 5개가 최대입니다");
   	  	return false;
 	}
-	
+	$(".surveyContents img").attr("src","/images/board/remove.png").attr("class","del_item_btn");
 	let surveyContents = $("<div>");
 	surveyContents.addClass("surveyContents");
 	
@@ -178,6 +178,11 @@ $("#frmBtn").on("click",function(){
 	
 	if($("#summernote").val()==""){
 		alert("내용을 입력해주세요");
+		return false;
+	}
+	
+	if($("#summernote").val().length>2000){
+		alert("게시글 내용은 최대 2000자 입니다");
 		return false;
 	}
 	

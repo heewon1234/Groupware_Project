@@ -17,8 +17,8 @@ $.ajax({ // 말머리 담아두기
 	data:{"board_title":board_title},
 	method:"POST"
 }).done(function(resp){
-	headerList = resp;
-	prevHeader = resp;
+	headerList = [...resp];
+	prevHeader = [...resp];
 	$(".header").css("display","block");
 });
 
@@ -36,10 +36,9 @@ $("#editFormBtn").on("click",function(){
 		}
 		if(change){$("#changeHeader").val("true")}
 	} else{
-		$("#changeHeader").val("true")
+		$("#changeHeader").val("true");
 	}
-	
-	
+
 	if($("#board_title_input").val()==""){
 		alert("게시판 이름을 입력하세요");
 		$("#board_title_input").focus();

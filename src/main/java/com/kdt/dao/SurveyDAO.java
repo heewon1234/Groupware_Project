@@ -39,8 +39,7 @@ public class SurveyDAO {
 	public boolean isExistVote(SurveyDTO dto) {
 		String totalVote = db.selectOne("Survey.isExistVote",dto);
 		int result = 0;
-		if(totalVote==null) {System.out.println("0임");}
-		else {result = Integer.parseInt(totalVote);}
+		if(totalVote!=null) {result = Integer.parseInt(totalVote);}
 		return result>0;
 	}
 	public List<SurveyDTO> voteList(SurveyDTO dto){

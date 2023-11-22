@@ -110,4 +110,7 @@ WHERE id=#{id};
 	<select id="selectbyname" resultType="String">
 		SELECT work_types FROM WorkPlan WHERE user_names = #{name} AND approval_status = '완료' AND STR_TO_DATE(work_days, '%Y년%m월%d일') = CURDATE();
 	</select>
+	<update id="updateleave">
+	UPDATE Works SET  leave_use = leave_use + #{leave_use}, leave_remainder = leave_remainder - #{leave_use} WHERE id = #{id};
+	</update>
   </mapper>

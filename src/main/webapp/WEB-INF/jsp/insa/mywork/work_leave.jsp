@@ -146,10 +146,8 @@
 						<span>근무현황</span>
 					</div>
 					<div class="workcurrent">
-						<div class="comment">
-						<table id="workform" width="100%" >
-						
-						</table>
+						<div id="scheduleList">
+								
 						</div>
 						<button class="worktime_update">근무시간 수정</button>
 					</div>

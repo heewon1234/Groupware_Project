@@ -58,4 +58,7 @@ public class ApprovalResponsiblesService {
 
 		return;
 	}
+	public int capplyleave(int doc_id)throws Exception{
+		return dao.capplyleave(doc_id);
+	}
 }

@@ -115,6 +115,7 @@
     height:45%;
 }
 .board_contents_list>.board_contents_title{width:60%;}
+.board_contents_list>.board_contents_title:hover{text-decoration: underline;}
 .board_contents_title>a{color:black;}
 .board_contents_title>a>span{color:rgb(41, 133, 219);}
 .board_contents_list>.board_contents_writer{width:10%;}

@@ -65,6 +65,7 @@ public class BoardController {
 	@RequestMapping("toBoard") // 게시글 리스트 보는 곳 이동
 	public String toBoard(String board_title, Model model, String cPage, String authBoard) throws Exception{
 		model.addAttribute("authBoard",authBoard);
+		String id = (String)session.getAttribute("loginId");
 		if(session.getAttribute("searchText") != null && cPage != null) {
 			String searchText = (String)session.getAttribute("searchText");
 			String encodedSearchText = URLEncoder.encode(searchText, "UTF-8");
@@ -74,11 +75,9 @@ public class BoardController {
 		if(board_title==null) {
 			board_title = session.getAttribute("board_title")==null?"중요게시물":(String)session.getAttribute("board_title");
 		}
-
-		String id = (String)session.getAttribute("loginId");
 		if(!board_title.equals("중요게시물")) {
 			boolean auth = aservice.isExistAuth(id, board_title);
-			if(!auth) {
+			if(!auth && !memberService.getJobName(id).equals("관리")) {
 				model.addAttribute("auth",auth);
 				board_title="중요게시물";
 			}
@@ -233,7 +232,7 @@ public class BoardController {
 	@RequestMapping("toWriteContentsBoard") // 게시글 작성하는 곳 이동
 	public String toWriteContentsBoard(Model model) {
 		String id = (String)session.getAttribute("loginId");
-		boolean authBoard = aservice.isAuthBoardExist(id);
+		boolean authBoard = aservice.isWriteAuthExist(id);
 		
 		if(!authBoard) {
 			return "redirect:/board/toBoard?authBoard=false";

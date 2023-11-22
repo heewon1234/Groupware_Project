@@ -133,15 +133,12 @@ function changeStatus(newStatus, button) { // 업무 외출 회의 외근 버튼
 		},
 	}).done(
 		function(resp) {
-			console.log(resp);
-			let tr = $("<tr>");
-			tr.html("<td width='100'>"
-				+ (resp[resp.length - 1].time) + "</td>"
-				+ "<td width='100'>"
-				+ (resp[resp.length - 1].work_type)
-				+ "</td></tr>")
-			$("#workform").append(tr);
-			$('.comment').scrollTop($('.comment')[0].scrollHeight);
+				$("#scheduleList").text("");
+			for (let i = 0; i < resp.length; i++) {
+				$("#scheduleList").append("<div class='schedules'><div class='circle''></div><div class='schedule''>"+(resp[i].work_type)
+				+ "</div><div class='startday'>"+(resp[i].time)+"</div></div><br>");
+				$('#scheduleList').scrollTop($('#scheduleList')[0].scrollHeight);
+			}
 		});
 
 }
@@ -159,14 +156,10 @@ function updateWorkformTable() { // 화면에 근무중 업무중 등 출력하�
 		url: "/works/list",
 	}).done(
 		function(resp) {
-			
 			for (let i = 0; i < resp.length; i++) {
-				let tr = $("<tr>");
-				tr.html("<td width='100'>" + (resp[i].time)
-					+ "</td>" + "<td width='100'>"
-					+ (resp[i].work_type) + "</td></tr>")
-				$("#workform").append(tr);
-				$('.comment').scrollTop($('.comment')[0].scrollHeight);
+				$("#scheduleList").append("<div class='schedules'><div class='circle''></div><div class='schedule''>"+(resp[i].work_type)
+				+ "</div><div class='startday'>"+(resp[i].time)+"</div></div><br>");
+				$('#scheduleList').scrollTop($('#scheduleList')[0].scrollHeight);
 			}
 		});
 }
@@ -186,7 +179,6 @@ function work_inout() {
 	})
 		.done(
 			function(resp) {
-				console.log(resp)
 				if (resp.length == 0) {
 
 				} else if (resp[resp.length - 1].work_type != "근무 종료") {

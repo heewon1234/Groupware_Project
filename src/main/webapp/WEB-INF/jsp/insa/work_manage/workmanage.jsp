@@ -16,6 +16,9 @@
 		<div class="left_item"></div>
 		<div class="right_item">
 			<div class="main_tab">
+			<div class="title">
+					<h3>2023년</h3>
+				</div>
 				<table border="1" id="table">
 					<thead>
 						<tr>
@@ -45,11 +48,12 @@
 				<c:choose>
 					<c:when test="${not empty list}">
 						<div id="myModal" class="modal right_item">
-							<h3>휴가 미생성자</h3>
+							<div class="modal_title">휴가 미생성자</div>
 							<hr>
 							<!-- action 및 method 추가 -->
 							<form action="/works/joindayupdate">
-								입사일을 입력하고 생성을 클릭하면, 해당 사용자의 올해 휴가가 생성됩니다.
+								<div class="span_title">입사일을 입력하고 생성을 클릭하면, 해당 사용자의 올해 휴가가 생성됩니다.</div>
+								<div class="span_title">
 								<table border="1" style="width: 100%;">
 									<thead>
 										<tr>
@@ -77,17 +81,19 @@
 									<button id="leaveCreationForm" type="submit" class="button_apply">생성</button>
 									<button id="closeModalBtn" class="button_cancel">취소</button>
 								</div>
+								</div>
 							</form>
 						</div>
 						<div id="overlay" class="overlay"></div>
 					</c:when>
 					<c:otherwise>
 						<div id="myModal" class="modal right_item">
-							<h3>휴가 미생성자</h3>
+							<div class="modal_title">휴가 미생성자</div>
 							<hr>
 							<!-- action 및 method 추가 -->
 							<form action="/works/joindayupdate">
-								입사일을 입력하고 생성을 클릭하면, 해당 사용자의 올해 휴가가 생성됩니다.
+								<div class="span_title">입사일을 입력하고 생성을 클릭하면, 해당 사용자의 올해 휴가가 생성됩니다.</div>
+								<div class="span_title">
 								<table border="1" style="width: 100%;">
 									<thead>
 										<tr>
@@ -106,6 +112,7 @@
 								<div style="text-align: center;">
 									<button id="leaveCreationForm" type="submit" class="button_apply permit">생성</button>
 									<button id="closeModalBtn" class="button_cancel">취소</button>
+								</div>
 								</div>
 							</form>
 						</div>

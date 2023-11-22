@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.kdt.dao.AuthorityDAO;
+import com.kdt.dao.BoardDAO;
 import com.kdt.dao.FileDAO;
 import com.kdt.dao.HeaderDAO;
 import com.kdt.dao.Mk_BoardDAO;
@@ -37,7 +38,10 @@ public class Mk_BoardService {
 
 	@Autowired
 	FileDAO fdao;
-
+	
+	@Autowired
+	BoardDAO bdao;
+	
 	@Autowired
 	private Gson gson;
 
@@ -133,7 +137,7 @@ public class Mk_BoardService {
 		Map<String,String> map = new HashMap<>();
 		map.put("board_title", board_title);
 
-		String[] boardTitleTable = {"Mk_Board", "File", "Header", "Reply", "Survey", "Survey_User"};
+		String[] boardTitleTable = {"File", "Header", "Reply", "Survey", "Survey_User"};
 		String[] oriBoardTitleTable = {"Authority","Favorite_Board"};
 
 		for(String table : boardTitleTable) {
@@ -145,6 +149,9 @@ public class Mk_BoardService {
 			map.put("table", table);
 			mdao.deleteByOriBoardTitle(map);
 		}
+		
+		map.put("table", "Mk_Board");
+		mdao.deleteByBoardTitle(map);
 
 	}
 	//
@@ -186,16 +193,31 @@ public class Mk_BoardService {
 		for(AuthorityDTO auth : authorityMember) {
 			adao.authorityInsert(new AuthorityDTO(0,auth.getId(),dto.getBoard_title(),"Board_"+boardSeq,auth.getAuthority()));
 		}
-
 		if(dto.isUse_header()) {
 			String[] headers = gson.fromJson(headerList, String[].class);
 			if(changeHeader.equals("true")) {
 				hdao.deleteHeader(prevBoardTitle);
+				
+				String headerListSql = "";
+				int i=0;
 				for(String header:headers) {
+					if(i<headers.length-1) {
+						headerListSql += "'"+header+"',";
+					} else {
+						headerListSql += "'"+header+"'";
+					}
 					hdao.headerInsert(new HeaderDTO(0,dto.getBoard_title(),header));
 				}
+				
+				Map<String,String> mapHeader = new HashMap<>();
+				mapHeader.put("board_title", "Board_"+mdao.selectBoardSeq(dto.getBoard_title()));
+				mapHeader.put("headerList", headerListSql);
+				bdao.updateSetHeaderNull(mapHeader);
 			}
-		}	
+		} else {
+			hdao.deleteHeader(prevBoardTitle);
+			bdao.headerSetNullAll("Board_"+mdao.selectBoardSeq(dto.getBoard_title()));
+		}
 	}
 	//
 }

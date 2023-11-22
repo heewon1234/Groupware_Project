@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +10,6 @@
 	<link rel="stylesheet" href="/css/commons/body_form/left_form/body_form_default.css" />
     <link rel="stylesheet" href="/css/board/board_favorite.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/js/commons/body_form/body_form_default.js" defer></script>
 </head>
 <body>
 	<div class="top">
@@ -54,7 +54,16 @@
                             						<c:if test="${i.header==''}">
                             							<span>${i.header }&nbsp;&nbsp;</span>
                             						</c:if>
-                            						${i.title }
+                            						<c:set var="maxTitleLength" value="25" /> 
+    												<c:set var="cutTitle" value="${fn:substring(i.title, 0, maxTitleLength)}" />
+    												<c:choose>
+        												<c:when test="${fn:length(i.title) > maxTitleLength}">
+            												<c:out value="${cutTitle}..." />
+        												</c:when>
+        												<c:otherwise>
+            												<c:out value="${i.title}" />
+        												</c:otherwise>
+    												</c:choose>
                             					</a>
                             				</div>
                            					<div class="board_contents_writer">
@@ -99,7 +108,16 @@
                             							<c:if test="${i.header!=''}">
                             								<span>${i.header }</span>
                             							</c:if>
-                            							${i.title }
+                            							<c:set var="maxTitleLength" value="25" /> 
+    													<c:set var="cutTitle" value="${fn:substring(i.title, 0, maxTitleLength)}" />
+    													<c:choose>
+        													<c:when test="${fn:length(i.title) > maxTitleLength}">
+            													<c:out value="${cutTitle}..." />
+        													</c:when>
+        													<c:otherwise>
+            													<c:out value="${i.title}" />
+        													</c:otherwise>
+    													</c:choose>
                             						</a>
                             					</c:when>
                             					<c:otherwise>
@@ -107,7 +125,16 @@
                             							<c:if test="${i.header!=''}">
                             								<span>${i.header }</span>
                             							</c:if>
-                            							${i.title }
+                            							<c:set var="maxTitleLength" value="25" /> 
+    													<c:set var="cutTitle" value="${fn:substring(i.title, 0, maxTitleLength)}" />
+    													<c:choose>
+        													<c:when test="${fn:length(i.title) > maxTitleLength}">
+            													<c:out value="${cutTitle}..." />
+        													</c:when>
+        													<c:otherwise>
+            													<c:out value="${i.title}" />
+        													</c:otherwise>
+    													</c:choose>
                             						</a>
                             					</c:otherwise>
                             				</c:choose>
@@ -183,7 +210,7 @@
 			if( endNavi == pageTotalCount ) { needNext = false; }
 		
 			if(needPrev) {
-				$("#boardListFooter").append("<a href='/board/toBoard?cPage="+(startNavi-1)+">"+ "<<"+ "</a>");
+				$("#boardListFooter").append("<a href='/board/toBoard?cPage="+(startNavi-1)+"'>"+ "<<"+ "</a>");
 			}
 			for(let i = startNavi; i<=endNavi; i++) {
 				$("#boardListFooter").append("<a href='/board/toBoard?cPage="+ i +"' class='naviNum'>" + i + "</a>");

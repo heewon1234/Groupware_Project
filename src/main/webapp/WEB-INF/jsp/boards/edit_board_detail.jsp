@@ -148,8 +148,8 @@
                         		<div><input type="radio" name="use_header" value="false" class="header_input_check" checked> 사용 안 함</div>
                     		</c:when>
                     		<c:otherwise>
-                    			<div><input type="radio" name="header" value="true" class="header_input_check" checked> 사용</div>
-                        		<div><input type="radio" name="header" value="false" class="header_input_check"> 사용 안 함</div>
+                    			<div><input type="radio" name="use_header" value="true" class="header_input_check" checked> 사용</div>
+                        		<div><input type="radio" name="use_header" value="false" class="header_input_check"> 사용 안 함</div>
                     		</c:otherwise>
                     	</c:choose>    
                     </div>
