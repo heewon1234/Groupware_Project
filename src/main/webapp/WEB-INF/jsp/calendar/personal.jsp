@@ -45,9 +45,9 @@
 					오피스 홈 <i id="topFormMenuSelect" class="fa-solid fa-chevron-down"></i>
 				</div>
 				<div class="topFormIcon">
-					<i class="fa-regular fa-comment" onclick="openPopup()"></i> <i
-						class="fa-regular fa-bell"></i> <i
-						class="fa-regular fa-circle-user" id="topFormLogout"></i>
+					<i class="fa-regular fa-comment" onclick="openPopup()"></i>
+					<!-- <i class="fa-regular fa-bell"></i> -->
+					<i class="fa-regular fa-circle-user" id="topFormLogout"></i>
 				</div>
 			</div>
 			<div id="topFormMenuCollection" style="display: none;">
