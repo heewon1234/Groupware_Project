@@ -47,6 +47,7 @@ public class CalendarController {
 		ObjectMapper objectMapper = new ObjectMapper();
         String listAsJSON = objectMapper.writeValueAsString(list);
         
+        model.addAttribute("userDTO", userDTO);
         model.addAttribute("rank",rank);
 		model.addAttribute("list",listAsJSON);
 		return "calendar/official";
@@ -60,6 +61,8 @@ public class CalendarController {
 		ObjectMapper objectMapper = new ObjectMapper();
         String listAsJSON = objectMapper.writeValueAsString(list);
         
+        MembersDTO userDTO = mservice.loginUser(id);
+        model.addAttribute("userDTO", userDTO);
 		model.addAttribute("list",listAsJSON);
 		return "calendar/personal";
 	}
