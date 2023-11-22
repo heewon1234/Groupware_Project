@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 public class ReplyDTO {
 	private int seq;
 	private String writer;
+	private String name;
 	private String contents;
 	private String board_title;
 	private int parent_seq;
@@ -31,8 +32,14 @@ public class ReplyDTO {
 	public String getWriter() {
 		return writer;
 	}
+	public String getName() {
+		return name;
+	}
 	public void setWriter(String writer) {
 		this.writer = writer;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getContents() {
 		return contents;

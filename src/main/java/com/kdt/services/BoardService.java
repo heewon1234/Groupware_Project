@@ -117,10 +117,12 @@ public class BoardService {
 
 		if(fileList != null) { 
 			for(MultipartFile file : fileList) {
-				String ori_name = file.getOriginalFilename();
-				String sys_name = UUID.randomUUID() + "_" + ori_name;
-				file.transferTo(new File(uploadPath+"/"+sys_name));
-				filedao.insertFile(new FileDTO(0,sys_name,ori_name,parent_seq,board_title,"input"));
+				if(!file.isEmpty()) {
+					String ori_name = file.getOriginalFilename();
+					String sys_name = UUID.randomUUID() + "_" + ori_name;
+					file.transferTo(new File(uploadPath+"/"+sys_name));
+					filedao.insertFile(new FileDTO(0,sys_name,ori_name,parent_seq,board_title,"input"));
+				}	
 			}
 		}
 		// img tag

@@ -147,7 +147,7 @@
         										<div>
         											<c:choose>
                             							<c:when test="${name_type eq 'identity' }">
-                            								${i.writer }
+                            								${i.name }
                             							</c:when>
                             							<c:otherwise>
                             								익명

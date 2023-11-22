@@ -3,14 +3,20 @@
 
 <mapper namespace="Reply">
 	<insert id="insertReply">
-		insert into Reply values (null, #{writer},#{contents},#{board_title},#{parent_seq},default);
+		insert into Reply values (null, #{writer},#{contents},#{board_title},#{parent_seq},#{write_date});
 	</insert>
 	
 	<select id="replyList" resultType="com.kdt.dto.ReplyDTO">
 		select * from Reply where board_title=#{board_title} and parent_seq=#{parent_seq} order by seq desc
 	</select>
 	<select id="replySelectBy" resultType="com.kdt.dto.ReplyDTO">
-		select * from (select row_number() over(order by seq desc) as rn, Reply.* from Reply where parent_seq=#{parent_seq} and board_title=#{board_title}) as sub where rn between #{start} and #{end}
+		select 
+			r.seq,name, writer, contents, board_title, parent_seq, write_date 
+		from Reply as r
+		inner join Members on writer = id
+		where board_title=#{board_title} and parent_seq=#{parent_seq}
+		order by write_date desc 
+		limit ${start},10
 	</select>
 	<select id="replyTotalCount" resultType="int">
 		select count(*) from Reply where parent_seq=#{parent_seq} and board_title=#{board_title}

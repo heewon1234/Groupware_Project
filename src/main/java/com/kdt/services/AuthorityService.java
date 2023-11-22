@@ -22,6 +22,10 @@ public class AuthorityService {
 		return adao.isExistAuth(map);
 	}
 	
+	public boolean isAuthBoardExist(String id) {
+		return adao.isAuthBoardExist(id);
+	}
+	
 	public List<String> selectAuthBoard(String id){
 		return adao.selectAuthBoard(id);
 	}

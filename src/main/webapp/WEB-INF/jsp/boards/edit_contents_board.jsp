@@ -167,14 +167,14 @@
                                 		<div class="surveyInputBox">
                                 			<input type="text" class="form-control"placeholder="항목을 입력해주세요" name="items" maxlength="100">
                                 		</div>
-                                		<div><img src="/images/commons/body_form/left_item/default/plus.png" class="add_item_btn"/></div>
+                                		<div><img src="/images/board/remove.png" class="del_item_btn"/></div>
                             		</div>
                             		<div class="itemBox surveyContents">
                                			<div class="surveyText">항목</div>
                                 		<div class="surveyInputBox">
                                 			<input type="text" class="form-control"placeholder="항목을 입력해주세요" name="items" maxlength="100">
                                 		</div>
-                                		<div><img src="/images/commons/body_form/left_item/default/plus.png" class="add_item_btn"/></div>
+                                		<div><img src="/images/board/plus.png" class="add_item_btn"/></div>
                             		</div>
                         		</div>
                         	</c:when>

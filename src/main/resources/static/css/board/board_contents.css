@@ -55,7 +55,10 @@
     align-items: center;
     justify-content: center;
 }
-.profileDiv>img{width:80%;}
+.profileDiv>img{
+	width:60px;
+	height:60px;
+}
 .board_contents_info>div:nth-child(2){
     width:78%;
     padding-left:10px;
@@ -232,7 +235,8 @@
 }
 .reply_profile{width:8%;}
 .reply_profile>img{
-    width:50%;
+    width:60px;
+    height:60px;
 }
 .reply_input{width:85%;}
 .reply_input>textarea{
