@@ -11,7 +11,7 @@ function oneChatPopup() {
 }
 
 // 로고 요소와 팝업 요소를 선택합니다.
-const logo = document.getElementById('logo');
+const logo = document.getElementById('chattingFormLogo');
 const container = document.getElementById('popup');
 
 let isDragging = false;

@@ -67,7 +67,7 @@
 		<input id="loginID" type="hidden" value="${loginId }">
 		<div class="chattingTop">
 			<span class="close-button" onclick="closePopup()">&times;</span>
-			<div id="logo" class="dragHandle"><img id="chattingLogo" src="/images/commons/logo.png"></div>
+			<div id="chattingFormLogo" class="dragHandle"><img id="chattingLogo" src="/images/commons/logo.png"></div>
 			<div class="profile">
 				<div id="chattingImg">
 					<img id="chattingProfileImg" src="${userDTO.profile_image}"
