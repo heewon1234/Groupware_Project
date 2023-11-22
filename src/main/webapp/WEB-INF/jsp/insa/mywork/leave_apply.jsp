@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,7 +45,7 @@
 						<table id="approvalTable" class="outTable" border='1'>
 							<tbody>
 								<tr>
-									<th>신청 <span class="modalButton_apply btns">+</span>
+									<th>신청 <img id="plusIcon" class="modalButton_apply" src="/images/approval/plus-circle.svg">
 									</th>
 									<td>
 										<table class="innerTable" border='1'>
@@ -139,13 +140,23 @@
 				<span>신청 설정</span>
 			</div>
 			<div class="modal_body">
-				<ul>
-					<c:forEach var="list" items="${managerList }">
-						<li><span>${list.organization }</span> <span>${list.name }</span>
-							<span hidden>${list.id }</span> <input type='checkbox'
-							name='managerID' value='${list.id}'></li>
-					</c:forEach>
-				</ul>
+				<c:choose>
+					<c:when test="${fn:length(managerList) == 0}">
+						<span>표시할 상사가 없습니다.</span>
+					</c:when>
+					<c:otherwise>
+						<ul>
+							<c:forEach var="list" items="${managerList }">
+								<li>
+									<span>${list.organization }</span> 
+									<span>${list.name }</span> 
+									<span hidden>${list.id }</span> 
+									<input type='checkbox' class="id_checkBox" value='${list.id}'>
+								</li>
+							</c:forEach>
+						</ul>
+					</c:otherwise>
+				</c:choose>
 			</div>
 			<div class="modal_footer">
 				<button type="button" class="button_cancel" id="button_cancel_tag">취소</button>
