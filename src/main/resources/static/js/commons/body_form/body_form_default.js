@@ -8,7 +8,6 @@
 // });
 
 // 메뉴 열고 닫고, 화살표 이미지 회전
-$(document).ready(function() {
     $(".menu_list_button").click(function() {
         let parent = $(this).closest('.menu_list');
         let child = parent.find('.menu_list_box');
@@ -21,7 +20,6 @@ $(document).ready(function() {
             parent.find('.menu_list_button_drop img').css('transform', '');
         }
     });
-});
 
 // 드롭다운 메뉴 + 버튼 테스트
 //$(document).ready(function() {
