@@ -40,7 +40,7 @@
 
 .board_contents_info{
     overflow: hidden;
-    height:100px;
+    min-height:100px;
     border-bottom:1px solid black;
     margin-left:25px;
 }
@@ -58,6 +58,7 @@
 .profileDiv>img{
 	width:60px;
 	height:60px;
+	margin-top:10px;
 }
 .board_contents_info>div:nth-child(2){
     width:78%;

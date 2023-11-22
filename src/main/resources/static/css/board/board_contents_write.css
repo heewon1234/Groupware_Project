@@ -3,6 +3,10 @@
 	font-size:29px;
 }
 /* div{border:1px solid black;} */
+.board_contents_box img{
+	max-width:600px;
+	max-height:600px;
+}
 .note-modal-backdrop{display:none !important;}
 .content_tab>form>div:not(.board_contents_file_box):not(.board_contents_box){
     width:100%;
@@ -62,7 +66,6 @@
 }
 
 .board_contents_box{
-    width:1500px;
     margin-bottom:30px;
 }
 .board_survey{

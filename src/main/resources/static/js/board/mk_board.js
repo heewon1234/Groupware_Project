@@ -354,10 +354,12 @@ $("#header_add_btn").on("click",function(){
 });
 
 $(document).on("click",".header_del_btn",function(){
+	console.log(headerList);
 	let index = $(this).parents(".header_list_box").attr("data-index");
 	$(this).parents(".header_list_box").remove();
 	headerList.splice(index,1);
-})
+	console.log(headerList);
+});
 
 // 게시판 이름 중복 체크
 $("#board_title_input").keyup(function(){

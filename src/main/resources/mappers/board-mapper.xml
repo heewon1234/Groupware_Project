@@ -3,10 +3,6 @@
 
 <mapper namespace="Board">
 	
-	<!-- member-mapper로 옮겨라 -->
-	
-	<!-- 옮겨라 -->
-	
 	<!-- 게시글 등록 -->
 	<insert id="insertBoardContents" useGeneratedKeys="true" keyProperty="seq">
 		insert into ${board_title} values (null,#{title},#{writer},#{write_date},#{header},#{notice},#{contents},#{survey_question},default)
@@ -114,6 +110,12 @@
 	<!-- 게시글 수정 -->
 	<update id="updateContentsBoard">
 		update ${board_title} set title=#{title}, header=#{header}, notice=#{notice}, contents=#{contents} where seq=#{seq}
+	</update>
+	<update id="headerSetNullAll">
+		update ${board_title} set header = null
+	</update>
+	<update id="updateSetHeaderNull">
+		update ${board_title} set header=null where header not in (${headerList})
 	</update>
 	<update id="updateSurveyQuestion">
 		update ${board_title} set survey_question=#{survey_question} where seq=#{seq}

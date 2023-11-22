@@ -46,7 +46,6 @@ public class Mk_BoardController {
 	public String sideBar(Model model) {
 		String id = (String)session.getAttribute("loginId");
 		String jobName = memberservice.getJobName(id);
-		System.out.println(jobName);
 		List<Mk_BoardDTO> group_list = new ArrayList<>();
 		List<Mk_BoardDTO> all_list = new ArrayList<>();
 		
@@ -146,6 +145,7 @@ public class Mk_BoardController {
 	
 	@RequestMapping("editBoardDetail")
 	public String editBoardDetail(Mk_BoardDTO dto, String headerList, String authorityList, String prevBoardTitle, String changeHeader) {
+		System.out.println(dto.isUse_header());
 		mservice.editBoardDetail(dto, headerList, authorityList, prevBoardTitle, changeHeader);
 		return "redirect:/mk_board/toEditBoard";
 	}

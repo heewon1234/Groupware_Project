@@ -21,7 +21,9 @@ public class AuthorityService {
 		map.put("board_title", board_title);
 		return adao.isExistAuth(map);
 	}
-	
+	public boolean isWriteAuthExist(String id) {
+		return adao.isWriteAuthExist(id);
+	}
 	public boolean isAuthBoardExist(String id) {
 		return adao.isAuthBoardExist(id);
 	}

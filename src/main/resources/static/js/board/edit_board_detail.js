@@ -17,28 +17,37 @@ $.ajax({ // 말머리 담아두기
 	data:{"board_title":board_title},
 	method:"POST"
 }).done(function(resp){
-	headerList = resp;
-	prevHeader = resp;
+	headerList = [...resp];
+	prevHeader = [...resp];
+	console.log(prevHeader);
+	console.log(headerList);
 	$(".header").css("display","block");
 });
 
 $("#editFormBtn").on("click",function(){
+	console.log(prevHeader);
+	console.log(headerList);
 	let change = false;
 	if(prevHeader.length==headerList.length){
 		for(let i=0;i<prevHeader.length;i++){
+			console.log("i"+prevHeader[i]);
 			for(let j=0;j<prevHeader.length;j++){
+				console.log("j"+headerList[j]);
 				if(prevHeader[i]!=headerList[j]){
 					change = true;
 					break;
+					console.log("같음");
 				}
 			}
 			if(change){break;}
 		}
 		if(change){$("#changeHeader").val("true")}
 	} else{
-		$("#changeHeader").val("true")
+		$("#changeHeader").val("true");
 	}
-	
+	console.log("2이전:"+$("#changeHeader").val());
+	console.log("2이전:"+prevHeader.length);
+	console.log("2이후:"+headerList.length);
 	
 	if($("#board_title_input").val()==""){
 		alert("게시판 이름을 입력하세요");
