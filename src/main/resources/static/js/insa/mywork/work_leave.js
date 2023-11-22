@@ -133,7 +133,7 @@ function changeStatus(newStatus, button) { // 업무 외출 회의 외근 버튼
 		},
 	}).done(
 		function(resp) {
-			let tr = $("<tr>");
+				$("#scheduleList").text("");
 			for (let i = 0; i < resp.length; i++) {
 				$("#scheduleList").append("<div class='schedules'><div class='circle''></div><div class='schedule''>"+(resp[i].work_type)
 				+ "</div><div class='startday'>"+(resp[i].time)+"</div></div><br>");

@@ -92,5 +92,14 @@ public class WorksDAO {
 	public String selectbyname(String name)throws Exception{
 		return db.selectOne("Works.selectbyname",name);
 	}
+	public int updateyleave(WorksDTO dto)throws Exception{
+		return db.update("Leaves.updateyleave",dto);
+	}
+	public int updatefleave(WorksDTO dto)throws Exception{
+		return db.update("Leaves.updatefleave",dto);
+	}
+	public int updateleave(WorksDTO dto)throws Exception{
+		return db.update("Works.updateleave",dto);
+	}
 	
 }

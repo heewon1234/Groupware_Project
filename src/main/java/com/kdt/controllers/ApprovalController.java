@@ -24,6 +24,7 @@ import com.kdt.dto.ApprovalFilesDTO;
 import com.kdt.dto.ApprovalResponsiblesDTO;
 import com.kdt.dto.MembersDTO;
 import com.kdt.dto.WorkPlanDTO;
+import com.kdt.dto.WorksDTO;
 import com.kdt.services.ApprovalFilesService;
 import com.kdt.services.ApprovalResponsiblesService;
 import com.kdt.services.ApprovalService;
@@ -31,6 +32,7 @@ import com.kdt.services.JobTitleService;
 import com.kdt.services.MembersService;
 import com.kdt.services.OrganizationService;
 import com.kdt.services.WorkPlanService;
+import com.kdt.services.WorksService;
 
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -54,6 +56,8 @@ public class ApprovalController {
 	private MembersService mService;
 	@Autowired
 	private WorkPlanService wpService;
+	@Autowired
+	private WorksService wService;
 	@Autowired
 	private Gson gson;
 
@@ -117,8 +121,25 @@ public class ApprovalController {
 	@RequestMapping("/updateStatus")
 	public String updateStatus(String status, int doc_id, String userId) throws Exception {
 		appRService.updateStatus(new ApprovalResponsiblesDTO(0, doc_id, userId, status));
-
-		return "redirect:/approval/document/box/every";
+		String ID = appService.getID(doc_id);
+		int result = appRService.capplyleave(doc_id);
+		if(result==0) {
+			String work_types = appService.work_type(doc_id);
+			int count = appService.count(doc_id);
+			WorksDTO dto = new WorksDTO(ID,count);
+			if(work_types.equals("연차")) {
+				wService.updateyleave(dto);
+			}
+			else {
+				wService.updatefleave(dto);
+			}
+			wService.updateleave(dto);
+			return "redirect:/approval/document/box/every";
+		}
+		else {
+			return "redirect:/approval/document/box/every";
+		}
+		
 	}
 	
 	@RequestMapping("/delete")
