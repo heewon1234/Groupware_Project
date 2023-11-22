@@ -412,13 +412,10 @@ function updateData(updateYear, updateMonth) {
 $(document).ready(function() {
 	$("#submit_button").on("click", function() {
 		let title = document.getElementById('work_leave_title').value; // 휴가신청
-		console.log("title: " + title);
 		let work_type = $('#selectleavetype select option:selected').val(); // 경조사인지 연차인지
-		console.log("worktype: " + work_type);
 		let approvalname = checkedManagerValues.join(',');
 		$("#work_days").val(selectedDates.join(','));
 		let work_day = document.getElementById('work_days').value;
-		console.log(work_day);
 		$.ajax({
 			url: '/approval/document/works/workLeave_write',
 			data: {
@@ -428,7 +425,7 @@ $(document).ready(function() {
 			approvalname:approvalname
 		},
 		}).done(function(resp) {
-			alert("ggod");
+			alert("휴가가 신청되었습니다");
 			window.location.href = resp;
 		});
 	});

@@ -63,8 +63,8 @@ public class BoardController {
 	// R 관련 기능
 
 	@RequestMapping("toBoard") // 게시글 리스트 보는 곳 이동
-	public String toBoard(String board_title, Model model, String cPage) throws Exception{
-
+	public String toBoard(String board_title, Model model, String cPage, String authBoard) throws Exception{
+		model.addAttribute("authBoard",authBoard);
 		if(session.getAttribute("searchText") != null && cPage != null) {
 			String searchText = (String)session.getAttribute("searchText");
 			String encodedSearchText = URLEncoder.encode(searchText, "UTF-8");
@@ -233,6 +233,12 @@ public class BoardController {
 	@RequestMapping("toWriteContentsBoard") // 게시글 작성하는 곳 이동
 	public String toWriteContentsBoard(Model model) {
 		String id = (String)session.getAttribute("loginId");
+		boolean authBoard = aservice.isAuthBoardExist(id);
+		
+		if(!authBoard) {
+			return "redirect:/board/toBoard?authBoard=false";
+		}
+		
 		List<String> boardList = aservice.selectAuthBoard(id);
 		model.addAttribute("boardList",boardList);
 		return "boards/write_contents_board";

@@ -153,7 +153,42 @@ public class MembersService {
 		return mdao.countUser();
 	}
 	
+	public String getJobName(String id) {
+		return mdao.getJobName(id);
+	}
+	
 	public int updateMember(MembersDTO dto) {
 		return mdao.updateMember(dto);
 	}
+	
+	// 게시판 권한 줄 때 사용
+	public List<MembersDTO> selectAllMembers(){
+		return mdao.selectAllMembers();
+	}
+	public List<String> selectAllOrganization(){
+		return mdao.selectAllOrganization();
+	}
+
+	public List<String> selectByOrganization(String organization){
+		return mdao.selectByOrganization(organization);
+	}
+
+	public List<String> selectByJobName(MembersDTO dto){
+		return mdao.selectByJobName(dto);
+	}
+	public List<MembersDTO> selectMemberByOrganization(String organization){
+		return mdao.selectMemberByOrganization(organization);
+	}
+
+	public List<MembersDTO> selectMemberByOrganizationAndJobName(String organization,String job_name){
+		Map<String,String> map = new HashMap<>();
+		map.put("organization", organization);
+		map.put("job_name", job_name);
+		return mdao.selectMemberByOrganizationAndJobName(map);
+	}
+
+	public MembersDTO selectMemberByName(MembersDTO dto){
+		return mdao.selectMemberByName(dto);
+	}
+	// 게시판 권한 줄 때 사용
 }

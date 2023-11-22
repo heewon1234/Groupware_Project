@@ -20,35 +20,7 @@ public class BoardDAO {
 
 
 	// memberdao로 옮겨라
-	public List<MembersDTO> selectAllMembers(){
-		return db.selectList("Board.selectAllMembers");
-	}
 
-	public List<String> selectAllOrganization(){
-		return db.selectList("Board.selectAllOrganization");
-	}
-
-	public List<String> selectByOrganization(String organization){
-		return db.selectList("Board.selectByOrganization",organization);
-	}
-
-	public List<String> selectByJobName(MembersDTO dto){
-		List<String> list = db.selectList("Board.selectByJobName",dto);
-		return list;
-	}
-
-	public List<MembersDTO> selectMemberByOrganization(String organization){
-		return db.selectList("Board.selectMemberByOrganization",organization);
-	}
-
-	public List<MembersDTO> selectMemberByOrganizationAndJobName(Map<String,String> map){
-		return db.selectList("Board.selectMemberByOrganizationAndJobName",map);
-	}
-
-	public MembersDTO selectMemberByName(MembersDTO dto){
-		MembersDTO list = db.selectOne("Board.selectMemberByName",dto);
-		return list;
-	}
 	//
 
 

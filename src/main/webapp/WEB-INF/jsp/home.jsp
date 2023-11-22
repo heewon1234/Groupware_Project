@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Home</title>
-
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
@@ -101,13 +101,19 @@
 									</div>
 								</div>
 								<div class="workinoutbox">
-									<button id="workin" onclick="workin()">
-										출근하기<br> <br> <span id="currentinTime">00:00:00</span>
-									</button>
-									<button id="workout" onclick="workout()" disabled>
-										퇴근하기<br> <br> <span id="currentoutTime">00:00:00</span>
-									</button>
-								</div>
+							<button id="workin" onclick="workin()">
+								출근하기
+								<div class="iconbox">
+									<img id="work-in" src="/images/insa/work_leave/log-in.svg" alt="...">
+								</div> 
+								<span id="currentinTime">00:00:00</span>
+							</button>
+							<button id="workout" onclick="workout()" disabled>
+								퇴근하기<div class="iconbox">
+									<img id="work-out" class="img-disabled" src="/images/insa/work_leave/log-out.svg" alt="...">
+								</div>  <span id="currentoutTime">00:00:00</span>
+							</button>
+						</div>
 								<div class="workbtnbox">
 									<button disabled onclick="changeStatus('업무중', this)"
 										class="workbtn">업무</button>

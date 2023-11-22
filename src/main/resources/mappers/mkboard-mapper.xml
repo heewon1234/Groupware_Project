@@ -5,6 +5,12 @@
 	<select id="isBoardAdmin" resultType="boolean">
 		select count(*) from Mk_Board where id=#{id}
 	</select>
+	<select id="selectAllboard_type_group" resultType="com.kdt.dto.Mk_BoardDTO">
+		select * from Mk_Board where board_type='group'
+	</select>
+	<select id="selectAllboard_type_all" resultType="com.kdt.dto.Mk_BoardDTO">
+		select * from Mk_Board where board_type='all'
+	</select>
 	<select id="select_board_type_group" resultType="com.kdt.dto.Mk_BoardDTO">
 		select m.* from Mk_Board m inner join Authority a on board_title = ori_board_title where a.id=#{id} and board_type='group'
 	</select>

@@ -255,12 +255,12 @@ public class ApprovalController {
 	}
 	@ResponseBody
 	@RequestMapping(value="/works/workLeave_write")
-	public String work_leave_write(String title,String work_type,String work_day,String approvalname)throws Exception {
+	public String work_leave_write(String title,String work_type,String work_day,String approvalname,String contents)throws Exception {
 		String ID = (String) session.getAttribute("loginId");
 		MembersDTO userDTO = (MembersDTO) session.getAttribute("userDTO");
 		String name = userDTO.getName();
 		System.out.println(userDTO.getName());
-		ApprovalDTO adto = new ApprovalDTO(0, ID, title, "contents", null, null, "휴가신청");
+		ApprovalDTO adto = new ApprovalDTO(0, ID, title,contents, null, null, "휴가신청");
 		int seq = appService.leaveinsert(adto);
 		ApprovalResponsiblesDTO ardto = new ApprovalResponsiblesDTO(0,seq,approvalname,null);
 		ApplyLeaveDTO aldto = new ApplyLeaveDTO(0,ID,name,work_type,work_day,seq,null);

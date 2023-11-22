@@ -4,27 +4,7 @@
 <mapper namespace="Board">
 	
 	<!-- member-mapper로 옮겨라 -->
-	<select id="selectAllMembers" resultType="com.kdt.dto.MembersDTO">
-		select * from Members;
-	</select>
-	<select id="selectAllOrganization" resultType="String">
-		select organization from Members group by organization
-	</select>
-	<select id="selectByOrganization" resultType="String">
-		select JOB_NAME from (select * from Members where organization=#{organization}) as job group by job_name
-	</select>
-	<select id="selectByJobName" resultType="String">
-		select name from Members where JOB_NAME=#{job_name} and organization=#{organization};
-	</select>
-	<select id="selectMemberByOrganization" resultType="com.kdt.dto.MembersDTO">
-		select * from Members where organization=#{organization}
-	</select>
-	<select id="selectMemberByOrganizationAndJobName" resultType="com.kdt.dto.MembersDTO">
-		select * from Members where organization=#{organization} and JOB_NAME=#{job_name}
-	</select>
-	<select id="selectMemberByName" resultType="com.kdt.dto.MembersDTO">
-		select * from Members where organization=#{organization} and JOB_NAME=#{job_name} and name=#{name}
-	</select>
+	
 	<!-- 옮겨라 -->
 	
 	<!-- 게시글 등록 -->
@@ -124,8 +104,8 @@
 	</select>
 	<!-- 공지 내용 최근 5개 가져오기 -->
 	<select id="Notice" resultType="com.kdt.dto.BoardDTO">
-		select *, #{ori_board_title} as board_title from (select row_number() over(order by write_date desc) as rn, ${board_title}.* from ${board_title} where notice=true) as sub 
-		where rn between 1 and 5;
+		select seq, title, name as writer, write_date, header, notice, view_count, #{ori_board_title} as board_title from ${board_title} b
+		inner join Members on writer=id order by write_date desc limit 0,5;
 	</select>
 	<!-- 게시글 삭제 -->
 	<delete id="delContents">
