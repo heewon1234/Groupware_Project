@@ -42,17 +42,50 @@
 	</update>
 	<update id="addworkminutetime">
 	<![CDATA[
-     UPDATE Works
-SET all_worktime = all_worktime + TIMESTAMPDIFF(Minute,
-                                (SELECT MIN(wt.work_time)
-                                 FROM WorkTimes wt
-                                 WHERE wt.id = #{id} AND DATE(wt.work_time) = CURDATE() AND wt.work_type = '근무중'),
-                                (SELECT MIN(wt.work_time)
-                                 FROM WorkTimes wt
-                                 WHERE wt.id = #{id} AND DATE(wt.work_time) = CURDATE() AND wt.work_type = '근무 종료'))
+    UPDATE Works
+SET 
+    all_worktime = all_worktime + CASE
+        WHEN TIMESTAMPDIFF(MINUTE,
+                (SELECT MIN(wt.work_time)
+                FROM WorkTimes wt
+                WHERE wt.id = #{id} AND DATE(wt.work_time) = CURDATE() AND wt.work_type = '근무중'),
+                (SELECT MIN(wt.work_time)
+                FROM WorkTimes wt
+                WHERE wt.id = #{id} AND DATE(wt.work_time) = CURDATE() AND wt.work_type = '근무 종료')) > 240
+        THEN TIMESTAMPDIFF(MINUTE,
+                (SELECT MIN(wt.work_time)
+                FROM WorkTimes wt
+                WHERE wt.id = #{id} AND DATE(wt.work_time) = CURDATE() AND wt.work_type = '근무중'),
+                (SELECT MIN(wt.work_time)
+                FROM WorkTimes wt
+                WHERE wt.id = #{id} AND DATE(wt.work_time) = CURDATE() AND wt.work_type = '근무 종료'))
+        ELSE 0
+    END,
+    work_truancy = work_truancy + CASE
+        WHEN TIMESTAMPDIFF(MINUTE,
+                (SELECT MIN(wt.work_time)
+                FROM WorkTimes wt
+                WHERE wt.id = #{id} AND DATE(wt.work_time) = CURDATE() AND wt.work_type = '근무중'),
+                (SELECT MIN(wt.work_time)
+                FROM WorkTimes wt
+                WHERE wt.id = #{id} AND DATE(wt.work_time) = CURDATE() AND wt.work_type = '근무 종료')) <= 240
+        THEN 1
+        ELSE 0
+    END,
+    all_workday = all_workday - CASE
+        WHEN TIMESTAMPDIFF(MINUTE,
+                (SELECT MIN(wt.work_time)
+                FROM WorkTimes wt
+                WHERE wt.id = #{id} AND DATE(wt.work_time) = CURDATE() AND wt.work_type = '근무중'),
+                (SELECT MIN(wt.work_time)
+                FROM WorkTimes wt
+                WHERE wt.id = #{id} AND DATE(wt.work_time) = CURDATE() AND wt.work_type = '근무 종료')) <= 240
+        THEN 1
+        ELSE 0
+    END
 WHERE id = #{id} AND DATE((SELECT MIN(wt.work_time)
-                               FROM WorkTimes wt
-                               WHERE wt.id = #{id} AND DATE(wt.work_time) = CURDATE() AND wt.work_type = '근무중')) = CURDATE();  
+        FROM WorkTimes wt
+        WHERE wt.id = #{id} AND DATE(wt.work_time) = CURDATE() AND wt.work_type = '근무중')) = CURDATE(); 
                                ]]>
 	</update>
 	<update id="addworknotcheck">
