@@ -262,3 +262,6 @@ td {
 #month {
 	margin-bottom:70px;
 }
+ .img-disabled {
+    filter: invert(100%) sepia(54%) saturate(28%) hue-rotate(293deg) brightness(116%) contrast(88%);;
+}
