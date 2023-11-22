@@ -1,12 +1,21 @@
 .right_item{
 	min-width:600px !important;
 }
+#myModal{
+	height :40% !important;
+}
+.modal_title{
+	margin:10px;
+}
+.span_title{
+	margin:10px;
+}
 .modal {
 	width: calc(0% - 276px)!important;
 	display: none;
 	position: fixed;
 	top: 30%;
-	left: 25%;
+	left: 22%;
 	padding: 20px;
 	background-color: #fff;
 	border: 1px solid #ccc;
