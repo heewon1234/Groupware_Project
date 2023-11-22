@@ -8,6 +8,10 @@ thead tr {
 	background-color: #EFF4FC;
 }
 
+tr, td {
+	border: 1px solid #d4d4d4;
+}
+
 .div{
 	margin-top: 10px;
 }
