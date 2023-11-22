@@ -419,7 +419,7 @@ text-align: center;
 				</div>
 			</div>
 			<div class="modal_footer" style="width: 100%;">
-				<button type="button" class="button_cancel float_left"
+				<button type="button" class="button_cancel"
 					id="modal_cancel_button">닫기</button>
 				<button class="button_apply float_right" id="modal_apply_button"
 					disabled>확인</button>
