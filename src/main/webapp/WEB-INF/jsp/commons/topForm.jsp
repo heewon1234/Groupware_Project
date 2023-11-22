@@ -1,19 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+>
 <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 <link rel="stylesheet" type="text/css" href="/css/commons/topForm.css">
 </head>
 <body>
 	<div id="topFormTop">
 		<div class="topFormLogo">
-			<a href="/"><img id="logo" src="/images/commons/logo.png" alt="..."></a>
+			<a href="/">
+				<img id="logo" src="/images/commons/logo.png" alt="...">
+			</a>
 		</div>
 		<div id="topFormMenuSelectDiv">
 			오피스 홈 <i id="topFormMenuSelect" class="fa-solid fa-chevron-down"></i>
@@ -34,23 +36,25 @@
 					</a>
 				</div>
 				<div class="topFormMenu">
-					<a href="/calendar/official"> <i
-						class="fa-regular fa-calendar-days menuIcon"></i> 일정
+					<a href="/calendar/official">
+						<i class="fa-regular fa-calendar-days menuIcon"></i> 일정
 					</a>
 				</div>
 				<div class="topFormMenu">
-					<a href="/works/work_leave"> <i
-						class="fa-solid fa-sitemap menuIcon"></i> 인사
+					<a href="/works/work_leave">
+						<i class="fa-solid fa-sitemap menuIcon"></i> 인사
 					</a>
 				</div>
 			</div>
 			<div id="topFormRight">
 				<div class="topFormMenu">
-					<i class="fa-regular fa-address-book menuIcon"></i> 주소록
+					<a href="/contact/personal">
+						<i class="fa-regular fa-address-book menuIcon"></i> 주소록
+					</a>
 				</div>
 				<div class="topFormMenu">
-					<a href="/approval/document/lists/all"> <i
-						class="fa-regular fa-clipboard menuIcon"></i> 결재
+					<a href="/approval/document/lists/all">
+						<i class="fa-regular fa-clipboard menuIcon"></i> 결재
 					</a>
 				</div>
 			</div>
@@ -59,7 +63,9 @@
 	<div class="topFormLogout" style="display: none;">
 		<div id="topFormProfile">
 			<div id="topFormProfileImg">
-				<img src="${userDTO.profile_image}" onerror="this.onerror=null; this.src='/images/commons/person-circle.svg';">
+				<img src="${userDTO.profile_image}"
+					onerror="this.onerror=null; this.src='/images/commons/person-circle.svg';"
+				>
 			</div>
 			<div id="topFormProfileContents">
 				<div>${userDTO.organization }</div>
@@ -72,7 +78,9 @@
 				<a href="/members/myInfo" style="font-size: 14px;">내 정보</a>
 			</div>
 			<div>
-				<a href="/members/logout"><button id="topFormLogoutBtn" class="button_cancel">로그아웃</button></a>
+				<a href="/members/logout">
+					<button id="topFormLogoutBtn" class="button_cancel">로그아웃</button>
+				</a>
 			</div>
 		</div>
 	</div>
