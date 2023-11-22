@@ -1,3 +1,13 @@
+#table {
+	width: 98%;
+	min-width: 1180px;
+	text-align: center;
+}
+
 thead tr {
 	background-color: #EFF4FC;
+}
+
+.div{
+	margin-top: 10px;
 }
