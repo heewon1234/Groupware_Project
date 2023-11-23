@@ -440,7 +440,6 @@ function tag_list_opener(type) {
 					type: "GET",
 					dataType: "json"
 				}).done(function(resp) {
-					console.log(resp);
 					for (let i = 0; i < resp.length; i++) {
 						const isTagSelected = selectedTags.includes(resp[i].tag);
 						const tagClass = isTagSelected ? "modal_tag_select_item select" : "modal_tag_select_item";
