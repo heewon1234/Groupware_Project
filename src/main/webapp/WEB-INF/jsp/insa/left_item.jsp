@@ -51,7 +51,6 @@ i{margin-right: 8px;}
 				</div>
 			</div>
 			<!-- 드롭 다운 메뉴 (추가 효과 없음) -->
-			<c:if test="${userDTO.job_name eq '관리'}">
 			<div class="menu_list">
 				<div class="menu_list_button">
 					<div class="menu_list_button_drop">
@@ -63,15 +62,18 @@ i{margin-right: 8px;}
 					<div id="workPlan" class="menu_list_item work_plan">
 						<i class="fa-solid fa-calendar-days"></i> <span class="menu_list_item_text">근무계획 수립 </span>
 					</div>
+					<c:if test="${userDTO.job_name eq '관리'}">
 					<div id="workstatistics" class="menu_list_item work_manage" style="padding-left: 30px;">
 						<img src="/images/commons/body_form/left_item/insa/pie-chart.svg" style="margin-right: 6px;"> <span class="menu_list_item_text">근무 통계</span>
 					</div>
 					<div id="workmanage" class="menu_list_item work_manage">
 						<i class="fa-solid fa-building"></i> <span class="menu_list_item_text">전사 근무관리</span>
 					</div>
+					</c:if>
 				</div>
+				
 			</div>
-			</c:if>
+			
 
 			<c:if test="${userDTO.job_name eq '관리'}">
 				<!-- 드롭 다운 메뉴 (추가 효과 없음) -->

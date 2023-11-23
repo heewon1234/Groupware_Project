@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
@@ -7,19 +6,21 @@
 <head>
 <meta charset="UTF-8">
 <title>Home</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+>
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
 
 </head>
 <body>
 	<c:choose>
 		<c:when test="${loginId==null }">
 			<c:if test="${login == false}">
-			    <script>
+				<script>
 			    	console.log(${login});
 			        alert("아이디 또는 비밀번호를 확인해주세요");
 			    </script>
@@ -28,15 +29,16 @@
 				<div class="loginBox">
 					<div class="loginLogo">GroupWare</div>
 					<div class="inputID">
-						<i class="fa-regular fa-user loginIcon"></i> <input type="text"
-							name="id" id="id" placeholder="input your ID" class="idbox">
+						<i class="fa-regular fa-user loginIcon"></i>
+						<input type="text" name="id" id="id" placeholder="input your ID" class="idbox">
 					</div>
 					<div class="inputPW">
-						<i class="fa-solid fa-lock loginIcon"></i> <input type="password"
-							name="pw" id="pw" placeholder="input your PW" class="pwbox">
+						<i class="fa-solid fa-lock loginIcon"></i>
+						<input type="password" name="pw" id="pw" placeholder="input your PW" class="pwbox">
 					</div>
 					<div class="rememberID">
-						<input type="checkbox" id="remID">아이디 기억하기
+						<input type="checkbox" id="remID">
+						아이디 기억하기
 					</div>
 					<div class="loginButton">
 						<button id="loginbtn">LOGIN</button>
@@ -75,9 +77,11 @@
 								<div class="title">인사</div>
 							</div>
 							<div>
-								<div class="main_icon_box">
-									<i class="fa-regular fa-address-book"></i>
-								</div>
+								<a href="/contact/personal">
+									<div class="main_icon_box">
+										<i class="fa-regular fa-address-book"></i>
+									</div>
+								</a>
 								<div class="title">주소록</div>
 							</div>
 							<div>
@@ -97,33 +101,32 @@
 							<div class="workcheckbox">
 								<div class="timebox">
 									<div>
-										<span id="clock"></span> <span id="statusText"
-											class="highlight">출근전</span>
+										<span id="clock"></span> <span id="statusText" class="highlight">출근전</span>
 									</div>
 								</div>
 								<div class="workinoutbox">
-							<button id="workin" onclick="workin()">
-								출근하기
-								<div class="iconbox">
-									<img id="work-in" src="/images/insa/work_leave/log-in.svg" alt="...">
-								</div> 
-								<span id="currentinTime">00:00:00</span>
-							</button>
-							<button id="workout" onclick="workout()" disabled>
-								퇴근하기<div class="iconbox">
-									<img id="work-out" class="img-disabled" src="/images/insa/work_leave/log-out.svg" alt="...">
-								</div>  <span id="currentoutTime">00:00:00</span>
-							</button>
-						</div>
+									<button id="workin" onclick="workin()">
+										출근하기
+										<div class="iconbox">
+											<img id="work-in" src="/images/insa/work_leave/log-in.svg" alt="...">
+										</div>
+										<span id="currentinTime">00:00:00</span>
+									</button>
+									<button id="workout" onclick="workout()" disabled>
+										퇴근하기
+										<div class="iconbox">
+											<img id="work-out" class="img-disabled" src="/images/insa/work_leave/log-out.svg"
+												alt="..."
+											>
+										</div>
+										<span id="currentoutTime">00:00:00</span>
+									</button>
+								</div>
 								<div class="workbtnbox">
-									<button disabled onclick="changeStatus('업무중', this)"
-										class="workbtn">업무</button>
-									<button disabled onclick="changeStatus('외출중', this)"
-										class="workbtn">외출</button>
-									<button disabled onclick="changeStatus('회의중', this)"
-										class="workbtn">회의</button>
-									<button disabled onclick="changeStatus('외근중', this)"
-										class="workbtn">외근</button>
+									<button disabled onclick="changeStatus('업무중', this)" class="workbtn">업무</button>
+									<button disabled onclick="changeStatus('외출중', this)" class="workbtn">외출</button>
+									<button disabled onclick="changeStatus('회의중', this)" class="workbtn">회의</button>
+									<button disabled onclick="changeStatus('외근중', this)" class="workbtn">외근</button>
 								</div>
 							</div>
 						</div>
@@ -160,8 +163,9 @@
 							<div class="date-month" id="month">
 								<div class="button_wrap">
 									<img id="month-prev" class="month-move" src="/images/insa/work_plan/chevron-left.svg">
-									<span id="month-this"></span>
-									<img id="month-next" class="month-move" src="/images/insa/work_plan/chevron-right.svg">
+									<span id="month-this"></span> <img id="month-next" class="month-move"
+										src="/images/insa/work_plan/chevron-right.svg"
+									>
 								</div>
 							</div>
 							<table class="date-month">
@@ -177,7 +181,7 @@
 									</tr>
 								</thead>
 								<tbody id="tbl-month">
-							
+
 								</tbody>
 							</table>
 						</div>

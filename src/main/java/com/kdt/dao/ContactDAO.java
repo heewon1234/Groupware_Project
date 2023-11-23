@@ -15,32 +15,70 @@ public class ContactDAO {
 	@Autowired
 	private SqlSession db;
 	
-	public List<ContactDTO> personalContactSelectAll(ContactDTO dto) {
-		return db.selectList("Contact.personal_contact_selectAll", dto);
+	public int personal_total_count(ContactDTO dto) {
+		return db.selectOne("Contact.personal_total_count", dto);
 	}
 	
-	public List<ContactDTO> shareContactSelectAll(ContactDTO dto) {
-		return db.selectList("Contact.share_contact_selectAll", dto);
+	public int share_total_count(ContactDTO dto) {
+		return db.selectOne("Contact.share_total_count", dto);
 	}
 	
-	public List<ContactDTO> personalContactSelectNull(ContactDTO dto) {
-		return db.selectList("Contact.personal_contact_selectNull", dto);
+	public int personal_total_count_by_tag_null(ContactDTO dto) {
+		return db.selectOne("Contact.personal_total_count_by_tag_null", dto);
 	}
 	
-	public List<ContactDTO> shareContactSelectNull(ContactDTO dto) {
-		return db.selectList("Contact.share_contact_selectNull", dto);
+	public int share_total_count_by_tag_null(ContactDTO dto) {
+		return db.selectOne("Contact.share_total_count_by_tag_null", dto);
 	}
 	
-	public List<ContactDTO> personalContactSelectBy(ContactDTO dto) {
-		return db.selectList("Contact.personal_contact_selectBy", dto);
+	public int personal_total_count_by_tag(ContactDTO dto) {
+		return db.selectOne("Contact.personal_total_count_by_tag", dto);
 	}
 	
-	public List<ContactDTO> shareContactSelectBy(ContactDTO dto) {
-		return db.selectList("Contact.share_contact_selectBy", dto);
+	public int share_total_count_by_tag(ContactDTO dto) {
+		return db.selectOne("Contact.share_total_count_by_tag", dto);
 	}
 	
+	public int personal_total_count_by_keyword(Map<String, Object> param) {
+		return db.selectOne("Contact.personal_total_count_by_keyword", param);
+	}
 	
+	public int share_total_count_by_keyword(Map<String, Object> param) {
+		return db.selectOne("Contact.share_total_count_by_keyword", param);
+	}
 	
+	public List<ContactDTO> personalContactSelectAll(Map<String, Object> param) {
+		return db.selectList("Contact.personal_contact_selectAll", param);
+	}
+	
+	public List<ContactDTO> shareContactSelectAll(Map<String, Object> param) {
+		return db.selectList("Contact.share_contact_selectAll", param);
+	}
+	
+	public List<ContactDTO> personalContactSelectNull(Map<String, Object> param) {
+		return db.selectList("Contact.personal_contact_selectNull", param);
+	}
+	
+	public List<ContactDTO> shareContactSelectNull(Map<String, Object> param) {
+		return db.selectList("Contact.share_contact_selectNull", param);
+	}
+	
+	public List<ContactDTO> personalContactSelectBy(Map<String, Object> param) {
+		return db.selectList("Contact.personal_contact_selectBy", param);
+	}
+	
+	public List<ContactDTO> shareContactSelectBy(Map<String, Object> param) {
+		return db.selectList("Contact.share_contact_selectBy", param);
+	}
+	
+	public List<ContactDTO> personalContactSelectBy_TagRenameSelect(ContactDTO dto) {
+		return db.selectList("Contact.personalContactSelectBy_TagRenameSelect", dto);
+	}
+	
+	public List<ContactDTO> shareContactSelectBy_TagRenameSelect(ContactDTO dto) {
+		return db.selectList("Contact.shareContactSelectBy_TagRenameSelect", dto);
+	}
+		
 	public List<ContactDTO> personalContactTagSelectAll(ContactDTO dto) {
 		return db.selectList("Contact.personal_contact_tag_selectAll", dto);
 	}
@@ -78,12 +116,10 @@ public class ContactDAO {
 	}
 	
 	public List<ContactDTO> personalContactSearch(Map<String, Object> param) {
-		System.out.println(param);
 		return db.selectList("Contact.personal_contact_search", param);
 	}
 	
 	public List<ContactDTO> shareContactSearch(Map<String, Object> param) {
-		System.out.println(param);
 		return db.selectList("Contact.share_contact_search", param);
 	}
 	

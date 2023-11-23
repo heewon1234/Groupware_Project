@@ -133,5 +133,14 @@ public class ApprovalService {
 
 		return;
 	}
+	public String work_type(int doc_id)throws Exception{
+		return adao.work_type(doc_id);
+	}
+	public int count(int doc_id)throws Exception{
+		return adao.count(doc_id);
+	}
+	public String getID(int doc_id)throws Exception{
+		return adao.getID(doc_id);
+	}
 	
 }

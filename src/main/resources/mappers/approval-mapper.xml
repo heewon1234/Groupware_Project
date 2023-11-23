@@ -43,4 +43,13 @@
 		SELECT COUNT(*) FROM Approval
 		WHERE id = #{id} and approval_status = '진행중'
 	</select>
+	<select id="work_type" resultType="String">
+		select work_types from ApplyLeave where doc_id = #{doc_id} group by work_types  ;
+	</select>
+	<select id="count" resultType="Integer">
+		select count(*) from ApplyLeave where doc_id = #{doc_id};
+	</select>
+	<select id="getID" resultType="String">
+		select id from ApplyLeave where doc_id = #{doc_id} group by id;
+	</select>
 </mapper>

@@ -58,4 +58,7 @@
 		select COUNT(*) from Approval_Responsibles
 		WHERE approver_id = #{id} and approval_status = '반려'
 	</select>
+	<select id="capplyleave" resultType="Integer">
+		select count(*) from Approval_Responsibles where doc_id = #{doc_id} and (approval_status ='미결' or approval_status ='반려')
+	</select>
 </mapper>

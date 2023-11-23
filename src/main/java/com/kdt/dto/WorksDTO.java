@@ -17,6 +17,10 @@ public class WorksDTO {
 	public WorksDTO() {
 		super();
 	}
+	public WorksDTO(String id,int count) {
+		this.id = id;
+		this.leave_use = count;
+	}
 	public WorksDTO(String id, String name, String organization, int leave_use, int leave_remainder, int work_late,
 			int work_early, int work_notcheck, int work_truancy, int all_workday, int all_worktime) {
 		super();
