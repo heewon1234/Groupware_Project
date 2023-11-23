@@ -282,7 +282,7 @@ function modal_contact_read_add_data(element, type) {
 
 
 				else if (resp[i].edit == "false") {
-					if (loginId == resp[i].writer) {
+					if (loginId == resp[i].writer || loginId == "admin") {
 						$("#modal_footer_read").
 							append(`<button class="button_cancel" onclick="modal_cancel_button('read_modal',event)">닫기</button>
 								<button class="button_apply" onclick="modal_read_edit('share')" style="margin-left: 14px;">수정</button>`);
