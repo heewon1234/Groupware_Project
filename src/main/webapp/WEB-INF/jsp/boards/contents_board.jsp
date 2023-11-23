@@ -38,7 +38,12 @@
                     	</c:choose>
                     </div>
                     <div class="contents_info">
-                        <div class="board_contents_title">${boardContents.title}</div>
+                        <div class="board_contents_title">
+                        	<c:if test="${boardContents.header!=''}">
+                            	<span>${boardContents.header }&nbsp;&nbsp;</span>
+                            </c:if>
+                        	${boardContents.title}
+                        </div>
                         <div class="contents_info_datail">
                         	<div id="boardSeq">글번호 ${boardContents.seq}</div> |
                             <div>
