@@ -147,6 +147,7 @@ public class BoardService {
 			List<Map<String,String>> list = new ArrayList<>();
 			return list;
 		}
+		System.out.println(fromBoard);
 		Map<String,String> map = new HashMap<>();
 		map.put("id", id);
 		map.put("fromBoard", fromBoard);

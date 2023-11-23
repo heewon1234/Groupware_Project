@@ -179,9 +179,9 @@ $(document).on("change",".organization_check",function(){
 			data:{"organization":organization}
 		}).done(function(resp){
 			for(let i=0;i<resp.length;i++){
-				authority.push({"id":resp[i].id,"name":resp[i].name,"authority":"읽기","organization":resp[i].organization,"job_name":resp[i].job_name,"position":resp[i].position});
+				authority.push({"id":resp[i].id,"name":resp[i].name,"authority":"읽기","organization":resp[i].organization,
+				"job_name":resp[i].job_name,"position":resp[i].position});
 			}
-			
 			add_auth_member_list();
 		})
 		
@@ -191,7 +191,6 @@ $(document).on("change",".organization_check",function(){
 	} else{	
 		let inputCheck = $(this).parent("div").next(".member_dept_detail_box");
 		inputCheck.find("input[type='checkbox']").prop("checked",false);
-		
 		add_auth_member_list();
 	}
 	
@@ -219,7 +218,6 @@ $(document).on("change",".jobName_check",function(){
 			for(let i=0;i<resp.length;i++){
 				authority.push({"id":resp[i].id,"name":resp[i].name,"authority":"읽기","organization":resp[i].organization,"job_name":resp[i].job_name,"position":resp[i].position});
 			}
-			
 			add_auth_member_list();
 		})
 		let inputCheck = $(this).parent("div").next(".member_datail_box");
@@ -257,8 +255,7 @@ $(document).on("change",".name_check",function(){
 			url:"/members/selectMemberByName",
 			data:{"organization":organization,"job_name":job_name,"name":name}
 		}).done(function(resp){
-			authority.push({"id":resp.id,"name":resp.name,"authority":"읽기","organization":resp.organization,"job_name":resp.job_name,"position":resp.position});
-			
+			authority.push({"id":resp.id,"name":resp.name,"authority":"읽기","organization":resp.organization,"job_name":resp.job_name,"position":resp.position});	
 			add_auth_member_list();
 		})
 	} else{
