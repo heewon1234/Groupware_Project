@@ -127,19 +127,22 @@ public class ApprovalController {
 			String work_types = appService.work_type(doc_id);
 			int count = appService.count(doc_id);
 			WorksDTO dto = new WorksDTO(ID,count);
-			if(work_types.equals("연차")) {
-				wService.updateyleave(dto);
+			if(work_types != null) {
+				if(work_types.equals("연차")) {
+					wService.updateyleave(dto);
+					wService.updateleave(dto);
+				}
+				else if(work_types.equals("경조사")) {
+					wService.updatefleave(dto);
+					wService.updateleave(dto);
+				}
+				else {
+					return "redirect:/approval/document/box/every";
+				}
+				return "redirect:/approval/document/box/every";
 			}
-			else {
-				wService.updatefleave(dto);
-			}
-			wService.updateleave(dto);
-			return "redirect:/approval/document/box/every";
 		}
-		else {
-			return "redirect:/approval/document/box/every";
-		}
-		
+		return "redirect:/approval/document/box/every";
 	}
 	
 	@RequestMapping("/delete")
