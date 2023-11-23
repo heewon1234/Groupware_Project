@@ -175,6 +175,8 @@ a {
 .button_wrap {
 	display:flex;
 	align-items: center;
+	padding-left: 10px;
+    padding-top: 10px;
 }
 
 #month-prev, #month-next {
@@ -250,6 +252,10 @@ a {
 
 table.date-month {
 	width:100%;
+}
+
+th {
+	text-align: center !important;
 }
 
 td {
