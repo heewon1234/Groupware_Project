@@ -58,6 +58,22 @@
 	height: 60px;
 	overflow: hidden;
 }
+
+.chat_send_btn {
+    box-shadow: none;
+    background-color: #ebebeb;
+    border: solid 1px #d6d6d6;
+    border-radius: 4px;
+    color: #333;
+    height: 34px;
+    cursor: pointer;
+    font-size: 14px;
+    width:50px;
+}
+
+.chat_send_btn:hover {
+    background-color: #d6d6d6;
+}
 </style>
 </head>
 <body>
@@ -198,7 +214,7 @@
 				<div class="chatBox">
 					<div class="inputText" id="inputText" contenteditable="true"></div>
 					<div>
-						<button id="sendBtn">전송</button>
+						<button id="sendBtn" class="chat_send_btn">전송</button>
 					</div>
 				</div>
 			</div>
@@ -229,7 +245,7 @@
 				<div class="chatBox">
 					<div class="inputText" id="groupinputText" contenteditable="true"></div>
 					<div>
-						<button id="sendGroupBtn">전송</button>
+						<button id="sendGroupBtn" class="chat_send_btn">전송</button>
 					</div>
 				</div>
 			</div>
