@@ -495,10 +495,29 @@ function groupChat(groupName, groupSeq) {
                 sendGroupMessage(groupSeq);
             }
         });
+        
+}
+function lineBreakText(text) {
+    const maxLineLength = 20; // 최대 허용 글자 수
+    let lines = text.split('\n');
+
+    for (let i = 0; i < lines.length; i++) {
+        if (lines[i].length > maxLineLength) {
+            let newText = '';
+            while (lines[i].length > maxLineLength) {
+                newText += lines[i].substring(0, maxLineLength) + '<br>';
+                lines[i] = lines[i].substring(maxLineLength);
+            }
+            newText += lines[i];
+            lines[i] = newText;
+        }
+    }
+
+    return lines.join('\n');
 }
 //그룹 메시지 전송 함수
 function sendGroupMessage(groupSeq) {
-    var message = $('#groupinputText').html();
+    var message = lineBreakText($('#groupinputText').html());
     var groupSeq = $('#groupSeq').val();
     let loginUserProfile = $("#loginUserProfile").val();
 
@@ -816,7 +835,7 @@ function getPreviousGroupMessages(groupSeq) {
 		}
 
 		function sendMessage(oneSeq) {
-		    var message = $('#inputText').html();
+		    var message = lineBreakText($('#inputText').html());
             var oneSeq = $('#oneSeq').val();
             let loginUserProfile = $("#loginUserProfile").val();
             var currentTime = new Date(); 
