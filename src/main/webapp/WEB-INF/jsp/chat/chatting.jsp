@@ -181,7 +181,7 @@
 		</div>
 		<!-- 그룹 선택 모달 창 -->
 		<div id="groupUserModal" class="ChatModal">
-			<div class="ChatModal-content" style="width: 300px; height: 500px;">
+			<div class="ChatModal-content" style="width: 300px; height: 500px;overflow-y: auto;">
 				<span class="close" id="groupModalClose">&times;</span>
 				<h2>사용자 선택</h2>
 				<ul id="groupUserList">
