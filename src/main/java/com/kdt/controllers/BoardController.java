@@ -176,7 +176,7 @@ public class BoardController {
 		int currentReplyPage=1;
 		if(rNum!=null) {currentReplyPage = Integer.parseInt(rNum);}
 		session.setAttribute("currentReplyPage", currentReplyPage);		
-		int start = currentReplyPage*Constants.RECORD_COUNT_PER_PAGE-(Constants.RECORD_COUNT_PER_PAGE-1);
+		int start = currentReplyPage*Constants.RECORD_COUNT_PER_PAGE-(Constants.RECORD_COUNT_PER_PAGE-1)-1;
 		int end = currentReplyPage*Constants.RECORD_COUNT_PER_PAGE;
 		List<ReplyDTO> replyList = rservice.replySelectBy(board_title, seq, String.valueOf(start), String.valueOf(end)); // 댓글 리스트
 		model.addAttribute("replyList",replyList);
@@ -192,7 +192,10 @@ public class BoardController {
 		model.addAttribute("isVote",false);
 
 		String id = (String)session.getAttribute("loginId");
-
+		
+		boolean auth = memberService.getJobName(id).equals("관리");
+		model.addAttribute("auth",auth);
+		
 		if(boardContents.getSurvey_question()!=null) {
 			model.addAttribute("isVote",sservice.isVote(new SurveyUserDTO(0,id,Integer.parseInt(seq),board_title)));
 			List<SurveyDTO> list = sservice.selectServeyItem(new SurveyDTO(0,board_title, Integer.parseInt(seq),null,0,0));

@@ -25,7 +25,6 @@ public class ReplyService {
 	}
 	
 	public List<ReplyDTO> replySelectBy(String board_title, String parent_seq, String start, String end){
-
 		Map<String,String> map = new HashMap<>();
 		map.put("board_title",board_title);
 		map.put("parent_seq", parent_seq);

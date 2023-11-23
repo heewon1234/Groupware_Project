@@ -207,6 +207,7 @@ public class Mk_BoardService {
 						headerListSql += "'"+header+"'";
 					}
 					hdao.headerInsert(new HeaderDTO(0,dto.getBoard_title(),header));
+					i++;
 				}
 				
 				Map<String,String> mapHeader = new HashMap<>();

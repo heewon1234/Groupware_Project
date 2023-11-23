@@ -109,7 +109,10 @@
     align-items: center;
     justify-content: center;
 }
-.board_contents_list>.favorite{width:3%;}
+.board_contents_list>.favorite{
+	min-width:47px;
+	width:3%;
+}
 .favorite>img{
     width:45%;
     height:45%;
