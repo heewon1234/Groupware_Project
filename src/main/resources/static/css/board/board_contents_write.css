@@ -2,6 +2,10 @@
 #logout{
 	font-size:29px;
 }
+.content_tab > *{
+    margin-left: 0px;
+    overflow-y:scroll;
+}
 /* div{border:1px solid black;} */
 .board_contents_box img{
 	max-width:600px;

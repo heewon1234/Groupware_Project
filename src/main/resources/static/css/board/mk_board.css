@@ -1,4 +1,7 @@
 @charset "UTF-8";
+.content_tab > *{
+    margin-left: 0px;
+}
 #logout{
 	font-size:29px;
 }

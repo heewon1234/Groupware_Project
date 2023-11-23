@@ -2,6 +2,10 @@
 #logout{
 	font-size:29px;
 }
+.content_tab > *{
+    margin-left: 0px;
+    overflow-y:scroll;
+}
 /* div{border: 1px solid black;}  */
 .content_tab{padding-right:25px;}
 .content_tab>div{
