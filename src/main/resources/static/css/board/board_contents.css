@@ -2,15 +2,14 @@
 #logout{
 	font-size:29px;
 }
-.content_tab > *{
+.content_tab>*{
     margin-left: 0px;
-    overflow-y:scroll;
+    min-width:1250px;
 }
+#topFormTop{position: fixed;}
 /* div{border: 1px solid black;}  */
 .content_tab{padding-right:25px;}
-.content_tab>div{
-	min-width:600px;
-}
+
 .backVoteBtn{
 	width:98px;
     box-shadow: none;

@@ -2,9 +2,9 @@
 #logout{
 	font-size:29px;
 }
-.content_tab > *{
+.content_tab>*{
     margin-left: 0px;
-    overflow-y:scroll;
+    min-width:1200px;
 }
 /* div{border:1px solid black;} */
 .board_contents_box img{
