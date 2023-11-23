@@ -1383,3 +1383,18 @@ $(document).ready(function() {
 	});
 });
 
+// 메뉴 열고 닫고, 화살표 이미지 회전
+$(document).ready(function() {
+    $(".menu_list_button").click(function() {
+        let parent = $(this).closest('.menu_list');
+        let child = parent.find('.menu_list_box');
+
+        child.toggle();
+        if (child.css('display') === 'none' || child.css('display') === '') {
+            parent.find('.menu_list_button_drop img').css('transform', 'rotate( 180deg )');
+        }
+        else {
+            parent.find('.menu_list_button_drop img').css('transform', '');
+        }
+    });
+});
