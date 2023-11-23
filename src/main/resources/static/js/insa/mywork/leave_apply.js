@@ -33,6 +33,7 @@ $(document).ready(function() {
         }
         
     });
+    
 });
 var checkedManagerValues = [];
 var checkedManagers;
@@ -118,13 +119,33 @@ $(document).ready(function() {
 			var tableRowSelect = $('#tr3');
 			let num2 = 0;
 			daysOfWeek.forEach(day => {
-
 				let cellDay = $('<td>').text(day).addClass('td' + num2);
 				tableRowDays.append(cellDay);
 				let td = $('<td>').addClass('td' + num2++);
 				tableRowSelect.append(td);
 			});
+    tableRowDays.find('td').each(function() {
+        let dayText = $(this).text().trim();
 
+        // '토' 또는 '일'이 아닌 경우에만 특정 클래스를 추가
+       if (dayText !== '토' && dayText !== '일') {
+        let dataValue = $(this).attr('class');
+        console.log(dataValue);
+        // data-value 값이 존재하는 경우에만 클래스 추가
+        if (dataValue) {
+			console.log("hi");
+            $("#tr3 td[class='" + dataValue + "']").hover(
+    function() {
+        $(this).css("cursor", "pointer");
+        $(this).css("background-color", "#d2e0fb");
+    },
+    function() {
+        $(this).css("background-color", "white");
+    }
+);
+        }
+    }
+    });
 
 
 			tableRowSelect.on('click', 'td', function() {
