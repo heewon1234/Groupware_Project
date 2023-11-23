@@ -60,7 +60,7 @@
     overflow-x: hidden;
     padding: 0 24px 30px;
     height: 100%;
-    max-height: 565px;
+    max-height: calc(100% - 228px);
 }
 .menu_item {
     height: 38px;
