@@ -125,7 +125,9 @@
     margin-left:25px;
     overflow-x:auto;
 }
-
+.contents img{
+	max-width:600px;
+}
 .survey_box{
     border:1px solid black;
     border-radius: 5px;

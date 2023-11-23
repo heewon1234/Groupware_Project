@@ -100,7 +100,11 @@ $("input[name='useSurvey']").change(function(){
 		$("#surveyBox").css("display","none");
 	}
 	
-})
+});
+
+$(".useSurveyTextBox").on("click",function(){
+	$(this).siblings("input[name='useSurvey']").prop("checked","true").trigger("change");
+});
 
 $(document).on("click",".add_item_btn",function(){
 	if($("input[name='items']").length>4){ 
@@ -162,6 +166,10 @@ $("input[name='notice']").change(function(){
 	} else{
 		$(this).val("false");
 	}
+});
+
+$(".noticeTextBox").on("click",function(){
+	$(this).siblings("input[name='notice']").prop("checked",true).trigger("change");
 });
 
 $("#frmBtn").on("click",function(){

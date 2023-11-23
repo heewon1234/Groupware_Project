@@ -77,10 +77,12 @@
                         <div>
                         	<c:choose>
                         		<c:when test="${boardContents.notice eq 'true'}">
-                        			<input type="checkbox" name="notice" value="true" checked> &nbsp;공지로 등록
+                        			<input type="checkbox" name="notice" value="true" checked> 
+                        			<span class="noticeTextBox">&nbsp;공지로 등록</span>
                         		</c:when>
                         		<c:otherwise>
-                        			<input type="checkbox" name="notice" value="false"> &nbsp;공지로 등록
+                        			<input type="checkbox" name="notice" value="false"> 
+                        			<span class="noticeTextBox">&nbsp;공지로 등록</span>
                         		</c:otherwise>
                         	</c:choose>
                             
@@ -124,12 +126,24 @@
                         <div>
                         	<c:choose>
                         		<c:when test="${empty boardContents.survey_question}">
-                        			<div><input type="radio" name="useSurvey" value="true"> 사용</div>
-                            		<div><input type="radio" name="useSurvey" value="false" checked> 사용 안 함</div>
+                        			<div>
+                        				<input type="radio" name="useSurvey" value="true"> 
+                        				<span class="useSurveyTextBox">사용</span>
+                        			</div>
+                            		<div>
+                            			<input type="radio" name="useSurvey" value="false" checked>
+                            			 <span class="useSurveyTextBox">사용 안 함</span>
+                            			 </div>
                         		</c:when>
                         		<c:otherwise>
-                        			<div><input type="radio" name="useSurvey" value="true" checked> 사용</div>
-                            		<div><input type="radio" name="useSurvey" value="false"> 사용 안 함</div>
+                        			<div>
+                        				<input type="radio" name="useSurvey" value="true" checked> 
+                        				<span class="useSurveyTextBox">사용</span>
+                        			</div>
+                            		<div>
+                            			<input type="radio" name="useSurvey" value="false">
+                            			<span class="useSurveyTextBox">사용 안 함</span>
+                            		</div>
                         		</c:otherwise>
                         	</c:choose>
                         </div>

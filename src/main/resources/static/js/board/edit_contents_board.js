@@ -2,7 +2,7 @@ $(document).ready(function() {
 	$("#left_item").load("/board/sideBar");
 			
 	$("#summernote").summernote({
-		width: 1500,
+		width: '100%',
 	    height: null,
 	    minHeight: 380,
 	    maxHeight: null,
@@ -100,7 +100,10 @@ $("input[name='useSurvey']").change(function(){
 		$("#surveyBox").css("display","none");
 	}
 	
-})
+});
+$(".useSurveyTextBox").on("click",function(){
+	$(this).siblings("input[name='useSurvey']").prop("checked","true").trigger("change");
+});
 
 $(document).on("click",".add_item_btn",function(){
 	if($("input[name='items']").length>4){ 
@@ -151,7 +154,9 @@ $("input[name='notice']").change(function(){
 		$(this).val("false");
 	}
 });
-
+$(".noticeTextBox").on("click",function(){
+	$(this).siblings("input[name='notice']").prop("checked",true).trigger("change");
+});
 $(document).on("click",".del_item_btn",function(){
 	if($("input[name='items']").length==2){
 		alert("설문조사 항목은 반드시 2개 이상이어야 합니다");
@@ -181,6 +186,28 @@ $("#frmBtn").on("click",function(){
 	if($("#summernote").val()==""){
 		alert("내용을 입력해주세요");
 		return false;
+	}
+	
+	if($("#summernote").val().length>2000){
+		alert("게시글 내용은 최대 2000자 입니다");
+		return false;
+	}
+	
+	if($("input[name='useSurvey']:checked").val()=="true"){
+		if($("input[name='survey_question']").val()==''){
+			alert("질문을 입력하거나 설문 여부 사용 안 함을 선택해주세요");
+			return false;
+		}
+		
+		let itemValues = [];
+		
+		let items = $(document).find("input[name='items']");
+		items.map((index,item)=>itemValues.push(item.value))
+		
+		if(itemValues.filter(item=>item != '').length<2){
+			alert("설문조사 항목은 2개 이상 입력해야합니다");
+			return false;
+		}
 	}
 	
 	if($("#header").val()=="말머리 없음"){
