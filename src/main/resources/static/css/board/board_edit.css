@@ -1,7 +1,7 @@
 @charset "UTF-8";
-.content_tab > *{
+.content_tab>*{
     margin-left: 0px;
-    overflow-y:scroll;
+    min-width:1200px;
 }
 #logout{
 	font-size:29px;
@@ -21,9 +21,6 @@
 	font-weight: bold;
 }
 .content_tab{padding-right:25px;}
-.content_tab>div{
-	min-width:600px;
-}
 
 .title{
     font-weight: bold;
