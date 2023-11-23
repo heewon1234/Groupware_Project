@@ -292,7 +292,6 @@ function modal_contact_read_add_data(element, type) {
 							append(`<button class="button_cancel" onclick="modal_cancel_button('read_modal',event)">닫기</button>`);
 					}
 				}
-				console.log(resp[i].edit);
 			}
 		});
 	}
@@ -441,6 +440,7 @@ function tag_list_opener(type) {
 					type: "GET",
 					dataType: "json"
 				}).done(function(resp) {
+					console.log(resp);
 					for (let i = 0; i < resp.length; i++) {
 						const isTagSelected = selectedTags.includes(resp[i].tag);
 						const tagClass = isTagSelected ? "modal_tag_select_item select" : "modal_tag_select_item";
@@ -621,23 +621,23 @@ function edit_form_new_tag_deplicate(type, element) {
 		$('#modal_new_tag_input').on('keyup', function() {
 
 			let tag_input = $(this).val();
-			console.log("현재 입력 값" + tag_input);
 
 			if (tag_input.includes(',') || tag_input.includes('미등록 태그') || tag_input.includes('[') || tag_input.includes(']')) {
 				$('.modal_tag_regex_error').css('display', 'block');
 				$('.button_apply.tag').addClass('permit');
+				return;
 			}
 
 			if (!tag_input.includes(',') || tag_input.includes('미등록 태그') || tag_input.includes('[') || tag_input.includes(']')) {
 				$('.modal_tag_regex_error').css('display', 'none');
+				$('.button_apply.tag').removeClass('permit');
 			}
 
 			if (!tag_input) {
-				console.log("공백임");
 				$('.button_apply.tag').addClass('permit');
 				$(".modal_tag_duplication_error").css('display', 'none');
 				$(".modal_tag_regex_error").css('display', 'none');
-
+				return;
 			}
 
 			if (contactType == "personal") {
@@ -658,7 +658,6 @@ function edit_form_new_tag_deplicate(type, element) {
 				});
 
 			} else if (contactType == "share") {
-				console.log("공유로 들어까지는 옴");
 				$.ajax({
 					url: "/contact/shareContactTagSelectAllDeplicate",
 					type: "GET",
@@ -739,9 +738,6 @@ function edit_form_new_tag_deplicate(type, element) {
 	else if (type == "personal") { // 수정 -> 태그 만들기
 		$('#modal_new_tag_input_from_edit').on('keyup', function() {
 			let tag_input = $(this).val();
-			console.log("현재 입력 값" + tag_input);
-			console.log("찍");
-			console.log(tag_input);
 
 			if (tag_input.includes(',') || tag_input.includes('미등록 태그') || tag_input.includes('[') || tag_input.includes(']')) {
 				$('.modal_tag_regex_error').css('display', 'block');
@@ -781,9 +777,6 @@ function edit_form_new_tag_deplicate(type, element) {
 	else if (type == "share") { // 수정 -> 태그 만들기
 		$('#modal_new_tag_input_from_edit').on('keyup', function() {
 			let tag_input = $(this).val();
-			console.log("현재 입력 값" + tag_input);
-			console.log("찍");
-			console.log(tag_input);
 
 			if (tag_input.includes(',') || tag_input.includes('미등록 태그') || tag_input.includes('[') || tag_input.includes(']')) {
 				$('.modal_tag_regex_error').css('display', 'block');
@@ -820,9 +813,6 @@ function edit_form_new_tag_deplicate(type, element) {
 
 	else if (type == "edit") { // 왼쪽 메뉴 -> 이름 수정하기
 		let tag_input = $(element).val();
-		console.log("현재 입력 값" + tag_input);
-		console.log("찍");
-		console.log(tag_input);
 
 		if (tag_input.includes(',') || tag_input.includes('미등록 태그') || tag_input.includes('[') || tag_input.includes(']')) {
 			$('.modal_tag_regex_error').css('display', 'block');
@@ -1110,7 +1100,6 @@ $(document).ready(function() {
 				window.location.href = "/contact/personal";
 			} else {
 				window.location.href = "/contact/personal?tag=" + item_name;
-				//console.log(item_name);
 			}
 		} else if (parent_name == "공유 주소록") {
 			if (item_name == "전체") {
@@ -1140,7 +1129,6 @@ $(document).ready(function() {
 
 // 연락처 수정 확인 누를때
 function modal_update_apply(type) {
-	console.log("ㄴㅁㅁ1;1");
 	$('#contact_form').removeAttr('action');
 	$('#hidden_tag_list_update').val(selectedTags);
 
