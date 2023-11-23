@@ -20,13 +20,13 @@ public class WebConfig implements WebMvcConfigurer{
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(getLoginValidator())
-				.excludePathPatterns("/")
-				.excludePathPatterns("/err")
-				.excludePathPatterns("/members/login")
-				.excludePathPatterns("/css/**")
-				.excludePathPatterns("/uploads/**")
-				.excludePathPatterns("/images/**");
+//		registry.addInterceptor(getLoginValidator())
+//				.excludePathPatterns("/")
+//				.excludePathPatterns("/err")
+//				.excludePathPatterns("/members/login")
+//				.excludePathPatterns("/css/**")
+//				.excludePathPatterns("/uploads/**")
+//				.excludePathPatterns("/images/**");
 	}
 	
 	@Bean
