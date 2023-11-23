@@ -442,7 +442,7 @@ text-align: center;
 									<span>${list.organization }</span> 
 									<span>${list.name }</span> 
 									<span hidden>${list.id }</span> 
-									<input type='checkbox' class="id_checkBox" value='${list.id}'>
+									<input name="managerID" type='checkbox' class="id_checkBox" value='${list.id}'>
 								</li>
 							</c:forEach>
 						</ul>
@@ -561,10 +561,10 @@ text-align: center;
 	    $('.modal_tag_add').css('display', 'none');
 	});
 
-	var selectedNames = [];
-	var managerIDs = [];
 	// 사람 설정
+	var managerIDs = [];
 	$(document).on("click", "#button_apply_tag", function() {
+	var selectedNames = [];
 		var checkboxes = document.querySelectorAll('input[name="managerID"]:checked');
 	    
 	    var gridItem = document.querySelector('.manager');
@@ -588,7 +588,7 @@ text-align: center;
 	    } else {
 	        applyButton.prop('disabled', true); // 확인 버튼 비활성화
 	    }
-
+	    gridItem.innerHTML = "";
 	    gridItem.innerHTML = selectedNames.join(', ');
 	    $('.modal_contact_add').css('z-index', '4');
 	    $('.modal_contact_add').css('border', '');
