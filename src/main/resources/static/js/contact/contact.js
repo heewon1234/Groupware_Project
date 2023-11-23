@@ -424,7 +424,6 @@ function modal_read_edit(type) {
 
 // 태그 리스트 열고 닫기
 function tag_list_opener(type) {
-
 	// 작성하기 버튼 눌러서 들어가는 곳 태그 불러오기
 	if (type == "nomal") {
 		if (tag_list_open) {
@@ -440,10 +439,14 @@ function tag_list_opener(type) {
 					type: "GET",
 					dataType: "json"
 				}).done(function(resp) {
-					for (let i = 0; i < resp.length; i++) {
-						const isTagSelected = selectedTags.includes(resp[i].tag);
-						const tagClass = isTagSelected ? "modal_tag_select_item select" : "modal_tag_select_item";
-						$(".modal_tag_select_list").append("<div class='" + tagClass + "'>" + resp[i].tag + "</div>");
+					if (!resp.length == "0") {
+						for (let i = 0; i < resp.length; i++) {
+							const isTagSelected = selectedTags.includes(resp[i].tag);
+							const tagClass = isTagSelected ? "modal_tag_select_item select" : "modal_tag_select_item";
+							$(".modal_tag_select_list").append("<div class='" + tagClass + "'>" + resp[i].tag + "</div>");
+						}
+					} else {
+						$(".modal_tag_select_list").append('<div class="modal_tag_select_item nothing">데이터가 없습니다.</div>');
 					}
 				});
 			} else if (contactType == "share") {
@@ -1372,16 +1375,16 @@ $(document).ready(function() {
 
 // 메뉴 열고 닫고, 화살표 이미지 회전
 $(document).ready(function() {
-    $(".menu_list_button").click(function() {
-        let parent = $(this).closest('.menu_list');
-        let child = parent.find('.menu_list_box');
+	$(".menu_list_button").click(function() {
+		let parent = $(this).closest('.menu_list');
+		let child = parent.find('.menu_list_box');
 
-        child.toggle();
-        if (child.css('display') === 'none' || child.css('display') === '') {
-            parent.find('.menu_list_button_drop img').css('transform', 'rotate( 180deg )');
-        }
-        else {
-            parent.find('.menu_list_button_drop img').css('transform', '');
-        }
-    });
+		child.toggle();
+		if (child.css('display') === 'none' || child.css('display') === '') {
+			parent.find('.menu_list_button_drop img').css('transform', 'rotate( 180deg )');
+		}
+		else {
+			parent.find('.menu_list_button_drop img').css('transform', '');
+		}
+	});
 });
