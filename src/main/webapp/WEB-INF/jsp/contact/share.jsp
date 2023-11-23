@@ -672,13 +672,6 @@
 		let currentReplyPage = parseInt($("#contactCurrentPage").val());
 		let hiddenKeyword = $("#hiddenKeyword").val();
 
-		console.log(recordTotalCount);
-		console.log(recordCountPerPage);
-		console.log(naviCountPerPage);
-		console.log(replyListSize);
-		console.log(currentReplyPage);
-		console.log(replyListSize);
-
 		let pageTotalCount = 0;
 
 		if ((recordTotalCount % recordCountPerPage) > 0) {
@@ -696,9 +689,7 @@
 		let startNavi = Math.floor((currentReplyPage - 1) / naviCountPerPage)
 				* naviCountPerPage + 1;
 		let endNavi = startNavi + naviCountPerPage - 1;
-		console.log("startNavi" + startNavi);
-		console.log("endNavi" + endNavi);
-		console.log("naviCountPerPage" + naviCountPerPage);
+
 		if (endNavi > pageTotalCount) {
 			endNavi = pageTotalCount;
 		}
