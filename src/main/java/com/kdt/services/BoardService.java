@@ -374,9 +374,7 @@ public class BoardService {
 			}
 			if(exist) {exist = false;}
 			else {existFile.add(prev);}
-
 		}
-
 		return existFile;
 	}
 

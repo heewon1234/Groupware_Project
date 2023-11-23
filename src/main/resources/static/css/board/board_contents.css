@@ -55,6 +55,10 @@
     align-items: center;
     justify-content: center;
 }
+.board_contents_title>span{
+	color:rgb(41, 133, 219);
+	font-size: medium;
+}
 .profileDiv>img{
 	width:60px;
 	height:60px;
