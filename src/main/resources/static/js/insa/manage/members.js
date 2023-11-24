@@ -120,7 +120,7 @@ $("#add_btn").on("click", function() {
 
 // 회원가입 regex
 let idRegex = /^[\w\d]{7,13}$/;
-let pwRegex = /^([\w\d\W]){8,}$/;
+let pwRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
 let nameRegex = /^[가-힣]{2,5}$/;
 
 let idCheck = false;
@@ -179,7 +179,7 @@ $("#signupForm").on("submit", function() {
 		return false;
 	}
 	if (pwCheck == false) {
-		alert("비밀번호는 대문자와 특수문자 포함 8글자 이상이여야 합니다.");
+		alert("비밀번호는 영문자, 숫자, 특수문자 포함 8글자 이상 15글자 이하여야 합니다.");
 		return false;
 	}
 	if (nameCheck == false) {

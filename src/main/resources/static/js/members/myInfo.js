@@ -29,7 +29,7 @@ function execDaumPostcode() {
 	}).open();
 }
 
-let pwRegex = /^([\w\d\W]){8,}$/;
+let pwRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
 
 let pwCheck = false;
 let pwReCheck = false;
@@ -37,8 +37,8 @@ let phoneCheck = false;
 
 $(".button_apply").on("click", function() {
 
-	if ($("pw").val() != "") {
-		if (!pwRegex.test($("#pw").val()) && $("#pw").val() != "") {
+	if ($("#pw").val() != "") {
+		if (!pwRegex.test($("#pw").val())) {
 			pwCheck = false;
 		} else {
 			pwCheck = true;
@@ -49,7 +49,11 @@ $(".button_apply").on("click", function() {
 		} else {
 			pwReCheck = true;
 		}
+	} else {
+		pwCheck = true;
+		pwReCheck = true;
 	}
+	
 
 	if (pwCheck == false) {
 		alert("비밀번호는 대문자와 특수문자 포함 8글자 이상이여야 합니다.");
