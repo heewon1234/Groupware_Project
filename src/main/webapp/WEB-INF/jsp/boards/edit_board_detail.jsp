@@ -130,7 +130,7 @@
                                         			</c:choose>
                                         			
                                         		</div>
-                                        		<div>x</div>
+                                        		<div class="authDelBtn">x</div>
                                     		</div>
                                	 		</div>
                             		</c:forEach>
