@@ -14,7 +14,6 @@
 
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <script src="/js/contact/contact.js"></script>
-<script src="/js/commons/body_form/body_form_default.js"></script>
 
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
@@ -673,13 +672,6 @@
 		let currentReplyPage = parseInt($("#contactCurrentPage").val());
 		let hiddenKeyword = $("#hiddenKeyword").val();
 
-		console.log(recordTotalCount);
-		console.log(recordCountPerPage);
-		console.log(naviCountPerPage);
-		console.log(replyListSize);
-		console.log(currentReplyPage);
-		console.log(replyListSize);
-
 		let pageTotalCount = 0;
 
 		if ((recordTotalCount % recordCountPerPage) > 0) {
@@ -697,9 +689,7 @@
 		let startNavi = Math.floor((currentReplyPage - 1) / naviCountPerPage)
 				* naviCountPerPage + 1;
 		let endNavi = startNavi + naviCountPerPage - 1;
-		console.log("startNavi" + startNavi);
-		console.log("endNavi" + endNavi);
-		console.log("naviCountPerPage" + naviCountPerPage);
+
 		if (endNavi > pageTotalCount) {
 			endNavi = pageTotalCount;
 		}

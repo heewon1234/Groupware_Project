@@ -38,7 +38,12 @@
                     	</c:choose>
                     </div>
                     <div class="contents_info">
-                        <div class="board_contents_title">${boardContents.title}</div>
+                        <div class="board_contents_title">
+                        	<c:if test="${empty boardContents.header}">
+                            	<span>${boardContents.header }&nbsp;&nbsp;</span>
+                            </c:if>
+                        	${boardContents.title}
+                        </div>
                         <div class="contents_info_datail">
                         	<div id="boardSeq">글번호 ${boardContents.seq}</div> |
                             <div>
@@ -57,7 +62,7 @@
                     </div>
                     <div class="contents_write_date">
                     	<div>${boardContents.write_date }</div>
-                    	<div><c:if test="${boardContents.writer eq loginId }"><button id="contentsDelBtn">삭제</button></c:if></div>
+                    	<div><c:if test="${boardContents.writer eq loginId or auth}"><button id="contentsDelBtn">삭제</button></c:if></div>
                     </div>
                 </div>
                 <div class="contents-file">
@@ -109,7 +114,7 @@
                 </div>
                 <div class="buttons">
                  	<button id="backBtn">뒤로가기</button>
-                    <c:if test="${boardContents.writer eq loginId }"><button id="contentsUpdateBtn">수정</button></c:if>
+                    <c:if test="${boardContents.writer eq loginId or auth}"><button id="contentsUpdateBtn">수정</button></c:if>
                 </div>
                 <div class="reply_box">
                 	<form action="/reply/insertReply" method="post">
@@ -159,7 +164,7 @@
         										${i.contents }
     										</div>
     										<div class="reply_list_edit_buttons">
-    											<c:if test="${i.writer eq loginId }">
+    											<c:if test="${i.writer eq loginId or auth}">
     												<button class="replyDelBtn" type="button">삭제</button>
         											<button class="replyUpdateBtn" type="button">수정</button>
     											</c:if>

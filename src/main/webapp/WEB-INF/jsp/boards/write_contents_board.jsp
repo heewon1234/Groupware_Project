@@ -49,7 +49,7 @@
                         	<input type="text" class="form-control" placeholder="제목을 입력하세요" name="title" maxlength="100" id="header_add_input">
                         </div>
                         <div>
-                            <input type="checkbox" name="notice" value="false"> &nbsp;공지로 등록
+                            <input type="checkbox" name="notice" value="false"> <span class="noticeTextBox">&nbsp;공지로 등록</span>
                         </div>
                     </div>
                     <div class="board_contents_file_box">
@@ -64,8 +64,8 @@
                     <div class="board_survey">
                         <div>설문 여부</div>
                         <div>
-                            <div><input type="radio" name="useSurvey" value="true"> 사용</div>
-                            <div><input type="radio" name="useSurvey" value="false" checked> 사용 안 함</div>
+                            <div><input type="radio" name="useSurvey" value="true"> <span class="useSurveyTextBox">사용</span></div>
+                            <div><input type="radio" name="useSurvey" value="false" checked> <span  class="useSurveyTextBox">사용 안 함</span></div>
                         </div>
                         <div id="surveyBox">
                             <div class="questionBox surveyContents">

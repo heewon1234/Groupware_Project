@@ -1,7 +1,14 @@
 @charset "UTF-8";
-
+.content_tab>*{
+    margin-left: 0px;
+    min-width:1200px;
+}
 #logout{
 	font-size:29px;
+}
+.board_contents_box img{
+	max-width:600px;
+	max-height:600px;
 }
 
 /* div{border:1px solid black;} */
@@ -35,6 +42,8 @@
     width:80%;
 }
 .board_contents_title_box>div:nth-child(3){width:60%;}
+.noticeTextBox:hover{cursor: pointer;}
+#fileAddBtn:hover{cursor: pointer;}
 .contents-file{
 	border:1px solid gainsboro;
 	margin-bottom:20px!important;
@@ -121,7 +130,7 @@
     height:20px;
     margin-left:30px;
 }
-
+.useSurveyTextBox:hover{cursor:pointer;}
 .buttons{
     margin-top:20px;
     display: flex;

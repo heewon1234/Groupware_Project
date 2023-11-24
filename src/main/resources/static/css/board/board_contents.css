@@ -2,11 +2,14 @@
 #logout{
 	font-size:29px;
 }
+.content_tab>*{
+    margin-left: 0px;
+    min-width:1250px;
+}
+#topFormTop{position: fixed;}
 /* div{border: 1px solid black;}  */
 .content_tab{padding-right:25px;}
-.content_tab>div{
-	min-width:600px;
-}
+
 .backVoteBtn{
 	width:98px;
     box-shadow: none;
@@ -54,6 +57,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.board_contents_title>span{
+	color:rgb(41, 133, 219);
+	font-size: medium;
 }
 .profileDiv>img{
 	width:60px;
@@ -125,7 +132,9 @@
     margin-left:25px;
     overflow-x:auto;
 }
-
+.contents img{
+	max-width:600px;
+}
 .survey_box{
     border:1px solid black;
     border-radius: 5px;

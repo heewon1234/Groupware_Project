@@ -227,7 +227,7 @@
 				var endTimestamp = end.toISOString().slice(0, 19).replace('T',
 						' ');
 
-				$(function deleteData() {
+				$(function updateData() {
 					$.ajax({
 						url : "/calendar/oupdate",
 						method : "POST",

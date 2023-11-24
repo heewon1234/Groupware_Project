@@ -58,6 +58,22 @@
 	height: 60px;
 	overflow: hidden;
 }
+
+.chat_send_btn {
+    box-shadow: none;
+    background-color: #ebebeb;
+    border: solid 1px #d6d6d6;
+    border-radius: 4px;
+    color: #333;
+    height: 34px;
+    cursor: pointer;
+    font-size: 14px;
+    width:50px;
+}
+
+.chat_send_btn:hover {
+    background-color: #d6d6d6;
+}
 </style>
 </head>
 <body>
@@ -165,7 +181,7 @@
 		</div>
 		<!-- 그룹 선택 모달 창 -->
 		<div id="groupUserModal" class="ChatModal">
-			<div class="ChatModal-content" style="width: 300px; height: 500px;">
+			<div class="ChatModal-content" style="width: 300px; height: 500px;overflow-y: auto;">
 				<span class="close" id="groupModalClose">&times;</span>
 				<h2>사용자 선택</h2>
 				<ul id="groupUserList">
@@ -198,7 +214,7 @@
 				<div class="chatBox">
 					<div class="inputText" id="inputText" contenteditable="true"></div>
 					<div>
-						<button id="sendBtn">전송</button>
+						<button id="sendBtn" class="chat_send_btn">전송</button>
 					</div>
 				</div>
 			</div>
@@ -229,7 +245,7 @@
 				<div class="chatBox">
 					<div class="inputText" id="groupinputText" contenteditable="true"></div>
 					<div>
-						<button id="sendGroupBtn">전송</button>
+						<button id="sendGroupBtn" class="chat_send_btn">전송</button>
 					</div>
 				</div>
 			</div>
@@ -479,10 +495,29 @@ function groupChat(groupName, groupSeq) {
                 sendGroupMessage(groupSeq);
             }
         });
+        
+}
+function lineBreakText(text) {
+    const maxLineLength = 20; // 최대 허용 글자 수
+    let lines = text.split('\n');
+
+    for (let i = 0; i < lines.length; i++) {
+        if (lines[i].length > maxLineLength) {
+            let newText = '';
+            while (lines[i].length > maxLineLength) {
+                newText += lines[i].substring(0, maxLineLength) + '<br>';
+                lines[i] = lines[i].substring(maxLineLength);
+            }
+            newText += lines[i];
+            lines[i] = newText;
+        }
+    }
+
+    return lines.join('\n');
 }
 //그룹 메시지 전송 함수
 function sendGroupMessage(groupSeq) {
-    var message = $('#groupinputText').html();
+    var message = lineBreakText($('#groupinputText').html());
     var groupSeq = $('#groupSeq').val();
     let loginUserProfile = $("#loginUserProfile").val();
 
@@ -800,7 +835,7 @@ function getPreviousGroupMessages(groupSeq) {
 		}
 
 		function sendMessage(oneSeq) {
-		    var message = $('#inputText').html();
+		    var message = lineBreakText($('#inputText').html());
             var oneSeq = $('#oneSeq').val();
             let loginUserProfile = $("#loginUserProfile").val();
             var currentTime = new Date(); 

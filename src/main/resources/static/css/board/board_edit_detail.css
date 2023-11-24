@@ -1,7 +1,12 @@
 @charset "UTF-8";
+.content_tab>*{
+    margin-left: 0px;
+    min-width:1200px;
+}
 #logout{
 	font-size:29px;
 }
+.authDelBtn:hover{cursor:pointer;}
 /* div{border:1px solid black;}  */
 #selectDiv{
     color: #333333;

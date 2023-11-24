@@ -25,7 +25,8 @@ public class WebConfig implements WebMvcConfigurer{
 				.excludePathPatterns("/err")
 				.excludePathPatterns("/members/login")
 				.excludePathPatterns("/css/**")
-				.excludePathPatterns("/uploads/**");
+				.excludePathPatterns("/uploads/**")
+				.excludePathPatterns("/images/**");
 	}
 	
 	@Bean

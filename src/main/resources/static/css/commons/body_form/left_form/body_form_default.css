@@ -60,7 +60,7 @@
     overflow-x: hidden;
     padding: 0 24px 30px;
     height: 100%;
-    max-height: 785px;
+    max-height: calc(100% - 228px);
 }
 .menu_item {
     height: 38px;
@@ -439,4 +439,19 @@
     background-color: #575757;
 }
 
+*::-webkit-scrollbar {
+    width: 6px;
+    height: 6px; 
+}
+
+*::-webkit-scrollbar-thumb {
+    height: 30%;
+    background: #909090;
+    border-radius: 10px;
+    transition: background 0.3s;
+}
+
+*::-webkit-scrollbar-track {
+    background: rgba(33, 122, 244, .1);
+}
 

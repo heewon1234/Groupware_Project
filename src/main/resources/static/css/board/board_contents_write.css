@@ -2,6 +2,10 @@
 #logout{
 	font-size:29px;
 }
+.content_tab>*{
+    margin-left: 0px;
+    min-width:1200px;
+}
 /* div{border:1px solid black;} */
 .board_contents_box img{
 	max-width:600px;
@@ -37,12 +41,14 @@
     width:80%;
 }
 .board_contents_title_box>div:nth-child(3){width:60%;}
+.noticeTextBox:hover{cursor: pointer;}
 .contents-file{
 	border:1px solid gainsboro;
 	margin-bottom:20px!important;
 	padding:10px;
 	
 }
+#fileAddBtn:hover{cursor: pointer;}
 .board_contents_file_box{
     width:100%;
 	min-width:600px;
@@ -121,7 +127,7 @@
     height:20px;
     margin-left:30px;
 }
-
+.useSurveyTextBox:hover{cursor:pointer;}
 .buttons{
     margin-top:20px;
     display: flex;
