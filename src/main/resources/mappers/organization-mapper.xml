@@ -21,4 +21,9 @@
         FROM Organization
         WHERE Organization = #{org}
 	</select>
+	<select id="getOrgLevel" resultType="Integer">
+		SELECT level
+        FROM Organization
+        WHERE Organization = #{org}
+	</select>
 </mapper>

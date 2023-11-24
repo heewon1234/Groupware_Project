@@ -29,4 +29,8 @@ public class OrganizationDAO {
 	public String getManagerOrg(String org) {
 		return db.selectOne("Organization.getManagerOrg", org);
 	}
+	
+	public int getOrgLevel(String org) {
+		return db.selectOne("Organization.getOrgLevel", org);
+	}
 }

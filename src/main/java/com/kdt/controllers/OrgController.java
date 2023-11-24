@@ -15,8 +15,10 @@ public class OrgController {
 	private OrganizationService service;
 	
 	@RequestMapping(value = "/insert")
-	public String insertJobRole(OrganizationDTO dto) throws Exception {
-		service.insert(dto);
+	public String insertJobRole(String organization, String manager) throws Exception {
+		int level = service.getOrgLevel(manager) + 1;
+		
+		service.insert(new OrganizationDTO(organization, level, manager, 0));
 		
 		return "redirect:/insa/manage/org";
 	}
