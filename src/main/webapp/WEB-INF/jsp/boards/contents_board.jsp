@@ -39,7 +39,7 @@
                     </div>
                     <div class="contents_info">
                         <div class="board_contents_title">
-                        	<c:if test="${boardContents.header!=''}">
+                        	<c:if test="${empty boardContents.header}">
                             	<span>${boardContents.header }&nbsp;&nbsp;</span>
                             </c:if>
                         	${boardContents.title}

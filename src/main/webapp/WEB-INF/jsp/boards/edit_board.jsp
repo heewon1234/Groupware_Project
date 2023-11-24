@@ -34,7 +34,9 @@
                     </div>
                 	<c:choose>
                 		<c:when test="${ boardList.size()==0}">
-                			<div class="board_index">게시판이 존재하지 않습니다</div>
+                			<div class="board_list" style="width:100%;">
+                				<div class="board_index" style="width:100%; background-color:white;">게시판이 존재하지 않습니다</div>
+                			</div>             			
                 		</c:when>
                 		<c:otherwise>
                 			<c:forEach items="${boardList }" var="i">
