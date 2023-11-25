@@ -69,6 +69,8 @@ function openchatGroupList() {
 //검색차
 function showSearchContainer() {
     $(".search_container").css("display", "block");
+    $("#friend_list").css("max-height","370px");
+    $(".chatroom_list").css("max-height","370px");
 }
 
 function hideSearchContainer() {
@@ -77,9 +79,12 @@ function hideSearchContainer() {
     searchValue.val('');
     groupValue.val('');
     $(".search_container").css("display", "none");
+    $("#friend_list").css("max-height","410px");
+    $(".chatroom_list").css("max-height","410px");
 }
 
 function searchUser() {
+	$("#friend_list").css("max-height","370px");
     // 입력된 검색어 가져오기
     var searchValue = $("#search_input").val();
 
@@ -92,14 +97,20 @@ function searchUser() {
         success: function (response) {
 			var listData = response.searchList;
 			var OneToOneChatDTOList = response.OneToOneChatDTOList;
+			console.log(listData);
 			$("#friend_list").empty();
 			
 			listData.forEach(function(friend) {
+				console.log("친구"+friend.profile_image);
     var $row = $("<div>").addClass("table-row");
     var $iconCell = $("<div>")
-        .html('<i class="fa-regular fa-circle-user"></i>')
-        .css("display", "inline-block");
-
+        .html('<img class="selectAllProfileImg" src="' + friend.profile_image + '" onerror="this.onerror=null; this.src=\'/images/commons/person-circle.svg\';">')
+        .css("display", "inline-block")
+        .addClass("iconCell");
+$iconCell.on("click", function() {
+										onOneChat();
+									});
+									$row.append($iconCell);
     var $nameCell = $("<div>")
         .text(friend.name)
         .addClass("oneChat")
@@ -110,12 +121,19 @@ function searchUser() {
         "click",
         (function (clickedUserName, clickedUserId) {
             return function () {
+				console.log("확인");
+				console.log(clickedUserName);
                 var loginID = $("#loginID").val();
                 var otherID = clickedUserId;
                 var organization = friend.organization;
+                $(".ownImg").html("");
+				$(".ownImg").append(
+				$("<div class='oneImg'>").html('<img class="ownProfileImg" src="' + friend.profile_image + '" onerror="this.onerror=null; this.src=\'/images/commons/person-circle.svg\';">'
+										).css("display", "inline-block"));
                 var oneSeq = null;
                 for (var i = 0; i < OneToOneChatDTOList.length; i++) {
                     var chatRoom = OneToOneChatDTOList[i];
+                    console.log("방"+chatRoom);
                     if (chatRoom.loggedInUserID === loginID && chatRoom.otherUserID === otherID) {
                         oneSeq = chatRoom.oneSeq;
                         openOneChat(clickedUserName, organization, oneSeq);
@@ -124,13 +142,13 @@ function searchUser() {
                     }
                 }
             };
-        })(friend.name, friend.id)
+        })(friend.name, friend.id,friend.profile_image)
     );
 
-    $row.append($iconCell);
+    //$row.append($iconCell);
     $row.append($nameCell);
 
-    $("#friend_list").append($row);
+    $("#friend_list").append($row).css("max-height","370px");
     
 });
 
@@ -143,6 +161,7 @@ function searchUser() {
 }
 
 function searchGroup() {
+	$("#chatroom_list").css("max-height","370px");
     var groupValue = $("#searchGroup_input").val();
     $.ajax({
         type: "POST",

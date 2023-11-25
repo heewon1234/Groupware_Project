@@ -63,12 +63,15 @@ public class ChatController {
 	@RequestMapping("searchUser")
 	@ResponseBody
 	public Map<String, Object> searchUser(@RequestParam String searchValue) throws Exception{
-		String id = (String)hsession.getAttribute("loginID");
+		String id = (String)hsession.getAttribute("loginId");
 		List<MembersDTO> searchList = service.searchUser(searchValue);
 		List<OneToOneChatDTO> OneToOneChatDTOList = service.selectAll(id);
 		Map<String, Object> responseData = new HashMap<>();
 		responseData.put("searchList", searchList);
 		responseData.put("OneToOneChatDTOList", OneToOneChatDTOList);
+		
+		System.out.println("서치"+searchList);
+		System.out.println("일대일"+OneToOneChatDTOList);
 		return responseData;
 	}
 	

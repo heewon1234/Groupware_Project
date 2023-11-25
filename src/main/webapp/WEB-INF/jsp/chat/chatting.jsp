@@ -195,7 +195,7 @@
 		<div class="box" id="inputJSP" style="display: none;">
 			<input id="userName" type="hidden" value="${name}"> <input
 				id="loginID" type="hidden" value="${loginId}"> <input
-				id="oneSeq" type="hidden" value="${oneSeq}">
+				id="oneSeq"  value="${oneSeq}">
 			<div class="inputTop" style="padding-top: 10px; padding-left: 5px">
 				<span class="close-button" onclick="closeOneChat()">&times;</span>
 				<div class="myProfile">
@@ -223,7 +223,7 @@
 		<div class="box" id="groupJSP" style="display: none">
 			<input id="groupUserName" type="hidden" value="${name}"> <input
 				id="loginID" type="hidden" value="${loginId}"> <input
-				type="hidden" id="groupSeq" value="${groupSeq}">
+				 type="hidden" id="groupSeq" value="${groupSeq}">
 			<div class="groupInputTop"
 				style="padding-top: 10px; padding-left: 5px">
 				<span class="close-button" onclick="closeGroupChat()">&times;</span>
@@ -459,6 +459,7 @@ function groupChat(groupName, groupSeq) {
             stompClient.unsubscribe(subscriptionId);
         });
     }*/
+    console.log("subscribe"+groupSeq);
 	getPreviousGroupMessages(groupSeq);
 	$("#groupName").val(groupName);
     $("#groupSeq").val(groupSeq);
@@ -487,6 +488,8 @@ function groupChat(groupName, groupSeq) {
         });
 
         $(document).on("click", "#sendGroupBtn", function () {
+        	var groupSeq = $('#groupSeq').val();
+        	console.log(groupSeq);
         	sendGroupMessage(groupSeq);
         });
         $(document).on("keydown", "#groupinputText", function (e) {
@@ -516,9 +519,11 @@ function lineBreakText(text) {
     return lines.join('\n');
 }
 //그룹 메시지 전송 함수
-function sendGroupMessage(groupSeq) {
+function sendGroupMessage() {
+	console.log(groupSeq);
+	var groupSeq = $('#groupSeq').val();
     var message = lineBreakText($('#groupinputText').html());
-    var groupSeq = $('#groupSeq').val();
+    
     let loginUserProfile = $("#loginUserProfile").val();
 
     if (message) {
