@@ -97,11 +97,9 @@ function searchUser() {
         success: function (response) {
 			var listData = response.searchList;
 			var OneToOneChatDTOList = response.OneToOneChatDTOList;
-			console.log(listData);
 			$("#friend_list").empty();
 			
 			listData.forEach(function(friend) {
-				console.log("친구"+friend.profile_image);
     var $row = $("<div>").addClass("table-row");
     var $iconCell = $("<div>")
         .html('<img class="selectAllProfileImg" src="' + friend.profile_image + '" onerror="this.onerror=null; this.src=\'/images/commons/person-circle.svg\';">')
@@ -121,8 +119,6 @@ $iconCell.on("click", function() {
         "click",
         (function (clickedUserName, clickedUserId) {
             return function () {
-				console.log("확인");
-				console.log(clickedUserName);
                 var loginID = $("#loginID").val();
                 var otherID = clickedUserId;
                 var organization = friend.organization;
@@ -133,7 +129,6 @@ $iconCell.on("click", function() {
                 var oneSeq = null;
                 for (var i = 0; i < OneToOneChatDTOList.length; i++) {
                     var chatRoom = OneToOneChatDTOList[i];
-                    console.log("방"+chatRoom);
                     if (chatRoom.loggedInUserID === loginID && chatRoom.otherUserID === otherID) {
                         oneSeq = chatRoom.oneSeq;
                         openOneChat(clickedUserName, organization, oneSeq);

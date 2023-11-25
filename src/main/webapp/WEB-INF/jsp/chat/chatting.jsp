@@ -195,7 +195,7 @@
 		<div class="box" id="inputJSP" style="display: none;">
 			<input id="userName" type="hidden" value="${name}"> <input
 				id="loginID" type="hidden" value="${loginId}"> <input
-				id="oneSeq"  value="${oneSeq}">
+				id="oneSeq" type="hidden" value="${oneSeq}">
 			<div class="inputTop" style="padding-top: 10px; padding-left: 5px">
 				<span class="close-button" onclick="closeOneChat()">&times;</span>
 				<div class="myProfile">
