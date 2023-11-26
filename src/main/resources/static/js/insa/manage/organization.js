@@ -20,14 +20,14 @@ $(document).ready(function() {
 
 function checkFields() {
 
-	if ($("#level").val() != "" && $("#org_input").val() != "" && $("#manager").val() != "상위조직명") {
+	if ($("#org_input").val() != "" && $("#manager").val() != "상위조직명") {
 		$("#submit_btn").removeClass("permit");
 	} else {
 		$("#submit_btn").addClass("permit");
 	}
 }
 
-$("#level, #org_input").on("keyup", function() {
+$("#org_input").on("keyup", function() {
 	checkFields();
 });
 
