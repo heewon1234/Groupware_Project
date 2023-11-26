@@ -4,6 +4,7 @@
 }
 #group_list, #friend_list,.chatroom_list{
 	padding-left: 8px;
+	
 }
 .chatBox {
     display: flex; /* 요소를 가로로 배치합니다 */
