@@ -44,11 +44,8 @@
                 		</c:forEach>
                 	</select>
                 </div>
-                <div class="input-group">
-                	<input type="text" class="form-control" id="level" name="level" placeholder="조직 레벨">
-                </div>
 				<br>
-				<div align="center">
+				<div align="center" class="button_div">
 					<button type="submit" class="button_apply permit" id="submit_btn">제출</button>
 					<button type="button" class="modalButton button_cancel">닫기</button>
 				</div>

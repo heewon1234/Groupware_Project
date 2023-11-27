@@ -40,4 +40,8 @@ public class OrganizationService {
 		
 		return managerList;
 	}
+	
+	public int getOrgLevel(String org) {
+		return dao.getOrgLevel(org);
+	}
 }
