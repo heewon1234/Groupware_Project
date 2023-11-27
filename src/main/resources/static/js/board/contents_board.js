@@ -104,7 +104,9 @@ $(document).on("click",".replyUpdateBtn",function(){
 	
 	if(!updateSuccess){
 		alert("댓글이 수정중입니다. \n취소하고 눌러주세요");
+		return false;
 	}
+	
 	updateSuccess = false;
 	
 	let replyContentsBox = $(this).parent(".reply_list_edit_buttons").prev(".reply_list_contents");
@@ -143,9 +145,16 @@ $("#voteSurveyBtn").on("click",function(){
 		voteItem.attr("data-index","true");
 		
 		voteResult(resp);
-	});
-	
-	
+	});	
+});
+
+$(".updateSuccessBtn").on("click",function(){
+	let seq = $(this).parents(".reply_list").attr("data-index");
+	let input = $("<input>");
+	input.attr("name","seq").attr("type","hidden");
+	input.val(seq);
+	$("#updateReplyFrm").append(input);
+	$("#updateReplyFrm").submit();
 });
 
 

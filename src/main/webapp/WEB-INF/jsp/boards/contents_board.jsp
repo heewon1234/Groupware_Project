@@ -142,12 +142,11 @@
                     <div class="reply_list_box">
                     	<c:choose>
                     		<c:when test="${replyList.size()>0 }"> 
-                    			<form action="/reply/updateReply" method="post">  
+                    			<form action="/reply/updateReply" method="post" id="updateReplyFrm">  
                     				<input type="hidden" name="parent_seq" value='${boardContents.seq }'>               			
                     				<c:forEach items="${replyList }" var="i">
 										<div class="reply_list" data-index='${i.seq }'>
     										<div class="reply_list_info">
-    											<input type="hidden" name="seq" value='${i.seq }'>
         										<div>
         											<c:choose>
                             							<c:when test="${name_type eq 'identity' }">

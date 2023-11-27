@@ -46,6 +46,7 @@ public class ReplyController {
 	
 	@RequestMapping("updateReply")
 	public String updateReply(ReplyDTO dto) {
+		System.out.println(dto.getSeq());
 		dto.setBoard_title((String)session.getAttribute("board_title"));
 		rservice.updateReply(dto);
 		return "redirect:/board/toContentsBoard?seq="+dto.getParent_seq();
