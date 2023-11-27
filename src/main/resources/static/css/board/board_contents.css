@@ -297,6 +297,7 @@
 .reply_list_contents{
     margin-top:5px;
     margin-bottom:5px;
+    overflow:auto;
 }
 .reply_list_edit_buttons{
     margin-top:10px;

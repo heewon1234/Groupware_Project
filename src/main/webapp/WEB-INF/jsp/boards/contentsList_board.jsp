@@ -52,7 +52,7 @@
                             				<div class="board_contents_title">
                             					<a href="/board/toContentsBoard?seq=${i.seq }">
                             						<c:if test="${i.header!=''}">
-                            							<span>${i.header }&nbsp;&nbsp;</span>
+                            							<span>${i.header }</span>
                             						</c:if>
                             						<c:set var="maxTitleLength" value="25" /> 
     												<c:set var="cutTitle" value="${fn:substring(i.title, 0, maxTitleLength)}" />
